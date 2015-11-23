@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Browser Report</title>
+    <link href="resources/styles/style.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+    <script src="resources/scripts/global/reports.js" type="text/javascript"></script>
+    <script type="text/javascript" src="resources/scripts/global/jquery-1.4.1.min.js"></script>
+</head>
+<body onload="buildTable();">
+<div>
+    <div class="CrumbContainer">
+        <div class="Crumbs"></div>
+        <div style="float:right;"><a class="setBlue" id="backlinkDiv" style="display: none;" href="javascript:buildTable();"><< back</a></div>
+        <div style="clear : both;"></div>
+    </div>
+<div class="ResultsTableHolder ReportTableHolder" id="report">
+<div id="spinner" class="loading">
+</div>
+</div>
+</div>
+</body>
+</html>

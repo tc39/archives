@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<excludeList>
+  <test id="15.4.4.15-3-14.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.15-3-29.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.15-3-8.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.20-3-14.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.20-3-28.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.20-3-29.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.20-3-8.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.21-3-14.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.21-3-28.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.21-3-29.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.21-3-8.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.22-3-14.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.22-3-28.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.22-3-29.js">
+    <!-- reason for the exclusion-->
+  </test>
+  <test id="15.4.4.22-3-8.js">
+    <!-- reason for the exclusion-->
+  </test>
+</excludeList>

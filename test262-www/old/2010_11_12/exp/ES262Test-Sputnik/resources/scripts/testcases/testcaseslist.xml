@@ -1,0 +1,15 @@
+<testSuite numTests="12951">
+  <testGroup>resources/scripts/testcases/07.xml</testGroup>
+  <testGroup>resources/scripts/testcases/08.xml</testGroup>
+  <testGroup>resources/scripts/testcases/09.xml</testGroup>
+  <testGroup>resources/scripts/testcases/10.xml</testGroup>
+  <testGroup>resources/scripts/testcases/11.xml</testGroup>
+  <testGroup>resources/scripts/testcases/12.xml</testGroup>
+  <testGroup>resources/scripts/testcases/13.xml</testGroup>
+  <testGroup>resources/scripts/testcases/14.xml</testGroup>
+  <testGroup>resources/scripts/testcases/15.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter10.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter11.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter12.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter15.xml</testGroup>
+</testSuite>

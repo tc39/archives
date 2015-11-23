@@ -1,0 +1,6 @@
+<testSuite numTests="2230">
+  <testGroup>resources/scripts/testcases/chapter10.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter11.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter12.xml</testGroup>
+  <testGroup>resources/scripts/testcases/chapter15.xml</testGroup>
+</testSuite>

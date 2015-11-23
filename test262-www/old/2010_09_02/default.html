@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<!-- #BeginTemplate "master.dwt" -->
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="expires" value="Thu, 16 Mar 2010 
+11:00:00 GMT" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<!-- #BeginEditable "doctitle" -->
+<title>Home</title>
+<!-- #EndEditable -->
+<link href="resources/styles/style.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+<!-- #BeginEditable "Links" -->
+</head>
+<body>
+<form>
+  <div class="wrapper"> 
+	
+    <!-- This Container holds the Logo -->
+    <div class="logoBg"> <img src="resources/images/logo.png" /> </div>
+    <!-- This Container holds the Navigation -->
+    <div class="NavBar">
+      <ul>
+        <li><a href="#" class="selected nav-link">Home</a></li>
+        <li><a href="#" class="nav-link">Run Tests</a></li>
+        <li><a href="#" class="nav-link test-report-link">Test Reports</a></li>
+        <li><a href="#" class="nav-link">Development</a></li>
+      </ul>
+    </div>
+	<div class="content-container" id="contentContainer">
+    <!-- This is the Main Content Container -->
+    <div class="content-home">
+	
+      <p class="Headers">What is test262?</p>
+      <p class="Content">test262 is a test suite that may be used to check how closely a JavaScript implementation conforms to the ECMAScript standard. The test suite contains thousands of individual tests, each of which tests some specific requirement of the ECMAScript standard.</p>
+      <p class="Headers">What is ECMAScript?</p>
+      <p class="Content">"ECMAScript" is the name under which the language more commonly known as "JavaScript" is standardized. Development of the ECMAScript standard is the responsibility of <a href='javascript:void(window.open("http://www.ecma-international.org/memento/TC39.htm"));'>Technical Committee 39 (TC39)</a> of <a href='javascript:void(window.open("http://www.ecma-international.org/"));'>Ecma International</a>. The ECMAScript standard is officially known as ECMA-262. ECMAScript 5 (or just ES5) is short hand for the "ECMA-262, 5th Edition ECMAScript Language Specification" the official name of the current edition of the standard.
+
+ECMAScript 5 was approved as an official Ecma standard by the the Ecma General Assembly on December 3, 2009. <a href='javascript:void(window.open("http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf"));'>The ECMAScript 5 Specification (PDF)</a> is available from the Ecma International web site.
+</p>
+      <p class="Headers">Who creates and maintains test262?</p>
+      <p class="Content">Development of test262 is a project of Ecma TC39.  The testing framework and individual tests are created by member organizations of TC39 and contributed to Ecma for use in test262. For more information about how test262 is developed and maintained click the “Development” tab at the top of this page.</p>
+      <p class="Headers">What is the status of test262?</p>
+      <p class="Content"><strong>test262 is not yet complete.  It is still undergoing active development.</strong> Some portions of the ES5 specification have very complete test coverage while other portions of the specification have only partial test coverage.  Some tests may be invalid or may yield false positive or false negative results. A perfect passing score on test262 does not guarantee that a JavaScript implementation perfectly supports ES5. Because tests are being actively added and modified, tests results from different days or times may not be directly comparable. Click the “Development” tab at the top of this page for instructions for reporting test262 bugs.</p>
+	  
+	  <p class="Headers">Running the Tests</p>
+      <p class="Content">Click the “Run Tests” tab at the top of this page for instructions and follow the instructions to run the tests.</p>
+      <p>
+        &nbsp;
+      </p>
+    </div>
+ <div class="content-dev">
+	
+      <p class="Headers">Development</p>
+      <p class="Content">Test262 is being developed by the members of Ecma TC39. Ecma's intellectual property policies, permit only Ecma 
+members to directly contribute code to the project. However, a <a href="http://mail.mozilla.org/pipermail/test262-discuss/">public mailing list</a> is used to coordinate development of Test62.  If you wish to participate in the discussion please <a href="http://mail.mozilla.org/listinfo/test262-discuss">subscribe</a>.  Bug reports and suggestions should be sent to the mailing list.
+</p>
+    </div>
+
+	<div class="content-tests">
+		  <!-- This is the Main Content Container -->
+    
+      <p class="Content">Please click on the Start button to start the test. Once you start the test you may pause the test anytime by clicking on the Pause button. You can click on Test Reports menu once the test is completed or after pausing the test. The Reset button is for restarting the test run.</p>
+    
+    <!-- This is the Progress Bar Holder -->
+    <div class="ProgressBarHolder">
+      <div id="progressbar">
+      </div>
+      <div class="ProgressBarButtons">
+         <img src="resources/images/reset.png" class="button-reset"/>&nbsp;<img src="resources/images/start.png" class="button-start" id="btnStart"/> 
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    <p style="display: none;">>
+         Timer Value(ms) : <input id="txtTimerValue" value="50" /> <input id="btnSetTimerValue" value="Set Timer Value" type="button"/>
+    </p>
+    <!-- This is the Results Text Holder -->
+    <div class="ResultsHeader">
+<!--Total Loaded: <strong><span id="totalLoadedCounter"></span></strong><span class="Separator">|</span>-->
+	Tests To Run: <strong><span class="teststorun-counter" id="testsToRun"></span></strong>&nbsp;<span class="Separator">|</span>
+   	Total Tests Run: <strong><span class="total-counter" id="totalCounter"></span></strong> <span class="Separator">|</span> Pass: <span class="Pass" id="Pass"></span> <span class="Separator">|</span> Fail: <span class="Fail" id="Fail"></span>
+	<span class="Separator">|</span>&nbsp;Failed To Load: <span class="Fail" id="totalFailedCounter"></span></div>
+    <!-- This is the Table -->
+    <div class="ResultsTableHolder" id="tableLoggerParent">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-logger" id="tableLogger">
+        
+      </table>
+    </div>
+    
+	</div>
+	<div class="content-results">
+    <div class="CrumbContainer">
+        <div class="Crumbs"></div>
+        <div style="float:right;"><a class="setBlue" id="backlinkDiv" style="display: none;"><< back</a></div>
+        <div style="clear : both;"></div>
+    </div>
+	
+     <div class="ResultsHeader"> <strong>Total Tests:<span class="totalCases"></span></strong><br />
+        Passed: <span class="passedCases"></span> <span id class="Separator">|</span> Failed: <span class="failedCases"></span> <span class="Separator">|</span>
+		Failed To Load: <strong><span id="failedToLoadCounter"></span></strong></div>
+	 <!-- This is the Table -->
+      <div class="ResultsTableHolder">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="results-data-table">
+		
+        </table>
+      </div>
+
+    <!--  <div class="downloadLinks">
+		  <p><a class="anchor-download-xml" id="ancGenXMLReport"><strong>Download results as XML</strong></a> | <strong><a href="resources/scripts/testcases.zip">Download Source</a></strong></p>
+		</div>-->
+<div id="legend" style="display: none;"><label style="background-color:#63be7b;color:white">Green:</label>&nbsp;80% to 100%&nbsp;<label style="background-color:#f7ba44;color:white">Yellow:</label>&nbsp;48% to 79% &nbsp;<label style="background-color:#f85050;color:White">Red:</label>&nbsp;less than 48%</div>		
+    </div>
+    </div>
+   	<!-- This is the Footer -->
+    <div class="Footer">
+      <!--<div class="Links"> <a href="">Privacy</a> | <a href="">Terms of Use</a> </div>-->
+      <div class="Copyright"> &copy; <a href="http://www.ecma-international.org">ECMA International</a> </div>
+    </div>
+  </div>
+  <iframe id="scriptLoader" style="display: none;" name="scriptLoader">
+  </iframe>
+</form>
+<script type="text/javascript" src="resources/scripts/global/sections.js"></script>
+<script type="text/javascript" src="resources/scripts/global/sth.js"></script>
+<script type="text/javascript" src="resources/scripts/global/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="resources/scripts/global/jqueryprogressbar.js"></script>
+<script type="text/javascript" src="resources/scripts/global/helper.js"></script>
+<!-- #EndEditable -->
+</body>
+
+</html>
