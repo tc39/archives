@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4322</bug_id>
+          
+          <creation_ts>2015-04-17 14:02:00 -0700</creation_ts>
+          <short_desc>Title of Annex B does not show up in table of contents</short_desc>
+          <delta_ts>2016-02-15 16:11:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14290</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-17 14:02:28 -0700</bug_when>
+    <thetext>In the &quot;absolutely final&quot; draft, Annex B is listed in the TOC but it has a blanks title.
+
+You probably have the wrong kind of heading item for it.  I suggest you copy the Annex A header (including the title) into annex B and then edit it appropiately.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14294</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-17 15:51:27 -0700</bug_when>
+    <thetext>When I try that, the formatting is lost and no title is added to the TOC when I regenerate.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14923</commentid>
+    <comment_count>2</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:11:21 -0800</bug_when>
+    <thetext>Fixed in the HTML version of 2nd edition: http://www.ecma-international.org/ecma-402/2.0/
+
+And fix is confirmed in the draft for the 3rd Edition: https://tc39.github.io/ecma402/</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

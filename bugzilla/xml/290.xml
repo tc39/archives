@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>290</bug_id>
+          
+          <creation_ts>2012-03-04 03:22:00 -0800</creation_ts>
+          <short_desc>Coverage: Date.prototype.setXXX functions evaluate all parameters</short_desc>
+          <delta_ts>2012-03-04 03:22:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>721</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-03-04 03:22:03 -0800</bug_when>
+    <thetext>Current engines vary widely in their implementations of the various Date.prototype.setXXX functions. 
+
+Some examples per browser:
+
+IE: `new Date(0).setMinutes(void 0, {valueOf:function(){throw &apos;xxx&apos;}})`
+=&gt; returns `NaN` instead of throwing &apos;xxx&apos;
+
+Opera: `new Date(NaN).setMinutes({valueOf: function(){throw &apos;xxx&apos;}})`
+=&gt; returns `NaN` instead of throwing &apos;xxx&apos;
+
+Firefox: `new Date(NaN).setMinutes(0, {valueOf:function(){throw &apos;xxx&apos;}})`
+=&gt; returns `NaN` instead of throwing &apos;xxx&apos;
+
+
+That means the engines perform different &quot;optimizations&quot; to detect possible invalid date values before evaluating (here: calling ToNumber) all parameters. These optimizations seem to include partial evaluation of the parameters until a NaN value is found and inspection of the current time ([[PrimitiveValue]] of the date object) to check for NaN.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

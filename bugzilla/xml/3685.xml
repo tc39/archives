@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3685</bug_id>
+          
+          <creation_ts>2015-01-28 19:26:00 -0800</creation_ts>
+          <short_desc>4.2 ECMAScript Overview: [properties] with zero or more attributes → with attributes</short_desc>
+          <delta_ts>2015-02-02 18:38:54 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11744</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-28 19:26:07 -0800</bug_when>
+    <thetext>&quot;... a collection of properties each with zero or more attributes ...&quot;
+
+A property has always exactly four attributes (configurable, enumerable, ...); so it does not make much sense to precise &quot;zero and more&quot;.
+
+Or maybe you meant:
+
+   &quot;... a collection of zero or more properties each with attributes ...&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11810</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-31 13:54:26 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11968</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:54 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

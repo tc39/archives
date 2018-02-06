@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>293</bug_id>
+          
+          <creation_ts>2012-03-06 01:48:00 -0800</creation_ts>
+          <short_desc>Invalid test? S15.9.3.1_A5_T1 - T6</short_desc>
+          <delta_ts>2013-02-20 12:25:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>barraclough</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>mstarzinger</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>724</commentid>
+    <comment_count>0</comment_count>
+    <who name="">barraclough</who>
+    <bug_when>2012-03-06 01:48:57 -0800</bug_when>
+    <thetext>DESCRIPTION
+
+These six tests are currently broken because the harness is miscalculating the start of DST by a week.
+
+The root of the bug is in sta.js, around line 454.  The variable &apos;dstStart&apos; appears to be calculated correctly (on line 450), however this is then used to calculate &apos;DST_start_sunday&apos;, indicating whether daylight savings starts on the first or last Sunday in the month. DST 2012 in the US starts on the 11th of March, which is the second Sunday of the month, so &apos;first&apos; is not an accurate description. :o) This is then used in DaylightSavingTA on line 665, which tries to determine the DST start date based on the misapprehension that DST starts on March 4th. This results in the UTC conversion being out on line 688.
+
+------------------
+TEST:            TestCases/ch15/15.9/15.9.3/S15.9.3.1_A5_T1.js
+SOURCE:          http://hg.ecmascript.org/tests/test262/file/tip/test/suite/ch15/15.9/15.9.3/S15.9.3.1_A5_T1.js
+TEST SUITE DATE: 2012-02-29
+PLATFORM:        Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/536.3+ (KHTML, like Gecko) Version/5.1.3 Safari/534.53.10
+ERROR:           Error: Unexpected exception, &quot;Test262 Error: #1: Incorrect value of Date&quot; was thrown.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>819</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-26 13:57:52 -0700</bug_when>
+    <thetext>Unfortunately ConstructDate isn&apos;t really salvageable at this point.  For this test to pass on compliant browsers anywhere in the world at any time, it needs to be aware of everything on http://www.webexhibits.org/daylightsaving/g.html which I suspect changes pretty frequently.
+
+Consequently, I&apos;ve taken the &quot;easy&quot; approach of making these tests valid by hardcoding the expected datetime&apos;s underlying value instead of relying on ConstructDate to do this.  The change is in Hg, but not yet on the live website.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1801</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-01 10:06:17 -0700</bug_when>
+    <thetext>From Paul Ruizendaal
+https://mail.mozilla.org/pipermail/test262-discuss/2012-September/000125.html
+
+The fix hardcodes number values for California Summer time (i.e. 8 hours west of UTC). This is not very useful outside the PST time zone, and even not useful inside that zone in Winter, as the tests will fail.
+
+Suggesting that the tests are rewritten like:
+new Date(1970, 0).valueOf()-Date.prototype.getTimezoneOffset()*60000 === 0
+etc.
+
+Although the tests will not test the absolute time value, it will test that the parameters are handled correctly on a relative basis. A single test with ample comment could be added to test the absolute return value for a specific date (e.g. the epoch) and only that test would then fail in other timezones than PST (or more pc: UTC).
+
+Another option would be to reinstate the Sputnik logic, as that would seem to be usable in most parts of the world, most of the time (if I understand correctly, the bug referenced above only occurs during one week in March in the PST time zone).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

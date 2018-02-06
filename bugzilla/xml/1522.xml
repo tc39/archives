@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1522</bug_id>
+          
+          <creation_ts>2013-05-18 20:57:00 -0700</creation_ts>
+          <short_desc>Annex D (In Edition 5.1): 15.4.4.18 step 9 does not exist.</short_desc>
+          <delta_ts>2015-02-19 19:10:54 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yoshinori TAKESAKO">takesako262</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4073</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yoshinori TAKESAKO">takesako262</who>
+    <bug_when>2013-05-18 20:57:32 -0700</bug_when>
+    <thetext>Shigeru Kizu reports:
+
+In Annex D (In Edition 5.1): There is the following line at es6draft-rev15;
+
+  15.4.3.18: In step 9 of the algorithm, undefined is now the specified return value.
+
+But the step 9 does not exist. 
+
+In Edition 5.1: 
+  15.4.4.18 step 9 does not exist. step 8 is correct.
+
+In Edition 6:
+  15.4.3.18 step 9 is wrong step. step 10 is correct.
+
+This is a bug of Edition 5.1 in old Annex F.
+
+Change
+
+- 15.4.3.18: In step 9 of the algorithm, undefined is now the specified return value.
+
+to
+
++ 15.4.3.18: In step 10 of the algorithm, undefined is now the specified return value.
+
+or
+
++ 15.4.4.18 (Edition 5.1): In step 8 of the algorithm, undefined is now the specified return value.
+
+Should the Annex D of Edition 6 refer to the old edition clause?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4192</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-17 11:24:21 -0700</bug_when>
+    <thetext>fixed this one but, all the step references in Annex D&amp;E need to be checked to see if they need updating.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12973</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 11:04:23 -0800</bug_when>
+    <thetext>Eliminated ES5/51 carry forward change logs from Annex D and E.  They&apos;re too confusing because the section and step numbers have no correlation to the Es6 spec content. 
+
+If somebody wants t see changed changed in Es5 or Es5.1 they are better off just looking at Annex D or E within those legacy documents. 
+
+fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13035</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:54 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

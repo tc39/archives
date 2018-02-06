@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4391</bug_id>
+          
+          <creation_ts>2015-06-11 07:22:00 -0700</creation_ts>
+          <short_desc>19.1.2.1 Object.assign unnecessary step</short_desc>
+          <delta_ts>2015-10-02 13:14:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14489</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-06-11 07:22:59 -0700</bug_when>
+    <thetext>Step 5.b.ii seems to be unnecessary:
+
+&gt; 19.1.2.1 Object.assign ( target, ...sources )
+&gt; [...]
+&gt; 5. For each element nextSource of sources, in ascending index order,
+&gt;    a. If nextSource is undefined or null, let keys be an empty List.
+&gt;    b. Else,
+&gt;       i. Let from be ToObject(nextSource).
+&gt;       ii. ReturnIfAbrupt(from).
+
+ToObject only returns an abrupt completion in three cases: when called with
+`null`, when called with `undefined`, or when called with an abrupt completion.
+Due to step 5.a, the first two cases will never occur. And because
+`Object.assign` is not used by any internal algorithm, the source cannot be a
+completion of any kind.
+
+I recognize that even if this issue is valid, this is very late in the
+specification process to be making changes. Would it be better to file bugs
+like this for the ES7 BugZilla &quot;product&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14492</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-06-12 08:48:01 -0700</bug_when>
+    <thetext>fixed in rev38 publication draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14493</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-06-12 08:50:40 -0700</bug_when>
+    <thetext>(In reply to mike from comment #0)
+
+&gt; 
+&gt; I recognize that even if this issue is valid, this is very late in the
+&gt; specification process to be making changes. Would it be better to file bugs
+&gt; like this for the ES7 BugZilla &quot;product&quot;?
+
+I&apos;m turning the publication copy to the spec. over to Ecma today, so future bugs you find should be filed for ES7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14494</commentid>
+    <comment_count>3</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-06-12 09:12:09 -0700</bug_when>
+    <thetext>Got it. Congrats!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

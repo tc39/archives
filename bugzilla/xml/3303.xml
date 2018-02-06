@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3303</bug_id>
+          
+          <creation_ts>2014-10-29 00:59:00 -0700</creation_ts>
+          <short_desc>Missing hyperlinks for TemplateStrings</short_desc>
+          <delta_ts>2015-02-13 18:15:23 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Lars T Hansen">lhansen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10545</commentid>
+    <comment_count>0</comment_count>
+    <who name="Lars T Hansen">lhansen</who>
+    <bug_when>2014-10-29 00:59:58 -0700</bug_when>
+    <thetext>Within 12.2.8.2.2 (GetTemplateCallSite) there are two references to the TemplateStrings semantics.  They could usefully be hyperlinked even if the references follow the definition by not more than a couple of (paper) pages; in the hyperlinked version such relationships are not clear.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10797</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-05 12:41:31 -0800</bug_when>
+    <thetext>It&apos;s not clear to me which references you are talking about. Are you talking about Note 2? 
+
+There is already a hyper-linked reference to tagged template evaluation in Note 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11038</commentid>
+    <comment_count>2</comment_count>
+    <who name="Lars T Hansen">lhansen</who>
+    <bug_when>2014-12-15 11:33:25 -0800</bug_when>
+    <thetext>I think I was talking about steps 1 and 6, which reference the TemplateStrings algorithm earlier in the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12618</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 18:15:23 -0800</bug_when>
+    <thetext>(In reply to Lars T Hansen from comment #2)
+&gt; I think I was talking about steps 1 and 6, which reference the
+&gt; TemplateStrings algorithm earlier in the spec.
+
+We aren&apos;t terribly consistent, but we do make these sorts of references all over the place, and usually only provide explicit x-references if the target is far away or otherwise &quot;special&quot;. 
+
+closing as I don&apos;t see any particularly reason to treat this one specially.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

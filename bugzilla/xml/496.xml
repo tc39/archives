@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>496</bug_id>
+          
+          <creation_ts>2012-07-09 22:19:00 -0700</creation_ts>
+          <short_desc>7.8.6: &quot;CRV&quot;</short_desc>
+          <delta_ts>2012-10-26 15:34:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1267</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-09 22:19:13 -0700</bug_when>
+    <thetext>In 7.8.6 &quot;Quasi Literal Lexical Components&quot;,
+under &quot;Static Semantics: QV&apos;s and RQV&apos;s&quot;,
+one of the bullets says:
+    The CRV of EscapeSequence :: UnicodeEscapeSequence
+    is the CRV of the UnicodeEscapeSequence.
+
+Change each occurrence of &quot;CRV&quot; to &quot;QRV&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1514</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-14 17:37:24 -0700</bug_when>
+    <thetext>fixed in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1733</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:28 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1805</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-01 16:59:23 -0700</bug_when>
+    <thetext>Nope, CRV is still there in rev 10.
+(But now, change &quot;CRV&quot; to &quot;TRV&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2070</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 16:44:55 -0700</bug_when>
+    <thetext>fixed in rev 11 (hopefully)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2168</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:27 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

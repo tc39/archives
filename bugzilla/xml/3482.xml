@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3482</bug_id>
+          
+          <creation_ts>2014-12-23 22:28:00 -0800</creation_ts>
+          <short_desc>15.2.3.3: &quot;*&quot; wrong font</short_desc>
+          <delta_ts>2015-01-15 16:19:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11229</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-23 22:28:09 -0800</bug_when>
+    <thetext>In 15.2.3.3 &quot;Static Semantics: ExportedBindings&quot;,
+in group 1,
+in the production,
+rhs 2 says:
+    export * FromClause;
+where the &quot;*&quot; is in a (monospace bold) italic font.
+
+Change it to a (monospace bold) upright font.
+
+(Also, insert a space before the &quot;;&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11276</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-30 16:53:28 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11439</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:04 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

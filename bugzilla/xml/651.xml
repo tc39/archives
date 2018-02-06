@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>651</bug_id>
+          
+          <creation_ts>2012-09-23 03:34:00 -0700</creation_ts>
+          <short_desc>Fix and split Test S11.8.7_A1</short_desc>
+          <delta_ts>2013-05-07 13:31:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1598</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2012-09-23 03:34:44 -0700</bug_when>
+    <thetext>http://hg.ecmascript.org/tests/test262/file/tip/test/suite/ch11/11.8/11.8.7/S11.8.7_A1.js
+
+The description of this test is &quot;Checking by using eval&quot;, but it&apos;s an unhelpful description. What is being checked exactly.
+
+Currently, Firefox fails this test, but this test is a bundle of 10 tests, so it isn&apos;t clear which exactly triggers the failure. It would help implementors if this test was split in several tests in order to identify more easily what&apos;s wrong.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3714</commentid>
+    <comment_count>1</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-07 13:31:45 -0700</bug_when>
+    <thetext>Tested on OSX.
+
+I can reproduce the failure in FF18.
+
+The test passes with FF 19.02 and recent versions of SpiderMonkey in strict and nonstrict modes with Spidermonkey.
+
+Can we close this as fixed?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

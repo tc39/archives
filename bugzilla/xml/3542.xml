@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3542</bug_id>
+          
+          <creation_ts>2015-01-15 09:53:00 -0800</creation_ts>
+          <short_desc>21.1.3.6, 21.1.3.7, 21.1.3.18: Unnecessary type check</short_desc>
+          <delta_ts>2015-01-15 16:19:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11383</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 09:53:58 -0800</bug_when>
+    <thetext>21.1.3.6 String.prototype.endsWith ( searchString [ , endPosition] ) 
+21.1.3.7 String.prototype.includes ( searchString [ , position ] )  
+21.1.3.18 String.prototype.startsWith ( searchString [, position ] ) 
+
+
+The `Type(...) is Object` test is not necessary, see step 1 of IsRegExp.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11393</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 12:02:00 -0800</bug_when>
+    <thetext>ixed in rev31 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11422</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:02 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

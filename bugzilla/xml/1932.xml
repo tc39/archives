@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1932</bug_id>
+          
+          <creation_ts>2013-09-27 06:39:00 -0700</creation_ts>
+          <short_desc>22.2.1.4: Remove step 15</short_desc>
+          <delta_ts>2014-07-24 09:03:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>2493</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5458</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 06:39:59 -0700</bug_when>
+    <thetext>22.2.1.4  %TypedArray% ( buffer, byteOffset=0, length=undefined )
+
+Step 15:
+If offset + elementSize ≥ bufferByteLength, then throw a RangeError exception.
+
+This step needs to be removed, otherwise zero length Typed Arrays cannot be created. Instead add a new step after 16.b to test newByteLength is &gt;= 0.
+
+test case:
+new Int8Array(new ArrayBuffer(0), 0, 0)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5493</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 12:19:04 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5572</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:45 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

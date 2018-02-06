@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1565</bug_id>
+          
+          <creation_ts>2013-06-21 11:30:00 -0700</creation_ts>
+          <short_desc>ArrayBuffer, TypedArray and DataView constructors should throw RangeError if byteLength parameter is negative</short_desc>
+          <delta_ts>2013-06-22 11:21:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dmitry Lomov">dslomov</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4271</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dmitry Lomov">dslomov</who>
+    <bug_when>2013-06-21 11:30:01 -0700</bug_when>
+    <thetext>Current specification suggests that negative byteLengths are clamped to 0.
+This is counter-intuitive, leads to sloppy code and incompatible with existing implementations in chromium, safari and firefox.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4277</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-22 10:52:35 -0700</bug_when>
+    <thetext>Can you be more specific about where you see this issue (other than in DataView which still needs to be redone).  The following places in rev 15 all check and throw if the length is &lt; 0:
+
+step 8 of 15.13.5.12.1 ArrayBuffer(length)
+step 10 of 15.13.6.1.1 TypedArray(length)
+step 12 of 15.13.6.1.3 TypedArray(array)
+step 13.d of 15.136.1.4 TypedArray(buffer, byteOffset, length)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4278</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dmitry Lomov">dslomov</who>
+    <bug_when>2013-06-22 11:21:21 -0700</bug_when>
+    <thetext>You(In reply to comment #1)
+&gt; Can you be more specific about where you see this issue (other than in DataView
+&gt; which still needs to be redone).  The following places in rev 15 all check and
+&gt; throw if the length is &lt; 0:
+&gt; 
+&gt; step 8 of 15.13.5.12.1 ArrayBuffer(length)
+&gt; step 10 of 15.13.6.1.1 TypedArray(length)
+&gt; step 12 of 15.13.6.1.3 TypedArray(array)
+&gt; step 13.d of 15.136.1.4 TypedArray(buffer, byteOffset, length)
+
+You are right; I guess I was looking at rev 14.
+Sorry for the noise!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

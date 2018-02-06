@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3256</bug_id>
+          
+          <creation_ts>2014-10-02 17:20:00 -0700</creation_ts>
+          <short_desc>New Array.prototype behavior of returning an instance of `this.constructor` breaks Zepto.</short_desc>
+          <delta_ts>2014-12-07 14:35:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10261</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-10-02 17:20:56 -0700</bug_when>
+    <thetext>We have discovered a breaking change in ES6 that has significant impact on the web (especially the mobile web). Zepto is affected and possibly other libraries that depend on similar patterns.
+
+The problem arises because Array.prototype methods now attempt to construct an instance of this.constructor rather than Array. This is obviously beneficial for some cases, but has extremely bad behavior for libraries like Zepto that detach methods from Array.prototype and apply them to objects whose only constructor property is found on Object.prototype.
+
+The min repro case is something like this:
+
+var obj = [1,2,3];
+obj.__proto__ = { slice: Array.prototype.slice };
+var res = obj.slice(2);
+Array.isArray(res); // true in ES5, false in ES6.
+
+Key pieces of code:
+
+Zepto prototype object: https://github.com/madrobby/zepto/blob/master/src/zepto.js#L389-L796
+(note lack of constructor property)
+
+Zepto &quot;wrapper&quot;: https://github.com/madrobby/zepto/blob/master/src/zepto.js#L157-L162
+
+Example isArray check that often fails in practice with ES6 semantics: https://github.com/madrobby/zepto/blob/master/src/zepto.js#L198
+
+The scope of this breakage seems very large. If at all possible we should update the semantics to preserve backwards compat for Zepto.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10262</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-02 18:01:16 -0700</bug_when>
+    <thetext>If we only have to worry about implicit inheritance of &quot;constructor&quot; from Object.prototype we can probably fix it by inserting an additional step between 14.c.ii (which is itself an hack to fix an earlier compat issue) and 14.c.ii.1. The new line is an additional guard on using C as the constructor:
+     If SameValue(C, %Object%) is false, then
+            (existing line 14.c.ii.1)
+ 
+This takes care of the sloppy code like what you presented that &quot;accidentally&quot; returns %Object% as the value of obj.constructor.  It would still break anybody who setups a well formed &quot;class&quot; using array methods and then did the same sort of dunder proto hacking to turn exotic array instances into instances of that class.
+
+I think I have a fix for that case too, but it would require exposing an additional @@method.  I not yet sure we really need it.
+
+Here is a sketch of the fix:
+Define a new &quot;static&quot; accessor property on Array whose getter is essentintially:
+   function () {return this}.
+
+All occurenencnce in Array.prototype methods of sequences that look like:
+4.	If O is an exotic Array object, then
+  a.	  Let C be Get(O, &quot;constructor&quot;).
+  b.  	  ReturnIfAbrupt(C).
+  c.	  If IsConstructor(C) is true, then
+    i.	    Let thisRealm be the running execution context’s Realm.
+    ii.	    If SameValue(thisRealm, GetFunctionRealm(C)) is true, then
+      1.	Let A be the result of calling the [[Construct]] internal method of C with argument (0).
+5.	If A is undefined, then
+a.	  Let A be ArrayCreate(0).
+
+would be replaced by:
+4.	Let C be Get(O, &quot;constructor&quot;).
+5.  	ReturnIfAbrupt(C).
+6.	If IsConstructor(C) is true, then
+  a.      Let species be Get(O, @@species);
+  b.      If IsConstructor(species) is true, then
+    i.      Let C be species.
+  c.      Else, let C be undefined.
+7.	If IsConstructor(C) is true, then
+  a.	  Let thisRealm be the running execution context’s Realm.
+  b.	  If SameValue(thisRealm, GetFunctionRealm(C)) is true, then
+    i.	    Let A be the result of calling the [[Construct]] internal method of C with argument (0).
+8.	If A is undefined, then
+  a.	  Let A be ArrayCreate(0).
+
+This approach actually is more backwards compatible and also provides greater flexibility for ES6 level programmers who what to wire together new kinds of pseudo-array classes and reuse Array prototype methods.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10263</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-04 08:23:43 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+
+Bug fixed in line 6a below
+
+&gt; 
+&gt; 
+&gt; would be replaced by:
+&gt; 4.	Let C be Get(O, &quot;constructor&quot;).
+&gt; 5.  	ReturnIfAbrupt(C).
+&gt; 6.	If IsConstructor(C) is true, then
+&gt;   a.      Let species be Get(C, @@species);
+&gt;   b.      If IsConstructor(species) is true, then
+&gt;     i.      Let C be species.
+&gt;   c.      Else, let C be undefined.
+&gt; 7.	If IsConstructor(C) is true, then
+&gt;   a.	  Let thisRealm be the running execution context’s Realm.
+&gt;   b.	  If SameValue(thisRealm, GetFunctionRealm(C)) is true, then
+&gt;     i.	    Let A be the result of calling the [[Construct]] internal method
+&gt; of C with argument (0).
+&gt; 8.	If A is undefined, then
+&gt;   a.	  Let A be ArrayCreate(0).
+&gt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10270</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-10-07 16:08:45 -0700</bug_when>
+    <thetext>Here&apos;s a slightly refactored version that should be semantically identical (except for the added ReturnIfAbrupt check after getting @@species from C).
+
+4. Let C be Get(O, &quot;constructor&quot;).
+5. ReturnIfAbrupt(C).
+6. If IsConstructor(C) is true, then
+   a. Let species be Get(C, @@species);
+   b. ReturnIfAbrupt(species)
+   c. If IsConstructor(species) is true, then
+      i.  let thisRealm be the running execution context’s Realm.
+      ii. If SameValue(thisRealm, GetFunctionRealm(C)) is true, then
+          1. Let A be the result of calling the [[Construct]] internal method of species with argument (0).
+7. If A is undefined, then
+  a. Let A be ArrayCreate(0).
+
+Allen currently investigating whether the realm check needs to be moved to 6.a before checking species.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10680</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-24 14:03:49 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10870</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:03 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4146</bug_id>
+          
+          <creation_ts>2015-03-08 20:41:00 -0700</creation_ts>
+          <short_desc>10.2 + 10.2.1: suggested rewrite</short_desc>
+          <delta_ts>2015-03-10 15:05:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13652</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-08 20:41:30 -0700</bug_when>
+    <thetext>In 10.2 &quot;Types of Source Code&quot; and 10.2.1 &quot;Strict Mode Code&quot;, ...
+
+{1}
+The &quot;four types of ECMAScript code&quot; don&apos;t cover all source text. There are little exceptions like the BindingIdentifier and top-level terminals of a FunctionDeclaration, but there are also big exceptions like classes.
+
+{2}
+10.2 has three long lists of nonterminals, all the same list. 10.2.1 has another list that is almost the same. And there are other repeated bits.
+
+To address the above (and also the points in Bug 4142 and Bug 4145), here&apos;s a suggested rewrite of those two sections.
+
+-----------
+
+Source text is divided into regions according to the &apos;region-defining nonterminals&apos;:
+    Script
+    Module
+    ClassDeclaration
+    ClassExpression
+    FunctionDeclaration
+    ...
+    ArrowFunction
+Each instance of a region-defining nonterminal in a parse tree defines a region that includes all of the matching source text except for the source text of any nested region.
+
+Source text is classified according to the region it belongs to:
+ * &apos;Global code&apos; is source text in a region defined by /Script/.
+
+ * &apos;Module code&apos; is source text in a region defined by /Module/.
+
+ * &apos;Class code&apos; is source text in a region defined by /ClassDeclaration/
+   or /ClassExpression/.
+
+ * &apos;Function code&apos; is source text in a region defined by any other
+   region-defining nonterminal.
+
+ * [&apos;Eval code&apos; is defined as it is now, just a special case of global code.]
+
+A region is &apos;strict&apos; if either it is nested within a region that is strict, or it is:
+    * module code;
+    * class code;
+    * global code that is explicitly strict;
+    * function code whose FunctionBody is explicitly strict; or
+    * eval code that is explicitly strict or is invoked via a direct eval
+        that is in a region that is strict.
+
+where &quot;is explicitly strict&quot; means
+&quot;begins with a Directive Prologue that contains a Use Strict Directive&quot;.
+
+For the purposes of the above definitions *only*, if an invocation of the built-in Function constructor causes source text to be parsed as FunctionBody and FormalParameters, these are deemed to be the FunctionBody and FormalParameters of a FunctionExpression.
+
+[And similarly for GeneratorFunction.]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13656</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-09 06:43:30 -0700</bug_when>
+    <thetext>Re {1}, I now recall that most of a class is function code. However, there&apos;s still a non-trivial leftover (ClassHeritage) that isn&apos;t any of the 4 &quot;types&quot; of code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13677</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-10 11:13:23 -0700</bug_when>
+    <thetext>I don&apos;t want to do this big a change at this state in the process.
+
+Deferring to Es7 so we can think about a rewrite in that context</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13688</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-10 15:05:20 -0700</bug_when>
+    <thetext>okay.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

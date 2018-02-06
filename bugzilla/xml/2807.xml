@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2807</bug_id>
+          
+          <creation_ts>2014-05-03 10:12:00 -0700</creation_ts>
+          <short_desc>chapter 22: misc editorial</short_desc>
+          <delta_ts>2014-06-01 10:28:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8107</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:12:19 -0700</bug_when>
+    <thetext>----------------------------------------
+In 22.2.1.3 &quot;%TypedArray% ( object )&quot;:
+
+{1}
+22.2.1.3 / step 1:
+Assert: Type(/array/) is Object and /object/ does not have ...
+    &apos;array&apos; is not defined.  s|array|object| ?
+
+----------------------------------------
+In 22.2.2.1 &quot;%TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )&quot;:
+
+{2,3}
+22.2.2.1 / step 7:
+Return TypedArrayFrom(/constructor/, *undefined*, /items/, /f/. /t/).
+    &apos;constructor&apos; is not defined.
+
+    Change the dot after &quot;f&quot; to a comma.
+
+----------------------------------------
+In 22.2.2.1.1 &quot;Runtime Semantics: TypedArrayFrom( ... )&quot;:
+
+{4}
+22.2.2.1.1 / step 3:
+Assert: target is either undefined or an Object that has been validated ...
+    Put &quot;target&quot; in italic.
+    Put &quot;undefined&quot; in bold.
+
+{5}
+22.2.2.1.1 / step 10.i.i:
+Assert: /target/ is an unitialized TypedArray instance object.
+    s|unitialized|initialized| ?
+
+{6}
+22.2.2.1.1 / step 10.i.xvi:
+Set /targetObj/&apos;s [[ArrayLength]] internal slot to /elementLength/.
+    &apos;elementLength&apos; is not defined.  s|elementLength|len| ?
+
+----------------------------------------
+In 22.2.3.22 &quot;%TypedArray%.prototype.set(array [ , offset ] )&quot;:
+
+{7}
+22.2.3.22 / step 5:
+Assert: /target/ has [[ViewedArrayBuffer]] internal slot.
+    After &quot;has&quot;, insert &quot;a&quot;.
+
+----------------------------------------
+In 22.2.3.23 &quot;%TypedArray%.prototype.set(typedArray [, offset ] )&quot;:
+
+{8}
+22.2.3.23 / step 5:
+Assert: /target/ has [[ViewedArrayBuffer]] internal slot.
+    After &quot;has&quot;, insert &quot;a&quot;.
+
+----------------------------------------
+In 22.2.3.27 &quot;%TypedArray%.prototype.subarray( [ begin [ , end ] ] )&quot;:
+
+{9}
+22.2.3.27 / step 4:
+Assert: /O/ has [[ViewedArrayBuffer]] internal slot.
+    After &quot;has&quot;, insert &quot;a&quot;.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8224</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 12:02:47 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8730</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 10:28:37 -0700</bug_when>
+    <thetext>confirmed fixed except {2}, re-raised as Bug 2942</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

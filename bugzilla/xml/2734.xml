@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2734</bug_id>
+          
+          <creation_ts>2014-04-24 15:59:00 -0700</creation_ts>
+          <short_desc>%ArrayIteratorPrototype%.next(): swap steps 13 and 14</short_desc>
+          <delta_ts>2014-07-15 11:24:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2736</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Beecher Greenman">thespooniest</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7911</commentid>
+    <comment_count>0</comment_count>
+    <who name="Beecher Greenman">thespooniest</who>
+    <bug_when>2014-04-24 15:59:35 -0700</bug_when>
+    <thetext>Step 13 of %ArrayIteratorPrototype%.next() checks if itemKind has the substring &quot;value&quot;, and ultimately returns if it does. Step 14 checks if itemKind has the substring &quot;key+value&quot;, and returns a different result based on that.
+
+However, because &quot;value&quot; is itself a substring of &quot;key+value&quot;, an ArrayIterator of kind &quot;key+value&quot; (intended to trip Step 14) will never reach the right step, because it will trip Step 13 and return before that can happen.
+
+This can be fixed simply by swapping the two steps. Then kind &quot;key+value&quot; will trip the appropriate step, but other kinds of iterators will pass through to the other checks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7914</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-24 18:39:58 -0700</bug_when>
+    <thetext>I don&apos;t think so, step 13c only returns if step 13b throws an exception, otherwise it just continues with step 14 (no else in front of step 14)
+
+Step 13 is doing the elementValue fetch for both the &quot;value&quot; and &quot;key+value&quot; cases</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9207</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 11:24:10 -0700</bug_when>
+    <thetext>substring testing eliminated as part of fix for Bug 2736 
+
+In rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

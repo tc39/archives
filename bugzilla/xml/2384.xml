@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2384</bug_id>
+          
+          <creation_ts>2013-12-11 19:50:00 -0800</creation_ts>
+          <short_desc>Update needed for test 15.5.4.9_CE.js, String.prototype.localeCompare</short_desc>
+          <delta_ts>2014-07-10 14:49:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6930</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-11 19:50:52 -0800</bug_when>
+    <thetext>In response to bug 1273, the ES6 draft specification has been updated to require that String.prototype.localeCompare returns 0 when comparing Strings that are considered canonically equivalent by the Unicode standard only if it performs language-sensitive comparisons. This partially invalidates test 15.5.4.9_CE.js, which verifies that canonical equivalence is always respected. The test case needs to be updated to only check for canonical equivalence if localeCompare implements language-sensitive comparisons.
+
+I don&apos;t know of a way to determine in general whether localeCompare performs language-sensitive comparisons. However, one feature that&apos;s very commonly used in language-sensitive comparisons (even for languages using non-Latin writing systems) is treating upper and lower case Latin characters as similar. A very simple test that catches most language-sensitive implementations is therefore
+   &quot;a&quot;.localeCompare(&quot;Z&quot;) &lt; 0</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6999</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-01-26 13:08:43 -0800</bug_when>
+    <thetext>Presumably all the 15.5.4.9 tests should be updated to first check if Intl is supported, and if so bail out (since presumably verification of the API&apos;s semantics should take place in the Intl402 test suite). I think the following should be a sufficient check to all but guarantee Intl is supported:
+
+try { &quot;&quot;.localeCompare(&quot;&quot;, [{toString: function() { throw 1; }}]) } catch(e) { return true; }
+
+Then, to detect whether the current implementation uses locale-sensitive comparisons, Norbert&apos;s proposed check can be employed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7002</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-01-26 15:48:47 -0800</bug_when>
+    <thetext>Why should tests be skipped if the internationalization API is implemented? The goal of ECMA-402 section 13 was not to invalidate the corresponding parts of ECMA-262, but to provide additional requirements. All existing tests in Test262 should remain valid.
+
+The change requested here has nothing to do with ECMA-402; it became necessary because a contradiction within ECMA-262 got resolved by the editor in a different way than the test anticipated.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

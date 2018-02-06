@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2476</bug_id>
+          
+          <creation_ts>2014-01-28 07:38:00 -0800</creation_ts>
+          <short_desc>9.2.13 CloneMethod: CloneMethod should also copy properties to the new function</short_desc>
+          <delta_ts>2014-04-06 11:29:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7141</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-28 07:38:47 -0800</bug_when>
+    <thetext>9.2.13  CloneMethod(function, newHome, newName):
+
+Step 4 only copies the internal slots and internal methods to the new function object, but properties are currently not defined as an internal slot, so it should be made more explicit that the new function also receives the properties from the original function. 
+
+Or alternatively 9.1 needs to be changed to define properties as an internal slot.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7149</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-28 08:24:15 -0800</bug_when>
+    <thetext>toMethod intentionally does not copy properties.  It is intended to be a primitive building block and that an additional function layer would deal with copying properties.
+
+The main concern is that properties may themselves be functions with super bindings and hence the cloning/copying needs to be recursively applied.
+
+We&apos;ll discuss this further at the Jan. 2014 TC39 meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7150</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-28 08:27:19 -0800</bug_when>
+    <thetext>If properties should not copied, there still needs to be some additional code to call 9.2.8 AddRestrictedFunctionProperties() to prevent .caller and .arguments access for strict functions. And most importantly the value of the [[Extensible]] internal slot must not be copied over the new function object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7305</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-14 12:21:20 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+Specified that it must work for exotic built-in functions
+set [[Extensible]] true
+Adds restricted properties for Strict functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7539</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:58 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

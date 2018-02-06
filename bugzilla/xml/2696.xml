@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2696</bug_id>
+          
+          <creation_ts>2014-04-19 16:22:00 -0700</creation_ts>
+          <short_desc>chapter 13: misc editorial</short_desc>
+          <delta_ts>2014-06-02 13:59:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2838</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7843</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:22:29 -0700</bug_when>
+    <thetext>----------------------------------------
+In 13.2.3.6 &quot;Runtime Semantics: IteratorBindingInitialization&quot;:
+
+{1}
+13.2.3.6 / group 12 / step 1:
+Return the result of performing IteratorBindingInitialization for
+/SingleNameBinding/ using /iterator/ /and/ /environment/ as the arguments.
+    De-italicize &quot;and&quot;
+
+----------------------------------------
+In 13.6.1.2 &quot;Runtime Semantics: LabelledEvaluation&quot;:
+
+{2}
+13.6.1.2 / step 1:
+Let /V/ = undefined.
+    Put &apos;undefined&apos; in bold.
+
+{3}
+13.6.1.2 / step 2.f:
+If /exprValue/ is false, Return NormalCompletion(/V/).
+    Put &apos;false&apos; in bold.
+    s|Return|return|
+
+{4}
+13.6.1.2 / step 2.g:
+Else if /exprValue/ is not true, then
+    Put &apos;true&apos; in bold.
+
+----------------------------------------
+In 13.6.2.2 &quot;Runtime Semantics: LabelledEvaluation&quot;:
+
+{5}
+13.6.2.2 / step 1:
+Let /V/ = undefined.
+    Put &apos;undefined&apos; in bold.
+
+{6}
+13.6.2.2 / step 2.c:
+If /exprValue/ is false, return NormalCompletion(/V/).
+    Put &apos;false&apos; in bold.
+
+{7}
+13.6.2.2 / step 2.d:
+If /exprValue/ is not true, then
+    Put &apos;true&apos; in bold.
+
+----------------------------------------
+In 13.6.3.2 &quot;Runtime Semantics: LabelledEvaluation&quot;:
+
+{8}
+13.6.3.2 / group 3 / production:
+IterationStatement : for ( LexicalDeclaration ; Expression_opt ; ...
+    Delete the semicolon immediately after LexicalDeclaration.
+
+{9}
+13.6.3.2 / group 3 / step 9:
+If /isConst/ is *false*, let /perIterationLets/ be /boundNames/
+otherwise let /perInterationLets/ be ( ).
+    s|Interation|Iteration|
+
+----------------------------------------
+In 13.6.3.4 &quot;Runtime Semantics: CreatePerIterationEnvironment&quot;:
+
+{10}
+13.6.3.4 / para 1:
+The abstract operation CreatePerIterationEnvironment with argument
+/perIterationBindings/, is performed as follows:
+    Delete comma
+
+{11}
+13.6.3.4 / step 1.b:
+Let /outer/ be /lastIterationEnv/&apos;s /outer/ lexical environment.
+    De-italicize second &quot;outer&quot;
+
+----------------------------------------
+In 13.6.4.1 &quot;Static Semantics: Early Errors&quot;:
+
+{12}
+13.6.4.1 / note:
+... even if multiple levels of nested parenthesizes surround /Expression/.
+    s|parenthesizes|parentheses|
+
+----------------------------------------
+In 13.6.4.3 &quot;Static Semantics: VarDeclaredNames&quot;:
+
+{13}
+13.6.4.3 / group 3 / production:
+IterationStatement : for ( ForDeclaration in Expression ) Statement
+    Terminal &apos;in&apos; should be in monospace bold.
+
+----------------------------------------
+In 13.7 &quot;The continue Statement&quot;:
+
+{14}
+13.7 / Syntax / prod 1 / rhs 2:
+continue [...] LabelIdentifier[...] ;
+    Italicize &apos;LabelIdentifier&apos;
+
+----------------------------------------
+In 13.7.1 &quot;Static Semantics: Early Errors&quot;:
+
+{15,16}
+13.7.1 / group 2 / item 1:
+It is a Syntax Error if StringValue(/LabelIdentifier/) does not appear in
+the /CurrentLabelSet/ of an enclosing (but not crossing function boundaries)
+/IterationStatement/.
+    &apos;CurrentLabelSet&apos; isn&apos;t defined.
+    It&apos;s presumably a semantic routine, so shouldn&apos;t be italicized.
+
+    &quot;IterationStatement&quot; is sans-serif italic, should be serif italic.
+
+----------------------------------------
+In 13.7.2 &quot;Runtime Semantics: Evaluation&quot;:
+
+{17}
+13.7.2 / group 2 / step 1:
+Let label be the StringValue of /LabelIdentifier/.
+    Italicize &apos;label&apos;
+
+{18}
+13.7.2 / group 2 / step 2:
+Return Completion{[[type]]: `continue`, [[value]]: `empty`, [[target]]: label }.
+    Italicize &quot;label&quot;
+
+----------------------------------------
+In 13.8 &quot;The break Statement&quot;:
+
+{19}
+13.8 / Syntax / prod 1 / rhs 2:
+break [...] LabelIdentifier[?Yield] ;
+    Italicize &apos;LabelIdentifier&apos;
+
+----------------------------------------
+In 13.8.1 &quot;Static Semantics: Early Errors&quot;:
+
+{20}
+13.8.1 / group 2 / item 1:
+It is a Syntax Error if StringValue(/LabelIdentifier/)does not appear in
+the /CurrentLabelSet/ of an enclosing (but not crossing function boundaries)
+/Statement/.
+    &apos;CurrentLabelSet&apos; isn&apos;t defined.
+    It&apos;s presumably a semantic routine, so shouldn&apos;t be italicized.
+
+----------------------------------------
+In 13.8.2 &quot;Runtime Semantics: Evaluation&quot;:
+
+{21}
+13.8.2 / group 2 / step 1:
+Let label be the StringValue of /LabelIdentifier/.
+    Italicize &apos;label&apos;
+
+{22}
+13.8.2 / group 2 / step 2:
+Return Completion{[[type]]: `break`, [[value]]: `empty`, [[target]]: label }.
+    Italicize &quot;label&quot;
+
+----------------------------------------
+In 13.11.2 &quot;Static Semantics: LexicalDeclarations&quot;:
+
+{23}
+13.11.2 / group 5 / production:
+DefaultClause : default : StatementList_opt
+    &apos;DefaultClause&apos; is sans-serif upright, should be in serif italic.
+    &apos;StatementList&apos; is sans-serif upright, should be in serif italic.
+
+----------------------------------------
+In 13.11.4 &quot;Static Semantics: VarDeclaredNames&quot;:
+
+{24}
+13.11.4 / group 1 / production:
+SwitchStatement : switch ( Expression ) CaseBlock
+    &apos;CaseBlock&apos; is sans-serif upright, should be in serif italic.
+
+{25}
+13.11.4 / group 3 / step 3:
+Append to /names/ the elements of the VarDeclaredNames of the DefaultClause.
+    &quot;DefaultClause&quot; is in monospace, should be in italic.
+
+----------------------------------------
+In 13.11.5 &quot;Runtime Semantics: CaseBlockEvaluation&quot;:
+
+{26}
+13.11.5 / group 1 / step 5.a:
+Let /C/ be the next /CaseClause/ in /A/. If there is no such CaseClause,
+return NormalCompletion(/V/).
+    &quot;CaseClause&quot; is in monospace, should be in italic.
+
+{27}
+13.11.5 / group 1 / step 5.b.ii:
+If /R/.[[value]] is not empty, then let /V/ = /R/.[[value]].
+    Put &apos;empty&apos; in sans-serif.
+
+{28}
+13.11.5 / group 2 / step 4.b.ii:
+If /R/.[[value]] is not empty, then let /V/ = /R/.[[value]].
+    Put &apos;empty&apos; in sans-serif.
+
+{29}
+13.11.5 / group 2 / step 6.b.ii.2:
+If /R/.[[value]] is not empty, then let /V/ = /R/.[[value]].
+    Put &apos;empty&apos; in sans-serif.
+
+{30}
+13.11.5 / group 2 / step 9:
+If /R/.[[value]] is not empty, then let /V/ = /R/.[[value]].
+    Put &apos;empty&apos; in sans-serif.
+
+{31}
+13.11.5 / group 2 / step 12.b:
+If /R/.[[value]] is not empty, then let /V/ = /R/.[[value]].
+    Put &apos;empty&apos; in sans-serif.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8306</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 14:27:00 -0700</bug_when>
+    <thetext>opened separate bug 2838 for item {15} continue statement label static semantics
+
+all the rest fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8633</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-05-27 06:58:10 -0700</bug_when>
+    <thetext>*** Bug 2889 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8848</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 13:59:48 -0700</bug_when>
+    <thetext>confirmed fixed except for:
+{3}, re-raised as Bug 2971, and
+{15}, covered by Bug 2838.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

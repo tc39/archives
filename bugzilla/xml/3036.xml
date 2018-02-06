@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3036</bug_id>
+          
+          <creation_ts>2014-07-22 17:48:00 -0700</creation_ts>
+          <short_desc>@@unscopables algorithm changed from array to object but well-know symbol table did not</short_desc>
+          <delta_ts>2014-08-25 08:29:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Farzon Lotfi">falotfi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9483</commentid>
+    <comment_count>0</comment_count>
+    <who name="Farzon Lotfi">falotfi</who>
+    <bug_when>2014-07-22 17:48:56 -0700</bug_when>
+    <thetext>section 6.1.5.1 Table 1 still says &quot;An Array of string values that are property 
+names that are excluded from the with environment bindings of the associated 
+objects. 
+
+Should be updated to &quot;An Object of string values ...&quot; to be consistent with the algorithmic change in 22.1.3.31 from Let blackList be ArrayCreate(7, %ArrayPrototype%) to Let blackList be ObjectCreate(%ObjectPrototype%).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9525</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-24 09:49:14 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9881</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:21 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>84</bug_id>
+          
+          <creation_ts>2011-03-30 17:09:00 -0700</creation_ts>
+          <short_desc>Some constructor spec. fails to mention required internal methods</short_desc>
+          <delta_ts>2015-10-02 13:37:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>83</dependson>
+          <blocked>150</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>178</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-30 17:09:17 -0700</bug_when>
+    <thetext>The spec. for the array constructors (15.4.3.1, 15.4.2.2) sets all the internal properties of new array instances but don&apos;t mention that they have a special [[DefineOwnProperty]] internal method. Section 15.4.5 mentions it but as covered in bug 83 the constructors don&apos;t explicitly reference that section</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>179</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-30 17:19:05 -0700</bug_when>
+    <thetext>Also similar problem with String 15.5.2.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>577</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:17:38 -0800</bug_when>
+    <thetext>set IN_PROGRESS to indicated this should go into ES5.1 Errata.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

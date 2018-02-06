@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3082</bug_id>
+          
+          <creation_ts>2014-07-27 13:48:00 -0700</creation_ts>
+          <short_desc>14.6.2.1: incorrect production</short_desc>
+          <delta_ts>2014-08-25 08:29:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9619</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-27 13:48:01 -0700</bug_when>
+    <thetext>In 14.6.2.1 &quot;Statement Rules&quot;,
+in group 5,
+the last production is:
+    LabelledStatement :
+        LabelIdentifier : Statement
+but this is no longer correct.
+
+&quot;Statement&quot; should be &quot;LabelledItem&quot;
+(which will require creating a new group for that production).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9678</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-05 14:35:59 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9913</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:25 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

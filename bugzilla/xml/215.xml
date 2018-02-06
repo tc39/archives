@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>215</bug_id>
+          
+          <creation_ts>2011-10-20 09:12:00 -0700</creation_ts>
+          <short_desc>15.9.5.43-0-4.js has SyntaxError in ECMA262 5.1 grammer</short_desc>
+          <delta_ts>2012-01-12 10:16:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>498</commentid>
+    <comment_count>0</comment_count>
+      <attachid>4</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2011-10-20 09:12:11 -0700</bug_when>
+    <thetext>Created attachment 4
+patch for 15.9.5.43-0-4.js
+
+chapter15/15.9/15.9.5/15.9.5.43/15.9.5.43-0-4.js has SyntaxError in ECMA262 5.1 grammer.
+
+The point at issue is NumericLiteral `09`.
+
+This is not OctalIntegerLiteral because 9 is not OctalDigit.
+OctalIntegerLiteral ::
+  0 OctalDigit
+  OctalIntegerLiteral OctalDigit
+
+http://es5.github.com/#B.1.1
+
+And, at the same time, this is not DecimalIntegerLiteral.
+
+DecimalIntegerLiteral ::
+  0 
+  NonZeroDigit DecimalDigitsopt
+
+http://es5.github.com/#x7.8.3
+
+so, parser should reduce it as 0 and 9.
+And because of &quot;The source character immediately following a NumericLiteral must not be an IdentifierStart or DecimalDigit.&quot;, this should be treated as SyntaxError.
+(section 7.8.3 NOTE)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>499</commentid>
+    <comment_count>1</comment_count>
+      <attachid>5</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2011-10-20 09:13:56 -0700</bug_when>
+    <thetext>Created attachment 5
+new test case for this issue
+
+And I suggests adding new testcase for it.
+This testcase file format may be invalid... sorry.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>563</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 09:53:54 -0800</bug_when>
+    <thetext>Thank you Yusuke!  Very good spot, and I&apos;ll fix it shortly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>564</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 10:16:03 -0800</bug_when>
+    <thetext>Checked into Hg.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>4</attachid>
+            <date>2011-10-20 09:12:00 -0700</date>
+            <delta_ts>2011-10-20 09:12:11 -0700</delta_ts>
+            <desc>patch for 15.9.5.43-0-4.js</desc>
+            <filename>res.patch</filename>
+            <type>application/octet-stream</type>
+            <size>822</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2hhcHRlcjE1LzE1LjkvMTUuOS41LzE1LjkuNS40My8x
+NS45LjUuNDMtMC00LmpzIGIvdGVzdC9zdWl0ZS9jaGFwdGVyMTUvMTUuOS8xNS45LjUvMTUuOS41
+LjQzLzE1LjkuNS40My0wLTQuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaGFwdGVyMTUvMTUuOS8xNS45
+LjUvMTUuOS41LjQzLzE1LjkuNS40My0wLTQuanMKKysrIGIvdGVzdC9zdWl0ZS9jaGFwdGVyMTUv
+MTUuOS8xNS45LjUvMTUuOS41LjQzLzE1LjkuNS40My0wLTQuanMKQEAgLTIwLDE0ICsyMCwxNCBA
+QAogCiAvKioKICAqIEBwYXRoIGNoYXB0ZXIxNS8xNS45LzE1LjkuNS8xNS45LjUuNDMvMTUuOS41
+LjQzLTAtNC5qcwogICogQGRlc2NyaXB0aW9uIERhdGUucHJvdG90eXBlLnRvSVNPU3RyaW5nIC0g
+Zm9ybWF0IG9mIHJldHVybmVkIHN0cmluZyBpcyAnWVlZWS1NTS1ERFRISDptbTpzcy5zc3NaJywg
+dGhlIHRpbWUgem9uZSBpcyBVVEMoMCkKICAqLwogCiAKIGZ1bmN0aW9uIHRlc3RjYXNlKCkgewot
+ICAgICAgICB2YXIgZGF0ZSA9IG5ldyBEYXRlKDE5OTksIDA5LCAxMCwgMTAsIDEwLCAxMCwgMTAp
+OworICAgICAgICB2YXIgZGF0ZSA9IG5ldyBEYXRlKDE5OTksIDksIDEwLCAxMCwgMTAsIDEwLCAx
+MCk7CiAgICAgICAgIHZhciBsb2NhbERhdGUgPSBuZXcgRGF0ZShkYXRlLmdldFRpbWUoKSAtIGRh
+dGUuZ2V0VGltZXpvbmVPZmZzZXQoKSAqIDYwMDAwKTsKIAogICAgICAgICByZXR1cm4gbG9jYWxE
+YXRlLnRvSVNPU3RyaW5nKCkgPT09ICIxOTk5LTEwLTEwVDEwOjEwOjEwLjAxMFoiOwogICAgIH0K
+IHJ1blRlc3RDYXNlKHRlc3RjYXNlKTsK
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>5</attachid>
+            <date>2011-10-20 09:13:00 -0700</date>
+            <delta_ts>2011-10-20 09:13:56 -0700</delta_ts>
+            <desc>new test case for this issue</desc>
+            <filename>7.8.3-8.js</filename>
+            <type>text/javascript</type>
+            <size>1980</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">Ly8vIENvcHlyaWdodCAoYykgMjAwOSBNaWNyb3NvZnQgQ29ycG9yYXRpb24gCi8vLyAKLy8vIFJl
+ZGlzdHJpYnV0aW9uIGFuZCB1c2UgaW4gc291cmNlIGFuZCBiaW5hcnkgZm9ybXMsIHdpdGggb3Ig
+d2l0aG91dCBtb2RpZmljYXRpb24sIGFyZSBwZXJtaXR0ZWQgcHJvdmlkZWQKLy8vIHRoYXQgdGhl
+IGZvbGxvd2luZyBjb25kaXRpb25zIGFyZSBtZXQ6IAovLy8gICAgKiBSZWRpc3RyaWJ1dGlvbnMg
+b2Ygc291cmNlIGNvZGUgbXVzdCByZXRhaW4gdGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UsIHRo
+aXMgbGlzdCBvZiBjb25kaXRpb25zIGFuZAovLy8gICAgICB0aGUgZm9sbG93aW5nIGRpc2NsYWlt
+ZXIuIAovLy8gICAgKiBSZWRpc3RyaWJ1dGlvbnMgaW4gYmluYXJ5IGZvcm0gbXVzdCByZXByb2R1
+Y2UgdGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2UsIHRoaXMgbGlzdCBvZiBjb25kaXRpb25zIGFu
+ZCAKLy8vICAgICAgdGhlIGZvbGxvd2luZyBkaXNjbGFpbWVyIGluIHRoZSBkb2N1bWVudGF0aW9u
+IGFuZC9vciBvdGhlciBtYXRlcmlhbHMgcHJvdmlkZWQgd2l0aCB0aGUgZGlzdHJpYnV0aW9uLiAg
+Ci8vLyAgICAqIE5laXRoZXIgdGhlIG5hbWUgb2YgTWljcm9zb2Z0IG5vciB0aGUgbmFtZXMgb2Yg
+aXRzIGNvbnRyaWJ1dG9ycyBtYXkgYmUgdXNlZCB0bwovLy8gICAgICBlbmRvcnNlIG9yIHByb21v
+dGUgcHJvZHVjdHMgZGVyaXZlZCBmcm9tIHRoaXMgc29mdHdhcmUgd2l0aG91dCBzcGVjaWZpYyBw
+cmlvciB3cml0dGVuIHBlcm1pc3Npb24uCi8vLyAKLy8vIFRISVMgU09GVFdBUkUgSVMgUFJPVklE
+RUQgQlkgVEhFIENPUFlSSUdIVCBIT0xERVJTIEFORCBDT05UUklCVVRPUlMgIkFTIElTIiBBTkQg
+QU5ZIEVYUFJFU1MgT1IKLy8vIElNUExJRUQgV0FSUkFOVElFUywgSU5DTFVESU5HLCBCVVQgTk9U
+IExJTUlURUQgVE8sIFRIRSBJTVBMSUVEIFdBUlJBTlRJRVMgT0YgTUVSQ0hBTlRBQklMSVRZIEFO
+RCBGSVRORVNTCi8vLyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQVJFIERJU0NMQUlNRUQuIElO
+IE5PIEVWRU5UIFNIQUxMIFRIRSBDT1BZUklHSFQgT1dORVIgT1IgQ09OVFJJQlVUT1JTIEJFIExJ
+QUJMRQovLy8gRk9SIEFOWSBESVJFQ1QsIElORElSRUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBF
+WEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwgREFNQUdFUyAoSU5DTFVESU5HLCBCVVQgTk9UCi8v
+LyBMSU1JVEVEIFRPLCBQUk9DVVJFTUVOVCBPRiBTVUJTVElUVVRFIEdPT0RTIE9SIFNFUlZJQ0VT
+OyBMT1NTIE9GIFVTRSwgREFUQSwgT1IgUFJPRklUUzsgT1IgQlVTSU5FU1MKLy8vIElOVEVSUlVQ
+VElPTikgSE9XRVZFUiBDQVVTRUQgQU5EIE9OIEFOWSBUSEVPUlkgT0YgTElBQklMSVRZLCBXSEVU
+SEVSIElOIENPTlRSQUNULCBTVFJJQ1QgTElBQklMSVRZLAovLy8gT1IgVE9SVCAoSU5DTFVESU5H
+IE5FR0xJR0VOQ0UgT1IgT1RIRVJXSVNFKSBBUklTSU5HIElOIEFOWSBXQVkgT1VUIE9GIFRIRSBV
+U0UgT0YgVEhJUyBTT0ZUV0FSRSwgRVZFTiBJRgovLy8gQURWSVNFRCBPRiBUSEUgUE9TU0lCSUxJ
+VFkgT0YgU1VDSCBEQU1BR0UuCgovKioKICogQHBhdGggY2hhcHRlcjA3LzcuOC83LjguMy83Ljgu
+My04LmpzCiAqIEBkZXNjcmlwdGlvbiBub3QgT2N0YWxJbnRlZ2VyTGl0ZXJhbCAtIFN5bnRheEVy
+cm9yIGV4cGVjdGVkOiAwOSBpcyBub3QgT2N0YWxJbnRlZ2VyTGl0ZXJhbCBhbmQgRGVjaW1hbExp
+dGVyYWwKICogQG9ubHlTdHJpY3QKICovCgoKZnVuY3Rpb24gdGVzdGNhc2UoKSB7CiAgICAgICAg
+dHJ5IHsKICAgICAgICAgICAgZXZhbCgidmFyIF83XzhfM184ID0gMDk7Iik7CiAgICAgICAgICAg
+IHJldHVybiBmYWxzZTsKICAgICAgICB9IGNhdGNoIChlKSB7CiAgICAgICAgICAgIHJldHVybiBl
+IGluc3RhbmNlb2YgU3ludGF4RXJyb3IgJiYgdHlwZW9mIF83XzhfM184ID09PSAidW5kZWZpbmVk
+IjsKICAgICAgICB9CiAgICB9CnJ1blRlc3RDYXNlKHRlc3RjYXNlKTsK
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

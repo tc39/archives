@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4356</bug_id>
+          
+          <creation_ts>2015-05-07 06:47:00 -0700</creation_ts>
+          <short_desc>Iteration statements return undefined instead of empty</short_desc>
+          <delta_ts>2015-05-07 09:05:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>manish.tripathi.777</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14384</commentid>
+    <comment_count>0</comment_count>
+    <who name="">manish.tripathi.777</who>
+    <bug_when>2015-05-07 06:47:45 -0700</bug_when>
+    <thetext>All iteration statements and if statement return &quot;undefined&quot; value when their body is not evaluated, which is not consistent with ES5.1, example:
+
+1; while (false) ;
+
+should evaluate to 1 according to ES5.1, but according to current specification of ES6 will evaluate to &quot;undefined&quot;.
+
+The is caused by initializing V to &quot;undefined&quot; in ES6 versus &quot;empty&quot; in ES5.1, for example see ES6 final draft (http://wiki.ecmascript.org/lib/exe/fetch.php?id=harmony%3Aspecification_drafts&amp;cache=cache&amp;media=harmony:ecma-262_6th_edition_final_draft_-04-14-15-markup.pdf) - 13.7.3.6, item 1 - Let V=undefined
+but in ES5.1 final draft (http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf) - 12.6.1, item 1 - Let V=empty</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14388</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-07 07:23:43 -0700</bug_when>
+    <thetext>This is an intentional change from ES5 based on the completion reform proposal: http://wiki.ecmascript.org/doku.php?id=harmony:completion_reform</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

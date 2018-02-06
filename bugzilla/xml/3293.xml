@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3293</bug_id>
+          
+          <creation_ts>2014-10-19 10:48:00 -0700</creation_ts>
+          <short_desc>8.6.1 HostNormalizeModuleName needs parentName</short_desc>
+          <delta_ts>2015-07-10 08:35:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>critical</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10525</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-10-19 10:48:59 -0700</bug_when>
+    <thetext>Modules have relative normalization:
+
+app/main.js:
+import &apos;./dep.js&apos;;
+
+Should import &quot;app/dep.js&quot; not &quot;dep.js&quot; at the root-level.
+
+We need to know the normalized name of the parent when normalizing in order to get this functionality:
+
+HostNormalizeModuleName(unnormalizedName, parentNormalizedName)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10530</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-10-20 07:23:04 -0700</bug_when>
+    <thetext>This is critical</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10531</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-20 09:19:33 -0700</bug_when>
+    <thetext>(In reply to Guy Bedford from comment #0)
+&gt; Modules have relative normalization:
+&gt; 
+&gt; app/main.js:
+&gt; import &apos;./dep.js&apos;;
+&gt; 
+&gt; Should import &quot;app/dep.js&quot; not &quot;dep.js&quot; at the root-level.
+
+Actually, this is host defined and not specified in the ES spec.
+
+&gt; 
+&gt; We need to know the normalized name of the parent when normalizing in order
+&gt; to get this functionality:
+&gt; 
+&gt; HostNormalizeModuleName(unnormalizedName, parentNormalizedName)
+
+But I agree this hook is need to enable the host to define such an interpretation.
+
+Fixed in rev29 editor&apos;s draft
+
+Also need to updated the signature of NormalizeModuleName</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10863</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:02 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

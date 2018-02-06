@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>337</bug_id>
+          
+          <creation_ts>2012-05-08 06:26:00 -0700</creation_ts>
+          <short_desc>Array.from (15.4.3.3) indented too far</short_desc>
+          <delta_ts>2012-05-10 17:47:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>898</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 06:26:44 -0700</bug_when>
+    <thetext>P. 179
+
+The Array.from specification text is indented too far - it appears to line up with the last paragraph of Array.of, instead of returning to the far left.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>901</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-08 08:47:48 -0700</bug_when>
+    <thetext>I don&apos;t see it...
+
+Perhaps you are seeing the left margin differences (the space reserved for paper binding) of facing pages ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>903</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 09:24:08 -0700</bug_when>
+    <thetext>Allen, thanks for the response. I&apos;ve taken a screenshot that has a vertical guide placed along the left margin to illustrate
+
+http://gyazo.com/6c4415eb88c322b01f433a3bb4777185.png</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>904</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-08 09:36:06 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Allen, thanks for the response. I&apos;ve taken a screenshot that has a vertical
+&gt; guide placed along the left margin to illustrate
+&gt; 
+&gt; http://gyazo.com/6c4415eb88c322b01f433a3bb4777185.png
+
+Yes, that&apos;s the facing page gutter difference. You should see this for every even/odd pair of pages.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>905</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 10:05:10 -0700</bug_when>
+    <thetext>...Well that&apos;s embarrassing. Thanks for clearing this up - sorry for the noise.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

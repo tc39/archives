@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2032</bug_id>
+          
+          <creation_ts>2013-10-01 22:15:00 -0700</creation_ts>
+          <short_desc>7.1.8 + 24.3.3: non-bold &quot;TypeError&quot;</short_desc>
+          <delta_ts>2013-11-10 19:27:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5798</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-10-01 22:15:48 -0700</bug_when>
+    <thetext>In 7.1.8 &quot;ToString&quot;,
+in Table 12,
+on the row for Symbol,
+the &quot;Result&quot; says:
+    Throw a TypeError exception.
+
+In 24.3.3 &quot;JSON.stringify ( ... )&quot;,
+under &quot;Runtime Semantics: Str Abstract Operation&quot;,
+step 5.c.ii says:
+    If value is undefined, then throw a TypeError exception.
+
+In each case, put &quot;TypeError&quot; in bold.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5803</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-02 14:11:41 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6021</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:44:33 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

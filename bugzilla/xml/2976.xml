@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2976</bug_id>
+          
+          <creation_ts>2014-06-04 14:24:00 -0700</creation_ts>
+          <short_desc>New name for neutered</short_desc>
+          <delta_ts>2014-08-30 09:44:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Simon Kaegi">simon.kaegi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8862</commentid>
+    <comment_count>0</comment_count>
+    <who name="Simon Kaegi">simon.kaegi</who>
+    <bug_when>2014-06-04 14:24:23 -0700</bug_when>
+    <thetext>During the June meeting we talked about using a better name to describe this state.
+
+Released, Vacated, Disconnected, ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8865</commentid>
+    <comment_count>1</comment_count>
+    <who name="Simon Kaegi">simon.kaegi</who>
+    <bug_when>2014-06-05 16:38:15 -0700</bug_when>
+    <thetext>Gone, Ghost, Zombie, Tombstone, Transferred</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8866</commentid>
+    <comment_count>2</comment_count>
+    <who name="Simon Kaegi">simon.kaegi</who>
+    <bug_when>2014-06-05 17:03:11 -0700</bug_when>
+    <thetext>Emptied, Discarded, Relinquished</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10085</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-30 09:44:05 -0700</bug_when>
+    <thetext>fixed in rev27
+
+Detached</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

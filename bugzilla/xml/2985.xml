@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2985</bug_id>
+          
+          <creation_ts>2014-06-10 09:04:00 -0700</creation_ts>
+          <short_desc>Use of &quot;production&quot;</short_desc>
+          <delta_ts>2015-03-16 11:30:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=4124</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8876</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-06-10 09:04:45 -0700</bug_when>
+    <thetext>The spec often conflates the notion of &quot;production&quot; with a program phrase _derived_ via a production. In many places this just results in a category error. For example:
+
+8.3.1: &quot;the production that is being evaluated&quot;
+9.2.2: &quot;the production that is the value of [[Code]]&quot;
+9.2.5/6/7: &quot;a parameter list production&quot; and &quot;a body production&quot;
+9.2.13: &quot;for each production in functionsToInitialize&quot;
+9.4.4.7: &quot;production &apos;formals&apos;&quot;
+
+12.1.1: &quot;if this production is contained in&quot;
+12.2.5.1: &quot;if this production is present&quot;
+12.2.7.2: &quot;let &apos;parameters&apos; be the production&quot; etc
+12.2.9.2.1/2: &quot;passing production as argument&quot;
+12.3.4.2: &quot;takes a production&quot;
+12.5.4.1: &quot;derives a production&quot;
+12.14.5.1: &quot;derives a production&quot; and &quot;that production is substituted&quot;
+
+13.1.11: &quot;code is the grammar production&quot;; &quot;if d is a X production&quot;; &quot;for each production&quot;
+13.2.1.1: &quot;the declaration containing this production&quot;
+13.6.4.1: &quot;derives a production&quot;
+13.7.1: &quot;this production is nested&quot;
+13.8.1: dito
+
+14.1.1: &quot;the longest sequence of productions&quot;
+14.3.9: &quot;let formalParameterList be the production&quot;
+14.4.15/16/17: &quot;let body be the production&quot;
+14.5.3/11: &quot;if ClassElement is the production&quot;
+14.6.1: &quot;nonterminal is a parsed grammar production&quot;
+14.6.2: &quot;HasProductionInTailPosition&quot;
+
+As Ch. 5 describes correctly, a production is a _rule_ of the grammar -- not a program _phrase_ derived by the grammar, nor a derivation of such a phrase. Consequently, a production cannot be &quot;contained&quot;, &quot;nested&quot; or &quot;substituted&quot; in a piece of program, nor can it be &quot;derived&quot; or &quot;evaluated&quot;. Likewise, the various algorithms are not actually parameterized over (or accumulate) productions, but phrases, pieces of code.
+
+All these uses should be replaced by &quot;phrase&quot; or &quot;code&quot;, &quot;phrase/code derived with a production / matching a production&quot;, or &quot;phrase/code being derivable with a production&quot;, respectively. Some places already use such wordings, but others don&apos;t.
+
+(This terminological mistake was already present in the ES5 spec, but it now has proliferated significantly, especially in the static semantics.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8877</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-10 10:39:13 -0700</bug_when>
+    <thetext>Further alternative wordings:
+  &quot;parse tree&quot;
+  &quot;parse node&quot;
+  &quot;an instance of [production]&quot;
+  &quot;an instance of [nonterminal]&quot;
+
+(Each of these already appears in the spec, though not much.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8878</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-10 11:24:33 -0700</bug_when>
+    <thetext>&gt; 
+&gt; (This terminological mistake was already present in the ES5 spec,
+
+In fact, phrasing such as
+    &quot;the production ... is evaluated as follows&quot;
+goes all the way back to ES1. ES5 added one or two more (mis-)usages, but almost all of the phrasings listed above first appeared in the 6th edition drafts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13747</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 11:30:15 -0700</bug_when>
+    <thetext>deferring to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

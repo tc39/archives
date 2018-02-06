@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>201</bug_id>
+          
+          <creation_ts>2011-08-30 10:41:00 -0700</creation_ts>
+          <short_desc>15.3.4.5 Function.proto.bind should use [[Get]] to access target function length</short_desc>
+          <delta_ts>2012-02-27 17:16:49 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 2: July 25, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>200</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>425</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-08-30 10:41:16 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #200 +++
+
+Step 15.a should use [[Get]]
+Steps 15.b,16,17 should explicitly use [[DefineOwnProperty]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>695</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-02-27 17:16:49 -0800</bug_when>
+    <thetext>fixed in Feb 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

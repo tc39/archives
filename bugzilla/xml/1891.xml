@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1891</bug_id>
+          
+          <creation_ts>2013-09-03 04:15:00 -0700</creation_ts>
+          <short_desc>Inconsistent use of [[Construct]] and OrdinaryConstruct</short_desc>
+          <delta_ts>2013-09-27 14:47:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5305</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-03 04:15:04 -0700</bug_when>
+    <thetext>The specification should either always use [[Construct]] or OrdinaryConstruct() when performing constructor calls:
+
+`If IsConstructor(c) then call [[Construct]] internal method [...]`
+
+or: `If IsConstructor(c) then call OrdinaryConstruct(c, ...) [...]`
+
+I&apos;d be in favour of using the [[Construct]] internal method because of two reasons:
+- a constructor may perform custom actions in its [[Construct]] internal method, calling OrdinaryConstruct() makes it impossible to execute these actions
+- OrdinaryConstruct() requires a `callable Constructor`, so non-callable Constructors cannot use OrdinaryConstruct() [*]
+
+
+[*]: non-callable Constructors are not prohibited by the spec, so in theory a non-standard exotic object could implement only [[Construct]] but not [[Call]]
+
+[[Construct]]:
+11.2.2  The new Operator
+11.2.4  The super Keyword
+15.4.2.4  Array.from ( arrayLike , mapfn=undefined, thisArg=undefined )
+15.4.3.19  Array.prototype.map ( callbackfn [ , thisArg ] )
+15.4.3.20  Array.prototype.filter ( callbackfn [ , thisArg ] )
+15.13.5.4.3  ArrayBuffer.prototype.slice ( start , end)
+15.13.6.3.8  %TypedArray%.prototype.subarray(begin = 0, end = this.length )
+
+OrdinaryConstruct:
+15.4.3.4  Array.prototype.concat ( [ item1 [ , item2 [ , … ] ] ] )
+15.4.3.10  Array.prototype.slice (start, end)
+15.4.3.12  Array.prototype.splice (start, deleteCount [ , item1 [ , item2 [ , … ] ] ] )
+15.13.6.2.2  %TypedArray%.of ( ...items )
+15.13.6.2.3  %TypedArray%.from ( source , mapfn=undefined, thisArg=undefined )
+15.13.6.3.13  %TypedArray%.prototype.slice ( start, end )
+15.13.6.3.20  %TypedArray%.prototype.map ( callbackfn, thisArg = undefined )
+15.13.6.3.21  %TypedArray%.prototype.filter ( callbackfn, thisArg = undefined )</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5385</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-12 11:26:58 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft
+
+All of the listed OrdinaryConstruct calls need to be [[Construct]] calls. . We should only call OrdinaryConstruct in contexts such as inside a [[Construct]] implementation were we know we are creating an ordinary object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5542</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:26 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1572</bug_id>
+          
+          <creation_ts>2013-07-01 18:31:00 -0700</creation_ts>
+          <short_desc>9.2.6_4_b has alert function</short_desc>
+          <delta_ts>2014-07-21 12:49:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-402 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Murat Sutunc">muratsu</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>sam.mikes</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4346</commentid>
+    <comment_count>0</comment_count>
+    <who name="Murat Sutunc">muratsu</who>
+    <bug_when>2013-07-01 18:31:57 -0700</bug_when>
+    <thetext>Test case 9.2.6_4_b has an alert call that get&apos;s called when running on IE, it should be removed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9249</commentid>
+    <comment_count>1</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 22:37:11 -0700</bug_when>
+    <thetext>Cannot reproduce as of 2014-Jul-17.
+
+Test has been moved from ch09 to intl402/ch09 and is not exposed via current version of http://test262.ecmascript.org/#</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9437</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 23:09:10 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+
+&gt; Test has been moved from ch09 to intl402/ch09 and is not exposed via current
+&gt; version of http://test262.ecmascript.org/#
+
+The ECMA-402 test suite has its own start page:
+http://test262.ecmascript.org/testcases_intl402.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9439</commentid>
+    <comment_count>3</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-21 05:11:56 -0700</bug_when>
+    <thetext>Thanks.  I was able to reproduce this alert() with IE11 and the current version of the website, test suite date 2013-06-13.
+
+The alert() has been removed from the github source code since Jan 30, 2014 (see https://github.com/tc39/test262/commit/7697770a4c475873185339f6a46506a1a2e0e435#diff-d40e674a44a7907bc55883b5a16f1d82 ) but a new version of the test suite has not been pushed to the webite since then.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9446</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-07-21 12:49:27 -0700</bug_when>
+    <thetext>Just to be clear, the alert fix wasn&apos;t merged until recently I believe. Website hasn&apos;t been updated yet.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

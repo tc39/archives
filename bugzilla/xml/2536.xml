@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2536</bug_id>
+          
+          <creation_ts>2014-02-12 16:45:00 -0800</creation_ts>
+          <short_desc>chapter 15: misc editorial</short_desc>
+          <delta_ts>2015-01-15 16:19:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>guybedford</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7270</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:45:51 -0800</bug_when>
+    <thetext>----------------------------------------
+In 15.2 &quot;Modules&quot;:
+
+15.2 / Syntax / prod 3:
+ModuleItemList :
+  ModuleItem
+  ModuleItemList ModuleItem
+
+    This production disagrees with 15.2.0.{3,4,5,6,9,10,11,14} / group 1,
+    which all have:
+        ModuleItemList : [empty]
+
+    It&apos;s probably easier to change the defining syntax than all the uses.
+    But if you do, you&apos;ll also need to drop the &apos;opt&apos; from
+        Module : ModuleBody_opt
+    to prevent ambiguity.
+    And you&apos;ll need to remove 15.2.0.9 / group 2, which has:
+        ModuleItemList : ModuleItem
+        
+----------------------------------------
+In 15.2.0.2 &quot;Static Semantics: DeclaredNames&quot;:
+
+15.2.0.2 / group 2 / step 2:
+Append to /names/ the elements of the VarDeclaratedNames of /ModuleBody/.
+    s|Declarated|Declared|
+
+----------------------------------------
+In 15.2.0.11 &quot;Static Semantics: LexicalDeclarations&quot;:
+
+15.2.0.11 / group 3 / step 1:
+If the BoundNames of /ImportDeclarations/ is empty, then return an empty List.
+    Drop &quot;s&quot; from &quot;ImportDeclarations&quot;.
+
+15.2.0.11 / group 4 / step 1:
+If /ExportDeclaration/ is export /Declaration/; then ...
+    Delete the semicolon.
+
+----------------------------------------
+In 15.2.0.13 &quot;Static Semantics: VarDeclaredNames&quot;:
+
+15.2.0.13 / group 3 / step 1:
+If /ExportDeclaration/ is export /VariableStatement/; then ...
+    Delete the semicolon.
+
+----------------------------------------
+In 15.2.0.14 &quot;Static Semantics: VarScopedDeclarations&quot;:
+
+15.2.0.14 / group 4 / step 1:
+If /ExportDeclaration/ is export /VariableStatement/; then ...
+    Delete the semicolon.
+
+----------------------------------------
+In 15.2.1.6 &quot;Runtime Semantics: Module Objects&quot;:
+
+15.2.1.6 / para 2:
+Each property name is the StringValue of of the corresponding exported binding.
+    Delete extra &quot;of&quot;.
+
+----------------------------------------
+In 15.2.2.1 &quot;Static Semantics: BoundNames&quot;:
+
+15.2.2.1 / group 2:
+ExportDeclaration : export VariableStatement ;
+    Delete the semicolon.
+
+15.2.2.1 / group 3:
+ExportDeclaration : export Declaration ;
+    Delete the semicolon.
+
+----------------------------------------
+In 15.2.2.2 &quot;Static Semantics: ExportedBindings&quot;:
+
+15.2.2.2 / group 3 / production / rhs 2:
+    Delete syntactic parameter &quot;[Default]&quot;.
+
+15.2.2.2 / group 7 / production:
+ExportDeclaration : export ExportClause FromClause_opt ;
+    Delete &quot;opt&quot; subscript.
+
+----------------------------------------
+In 15.2.2.3 &quot;Static Semantics: ExportEntries&quot;:
+
+15.2.2.3 / group 4 / production:
+ExportDeclaration : export VariableStatement ;
+    Delete the semicolon.
+
+15.2.2.3 / group 5 / production:
+ExportDeclaration : export Declaration ;
+    Delete the semicolon.
+
+----------------------------------------
+In 15.2.3.1 &quot;Loader Records and Loader Objects&quot;:
+
+15.2.3.1 / Table 33 / last row:
+    After &quot;[[LoaderObj]&quot;, add &quot;]&quot;.
+
+----------------------------------------
+In 15.2.3.1.1 &quot;CreateLoaderRecord(realm, object) Abstract Operation&quot;:
+
+15.2.3.1.1 / step 3:
+Set /loader/.[[ Modules]] to a new empty List.
+    Delete space before &quot;Modules&quot;.
+
+----------------------------------------
+In 15.2.3.2 &quot;Load Records and LoadRequest Objects&quot;:
+
+15.2.3.2 / Table 34:
+    Add rows for [[Factory]] and [[GroupIndex]].
+
+----------------------------------------
+In 15.2.3.2.1 &quot;CreateLoad(name) Abstract Operation&quot;:
+
+    Steps start at 7.
+
+15.2.3.2.1 / step 11:
+Set /load/.[[Metadata]] to /metadata/ ObjectCreate(%ObjectPrototype%).
+    Delete &quot;metadata&quot;.
+
+----------------------------------------
+In 15.2.4.1 &quot;LoadModule(loader, name, options) Abstract Operation&quot;:
+
+15.2.4.1 / preamble:
+    The preamble doesn&apos;t say anything about the operation.
+
+15.2.4.1 / step 1:
+Assert: /loader/ is a Loader record.
+    Capitalize &quot;record&quot;.
+
+15.2.4.1 / step 9:
+Return PromiseOfStartLoadPartwayThrough( ..., /source/, ...).
+    &apos;source&apos; is not defined
+
+----------------------------------------
+In 15.2.4.2 &quot;RequestLoad(...) Abstract Operation&quot;:
+
+15.2.4.2 / para 2:
+The /loader/ argument is a Loader record.
+    Capitalize &quot;record&quot;.
+
+----------------------------------------
+In 15.2.4.2.2 &quot;GetOrCreateLoad(name) Functions&quot;:
+
+15.2.4.2.2 / step 4:
+Let /modules/ be the value of of /loaderRecord/.[[ Modules]],
+    Delete extra &quot;of&quot;.
+    &apos;loaderRecord&apos; is not defined. Change to &apos;loader&apos;?
+    Delete space before &quot;Modules&quot;.
+
+15.2.4.2.2 / step 5:
+Repeat for each Record {...} /p/ that is an element of /loader/.[[ Modules], do
+    Delete space before &quot;Modules&quot;, and add a &quot;]&quot;.
+
+15.2.4.2.2 / step 5.a.i:
+Let /existingModule/ be the [[value]] field of that Record.
+    Change &quot;the [[value]] field of that Record&quot; to &quot;/p/.[[value]]&quot;
+
+15.2.4.2.2 / step 6.a.i:
+Assert: /load/.status is either &quot;loading&quot; or &quot;loaded&quot;.
+    Change &quot;status&quot; to &quot;[[Status]]&quot;
+
+15.2.4.2.2 / step 8:
+Append /load/ to the the end of the List /loader/.[[Loads]].
+    Delete extra &quot;the&quot;
+
+----------------------------------------
+In 15.2.4.4 &quot;ProceedToFetch(loader, load, p) Abstract Operation&quot;:
+
+15.2.4.4 / step 4:
+Set /F/&apos;s [[AddressPromise]] internal slot to /p/.
+    This is the only mention of [[AddressPromise]].
+
+----------------------------------------
+In 15.2.4.4.1 &quot;CallFetch(address) Functions&quot;:
+
+15.2.4.4.1 / step 8:
+If IsCallable(/hook/) is false, throw a *TypeError* exception.
+    Put &quot;false&quot; in bold.
+
+----------------------------------------
+In 15.2.4.5 &quot;ProceedToTranslate(loader, load, p) Abstract Operation&quot;:
+
+15.2.4.5 / step 7:
+Set /F/&apos;s [[Load]] to internal slot /load/.
+    s|to internal slot|internal slot to|
+
+15.2.4.5 / step 10:
+Set /F/&apos;s [[Loader]] to internal slot /loader/.
+    s|to internal slot|internal slot to|
+
+15.2.4.5 / step 11:
+Set /F/&apos;s [[Load]] to internal slot /load/.
+    s|to internal slot|internal slot to|
+
+----------------------------------------
+In 15.2.4.5.1 &quot;CallTranslate Functions&quot;:
+
+15.2.4.5.1 / step 6:
+If IsCallable(/hook/) is false, throw a *TypeError* exception.
+    Put &quot;false&quot; in bold.
+
+15.2.4.5.1 / step 7:
+Let /obj/ be CreateLoadRequestObject(/load/.[[Name, ..., &quot;, ...).
+    After &quot;[[Name&quot;, add &quot;]]&quot;
+    Delete the quote+comma.
+
+----------------------------------------
+In 15.2.4.5.3 &quot;InstantiateSucceeded(instantiateResult) Functions&quot;:
+
+15.2.4.5.3 / step 5.c:
+If /deps/ is undefined, then let /depsList/ be a new empty List.
+    Put &quot;undefined&quot; in bold.
+
+15.2.4.5.3 / step 5.d.i:
+... the result of calling the IterableToArray abstract operation ...
+    IterableToArray is not defined
+
+----------------------------------------
+In 15.2.4.5.4 &quot;LoadFailed Functions&quot;:
+
+15.2.4.5.4 / step 3:
+Set /load/.[[Status]] to `&quot;failed&quot;.
+    Delete backtick
+
+----------------------------------------
+In 15.2.4.6 &quot;ProcessLoadDependencies(...) Abstract Operation&quot;:
+
+15.2.4.6 / step 2:
+Set /load/. [[Dependencies]] to a new empty List.
+    Delete space between dot and &quot;[[&quot;
+
+----------------------------------------
+In 15.2.4.7 &quot;PromiseOfStartLoadPartwayThrough (...)&quot;:
+
+    This algorithm has no preamble.
+
+15.2.4.7 / step 3:
+Set /F/&apos;s [[StepState]] ]] internal slot to /state/.
+    Delete extra &quot;]]&quot;
+
+----------------------------------------
+In 15.2.4.7.1 &quot;AsyncStartLoadPartwayThrough Functions&quot;:
+
+15.2.4.7.1 / step 6:
+Repeat for each Record {...} /p/ that is an element of /loader/.[[ Modules], do
+    Delete space before &quot;Modules&quot;, and add a &quot;]&quot;.
+
+15.2.4.7.1 / step 7:
+Repeat for element of /load/ or /loader/.[[ Modules], do
+    Change &quot;for element of /load/ or&quot; to &quot;for each element /loads/ of&quot;
+
+    Delete space before &quot;Modules&quot;, and add a &quot;]&quot;.
+
+    Rename &apos;loads&apos; to &apos;module&apos; in 7 and 7.a?
+
+15.2.4.7.1 / step 8:
+Let /load/ be the result of calling the CreateLoad(/name/).
+    Delete &quot;the&quot;
+
+----------------------------------------
+In 15.2.5.1 &quot;ModuleLinkage Record&quot;:
+
+15.2.5.1 / Table 35:
+
+    Change second occurrence of &quot;KnownExportEntries&quot; to &quot;UnknownExportEntries&quot;.
+
+    s|Dependenies|Dependencies|
+
+    s|ImportedEntries|ImportEntries|
+
+    s|ImportedDefinitions|ImportDefinitions|
+
+    Add entry for [[Evaluated]].
+
+----------------------------------------
+In 15.2.5.1.1 &quot;CreateModuleLinkageRecord (loader, body) Abstract Operation&quot;:
+
+15.2.5.1.1 / step 1:
+Assert: /body/ is a /Modulebody/ parse.
+    s|Modulebody|ModuleBody|
+    Delete &quot;parse&quot;.
+    I.e., change &quot;is a Modulebody parse&quot; to &quot;is a ModuleBody&quot;.
+
+15.2.5.1.1 / step 15:
+Let /globalEnv/ be /realm/.[[/globalEnv/]].
+    De-italicize the second &quot;globalEnv&quot;.
+
+15.2.5.1.1 / step 16:
+Let /env/ be NewModuleEnvironment(/globalEnv/).
+    NewModuleEnvironment is not defined
+
+----------------------------------------
+In 15.2.5.1.2 &quot;LookupExport ( M, exportName )&quot;:
+
+    LookupExport is defined but never used.
+
+----------------------------------------
+In 15.2.5.2.1 &quot;CreateLinkSet(loader, startingLoad) Abstract Operation&quot;:
+
+15.2.5.2.1 / step 2:
+If /loader/ does not have all of the internal properties of a Loader Instance,
+throw a TypeError exception.
+    s|properties|slots|
+
+    Put &quot;TypeError&quot; in serif-bold
+
+----------------------------------------
+In 15.2.5.2.2 &quot;AddLoadToLinkSet(linkSet, load) Abstract Operation&quot;:
+
+15.2.5.2.2 / step 3.c.i:
+Repeat for each /r/ that is a Record {[[Name]], [[NormalisedName]]} in
+/load/.[[Dependencies]],
+    Delete &quot;that is a Record {[[Name]], [[NormalisedName]]}&quot;.
+    Its presence suggests that there might be things in load.[[Dependencies]]
+    that *aren&apos;t* records with [[Name]] and [[NormalisedName]] fields,
+    that the for-each should skip over.
+
+15.2.5.2.2 / step 3.c.i.1:
+If there is no element of /loader/.[[ Modules]] whose [[key]] field
+is equal to /name/,
+    Delete space before &quot;Modules&quot;.
+
+    &apos;name&apos; is undefined.
+    Insert step &quot;Let /name/ be /r/.[[Name]]&quot; ?
+
+----------------------------------------
+In 15.2.5.2.4 &quot;LinkSetFailed(linkSet, exc) Abstract Operation&quot;:
+
+15.2.5.2.4 / step 4:
+Return the result of calling [[Call]] internal method of /linkSet/.[[Reject]] ...
+    After &quot;calling&quot;, insert &quot;the&quot;
+
+----------------------------------------
+In 15.2.5.2.5 &quot;FinishLoad(loader, load) Abstract Operation&quot;:
+
+15.2.5.2.5 / step 2.a:
+... that is an element of /loader/.[[ Modules]], ...
+    Delete space before &quot;Modules&quot;.
+
+15.2.5.2.5 / step 2.b:
+... as the last element of /loader/.[[ Modules]].
+    Delete space before &quot;Modules&quot;.
+
+----------------------------------------
+In 15.2.5.3.1 &quot;LinkageGroups ( start )&quot;:
+
+15.2.5.3.1 / step 3:
+If there are any mixed dependency cycles in /G/, throw a new Syntax Error.
+    s|a new Syntax Error|a SyntaxError exception|
+    where &apos;SyntaxError&apos; is serif-bold
+
+----------------------------------------
+In 15.2.5.3.2 &quot;BuildLinkageGroups (...)&quot;:
+
+15.2.5.3.2 / preamble:
+    Doesn&apos;t mention the &apos;visited&apos; parameter.
+
+15.2.5.3.2 / step 1:
+If /visited/ contains an element whose [[Name]] is equal to /load/.[[Name]], ...
+    After &quot;[[Name]]&quot;, insert &quot;field&quot;
+
+----------------------------------------
+In 15.2.5.4 &quot;Link ( start, loader )&quot;:
+
+15.2.5.4 / preamble:
+    The preamble omits the &apos;loader&apos; parameter.
+
+15.2.5.4 / step 2.a:
+If the [[Kind]] of each element of /group/ is declarative, then perfrom ...
+    s|perfrom|perform|
+
+15.2.5.4 / step 2.b:
+Else, perfrom LinkDynamicModules(/group/, /loader/).
+    s|perfrom|perform|
+
+----------------------------------------
+In 15.2.5.5 &quot;LinkDeclarativeModules ( loads, loader )&quot;:
+
+15.2.5.5 / step 2.a:
+If /load/.[[Status]] is not *linked*, then
+    Change &apos;linked&apos; from serif-bold to quoted and monospace.
+
+15.2.5.5 / step 3.c.iii.1:
+If /load/.[[Status]] is *linked*, then
+    Change &apos;linked&apos; from serif-bold to quoted and monospace.
+
+15.2.5.5 / step 3.c.iv.1:
+Let /module/ be LoaderRegistryLookup(/loader/, /normalizedName/).
+    LoaderRegistryLookup is not defined.
+
+15.2.5.5 / step 3.c.iv.2.a:
+Let /error/ be a new *ReferenceError* exception.
+    s|exception|object|
+    (You shouldn&apos;t call it an exception until/unless it&apos;s thrown.)
+
+15.2.5.5 / step 4.a:
+Perform ResolveExportEntries(/pair/.[[Module]], a new empty List.
+    Insert right-paren before final period.
+
+15.2.5.5 / step 7.b:
+Set /pair/.[[Load]].[[Status]] to *linked*.
+    Change &apos;linked&apos; from serif-bold to quoted and monospace.
+
+15.2.5.5 / step 7.c:
+Let /r/ beFinishLoad(/loader/, /pair/.[[Load]]).
+    Insert space between &quot;be&quot; and &quot;FinishLoad&quot;
+
+----------------------------------------
+In 15.2.5.5.1 &quot;LinkImports ( M )&quot;:
+
+15.2.5.5.1 / step 3.a:
+If /def/.[[ImportName]] is *module*, then the following steps are taken:
+    Where would [[ImportName]] be set to *module*?
+
+15.2.5.5.1 / step 3.a.ii:
+Call the InitializeImmutableBinding concrete method of /envRec/ passing ...
+    InitializeImmutableBinding is not defined
+
+15.2.5.5.1 / step 3.b.ii.1:
+Let /error/ be a new Reference Error.
+    Change &quot;a new Reference Error&quot; to &quot;a new ReferenceError object&quot;
+    (where &quot;ReferenceError&quot; is bold)
+
+15.2.5.5.1 / step 3.b.iii:
+Otherwise, call the CreateImportBinding concrete method of /envRec/ ...
+    CreateImportBinding is not defined.
+
+----------------------------------------
+In 15.2.5.6 &quot;LinkDynamicModules ( loads, loader )&quot;:
+
+15.2.5.6 / step 1.f:
+Set /load/.[[Status]] to *linked*.
+    Change &apos;linked&apos; from serif-bold to quoted and monospace.
+
+----------------------------------------
+In 15.2.5.7 &quot;ResolveExportEntries ( M, visited )&quot;:
+
+15.2.5.7 / step 4.c.i:
+Let /error/ be a new Reference Error.
+    Change &quot;a new Reference Error&quot; to &quot;a new ReferenceError object&quot;
+    (where &quot;ReferenceError&quot; is bold)
+
+15.2.5.7 / step 5.b.i:
+Let /error/ be a new Syntax Error.
+    Change &quot;a new Syntax Error&quot; to &quot;a new SyntaxError object&quot;
+    (where &quot;SyntaxError&quot; is bold)
+
+----------------------------------------
+In 15.2.5.9 &quot;ResolveExport ( M, exportName, visited )&quot;:
+
+15.2.5.9 / preamble:
+... with arguments M, exportName, and importName performs the following steps:
+    s|importName|visited|
+
+15.2.5.9 / step 3:
+Let /ref/ be {[[Module]]: /M/, [[ExportName]]: /exportName/}.
+    Insert &quot;the Record&quot; before &quot;{&quot;.
+
+15.2.5.9 / step 4.a:
+Let /error/ be a new Syntax Error.
+    Change &quot;a new Syntax Error&quot; to &quot;a new SyntaxError object&quot;
+    (where &quot;SyntaxError&quot; is bold)
+
+15.2.5.9 / step 7.a:
+Let /error/ be a new Reference Error.
+    Change &quot;a new Reference Error&quot; to &quot;a new ReferenceError object&quot;
+    (where &quot;ReferenceError&quot; is bold)
+
+15.2.5.9 / step 8:
+If /overlappingDefs/ has more than one record /def/ such that /def/.[[Explicit]]
+is *true*, or if it has length greater than 1 but contains no records /def/ such
+that /def/.[[Explicit]] is *true*, then the following steps are taken:
+    
+    An equivalent but simpler condition would be:
+        ... /overlappingDefs/ has length greater than 1 and it does not
+        have exactly one record def such that def.[[Explicit]] is *true* ...
+
+15.2.5.9 / step 8.a:
+Let /error/ be a new Syntax Error.
+    Change &quot;a new Syntax Error&quot; to &quot;a new SyntaxError object&quot;
+    (where &quot;SyntaxError&quot; is bold)
+
+----------------------------------------
+In 15.2.6.2 &quot;EnsureEvaluated(mod, seen, loader) Abstract Operation&quot;:
+
+15.2.6.2 / step 7:
+Let status be the result of perform ModuleDeclarationInstantiation ...
+    s|perform|performing|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7467</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-03-23 14:05:21 -0700</bug_when>
+    <thetext>*** Bug 2584 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7469</commentid>
+    <comment_count>2</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-03-23 14:06:10 -0700</bug_when>
+    <thetext>*** Bug 2591 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11279</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-30 17:31:37 -0800</bug_when>
+    <thetext>Fixed in rev31 editor&apos;s draft
+
+or at least tried to verify that typos in sections that are no longer present haven&apos;t leaked forward.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11434</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:03 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

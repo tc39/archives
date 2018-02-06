@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1888</bug_id>
+          
+          <creation_ts>2013-09-02 02:56:00 -0700</creation_ts>
+          <short_desc>The ECMAScript specification is not licensed under a free-content license</short_desc>
+          <delta_ts>2015-10-01 16:06:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>critical</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>musicdenotation</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5302</commentid>
+    <comment_count>0</comment_count>
+    <who name="">musicdenotation</who>
+    <bug_when>2013-09-02 02:56:12 -0700</bug_when>
+    <thetext>&quot;This document and possible translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published, and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this section are included on all such copies and derivative works. However, this document itself may not be modified in any way, including by removing the copyright notice or references to Ecma International, except as needed for the purpose of developing any document or deliverable produced by Ecma International (in which case the rules applied to copyrights must be followed) or as required to translate it into languages other than English.&quot;
+
+In short, Ecma International does not allow you to change the specification in any way other than to explain, translate it, or otherwise modifying without changing it&apos;s meaning. This restriction is because Ecma wants to preserve the integrity of the standard. However, there are much better way to do this:
+
+    1. Ecma may permit distributing modified versions of the specification, as long as the modified copies do not claim to be the official standard (see the Haskell and ISLISP specifications);
+    2. Ecma may trademark it&apos;s name and enact trademark policies that prohibit using it&apos;s name in anything other than the official standard;
+    3. Or Ecma may stop caring about the issue altogether. (Works with Scheme, F#, Lua, Squirrel, Rust, Ruby [they don&apos;t have an official specification, but it is neither that &quot;Ruby&quot; is trademarked nor that the copyright license prohibits making changes that keep the name],...) /* the most prevalent case, as far as I know */</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14711</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-01 16:06:04 -0700</bug_when>
+    <thetext>Looks like there have been some changes to this license text since this issue was filed. But I think the normal proposal workflow is protected by Fair Use and so I&apos;m not too motivated to push for more changes here.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

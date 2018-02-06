@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>179</bug_id>
+          
+          <creation_ts>2011-07-29 07:08:00 -0700</creation_ts>
+          <short_desc>S11.1.1_A2.js is invalid</short_desc>
+          <delta_ts>2012-01-12 09:50:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Geoffrey Sneddon">gsneddon</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>401</commentid>
+    <comment_count>0</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-07-29 07:08:19 -0700</bug_when>
+    <thetext>This asserts, this.toString() === toString(). The former calls toString with the global object as thisArg, the latter with undefined as thisArg. The global object is normally [object global]/[object Window] or some such, and hence not [object Undefined].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>451</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-09-14 10:28:23 -0700</bug_when>
+    <thetext>I think this test case is invalid, but not for the aforementioned reason:
+1.  ES5.1 doesn&apos;t define a global &apos;toString&apos; function =&gt;
+2.  &apos;toString&apos; must be coming in as an unspec&apos;ed browser extension *or* from Object.prototype.toString.  The former would make this obviously invalid, and the latter means the global object&apos;s prototype is in fact Object.prototype =&gt;
+3. Section 15.1 of ES5.1 states:
+   The values of the [[Prototype]] and [[Class]] internal properties of the global object are implementation-dependent.
+
+=&gt; the test is indeed invalid.  I&apos;ll disable it shortly, and thanks for reporting this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>452</commentid>
+    <comment_count>2</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-09-15 13:57:16 -0700</bug_when>
+    <thetext>Ah, I didn&apos;t bother actually checking the spec, and just assumed the global object&apos;s prototype chain contained Object.prototype. :)
+
+All implementations except Opera have Window.prototype as the prototype of the global object (and the prototype of that is Object.prototype); Opera has Object.prototype as the prototype of the global object (there is no Window object).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>562</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 09:50:21 -0800</bug_when>
+    <thetext>Removed the test case from source control.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

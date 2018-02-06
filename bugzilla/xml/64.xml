@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>64</bug_id>
+          
+          <creation_ts>2011-03-14 09:40:00 -0700</creation_ts>
+          <short_desc>Increase size of content box on http://test262.ecmascript.org</short_desc>
+          <delta_ts>2012-08-11 20:03:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>146</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-14 09:40:59 -0700</bug_when>
+    <thetext>style.css is limiting the size of all contents (sans the footer) to 800px.  It would be useful to increase this a bit, particularly for the &apos;Results&apos; page where we display test case descriptions.  Not making this change though until I figure out why 800px was originally chosen.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1425</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-11 20:03:26 -0700</bug_when>
+    <thetext>I disagree. Rather than assuming any particular screen size, we should switch to a responsive layout, i.e., one that adapts itself to different screen sizes. Right now the pages are pretty hard to read and use on a phone.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

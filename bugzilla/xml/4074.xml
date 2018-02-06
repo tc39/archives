@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4074</bug_id>
+          
+          <creation_ts>2015-02-21 14:53:00 -0800</creation_ts>
+          <short_desc>9.2.2.2 OrdinaryCallBindThis: assert that the algorithm will not return an abrupt completion</short_desc>
+          <delta_ts>2015-03-04 18:58:22 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>4076</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13249</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-21 14:53:15 -0800</bug_when>
+    <thetext>9.2.2.2 OrdinaryCallBindThis
+
+The last step of the algorithm, calling envRec.BindThisValue(), is the only one that could end up in an abrupt completion, in case of envrec.[[thisBindingStatus]] is &quot;initialized&quot;.
+
+However, (I think) it does not occur, because the OrdinaryCallBindThis abstract operation is always used on newly created execution context with non-initialised this-binding.
+
+Asserting that would be useful, e.g. something like the following, just before current step 8:
+
+    Assert: envRec.[[thisBindingStatus]] is &quot;uninitialized&quot;, and therefore the next step does not produces an abrupt completion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13363</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 16:02:20 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13540</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:22 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

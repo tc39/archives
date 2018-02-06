@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2973</bug_id>
+          
+          <creation_ts>2014-06-04 08:30:00 -0700</creation_ts>
+          <short_desc>Duplicate steps in 23.3.1.1 WeakMap([iterable])</short_desc>
+          <delta_ts>2014-06-11 15:44:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nathan Wall">nathan.wall</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8854</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nathan Wall">nathan.wall</who>
+    <bug_when>2014-06-04 08:30:47 -0700</bug_when>
+    <thetext>In &quot;23.3.1.1 WeakMap([iterable])&quot;, steps 4 and 8 seem to be duplicates to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8855</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-06-04 08:45:30 -0700</bug_when>
+    <thetext>Side-effects after step 4 may have reentrantly initialized the WeakMap object. Therefore the initialization state needs to be checked again in step 8.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8858</commentid>
+    <comment_count>2</comment_count>
+    <who name="Nathan Wall">nathan.wall</who>
+    <bug_when>2014-06-04 09:48:17 -0700</bug_when>
+    <thetext>Ahh, that makes sense.  Thanks for the clarification, and sorry for the noise.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8859</commentid>
+    <comment_count>3</comment_count>
+    <who name="Nathan Wall">nathan.wall</who>
+    <bug_when>2014-06-04 10:50:56 -0700</bug_when>
+    <thetext>As a matter of process, should I try to close this ticket somehow or should I wait for someone official to do it?  I don&apos;t see a way to reject it.  I see a way to mark it as &quot;Resolved&quot;, but I&apos;m not sure if that is the correct designation using this ticket system.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8860</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-06-04 11:08:49 -0700</bug_when>
+    <thetext>There is not really a strict process to follow, you can just close the issue report yourself.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

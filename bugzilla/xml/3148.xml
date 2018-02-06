@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3148</bug_id>
+          
+          <creation_ts>2014-08-24 10:16:00 -0700</creation_ts>
+          <short_desc>need to better define &quot;can be statically determined&quot;</short_desc>
+          <delta_ts>2014-12-07 14:35:05 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2982</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9854</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-24 10:16:00 -0700</bug_when>
+    <thetext>12.14.1, 1st case 3rd bullet: &quot;can be statically determined&quot; is far too vague here. Consider &quot;const x = 0; with ({__proto__: null}) x = 1;&quot; -- it is possible (and in this case even fairly easy) to statically determine the condition. Or &quot;const x = 0; { eval(&quot;&quot;); x = 1}&quot;. But those are clearly not cases that you want to require an error for. The spec needs to be more specific, probably by explicitly ruling out cases with intervening object environments, or scopes with sloppy eval.
+12.14.1, 2nd case 1st bullet: dito
+12.14.5.1, 3rd case, 3rd bullet: dito
+
+split from Bug 2982</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10173</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-09-09 10:59:30 -0700</bug_when>
+    <thetext>Note that this includes import bindings as well as const bindings. There should probably at least be informative text clarifying this in the spec, even if &quot;statically determined&quot; isn&apos;t formalized more precisely.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10713</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-03 17:10:55 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft
+
+statically determined language and requirement removed as per TC39 discussion https://github.com/tc39/tc39-notes/blob/master/es6/2014-11/nov-18.md#43-assignment-to-a-const-static-error</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10894</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:05 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

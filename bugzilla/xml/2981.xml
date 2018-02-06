@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2981</bug_id>
+          
+          <creation_ts>2014-06-09 20:48:00 -0700</creation_ts>
+          <short_desc>Exotic Object description needs to be bit more verbose?</short_desc>
+          <delta_ts>2014-07-20 01:44:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-exotic-object</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="hemanth">hemanth.hm</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="13"
+          type_id="1"
+          status="?"
+          setter="hemanth.hm"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8872</commentid>
+    <comment_count>0</comment_count>
+    <who name="hemanth">hemanth.hm</who>
+    <bug_when>2014-06-09 20:48:34 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-exotic-object states:
+
+&gt; object that has some alternative behaviour for one or more of the essential internal methods that must be supported by all objects.
+
+The term alternative behavior is pretty confusing, an example would help here?
+
+In simple terms an object whose internal methods are overridden will be considered as an exotic object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9244</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-17 18:39:31 -0700</bug_when>
+    <thetext>clarified in rev26 editor&apos;s draft
+
+it now says: object that has does not have the default behaviour for one or more of the essential internal methods</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9371</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:14:49 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9405</commentid>
+    <comment_count>3</comment_count>
+    <who name="hemanth">hemanth.hm</who>
+    <bug_when>2014-07-20 01:43:35 -0700</bug_when>
+    <thetext>Thank you! :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9406</commentid>
+    <comment_count>4</comment_count>
+    <who name="hemanth">hemanth.hm</who>
+    <bug_when>2014-07-20 01:44:06 -0700</bug_when>
+    <thetext>Thank you! :)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

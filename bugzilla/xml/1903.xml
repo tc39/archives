@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1903</bug_id>
+          
+          <creation_ts>2013-09-20 16:13:00 -0700</creation_ts>
+          <short_desc>Incorporate &quot;regexp match web reality&quot; into draft spec</short_desc>
+          <delta_ts>2013-10-29 09:45:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5414</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2013-09-20 16:13:44 -0700</bug_when>
+    <thetext>There is spec text for RegExp &quot;match web reality&quot; in the Wiki here:
+
+http://wiki.ecmascript.org/doku.php?id=strawman:match_web_reality_spec
+
+The plan was to add this in an Annex.  
+
+The algorithmic text is phrased as a delta on the existing RegExp spec (before the recent reorganization).  It should be possible to include in the Annex.
+
+The grammar is a full duplicate with some modifications, and with the changed interpretation that ambiguities are broken by ordering in the productions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5985</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 17:38:24 -0700</bug_when>
+    <thetext>in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6066</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:23 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4329</bug_id>
+          
+          <creation_ts>2015-04-20 17:12:00 -0700</creation_ts>
+          <short_desc>5.3 Static Semantic Rules references Script but not Module</short_desc>
+          <delta_ts>2015-10-02 13:14:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Ficarra">bugs.ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14311</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Ficarra">bugs.ecmascript</who>
+    <bug_when>2015-04-20 17:12:37 -0700</bug_when>
+    <thetext>Section 5.3 ends with &quot;A conforming implementation must, prior to the first evaluation of a Script, validate all of the early error rules of the productions used to parse that Script. If any of the early error rules are violated the Script is invalid and cannot be evaluated&quot;. This is implying that early errors apply only to Scripts, but it is explicitly stated elsewhere that they also apply to Modules. This inconsistency should be corrected by mentioning Module as well.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14312</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-21 07:23:55 -0700</bug_when>
+    <thetext>fixed in rev39 production draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

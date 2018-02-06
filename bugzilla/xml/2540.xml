@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2540</bug_id>
+          
+          <creation_ts>2014-02-12 16:48:00 -0800</creation_ts>
+          <short_desc>chapter 21: misc editorial</short_desc>
+          <delta_ts>2014-06-01 16:11:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7274</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:48:48 -0800</bug_when>
+    <thetext>----------------------------------------
+In 21.1.2.4 &quot;String.raw ( callSite, ...substitutions)&quot;:
+
+21.1.2.4 / step 13.f.i:
+... If /length/ is 0, the empty string is returned.
+    &apos;length&apos; is not defined. Change to &apos;len&apos;?
+
+----------------------------------------
+In 21.1.3.12 &quot;String.prototype.normalize ( form = &quot;NFC&quot; )&quot;:
+
+21.1.3.12 / step 4:
+If /form/ is not provided or *undefined* let /form/ be &quot;NFC&quot;.
+    Normally, a condition of the form &quot;X is not A or B&quot;
+    would be interpreted as &quot;X is neither A nor B&quot;
+    (i.e., the &quot;not&quot; applies to both A and B).
+    But here it seems to mean &quot;X is not A or X is B&quot;
+    (i.e., the &quot;not&quot; only applies to A).
+    Change to:
+        If /form/ is not provided or /form/ is *undefined*, ...
+
+----------------------------------------
+In 21.1.3.14.1 &quot;Runtime Semantics: GetReplaceSubstitution Abstract Operation&quot;:
+
+21.1.3.14.1 / step 5:
+Assert: /position/ is a non-negative integer.
+    s|non-negative|nonnegative|
+
+----------------------------------------
+In 21.2.2.15.1 &quot;Runtime Semantics: CharacterRange Abstract Operation&quot;:
+
+    The algorithm&apos;s steps are missing labels.
+
+----------------------------------------
+In 21.2.3.3.1 &quot;Runtime Semantics: RegExpAlloc Abstract Operation&quot;:
+
+21.2.3.3.1 / step 2:
+... (..., PropertyDescriptor {..., [[Configurable]]: *false}).*
+    De-bold &quot;}).&quot;
+
+----------------------------------------
+In 21.2.5.2 &quot;RegExp.prototype.exec(string)&quot;:
+
+21.2.5.2 / step 7:
+Return the result of the RegExpExec(/R/, /S/, *false*).
+    Delete &quot;the&quot; before &quot;RegExpExec&quot;
+
+----------------------------------------
+In 21.2.5.2.1 &quot;Runtime Semantics: RegExpExec Abstract Operation&quot;:
+
+21.2.5.2.1 / step 12.a:
+If /i/ &lt; 0 or /i/ &gt; /length/, then
+    &apos;i&apos; isn&apos;t necessarily defined at that point.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 08:19:21 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8764</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 16:11:28 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2490</bug_id>
+          
+          <creation_ts>2014-02-01 09:22:00 -0800</creation_ts>
+          <short_desc>Clarify &apos;metadata&apos; option property, esp. in Loader.prototype.define()</short_desc>
+          <delta_ts>2015-03-16 14:43:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="johnjbarton">johnjbarton</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7168</commentid>
+    <comment_count>0</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2014-02-01 09:22:52 -0800</bug_when>
+    <thetext>The current spec has 
+26.3.3.2 %Loader%.prototype.define ( name, source, options = undefined )
+with this in the steps:
+
+10.If metadata is undefined then let metadata be the result of calling ObjectCreate(%ObjectPrototype%). 
+11. Let p be PromiseOfStartLoadPartwayThrough(&quot;translate&quot;, loaderRecord, name, metadata, source, 
+address). 
+
+In implementing define() I found two issues here:
+  1) Must metadata be passed by reference to translate()? 
+  2) What is the purpose of passing metadata here at all?
+
+We have been using metadata as an opaque side-table for the loader hooks. The Loader provides the metadata object to each of the hook calls but does nothing else to the object. This way the hooks can add and remove properties for a Load object, confident that the data will arrive again with another call for the same Load object. If the metadata can be passed in from user code then all of that has to stop and we&apos;ll have to ignore the metadata property throughout the hooks calls.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7174</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-02-03 08:14:16 -0800</bug_when>
+    <thetext>&gt; If the metadata can be passed in from user code then all of
+&gt; that has to stop and we&apos;ll have to ignore the metadata property throughout
+&gt; the hooks calls.
+
+It can&apos;t be passed in from user code.
+
+In some cases, the &quot;load pipeline&quot; starts in the middle, e.g. when you&apos;re doing loader.define(), you&apos;ve already got the source code so that there&apos;s no point doing a locate() or fetch(). So no hook can assume the previous hooks were called. I think we just have to live with that. The ability to jump in at intermediate stages of a load is just too important a feature to drop.
+
+For those in-medias-res cases, what should the metadata value be? We decided to create an empty object. I agree this is confusing and obnoxious. We considered some alternatives but didn&apos;t find anything clearly better. My best alternative was:
+
+  - Drop metadata from the spec entirely;
+
+  - instead, pass the *same* options object to locate, fetch, translate, and
+    instantiate;
+
+  - and then Loader hooks can store data on that object (attaching
+    whatever metadata properties they want, ad hoc).
+
+I think that&apos;s more elegent, but is it really any better? Each hook that uses metadata would still have to detect the in-medias-res case and cope with it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7175</commentid>
+    <comment_count>2</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2014-02-03 09:21:35 -0800</bug_when>
+    <thetext>In our implementation, &apos;metadata&apos; is a property of Load. That is how it appears in other functions of the spec API.  There is no need to drop metadata from Load, or the rest if the spec.  It&apos;s fine there, because Load is a data structure shared between the Loader and its hooks. The issue it having it part of the API for the define() function, a user level function, not a loader hook.
+
+I&apos;m confused by
+
+&gt;It can&apos;t be passed in from user code.
+
+Loader.prototype.define() seems to be one of the primary user entry points. User code only really needs import() and define().</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13777</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:43:15 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

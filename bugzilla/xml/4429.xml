@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4429</bug_id>
+          
+          <creation_ts>2015-07-21 09:12:00 -0700</creation_ts>
+          <short_desc>14.5.14 invalid default constructor for class extends null</short_desc>
+          <delta_ts>2015-07-21 12:41:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14560</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-21 09:12:30 -0700</bug_when>
+    <thetext>The spec says that
+
+    class Foo extends null {}
+
+sets Foo.[[Prototype]] to %FunctionPrototype% and defines the default constructor body as: constructor(...args) {super(...args);}
+
+This causes a runtime error for
+   new Foo
+because %FunctionPrototype% is not a constructor
+
+The problem is in line 10.a where the test
+   if ClassHeritage-opt is present, then
+
+is such to determine the default constructor body. Instead the 10.a test should be
+   if ClassHeritage-opt is present and SameValue(constructorParent,%FunctionProtoype) is false, then
+
+
+(thanks to Brian Terlson for spotting the problem)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14561</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-07-21 09:45:37 -0700</bug_when>
+    <thetext>Does that mean the resolution from [1] is going to be revised?
+
+[1] https://github.com/rwaldron/tc39-notes/blob/master/es6/2015-01/jan-27.md#conclusionresolution-2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14562</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-21 11:25:46 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #1)
+&gt; Does that mean the resolution from [1] is going to be revised?
+&gt; 
+&gt; [1]
+&gt; https://github.com/rwaldron/tc39-notes/blob/master/es6/2015-01/jan-27.
+&gt; md#conclusionresolution-2
+
+It seems that it must.
+
+Unfortunately, the resolution described there (which is what is in the ES2015 spec) just doesn&apos;t work for:
+
+    new class extends null {}
+
+Because %FunctionPrototype% is not a constructor and hence the  `super(...args)` call in the default constructor body will fail when it does %FunctionPrototype%.[[Construct]]()</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14563</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-07-21 11:50:26 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #2)
+&gt; Unfortunately, the resolution described there (which is what is in the
+&gt; ES2015 spec) just doesn&apos;t work for:
+&gt; 
+&gt;     new class extends null {}
+&gt; 
+&gt; Because %FunctionPrototype% is not a constructor and hence the 
+&gt; `super(...args)` call in the default constructor body will fail when it does
+&gt; %FunctionPrototype%.[[Construct]]()
+
+
+Erik Arvidsson (cc-ed) already described that issue during the meeting:
+
+&gt; EA: If you have an extends clause, the default constructor calls super. If the 
+&gt; extends expression evaluates to null then the super() call will throw. So you 
+&gt; have to provide your own constructor</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14564</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-21 12:29:23 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #0)
+&gt; The spec says that
+&gt; 
+&gt;     class Foo extends null {}
+&gt; 
+&gt; sets Foo.[[Prototype]] to %FunctionPrototype% and defines the default
+&gt; constructor body as: constructor(...args) {super(...args);}
+&gt; 
+&gt; This causes a runtime error for
+&gt;    new Foo
+&gt; because %FunctionPrototype% is not a constructor
+&gt; 
+&gt; The problem is in line 10.a where the test
+&gt;    if ClassHeritage-opt is present, then
+&gt; 
+&gt; is such to determine the default constructor body. Instead the 10.a test
+&gt; should be
+&gt;    if ClassHeritage-opt is present and
+&gt; SameValue(constructorParent,%FunctionProtoype) is false, then
+&gt; 
+&gt; 
+&gt; (thanks to Brian Terlson for spotting the problem)
+
+In addition, step 15 needs to also add a 
+   and SameValue(constructorParent,%FunctionProtoype) is false
+clause to its predicate</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14565</commentid>
+    <comment_count>5</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-07-21 12:41:50 -0700</bug_when>
+    <thetext>It was actually discovered here: https://github.com/Microsoft/TypeScript/issues/3696.
+
+I think it&apos;s clear that `extends null` shouldn&apos;t need to provide its own constructor to avoid errors. From the notes it seems like Erik raised the concern and it was not addressed at all. Maybe no one realized the severity of the issue? Or maybe I&apos;m overlooking why Allen&apos;s proposed solution is a bad idea.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3155</bug_id>
+          
+          <creation_ts>2014-08-26 01:37:00 -0700</creation_ts>
+          <short_desc>Sections 20.1.2 and 20.2.1: Defective alphabetical order of the subsections</short_desc>
+          <delta_ts>2014-10-14 15:17:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9989</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-26 01:37:04 -0700</bug_when>
+    <thetext>20.1.2 Properties of the Number Constructor
+
+Subsections &quot;20.1.2.8 Number.NaN&quot; and &quot;20.1.2.9 Number.NEGATIVE_INFINITY&quot; should be moved after &quot;20.1.2.11 Number.MIN_VALUE&quot;, in order to respect the alphabetical order.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9990</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-26 01:44:17 -0700</bug_when>
+    <thetext>Also:
+
+20.2.1 Value Properties of the Math Object
+
+Move &quot;20.2.1.3 Math.LOG10E&quot; after &quot;20.2.1.4 Math.LN2&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10014</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-29 12:19:14 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10440</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:54 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

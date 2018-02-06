@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3250</bug_id>
+          
+          <creation_ts>2014-09-30 06:25:00 -0700</creation_ts>
+          <short_desc>Reflective API to verify a module object</short_desc>
+          <delta_ts>2015-03-16 14:27:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10251</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-09-30 06:25:44 -0700</bug_when>
+    <thetext>It would be useful in various scenarios to verify than an object is a full ES6 module object, as opposed to a plain object.
+
+Something like - 
+
+var p = System.newModule({ module: &apos;object&apos; });
+Reflect.isModule(p); // returns true, false otherwise</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

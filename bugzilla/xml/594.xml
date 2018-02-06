@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>594</bug_id>
+          
+          <creation_ts>2012-07-28 07:07:00 -0700</creation_ts>
+          <short_desc>String.prototype.split with undefined separator and limit 0</short_desc>
+          <delta_ts>2013-10-29 09:45:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Steven Levithan">steves_list</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1389</commentid>
+    <comment_count>0</comment_count>
+    <who name="Steven Levithan">steves_list</who>
+    <bug_when>2012-07-28 07:07:37 -0700</bug_when>
+    <thetext>The following paragraph appears in ES 6 Rev 9 section 15.5.4.14 (it is unchanged from ES 5.1):
+
+“If separator is undefined, then the result array contains just one String, which is the this value (converted to a String). If limit is not undefined, then the output array is truncated so that it contains no more than limit elements.”
+
+This is ambiguous about whether the limit argument applies when separator is undefined. The algorithm steps that follow, by my reading, specify that limit should not affect the result if separator is undefined. In other words, &apos;undefined&apos;.split(undefined, 0) should return [&apos;undefined&apos;], not [].
+
+Was this special case for the limit argument intentional? Although this is a minor issue, the special case seems unnecessary and wrong.
+
+Browser test results:
+ 
+Chrome 20, Chrome Canary 22:
+&apos;undefined&apos;.split(); // –&gt; [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined); // –&gt; [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined, 0); // –&gt; [&apos;undefined&apos;]
+ 
+IE 9 (IE 9 standards mode):
+&apos;undefined&apos;.split(); // –&gt; [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined); // –&gt; [&apos;&apos;, &apos;&apos;]
+&apos;undefined&apos;.split(undefined, 0); // –&gt; []
+ 
+Firefox 14.0.1, Opera 12, and Safari 5.1.7:
+&apos;undefined&apos;.split(); // –&gt; [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined); // –&gt; [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined, 0); // –&gt; []
+ 
+Safari 5.1.2:
+&apos;undefined&apos;.split(); // –&gt; Didn&apos;t test
+&apos;undefined&apos;.split(undefined); // –&gt; [&apos;&apos;, &apos;&apos;]
+&apos;undefined&apos;.split(undefined, 0); // –&gt; []</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1390</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-28 08:09:41 -0700</bug_when>
+    <thetext>FWIW, here are the results for Safari 6.0 (8536.25) which shipped with OS X 10.8 Mountain Lion:
+
+&apos;undefined&apos;.split(); // [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined); // [&apos;undefined&apos;]
+&apos;undefined&apos;.split(undefined, 0); // []</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5906</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-18 14:10:50 -0700</bug_when>
+    <thetext>fixed in rev 20 editor&apos;s draft
+
+Note that the algorithms in ES3, 5, and 6 all return an empty array when the limit parameter is 0.
+
+Moved all of the prose functionality description to the end as an informative note.  Only the algorithm is normative.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6090</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:40 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

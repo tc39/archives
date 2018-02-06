@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1934</bug_id>
+          
+          <creation_ts>2013-09-27 07:16:00 -0700</creation_ts>
+          <short_desc>22.2.3.*, 23.*, 24.*: Replace ToObject calls with type checks in non-generic functions</short_desc>
+          <delta_ts>2013-09-27 14:47:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5460</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 07:16:23 -0700</bug_when>
+    <thetext>The following functions should perform a type check instead of calling ToObject(). The ToObject coercion is somewhat useless because the functions are all non-generic, i.e. they require certain internal data properties to be present on the input value. And wrapped primitives don&apos;t provide these internal data properties. Removing the ToObject calls also saves at least on additional step in the algorithms. For example:
+
+1. Let obj be the result of ToObject(arg).
+2. ReturnIfAbrupt(obj).
+
+Can be reduced to:
+
+1. If Type(arg) is not Object, then throw a TypeError exception.
+
+
+22.2.3.1  get %TypedArray%.prototype.buffer
+22.2.3.2  get %TypedArray%.prototype.byteLength
+22.2.3.3  get %TypedArray%.prototype.byteOffset
+22.2.3.17  get %TypedArray%.prototype.length
+22.2.3.22  %TypedArray%.prototype.set(array, offset = 0)
+22.2.3.23  %TypedArray%.prototype.set(typedArray, offset = 0)
+22.2.3.27  %TypedArray%.prototype.subarray(begin = 0, end = this.length)
+22.2.3.32  get %TypedArray%.prototype [ @@toStringTag ]
+
+23.1.5.1  CreateMapIterator Abstract Operation
+23.2.5.1  CreateSetIterator Abstract Operation
+
+24.1.4.1  get ArrayBuffer.prototype.byteLength
+24.1.4.3  ArrayBuffer.prototype.slice ( start , end)
+
+24.2.1.1  GetViewValue(view, requestIndex, isLittleEndian, type)
+24.2.1.2  SetViewValue(view, requestIndex, isLittleEndian, type, value)
+24.2.4.1  get DataView.prototype.buffer
+24.2.4.2  get DataView.prototype.byteLength
+24.2.4.3  get DataView.prototype.byteOffset</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5461</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 07:17:25 -0700</bug_when>
+    <thetext>And the &quot;If Type(arg) is not Object, ...&quot; form is already used in the specification for other non-generic functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5492</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 12:14:30 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5577</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:49 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

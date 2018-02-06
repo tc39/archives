@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>636</bug_id>
+          
+          <creation_ts>2012-08-31 19:22:00 -0700</creation_ts>
+          <short_desc>13.4: &quot;any AssignmentExpression&quot;</short_desc>
+          <delta_ts>2012-10-26 15:34:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1574</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-31 19:22:39 -0700</bug_when>
+    <thetext>In 13.4 &quot;Generator Definitions&quot;,
+under &quot;Static Semantics: Early Errors&quot;,
+rule 2 says:
+    &quot;It is a Syntax Error if any AssignmentExpression Contains YieldExpression.&quot;
+
+I&apos;m wondering about that &quot;any&quot;. If this is really about *any* AssignmentExpression, then you&apos;ve got a problem, because every YieldExpression is contained by an AssignmentExpression (or AssignmentExpressionNoIn).
+
+But if it&apos;s just about the AssignmentExpression in the YieldExpression production, then change &quot;any&quot; to &quot;the&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2067</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 16:33:31 -0700</bug_when>
+    <thetext>deleted any
+
+corrected in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2144</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:20 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

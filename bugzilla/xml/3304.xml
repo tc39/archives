@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3304</bug_id>
+          
+          <creation_ts>2014-11-03 14:11:00 -0800</creation_ts>
+          <short_desc>name property of anonymous class expression?</short_desc>
+          <delta_ts>2015-07-10 08:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10547</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-11-03 14:11:43 -0800</bug_when>
+    <thetext>Based on my interpretation it seems like there will not be a name property on C in the following example.
+
+var C = class {};
+assertFalse(C.hasOwnProperty(&apos;name&apos;));
+
+Is this correc. Is this desired?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10548</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-03 17:38:14 -0800</bug_when>
+    <thetext>How did you reach that conclusion?
+
+It should be set by the evaluation action for
+  VariableDeclaration : BindingIdentifier Initializer
+
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-variable-statement-runtime-semantics-evaluation step 4.
+
+Do you see something that is cause the name property creation step to be skipped?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10551</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-11-04 06:55:56 -0800</bug_when>
+    <thetext>Thanks. It is clear now.
+
+IsAnonymousFunctionDefinition was the magic word I didn&apos;t find</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1818</bug_id>
+          
+          <creation_ts>2013-08-26 20:46:00 -0700</creation_ts>
+          <short_desc>conjoined steps</short_desc>
+          <delta_ts>2013-09-27 14:47:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5226</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-26 20:46:05 -0700</bug_when>
+    <thetext>There are (at least) 7 places in the spec where 2 adjacent steps are run together:
+
+8.5.4 [[PreventExtensions]] / step 6.
+
+11.2.3 Function Calls / EvaluateMethodCall / step 5
+
+13.5.1.1 Static Semantics / PrototypeMethodDefinitions / group 2 / step 10
+
+15.2.4.2 Object.prototype.toString() / step 2
+
+15.4.2.4 Array.from (...) / step 12
+
+15.4.5.2.2 ArrayIterator.prototype.next() / step 12
+
+B.2.2.1.2 set Object.prototype.__proto__ / step 2
+
+In all but one of these cases, I believe the two steps, once separated, should be sequential steps at the same level as the existing step.
+
+However, in 15.4.5.2.2, I believe the first step should actually be 11.b, i.e. one level deeper, within the previous step.
+
+
+Also, 15.13.6.3.7 / step 27.c *looks* like two steps run together:
+    Set srcByteIndex to srcByteIndex + srcElementSize.Return
+but I think the &quot;Return&quot; should just be deleted.
+
+
+(Some overlap with Bug 1811.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5369</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-10 13:54:26 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft
+
+9.3.4
+12.2.3
+14.5.1.1
+19.1.4.6
+22.1.2.1
+22.1.5.2.2
+
+22.2.3.24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5535</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:21 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3271</bug_id>
+          
+          <creation_ts>2014-10-08 12:33:00 -0700</creation_ts>
+          <short_desc>6.2.4.4, 12.2.4.1.2, 24.3.1.1: More [[DefineOwnProperty]] -&gt; CreateDataProperty places</short_desc>
+          <delta_ts>2014-10-14 15:17:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10297</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-08 12:33:32 -0700</bug_when>
+    <thetext>Calls to [[DefineOwnProperty]] can be replaced with CreateDataProperty in the following sections. 
+
+12.2.4.1.2 Runtime Semantics: ArrayAccumulation
+ElementList :  Elisionopt AssignmentExpression 
+- step 5
+
+ElementList :  ElementList , Elisionopt AssignmentExpression 
+- step 7
+
+If these two are changed, the note in 12.2.4.1.2 needs to be updated, too.
+
+
+24.3.1.1 Runtime Semantics: Walk Abstract Operation
+- step 3.a.iv.3.a
+- step 3.b.ii.3.a
+
+
+---
+
+6.2.4.4 FromPropertyDescriptor ( Desc )
+
+Calls to OrdinaryDefineOwnProperty can be replaced with CreateDataProperty.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10302</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 17:05:32 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10409</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:48 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

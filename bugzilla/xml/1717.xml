@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1717</bug_id>
+          
+          <creation_ts>2013-08-06 09:51:00 -0700</creation_ts>
+          <short_desc>Numbering glitches</short_desc>
+          <delta_ts>2013-08-23 08:22:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4761</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-08-06 09:51:40 -0700</bug_when>
+    <thetext>In 8.3.16.10 &quot;MakeConstructor Abstract Operation&quot;, there is no step 6.
+
+In 8.4.6.5 &quot;[[Get]] (P, Receiver)&quot; there is no step 3.
+
+In 8.4.6.8 &quot;IntegerIndexedObjectCreate Abstract Operation&quot;, the algorithm begins at step 11.
+
+In 10.2.1.4.11 &quot;GetThisBinding ()&quot;, the algorithm begins at step 2.
+
+In 12.1.1.1 &quot;Static Semantics&quot;, the last algorithm has only a step 2.
+
+In 12.2.2.2 &quot;Runtime Semantics&quot;, the last algorithm begins at step 2.
+
+In 12.2.3.2 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics: Indexed
+Binding Initialisation&quot;, the last algorithm begins at step 2.
+
+In 12.11.1.2 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics: Case
+Block Evaluation&quot;, the second algorithm, the substeps of step 12 begin
+at b. rather than a.
+
+In 12.12.1.2 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics:
+Evaluation&quot;, the algorithm begins at step 3.
+
+In 13.2.1.1 &quot;Static Semantics&quot;, subsection &quot;Static Semantics:
+ExpectedArgumentCount&quot;, the first algorithm has only a step 2.
+
+In 14.1.1 &quot;Static Semantics&quot;, subsection &quot;Static Semantics:
+VarDeclaredNames&quot;, three algorithms have only a step 2.
+
+In 15.3.3.3, the algorithm begins at step 9.
+
+In 15.13.6.2.2 &quot;%TypedArray%.of ( ...items )&quot;, the algorithm begins at step 12.
+
+In 15.13.6.3.8 &quot;%TypedArray%.prototype.subarray(begin = 0, end = this.length )&quot;,
+the algorithm goes from step 20 to step 26.
+
+In 15.13.6.3.26 &quot;%TypedArray%.prototype.entries ( )&quot;, the algorithm begins at step 4.
+
+In 15.13.6.3.27 &quot;%TypedArray%.prototype.keys ( )&quot;, same thing.
+
+In 15.13.6.3.28 &quot;%TypedArray%.prototype.values ( )&quot;, same thing.
+
+In 15.13.7.2.2 &quot;new DataView( ... argumentsList)&quot;, same thing.
+
+In 15.14.2.2 &quot;Map[ @@create ] ( )&quot;, same thing.
+
+In 15.17.3.4 &quot;WeakSet.prototype.delete ( value )&quot;, the algorithm begins
+at step 10. (Also, step 13 is truncated.)
+
+In 15.18.1.6 &quot;Reflect.hasOwn (target, propertyKey)&quot;, the algorithm
+begins at step 6.
+
+In 15.19.4.3.7 &quot;IteratorComplete ( itrResult )&quot;, the algorithm begins at
+step 6.
+
+In 16.3.2.1 &quot;Static Semantics&quot;, subsection &quot;Static Semantics:
+BoundNames&quot;, most of the algorithms do not start with step 1.
+
+In F.1.1.3 &quot;_proto___ Object Initialisers _&quot;, the second algorithm has
+two steps numbered &quot;5.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4785</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-06 18:28:56 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5070</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:27 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

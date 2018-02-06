@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4312</bug_id>
+          
+          <creation_ts>2015-04-16 16:44:00 -0700</creation_ts>
+          <short_desc>Function.prototype.toString language mysteriously weakened.</short_desc>
+          <delta_ts>2015-04-22 09:50:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Bugs from ES6</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bugs.ecmascript</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14267</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-04-16 16:44:01 -0700</bug_when>
+    <thetext>From https://mail.mozilla.org/pipermail/es-discuss/2015-April/042525.html
+
+Where the strawman http://wiki.ecmascript.org/doku.php?id=harmony:function_to_string says:
+
+&gt; if eval()uated in an equivalent-enough lexical context, would result in a function 
+&gt; with the same [[Call]] behavior as the present one. Note that the new function would 
+&gt; have a fresh identity and none of the original’s properties, not even .prototype. 
+&gt; (The properties could of course be transferred by other means but the identity will 
+&gt; remain distinct.)
+
+the spec text at https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function.prototype.tostring says only
+
+&gt; if the string is evaluated, using eval in a lexical context that is equivalent to 
+&gt; the lexical context used to create the original object, it will result in a new 
+&gt; functionally equivalent object.
+
+This &quot;functionally equivalent&quot; is bizarrely vaguer than &quot;same [[Call]] behavior&quot; and, if taken literally, is clearly wrong. As the strawman (but not the spec) says clearly, evaling the returned string is not expected to replicate the properties of the original function object. And of course it cannot replicate the original function&apos;s identity.
+
+Allen, is this a spec bug, or was this weakening intentional? If so, why?
+
+I&apos;m sure it&apos;s too late for ES6 anyway, so feel free to move to ES7 of course.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14280</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-17 08:35:43 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #0)
+...
+&gt; 
+&gt; This &quot;functionally equivalent&quot; is bizarrely vaguer than &quot;same [[Call]]
+&gt; behavior&quot; and, if taken literally, is clearly wrong
+
+&quot;same [[Call]] behavior&quot; if taken literally in the context of the ES6 spec. is also wrong.  In the ES6 spec, that phraae  literally means has the same implementation of the [[Call]] internal method.  But, this is always the case for ECMAScript language functions. Also, note that the standard [[Call]] internal method simply delegates to the evaluation of the function body. It does not say anything about the actual behavior of the body.
+
+Clearly, your intended  to say that (given the appropriate lexical environment) there would be no observable difference in calling the new eval generated function in place of the original function. &quot;functionally equivalent&quot; seems like a plausible statement of that requirement. But you might be able to come up with something better, but any description consisting of a handful of words is going to be vague.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14281</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-04-17 08:46:53 -0700</bug_when>
+    <thetext>Good point. So perhaps &quot;observably equivalent [[Call]] behavior&quot; or something?
+
+I would like to see language that clearly includes [[Call]] but excludes other properties, internal methods, and identity.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14282</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-17 08:53:17 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #2)
+
+I don&apos;t think you are going to find a four or five word sentence that can precisely express you requirements.  I think you are going to either have to significantly expand your list of requirements or be content with vagueness.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14316</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-22 09:50:07 -0700</bug_when>
+    <thetext>deferring to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1196</bug_id>
+          
+          <creation_ts>2013-01-14 13:34:00 -0800</creation_ts>
+          <short_desc>__proto__ [[DefineOwnProperty]] treats missing descriptors as changes that disable __proto__, is this intentional?</short_desc>
+          <delta_ts>2013-07-15 17:03:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3120</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2013-01-14 13:34:02 -0800</bug_when>
+    <thetext>Current spec says this:
+
+The definition of the [[DefineOwnProperty]] internal method given in 8.12.9 is replaced with the following:
+1.	If UnderscoreProtoEnabled is true and P is the string value &quot;__proto__&quot; and O is the standard built-in Object prototype object, then 
+a.	If any attribute contained in Desc is not present or has a different value from the corresponding attribute in { [[Writable]]: true, [[Enumerable]]: true, [[Configurable]]: true }then,
+i.	Set UnderscoreProtoEnabled to false.
+2.	Continue by executing the steps of 8.12.9 starting with step 1.
+
+
+Given that missing descriptors will not cause a change to the __proto__ property descriptor, is it intentional that these lead to disabling UnderscoreProtoEnabled?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4342</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-30 13:51:53 -0700</bug_when>
+    <thetext>This is all gone from the rewrite of __proto__ that was done in rev 15</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4430</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:38 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

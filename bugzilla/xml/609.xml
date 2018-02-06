@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>609</bug_id>
+          
+          <creation_ts>2012-08-07 08:05:00 -0700</creation_ts>
+          <short_desc>No way to customize behavior on the Intl object</short_desc>
+          <delta_ts>2012-10-16 15:04:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="John Emmons">emmo</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1410</commentid>
+    <comment_count>0</comment_count>
+    <who name="John Emmons">emmo</who>
+    <bug_when>2012-08-07 08:05:25 -0700</bug_when>
+    <thetext>One of the things that me and all my colleagues at IBM are very concerned about regarding this specification is the lack of ability to customize the behavior that will be provided for a given locale.  Since the specification allows each implementer (browser) to make its own decisions about which locales are to be supported, and the source of that data, it is definitely going to open up the door for different behavior coming from different browsers.  From our point of view, this is unacceptable, as it means that in the end our products would behave differently on different browsers, and may also not support locales that our customer base requires.
+
+What we need is a simple way to extend the locale capabilities of the Intl object, so that we can tweak its behavior if we don&apos;t like what the browser chooses to provide.  That way we can tell our developers, &quot;run this IBM custom script at the beginning of your application, so that you can get the accepted and consistent &apos;IBM&apos; behavior.&quot;
+
+This topic was briefly discussed at the latest TC 39 meeting, but the voices started getting very fuzzy over the phone so I didn&apos;t hear if anyone was driving this.  In our minds, this is the major hurdle keeping IBM from really embracing this specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1411</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-07 17:19:19 -0700</bug_when>
+    <thetext>The issue of different behavior in different implementations has come up several times. TC 39 members coming more from a programming language specification background had a strong desire to specify more precisely the behavior of the compare and format functions because their experience is that slight differences in language behavior can cause big headaches for developers. The opinion of the internationalization ad-hoc leaned more in the direction of leaving the details open because localization has to reflect the real world, and the real world is often not well specified and subject to change. The outcome is summarized in section 4.3 of the spec.
+
+We haven&apos;t much discussed how libraries or applications might tweak the behavior of the Intl objects - the focus has been on making existing functionality available to them. There are some access points however that can be used:
+
+- Since this is EcmaScript, a script like the one you propose could replace all of Intl, its constructor properties, and/or the locale sensitive functions on String, Number, and Date with other implementations.
+
+- The API&apos;s constructors are subclassable, so that it&apos;s possible for such a script to create subclass constructors whose constructors or compare/format functions implement different behavior.
+
+- The API provides supportedLocalesOf and resolvedOptions methods which let such a script probe what is and what isn&apos;t supported in a given implementation.
+
+My article on the API sketches a few ideas how these facilities could be used:
+http://norbertlindenberg.com/2012/06/ecmascript-internationalization-api/index.html
+
+One can certainly imagine more fine-grained access points to let libraries and applications probe and tweak the behavior of an implementation of the API. I think it&apos;s too late to do this for version 1 of the API, but I encourage you and your colleagues to describe the needs of IBM in more detail so that they can be addressed in a future version of the API. A strawman on wiki.ecmascript.org or an article on a personal web site are common ways to start the discussion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1949</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-16 15:04:03 -0700</bug_when>
+    <thetext>Closing this ticket as there are some ways to customize, but there&apos;s certainly the possibility of follow-up work as mentioned in comment 1.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

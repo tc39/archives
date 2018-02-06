@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1893</bug_id>
+          
+          <creation_ts>2013-09-04 08:57:00 -0700</creation_ts>
+          <short_desc>The ECMAScript specification is not licensed under a free content license</short_desc>
+          <delta_ts>2014-04-18 11:50:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter>musicdenotation</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5308</commentid>
+    <comment_count>0</comment_count>
+    <who name="">musicdenotation</who>
+    <bug_when>2013-09-04 08:57:34 -0700</bug_when>
+    <thetext>&quot;This draft document may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published, and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this section are included on all such copies and derivative works. However, this document itself may not be modified in any way, including by removing the copyright notice or references to Ecma International, except as needed for the purpose of developing any document or deliverable produced by Ecma International.&quot;
+
+This license prohibits making most kind of changes to it, which make it not a &quot;free cultural works&quot; [1] license, and therefore it can&apos;t be mirrored at MDN, Wikisource, or other free content libraries. Now we and JavaScript are in a world of free and open source software [2], the existing state of affairs must be changed. Ecma International may be worrying about the integrity of the standard, however there are three alternatives:
+    1. They can permit making changes to it as long as the modified versions are not distributed as the official standards;
+    2. They can use trademark and set a policy restricting the use of their name and standard names;
+    3. They may ignore the issue altogether. Why worry about it? JavaScript is supposed to be open source.
+
+In short, the ECMAScript official specification should be distributed under either the Creative Commons [3] Attribution license version 2.5 or the Open Web Foundation [4] License Agreement version 1.0.
+
+Part of the free culture and free software movements.
+
+
+[1]: http://freedomdefined.org/
+[2]: http://www.fsf.org/
+[3]: http://creativecommons.org/
+[4]: http://www.openwebfoundation.org/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7816</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-18 11:50:52 -0700</bug_when>
+    <thetext>This is an issue for Ecma International management and its General Assembly.
+
+You should take it up with them.
+
+Also see http://www.ecma-international.org/memento/Ecma%20copyright%20FAQ.htm</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

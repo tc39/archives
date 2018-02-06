@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>738</bug_id>
+          
+          <creation_ts>2012-10-05 22:08:00 -0700</creation_ts>
+          <short_desc>15.14.1.1: algorithm control flow</short_desc>
+          <delta_ts>2013-11-08 13:09:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>2179</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1869</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-05 22:08:36 -0700</bug_when>
+    <thetext>In 15.14.1.1 &quot;MapInitialization&quot;,
+move step 4 (&quot;If iterable is not undefined ...&quot;)
+to after step 7 (&quot;If iterable is undefined, return obj.&quot;),
+and remove the condition (since it&apos;s guaranteed true).
+
+I.e., promote the substeps of 4 to top-level steps between 7 and 8.
+
+(Note that you have to convince yourself that step 4.a can&apos;t cause
+iterable to become undefined.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1964</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-20 15:32:58 -0700</bug_when>
+    <thetext>If those steps were move, then obj could get observably tagged as an initialized map (by getting a [[MapData]] internal property) before a possible abrupt termination of those steps.  It seems better to validate the iterable argument before modifying obj.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2133</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:16 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2439</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-08 12:33:39 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; If those steps were move, then obj could get observably tagged as an
+&gt; initialized map (by getting a [[MapData]] internal property) before a possible
+&gt; abrupt termination of those steps.
+
+Ah, right.
+
+So what I *should* have suggested is:
+
+    ...
+    4. If iterable is undefined, then
+        a. [current step 5]
+        b. [current step 6]
+        c. return obj
+    [current steps 4.a - 4.h]
+    [current step 5]
+    [current step 6]
+    [current step 8]
+
+This has the downside of repeating the current steps 5 and 6:
+    5. Add a [[MapData]] internal property to obj.
+    6. Set obj&apos;s [[MapData]] internal property to a new empty List.
+
+However, it occurs to me that step 5 is odd: it adds an internal property without setting it. That is, the spec would normally combine those two steps into one:
+
+    Add a [[MapData]] internal property to obj with value an empty List.
+
+(or, if that sounds a bit clunky, &quot;... with an empty List as its value&quot;.)
+
+So assuming that change, then my suggested refactoring would only repeat a single step, which doesn&apos;t seem like much of a drawback.
+
+Ditto all that to the corresponding algorithms in 15.15.1.1 and 15.16.1.1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3046</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-19 09:40:14 -0800</bug_when>
+    <thetext>Steps 2-3 also need to be moved, since 4a-h are not side effect free, which means it&apos;s technically possible to execute steps 5-6 multiple times. Or possible side effects in 4a-h change `obj` to extensible=false and later in steps 5-6 a now no longer extensible `obj` is altered.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5962</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 19:24:37 -0700</bug_when>
+    <thetext>How about reviewing the  current 23.1.1.1  (the Map constructor) to see if you think all the formal issues have been addressed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5963</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-23 00:50:59 -0700</bug_when>
+    <thetext>The problem mentioned in comment 4 still applies:
+
+new class extends Map {
+  constructor() {
+    let iter = {[Symbol.iterator]: () =&gt; {
+      super();
+      return [].values();
+    }};
+    super(iter);
+  }
+}
+
+That example leads to:
+java.lang.AssertionError: Map already initialised
+        at com.github.anba.es6draft.runtime.objects.collection.MapObject.initialise(MapObject.java:51)
+        at com.github.anba.es6draft.runtime.objects.collection.MapConstructor.call(MapConstructor.java:103)
+        at #typein_7.!constructor~1(typein:7)
+        ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6417</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-03 11:08:50 -0800</bug_when>
+    <thetext>fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6556</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:11 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

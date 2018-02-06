@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2460</bug_id>
+          
+          <creation_ts>2014-01-27 09:01:00 -0800</creation_ts>
+          <short_desc>26.3.*: Various typos and format issues</short_desc>
+          <delta_ts>2014-05-22 17:59:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7031</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-27 09:01:18 -0800</bug_when>
+    <thetext>26.3.1.1 %Loader% (options = { })
+- step 3: Add space between &quot;a&quot; and &quot;[[LoaderRecord]]&quot;
+- step 9.c.i: &quot;isCallable&quot; -&gt; &quot;IsCallable&quot;
+- step 10: &quot;rentretly&quot; -&gt; &quot;reentrantly&quot;
+- step 10: &quot;realmObject&quot; -&gt; &quot;loader&quot;
+
+26.3.2.1 %Loader%.prototype
+- 1st paragraph: Missing closing parenthesis
+
+26.3.3.3 Loader.prototype.delete ( name )
+- preamble: &quot;remove&quot; -&gt; &quot;removes&quot;
+
+26.3.3.5 Loader.prototype.eval ( source )
+- step 4: Remove space character in &quot;[[ Realm]]&quot;
+
+26.3.3.6 Loader.prototype.get ( name )
+- step 6: Remove space character in &quot;[[ Modules]]&quot;
+
+26.3.3.7 get Loader.prototype.global
+- step 4: Remove space character in &quot;[[ Realm]]&quot;
+
+26.3.3.8 Loader.prototype.has ( name )
+- step 6: Remove space character in &quot;[[ Modules]]&quot;
+
+26.3.3.11 Loader.prototype.load ( name, options = undefined )
+- 4th paragraph: &quot;[...] import method is 1&quot; -&gt; &quot;[...] load method is 1&quot;
+
+26.3.3.12 Loader.prototype.module ( source, options )
+- preamble: &quot;evaluates evaluates&quot; -&gt; &quot;evaluates&quot;
+- 3rd paragraph: incomplete sentence &quot;If the optional argument [...]&quot;
+
+26.3.3.15 Loader.prototype.set ( name, module )
+- step 7: Remove space character in &quot;[[ Modules]]&quot;
+- step 8: Remove space character in &quot;[[ key]]&quot;
+- step 10: Remove space character in &quot;[[ Modules]]&quot;
+
+26.3.3.18 Loader Pipeline Hook Properties
+- preamble: &quot;provide default&quot; -&gt; &quot;provides default&quot;
+
+26.3.3.18.1 Loader.prototype.normalize
+- heading: &quot;iLoader&quot; -&gt; &quot;Loader&quot;
+- 4th paragraph: &quot;initialtes&quot; -&gt; &quot;initiates&quot;
+
+26.3.3.18.2  Loader.prototype.locate
+- 3rd paragraph: &quot;retrive&quot; -&gt; &quot;retrieve&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8397</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-13 17:58:23 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8602</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 17:59:57 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

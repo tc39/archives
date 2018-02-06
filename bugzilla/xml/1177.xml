@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1177</bug_id>
+          
+          <creation_ts>2012-12-23 01:22:00 -0800</creation_ts>
+          <short_desc>15.9.4.6: various</short_desc>
+          <delta_ts>2013-03-08 14:44:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3097</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-12-23 01:22:08 -0800</bug_when>
+    <thetext>In 15.9.4.6 &quot;@@create ( )&quot;...
+
+(A)
+Unlike its sibling sections, this one&apos;s title doesn&apos;t have &quot;Date.&quot; before the property name, which makes me wonder if it&apos;s a property. Presumably it must be, but then why is the &quot;Date.&quot; missing?
+
+(This applies to all other &quot;@@create&quot; sections.)
+
+(B)
+The preamble:
+    When the Date @@create method of an object F,
+    the following steps are taken:
+is ungrammatical. Based on preambles elsewhere, it should maybe say:
+    The @@create method of a Date function object F
+    performs the following steps:
+
+(C)
+Presumably, this method should be invoked (indirectly) by &quot;new Date(...)&quot;, but none of 15.9.3.* mention it or OrdinaryConstruct.
+
+(D)
+Step 2 says:
+     Add a [[DateValue]] internal data property to obj.
+
+What is the effect of adding an internal data property without specifying its value? And is there any benefit in allowing this situation? I.e., wouldn&apos;t it be better to only add an internal data property when you can also supply its value?
+
+(This applies to some other &quot;@@create&quot; sections.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3243</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-27 18:01:09 -0800</bug_when>
+    <thetext>A, B, and D fixed in rev 14 editor&apos;s draft
+C: it&apos;s normally called by the [[Construct]] internal method</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3385</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:30 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

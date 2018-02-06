@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2360</bug_id>
+          
+          <creation_ts>2013-12-08 17:50:00 -0800</creation_ts>
+          <short_desc>10.1, 21.2.2: Unicode code units -&gt; UTF-16 code units</short_desc>
+          <delta_ts>2015-02-06 18:07:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6897</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 17:50:39 -0800</bug_when>
+    <thetext>The Unicode Standard defines code units for UTF-8, UTF-16, and UTF-32, but no Unicode code units.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7343</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 10:47:52 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7608</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:31:38 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8696</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-30 18:31:49 -0700</bug_when>
+    <thetext>Problem still exists in rev 25 draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9192</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-14 13:15:26 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9402</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:52:55 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9420</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 20:16:10 -0700</bug_when>
+    <thetext>Looked at rev 26 draft:
+
+- The text simplification in 10.1 that got rid of &quot;Unicode code unit&quot; looks good.
+
+- The change in 21.2.2 is not so good. The old-style RegExp system knows nothing about code points, it doesn&apos;t support them in a meaningful way, but it also doesn&apos;t limit them to the BMP. It simply operates on 16-bit units. A number of people have used it to successfully support full Unicode, but by mapping regular expressions based on Unicode code points to regular expressions based on UTF-16 code units. You can&apos;t talk about &quot;a sequence of 16-bit values that are Unicode code points in the range of the Basic Multilingual Plane&quot; because neither the Unicode Standard nor ECMAScript define a mapping from sequences of 16-bit values to Unicode code points whose range is limited to the BMP.
+
+When describing the old-style RegExp system, we should not use the term &quot;code point&quot; at all. If you don&apos;t like &quot;UTF-16 code unit&quot;, then &quot;16-bit code unit&quot; or such is fine.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9718</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 14:30:22 -0700</bug_when>
+    <thetext>I&apos;m sure I see your problem with 21.2.2.  the official Unicode glossary defines the term &quot;BMP code point&quot; http://www.unicode.org/glossary/#BMP_code_point 
+
+To me, the language in that paragraph seems consistent with that definition.
+
+It also doesn&apos;t seem relevant that the old ES5 RegExp could be made to do some useful work with UTF-16 encoded strings.  This paragraph is fundamentally about defining the term &quot;Pattern&quot; as using within the rest of the specification. It isn&apos;t about the relative utility of &quot;BMP patterns&quot; and &quot;Unicode patterns&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9747</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-09 12:35:15 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #7)
+&gt; I&apos;m sure I see your problem with 21.2.2.  the official Unicode glossary
+      ^
+     not
+&gt; defines the term &quot;BMP code point&quot;
+&gt; http://www.unicode.org/glossary/#BMP_code_point 
+&gt; 
+&gt; To me, the language in that paragraph seems consistent with that definition.
+&gt; 
+&gt; It also doesn&apos;t seem relevant that the old ES5 RegExp could be made to do
+&gt; some useful work with UTF-16 encoded strings.  This paragraph is
+&gt; fundamentally about defining the term &quot;Pattern&quot; as using within the rest of
+&gt; the specification. It isn&apos;t about the relative utility of &quot;BMP patterns&quot; and
+&gt; &quot;Unicode patterns&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12206</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 18:07:37 -0800</bug_when>
+    <thetext>reclosing as worksforme as I&apos;m not planning on making an more changes.
+
+I you would to suggest some specific changes I&apos;ll see if I can get them in.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

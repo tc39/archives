@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3216</bug_id>
+          
+          <creation_ts>2014-09-09 13:28:00 -0700</creation_ts>
+          <short_desc>20.2.2.18 Math.hypot: small issue in the NOTE</short_desc>
+          <delta_ts>2014-10-14 15:17:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10175</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-09-09 13:28:25 -0700</bug_when>
+    <thetext>The NOTE says:
+
+Implementations should take care to avoid the loss of precision from overflows and underflows that are prone to occur in naive implementations when this function is called with more than two arguments.
+
+Replace &quot;... with more than two arguments.&quot; with: &quot;... with at least two arguments.
+
+Indeed, a naive implementation of Math.hypot would overflow on, e.g.,
+
+    Math.hypot(Number.MAX_VALUE/7, Number.MAX_VALUE/7)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10226</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-21 11:18:35 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10444</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:55 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4541</bug_id>
+          
+          <creation_ts>2015-09-24 05:41:00 -0700</creation_ts>
+          <short_desc>Incorrect use of completion value after ReturnIfAbrupt</short_desc>
+          <delta_ts>2015-10-23 14:30:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14706</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-09-24 05:41:38 -0700</bug_when>
+    <thetext>In a couple of places, ReturnIfAbrupt is invoked on a completion value, but later steps assume that it is still a completion record, although the macro replaces the variable with its .[[value]]:
+
+- 13.2.13 step 4
+- 13.6.7 (1st production) step 7
+- 13.6.7 (2nd production) step 5.c</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14861</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-23 14:30:12 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

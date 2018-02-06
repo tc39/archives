@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3477</bug_id>
+          
+          <creation_ts>2014-12-18 06:49:00 -0800</creation_ts>
+          <short_desc>Fully specify the behaviour of backslash followed by digits in string literals and template literals</short_desc>
+          <delta_ts>2015-07-10 08:34:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bugs.ecmascript</cc>
+    
+    <cc>caitpotter88</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>gabelevi</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>oliver</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11094</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:49:07 -0800</bug_when>
+    <thetext>This is a follow-up of Bug 1553 and Bug 3212.
+
+Let&apos;s consider the general case of a backslash followed by one or more digits, in string literal. We can distinguish four cases:
+
+A. &quot;\0&quot;
+-------
+This is interpreted as the NUL character.
+
+B. &quot;\[89][0-9]*&quot;
+----------------
+This is interpreted as literal characters (i.e., as if the backslash wasn&apos;t there).
+
+C. &quot;\0[89][0-9]*&quot;
+-----------------
+This is interpreted as NUL followed by literal characters.
+
+D. All other cases: &quot;\[1-7][0-9]*&quot; and &quot;\0[1-7][0-9]*&quot;
+------------------------------------------------------
+This is interpreted as a legacy octal escape sequence producing a character of code 0-255, eventually followed by literal characters.
+
+--
+
+In sloppy mode, engines seem to accept all the forms above and interpret them as described (although I have not fully tested them).
+
+In strict mode (and in template literals, which follow the rules of strict mode), form A is explicitely allowed, and form D is explicitely forbidden. For forms B and C, according to Bug 1553 Comment 2, the behaviour of engines varies between accepting both (V8/Presto), accepting only B (IE/SpiderMonkey), and throwing a SyntaxError on both (JSC).
+
+As for regexps, engines seem to be very sloppy even in strict mode :-(
+If something is to be said about them, I think it is better to open a separate bug.
+
+--
+
+I believe that forms A and D are fully specified. I plan to check the current spec and implementations, and to propose an update of the spec text of annex B that includes also cases B and C (for string literals in sloppy mode) before the end of the year. The only formal decision to be taken here is whether forms B and C should be explicitely forbidden in strict mode and/or in template literals.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11096</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:54:05 -0800</bug_when>
+    <thetext>*** Bug 1553 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11098</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:54:35 -0800</bug_when>
+    <thetext>*** Bug 3212 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11099</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:56:10 -0800</bug_when>
+    <thetext>IMHO, the best behaviour in strict mode is the one of JSC, that is disallowing forms B and C. The reason is that, in these cases, if you replace the first 8 or 9 with any digit between 1 and 7, you fall in case D, and it is better to have something that behaves consistently accross all digits.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11100</commentid>
+    <comment_count>4</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2014-12-18 07:15:33 -0800</bug_when>
+    <thetext>Erik&apos;s position (in https://crrev.com/811113002/) is that \0 followed by any digit should be legal (in template literals), such that
+
+EscapeSequence :: 0 [lookahead ∉ DecimalDigit]
+
+becomes
+
+EscapeSequence :: 0
+
+And \[1-9] would then need to match CharacterEscapeSequence
+
+It&apos;s different from the current strict mode behaviour in all engines, but it doesn&apos;t seem unreasonable --- just not what is specified</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11101</commentid>
+    <comment_count>5</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-12-18 07:49:13 -0800</bug_when>
+    <thetext>I wish B, C and D were all syntax errors in strict mode but I&apos;m afraid that changing this might lead to breaking web sites. However, if JSC gets away with it I&apos;m fine specing that and hope that we can make changes to the other engines.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11105</commentid>
+    <comment_count>6</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 08:50:26 -0800</bug_when>
+    <thetext>(In reply to Caitlin Potter [:caitp] from comment #4)
+&gt; Erik&apos;s position (in https://crrev.com/811113002/) is that \0 followed by any
+&gt; digit should be legal (in template literals), such that
+&gt; 
+&gt; EscapeSequence :: 0 [lookahead ∉ DecimalDigit]
+&gt; 
+&gt; becomes
+&gt; 
+&gt; EscapeSequence :: 0
+&gt; 
+&gt; And \[1-9] would then need to match CharacterEscapeSequence
+&gt; 
+&gt; It&apos;s different from the current strict mode behaviour in all engines, but it
+&gt; doesn&apos;t seem unreasonable --- just not what is specified
+
+Right, and if we want to be precise, we should make a distinction between:
+1. forbidding a given extension (e.g., legacy octal escape sequence);
+2. requiring to throw a SyntaxError on some escape sequences.
+This will make a difference of what engines are allowed to do with \07, for example.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11107</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-18 09:14:54 -0800</bug_when>
+    <thetext>added Jason and Oliver to the CC list</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11134</commentid>
+    <comment_count>8</comment_count>
+      <attachid>77</attachid>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-23 05:06:45 -0800</bug_when>
+    <thetext>Created attachment 77
+Tests for string literals in sloppy and strict modes
+
+Here are tests for testing the behaviour of implementations in string literals.
+
+The last two tests check if forms C and B respectively throw a SyntaxError; it is where current implementations differ. (The results are those announced in Comment 0 and Bug 1553 Comment 2.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11135</commentid>
+    <comment_count>9</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-23 06:43:37 -0800</bug_when>
+    <thetext>Completing the spec in sloppy mode is remarkably simple: It suffices to replace the following definition of EscapeCharacter (11.8.4) 
+
+    EscapeCharacter ::
+        SingleEscapeCharacter
+        DecimalDigit
+        x
+        u
+
+by the following alternative one (to be introduced in B.1.2 probably, although it will depend of what we want for strict mode and templates):
+
+    EscapeCharacter ::
+        SingleEscapeCharacter
+        OctalDigit
+        x
+        u
+
+That would effectively add 8 and 9 to the NonEscapeCharacter production. Other cases are just special cases of LegacyOctalEscapeSequence.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11136</commentid>
+    <comment_count>10</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-23 07:18:37 -0800</bug_when>
+    <thetext>In case there is an interest in fully specifying the behaviour in strict mode, we need a decision of what to do with the following:
+
+(a) \07
+(b) \7
+(c) \08
+(d) \8
+
+Options are:
+
+(1) leave undefined (but do not implement the legacy octal escapes);
+(2) throw a SyntaxError;
+(3) interpret as \0 = NUL, \1 = 1, etc.
+
+Current spec uses (1);  implementations uses (2) or (3), depending (or not) on the case.
+
+The same question arises for template literals. According to Comment 4, the answer might be different.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11137</commentid>
+    <comment_count>11</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2014-12-23 07:50:35 -0800</bug_when>
+    <thetext>(1) and (2) are essentially equivalent, as there is no valid production to be made from each of those (in the current spec).
+
+It comes down to two things: A) should octals be parsed and result in a syntax error in strict mode, or B) should they not be parsed at all, with related productions changed to accommodate.
+
+The rationale for B) is that it doesn&apos;t make sense to throw a syntax error, it&apos;s strange that the legacy octal escapes are being considered at all (that the grammar is defined in this way explicitly to make it a syntax error to use something that looks like a numeric literal).
+
+So here&apos;s a proposal:
+
+```
+11.8.4
+
+EscapeSequence ::
+    CharacterEscapeSequence
+    0 (previously `0 [lookahead ∉ DecimalDigit]`)
+    HexEscapeSequence
+    UnicodeEscapeSequence
+
+EscapeCharacter ::
+    SingleEscapeCharacter
+    0 (previously `DecimalDigit`)
+    x
+    u
+
+B.1.2
+
+EscapeSequence ::
+    CharacterEscapeSequence
+    LegacyOctalEscapeSequence
+    HexEscapeSequence
+    UnicodeEscapeSequence
+
+EscapeCharacter ::
+    SingleEscapeCharacter
+    OctalDigit (previously replacing `0` in strict mode)
+    x
+    u
+```
+
+Following this,
+
+- &quot;\0&quot;  :: U+0000 (strict and sloppy)
+- &quot;\1&quot;  :: U+0031 (strict), U+0001 (sloppy)
+- &quot;\2&quot;  :: U+0032 (strict), U+0002 (sloppy)
+- &quot;\3&quot;  :: U+0033 (strict), U+0003 (sloppy)
+- &quot;\4&quot;  :: U+0034 (strict), U+0004 (sloppy)
+- &quot;\5&quot;  :: U+0035 (strict), U+0005 (sloppy)
+- &quot;\6&quot;  :: U+0036 (strict), U+0006 (sloppy)
+- &quot;\7&quot;  :: U+0037 (strict), U+0007 (sloppy)
+- &quot;\8&quot;  :: U+0038 (strict and sloppy)
+- &quot;\9&quot;  :: U+0039 (strict and sloppy)
+- &quot;\00&quot; :: U+0000 U+0030 (strict), U+0000 (sloppy)
+- &quot;\01&quot; :: U+0000 U+0031 (strict), U+0001 (sloppy)
+- &quot;\02&quot; :: U+0000 U+0032 (strict), U+0002 (sloppy)
+- &quot;\03&quot; :: U+0000 U+0033 (strict), U+0003 (sloppy)
+- &quot;\04&quot; :: U+0000 U+0034 (strict), U+0004 (sloppy)
+- &quot;\05&quot; :: U+0000 U+0035 (strict), U+0005 (sloppy)
+- &quot;\06&quot; :: U+0000 U+0036 (strict), U+0006 (sloppy)
+- &quot;\07&quot; :: U+0000 U+0037 (strict), U+0007 (sloppy)
+- &quot;\08&quot; :: U+0000 U+0038 (strict and sloppy)
+- &quot;\09&quot; :: U+0000 U+0039 (strict and sloppy)
+
+In my mind, it&apos;s low-risk because non-interoperable legacy octal behaviour in strict mode is probably not something many applications depend on, and it seems to make sense, but does prevent introducing octal escape sequences to strict mode later.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11138</commentid>
+    <comment_count>12</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-23 08:21:01 -0800</bug_when>
+    <thetext>(In reply to Caitlin Potter [:caitp] from comment #11)
+&gt; (1) and (2) are essentially equivalent, as there is no valid production to
+&gt; be made from each of those (in the current spec).
+
+They are not equivalent if implementations are allowed to extend the specced syntax. (And they often do extend.)
+
+&gt; (...) it&apos;s strange that the legacy octal escapes are being considered at all (that
+&gt; the grammar is defined in this way explicitly to make it a syntax error to
+&gt; use something that looks like a numeric literal).
+
+It&apos;s useful for avoiding refactoring hazards. For example, if you put &quot;use strict&quot; at the top of the file, you are loudly notified that something need to be amended in your string literal 80 lines below, instead of having its semantics silently modified.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12919</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 12:01:47 -0800</bug_when>
+    <thetext>I like Catlin&apos;s proposal in comment 11, but I think it needs to be formally considered by TC39.
+
+Too late to do that for ES6 but we can do it for ES7.
+
+Changing this ticket to ES7 deferred</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>77</attachid>
+            <date>2014-12-23 05:06:00 -0800</date>
+            <delta_ts>2014-12-23 05:06:45 -0800</delta_ts>
+            <desc>Tests for string literals in sloppy and strict modes</desc>
+            <filename>test_escape_digits.html</filename>
+            <type>text/html</type>
+            <size>2257</size>
+            <attacher name="Claude Pache">claude.pache</attacher>
+            
+              <data encoding="base64">PCFET0NUWVBFIGh0bWw+CjxtZXRhIGNoYXJzZXQ9dXRmLTg+Cjx0aXRsZT5UZXN0cyBmb3IgYmFj
+a3NsYXNoIGZvbGxvd2VkIGJ5IGRpZ2l0cyBpbiBzdHJpbmcgbGl0ZXJhbHM8L3RpdGxlPgo8bWV0
+YSBuYW1lPXZpZXdwb3J0IGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCI+CjxkaXYgaWQ9bG9n
+PjwvZGl2Pgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9tYXRoaWFzLmh0bWw1Lm9yZy9yZXNvdXJjZXMv
+dGVzdGhhcm5lc3MuanMiPjwvc2NyaXB0Pgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9tYXRoaWFzLmh0
+bWw1Lm9yZy9yZXNvdXJjZXMvdGVzdGhhcm5lc3NyZXBvcnQuanMiPjwvc2NyaXB0Pgo8c2NyaXB0
+PgoJKGZ1bmN0aW9uKGdsb2JhbCkgewoKCgkJdGVzdChmdW5jdGlvbigpIHsKCQkgICAgYXNzZXJ0
+X2VxdWFscygiXDAxMSIsICJceDA5IikKCQkgICAgYXNzZXJ0X2VxdWFscygiXDExOCIsICJceDA5
+OCIpCgkJICAgIGFzc2VydF9lcXVhbHMoIlwxMTM3IiwgIlx4NEI3IikKCQkgICAgYXNzZXJ0X2Vx
+dWFscygiXDc3MiIsICJceDNGMiIpCgkJfSwgJyJcXFswLTddKyIsIHdpdGggY29kZSBiZXR3ZWVu
+IDBvMCBhbmQgMG8zNzcsIGlzIGFuIG9jdGFsIGVzY2FwZSBzZXF1ZW5jZScpOwoKCQl0ZXN0KGZ1
+bmN0aW9uKCkgewoJCSAgICBhc3NlcnRfZXF1YWxzKCJcMDgiLCAiXHgwMDgiKQoJCSAgICBhc3Nl
+cnRfZXF1YWxzKCJcMDkiLCAiXHgwMDkiKQoJCX0sICciXFwwWzg5XSIgaXMgTlVMIGZvbGxvd2Vk
+IGJ5IGxpdGVyYWwgOCBvciA5Jyk7CgoJCXRlc3QoZnVuY3Rpb24oKSB7CgkJICAgIGFzc2VydF9l
+cXVhbHMoIlwwIiwgIlx4MDAiKQoJCSAgICBhc3NlcnRfZXF1YWxzKCI1XDBBIiwgIjVceDAwQSIp
+CgkJfSwgJyJcXDAiIG5vdCBmb2xsb3dlZCBieSBkaWdpdDogTlVMJyk7CgoJCXRlc3QoZnVuY3Rp
+b24oKSB7CgkJICAgIGFzc2VydF9lcXVhbHMoIlw4MzQiLCAiODM0IikKCQkgICAgYXNzZXJ0X2Vx
+dWFscygiXDk5IiwgIjk5IikKCQl9LCAnIlxcOCIgYW5kICJcXDkiOiBsaXRlcmFsIGNoYXJhY3Rl
+cicpCgoJCXRlc3QoZnVuY3Rpb24oKSB7CiAgICAgICAgICAgIGFzc2VydF9lcXVhbHMoZXZhbCgn
+InVzZSBzdHJpY3QiOyJcXDBBIicpLCAiXHgwMEEiKQoJCX0sICdzdHJpY3QgbW9kZTogIlxcMCIg
+bm90IGZvbGxvd2VkIGJ5IGRpZ2l0OiBOVUwnKQoKCQl0ZXN0KGZ1bmN0aW9uKCkgewoJCSAgICBh
+c3NlcnRfdGhyb3dzKG5ldyBTeW50YXhFcnJvciwgZnVuY3Rpb24oKSB7CgkJICAgICAgICBldmFs
+KCcidXNlIHN0cmljdCI7IlxcMDAiJykKCQkgICAgfSkKCQkgICAgYXNzZXJ0X3Rocm93cyhuZXcg
+U3ludGF4RXJyb3IsIGZ1bmN0aW9uKCkgewoJCSAgICAgICAgZXZhbCgnInVzZSBzdHJpY3QiOyJc
+XDAzIicpCgkJICAgIH0pCgkJfSwgJ3N0cmljdCBtb2RlOiAiXFwwWzAtN10iIHRocm93cyBhIFN5
+bnRheEVycm9yJykKCgkJdGVzdChmdW5jdGlvbigpIHsKCQkgICAgYXNzZXJ0X3Rocm93cyhuZXcg
+U3ludGF4RXJyb3IsIGZ1bmN0aW9uKCkgewoJCSAgICAgICAgZXZhbCgnInVzZSBzdHJpY3QiOyJc
+XDcxIicpCgkJICAgIH0pCgkJICAgIGFzc2VydF90aHJvd3MobmV3IFN5bnRheEVycm9yLCBmdW5j
+dGlvbigpIHsKCQkgICAgICAgIGV2YWwoJyJ1c2Ugc3RyaWN0IjsiXFwxOCInKQoJCSAgICB9KQoJ
+CX0sICdzdHJpY3QgbW9kZTogIlxcWzEtN10iIHRocm93cyBhIFN5bnRheEVycm9yJykKCgkJdGVz
+dChmdW5jdGlvbigpIHsKCQkgICAgYXNzZXJ0X3Rocm93cyhuZXcgU3ludGF4RXJyb3IsIGZ1bmN0
+aW9uKCkgewoJCSAgICAgICAgZXZhbCgnInVzZSBzdHJpY3QiOyJcXDA4IicpCgkJICAgIH0pCgkJ
+ICAgIGFzc2VydF90aHJvd3MobmV3IFN5bnRheEVycm9yLCBmdW5jdGlvbigpIHsKCQkgICAgICAg
+IGV2YWwoJyJ1c2Ugc3RyaWN0IjsiXFwwOSInKQoJCSAgICB9KQoJCX0sICdzdHJpY3QgbW9kZTog
+IlxcMFs4OV0iIHRocm93cyBhIFN5bnRheEVycm9yJykKCgkJdGVzdChmdW5jdGlvbigpIHsKCQkg
+ICAgYXNzZXJ0X3Rocm93cyhuZXcgU3ludGF4RXJyb3IsIGZ1bmN0aW9uKCkgewoJCSAgICAgICAg
+ZXZhbCgnInVzZSBzdHJpY3QiOyJcXDgiJykKCQkgICAgfSkKCQkgICAgYXNzZXJ0X3Rocm93cyhu
+ZXcgU3ludGF4RXJyb3IsIGZ1bmN0aW9uKCkgewoJCSAgICAgICAgZXZhbCgnInVzZSBzdHJpY3Qi
+OyJcXDkiJykKCQkgICAgfSkKCQl9LCAnc3RyaWN0IG1vZGU6ICJcXFs4OV0iIHRocm93cyBhIFN5
+bnRheEVycm9yJykKCgl9KHRoaXMpKTsKPC9zY3JpcHQ+Cg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

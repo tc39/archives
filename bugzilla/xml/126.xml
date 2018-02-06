@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>126</bug_id>
+          
+          <creation_ts>2011-07-14 06:48:00 -0700</creation_ts>
+          <short_desc>S15.8.2.16_A6/7 expect implementation-defined behaviour</short_desc>
+          <delta_ts>2012-01-04 10:00:31 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Geoffrey Sneddon">gsneddon</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>293</commentid>
+    <comment_count>0</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-07-14 06:48:11 -0700</bug_when>
+    <thetext>Math.sin &quot;returns an implementation-dependent approximation to the sine of x&quot;. As such, any Number value is allowable (going for a constant value could be an approximation, though a not very useful one, but would be implementation-defined).
+
+There are similar tests for the other trig functions.
+
+(To be fair, these are more tests which are probably useful to have somewhere, even though they aren&apos;t required for conformance.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>318</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-18 09:35:31 -0700</bug_when>
+    <thetext>It&apos;s a shame to disable these as they provide quite a bit of value, but you&apos;re correct that they&apos;re invalid as-per ES5.  I&apos;ve disabled all of the following in source control plus a few more that were obviously verifying implementation defined behavior:
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.10_log\S15.8.2.10_A6.js(7): * @assertion: Math.log, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.10_log\S15.8.2.10_A6.js(19):assertion: &quot;Math.log, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.13_pow\S15.8.2.13_A24.js(7): * @assertion: Math.pow, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.13_pow\S15.8.2.13_A24.js(19):assertion: &quot;Math.pow, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.16_sin\S15.8.2.16_A7.js(7): * @assertion: Math.sin it is recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.16_sin\S15.8.2.16_A7.js(19):assertion: &quot;Math.sin it is recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.17_sqrt\S15.8.2.17_A6.js(7): * @assertion: Math.sqrt, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.17_sqrt\S15.8.2.17_A6.js(19):assertion: &quot;Math.sqrt, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.18_tan\S15.8.2.18_A7.js(7): * @assertion: Math.tan, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.18_tan\S15.8.2.18_A7.js(19):assertion: &quot;Math.tan, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.2_acos\S15.8.2.2_A5.js(7): * @assertion: Math.acos, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.2_acos\S15.8.2.2_A5.js(19):assertion: &quot;Math.acos, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.3_asin\S15.8.2.3_A6.js(7): * @assertion: Math.asin, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.3_asin\S15.8.2.3_A6.js(19):assertion: &quot;Math.asin, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.4_atan\S15.8.2.4_A6.js(7): * @assertion: Math.atan, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.4_atan\S15.8.2.4_A6.js(19):assertion: &quot;Math.atan, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.5_atan2\S15.8.2.5_A24.js(7): * @assertion: Math.atan2, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.5_atan2\S15.8.2.5_A24.js(19):assertion: &quot;Math.atan2, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.7_cos\S15.8.2.7_A7.js(7): * @assertion: Math.cos it is recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.7_cos\S15.8.2.7_A7.js(19):assertion: &quot;Math.cos it is recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.8_exp\S15.8.2.8_A6.js(7): * @assertion: Math.exp, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm;
+  G:\262\test262\test\suite\sputnik_converted\15_Native\15.8_The_Math_Object\15.8.2_Function_Properties_of_the_Math_Object\15.8.2.8_exp\S15.8.2.8_A6.js(19):assertion: &quot;Math.exp, recommended that implementations use the approximation algorithms for IEEE 754 arithmetic contained in fdlibm&quot;,
+
+Mark - could you please move these to a &quot;Sputnik\BestPractices&quot;-esque directory?  Then these won&apos;t be on the live website, but will be available to all implementers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>319</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-07-18 09:46:54 -0700</bug_when>
+    <thetext>&gt; Mark - could you please move these to a &quot;Sputnik\BestPractices&quot;-esque
+&gt; directory?  Then these won&apos;t be on the live website, but will be available to
+&gt; all implementers.
+
+Yes, that&apos;s a good idea.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>391</commentid>
+    <comment_count>3</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-07-27 04:32:34 -0700</bug_when>
+    <thetext>Maybe also worthwhile to have something in excludelist.xml to tell apart bogus tests from not-mandated-by-standard-but-preferable tests.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>447</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-09-09 16:08:29 -0700</bug_when>
+    <thetext>The call was made at the last TC-39 meeting to re-enable these tests since we must have some sort of coverage for these math functions, and also because the tests have the capability to loosen their precision via the &apos;prec&apos; global variable.
+
+Was there any specific OS/architecture/browser combo you saw these tests failing against?  Believe they were actually passing against Win7/AMD64/Opera when I disabled them back in July.  Maybe ARM?  If you can give me a precise (and reasonable:) ) value for &apos;prec&apos; that works for you, I&apos;ll go ahead and modify the tests to use this instead.
+
+In the long run, I&apos;m optimistic that ES6 will be more stringent with respect to precision of these math functions; particularly with APIs like IndexDB floating around.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>448</commentid>
+    <comment_count>5</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-09-10 07:29:27 -0700</bug_when>
+    <thetext>It was just a bug in an internal build that caused these to fail, so I have little opinion about what prec should be.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

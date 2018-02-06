@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1272</bug_id>
+          
+          <creation_ts>2013-03-08 15:23:00 -0800</creation_ts>
+          <short_desc>Incorrect algorithm steps in String.prototype.normalize</short_desc>
+          <delta_ts>2014-07-27 22:25:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3400</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-03-08 15:23:27 -0800</bug_when>
+    <thetext>The new String.prototype.normalize function includes an incomplete algorithm step:
+
+4. If form is not provided or undefined.
+
+The strawman had &quot;If form is undefined or not provided, let form be &apos;NFC&apos;.&quot; It seems the entire step has become unnecessary because the function parameter list now provides a default value for form.
+
+The function also has a step that lists &quot;NFC&quot; twice and omits &quot;NFKD&quot; from its condition, and then has two &quot;then&quot; parts for one &quot;if&quot;:
+
+7. If f is not one of &quot;NFC&quot;, &quot;NFD&quot;, &quot;NFKC&quot;, or &quot;NFC&quot;, then let form be &quot;NFKD&quot;, then throw a RangeError Exception.
+
+The statement should be
+
+7. If f is not one of &quot;NFC&quot;, &quot;NFD&quot;, &quot;NFKC&quot;, or &quot;NFKD&quot;, then throw a RangeError Exception.
+
+Finally, step 8 contains &quot;by in&quot;. Either one of these words fits, but both together are too much.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3401</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 15:34:02 -0800</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3968</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:14:00 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9636</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 22:25:30 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

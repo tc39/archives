@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4213</bug_id>
+          
+          <creation_ts>2015-03-26 16:06:00 -0700</creation_ts>
+          <short_desc>Ch. 6: Various editorial issues</short_desc>
+          <delta_ts>2015-04-03 12:35:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13930</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-26 16:06:33 -0700</bug_when>
+    <thetext>Table 3 — Attributes of an Accessor Property
+  [[Get]] - Description: &quot;function Object&quot; -&gt; &quot;function object&quot;
+  [[Set]] - Description: &quot;function Object&quot; -&gt; &quot;function object&quot;
+  (&quot;function object&quot; is more common than &quot;function Object&quot; or &quot;Function object&quot;).
+
+
+Table 5 — Essential Internal Methods
+  [[Set]] - Description: 
+&gt; Returns true if that the property value was set or false if that it could not be set.
+=&gt; &quot;Returns true if the property value was set or false if it could not be set.&quot;
+
+  [[Delete] - Description: Wrong font type for `false` and `true` literals.
+  [[DefineOwnProperty] - Description: Wrong font type for `false` and `true` literals.
+
+
+Table 6 — Additional Essential Internal Methods of Function Objects
+  [[Construct]] - Description:
+    &quot;first arguments&quot; -&gt; &quot;first argument&quot;
+    &quot;A Function object&quot; -&gt; &quot;A function object&quot;
+    &quot;non-constructor Function objects&quot; -&gt; &quot;non-constructor function objects&quot;
+
+
+6.1.7.4 Well-Known Intrinsic Objects
+  2nd paragraph: Bad reference 8.1.2.5
+
+
+6.2.2.2 Implicit Completion Values
+  Completion abstract operation: Remove &quot;such as&quot; before algorithm steps.
+  
+
+6.2.4.4 FromPropertyDescriptor ( Desc )
+  &quot;Call CreateDataProperty&quot; -&gt; &quot;Perform CreateDataProperty&quot; (5x)
+
+
+6.2.4.5 ToPropertyDescriptor ( Obj )
+  Step 2: Add comma between &quot;Object throw&quot;.
+  Step 10: &quot;are present&quot; -&gt; &quot;is present&quot;.
+  Step 10.a: &quot;are present&quot; -&gt; &quot;is present&quot;.
+
+
+6.2.6 Data Blocks
+  2nd paragraph: &quot;to express to the&quot; -&gt; either &quot;to express access to the&quot; or simply &quot;to access the&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13971</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-31 15:04:58 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14039</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:29 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

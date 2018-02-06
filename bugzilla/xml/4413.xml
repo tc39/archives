@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4413</bug_id>
+          
+          <creation_ts>2015-06-20 14:22:00 -0700</creation_ts>
+          <short_desc>Wrong reference to RegularExpressionLiteral</short_desc>
+          <delta_ts>2015-07-27 10:18:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>a.d.bergi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14525</commentid>
+    <comment_count>0</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-06-20 14:22:38 -0700</bug_when>
+    <thetext>In section 12.2.8 (regex literal expressions) &lt;http://www.ecma-international.org/ecma-262/6.0/#sec-primary-expression-regular-expression-literals&gt; the syntax just linking to the production of `RegularExpressionLiteral`s which are defined in their own chapter. It does link to 11.8.4 (strings) instead of 11.8.5 (regexes) however.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14578</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-27 10:18:57 -0700</bug_when>
+    <thetext>corrected in final (June 21, 2015) Ecma distribution update</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

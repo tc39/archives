@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3378</bug_id>
+          
+          <creation_ts>2014-11-13 08:54:00 -0800</creation_ts>
+          <short_desc>25.4.1.6 NewPromiseCapability: Missing steps and parameters</short_desc>
+          <delta_ts>2014-12-07 14:35:08 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10627</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-13 08:54:38 -0800</bug_when>
+    <thetext>25.4.1.6 NewPromiseCapability ( C )
+
+- step 3: CreateFromConstructor requires two arguments, add empty List ().
+- step 5: Change to &quot;If promise is undefined, then let promise be AllocatePromise(C).&quot;
+  This change is required for the &quot;all.js&quot; and &quot;simple.js&quot; tests in [1].
+
+[1] https://github.com/domenic/promises-unwrapping/tree/master/reference-implementation/test</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10707</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-03 15:04:21 -0800</bug_when>
+    <thetext>fixed step 3
+
+Also changed CreateFromConstructor so it does an OrdinaryCreateFromConstructor if a [[CreateAction]] is not found.  This means that NewPromiseCapability will create an ordinary object from the constructorif it is passed a non-native promise constructor.
+
+That seems correct and consistent with the note.  Doing an AllocatePromise does not seem correct as it would create an object with the internal slots of a built-in promise object when the constructor apparently doesn&apos;t derive from built-in Promise.
+
+I&apos;m not sure exactly what those tests are depending upon, but hopefully this fixes it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10708</commentid>
+    <comment_count>2</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-12-03 15:14:48 -0800</bug_when>
+    <thetext>The tests (and the reference implementation they test) are from a @@create era, FYI.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10728</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-04 13:07:03 -0800</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #2)
+&gt; The tests (and the reference implementation they test) are from a @@create
+&gt; era, FYI.
+
+Ah, of course! Sorry for misleading everyone when I said AllocatePromise is necessary.
+
+(In reply to Allen Wirfs-Brock from comment #1)
+&gt; I&apos;m not sure exactly what those tests are depending upon, but hopefully this
+&gt; fixes it.
+
+Yes, using OrdinaryCreateFromConstructor fixes it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10915</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:08 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

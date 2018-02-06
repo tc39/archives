@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2810</bug_id>
+          
+          <creation_ts>2014-05-03 10:15:00 -0700</creation_ts>
+          <short_desc>B.3.2: spaces in &quot;Function Declaration Instantiation&quot;</short_desc>
+          <delta_ts>2014-06-01 00:25:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8110</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:15:52 -0700</bug_when>
+    <thetext>In B.3.2 &quot;Web Legacy Compatibility for Block-Level Function Declarations&quot;:
+
+B.3.2 / step 2.a.iii.2:
+The new binding is not initialized during Function Declaration Instantiation.
+    Delete spaces in &quot;Function Declaration Instantiation&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8214</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-07 17:59:21 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8725</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 00:25:46 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2487</bug_id>
+          
+          <creation_ts>2014-01-29 18:10:00 -0800</creation_ts>
+          <short_desc>22.1.5.3: References to &quot;sparse&quot; remain in [[ArrayIterationKind]] description</short_desc>
+          <delta_ts>2014-05-13 16:34:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>qantas94heavy</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7161</commentid>
+    <comment_count>0</comment_count>
+    <who name="">qantas94heavy</who>
+    <bug_when>2014-01-29 18:10:11 -0800</bug_when>
+    <thetext>The non-normative description in Table 42 of 22.1.5.3 for [[ArrayIterationKind]] still references the old &quot;sparse&quot; forms of this, even though they are no longer used. It should read:
+
+&gt; A string value that identifies what is to be returned for each element
+&gt; of the iteration. The possible values are: &quot;key&quot;, &quot;value&quot;, &quot;key+value&quot;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

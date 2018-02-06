@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>88</bug_id>
+          
+          <creation_ts>2011-04-12 13:46:00 -0700</creation_ts>
+          <short_desc>Test could all be downloaded at the beginning in parallel</short_desc>
+          <delta_ts>2011-05-10 11:39:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>183</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-04-12 13:46:44 -0700</bug_when>
+    <thetext>When starting the test run, testcaseslist.json is downloaded. It contains paths to all tests. All of these could be downloaded right away. Even if they are not use right away. If downloaded (with XMLHttpRequest) and cached by the browser, later attempts to retrieve the tests will be a fetch from cache which is usually far more efficient that a network request.
+Having the right HTTP headers and changing the behavior when recieving testcaseslist.json sounds like easy changes to make and the benefits may be important.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>203</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-10 11:39:31 -0700</bug_when>
+    <thetext>Conservatively estimating four hours on this mainly due to the testing against all platforms that will be needed afterwards.
+
+Beefing up the Importance to &apos;High&apos; - this has been suggested multiple times.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

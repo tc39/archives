@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1780</bug_id>
+          
+          <creation_ts>2013-08-14 08:10:00 -0700</creation_ts>
+          <short_desc>normalize test logs</short_desc>
+          <delta_ts>2014-07-18 01:37:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Susanne Oberhauser">Susanne.Oberhauser</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>sam.mikes</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4883</commentid>
+    <comment_count>0</comment_count>
+    <who name="Susanne Oberhauser">Susanne.Oberhauser</who>
+    <bug_when>2013-08-14 08:10:21 -0700</bug_when>
+    <thetext>I&apos;m smoke testing and validating updates to our (SUSE) nodejs package using this test suite.
+
+For that, I&apos;m packaging the test suite into an rpm package.  The package is rebuilt automatically when the nodejs package is updated (&lt;plug&gt;on all architectures and all distributions in the build service.  That includes, if someone has interest, fedora, ubuntu and CentOS, not only SUSE.  If someone has interest I can help enabling these, too.  Oh, and it could easily be extended to other js runtimes, too.&lt;/plug&gt;)
+
+To increase the value of the test builds, I include the result of a manual reviewed run in the package and I compare to that, using goode olde diff -u.
+
+Now the current log of the test suite is garbled if a failing test output doesn&apos;t end with a newline.  In those cases the log will contain that last line of the failed test together with the name of the next test.
+
+My little sed work around shows the issue nicely:
+
+0 froh@byron:/tmp/test262 $ diff -u test262.log &lt;(sed -e &quot;s,\^\([^\n]\),^\n\1,&quot; test262.log )
+--- test262.log 2013-08-14 15:40:33.141662499 +0200
++++ /dev/fd/63  2013-08-14 15:54:35.264134519 +0200
+@@ -1981,7 +1981,8 @@
+ --- output --- 
+  /tmp/test262-TEST.js:289: Test262 Error: Test case returned non-true value!
+     throw new Test262Error(message);
+-          ^ch11/11.2/11.2.3/11.2.3-3_4 passed in non-strict mode 
++          ^
++ch11/11.2/11.2.3/11.2.3-3_4 passed in non-strict mode 
+ ch11/11.2/11.2.3/11.2.3-3_5 passed in non-strict mode 
+ ch11/11.2/11.2.3/11.2.3-3_6 passed in non-strict mode 
+ ch11/11.2/11.2.3/11.2.3-3_7 passed in non-strict mode 
+@@ -4484,7 +4485,8 @@
+ --- output --- 
+  /tmp/test262-TEST.js:289: Test262 Error: #1: JSON.parse confused by &quot;__proto__&quot;
+     throw new Test262Error(message);
+-          ^ch15/15.12/15.12.3/15.12.3-0-1 passed in non-strict mode 
++          ^
++ch15/15.12/15.12.3/15.12.3-0-1 passed in non-strict mode 
+ ch15/15.12/15.12.3/15.12.3-0-2 passed in non-strict mode 
+ ch15/15.12/15.12.3/15.12.3-0-3 passed in non-strict mode 
+ ch15/15.12/15.12.3/15.12.3-11-1 passed in non-strict mode 
+
+...
+
+
+I&apos;d appreciate a fix for this, probably in tools/packaging/test262.py:TestResult.ReportOutcome(), as my workaround only captures that one kind of borked output that currently is there.
+
+As I don&apos;t know in which scripts you possibly use the log file, I didn&apos;t just create a patch.
+
+thx :)
+
+
+S.
+PS: the tempnames can be handled fine with sed, like so:
+sed -e &quot;s,/tmp/test262-......\.js:,/tmp/test262-TEST.js:,&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4907</commentid>
+    <comment_count>1</comment_count>
+      <attachid>68</attachid>
+    <who name="Susanne Oberhauser">Susanne.Oberhauser</who>
+    <bug_when>2013-08-15 07:02:23 -0700</bug_when>
+    <thetext>Created attachment 68
+add newlines after --- output --- in log files
+
+ok, I realized that there is nicely obfuscated code duplication, writing to the screen uses &apos;print&apos; statements, while writing to the log file writes to the log file, and these two are not consistent.
+
+Furthermore, the log file is scattered with trailing whitespace on the lines, which greatly obfuscated the issue :D
+
+anyhow, attached is a patch that fixes exactly one thing:  add newlines after 
+--- output --- for failing test cases.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9250</commentid>
+    <comment_count>2</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 22:50:57 -0700</bug_when>
+    <thetext>As of 2014-July-17, this is not present in test262.py.
+
+I am willing to convert this patch into a github pull request.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9257</commentid>
+    <comment_count>3</comment_count>
+    <who name="Susanne Oberhauser">Susanne.Oberhauser</who>
+    <bug_when>2014-07-18 01:37:25 -0700</bug_when>
+    <thetext>ah you moved to github :)
+https://bugs.ecmascript.org/show_bug.cgi?id=2827
+
+I&apos;ll happily create a pull request :)</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>68</attachid>
+            <date>2013-08-15 07:02:00 -0700</date>
+            <delta_ts>2013-08-15 07:02:23 -0700</delta_ts>
+            <desc>add newlines after --- output --- in log files</desc>
+            <filename>testcase-output-eol.patch</filename>
+            <type>text/plain</type>
+            <size>920</size>
+            <attacher name="Susanne Oberhauser">Susanne.Oberhauser</attacher>
+            
+              <data encoding="base64">SW5kZXg6IHRlc3QyNjItZDA2N2QyZjBjYTMwL3Rvb2xzL3BhY2thZ2luZy90ZXN0MjYyLnB5Cj09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT0KLS0tIHRlc3QyNjItZDA2N2QyZjBjYTMwLm9yaWcvdG9vbHMvcGFja2FnaW5nL3Rl
+c3QyNjIucHkKKysrIHRlc3QyNjItZDA2N2QyZjBjYTMwL3Rvb2xzL3BhY2thZ2luZy90ZXN0MjYy
+LnB5CkBAIC01MTUsMTAgKzUxNSwxMSBAQCBjbGFzcyBUZXN0U3VpdGUob2JqZWN0KToKICAgICAg
+ICAgICBzZWxmLmxvZ2Yud3JpdGUoIj09PSAlcyBmYWlsZWQgaW4gJXMgPT09IFxuIiAlIChuYW1l
+LCBtb2RlKSkKICAgICAgICAgICBvdXQgPSByZXN1bHQuc3Rkb3V0LnN0cmlwKCkKICAgICAgICAg
+ICBpZiBsZW4ob3V0KSA+IDA6Ci0gICAgICAgICAgICAgc2VsZi5sb2dmLndyaXRlKCItLS0gb3V0
+cHV0IC0tLSBcbiAlcyIgJSBvdXQpCisgICAgICAgICAgICAgc2VsZi5sb2dmLndyaXRlKCItLS0g
+b3V0cHV0IC0tLSBcbiAlc1xuIiAlIG91dCkKICAgICAgICAgICBlcnIgPSByZXN1bHQuc3RkZXJy
+LnN0cmlwKCkKICAgICAgICAgICBpZiBsZW4oZXJyKSA+IDA6Ci0gICAgICAgICAgICAgc2VsZi5s
+b2dmLndyaXRlKCItLS0gZXJyb3JzIC0tLSAgXG4gJXMiICUgZXJyKQorICAgICAgICAgICAgIHNl
+bGYubG9nZi53cml0ZSgiLS0tIGVycm9ycyAtLS0gIFxuICVzXG4iICUgZXJyKQorICAgICAgICAg
+IGlmIGxlbihvdXQpID4gMCBvciBsZW4oZXJyKToKICAgICAgICAgICAgICBzZWxmLmxvZ2Yud3Jp
+dGUoIj09PSBcbiIpCiAgICAgZWxpZiByZXN1bHQuY2FzZS5Jc05lZ2F0aXZlKCk6CiAgICAgICAg
+c2VsZi5sb2dmLndyaXRlKCIlcyBmYWlsZWQgaW4gJXMgYXMgZXhwZWN0ZWQgXG4iICUgKG5hbWUs
+IG1vZGUpKQo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

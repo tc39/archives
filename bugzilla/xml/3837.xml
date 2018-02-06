@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3837</bug_id>
+          
+          <creation_ts>2015-02-11 17:04:00 -0800</creation_ts>
+          <short_desc>chapter 25: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12329</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 17:04:33 -0800</bug_when>
+    <thetext>----------------------------------------
+In 25.3.3.1 &quot;GeneratorStart (generator, generatorBody)&quot;:
+
+{1}
+25.3.3.1 / step 4.7:
+Else.
+
+    Change dot to comma
+
+{2}
+25.3.3.1 / step 4.7.a:
+If /result/.[[type]] is `return`, let /resultValue/ be /result/.[[value].
+
+    Insert missing right-square-bracket
+
+----------------------------------------
+In 25.4.1.3.2 &quot;Promise Resolve Functions&quot;:
+
+{3}
+25.4.1.3.2 / step 12:
+Perform EnqueueJob (&quot;PromiseJobs&quot;, PromiseResolveThenableJob, ...)
+
+    After &quot;PromiseJobs&quot;, the comma is monospace, should be serif
+
+----------------------------------------
+In 25.4.1.5 &quot;NewPromiseCapability ( C )&quot;:
+
+{4}
+25.4.1.5 / step 6:
+Let /promise/ be Construct(/constructor/, &lt;&lt;/executor/&gt;&gt;).
+
+    &apos;constructor&apos; not defined. Change to &apos;C&apos;?
+
+----------------------------------------
+In 25.4.1.8 &quot;TriggerPromiseReactions ( reactions, argument )&quot;:
+
+{5}
+25.4.1.8 / step 1.a:
+Perform EnqueueJob(&quot;PromiseJobs&quot;, PromiseReactionJob, ...).
+
+    After &quot;PromiseJobs&quot;, the comma is monospace, should be serif
+
+----------------------------------------
+In 25.4.4.1 &quot;Promise.all ( iterable )&quot;:
+
+{6}
+25.4.4.1 / step 3:
+Let /S/ be Get(/C/, @@species).
+
+    Right-paren and period are in monospace font, should be in serif font.
+
+----------------------------------------
+In 25.4.4.1.1 &quot;PerformPromiseAll(...) Abstract Operation&quot;:
+
+{7}
+25.4.4.1.1 / step 7.b:
+ReturnIfAbrupt (/next/).
+
+    Delete space before left-paren
+
+{8}
+25.4.4.1.1 / step 7.e:
+ReturnIfAbrupt (/nextValue/ ).
+
+    Delete space before left-paren
+
+{9}
+25.4.4.1.1 / step 7.h:
+ReturnIfAbrupt (/nextPromise/ ).
+
+    Delete space before left-paren
+
+{10}
+25.4.4.1.1 / step 7.q:
+ReturnIfAbrupt (/result/).
+
+    Delete space before left-paren
+
+----------------------------------------
+In 25.4.4.3 &quot;Promise.race ( iterable )&quot;:
+
+{11}
+25.4.4.3 / step 3:
+Let /S/ be Get(/C/, @@species).
+
+    Right-paren and period are in monospace font, should be in serif font.
+
+----------------------------------------
+In 25.4.4.4 &quot;Promise.reject ( r )&quot;:
+
+{12}
+25.4.4.4 / step 3:
+Let /S/ be Get(/C/, @@species).
+
+    Right-paren and period are in monospace font, should be in serif font.
+
+----------------------------------------
+In 25.4.4.5 &quot;Promise.resolve ( x )&quot;:
+
+{13}
+25.4.4.5 / step 4:
+Let /S/ be Get(/C/, @@species).
+
+    Right-paren and period are in monospace font, should be in serif font.
+
+----------------------------------------
+In 25.4.4.6 &quot;get Promise [ @@species ]&quot;:
+
+{14}
+25.4.4.6 / step 1:
+Return *this*.
+
+    s|*this*|the *this* value|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12335</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 17:24:27 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12402</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

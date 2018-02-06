@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2347</bug_id>
+          
+          <creation_ts>2013-12-08 17:03:00 -0800</creation_ts>
+          <short_desc>10.1.2 Incorrect UTF16Decode</short_desc>
+          <delta_ts>2014-05-30 18:38:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6884</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 17:03:14 -0800</bug_when>
+    <thetext>The algorithm for UTF16Decode in 10.1.2 has two problems:
+
+- Step 2 is not only useless, but also refers to a variable that&apos;s not defined yet.
+
+- Step 3 is missing the addition of 65536 (0x10000) to form the final cp value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7347</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 11:10:38 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7525</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:39 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8698</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-30 18:38:11 -0700</bug_when>
+    <thetext>Verified in rev 25 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

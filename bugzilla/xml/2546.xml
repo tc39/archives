@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2546</bug_id>
+          
+          <creation_ts>2014-02-12 19:58:00 -0800</creation_ts>
+          <short_desc>Array.prototype.copyWithin specifies two differerent default values for &apos;end&apos;</short_desc>
+          <delta_ts>2014-04-06 11:31:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7285</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-12 19:58:01 -0800</bug_when>
+    <thetext>The (non-normative?) text at the top of 22.1.3.3 Array.prototype.copyWithin states &quot;(target, start, end = this.length)&quot; and &quot;The end argument is optional with the length of the this object as its default value.&quot;.
+
+However, the actual algorithm sets end to ToLength(ToObject(this).length) not this.length.  In particular, if this.length is negative, ToLength will make it zero, so there will be two different values for `end` depending on whether you think it is given its default value before executing the algorithm or not.  (Aka, whether you pay attention to the method signature and first paragraph, or just pay attention to the algorithm as stated.)
+
+The easiest fix is just to eliminate the `= this.length` from the signature and possibly `with the length of the this object as its default value` from the second sentence.  That&apos;s assuming the algorithm is correct.
+
+If instead the heading and paragraph text is correct, then step 12 should read:
+
+&quot;If end is undefined, let relativeEnd be ToInteger(lenVal); else let relativeEnd be ToInteger(end).&quot;
+
+That is, refer to lenVal, not len, and perform ToInteger instead of ToLength.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7291</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-13 08:52:26 -0800</bug_when>
+    <thetext>The algorithm is always normative.
+
+As for any method that deals with generic array-like objects, &quot;the length of the Array&quot; should be be interpreted as meaning the result of applying ToLength to the value of the array&apos;s &apos;length&apos; property. 
+
+The signature line isn&apos;t intended to be normative, but just a sort hand description of typical usage.
+
+I&apos;m somewhat conflicted about whether I should change the heading signature line.  Clearly it caused some confusion for you and we what to avoid creating that sort of confusion. On the other hand, saying copyWithin(target, start [, end]) would be a less informative summary of the intended usage. 
+
+I probably should say somewhere that heading signatures like this are non-normative, but not everybody will read that so the source of potential confusion will still be there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7293</commentid>
+    <comment_count>2</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-13 13:20:27 -0800</bug_when>
+    <thetext>I wonder what the impact of actually changing the algorithm to use ToInteger for the end parameter would be?  This is totally a corner case, you&apos;d only see it if you had an object with a negative length property.  But it would eliminate the possible confusion, and allow us to use the more descriptive signature without caveats.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7294</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-13 13:59:52 -0800</bug_when>
+    <thetext>It&apos;s still necessary to say that default parameter expressions are not normative and are not supposed to be evaluated. This is required because the default expression may contain code which executes side effects, in this case, for example, `this.length` may execute arbitrary code if there is a getter for the &quot;length&quot; property on the thisValue object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7353</commentid>
+    <comment_count>4</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-17 14:31:16 -0800</bug_when>
+    <thetext>Discussion in http://esdiscuss.org/topic/changing-behavior-of-array-copywithin-when-used-on-array-like-with-negative-length
+
+André Bargull proposes a concrete diff at https://gist.github.com/anba/6c75c34c72d4ffaa8de7
+which avoids double-invocation of `valueOf`/etc side-effects in case `this.length` is object-valued.
+
+A quick audit of the spec shows that `Array#fill` might have the same issue. `Array#lastIndexOf` also uses `ToLength` instead of `ToInteger` but it uses ES5-style default parameters.  The spec text can probably be made consistent without affecting actual behavior.
+
+The `copyWithin`, `fill`, `lastIndexOf`, and `subarray` methods of `%TypedArray%.prototype` are spec&apos;ed with default arguments equal to `this.length`, but there&apos;s no way `length` can be negative for a typed array.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7369</commentid>
+    <comment_count>5</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-18 12:54:03 -0800</bug_when>
+    <thetext>Claude Pache points out that `Array#slice` also contains a similar default for `end`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7452</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-19 12:48:42 -0700</bug_when>
+    <thetext>Fixed in rev23 editor&apos;s draft.
+
+Removed all &quot;default value&quot;notation usage in function signatures so there is no confusion with the  normative algorithm texts.
+
+added Bug 2582 for a abstract operation for converting relative index positions to absolute</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7605</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:31:29 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2809</bug_id>
+          
+          <creation_ts>2014-05-03 10:14:00 -0700</creation_ts>
+          <short_desc>chapter 26: misc editorial</short_desc>
+          <delta_ts>2014-06-02 12:55:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8109</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:14:25 -0700</bug_when>
+    <thetext>----------------------------------------
+In 26.2.1.1 &quot;Reflect.Realm ( [ target , handler ] )&quot;:
+
+{1}
+26.2.1.1 / para 1:
+    The section header says that parameters are &apos;target&apos; and &apos;handler&apos;,
+    but the preamble says they&apos;re &apos;options&apos; and &apos;initializer&apos;.
+    The algorithm has no reference to &apos;options&apos;,
+    but there is still one to &apos;initializer&apos;, in step 28.
+
+{2}
+26.2.1.1 / step 5:
+NOTE the following step ensures that this function was not rentretly applied ...
+    s|rentretly|reentrantly|
+
+{3}
+26.2.1.1 / step 8,8.a:
+8. If no arguments were passed to this function, then
+   a. Let /newGlobal/ be ProxyCreate(/target/, /handler/).
+
+    But if no args were passed, then target and handler are undefined,
+    and ProxyCreate will just throw a TypeError exception.
+
+{4}
+26.2.1.1 / step 9:
+Else.
+    Change dot to comma.
+
+{5,6}
+26.2.1.1 / step 9.a:
+Let /objProto/ be /realmRec/.[[intrinsics]].[[%ObjectPrototype]].
+    &apos;realmRec&apos; is not defined
+
+    After &quot;ObjectPrototype&quot;, insert &quot;%&quot;.
+
+{7}
+26.2.1.1 / step 23:
+NOTE the following step ensures that this function was not rentretly applied ...
+    s|rentretly|reentrantly|
+
+{8}
+26.2.1.1 / step 28.a:
+Let /status/ be the result of calling the [[Call]] internal method
+/initGlobal/ , passing /realmObject/ as the *this* value and no arguments..
+    After &quot;method&quot;, insert &quot;of&quot;
+    Delete space before comma
+    Delete extra period
+
+----------------------------------------
+In 26.2.3.7.3 &quot;Reflect.Realm.prototype.initGlobal ( )&quot;:
+
+{9}
+26.2.3.7.3 / step 8:
+Let /global/ be /realmRec/.[[globalThis]].
+    &apos;realmRec&apos; is not defined.
+
+----------------------------------------
+In 26.2.3.7.4 &quot;Reflect.Realm.prototype.nonEval ( ... )&quot;:
+
+{10}
+26.2.3.7.4 / step 5:
+Let /obj/ be ToObject(/target/).
+    &apos;target&apos; is not defined
+
+{11}
+26.2.3.7.4 / step 11:
+Return the result of calling the [[Call]] internal method of /obj/
+with arguments /thisArgument/ and /args/.
+    &apos;thisArgument&apos; is not defined
+
+----------------------------------------
+In 26.3.1.1 &quot;Reflect.Loader ( [ options ] )&quot;:
+
+{12}
+26.3.1.1 / step 10:
+NOTE the following step ensures that this function was not rentretly applied ...
+    s|rentretly|reentrantly|
+
+----------------------------------------
+In 26.3.1.2 &quot;new Reflect.Loader ( ...argumentsList )&quot;:
+
+{13}
+26.3.1.2 / step 3:
+R Reflect.Loader eturn the result of Construct(/F/, /argumentsList/).
+    s|R Reflect.Loader eturn|Return|
+
+----------------------------------------
+In 26.3.2.1 &quot;Reflect.Loader.prototype&quot;:
+
+{14}
+26.3.2.1 / para 1:
+The initial value of Reflect.Loader.prototype is the intrinsic
+%LoaderPrototype% object (26.3.3.)
+    Move period from before right-paren to after it.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8215</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-07 18:42:06 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8591</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 17:46:03 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8837</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 12:55:04 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

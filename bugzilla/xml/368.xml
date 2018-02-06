@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>368</bug_id>
+          
+          <creation_ts>2012-05-28 00:44:00 -0700</creation_ts>
+          <short_desc>Duplicate parameter names in non-strict function cause assertion failure in InitializeBinding</short_desc>
+          <delta_ts>2012-09-28 12:53:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>957</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-05-28 00:44:00 -0700</bug_when>
+    <thetext>See https://mail.mozilla.org/pipermail/es-discuss/2012-May/022917.html
+
+In the latest ES.next draft(May 4), section 10.5.3 Function Declaration Instantiation step 5 is following
+
+  5. For each String argName in parameterNames, in list order do
+    a. Let alreadyDeclared be the result of calling env’s HasBinding concrete method passing argName as the argument.
+    b. NOTE Duplicate parameter names can only occur in non-strict code.
+    c. If alreadyDeclared is false, then
+      i. Call env’s CreateMutableBinding concrete method passing argName as the argument.
+    d. If strict is false, then
+      i. Call env’s InitializeBinding concrete method passing argName, and undefined as the arguments.
+
+In the step d-i, if strict is false, engine always call env.InitializeBinding(argName, undefined).
+But if code is non-strict mode, duplicate parameter names may be provided.
+
+And section 10.2.1.1.8, InitializeBinding, step 2 is following
+
+  2. Assert: envRec must have an uninitialised binding for N.
+
+So for example,
+
+  // this is non-strict function
+  function test(a, a) {
+  }
+  test(1, 1);
+
+engine execute above script and raise assertion failure because of calling InitializeBinding to the same name twice.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>982</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-14 18:24:45 -0700</bug_when>
+    <thetext>The fix for this specific issue is to move 5.d under 5.c:
+
+5. For each String argName in parameterNames, in list order do
+    a. Let alreadyDeclared be the result of calling env’s HasBinding concrete
+method passing argName as the argument.
+    b. NOTE Duplicate parameter names can only occur in non-strict code.
+    c. If alreadyDeclared is false, then
+      i. Call env’s CreateMutableBinding concrete method passing argName as the
+argument.
+     ii. If strict is false, then
+         1. Call env’s InitializeBinding concrete method passing argName, and
+undefined as the arguments.
+
+In other words, on the first occurrence of a name in a non-strict parameter, the binding of the name is initialized to undefined.  This allows them to be multiply initialized by step 8.d.
+
+Basically, non-string parameters are treated similarly to var declarations while strict parameters are treated similarly to let declarations.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1188</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-08 16:24:44 -0700</bug_when>
+    <thetext>fixed in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1772</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:53:20 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft.  But this whole section is going to be rewritten in the near future</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

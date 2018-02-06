@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3265</bug_id>
+          
+          <creation_ts>2014-10-08 11:37:00 -0700</creation_ts>
+          <short_desc>19.2.3.2 Function.prototype.bind: Drop &quot;bound&quot; prefix for already bound functions?</short_desc>
+          <delta_ts>2015-02-06 17:59:49 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10288</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-08 11:37:45 -0700</bug_when>
+    <thetext>19.2.3.2 Function.prototype.bind ( thisArg , ...args)  
+
+`(function f(){}).bind().bind().bind().name` currently returns &quot;bound bound bound f&quot;. Maybe it should just return &quot;bound f&quot; instead? From a usability point of view, repeating &quot;bound&quot; for every bound function level seems rather distracting.
+
+There are some open issues here, like should &quot;bound&quot; only be dropped if the target name already starts with &quot;bound&quot; or should it be dropped for all bound functions, etc. ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10306</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-09 12:13:24 -0700</bug_when>
+    <thetext>I don&apos;t see why the extra &quot;bound&quot;s are an issue.  This is primarily used for debugging and the fact that a function has been bound multiple times may be useful debugging information.
+
+May be you should bring this up on es-discuss and see if anybody else has strong opinions of this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

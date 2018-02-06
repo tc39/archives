@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2665</bug_id>
+          
+          <creation_ts>2014-04-17 05:52:00 -0700</creation_ts>
+          <short_desc>12.3: Optional Arguments in &quot;MemberExpression : new super Arguments&quot; leads to Shift/Reduce conflicts</short_desc>
+          <delta_ts>2014-04-29 21:57:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7764</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-17 05:52:18 -0700</bug_when>
+    <thetext>This is the same issue as in bug 2338. Draft rev23 added a lookahead restriction, but the issue still persists. 
+
+For the input token sequence &quot;new super ( )&quot; it cannot be decided if it has to parsed as:
+- LeftHandSideExpression[CallExpression[ MemberExpression[&quot;new super&quot;] &quot;( )&quot;]]
+- or as LeftHandSideExpression[MemberExpression[&quot;new super ( )&quot;]]
+
+Shouldn&apos;t it be possible to resolve this issue by moving &quot;new super&quot; without optional arguments to NewExpression? That way no lookahead restriction is required and it&apos;s still possible to use &quot;new super&quot; as a standalone expression.
+
+---
+MemberExpression:
+  PrimaryExpression
+  MemberExpression [ Expression ]
+  MemberExpression . IdentifierName
+  MemberExpression TemplateLiteral
+  super [ Expression ]
+  super . IdentifierName
+  new super Arguments
+  new MemberExpression Arguments
+
+NewExpression:
+  MemberExpression
+  new NewExpression
+  new super
+---
+
+
+Simplified grammar to show the shift/reduce conflict:
+---
+%start leftHandSideExpression
+
+%error-verbose
+
+%token SUPER &quot;super&quot;
+%token NEW &quot;new&quot;
+
+%%
+
+leftHandSideExpression : newExpression
+                       | callExpression
+                       ;
+
+arguments : &apos;(&apos; &apos;)&apos; ;
+
+callExpression : memberExpression arguments ;
+
+newExpression : memberExpression ;
+
+memberExpression : NEW SUPER arguments
+                 | NEW SUPER
+                 ;
+
+%%
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7829</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-18 15:42:02 -0700</bug_when>
+    <thetext>this looks pretty good and preserves the grammar structure from before the addition of super</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7830</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-18 19:03:58 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7989</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 21:57:20 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

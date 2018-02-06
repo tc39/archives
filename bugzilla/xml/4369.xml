@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4369</bug_id>
+          
+          <creation_ts>2015-05-18 16:53:00 -0700</creation_ts>
+          <short_desc>Would be nice to factor out byteOffset, byteLength, and buffer accessors into abstract ops</short_desc>
+          <delta_ts>2015-07-10 08:34:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14415</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-18 16:53:27 -0700</bug_when>
+    <thetext>Then other specifications could call them, given an arbitrary object which the spec hopes is a typed array or DataView. And, I think it would dedupe the %TypedArray% versions and the DataView versions, unless I am missing a subtle difference between them.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14416</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-19 06:41:02 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #0)
+&gt; And, I think it would dedupe the %TypedArray% versions and the DataView 
+&gt; versions, unless I am missing a subtle difference between them.
+
+Do you mean this subtle difference?
+
+DataView.prototype.byte{Length,Offset} throw a TypeError if the array buffer is detached, whereas %TypedArray%.prototype.byte{Length,Offset} return 0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14421</commentid>
+    <comment_count>2</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-19 11:43:35 -0700</bug_when>
+    <thetext>Wow, I am surprised that we are not having those throw but we are still having indexed access throw. The inconsistency is quite surprising as well.
+
+But yes, I guess in that case we couldn&apos;t dedupe (without introducing a flag or similar). I&apos;d rather in that case export an abstract op that has the behavior we want other specs to follow, which I assume is the throwing one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14433</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-21 08:03:04 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #2)
+&gt; Wow, I am surprised that we are not having those throw but we are still
+&gt; having indexed access throw. The inconsistency is quite surprising as well.
+&gt; 
+
+Walking a fine line here regarding how much legacy implemented browser behavior can be changed without web breakage.  Nobody knows...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14434</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-21 08:21:46 -0700</bug_when>
+    <thetext>Yeah, just not sure why we think byteLength and byteOffset throwing for DataView is any more or less compatible than it throwing for %TypedArray%.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14437</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-21 08:41:42 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #4)
+&gt; Yeah, just not sure why we think byteLength and byteOffset throwing for
+&gt; DataView is any more or less compatible than it throwing for %TypedArray%.
+
+It&apos;s more a matter that each such potentially breaking change needs to be discussed with TC39.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14440</commentid>
+    <comment_count>6</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-21 08:48:03 -0700</bug_when>
+    <thetext>I kind of doubt that when we discussed this for typed arrays everyone was implicitly adding &quot;(but not DataView)&quot; to their statements. More likely people just forgot to distinguish.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14441</commentid>
+    <comment_count>7</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-05-21 10:07:15 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #6)
+&gt; I kind of doubt that when we discussed this for typed arrays everyone was
+&gt; implicitly adding &quot;(but not DataView)&quot; to their statements. More likely
+&gt; people just forgot to distinguish.
+
+I certainly agree. DataView is included is just another typed array in these kind of discussions. Having them behave different here sounds like a bug.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

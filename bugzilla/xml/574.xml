@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>574</bug_id>
+          
+          <creation_ts>2012-07-18 15:44:00 -0700</creation_ts>
+          <short_desc>test262.py should handle $INCLUDE</short_desc>
+          <delta_ts>2014-08-14 04:29:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Sam Mikes">sam.mikes</assigned_to>
+          <cc>brbaker</cc>
+    
+    <cc>dschaffe</cc>
+    
+    <cc>prsriniv</cc>
+    
+    <cc>sam.mikes</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1367</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-18 15:44:19 -0700</bug_when>
+    <thetext>test262.py, the command line runner for the test suite, currently doesn&apos;t look at the $INCLUDE statements in source files to determine which files to include. Instead it includes sta.js, which has copies of the contents of several other include files, and a select few others.
+
+It would be better to let the test cases drive via $INCLUDE which files to include. It might make sense though to merge some of the include files, such as the math related ones.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3718</commentid>
+    <comment_count>1</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-09 07:11:20 -0700</bug_when>
+    <thetext>Dan, please investigate this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9246</commentid>
+    <comment_count>2</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 22:24:57 -0700</bug_when>
+    <thetext>Candidate fix here: 
+
+https://github.com/smikes/test262/commit/7e07cc138d043ffdd0e6730d51d83914dfe6958f#diff-6fefc8237a5115257bd5a6b1f3014801R253</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9787</commentid>
+    <comment_count>3</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-08-14 04:29:14 -0700</bug_when>
+    <thetext>Resolved by PR #48 - https://github.com/tc39/test262/pull/48</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

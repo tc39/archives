@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2367</bug_id>
+          
+          <creation_ts>2013-12-08 20:28:00 -0800</creation_ts>
+          <short_desc>21.2.2: BMP pattern and Unicode pattern</short_desc>
+          <delta_ts>2014-02-17 10:19:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6904</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 20:28:44 -0800</bug_when>
+    <thetext>Section 21.2.2 defines a regular expression pattern as either a &quot;BMP pattern&quot; or a &quot;Unicode pattern&quot;. These names are a bit odd because both patterns are expressed as Unicode strings, and the BMP is a subset of Unicode. I think more relevant is that in one mode the pattern (and the strings matched against it) are processed code unit by code, while in the other mode they&apos;re processed code point by code point.
+
+I suggest calling them &quot;code unit pattern&quot; and &quot;code point pattern&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7339</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 10:19:21 -0800</bug_when>
+    <thetext>Note we use &quot;u&quot; to designate a &quot;code point pattern&quot; even though a &quot;code unit pattern&quot; is also a subset of Unicode (and even has a word in its description that starts with &quot;u&quot;).
+
+We are defining terminology for internal clarity within the specification.  From that perspective &quot;code point pattern&quot; and &quot;code unit pattern&quot; are  too visually and cognitively similar and likely to be occasionally misread. 
+
+&quot;BMP pattern&quot; and &quot;Unicode Pattern&quot; are more distinguishable in this regard.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

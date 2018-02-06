@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4373</bug_id>
+          
+          <creation_ts>2015-05-20 19:57:00 -0700</creation_ts>
+          <short_desc>12.3.4.1: dynamic definition of direct eval</short_desc>
+          <delta_ts>2015-10-02 13:14:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14430</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-05-20 19:57:39 -0700</bug_when>
+    <thetext>12.3.4.1 &quot;Runtime Semantics: Evaluation&quot;
+says:
+     A CallExpression whose evaluation executes step 4.a.vii is a direct eval.
+
+Two things:
+
+(1) For a given CallExpression, whether its evaluation executes that step can vary between evaluations. (ArgumentListEvaluation might return an abrupt completion, or it might not.) So does this mean that the CallExpression is sometimes a direct eval and sometimes not?
+
+(2) Some early error conditions (which must be enforced before code is evaluated) rely on detecting direct evals. But given the above, direct evals cannot be statically detected.
+
+
+If you change &quot;4.a.vii&quot; to &quot;4.a.i&quot;, that might make some of this go away, but you&apos;d still be left with a definition of direct eval that is not actually usable for early error detection.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14432</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-21 07:58:57 -0700</bug_when>
+    <thetext>Whether or not a call expression is a direct eval cannot be statically determined.  Unfortunate, but that is a design decision made in the Es5 days.
+
+I can&apos;t find any early errors that depend upon static identification of a direct eval. The rules in 15.1.1 are referring to an eval invocation that has already passed through 4.a.vii (or not).   It is the direct (or indirect) eval it self that is applying that rule, so it knows whether or not it is a direct eval.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14442</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-05-21 10:33:40 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; Whether or not a call expression is a direct eval cannot be statically
+&gt; determined.  Unfortunate, but that is a design decision made in the Es5 days.
+
+Okay. Then it might be clearer for 12.3.4.1 to say:
+     An evaluation of a CallExpression that executes step 4.a.vii
+     is a direct eval.
+I.e., being (or not being) a direct eval is a property of an evaluation, not of the static CallExpression.
+
+
+&gt; The rules in 15.1.1 are referring to an eval invocation that
+&gt; has already passed through 4.a.vii (or not).   It is the direct (or
+&gt; indirect) eval it self that is applying that rule, so it knows whether or
+&gt; not it is a direct eval.
+
+Ah, got it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14446</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-25 10:17:05 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

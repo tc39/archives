@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1533</bug_id>
+          
+          <creation_ts>2013-05-31 02:21:00 -0700</creation_ts>
+          <short_desc>15.3.5.4_2-89gs just returns bound function instead of calling it</short_desc>
+          <delta_ts>2014-07-10 14:51:56 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Prashanth Srinivasan">prsriniv</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4107</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-31 02:21:51 -0700</bug_when>
+    <thetext>Change: (function () {&quot;use strict&quot;; return f.bind();})();
+
+to: (function () {&quot;use strict&quot;; return f.bind()();})();
+
+Note the additional call expression in `f.bind()()`.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

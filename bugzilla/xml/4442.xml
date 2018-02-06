@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4442</bug_id>
+          
+          <creation_ts>2015-08-21 11:06:00 -0700</creation_ts>
+          <short_desc>Redundant function length definition</short_desc>
+          <delta_ts>2015-10-23 14:00:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14602</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 11:06:58 -0700</bug_when>
+    <thetext>Explicit function length definition is not necessary for the following methods:
+
+
+19.2.3.1 Function.prototype.apply ( thisArg, argArray )
+20.1.3.2 Number.prototype.toExponential ( fractionDigits )
+20.1.3.3 Number.prototype.toFixed ( fractionDigits )
+20.1.3.5 Number.prototype.toPrecision ( precision )
+20.3.3.4 Date.UTC ( year, month [ , date [ , hours [ , minutes [ , seconds [ , ms ] ] ] ] ] )
+20.3.4.21 Date.prototype.setFullYear ( year [ , month [ , date ] ] )
+20.3.4.22 Date.prototype.setHours ( hour [ , min [ , sec [ , ms ] ] ] )
+20.3.4.24 Date.prototype.setMinutes ( min [ , sec [ , ms ] ] )
+20.3.4.25 Date.prototype.setMonth ( month [ , date ] )
+20.3.4.26 Date.prototype.setSeconds ( sec [ , ms ] )
+20.3.4.29 Date.prototype.setUTCFullYear ( year [ , month [ , date ] ] )
+20.3.4.30 Date.prototype.setUTCHours ( hour [ , min [ , sec [ , ms ] ] ] )
+20.3.4.32 Date.prototype.setUTCMinutes ( min [ , sec [, ms ] ] )
+20.3.4.33 Date.prototype.setUTCMonth ( month [ , date ] )
+20.3.4.34 Date.prototype.setUTCSeconds ( sec [ , ms ] )
+21.1.1.1 String ( value )
+21.1.3.16 String.prototype.slice ( start, end )
+21.1.3.17 String.prototype.split ( separator, limit )
+21.1.3.19 String.prototype.substring ( start, end )
+21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+22.1.3.12 Array.prototype.join (separator)
+22.1.3.22 Array.prototype.slice (start, end)
+22.2.3.23 %TypedArray%.prototype.slice ( start, end )
+22.2.3.26 %TypedArray%.prototype.subarray( [ begin [ , end ] ] )
+B.2.3.1 String.prototype.substr (start, length)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14859</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-23 14:00:28 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

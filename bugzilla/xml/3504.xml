@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3504</bug_id>
+          
+          <creation_ts>2014-12-31 15:05:00 -0800</creation_ts>
+          <short_desc>Modules can&apos;t have realm-specific IDs</short_desc>
+          <delta_ts>2015-02-19 19:11:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11289</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-12-31 15:05:07 -0800</bug_when>
+    <thetext>Recent drafts use a layer of indirection to allow external specs to refer to modules by &quot;module ID&quot; instead of working directly with Module Records. Spec algorithms work with IDs instead of directly with Module Records, and these IDs are stored in a per-realm [[modules]] table and looked up with ModuleAt().
+
+Unfortunately there&apos;s a pretty serious flaw in this approach: it falls apart when modules are shared across realms. As a very simple example, multiple windows (or multiple realms created via the ES7 Realm class) need to be allowed to install modules from one registry into another:
+
+    var otherRealm = window.open(sameOriginURL);
+    otherRealm.Reflect.Loader.import(&quot;foo/bar&quot;, mod =&gt; {
+        Reflect.Loader.set(&quot;foo/bar&quot;, mod);
+        // next line can&apos;t find the module by ID
+        Reflect.Loader.import(&quot;foo/bar&quot;, ...);
+    });
+
+(A common example of why this is necessary is a parent realm creating a sandbox and pre-populating it with modules.) It breaks because the linking semantics looks up modules in realm.[[modules]] instead of simply having direct references to Module Records. There isn&apos;t a way to install some kind of tripwire where any time a realm &quot;gets a reference to&quot; a module from another realm it quickly adds that module&apos;s ID to its own [[modules]] table. And I&apos;m sure we don&apos;t want to create a concept of a more-global-than-realm context (a Worker, effectively) to hoist the [[modules]] table into -- especially at this point in ES6.
+
+I still don&apos;t believe the indirection of module IDs is warranted. In fact, because the Loader spec needs to define reflective operations like the Reflect.Module constructor (which is a hard dependency of the loader API), it has to deal directly with Module Records anyway, at the very least until we fold some of that material back into ES in the future.
+
+I recommend we eliminate the notion of module IDs, and instead of NormalizeModuleName and HostNormalizeModuleName, we simply give each Module Record its own local, immutable table mapping its unnormalized, imported module names directly to their corresponding Module Records, and assume it&apos;s the loader&apos;s responsibility to create that table.
+
+This also means changing ParseModuleAndImports, but that&apos;s a misleading operation anyway (naive implementations would require parsing all modules twice, once by the loader spec to extract dependencies and once by the ES spec to initialize the Module Record). It seems like the only reason ParseModuleAndImports ties parsing and Module Record construction together is for ModuleEvaluationJob; it should be fine for ModuleEvaluationJob to simply assume that the graph of Module Records has already been constructed by the time it starts (which is an accurate reflection of reality: the loader must have already loaded them before evaluation can begin). Ideally parsing and extracting static module info should be an ES6 spec operation that the loader spec can call into, because it needs access to the static information provided by parsing in order to compute dependencies for loading.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-01-01 11:41:34 -0800</bug_when>
+    <thetext>I did some work sketching out what this would look like. (I also found and fixed some bugs in ResolveExport and GetExportNames.) Here&apos;s a draft:
+
+https://gist.github.com/dherman/cad85565e0eb16d0a22d
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11296</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-02 13:59:10 -0800</bug_when>
+    <thetext>(In reply to Dave Herman from comment #0)
+&gt; Recent drafts use a layer of indirection to allow external specs to refer to
+&gt; modules by &quot;module ID&quot; instead of working directly with Module Records. Spec
+&gt; algorithms work with IDs instead of directly with Module Records, and these
+&gt; IDs are stored in a per-realm [[modules]] table and looked up with
+&gt; ModuleAt().
+
+Actually, you have the intent backwards. HostGetSource and HostNormalizeModuleName are hooks that allow the ES spec. algorithms to delegate, to the host, source code &quot;file&quot; access and normalization of source &quot;file names&quot; contained within such files. To avoid this confusion in the future I think I will rename  the latter of these operations to HostNormalizeSourceCodeReference.
+
+Also, I agree that at least some of the abstract operations that are parameterized with ModuleIds can be parameterized using using module records.  I&apos;ll change those and see if I can convince myself that the rest of them can also be converted without unnecessarily over specification.
+
+External specifications that extend the ES6 spec. are free to make direct reference to the ES6 abstract operations and even to extend those algorithms. (Clause 16 allows extensions.) If needed, any such extensions can be folded back into the ES7 spec. I&apos;m very reluctant to put anything into the ES6 spec. that isn&apos;t actually required by features that are part of ES6. Such material adds complexity and experience suggests that such material usually ends up having to be changed when the anticipated features actually get added.  
+
+&gt; 
+&gt; Unfortunately there&apos;s a pretty serious flaw in this approach: it falls apart
+&gt; when modules are shared across realms. As a very simple example, multiple
+&gt; windows (or multiple realms created via the ES7 Realm class) need to be
+&gt; allowed to install modules from one registry into another:
+&gt; 
+&gt;     var otherRealm = window.open(sameOriginURL);
+&gt;     otherRealm.Reflect.Loader.import(&quot;foo/bar&quot;, mod =&gt; {
+&gt;         Reflect.Loader.set(&quot;foo/bar&quot;, mod);
+&gt;         // next line can&apos;t find the module by ID
+&gt;         Reflect.Loader.import(&quot;foo/bar&quot;, ...);
+&gt;     });
+
+This whole concept is something that needs to be further worked out before we commit to ES6 spec changes.  For example, I&apos;m not at all sure what your intended semantics of global access is for the above. Current in the ES6 spec a module&apos;s binding environment is a subscope of the global scope of the realm in which the module was loaded. In the above example are you saying that a module can be loaded into a realm such that it&apos;s globals comes from a different realm? Also, it isn&apos;t clear to me what the relationship (if any) is between the module registry you are exposing in this API and an ES65 Realm Record&apos;s [[modules]] field. I don&apos;t see why we should assume that they are one and same.
+
+Fortunately, there is nothing in the ES6 spec. that requires that we try to work this out in the next few days. 
+
+...
+
+&gt; 
+&gt; I recommend we eliminate the notion of module IDs, and instead of
+&gt; NormalizeModuleName and HostNormalizeModuleName, we simply give each Module
+&gt; Record its own local, immutable table mapping its unnormalized, imported
+&gt; module names directly to their corresponding Module Records, and assume it&apos;s
+&gt; the loader&apos;s responsibility to create that table.
+
+Taht would make the ES6 spec. incomplete. It would require implementers of basic ES6 (for example, a command line JS engine) to invent the concept of a module loader and figure out what it needs to do.  As currently specified, all such an implementation needs to do, in terms of the spec, is: 
+  1) Perform InitializeFirstRealm(CreateRealm())
+  2) Enqueue ScriptEvaluationJobs and ModuleEvaluationJobs for the scripts and modules (name on the command line)
+  3) Dispatch the first pending job
+
+The implementation needs to know about source files and provide a file name normalization policy, but there is no concept of module loader that it needs to deal with. 
+
+&gt; 
+&gt; This also means changing ParseModuleAndImports, but that&apos;s a misleading
+&gt; operation anyway (naive implementations would require parsing all modules
+&gt; twice, once by the loader spec to extract dependencies and once by the ES
+&gt; spec to initialize the Module Record).
+
+I feel that my obligation is to make the specification of the semantics as clear as possible. The ES6 spec. is not an implementation guide and I&apos;d be reluctant to add complexity, simply for the sake of naive implementers who don&apos;t realize that parsing is idempotent.  That said, if you have any informative NOTES, beyond what is already there, that you think would be helpful, please draft them and send them to me (preferably as a bug report). 
+
+&gt; It seems like the only reason
+&gt; ParseModuleAndImports ties parsing and Module Record construction together
+&gt; is for ModuleEvaluationJob; it should be fine for ModuleEvaluationJob to
+&gt; simply assume that the graph of Module Records has already been constructed
+&gt; by the time it starts (which is an accurate reflection of reality: the
+&gt; loader must have already loaded them before evaluation can begin). Ideally
+&gt; parsing and extracting static module info should be an ES6 spec operation
+&gt; that the loader spec can call into, because it needs access to the static
+&gt; information provided by parsing in order to compute dependencies for loading.
+
+All of the abstract operations on modules including parsing and static semantic queries are available for use in extension specifications. It would be trivial to make step 12.c of ParseModulesAndImports, the actual parsing step, a separate abstract operation.  There just isn&apos;t any need for this in the ES6 spec as it occurs at exactly one place.  But you should feel free to assume there is such an operation if you need it and we can refactor the ES spec. when we have more time.
+
+ModuleEvaluationJob starts with a reference to the source code of a module. In the basic ES6 world there is no agent who might have already constructed that module graph (and even if there was, I&apos;d still have to specify how a valid graph was constructed).
+
+I actually did have a motivation for recursing through the referenced modules in ParseModuleAndImports.  A closed world ahead of time ES compiler should be able to validate all static linkages within a module graph a report a failed compilation if any parsing errors occurred within that graph.  I&apos;m not super confident that  the current ES6 factoring makes this clear enough, but I think what he have is good enough for this release of the specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11297</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-02 14:28:38 -0800</bug_when>
+    <thetext>(In reply to Dave Herman from comment #1)
+&gt; I did some work sketching out what this would look like. (I also found and
+&gt; fixed some bugs in ResolveExport and GetExportNames.) Here&apos;s a draft:
+&gt; 
+&gt; https://gist.github.com/dherman/cad85565e0eb16d0a22d
+
+Could more clearly identify the bug fixes so I can fix any issues, independent of applying your complete refactoring.
+
+For example, I notice that you change the processing order of the various import forms within GetExportNames.  What is the semantic purpose to that ordering change? And why did you add filtering to it. that I had previously concluded was redundant at that point. But I may have missed something.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11298</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-01-02 16:15:00 -0800</bug_when>
+    <thetext>&gt; Actually, you have the intent backwards. HostGetSource and
+&gt; HostNormalizeModuleName are hooks that allow the ES spec. algorithms to
+&gt; delegate, to the host, source code &quot;file&quot; access and normalization of source
+&gt; &quot;file names&quot; contained within such files. To avoid this confusion in the
+&gt; future I think I will rename  the latter of these operations to
+&gt; HostNormalizeSourceCodeReference.
+
+Huh, that wasn&apos;t how you described it to me at the last f2f. But I can&apos;t make sense of this rationale you&apos;re giving now. A Module ID is a reference to a module record, not to its source code. If you still want the HostGetSource and HostNormalizeModuleName operations there&apos;s no reason why they have to take or return a Module ID instead of just a Module Record directly.
+
+I still see no clear justification for the existence of module ID strings or for indirecting module references through realm.[[modules]]. It adds confusion for no apparent gain. It seems to be little more than an abstraction of the heap: a module ID is an abstraction of a pointer to a Module Record, serialized as a GUID string. Worse, this conceptual heap is arbitrarily subdivided into different sub-heaps, one per realm -- even though values can be shared between those heaps.
+
+&gt; Also, I agree that at least some of the abstract operations that are
+&gt; parameterized with ModuleIds can be parameterized using using module
+&gt; records.  I&apos;ll change those and see if I can convince myself that the rest
+&gt; of them can also be converted without unnecessarily over specification.
+
+OK. Please let me know as soon as you have a draft ready, because then I can re-review and try to figure out where the loader spec gets stuck. I understand that ES6 will not ship in a perfect state, but it would be bad to ship with significant blockers for the loader spec.
+
+&gt; This whole concept is something that needs to be further worked out before
+&gt; we commit to ES6 spec changes.  For example, I&apos;m not at all sure what your
+&gt; intended semantics of global access is for the above.
+
+We can discuss such things later -- I agree there&apos;s no time to work through the details of things that aren&apos;t part of ES6. The important thing right now is to make sure the modules spec is right.
+
+&gt; Also, it isn&apos;t clear to me what the relationship (if any)
+&gt; is between the module registry you are exposing in this API and an ES65
+&gt; Realm Record&apos;s [[modules]] field. I don&apos;t see why we should assume that they
+&gt; are one and same.
+
+They definitely cannot be the same, no matter what. But the problem is some operations in the draft ES6 forcibly look up modules in realm.[[modules]] instead of parameterizing over a module set. The full set is:
+
+- ParseModuleAndImports
+- ModuleEvaluationJob
+- LinkModules
+- ModuleEvaluation
+- the [[Get]] method of Module Namespace Exotic Objects
+
+And weirdly, LinkModules only commits a module record to realm.[[modules]] if linking succeeds (which could lead to effectively a &quot;dangling pointer&quot; to a module record).
+
+I can work around all of these except for the [[Get]] method by pretending they don&apos;t exist. I think I can make [[Get]] work by ensuring that whenever I create a module record I commit it eagerly to realm.[[modules]] and make sure that its namespace object stores that realm in its [[Realm]] slot. This is scary, because it seems to be working against some data structure invariant LinkModules is trying to enforce with its strange transactional back-out behavior... I can&apos;t use that operation anyway so I could *technically* disregard those invariants, but... yikes!
+
+And then for all the other operations that take a Module ID and are explicitly parameterized over a set in which to look them up, I&apos;ll have to create some sort of super-global (like, global to the entire worker) &quot;module heap&quot; to pass around.
+
+Again, this then leaves me with the conclusion that module IDs are serving no useful role and are significantly obfuscating the spec.
+
+I also now understand that the loader spec, and any other web specs, should treat not just ParseModuleAndImports, but also ModuleEvaluationJob, LinkModules, and ModuleEvaluation as if they don&apos;t exist, and instead spec their own versions of parsing, linking, and evaluating ES6 modules. If there isn&apos;t time to include proper versions of these operations in ES6, that&apos;s OK and I can do them in the loader spec for now, to be reincorporated later.
+
+&gt; Taht would make the ES6 spec. incomplete. It would require implementers of
+&gt; basic ES6 (for example, a command line JS engine) to invent the concept of a
+&gt; module loader and figure out what it needs to do.  As currently specified,
+&gt; all such an implementation needs to do, in terms of the spec, is: 
+&gt;   1) Perform InitializeFirstRealm(CreateRealm())
+&gt;   2) Enqueue ScriptEvaluationJobs and ModuleEvaluationJobs for the scripts
+&gt; and modules (name on the command line)
+&gt;   3) Dispatch the first pending job
+
+Well, you&apos;ve just described a loader! :) But not one that is general enough to be of any use to the browser or Node. I don&apos;t see that serving much of a useful role, and it costs in terms of confusion (we&apos;ll have to explain to mainstream JS engine implementors not to implement ParseModulesAndImport, ModuleEvaluationJob, LinkModules, or ModuleEvaluation). That&apos;s hardly different from dead spec -- personally I&apos;d remove them all.
+
+But I think I can survive re-specifying the versions I need in the loader spec, and we can fold them back into ECMA-262 later.
+
+But if nothing else, I would just beg you to consider eliminating the module ID abstraction.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11299</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-01-02 16:15:43 -0800</bug_when>
+    <thetext>&gt; Could more clearly identify the bug fixes so I can fix any issues,
+&gt; independent of applying your complete refactoring.
+
+Sure thing. I&apos;ll file them as separate bugs.
+
+&gt; For example, I notice that you change the processing order of the various
+&gt; import forms within GetExportNames.  What is the semantic purpose to that
+&gt; ordering change? And why did you add filtering to it. that I had previously
+&gt; concluded was redundant at that point. But I may have missed something.
+
+Will file.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11300</commentid>
+    <comment_count>6</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-01-02 23:50:51 -0800</bug_when>
+    <thetext>Just to be clear, here are the reasons why the following operations aren&apos;t usable for the web semantics (or likely for Node.js):
+
+* LinkModules: Waiting to store the modules in realm.[[modules]] until linking completes successfully means that the loader semantics can&apos;t even refer to module records that aren&apos;t done linking or have had a link error.
+
+* ModuleEvaluation: The semantics forcibly looks up module records in realm.[[modules]], not just for the module being executed but for all its dependencies. So it&apos;s impossible for a module to have a dependency that came from another realm. The loader spec has to allow for modules to intermix between realms.
+
+* ModuleEvaluationJob: This uses ModuleEvaluation and ParseModuleAndImports, so since both of them are unusable this one is too. Note that this means that the whole top-level Job semantics given in 8.5 cannot be used for the web.
+
+* ParseModuleAndImports: First of all, this one also forcibly looks up module records in realm.[[modules]], so it doesn&apos;t allow cross-realm dependencies. But it also assumes that all dependencies are being loaded from source. This doesn&apos;t allow dependencies that were already installed and executed, and it doesn&apos;t allow dependencies that were constructive reflectively and don&apos;t have source code at all.
+
+Before I do too much more on the loader spec, can you confirm these limitations? And my best course of action for now is to re-specify the relevant parsing (extracted from ParseModuleAndImports), linking (extracted from LinkModules), and evaluation (extracted from LinkModules) semantics I need in the loader spec?
+
+Thanks,
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11516</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-16 14:44:26 -0800</bug_when>
+    <thetext>I&apos;m going to summarize here what I changed in Rev31 to address your concerns.  I&apos;ll respond to some of your discussion points in separate comments:
+
+In Rev32:
+
+The strings values that I had previous called &quot;moduleIds&quot; I now call &quot;sourceCodeIds&quot; to emphasize that their primary role is to acquire a source code resource from the host so it can be parsed.
+
+ParseModuleAndImports is the primary consumer of sourceCodeId. It takes a sourceCodeId as a parameter and is the only module abstract operation that uses a sourceCodeId to fetch actual source code (for parsing) or requests the mapping of a sourceCodeId to a Module Record.
+
+All the other semantic abstract operations for modules that previous took a moduleId parameter now take Module Record parameters instead.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11517</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-16 15:54:23 -0800</bug_when>
+    <thetext>(In reply to Dave Herman from comment #4)
+&gt; &gt; Actually, you have the intent backwards. HostGetSource and
+&gt; &gt; HostNormalizeModuleName are hooks that allow the ES spec. algorithms to
+&gt; &gt; delegate, to the host, source code &quot;file&quot; access and normalization of source
+&gt; &gt; &quot;file names&quot; contained within such files. To avoid this confusion in the
+&gt; &gt; future I think I will rename  the latter of these operations to
+&gt; &gt; HostNormalizeSourceCodeReference.
+&gt; 
+&gt; Huh, that wasn&apos;t how you described it to me at the last f2f. But I can&apos;t
+&gt; make sense of this rationale you&apos;re giving now. A Module ID is a reference
+&gt; to a module record, not to its source code. If you still want the
+&gt; HostGetSource and HostNormalizeModuleName operations there&apos;s no reason why
+&gt; they have to take or return a Module ID instead of just a Module Record
+&gt; directly.
+
+Prior to the introduction of modules, the ES spec. was written such that a host implicitly handed it the &quot;source code&quot; of a Script and ES just parsed and evaluated it.  ES has no need to talk about file names or other any other sort of identifier of source code.  But with modules we have &apos;from&apos; clauses as part of the language and the &apos;from&apos; clause values aren&apos;t necessarily canonical source code identifiers.  So the ES spec. has to say something about the need to canonicalize &apos;from&apos; clause values and then retrieve the identified source code in order to parse, link, and evaluate it.  That&apos;s what sourceCodeIds, HostNormalizeModuleName, and HostGetSource are all about.
+
+I assume that there is a unique 1:1 mapping from sourceCodeIds to actual source code text.  So, all occurrences of sourceCodeId could be replaced with the actual source code. Then HostNormalizeModuleName might be replaced with HostNormalizeModuleNameAndGetSource. But I didn&apos;t want to imply that the source code actually had to be available at the point of the HostNormalizeMoudleName calls.  So, I use sourceCodeIds and only convert them to source code at the point here the source code is actually needed.
+
+&gt; 
+&gt; I still see no clear justification for the existence of module ID strings or
+&gt; for indirecting module references through realm.[[modules]]. It adds
+&gt; confusion for no apparent gain. It seems to be little more than an
+&gt; abstraction of the heap: a module ID is an abstraction of a pointer to a
+&gt; Module Record, serialized as a GUID string. Worse, this conceptual heap is
+&gt; arbitrarily subdivided into different sub-heaps, one per realm -- even
+&gt; though values can be shared between those heaps.
+
+A module record currently has both static semantic and runtime semantic roles. As a static semantic entity, is digests important about a successfully parsed source code module. So we can have a mapping from a specific source code to its corresponding module record (or at least the static part). ES6 semantics actually requires such a mapping because multiple &apos;from&apos; clauses may reference the same source code resource (possibly using different names) and all such equivalent references need to map to the same module record. That&apos;s the primary job of realm[[modules]].
+
+But why is it associated with a realm?  Primarily because of the runtime semantic roles of a module record. This includes holding on to the Module Lexical Environment and tracking whether or not the module code has been evaluated.  Lexical Environments are always implicitly associated with a specific Realm because they have an  outer Lexical Environment that is a Global Environment backed by some Realm&apos;s global object.  Also, when the code of a module is is evaluated, it must have some initial current realm set (as well has having its Realm-dependent Lexical Environment set).
+
+So, (at least given what we currently have in ES6) module records are Realm specific and for that to be the case, the mapping from source code (or equivalently, a sourceCodeId) also needs to be Realm specific.  
+
+We probably could decouple the static semantic and runtime roles of a Module Record by splitting it into two separate records. But there is no need for this separation to describe the self contained ES6 module semantics and there isn&apos;t time to make anymore non=essential changes to the ES6 spec.  If we find it is needed to support your loader specs. we can make that change in the ES7 spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11518</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-16 18:06:25 -0800</bug_when>
+    <thetext>(In reply to Dave Herman from comment #4)
+
+more follow up
+
+&gt; ...
+&gt; &gt; Also, it isn&apos;t clear to me what the relationship (if any)
+&gt; &gt; is between the module registry you are exposing in this API and an ES65
+&gt; &gt; Realm Record&apos;s [[modules]] field. I don&apos;t see why we should assume that they
+&gt; &gt; are one and same.
+&gt; 
+&gt; They definitely cannot be the same, no matter what. But the problem is some
+&gt; operations in the draft ES6 forcibly look up modules in realm.[[modules]]
+&gt; instead of parameterizing over a module set. The full set is:
+&gt; 
+&gt; - ParseModuleAndImports
+&gt; - ModuleEvaluationJob
+&gt; - LinkModules
+&gt; - ModuleEvaluation
+&gt; - the [[Get]] method of Module Namespace Exotic Objects
+
+you can now strike the last two entries from the above list. And the use of realm.[[modules]] ModuleEvaluationJob could be removed without changing the semantics, but I think the semantics are a bit clearer as it is currently stated as it makes it explicit at the job level that a module need only be parsed and linked once. 
+
+&gt; 
+&gt; And weirdly, LinkModules only commits a module record to realm.[[modules]]
+&gt; if linking succeeds (which could lead to effectively a &quot;dangling pointer&quot; to
+&gt; a module record).
+
+No dangling pointer that I see, but if you have a scenario that results in one let me know ASAP.
+
+Here&apos;s what is going one here.  A module is only valid if all of its  imports are transitively resolvable. So, starting with some root module (one named in a ModuleEvaluationJob) ParseModulesandImports returns an uncommitted module record for the root module and a set of newly created uncommitted modules records that the root is dependent upon (the set include the root). Note that the only references to modules in that set is from other module records in that set.
+
+LinkModules then tries to resolve all the actual import binding within that set (and references from them to bindings imported form already committed modules) and instantiates (but not evaluate) the module level environment for each module in the set. Only if linking succeeded (all imports are resolved) do any of the new module get atomically committed to realm.[[modules]].  If any linking errors occurs then the entire new module set is dropped on the floor and nothing is committed to realm.[[modules]]. There are no dangling references because the only things that have references into the new module set are other members of the new module set or things, like their module environment records, that exclusively hang off of them.
+
+&gt; 
+&gt; I can work around all of these except for the [[Get]] method by pretending
+&gt; they don&apos;t exist. I think I can make [[Get]] work by ensuring that whenever
+&gt; I create a module record I commit it eagerly to realm.[[modules]] and make
+&gt; sure that its namespace object stores that realm in its [[Realm]] slot. This
+&gt; is scary, because it seems to be working against some data structure
+&gt; invariant LinkModules is trying to enforce with its strange transactional
+&gt; back-out behavior... I can&apos;t use that operation anyway so I could
+&gt; *technically* disregard those invariants, but... yikes!
+
+I got rid of the [[Get]] dependency in Rev31.
+
+&gt; 
+&gt; And then for all the other operations that take a Module ID and are
+&gt; explicitly parameterized over a set in which to look them up, I&apos;ll have to
+&gt; create some sort of super-global (like, global to the entire worker) &quot;module
+&gt; heap&quot; to pass around.
+&gt; 
+&gt; Again, this then leaves me with the conclusion that module IDs are serving
+&gt; no useful role and are significantly obfuscating the spec.
+
+Hopefully, most of those moduleID dependencies are gone, but you still need some sort of map from sourceCodeIds (or the actual source codes) to committed module records.  realm.[[modules]] provides, but if you need some different scope of module commitment it would be easy enough to deal with that, but it isn&apos;t yet clear to me what you actual cross-realm semantics are WRT module linking.
+&gt; 
+&gt; I also now understand that the loader spec, and any other web specs, should
+&gt; treat not just ParseModuleAndImports, but also ModuleEvaluationJob,
+&gt; LinkModules, and ModuleEvaluation as if they don&apos;t exist, and instead spec
+&gt; their own versions of parsing, linking, and evaluating ES6 modules. If there
+&gt; isn&apos;t time to include proper versions of these operations in ES6, that&apos;s OK
+&gt; and I can do them in the loader spec for now, to be reincorporated later.
+
+Not entirely.  There are really three essential semantics that are expressed in those sets of abstract operations.  The first, (driven from ParseModuleAndImports) says that starting with a root module, all &apos;from&apos; clauses must be transitively resolvable.  The second, (driven from LinkModules and ModuleDeclarationInstantiations) says that starting with that root, all import bindings must  resolve to export bindings. If either of the conditions is not satisfied, the root module is not valid and can&apos;t be evaluated. The third semantic is the setup of the actual runtime bindings that connect imports to exports.
+
+You  probably should try into tied into those three semantics and not respecify them as they really are part of the core language.
+
+My intent, for the ES6 spec, is that the way other spec. would tie into all this is via ModuleEvaluationJob.  What that really provides is a to apply those three semantics to the source code of a root module (and modules imported by the root). The ES6 spec. doesn&apos;t have any dependencies upon where that source code comes form or how its fetched. 
+
+It&apos;s not clear to me (and for this statement I&apos;m ignoring the x-realm issues you have) that the above isn&apos;t enough for HTML module loading.  But please educate me about where you see issues.
+
+What isn&apos;t covered is reflective dynamic linking. I understand that we want to provide that as part of the ECMAScript reflection support. But is it also needed to support the HTML level modules?
+
+Regardless, to do reflective modules (as I understand your goals) you need some way to dynamically inject into the set of committed modules a module that does exist as host provided source code. Is that right?  Is so, I think there are at least two approaches that would work as simple extensions the current ES6 semantics.  First, you can construct and commit a well formed module record and commit it to  realm.[[modules]]. If all it does is map imports to export a empty body should be fine as all the linking is driven off of the ImportEntry and ExportEntries that are part of the Module Record.
+
+Alternatively, you could &quot;as if&quot; synthesize a source code module  whose source code contains the imports, exports, and local declaration of the dynamically created module. Then feed that into a ModuleEvaluationJob as either a root module or a module that is referenced via a &apos;from&apos; clause.
+
+Also, keep in mind that I&apos;m only talking about how to tie the semantic specification of such dynamic modules into the  ES6 provided module semantics. I&apos;m not saying anything about about implementations.
+
+Finally, I see some advantages if you can get away with specifying dynamic modules in terms of their equivalent source code rather than as Module Records. Source code level syntax and semantics are forever, but specification devices like Module Records tend to evolve as the spec. tries to cope with new features.
+
+
+&gt; 
+&gt; &gt; Taht would make the ES6 spec. incomplete. It would require implementers of
+&gt; &gt; basic ES6 (for example, a command line JS engine) to invent the concept of a
+&gt; &gt; module loader and figure out what it needs to do.  As currently specified,
+&gt; &gt; all such an implementation needs to do, in terms of the spec, is: 
+&gt; &gt;   1) Perform InitializeFirstRealm(CreateRealm())
+&gt; &gt;   2) Enqueue ScriptEvaluationJobs and ModuleEvaluationJobs for the scripts
+&gt; &gt; and modules (name on the command line)
+&gt; &gt;   3) Dispatch the first pending job
+&gt; 
+&gt; Well, you&apos;ve just described a loader! :) But not one that is general enough
+&gt; to be of any use to the browser or Node. I don&apos;t see that serving much of a
+&gt; useful role, and it costs in terms of confusion (we&apos;ll have to explain to
+&gt; mainstream JS engine implementors not to implement ParseModulesAndImport,
+&gt; ModuleEvaluationJob, LinkModules, or ModuleEvaluation). That&apos;s hardly
+&gt; different from dead spec -- personally I&apos;d remove them all.
+
+And if we removed them, we wouldn&apos;t have any semantics for what module import and exports mean at the abstract language level. An implementation (such as by comand line) could implement anything they want.  And even what you are specify is still expected to conform to those ES6 semantics. I hope you don&apos;t see any issues in that regard. I know that you are smack in the middle of the other side of this problem, the basic semantics of ES6 modules became much clearer and easy to specify once all the non-essential loader features were removed. I hope we can find a way to bring those features all back in a more module fashion ;-0   
+
+Finally, implementers aren&apos;t supposed to literally implement ParseModulesAndImport and friends anymore than they are expected to literally implement the Reference Type or ES environment records, or to implement evaluation by walking the parse tree. 
+
+I assume that at least somebody on every engine team (hopefully mostbodies) is a competent language implementer and know better than to try to use a language spec. as an implementation design document.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12859</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:30:51 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13100</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:02 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

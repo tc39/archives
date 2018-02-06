@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>127</bug_id>
+          
+          <creation_ts>2011-07-14 07:10:00 -0700</creation_ts>
+          <short_desc>S7.8.4_A4.3_T1–6 requiring syntax extensions are unsupported</short_desc>
+          <delta_ts>2011-09-25 12:23:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/1b9df0fdd5c7</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Geoffrey Sneddon">gsneddon</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>294</commentid>
+    <comment_count>0</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-07-14 07:10:36 -0700</bug_when>
+    <thetext>1/2 are bug #59, the rest are for things like noctal (\9), \u, \x, all of which fail to match the grammar, but there&apos;s nothing forbidding them as extensions.
+
+There is: &quot;A conforming implementation, when processing strict mode code (see 10.1.1), must not extend the syntax of NumericLiteral to include OctalIntegerLiteral as described in B.1.1&quot;. However, this doesn&apos;t cover \9, \u, or \x.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>320</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-18 09:59:15 -0700</bug_when>
+    <thetext>Thanks for the report Geoffrey.  Agreed the extension clause makes these tests invalid.  
+
+Disabled S7.8.4_A4.3_T5 and S7.8.4_A4.3_T6 in source control =&gt; S7.8.4_A4.3_T1/S7.8.4_A4.3_T2 were already disabled as-per https://bugs.ecmascript.org/show_bug.cgi?id=59; S7.8.4_A4.3_T3/S7.8.4_A4.3_T4 were disabled due to https://bugs.ecmascript.org/show_bug.cgi?id=80.  
+
+Mark, could you move these tests to a &quot;Sputnik\NegativeConformance&quot; or &quot;Sputnik\BestPractices&quot; directory?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>481</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-25 12:23:32 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/1b9df0fdd5c7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

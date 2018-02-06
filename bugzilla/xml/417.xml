@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>417</bug_id>
+          
+          <creation_ts>2012-06-25 11:02:00 -0700</creation_ts>
+          <short_desc>15.4.4.10 Array.prototype.slice does not set length correctly if trailing elements are holes</short_desc>
+          <delta_ts>2015-10-02 14:32:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1059</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-25 11:02:23 -0700</bug_when>
+    <thetext>Immediately before line 11 new top level line needs to be inserted:
+
+10.5 Call the [[Put]] internal method of A with arguments &quot;length&quot;,
+final, and true. 
+
+The ES3 spec. has the equivalent of the above line.  It was apparently
+inadvertently  dropped in the ES5 spec. 
+
+
+(marked as in progress to indicate that this is an errata item)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14721</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:32:59 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

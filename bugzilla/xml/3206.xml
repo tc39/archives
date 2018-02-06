@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3206</bug_id>
+          
+          <creation_ts>2014-09-01 11:43:00 -0700</creation_ts>
+          <short_desc>Unscopables should use HasProperty and not Get</short_desc>
+          <delta_ts>2015-07-10 08:34:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10112</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-01 11:43:36 -0700</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-object-environment-records-hasbinding-n
+
+Step 9.a should be HasBinding and not Get. We do not care about getter side effects here and we do not care about the value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10114</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-01 12:04:22 -0700</bug_when>
+    <thetext>The reason for doing a [[Get]] is so a subclass can over-ride a unscopables item of a super class: 
+
+SubArray.prototype[Symbol.unscopables] = {
+   __proto__: Array.prototype[Symbol.unscopables],
+   values: undefined,   //remove &apos;values&apos; from unscopable set of SubArray
+};</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10120</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-02 16:04:06 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; The reason for doing a [[Get]] is so a subclass can over-ride a unscopables
+&gt; item of a super class: 
+&gt; 
+&gt; SubArray.prototype[Symbol.unscopables] = {
+&gt;    __proto__: Array.prototype[Symbol.unscopables],
+&gt;    values: undefined,   //remove &apos;values&apos; from unscopable set of SubArray
+&gt; };
+
+What is the use case for that?
+
+If we are doing Get, should we not do a ToBoolean on the value?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10168</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-09-09 09:13:54 -0700</bug_when>
+    <thetext>I think it is good to have a general uniform rule for interpreting properties whose sole purpose of is to provide a yes/no answer. There are various possibilities:
+
+1. HasProperty(obj, prop)
+2. Get(obj, prop) !== undefined
+3. ToBoolean(Get(obj, prop))
+4. etc. 
+
+Option 1 is not good (as a general rule), because of impossibility to override a &quot;yes&quot; answer found on the prototype. Option 3 is imho the best one, because it is more intuitive  to have `false` meaning &quot;no&quot;. 
+
+Currently, Option 3 is chosen for @@isConcatSpreadable and @@isRegExp, and a variant of it for @@hasInstance -- namely (oversimplifying a bit): 
+ToBoolean(Invoke(obj, @@hasInstance, (C))
+
+I think that ToBoolean(Get(...)) should also be chosen here for uniformity, unless there is a good reason against it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10518</commentid>
+    <comment_count>4</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-10-17 06:55:07 -0700</bug_when>
+    <thetext>After thinking more about this, I prefer using `undefined` instead of ToBoolean() === false. The main reason is that there are less chances of unexpected side effects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10520</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-10-18 06:48:05 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #4)
+&gt; After thinking more about this, I prefer using `undefined` instead of
+&gt; ToBoolean() === false. The main reason is that there are less chances of
+&gt; unexpected side effects.
+
+I don&apos;t understand your point, since ToBoolean() itself is side-effect free (recall that all objects are truthy without computation). In fact, regarding potential side-effects, one must choose between those of HasProperty() and those of Get(). Or I missed something?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11556</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-19 17:11:32 -0800</bug_when>
+    <thetext>I did a quick review over the spec. and the most common way handle situations like this is treat both undefined and null as meaning not there.
+
+Basically, undefined covers the non-existent property case and null is a nice value some people like to use (rather than an explicit undefined) as a &quot;not here&quot; marker.
+
+so I&apos;m changed step 9.c. to:
+  c.	If blocked is neither undefined nor null, return false.
+
+which is the usual formulation we use for such tests
+
+fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11560</commentid>
+    <comment_count>7</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-20 06:40:33 -0800</bug_when>
+    <thetext>I&apos;m not happy with this. I think we should either stick to just *undefined* or do ToBoolean and compare the result with false. Having something in between just leads to more cases to remember.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11563</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-20 10:43:26 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #7)
+&gt; I&apos;m not happy with this. I think we should either stick to just *undefined*
+&gt; or do ToBoolean and compare the result with false. Having something in
+&gt; between just leads to more cases to remember.
+
+I&apos;ve reconsidered, and think it should be ToBoolean.
+
+The reason is that when we defined an unscopables array we use &apos;true&apos; as the value of the properties.  While we don&apos;t explicitly say do, that strongly suggests &apos;false&apos; would mean the opposite of &apos;true&apos;.  Or, in otherwords we expect the values of these properties to be treated as ToBoolean values.
+
+So, step 9.c becomes:
+
+c.	If ToBoolean(blocked) is true, return false.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11944</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:51 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

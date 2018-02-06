@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4232</bug_id>
+          
+          <creation_ts>2015-03-27 07:45:00 -0700</creation_ts>
+          <short_desc>22.1.3.24 Array.prototype.sort: Term &quot;different behaviour&quot; is unclear</short_desc>
+          <delta_ts>2015-04-03 12:35:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13949</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-27 07:45:15 -0700</bug_when>
+    <thetext>22.1.3.24 Array.prototype.sort (comparefn)
+
+&gt; If obj is an exotic object (including Proxy exotic objects) whose behaviour for [[Get]], [[Set]], [[Delete]],
+&gt; and [[GetOwnProperty]] is different from the ordinary object behaviour for these internal methods.
+
+
+It&apos;s not clear to me what &quot;different behaviour&quot; means in this context. For example does a Proxy object which only adds logging, like:
+
+  p = new Proxy({}, {
+    get(t, pk, r) { print(&quot;get trap&quot;); return Reflect.get(t, pk, r); }
+  });
+
+count as &quot;different behaviour&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13998</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 11:58:13 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft
+
+changed &quot;is different from&quot; to &quot;is not&quot;
+
+It really mans what it says.  Sorting of any proxy falls into the implementation dependent bucket.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14110</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:41 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

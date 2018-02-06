@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>414</bug_id>
+          
+          <creation_ts>2012-06-24 08:00:00 -0700</creation_ts>
+          <short_desc>Arguments instantiation by destructuring assignment has no effect</short_desc>
+          <delta_ts>2012-10-26 15:34:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1055</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-06-24 08:00:06 -0700</bug_when>
+    <thetext>See https://mail.mozilla.org/pipermail/es-discuss/2012-June/023693.html
+
+In June 15 draft, to realize destructuring assignment in FormalParameters,
+we perform Binding Initialisation for formals with Arguments object.
+
+In section 10.5.3, step 8-d,
+
+    d. Let formalStatus be the result of performing Binding Initialisation
+for formals with ao and undefined as arguments.
+
+But, ao.[[Get]], ao.[[GetOwnProperty]] have been already overriden to
+mapped arguments special internal methods in non-strict function.
+
+For example,
+
+function test(a) { }
+test(10);
+
+In this script, we perform Indexed Binding Initialisation and finally, we
+perform ao.[[Get]](&apos;a&apos;).
+But, in this phase, &apos;a&apos; entry of environmental record is initialized to
+undefined in 10.5.3-5-c-ii-1, so ao&apos;s getter defined in
+CreateMappedArgumentsObject step 7-c-ii-2,
+
+function () { return a; }
+
+always returns undefined.
+As the result, ao.[[Get]] result is always undefined, and we cannot
+initialize argument by correct value.
+
+To fix this, I suggest creating JS Array from argumentsList and performing
+Binding Initialisation with it, or delaying internal method override phase
+of ao.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2077</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 18:54:16 -0700</bug_when>
+    <thetext>corrected in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2120</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:13 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3141</bug_id>
+          
+          <creation_ts>2014-08-19 04:38:00 -0700</creation_ts>
+          <short_desc>22.1.3.24 Array.prototype.sort: Description of argument types for SortCompare</short_desc>
+          <delta_ts>2014-08-25 08:29:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3143</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>3143</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9806</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-19 04:38:00 -0700</bug_when>
+    <thetext>22.1.3.24 Array.prototype.sort (comparefn)
+
+In the &quot;Otherwise, the following steps are taken&quot; part:
+
+&gt; [...] where the arguments for calls to SortCompare are results of
+&gt; previous calls to the [[Get]] internal method.
+
+But SortCompare takes property keys as arguments, not results from previous [[Get]] operations.
+
+There are some recent proposals to change SortCompare to use values instead of property keys [1, 2], so basically reverting the changes from the 3rd edition. If SortCompare gets reverted to use values, this bug report can be closed for the 6th edition resp. converted to 5th edition for a future errata. IOW the mismatched description is an issue since the 3rd edition.
+
+
+[1] bug 3089
+[2] https://mail.mozilla.org/pipermail/es-discuss/2014-August/038847.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9810</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-20 10:39:42 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft
+
+Cloned Bug 3143 for ES5.1 issue</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9968</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:31 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

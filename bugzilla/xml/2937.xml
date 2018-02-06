@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2937</bug_id>
+          
+          <creation_ts>2014-05-30 22:48:00 -0700</creation_ts>
+          <short_desc>informal language about properties in &quot;19.1.2.3.1 Runtime Semantics: ObjectDefineProperties Abstract Operation&quot;</short_desc>
+          <delta_ts>2014-07-18 14:31:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8705</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-30 22:48:24 -0700</bug_when>
+    <thetext>Step 3 of the ObjectDefineProperties algorithm reads:
+
+&gt; 3. Let names be a List containing the keys of each enumerable own property of props.
+
+It should probably do something involving props.[[OwnPropertyKeys]](), like the algorithm for Object.keys().
+
+(This algorithm is meant to see both symbol-keyed and string-keyed properties on props, right?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8720</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-31 12:00:45 -0700</bug_when>
+    <thetext>(Bumping this bug&apos;s Version from Rev23 to Rev25, the revision that was current when the bug was filed.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8909</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-12 14:42:57 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+and yes, both string and symbol keys are processed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9276</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:31:20 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4480</bug_id>
+          
+          <creation_ts>2015-08-21 14:09:00 -0700</creation_ts>
+          <short_desc>13.2.7 - 13.2.10: Don&apos;t special case FunctionDeclaration and GeneratorDeclaration, instead use HoistableDeclaration</short_desc>
+          <delta_ts>2015-10-23 12:18:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14640</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 14:09:44 -0700</bug_when>
+    <thetext>Instead of explicitly handling FunctionDeclaration and GeneratorDeclaration, 13.2.7 - 13.2.10 could simply use HoistableDeclaration. That way new hoistable declarations (like AsyncFunctionDeclaration) don&apos;t need to add new if-statements to 13.2.7 - 13.2.10.
+
+
+
+13.2.7 Static Semantics: TopLevelLexicallyDeclaredNames
+StatementListItem : Declaration
+
+Steps 1.a-b could be simplified to:
+---
+a. Return &lt;&lt; &gt;&gt;
+---
+
+
+13.2.8 Static Semantics: TopLevelLexicallyScopedDeclarations
+StatementListItem : Declaration
+
+Steps 1.a-b could be simplified to:
+---
+a. Return &lt;&lt; &gt;&gt;
+---
+
+
+13.2.9 Static Semantics: TopLevelVarDeclaredNames
+StatementListItem : Declaration
+
+Steps 1.a-b could be simplified to:
+---
+a. Return the BoundNames of HoistableDeclaration.
+---
+
+
+
+13.2.10 Static Semantics: TopLevelVarScopedDeclarations
+StatementListItem : Declaration
+
+
+Steps 1.a-b could be simplified to:
+---
+a. Return DeclarationPart of HoistableDeclaration.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14833</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-23 12:18:52 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

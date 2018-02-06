@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2798</bug_id>
+          
+          <creation_ts>2014-05-03 10:01:00 -0700</creation_ts>
+          <short_desc>chapter 9: misc editorial</short_desc>
+          <delta_ts>2014-06-02 13:19:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8098</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:01:47 -0700</bug_when>
+    <thetext>----------------------------------------
+In 9.1.6.3 &quot;ValidateAndApplyPropertyDescriptor (...)&quot;:
+
+{1}
+9.1.6.3 / step 10.a:
+For each field of /Desc/ that is present, set the correspondingly attribute ...
+    s|correspondingly|corresponding|
+
+----------------------------------------
+In 9.1.11 &quot;[[Enumerate]] ()&quot;:
+
+{2}
+9.1.11 / alg 1 / step 1:
+... all the String valued keys of enumerable property keys of /O/. ...
+    s|property keys|properties|
+    
+    Also, insert a hyphen into &quot;String valued&quot;?
+
+----------------------------------------
+In 9.2.4 &quot;[[Call]] ( thisArgument, argumentsList)&quot;:
+
+{3}
+9.2.4 / step 14.b:
+Assert: /wrapperedThis/ is not an abrupt conpletion.
+    s|conpletion|completion|
+
+{4}
+9.2.4 / step 15:
+Let /status/ be the result of performing Function Declaration Instantiation ...
+    Delete spaces in &quot;Function Declaration Instantiation&quot;
+
+----------------------------------------
+In 9.2.14 &quot;Function Declaration Instantiation&quot;:
+
+{5}
+9.2.14 / header:
+Function Declaration Instantiation
+    Delete spaces in &quot;Function Declaration Instantiation&quot;
+
+{6}
+9.2.14 / para 1:
+Function Declaration Instantiation is performed as follows ...
+    Delete spaces in &quot;Function Declaration Instantiation&quot;
+
+{7}
+9.2.14 / step 27.a:
+NOTE A separate enviornemnt record is needed ...
+    s|enviornemnt|environment|
+
+----------------------------------------
+In 9.4.3.2 &quot;[[Enumerate]] ()&quot;:
+
+{8}
+9.4.3.2 / step 4:
+For each integer /i/ starting with 0 such that /i/ &lt; /len/. in ascending order.
+    Change both dots to commas.
+
+----------------------------------------
+In 9.4.3.3 &quot;[[OwnPropertyKeys]] ( )&quot;:
+
+{9}
+9.4.3.3 / step 4:
+For each integer /i/ starting with 0 such that /i/ &lt; /len/. in ascending order.
+    Change both dots to commas.
+
+{10}
+9.4.3.3 / step 5:
+For each own property key /P/ of /O/ that is an integer index and
+ToInteger(/P/) &gt;= /len/, in ascending numeric index order
+    The subordinate clause
+        &quot;that is an integer index and ToInteger(P) &gt;= len&quot;
+    is ungrammatical.  Maybe change it to
+        &quot;such that P is an integer index and ToInteger(P) &gt;= len&quot;
+
+----------------------------------------
+In 9.4.3.4 &quot;StringCreate Abstract Operation&quot;:
+
+{11}
+9.4.3.4 / step 5:
+Set the [[OwnPropertyKeys]] internal method of /A/ as specified in 1.
+    s|1|9.4.3.3|
+
+----------------------------------------
+In 9.4.4.4 &quot;[[Set]] ( P, V, Receiver)&quot;:
+
+{12}
+9.4.4.4 / para 1:
+The [[Set]] internal method of ... when called with with property key /P/, ...
+    Delete extra &quot;with&quot;
+
+----------------------------------------
+In 9.4.4.6 &quot;CreateUnmappedArgumentsObject(argumentsList) Abstract Operation&quot;:
+
+{13}
+9.4.4.6 / para 1:
+The abstract operation CreateStrictArgumentsObject called with ...
+    s|Strict|Unmapped|
+
+----------------------------------------
+In 9.4.4.7 &quot;CreateMappedArgumentsObject ( ... ) Abstract Operation&quot;:
+
+{14}
+9.4.4.7 / step 23:
+Perform DefinePropertyOrThrow(/obj/, &quot;callee&quot;, PropertyDescriptor {
+[[Value]]: /func/, [[Writab le]]: *true*, ...}).
+    The word &quot;Writable&quot; is broken over a line-break, which is odd.
+
+----------------------------------------
+In 9.4.5.5 &quot;[[Enumerate]] ()&quot;:
+
+{15}
+9.4.5.5 / step 6:
+For each integer /i/ starting with 0 such that /i/ &lt; /len/. in ascending order.
+    Change both dots to commas.
+
+----------------------------------------
+In 9.4.5.6 &quot;[[OwnPropertyKeys]] ()&quot;:
+
+{16}
+9.4.5.6 / step 6:
+For each integer /i/ starting with 0 such that /i/ &lt; /len/. in ascending order.
+    Change both dots to commas.
+
+{17}
+9.4.5.6 / step 7:
+For each own property key /P/ of /O/ that is an integer index and
+ToInteger(/P/) [&gt;=] /len/, in ascending numeric index order
+    The subordinate clause
+        &quot;that is an integer index and ToInteger(P) &gt;= len&quot;
+    is ungrammatical.  Maybe change it to
+        &quot;such that P is an integer index and ToInteger(P) &gt;= len&quot;
+
+----------------------------------------
+In 9.4.5.7 &quot;IntegerIndexedObjectCreate Abstract Operation&quot;:
+
+{18}
+9.4.5.7 / step 8:
+Set the [[OwnPropertyKeys]] internal method of /A/ as specified in 0.
+    s|0|9.4.5.6|
+
+----------------------------------------
+In 9.4.6.8 &quot;[[Get]] (P, Receiver)&quot;:
+
+{19}
+9.4.6.8 / step 5:
+Return the result of calling ... with arguments /P/ /and/ *true*.
+    De-italicize &quot;and&quot;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8232</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 17:18:23 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8601</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 17:58:36 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8842</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 13:19:53 -0700</bug_when>
+    <thetext>confirmed fixed except for:
+{7}, re-raised as Bug 2969,
+{9}, re-raised as Bug 2970,</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

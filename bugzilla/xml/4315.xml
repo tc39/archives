@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4315</bug_id>
+          
+          <creation_ts>2015-04-17 09:21:00 -0700</creation_ts>
+          <short_desc>Extend Object.is to reject suspicious invocation patterns</short_desc>
+          <delta_ts>2015-04-17 09:21:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14283</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-17 09:21:43 -0700</bug_when>
+    <thetext>The ES6 specification defines `Object.is` as follows:
+
+&gt; 19.1.2.10 Object.is ( value1, value2 )
+&gt; 
+&gt; When the is function is called with arguments value1 and value2 the following
+&gt; steps are taken:
+&gt;
+&gt;     1. Return SameValue(value1, value2).
+
+This allows for two somewhat bizarre invocations:
+
+    Object.is(undefined); // true
+    Object.is();          // true
+
+The latter looks more strange, but it is unlikely to cause problems in real code. The former presents a refactoring hazard. Generally speaking, code written like this:
+
+     if (Object.is(x,y[z])) {
+       // etc.
+     }
+
+May be mistakenly refactored as:
+
+    if (Object.is(x[z])) {
+      // etc.
+    }
+
+This kind of problem is most frequently exhibited by JavaScript assertion libraries today. By silently accepting suspicious invocation patterns, functions like these miss an important opportunity to alert developers of probable sources of errors.
+
+I&apos;d like to propose an extension to the implementation of `Object.is`:
+
+&gt; 19.1.2.10 Object.is ( value1, value2 )
+&gt; 
+&gt; When the is function is called with arguments value1 and value2 the following
+&gt; steps are taken:
+&gt;
+&gt; 1. If value1 is not present or if value2 is not present,
+&gt;    then throw a TypeError exception.
+&gt; 2. Return SameValue(value1, value2).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

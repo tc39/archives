@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2643</bug_id>
+          
+          <creation_ts>2014-04-11 11:35:00 -0700</creation_ts>
+          <short_desc>9.2.14  Function Declaration Instantiation: Bindings for function declarations not created</short_desc>
+          <delta_ts>2014-05-06 15:11:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7675</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-11 11:35:59 -0700</bug_when>
+    <thetext>9.2.14  Function Declaration Instantiation.
+
+Step 30 calls ResolveBinding() for function declaration names, but the bindings were never created in the first place.
+
+My current implementation uses instead:
+---
+For each production f in functionsToInitialize, do
+
+1. Let fn be the sole element of the BoundNames of  f
+
+2. Let fo be the result of performing InstantiateFunctionObject for f with argument env.
+
+3. If needsArgumentsBinding is true and fn is &quot;arguments&quot; and needsParameterEnvironment is false, then
+3.a Call env.SetMutableBinding(fn, fo, strict)
+
+4. Else If parameterNames contains fn and needsParameterEnvironment is false, then
+4.a Call env.SetMutableBinding(fn, fo, strict)
+
+5. Else
+5.a Call env.CreateMutableBinding(fn, false)
+5.b Call env.InitializeBinding(fn, fo)
+
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7699</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-12 00:39:34 -0700</bug_when>
+    <thetext>Step 28 instead of step 30.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7713</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-12 15:29:47 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+Now function names are not removed from varNames, so the the varNames instantiation loop will create the function bindings.  that was what I had originally intended.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8157</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 15:11:19 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

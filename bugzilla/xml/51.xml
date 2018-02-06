@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>51</bug_id>
+          
+          <creation_ts>2011-03-04 16:23:00 -0800</creation_ts>
+          <short_desc>Coverage:  Double-check that test coverage of Chapter 10 is adequate</short_desc>
+          <delta_ts>2012-01-13 09:06:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>112</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-04 16:23:51 -0800</bug_when>
+    <thetext>Chapter 10 was completely re-written for ES5.  There were test cases added within IE Test Center for at least some of these.  We need to double-check that these are thorough enough.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>113</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-04 16:27:21 -0800</bug_when>
+    <thetext>Guessing 2.5 days will be needed on this one.  Chapter 10 is rather short (only 10 pages) and not many of the sections are directly hittable.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

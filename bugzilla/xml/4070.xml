@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4070</bug_id>
+          
+          <creation_ts>2015-02-21 12:34:00 -0800</creation_ts>
+          <short_desc>15.2.1.16.1: &quot;module identifier&quot;</short_desc>
+          <delta_ts>2015-03-04 18:58:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13245</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-21 12:34:10 -0800</bug_when>
+    <thetext>In 15.2.1.16.1 &quot;Runtime Semantics: ParseModule ( sourceText )&quot;,
+the Note says:
+    An implementation may parse the source code identified by a host supplied
+    module identifier as a /Module/ ...
+
+This is obsolete terminology. Change to something like:
+
+    An implementation may parse a module source text as a /Module/ ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13269</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-23 17:52:29 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13505</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:16 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

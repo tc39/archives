@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1098</bug_id>
+          
+          <creation_ts>2012-11-29 11:27:00 -0800</creation_ts>
+          <short_desc>ToPrimitive&apos;s PreferredType parameter</short_desc>
+          <delta_ts>2015-02-18 18:21:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2906</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-29 11:27:42 -0800</bug_when>
+    <thetext>The nature of ToPrimitive&apos;s PreferredType parameter is odd. It&apos;s described as &quot;an optional hint&quot;, and its values are denoted (in the ToPrimitive algorithm, and in invocations of it) as &quot;hint Number&quot; and &quot;hint String&quot;.
+
+You could eliminate this ad-hoc-ness by using the same convention as @@ToPrimitive and OrdinaryToPrimitive. I.e., change:
+    hint Number   to   &quot;number&quot;
+and
+    hint String   to   &quot;string&quot;
+
+(If you also renamed &apos;PreferredType&apos; as &apos;hint&apos;, you could delete steps 2 and 3 of the ToPrimitive algorithm.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2937</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-01 09:53:05 -0800</bug_when>
+    <thetext>I have mixed feelings about this approach. Just using strings would simplify things.  However, the hint is strictly a specification artifact (at this level).  It seems like good hygiene to avoid using ECMAScript language values as such specification meta values.
+
+I realize the historically the spec. has been very inconsistent in the application of this &quot;rule&quot; and I suspect we will never get away from using true, false, and maybe undefined as both language and spec meta values.
+
+So, I&apos;m still not really sure which way to go on this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>167</bug_id>
+          
+          <creation_ts>2011-07-24 13:32:00 -0700</creation_ts>
+          <short_desc>10.1.2: misc typos</short_desc>
+          <delta_ts>2011-08-30 11:44:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>371</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-07-24 13:32:45 -0700</bug_when>
+    <thetext>In 10.1.2 Extended Code...
+
+The first para says:
+    &quot;Extended code is any any code...&quot;
+Delete one &quot;any&quot;.
+
+Also,
+    &quot;... that contains occurances of ...&quot;
+Change &quot;occurances&quot; to &quot;occurrences&quot;.
+
+Also,
+    &quot;...productions define subsequent to...&quot;
+Change &quot;define&quot; to &quot;defined&quot;.
+
+The last para says:
+   &quot;The “strict code” includes both actual strict mode code ...&quot;
+After &quot;The&quot;, insert &quot;phrase&quot;? &quot;term&quot;?
+Append &quot;and extended code&quot;?
+
+Also,
+   &quot;while “extended code” islucco only used to to mean actual extended code.&quot;
+Change &quot;islucco&quot; to &quot;is&quot;.
+Delete one &quot;to&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>376</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-25 15:29:02 -0700</bug_when>
+    <thetext>corrected in editor&apos;s current draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>394</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-07-27 20:54:23 -0700</bug_when>
+    <thetext>In the last para, you changed
+    “extended code” islucco only ...
+to
+    “extended code” is designates only ...
+
+but
+    is designates
+should be
+    designates
+or
+    is used to designate</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>430</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-08-30 10:56:26 -0700</bug_when>
+    <thetext>corrected in working draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

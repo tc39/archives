@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1589</bug_id>
+          
+          <creation_ts>2013-07-17 09:59:00 -0700</creation_ts>
+          <short_desc>8.1.6.2 One reference to [[CanPut]] remains</short_desc>
+          <delta_ts>2013-09-27 14:47:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4545</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2013-07-17 09:59:37 -0700</bug_when>
+    <thetext>&quot;If possible, exotic objects should not allow [[Set]] operations in situations where this definition of [[CanPut]] returns false.&quot;
+
+[[CanPut]] is not discussed anywhere else in the specification; I believe it&apos;s a leftover from an older era.
+
+(This is in the Rev 16 July draft, which the bug tracker will not let me choose.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5434</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-26 18:48:33 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5584</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:53 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

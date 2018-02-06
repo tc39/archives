@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1783</bug_id>
+          
+          <creation_ts>2013-08-16 02:51:00 -0700</creation_ts>
+          <short_desc>10.2.1.4.2: steps 3-4 should directly call CreateMutableBinding() on the Declarative Environment Record</short_desc>
+          <delta_ts>2013-08-23 08:23:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4922</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-16 02:51:05 -0700</bug_when>
+    <thetext>10.2.1.4.2 CreateMutableBinding (N, D), steps 3-4:
+
+&gt; 3.  Assert: DclRec does not already have a binding for N.
+&gt; 4.  Create a mutable binding in DclRec for N and record that it is uninitialised. If D is true record that the newly created binding may be deleted by a subsequent DeleteBinding call.
+
+These steps duplicate the work already done in &quot;10.2.1.1.2 CreateMutableBinding (N, D)&quot;, maybe just call CreateMutableBinding() directly on the Declarative Environment Record &apos;DclRec&apos;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4931</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 10:20:53 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5146</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:12 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

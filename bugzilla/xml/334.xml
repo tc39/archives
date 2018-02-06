@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>334</bug_id>
+          
+          <creation_ts>2012-04-23 13:18:00 -0700</creation_ts>
+          <short_desc>Why the Intl object cannot have non-constructor properties?</short_desc>
+          <delta_ts>2012-10-16 15:13:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roozbeh Pournader">roozbeh</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>869</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roozbeh Pournader">roozbeh</who>
+    <bug_when>2012-04-23 13:18:38 -0700</bug_when>
+    <thetext>Section 8.1 starts with &quot;Each of the properties of the Intl object is a constructor.&quot;
+
+We are considering how private extensions to the i18n functionality may be implemented in a standard way. For new functionality (say, a break iterator), we can simply add a new constructor named something like Intl.v8BreakIterator, but we are struggling to figure out how to implement things like version numbers.
+
+Let&apos;s say we want to provide a way to the user to know the version of our API and the version of ICU used in the browser build. We cannot simply have a normal readable but not writable property in the Intl object for that. We would need to make a constructor called something like Intl.v8GetVersions that people are supposed to &apos;new&apos;, and then get another object that they could investigate for the version info.
+
+Why is there such a limitation on Intl&apos;s properties?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>874</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-04-26 18:37:16 -0700</bug_when>
+    <thetext>I meant this sentence as a description of the standard properties, not as a restriction on implementation dependent additional properties. It&apos;s similar in that respect to the specification of the JSON object in Ecma-262, which starts with &quot;The JSON object is a single object that contains two functions, parse and stringify...&quot;, but of course the Conformance clause of the standard allows additional properties.
+
+Allen, what do you think - do we need to edit all such descriptions to clarify that they only describe the standard properties, or is the Conformance clause sufficient to let implementers add other properties of any type?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1043</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-06-21 17:09:22 -0700</bug_when>
+    <thetext>Changed to &quot;The value of each of the standard built-in properties of the Intl object is a constructor.&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

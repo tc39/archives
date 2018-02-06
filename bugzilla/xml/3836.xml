@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3836</bug_id>
+          
+          <creation_ts>2015-02-11 17:03:00 -0800</creation_ts>
+          <short_desc>chapter 24: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:41 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12328</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 17:03:53 -0800</bug_when>
+    <thetext>----------------------------------------
+In 24.1.1.2 &quot;IsDetachedBuffer( arrayBuffer )&quot;:
+
+{1}
+24.1.1.2 / step 1:
+Assert: Type(/arrayBuffer/) is Object and it has [[ArrayBufferData]] internal
+slot.
+
+    After &quot;has&quot;, insert &quot;an&quot;
+
+----------------------------------------
+In 24.1.1.4 &quot;CloneArrayBuffer( srcBuffer, srcByteOffset [, cloneConstructor] )&quot;:
+
+{2}
+24.1.1.4 / preamble:
+The abstract operation CloneArrayBuffer takes two parameters, an ArrayBuffer
+/srcBuffer/ an integer /srcByteOffset/ and ...
+
+    After &quot;srcBuffer&quot;, insert a comma.
+
+{3}
+24.1.1.4 / step 3:
+Else, assert IsConstructor(/cloneConstructor/) is *true*.
+
+    After &quot;assert&quot;, insert colon
+
+{4}
+24.1.1.4 / step 6:
+Let /cloneLength/ be be /srcLength/ - /srcByteOffset/.
+
+    Delete extra &quot;be&quot;
+
+----------------------------------------
+In 24.1.1.6 &quot;SetValueInBuffer (...)&quot;:
+
+{5}
+24.1.1.6 / step 7:
+Let /elementSize/ be the Number value of the Element Size specified in Table 46
+for Element Type /type/.
+
+    After &quot;Element Size&quot;, insert &quot;value&quot;
+
+----------------------------------------
+In 24.1.3.3 &quot;get ArrayBuffer [ @@species ]&quot;:
+
+{6}
+24.1.3.3 / step 1:
+Return *this*.
+
+    s|*this*|the *this* value|
+
+----------------------------------------
+In 24.3.2.2 &quot;Runtime Semantics: Quote Abstract Operation&quot;:
+
+{7}
+24.3.2.2 / step 2.b:
+Else if /C/ is u+0008 (BACKSPACE), U+000C (FORM FEED), u+000A (LINE FEED), ...
+
+    s|u+|U+| (twice)
+
+----------------------------------------
+In 24.3.2.3 &quot;Runtime Semantics: JO Abstract Operation&quot;:
+
+{8}
+24.3.2.3 / step 8.c.iii.1:
+Let /member/ be the concatenation of /member/ and code unit U+020 (SPACE).
+
+    s|020|0020|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12336</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 17:34:55 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12456</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:41 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

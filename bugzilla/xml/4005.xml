@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4005</bug_id>
+          
+          <creation_ts>2015-02-18 15:11:00 -0800</creation_ts>
+          <short_desc>24.2.2.1 DataView: Remove length integer validation and use ToLength ?</short_desc>
+          <delta_ts>2015-02-19 19:11:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12934</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:11:42 -0800</bug_when>
+    <thetext>24.2.2.1 DataView (buffer [ , byteOffset [ , byteLength ] ] )
+
+Steps 12.a-d
+
+Maybe change to:
+---
+Let viewLength be ToLength(byteLength).
+ReturnIfAbrupt(viewLength).
+---
+
+for consistency with 22.2.1.4 %TypedArray% ( buffer [ , byteOffset [ , length ] ] ) steps 14.a-b .</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12937</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:16:01 -0800</bug_when>
+    <thetext>OTOH DataView performs in general more offset and length validation (cf. GetViewValue, SetViewValue, byteOffset parameter in 24.2.2.1 DataView ).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12945</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:41:37 -0800</bug_when>
+    <thetext>that would miss the length must be an integer test in step d</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12946</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:57:07 -0800</bug_when>
+    <thetext>I meant replacing all four steps 12.a-d with ToLength, similar to 22.2.1.4 %TypedArray% steps 14.a-b.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12950</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 16:27:16 -0800</bug_when>
+    <thetext>yes, but the RangeError checks in 12.d are a legacy requirement
+
+and it actually appears that 20.2.1.4 also requires that same error check.
+
+or maybe it doesn&apos;t.  I think what I&apos;m observing when I test these in  browsers are the WebIDL argument validation rules being applied. And, that when we moved the typed arrays in to the ES6 spec. we decided that we would not bring along all of those checks (where aren&apos;t normally performed by other ES built-ins)
+
+Removing an exception isn&apos;t normally considered a breaking change, so maybe the length usage is ok. I</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12978</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 11:53:05 -0800</bug_when>
+    <thetext>It looks like existing browsers are inconsistent enought here that we probably can safely change to ToLength
+
+fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13110</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:04 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

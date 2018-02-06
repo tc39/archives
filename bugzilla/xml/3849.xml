@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3849</bug_id>
+          
+          <creation_ts>2015-02-12 18:49:00 -0800</creation_ts>
+          <short_desc>11.8.4.3: Table 34 doesn&apos;t have cell borders</short_desc>
+          <delta_ts>2015-02-19 19:11:12 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12500</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-12 18:49:08 -0800</bug_when>
+    <thetext>In 11.8.4.3 &quot;Static Semantics: SV’s&quot;,
+Table 34 &quot;String Single Character Escape Sequences&quot;
+does not have vertical lines separating its columns,
+or horizontal lines separating its rows
+(other than the line under the header row).
+
+I think it&apos;s the only table in the spec that&apos;s styled that way.
+
+For consistency, style it like other tables.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12531</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 08:44:10 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13163</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:12 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

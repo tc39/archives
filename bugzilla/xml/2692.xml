@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2692</bug_id>
+          
+          <creation_ts>2014-04-19 16:18:00 -0700</creation_ts>
+          <short_desc>chapter 9: misc editorial</short_desc>
+          <delta_ts>2014-06-01 12:49:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7839</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:18:46 -0700</bug_when>
+    <thetext>----------------------------------------
+In 9.1.5 &quot;[[GetOwnProperty]] (P)&quot;:
+
+{1}
+9.1.5 / step 1:
+Return OrdinaryGetOwnProperty with arguments /O/ and /P/.
+    This is odd phrasing.
+    Either insert &quot;the result of calling&quot;
+    or use prefix-parenthesized notation.
+    (Other calls to this operation use the latter.)
+
+----------------------------------------
+In 9.1.6 &quot;[[DefineOwnProperty]] (P, Desc)&quot;:
+
+{2}
+9.1.6 / step 1:
+Return OrdinaryDefineOwnProperty with arguments /O/, /P/, and /Desc/.
+    This is odd phrasing.
+    Either insert &quot;the result of calling&quot;
+    or use prefix-parenthesized notation.
+    (Other calls to this operation are about equally divided.)
+
+----------------------------------------
+In 9.1.13 &quot;ObjectCreate(proto, internalSlotsList) Abstract Operation&quot;:
+
+{3}
+9.1.13 / step 1:
+If /internalslotsList/ was not provided, let /internalSlotsList/ be ...
+    s|slots|Slots|
+
+----------------------------------------
+In 9.2.2 &quot;[[GetOwnProperty]] (P)&quot;:
+
+{4}
+9.2.2 / step 4:
+Return v.
+    Italicize &apos;v&apos;
+
+----------------------------------------
+In 9.2.4 &quot;[[Call]] ( thisArgument, argumentsList)&quot;:
+
+{5}
+9.2.4 / step 8:
+Let /needsThisWrapper/ to *false*.
+    s|to|be|
+
+{6}
+9.2.4 / step 10.a:
+If /thisMode/ is `strict`, then let /thisValue/ to /thisArgument/.
+    s|to|be|
+
+{7}
+9.2.4 / step 10.b.i.1:
+Let /thisValue/ to /calleeRealm/.[[globalThis]].
+    s|to|be|
+
+{8}
+9.2.4 / step 10.b.ii.1:
+if Type(/thisArgument/) is not Object, then let /needsThisWrapper/ to *true*..
+    s|to|be|
+    Delete one of the final periods.
+
+{9}
+9.2.4 / step 10.b.ii.2:
+Let /thisValue/ to /thisArgument/.
+    s|to|be|
+
+{10}
+9.2.4 / step 14.b:
+Assert: /wrapperedThis/ not not an abrupt conpletion.
+    s|not not|is not|
+
+{11}
+9.2.4 / step 14.d:
+Let /funcionEnv/ be /localEnv/&apos;s environment.
+    s|funcion|function|
+    s|environment|environment record|
+
+----------------------------------------
+In 9.2.5 &quot;FunctionInitialize Abstract Operation&quot;:
+
+{12}
+9.2.5 / step 10:
+..., then set the [[ThisMode]] internal slot of /F/ to strict.
+    Put &apos;strict&apos; in sans-serif.
+
+{13}
+9.2.5 / step 11:
+Else set the [[ThisMode]] internal slot of /F/ to global.
+    Put &apos;global&apos; in sans-serif.
+
+----------------------------------------
+In 9.2.13 &quot;CloneMethod(function, newHome, newName) Abstract Operation&quot;:
+
+{15}
+9.2.13 / step 8.c.i:
+Set the value of /new/&apos;s [[MethodName]] internal slot
+to the value of /functions/&apos;s [[MethodName]] internal slot.
+    s|functions|function|
+
+----------------------------------------
+In 9.2.14 &quot;Function Declaration Instantiation&quot;:
+
+{16}
+9.2.14 / step 5:
+If /parameterNames/ has an duplicate entries, let /hasDuplicates/ be true.
+Otherwise, let /hasDuplicates/ be false.
+    s|an|any|
+    Put &apos;true&apos; and &apos;false&apos; in bold.
+
+{17}
+9.2.14 / step 15:
+If the value of the [[ThisMode]] internal slot of /func/ is lexical, then
+    Put &apos;lexical&apos; in sans-serif.
+
+{18}
+9.2.14 / step 19:
+If /needArgumentsBinding/ is *true*, then
+    s|need|needs|
+
+{19}
+9.2.14 / step 19.a:
+If /strict/ is *true*, *then*, then
+    Delete bold &apos;then&apos;.
+
+{20}
+9.2.14 / step 21.a:
+Let /formalStatus/ be the result of performing IteratorBindingInitialisation ...
+    s|isation|ization|
+
+{21}
+9.2.14 / step 22.a:
+Let /formalStatus/ be the result of performing IteratorBindingInitialisation ...
+    s|isation|ization|
+
+{22}
+9.2.14 / step 28.d:
+Let /status/ PutValue(/fref/, /fo/).
+    After &apos;status&apos;, insert &apos;be&apos;
+
+----------------------------------------
+In 9.3.1 &quot;[[Call]] ( thisArgument, argumentsList)&quot;:
+
+{23}
+9.3.1 / step 6:
+Perform any necessary implementation defined initialisation of /calleeContext/.
+    s|isation|ization|
+
+----------------------------------------
+In 9.3.2 &quot;CreateBuiltinFunction(realm, steps, internaSlotsList) Abstract Op...&quot;:
+
+{24}
+9.3.2 / header:
+CreateBuiltinFunction(realm, steps, internaSlotsList) Abstract Operation
+    s|interna|internal|
+
+----------------------------------------
+In 9.4.2 &quot;Array Exotic Objects&quot;:
+
+{25}
+9.4.2 / para 2:
+... They also have an [[ArrayInitialisationState]] internal slot.
+    s|isation|ization|
+
+----------------------------------------
+In 9.4.2.1 &quot;[[DefineOwnProperty]] ( P, Desc)&quot;:
+
+{26}
+9.4.2.1 / step 3.a:
+Let /oldLen/ be /oldLenDesc/.[[Value]].
+    &apos;oldLenDesc&apos; is used before its definition.
+    Move 3.a to after 3.c?
+    (and while you&apos;re there, move 3.d to immediately after 3.b?)
+
+----------------------------------------
+In 9.4.2.2 &quot;ArrayCreate(length) Abstract Operation&quot;:
+
+{27}
+9.4.2.2 / step 7.a:
+Set the [[ArrayInitialisationState]] internal slot of /A/ to *true*.
+    s|isation|ization|
+
+{28}
+9.4.2.2 / step 8.a:
+Set the [[ArrayInitialisationState]] internal slot of /A/ to *false*.
+    s|isation|ization|
+
+----------------------------------------
+In 9.4.3.4 &quot;StringCreate Abstract Operation&quot;:
+
+{29}
+9.4.3.4 / step 4:
+Set the [[DefineOwnProperty]] internal method of /A/ as specified in 9.4.3.2.
+    9.4.3.2 is an algorithm for [[Enumerate]], not [[DefineOwnProperty]].
+    There isn&apos;t an algorithm for [[DefineOwnProperty]] in 9.4.3.*.
+    Delete this step?
+
+----------------------------------------
+In 9.4.4.1 &quot;[[GetOwnProperty]] (P)&quot;:
+
+{30}
+9.4.4.1 / step 6:
+If IsDATADescriptor(/desc/) is *true* and /P/ is &quot;caller&quot; and ...
+    s|DATA|Data|
+
+----------------------------------------
+In 9.4.4.3 &quot;[[Get]] (P, Receiver)&quot;:
+
+{31}
+9.4.4.3 / para 1:
+The [[Get]] internal method of an arguments exotic object
+for a with formal parameters when called with a property name /P/ ...
+    s|for a with|for a function with|
+
+{32}
+9.4.4.3 / step 7:
+ReturnIfAbrupt(/v/.
+    Insert right-paren.
+
+----------------------------------------
+In 9.4.4.4 &quot;[[Set]] ( P, V, Receiver)&quot;:
+
+{33,34,35}
+9.4.4.4 / para 1:
+The [[Get]] internal method of an arguments exotic object for a with formal
+parameters when called with a property name /P/ performs the following steps:
+    s|Get|Set|
+    s|for a with|for a function with|
+    After /P/, insert &quot;and a value /V/&quot;
+
+{36}
+9.4.4.4 / step 5.a:
+Return the result of calling the default ordinary object [[Set]] internal
+method (9.1.8) on /args/ passing /P/, /V/ and /receiver/ as the arguments.
+    s|receiver|Receiver|
+
+----------------------------------------
+In 9.4.4.6 &quot;CreateStrictArgumentsObject(formals, argumentsList) Abstract Op...&quot;:
+
+{37}
+9.4.4.6 / para 1:
+The abstract operation CreateStrictArgumentsObject called with an arguments
+/formals/ and /argumentsList/ performs the following steps:
+    Delete &quot;an&quot;
+
+{38}
+9.4.4.6 / step 6:
+Perform DefinePropertyOrThrow(/F/, &quot;caller&quot;,
+PropertyDescriptor { [[Get]]: /thrower/, [[Set]]: /thrower/, ...}).
+    &apos;F&apos; is not defined.
+    &apos;thrower&apos; is not defined.
+
+----------------------------------------
+In 9.4.4.7 &quot;CreateMappedArgumentsObject( ... ) Abstract Operation&quot;:
+
+{39}
+9.4.4.7 / para 1:
+The abstract operation CreateMappedArgumentsObject is called with
+object /func/, grammar production /formals/, List /argumentsList/,
+and environment record /env/The following steps are performed:
+    s|envThe|env. The|
+
+{40}
+9.4.4.7 / step 7:
+Set the [[Set]] internal method of /obj/ as specified in 8.
+    s|8|9.4.4.4|
+
+{41}
+9.4.4.7 / step 15.a:
+Let /val/ be the element of /args/ at 0-origined list position /index/.
+    &apos;args&apos; is not defined.
+
+{42}
+9.4.4.7 / step 17:
+Let /map/ be ObjectCreate(null).
+    Put &apos;null&apos; in bold.
+
+{43}
+9.4.4.7 / step 22:
+Perform DefinePropertyOrThrow(/F/, &quot;callee&quot;,
+PropertyDescriptor {[[Get]]: /thrower/, [[Set]]: /thrower/, ...}).
+    &apos;F&apos; is not defined.
+    &apos;thrower&apos; is not defined.
+
+----------------------------------------
+In 9.4.4.7.1 &quot;nameMakeArgGetter ( name, env) Abstract Operation&quot;:
+
+{44}
+9.4.4.7.1 / header:
+nameMakeArgGetter ( name, env) Abstract Operation
+    Delete initial &apos;name&apos;
+
+{45}
+9.4.4.7.1 / para 2:
+An ArgGetter function is an anonymous built-in function with
+[[name]] and [[env]] internal slots. When an ArgGetter function /f/
+is called with it performs the following steps:
+    Delete the &quot;with&quot; before &quot;it performs&quot;.
+
+----------------------------------------
+In 9.4.4.7.2 &quot;MakeArgSetter ( name, env) Abstract Operation&quot;:
+
+{46}
+9.4.4.7.2 / para 2:
+An ArgSetter function is an anonymous built-in function with
+[[name]] and [[env]] internal slots. When an ArgGetter function /f/
+is called with argument /value/ with it performs the following steps:
+    s|ArgGetter|ArgSetter|
+    Delete the &quot;with&quot; before &quot;it performs&quot;
+
+----------------------------------------
+In 9.4.5.1 &quot;[[GetOwnProperty]] ( P )&quot;:
+
+{47}
+9.4.5.1 / step 3.a:
+Let /numericIndex/ be CannonicalNumericString(/P/).
+    s|Cannon|Canon|
+
+----------------------------------------
+In 9.4.6 &quot;Module Exotic Objects&quot;:
+
+{}
+9.4.6 / para 1:
+A /module object/ is an exotic object that exposes the bindings exported from
+an ECMScript /Module/ (See 15.2).
+    s|ECM|ECMA|
+
+{48}
+9.4.6 / para 1:
+There is a one-to-one correspondence between the own properties of
+a module exoticobject ...
+    Insert space into &quot;exoticobject&quot;
+
+{49}
+9.4.6 / para 1:
+These are the only properties of an module exotic object.
+    s|an module|a module|
+
+{}
+9.4.6 / para 1:
+Each such property have the attributes {...}.
+    s|have|has|
+
+{50}
+9.4.6 / table / row 2:
+[[ModuleEnviornment]]
+    s|Enviornment|Environment|
+
+{51}
+9.4.6 / table / row 4:
+    Table has a row of empty cells.
+
+----------------------------------------
+In 9.4.6.8 &quot;[[Get]] (P, Receiver)&quot;:
+
+{52,53}
+9.4.6.8 / step 5:
+Return the result of calling the GetBindngValue concrete method of /env/
+with arguments (/P/, *true*).
+    s|Bindng|Binding|
+
+    The parenthesized args are odd without a prefix identifier.
+    Change (back) to &quot;... with arguments /P/ and *true*&quot;
+
+----------------------------------------
+In 9.4.6.11 &quot;[[Enumerate]] ()&quot;:
+
+{54}
+9.4.6.11 / step 1:
+Let /exports/ be the value of O&apos;s [[Exports]] internal slot.
+    Italicize &apos;O&apos;
+
+{55}
+9.4.6.11 / step 2:
+Return CreateListIternator(/exports/).
+    s|Iternator|Iterator|
+
+----------------------------------------
+In 9.4.6.12 &quot;[[OwnPropertyKeys]] ( )&quot;:
+
+{56}
+9.4.6.12 / para 1:
+When the [[OwnPropertyKeys]] internal method of an module exotic object /O/ ...
+    s|an module|a module|
+
+{57}
+9.4.6.12 / step 1:
+Let /exports/ be the value of O&apos;s [[Exports]] internal slot.
+    Italicize &apos;O&apos;
+
+{58}
+9.4.6.12 / step 2:
+Return CreateListIternator(/exports/).
+    s|Iternator|Iterator|
+
+----------------------------------------
+In 9.4.6.13 &quot;ModuleObjectCreate (environment, exports)&quot;:
+
+{59}
+9.4.6.13:
+    The operation defined by this section is never invoked.
+
+{60}
+9.4.6.13 / step 1:
+Assert: /environment/ is Declarative Environment Record.
+    After &quot;is&quot;, insert &quot;a&quot;
+
+{61}
+9.4.6.13 / step 5:
+Set /M/&apos;s [[ModuleEnviornment]] internal slot to /environment/.
+    s|Enviornment|Environment|
+
+{62}
+9.4.6.13 / step 6:
+Set /M/&apos;s [[Exports]] internal slot /exports/.
+    After &quot;slot&quot;, insert &quot;to&quot;
+
+----------------------------------------
+In 9.5.15 &quot;ProxyCreate(target, handler) Abstract Operation&quot;:
+
+{63}
+9.5.15 / step 4:
+Set /P/&apos;s essential internal methods to the definitions specified in 9.4.6.
+    The definitions in 9.4.6 are for modules. s|9.4.6|9.5| ?
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7884</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-22 15:11:26 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7954</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 00:28:26 -0700</bug_when>
+    <thetext>Not fixed in rev24:
+
+{6}
+9.2.4 / step 10.a:
+If /thisMode/ is `strict`, then let /thisValue/ to /thisArgument/.
+    s|to|be|
+
+{8}
+9.2.4 / step 10.b.ii.1:
+if Type(/thisArgument/) is not Object, then let /needsThisWrapper/ to *true*.
+    s|to|be|
+    
+{18}
+9.2.14 / step 23:
+If /needSpecialArgumentsBinding/ is *true*, then
+    s|need|needs|
+
+{59}
+Abstract operation ModuleObjectCreate() is never invoked.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8033</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:56:14 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8046</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-30 15:27:44 -0700</bug_when>
+    <thetext>Reopening due to the leftovers noted in comment 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8283</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 15:30:58 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8760</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 12:49:24 -0700</bug_when>
+    <thetext>confirmed fixed except for {59}, re-raised as Bug 2947.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

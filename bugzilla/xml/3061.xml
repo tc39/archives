@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3061</bug_id>
+          
+          <creation_ts>2014-07-24 18:02:00 -0700</creation_ts>
+          <short_desc>19.1.2.1 Object.assign does not account for throwing undefined</short_desc>
+          <delta_ts>2014-07-25 06:18:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nathan Braswell">miloignis</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9544</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nathan Braswell">miloignis</who>
+    <bug_when>2014-07-24 18:02:32 -0700</bug_when>
+    <thetext>19.1.2.1 Object.assign ( target, ...source )
+
+In step 5.i pendingException is set to be undefined.
+This is then updated in 5.j.iv.1, 5.j.v.2.a, and 5.j.v.3.b.i.
+Finally, it is checked in 5.k to see if it is still undefined, and if it is, it is then re-thrown.
+
+However, I think it is possible to throw undefined, which would be lost and not registered under this scheme of checking if pendingException is undefined.
+
+Sorry if I misunderstood something; thanks for your time!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9555</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 06:18:54 -0700</bug_when>
+    <thetext>(In reply to Nathan Braswell from comment #0)
+
+In steps 5.j.iv.1, 5.j.v.2.a, and 5.j.v.3.b.i, `pendingException` is updated to a Completion Record (see Section 6.2.2). For instance, if `undefined` is thrown, you don&apos;t get a bare `undefined`, but:
+
+    Completion{[[type]]: throw, [[value]]: undefined, [[target]]: empty}</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

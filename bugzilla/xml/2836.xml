@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2836</bug_id>
+          
+          <creation_ts>2014-05-10 12:00:00 -0700</creation_ts>
+          <short_desc>use of &quot;UTC&quot;</short_desc>
+          <delta_ts>2015-02-18 14:40:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8300</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-10 12:00:36 -0700</bug_when>
+    <thetext>Recapping items 5-8 of Bug 2701:
+
+20.3.2.1 / step 5.a:
+20.3.2.2 / step 10.a:
+20.3.2.3 / step 14.a:
+20.3.2.3 / step 15.a:
+These say:
+    &quot;... the time value (UTC) identifying the current time.&quot;
+
+[And there are other uses of the term &quot;UTC&quot;.]
+
+--------
+I said:
+
+Saying &quot;(UTC)&quot; suggests that a time value is bound to a particular time zone, which it isn&apos;t.
+
+--------
+Allen Wirfs-Brock replied:
+
+Saying (UTC) means the exact opposite:  that the time value is a universal time
+rather than  a local time associated with a particular time zone. See the
+definition of time value in 20.3.1.1.
+
+Removing the &quot;(UTC)&quot; would make these phrases ambiguous WRT whether the
+resulting timevalue should be a UTC value or a locally adjusted value.
+
+These particular phrases have been in the ES spec. since the introduction of
+Date object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8301</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-10 12:01:46 -0700</bug_when>
+    <thetext>&gt; Saying (UTC) means the exact opposite:  that the time value is a universal
+&gt; time rather than  a local time associated with a particular time zone.
+
+That appears to be a somewhat wishful interpretation of UTC.
+
+For most people&apos;s purposes, UTC is equivalent to GMT, which is more obviously bound to a time zone.
+
+Also, as 20.3.1.1 makes clear:
+    In time values leap seconds are ignored.
+    It is assumed that there are exactly 86,400,000 milliseconds per day.
+These statements are not true of UTC.
+
+
+&gt; See the definition of time value in 20.3.1.1.
+
+Yes, in fact, to avoid these concerns, it would be better for the spec to say something like:
+    &quot;... the time value (see 20.3.1.1) identifying the current time.&quot;
+
+
+&gt; Removing the &quot;(UTC)&quot; would make these phrases ambiguous WRT whether the
+&gt; resulting timevalue should be a UTC value or a locally adjusted value.
+
+Given how 20.3.1.1 defines &apos;time value&apos;, I don&apos;t think that ambiguity exists. But if you think it does, it would perhaps be better to clarify that in one spot, rather than multiple spots. E.g., maybe add a paragraph to 20.3.1.1 about the meaning of the phrase &quot;a time value identifying the current time&quot;. (Perhaps introduce a shorter term like &quot;the current time value&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8487</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-05-15 03:56:40 -0700</bug_when>
+    <thetext>There is also the introductory paragraph of Section 20.3.2 (The Date Constructor): 
+
+    &quot;When Date is called as a function rather than as a constructor, it returns a String representing the current time (UTC).&quot; 
+
+The precision &quot;(UTC)&quot;, at least when interpreted non-convolutedly, is contradicted by every implementation I&apos;ve tried, for all of them give me a local time, e.g.: 
+
+    &quot;Thu May 15 2014 09:15:16 GMT+0200 (CEST)&quot;
+
+In order to avoid such a confusion, and similar ones, one should be precise on the vocabulary used.
+
+* On the one hand, the notion of local time, time zone or universal time, and the abbreviation &quot;UTC&quot;, are relevant when a time is expressed as an hour within a given day, e.g: &quot;9.30am&quot;. 
+* On the other hand, a number of milliseconds (or days, or whatever) is just expressing a difference between two instants, and is independent to the notion of timezone or UTC. The &quot;millisecond&quot; is a duration completely defined by the International System of Units.
+
+In fact, the spec is itself confused about the term &quot;time value&quot;:
+
+* In Section 20.3.1.1, the technical term &quot;time value&quot; seems to be defined as the number of milliseconds since the Epoch, plus a correction regarding leap seconds. Note that such a number isn&apos;t itself in UTC for any correct meaning of &quot;UTC&quot;, even if some parts of its definition refer more or less implicitly to Universal Coordinated Time, such as the notion of leap second, or the usual definition of the Epoch. 
+
+* Section 20.3.1.6 Week Day (as a random example) gives a formula that computes the &quot;weekday for a particular time value /t/&quot;. But the &quot;time value /t/&quot; used in that formula corresponds precisely to the number of milliseconds since 1st Jan 1970 midnight in a given timezone, in contradiction of the definition of &quot;time value&quot; given in Section 20.3.1.1.
+
+In order to add clarity, one should use the technical term &quot;time value&quot; only exactly as defined in Section 20.3.1.1, rather than adding a spurious (UTC) precision in some cases. For instance, the introductory text of Section 20.3.1.6 could say: &quot;The operator WeekDay calculates a week day from a given number of milliseconds since 1st Jan 1970 midnight in a given timezone .&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

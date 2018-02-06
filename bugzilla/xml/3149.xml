@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3149</bug_id>
+          
+          <creation_ts>2014-08-25 05:30:00 -0700</creation_ts>
+          <short_desc>21.2.5.10 RegExp.prototype.split: update the NOTE 1 at the end of the section</short_desc>
+          <delta_ts>2014-10-14 15:17:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2662</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9860</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-25 05:30:32 -0700</bug_when>
+    <thetext>21.2.5.10 RegExp.prototype.split
+
+The NOTE 1 at the end of that section says:
+
+  The split method ignores the value of the global property of this RegExp object.
+
+Two things:
+* It is now the &quot;global flag&quot; rather than the &quot;global property&quot;.
+* It should be mentioned that the sticky flag is also ignored.
+
+That said, if we change the algorithm in order to use `exec` instead of directly the RegExp matcher (according Bug 2662), that NOTE is not guaranteed to be true for user-defined strangely-behaving subclasses of RegExp, because one couldn&apos;t force it to ignore the flags.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9862</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-25 06:04:54 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #0)
+&gt; * It is now the &quot;global flag&quot; rather than the &quot;global property&quot;.
+
+Sorry, this is still the &quot;global property&quot; (and the &quot;sticky property&quot;) according to the RegExpBuiltinExec algorithm (Section 21.2.5.2.2), steps 7 and 9.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10017</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-29 13:20:11 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+added mention of the &quot;sticky&quot; property to the note.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10431</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:52 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

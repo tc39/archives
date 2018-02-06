@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>336</bug_id>
+          
+          <creation_ts>2012-05-08 06:23:00 -0700</creation_ts>
+          <short_desc>Typo: Consice =&gt; Concise</short_desc>
+          <delta_ts>2012-06-16 09:47:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>897</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 06:23:44 -0700</bug_when>
+    <thetext>Spelling/typo:
+
+&quot;consice&quot; should be &quot;concise&quot; 
+
+eg. ConsiceBody should should by ConciseBody
+
+
+Found in:
+
+P.146 
+
+ArrowFunction : ArrowParameters =&gt; ConsiceBody
+
+  It is a Syntax Error if any element of the LexicallyDeclaredNames of ConsiceBody also occurs in the VarDeclaredNames of ConsiceBody.
+
+  It is a Syntax Error if any element of the BoundNames of ArrowParameters also occurs in the LexicallyDeclaredNames of ConsiceBody.
+  It is a Syntax Error if ConsiceBody Contains YieldExpression.
+
+
+P.147
+
+ArrowFunction : ArrowParameters =&gt; ConsiceBody
+
+
+P. 148 
+
+ConsiceBody : [lookahead  { { }] AssignmentExpression
+
+
+P. 150
+
+It is a Syntax Error if ConsiceBody Contains YieldExpression.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>902</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-08 08:50:51 -0700</bug_when>
+    <thetext>fixed in editor&apos;s working draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>921</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-10 17:46:29 -0700</bug_when>
+    <thetext>*** Bug 344 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

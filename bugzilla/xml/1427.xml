@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1427</bug_id>
+          
+          <creation_ts>2013-04-11 12:53:00 -0700</creation_ts>
+          <short_desc>15.4.2: Typo &quot;argumentsList be the be the argumentsList&quot;</short_desc>
+          <delta_ts>2013-05-14 18:13:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3622</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 12:53:31 -0700</bug_when>
+    <thetext>Typo in step 2 of 15.4.2:
+&gt; 2.  Let argumentsList be the be the argumentsList argument</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3623</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 12:56:20 -0700</bug_when>
+    <thetext>Also in the same section:
+&gt; If Array is implemented as an ordianary function object [...]
+
+Typo &quot;ordianary&quot; -&gt; &quot;ordinary&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3630</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 13:46:41 -0700</bug_when>
+    <thetext>Same issues also present in 15.7.2.1, and in 15.5.2.1 + 15.9.3.1 &quot;ordianary&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3736</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 13:11:33 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3934</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:41 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

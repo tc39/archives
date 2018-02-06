@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>345</bug_id>
+          
+          <creation_ts>2012-05-10 14:54:00 -0700</creation_ts>
+          <short_desc>Error in specification of switch statement 12.11</short_desc>
+          <delta_ts>2015-10-02 14:32:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>918</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-10 14:54:59 -0700</bug_when>
+    <thetext>There is an error in the specification of the switch statement in 12.11.
+
+A switch statement like:
+
+switch (100) {
+ case 1: alert(1);
+ default: alert(&quot;default&quot;);
+ case 2: alert(2);
+}
+
+should alert &quot;default&quot; followed by &quot;2&quot; because there isn&apos;t a break statement at the end of the default clause&apos;s statement list.
+
+As specified in the ES5/5.1 spec. the &quot;2&quot; will not appear.  The loop in step is intended to evaluate all of the statement list following the default clause in situations like this.  However, as written is doesn&apos;t because list B has already been iterated to its end  by the loop in 7.a.
+
+The correction is to add a new step between 8 and 9 that says:
+   If foundInB is false, reset list B to so it will iterate from its beginning. 
+
+also the note in step 9 should be modified to say set 7.a.iii.1 instead of 7.a.i</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>919</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-10 17:30:36 -0700</bug_when>
+    <thetext>marked as in progress to indiate in need to go into the errata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14719</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:32:58 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

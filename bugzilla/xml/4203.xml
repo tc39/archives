@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4203</bug_id>
+          
+          <creation_ts>2015-03-19 14:20:00 -0700</creation_ts>
+          <short_desc>9.2.8 MakeConstructor (F, writablePrototype, prototype)</short_desc>
+          <delta_ts>2015-04-03 12:35:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>coolwust</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13917</commentid>
+    <comment_count>0</comment_count>
+    <who name="">coolwust</who>
+    <bug_when>2015-03-19 14:20:48 -0700</bug_when>
+    <thetext>If I understand correctly, can I rewrite the algorithms like follows:
+
+1. ...
+2. ...
+3. ...
+4. If the writablePrototype argument was not provided, then
+   a. Let writablePrototype be true.
+5. If the prototype argument was not provided, then
+   b. Let prototype be ObjectCreate(%ObjectPrototype%).
+   a. Let status be DefinePropertyOrThrow(prototype, &quot;constructor&quot;, ...)
+   b. Assert: status is not an abrupt completion.
+6. Let status be DefinePropertyOrThrow(F, &quot;prototype&quot;, ...)
+7. ...
+
+It&apos;s kinda more clear.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13979</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 09:22:58 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14095</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:38 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

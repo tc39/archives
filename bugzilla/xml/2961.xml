@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2961</bug_id>
+          
+          <creation_ts>2014-06-02 09:15:00 -0700</creation_ts>
+          <short_desc>9.2.13 Function Declaration Instantiation: Visibility of function declaration with name &quot;arguments&quot;?</short_desc>
+          <delta_ts>2014-07-19 18:06:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8795</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-06-02 09:15:27 -0700</bug_when>
+    <thetext>9.2.13  Function Declaration Instantiation(func, argumentsList, env ) Abstract
+Operation
+
+In general default parameter expressions cannot access inner function declarations. There is currently one exception to this rule: If the inner function declaration is named &quot;arguments&quot;, default parameter expressions have access to that function. 
+
+Q: Is it necessary to handle this special case?
+
+
+Test case:
+---
+function f1(g = arguments) {
+  function arguments() { }
+}
+f1(); // Throws ReferenceError: binding is not initialized: &quot;arguments&quot;
+
+function f2(g = () =&gt; arguments) {
+  function arguments() { }
+  return g();
+}
+f2(); // Returns `function arguments() { }`
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9155</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-11 12:01:04 -0700</bug_when>
+    <thetext>fixed in rev26.
+
+Took some more redesign of 9.2.13.  The result of your tests should  be:
+
+function f1(g = arguments) {
+  function arguments() { }
+}
+f1(); // No error, parameter list arguments binding is  initialized: to arguments object
+
+function f2(g = () =&gt; arguments) {
+  function arguments() { }
+  return g();
+}
+f2(); // Returns f2&apos;s arguments object</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9364</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:06:38 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

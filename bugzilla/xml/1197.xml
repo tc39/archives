@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1197</bug_id>
+          
+          <creation_ts>2013-01-16 22:25:00 -0800</creation_ts>
+          <short_desc>&quot;IsPropertyKey(P) is true&quot; not struck-through</short_desc>
+          <delta_ts>2013-03-08 14:44:32 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3122</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-16 22:25:26 -0800</bug_when>
+    <thetext>On the page labelled &quot;55&quot; (#67 in the PDF),
+after the end of section 8.3.10,
+there is some struck-through text,
+beginning with:
+
+    8.3.9 [[HasProperty]] (P)
+
+    When the [[HasProperty]] internal method of O is called with property key P,
+    the following steps are taken:
+
+    1. Assert: IsPropertyKey(P) is true.
+
+On that last line, the text &quot;IsPropertyKey(P) is true&quot; is not struck-through,
+but presumably should be.
+
+(Mind you, why does the &quot;pdf without markup&quot; have struck-through text in the first place? I would only have expected to see it in the pdfs with change markup.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3231</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-25 16:17:38 -0800</bug_when>
+    <thetext>Those were explicitly shown as struck-out rather than just deleted to make sure that there was sufficient visibility of the fact that they were gone.
+
+But they&apos;ve been that way long enough, so now I&apos;m just deleting the text.
+
+fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3391</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:32 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

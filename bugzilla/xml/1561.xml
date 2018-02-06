@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1561</bug_id>
+          
+          <creation_ts>2013-06-18 05:45:00 -0700</creation_ts>
+          <short_desc>Wrong error messages in test S12.6.1_A1.</short_desc>
+          <delta_ts>2014-07-10 14:32:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Martin Bodin">martin.bodin</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>jaimelynschatz</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4239</commentid>
+    <comment_count>0</comment_count>
+    <who name="Martin Bodin">martin.bodin</who>
+    <bug_when>2013-06-18 05:45:44 -0700</bug_when>
+    <thetext>Hi,
+
+I was reading the test S12.6.1_A1 and I didn’t understood it until I realize that the error messages wasn’t matching the tested property.
+
+For instance, the test begins with:
+var __in__do;
+
+do __in__do=1; while ( false );
+
+//////////////////////////////////////////////////////////////////////////////
+//CHECK#1
+if (__in__do!==1) {
+	$ERROR(&apos;#1: false evaluates to false&apos;);
+}
+
+Mmmh…  If “false” doesn’t evaluate to false due to oddities of the JS interpreter, then the loop won’t terminate and this message won’t ever happen.
+I think the error message should be “$ERROR(&apos;#1:  the inner statement of a do-loop should be executed.&apos;)”.  The current one is quite ununderstandable.
+
+Martin.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7003</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jaime">jaimelynschatz</who>
+    <bug_when>2014-01-26 16:25:14 -0800</bug_when>
+    <thetext>pull request submitted to Github.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>407</bug_id>
+          
+          <creation_ts>2012-06-22 15:20:00 -0700</creation_ts>
+          <short_desc>String.prototype.localeCompare spec inconsistent about canonical equivalence</short_desc>
+          <delta_ts>2014-12-01 20:22:54 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1045</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-06-22 15:20:12 -0700</bug_when>
+    <thetext>From Markus Scherer&apos;s comments on internationalization support in ECMAScript edition 4 (applicable to all editions from ES3 to ES6 draft 8):
+
+Edition 3 section 15.5.4.9 String.prototype.localeCompare() has a very abbreviated explanation of canonical equivalence, and one part requires canonical equivalence while another only recommends it.
+
+Proposal: To update the text for this function by largely referring to relevant sections of the Unicode Standard, without expanding the required semantics of the function. Specifically (changes with &lt;del&gt;deletion&lt;/del&gt; and &lt;ins&gt;insertion&lt;/ins&gt;):
+
+In the second NOTE make the following changes: &quot;This function is intended to rely on whatever language-sensitive comparison functionality is available to the ECMAScript environment from the host environment, and to compare according to the ruls of the host environment&apos;s current locale. It is &lt;del&gt;strongly recommended&lt;/del&gt; &lt;ins&gt;required&lt;/ins&gt; that this function treat strings that are canonically equivalent according to the Unicode standard as identical &lt;del&gt;(in other words, compare the strings as if they had both been converted to Normalised Form C or D first)&lt;/del&gt;. It is also recommended that this function not honour Unicode compatibility equivalences or decompositions. &lt;ins&gt;For a definition and discussion of canonical equivalence see the Unicode Standard, chapters 2 and 3, as well as &lt;a href=&quot;http://www.unicode.org/reports/tr15/&quot;&gt;UAX #15&lt;/a&gt; Unicode Normalization Forms and &lt;a href=&quot;http://www.unicode.org/notes/tn5/&quot;&gt;UTN #5&lt;/a&gt; Canonical Equivalence in Applications. See also &lt;a href=&quot;http://www.unicode.org/reports/tr10/&quot;&gt;UTS #10&lt;/a&gt; Unicode Collation Algorithm.&quot;&lt;/ins&gt;
+
+Change the following paragraph: &quot;If no language-sensitive comparison at all is available from the host environment, this function may perform a &lt;del&gt;bitwise&lt;/del&gt; &lt;ins&gt;canonical equivalence&lt;/ins&gt; comparison.
+
+https://sites.google.com/site/markusicu/unicode/es/i18n-2003#Comparisons</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5910</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-18 15:49:53 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6109</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:52 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9433</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 22:32:47 -0700</bug_when>
+    <thetext>Checked in rev 26 draft:
+
+In the old version, the normative text required that implementations detect canonical equivalence, but the non-normative text only recommended that.
+
+In the new version, the normative text added a loophole for implementations that don&apos;t have a locale-sensitive implementation available, in which case they don&apos;t have to detect canonical equivalence either, but now the non-normative text requires detection of canonical equivalence.
+
+I believe the right solution is to revert the normative text to requiring detection of canonical equivalence. Note that canonical equivalence has nothing to do with language sensitivity - it&apos;s a core feature of the Unicode Standard that makes up for the fact that compatibility with legacy character encodings required Unicode to occasionally provide two different encodings for what humans would consider the same character.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9723</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 16:27:02 -0700</bug_when>
+    <thetext>fixed again in rev27 editor&apos;s draft
+
+made canonically equivalent comparison mandatory and  eliminated all normative mentions of host environment capabilities. 
+
+Rationale:  since we require an implementation to provide String.prototype.normalize is isn&apos;t really an extra burden to require this function to do canonically equivalent comparison.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9920</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:25 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10695</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 20:22:54 -0800</bug_when>
+    <thetext>Very nice - thank you!
+
+Verified in rev 28 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

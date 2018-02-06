@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1816</bug_id>
+          
+          <creation_ts>2013-08-26 09:40:00 -0700</creation_ts>
+          <short_desc>15.4.3.31 Array.prototype.copyWithin typo: copyWith</short_desc>
+          <delta_ts>2013-10-01 21:16:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jordan Harband">ljharb</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5222</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2013-08-26 09:40:06 -0700</bug_when>
+    <thetext>- %TypedArray%#copyWithin refers to the Array#copyWithin spec at 15.4.3.23, but it&apos;s actually at 15.4.3.31.
+- it&apos;s there named &quot;copyWith&quot;, not &quot;copyWithin&quot;.
+- when describing the arity, it refers to Array#fill
+- In describing the algorithm, it starts referring to a &quot;from&quot; and &quot;to&quot; parameter that aren&apos;t referenced previously.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5371</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-10 14:04:57 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft
+
+22.1.3.3
+22.2.3.5
+
+Note that to/from are defined in steps 9 and 12</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5522</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:12 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5732</commentid>
+    <comment_count>3</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2013-09-30 15:49:15 -0700</bug_when>
+    <thetext>I&apos;m being pedantic, but there&apos;s one more occurrence: Note 1 at the bottom of section 22.1.3.3, the sentence &quot;Whether the copyWith function can be applied successfully to an exotic object that is not an Array is implementation-dependent.&quot; - s/copyWith/copyWithin.
+
+Also, is &quot;exotic object&quot; still relevant with the Symbol changes?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5735</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-09-30 16:54:08 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Also, is &quot;exotic object&quot; still relevant with the Symbol changes?
+
+With regard to?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5736</commentid>
+    <comment_count>5</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2013-09-30 17:00:16 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; (In reply to comment #3)
+&gt; &gt; Also, is &quot;exotic object&quot; still relevant with the Symbol changes?
+&gt; 
+&gt; With regard to?
+
+I&apos;m not very informed on symbols/exotic objects etc, I just noticed a bunch of changes in this rev of Symbol being a primitive instead of an exotic object, so i thought i&apos;d bring it up. I&apos;m not thinking of anything specific.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5768</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-01 08:25:53 -0700</bug_when>
+    <thetext>&quot;exotic object&quot; is spec terminology used to describe any object that requires functionality that is outside of the Meta Object Protocol (MOP). There is good discussion in the Nov 2012 meeting notes: https://github.com/rwaldron/tc39-notes/blob/master/es6/2012-11/nov-27.md#meta-object-protocol-aka-mop</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5772</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-01 12:44:58 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; &quot;exotic object&quot; is spec terminology used to describe any object that requires
+&gt; functionality that is outside of the Meta Object Protocol (MOP). 
+
+Actually, its any object that requires an implement of any of the MOP functions that is different than those provided in http://people.mozilla.org/~jorendorff/es6-draft.html#sec-9.1 
+
+Objects that exactly implement the MOP as described in that section are called &quot;ordinary objects&quot;
+
+All objects, whether ordinary or exotic must support the full MOP interface.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5773</commentid>
+    <comment_count>8</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-01 15:32:02 -0700</bug_when>
+    <thetext>(In reply to comment #7)
+&gt; (In reply to comment #6)
+&gt; &gt; &quot;exotic object&quot; is spec terminology used to describe any object that requires
+&gt; &gt; functionality that is outside of the Meta Object Protocol (MOP). 
+&gt; 
+&gt; Actually, its any object that requires an implement of any of the MOP functions
+&gt; that is different than those provided in
+&gt; http://people.mozilla.org/~jorendorff/es6-draft.html#sec-9.1 
+&gt; 
+&gt; Objects that exactly implement the MOP as described in that section are called
+&gt; &quot;ordinary objects&quot;
+&gt; 
+&gt; All objects, whether ordinary or exotic must support the full MOP interface.
+
+If I understand correctly, an exotic object becomes exotic (from ordinary) in both cases, unless that&apos;s changed since you first introduced exotic objects last fall (introduced to the spec that is). Or it&apos;s simply evolved and become more specific? I refer, again, to this conversation: https://github.com/rwaldron/tc39-notes/blob/master/es6/2012-11/nov-27.md#meta-object-protocol-aka-mop</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5793</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-01 19:43:26 -0700</bug_when>
+    <thetext>(In reply to comment #8)
+
+&gt; If I understand correctly, an exotic object becomes exotic (from ordinary) in
+&gt; both cases, unless that&apos;s changed since you first introduced exotic objects
+&gt; last fall (introduced to the spec that is). Or it&apos;s simply evolved and become
+&gt; more specific? I refer, again, to this conversation:
+&gt; https://github.com/rwaldron/tc39-notes/blob/master/es6/2012-11/nov-27.md#meta-object-protocol-aka-mop
+
+Well that says an ordinary object is any object that &quot;uses the standard MOP semantics&quot; and an exotic object is any object that is not an ordinary object.
+
+So, it&apos;s the standard MOP semantics that is the key differentiators.  The MOP interface is the same in either case.  This hasn&apos;t really changed since I introduced the terms.  However, the second half of the exotic definition in the notes is kind of sloppy &quot;which means anything that specifies the use of something that is not in the MOP.&quot; Particularly it isn&apos;t clear what &quot;use of&quot; really means.  But really, it&apos;s any MOP operation that does anything different form the ordinary MOP specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5796</commentid>
+    <comment_count>10</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-01 21:16:12 -0700</bug_when>
+    <thetext>(In reply to comment #9)
+&gt; (In reply to comment #8)
+&gt; 
+&gt; &gt; If I understand correctly, an exotic object becomes exotic (from ordinary) in
+&gt; &gt; both cases, unless that&apos;s changed since you first introduced exotic objects
+&gt; &gt; last fall (introduced to the spec that is). Or it&apos;s simply evolved and become
+&gt; &gt; more specific? I refer, again, to this conversation:
+&gt; &gt; https://github.com/rwaldron/tc39-notes/blob/master/es6/2012-11/nov-27.md#meta-object-protocol-aka-mop
+&gt; 
+&gt; Well that says an ordinary object is any object that &quot;uses the standard MOP
+&gt; semantics&quot; and an exotic object is any object that is not an ordinary object.
+&gt; 
+&gt; So, it&apos;s the standard MOP semantics that is the key differentiators.  The MOP
+&gt; interface is the same in either case.  This hasn&apos;t really changed since I
+&gt; introduced the terms.  However, the second half of the exotic definition in the
+&gt; notes is kind of sloppy &quot;which means anything that specifies the use of
+&gt; something that is not in the MOP.&quot; Particularly it isn&apos;t clear what &quot;use of&quot;
+&gt; really means.  But really, it&apos;s any MOP operation that does anything different
+&gt; form the ordinary MOP specification.
+
+Great, thanks for clarifying</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

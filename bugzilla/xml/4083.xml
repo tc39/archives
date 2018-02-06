@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4083</bug_id>
+          
+          <creation_ts>2015-02-24 13:57:00 -0800</creation_ts>
+          <short_desc>Module exotic object and GetOwnProperty?</short_desc>
+          <delta_ts>2015-07-10 08:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>adamk</cc>
+    
+    <cc>andrebargull</cc>
+    
+    <cc>d</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13312</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-24 13:57:27 -0800</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-module-namespace-exotic-objects-getownproperty-p
+
+Why does [[GetOwnProperty]] throw here?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13356</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 15:17:03 -0800</bug_when>
+    <thetext>Mostly to avoid any implication that the properties that correspond to module exports are specifically either data properties or accessor properties.   (they really are neither). Returning undefined wouldn&apos;t be right either, because that would imply that the property doesn&apos;t exist.
+
+More generally module objects are very exotic and the reflection that is supported on them is very limited.  You can enumerate the the exported name property and test to see whether a property exists or access its values, but not very much else.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13358</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-25 15:22:11 -0800</bug_when>
+    <thetext>My concern is that some spec algorithms use [[GetOwnProperty]] and now they are going to throw. 
+
+Sorry for rehashing this but what were the reasons we decided to not uses getters for these?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13360</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 15:34:09 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; My concern is that some spec algorithms use [[GetOwnProperty]] and now they
+&gt; are going to throw. 
+&gt; 
+&gt; Sorry for rehashing this but what were the reasons we decided to not uses
+&gt; getters for these?
+
+Then the get functions would be exposed and could be passed around. Instead we over-ride [[Get]].
+
+What algorithms that use [[GetOwnProperty]] would be reasonably applied to a module namespace object?  If we really need to support that, the way to do it would be for them to expose the attributes of a data property, rather than an accessor.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13361</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 15:41:23 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; 
+&gt; What algorithms that use [[GetOwnProperty]] would be reasonably applied to a
+&gt; module namespace object? 
+
+I just did a quick check (including HasOwnProperty which is defined in terms of [[GetOwnProperty]]) and I didn&apos;t see any that would be an issue</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13394</commentid>
+    <comment_count>5</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-26 10:37:16 -0800</bug_when>
+    <thetext>The only one I can think of that will be very confusing to people is getOwnPropertyDescriptor.
+
+&gt; Then the get functions would be exposed and could be passed around. Instead we over-ride [[Get]].
+
+Why is that a problem?
+
+Even if you don&apos;t want that to work we could make getters work. They could do some kind of &quot;brand check&quot; to ensure that the function is called with the right this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13395</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 11:05:38 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #5)
+&gt; The only one I can think of that will be very confusing to people is
+&gt; getOwnPropertyDescriptor.
+
+The existence of Proxy makes any use of the Object.* meta operations upon arbitrary objects totally unpredictable .
+
+&gt; 
+&gt; &gt; Then the get functions would be exposed and could be passed around. Instead we over-ride [[Get]].
+&gt; 
+&gt; Why is that a problem?
+&gt; 
+&gt; Even if you don&apos;t want that to work we could make getters work. They could
+&gt; do some kind of &quot;brand check&quot; to ensure that the function is called with the
+&gt; right this.
+
+To me, the whole point of having a MOP is that specialized object behaviors can be defined without exposing implementation details like the use of accessor properties.  What benefit is there to requiring an implementation to expose accessor properties (other than making down version trans-compilation easier in the absence of Proxies).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13396</commentid>
+    <comment_count>7</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-26 11:25:09 -0800</bug_when>
+    <thetext>Anything that is exotic requires a &quot;proxy&quot; which will lead to higher implementation costs and performance penalty.
+
+This is not about transpilers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13398</commentid>
+    <comment_count>8</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-26 12:13:37 -0800</bug_when>
+    <thetext>Strongly agreed. The presence of a well-specified MOP does not change the fact that exotic objects are painful exceptions to the language for both authors and implementers. We should not be introducing more exotic objects like this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13402</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 14:34:46 -0800</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #8)
+&gt; Strongly agreed. The presence of a well-specified MOP does not change the
+&gt; fact that exotic objects are painful exceptions to the language for both
+&gt; authors and implementers. We should not be introducing more exotic objects
+&gt; like this.
+
+Module name space objects, howeever they are specified are highly exotic.  Look at the rest of their behavior particularly their [[Get]] behavior. That burden is there however you look at it.
+
+The current specification gives implementors maximal flexibility in how they go about support their module linkage semantics. 
+
+I&apos;d entertain an argument that that their [[GetOwnProperty]] should report the exported names as non-configurable, non-writeable, enumerable data properties.  But requiring exposing them as an accessor property with an visible per name per namespace get attribute function is a very bad idea.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13405</commentid>
+    <comment_count>10</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 15:02:41 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #9)
+&gt; I&apos;d entertain an argument that that their [[GetOwnProperty]] should report
+&gt; the exported names as non-configurable, non-writeable, enumerable data
+&gt; properties. 
+
+Non-configurable and non-writeable is not possible without violating the essential internal method invariants. Only non-configurable and writeable is valid. (Even if a property is reported as writable, it&apos;s not required to expose a mechanism to give the property a different value.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13406</commentid>
+    <comment_count>11</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-26 15:03:53 -0800</bug_when>
+    <thetext>Isn&apos;t it a violation to throw as well? It should be.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13407</commentid>
+    <comment_count>12</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 15:10:49 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #11)
+&gt; Isn&apos;t it a violation to throw as well? It should be.
+
+No, throwing is always allowed - otherwise revocable proxies wouldn&apos;t be possible. Or in general all proxies because user code in proxy traps can throw.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13408</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 15:19:26 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #10)
+&gt; 
+&gt; Non-configurable and non-writeable is not possible without violating the
+&gt; essential internal method invariants. Only non-configurable and writeable is
+&gt; valid. (Even if a property is reported as writable, it&apos;s not required to
+&gt; expose a mechanism to give the property a different value.)
+
+Yes, of course! It would have to be writable: true.  Of course, [[Set]] and [[DefineOwnProperty]] still unconditionally return false (in other words, refuse to modify the value)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13731</commentid>
+    <comment_count>14</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 11:42:44 -0700</bug_when>
+    <thetext>I&apos;m not going to change this, as none of the arguments presented seem sufficient to change this intentional design decision.  Exposing get functions via accessors property descriptors still seems like a bad idea. Exposing them as data properties would require saying that they are writable: true. and that seems  likely to mess up user written reflection algorithms.
+
+Throwing here seems like appropriate notification that you shouldn&apos;t be reflecting upon module namespace objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13739</commentid>
+    <comment_count>15</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-03-15 21:21:55 -0700</bug_when>
+    <thetext>Allen, you did not answer Erik&apos;s question
+
+
+&gt;&gt; Then the get functions would be exposed and could be passed around. Instead we over-ride [[Get]].
+&gt;
+&gt; Why is that a problem?
+
+Indeed, it seems to be no more of a problem than exposing `import * as foo from &apos;foo&apos;; export function getMNOProperty() { return foo.bar; }`.
+
+I think it&apos;s not appropriate to close this without further discussion given there is implementer feedback that this will make the spec harder to implement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13743</commentid>
+    <comment_count>16</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 10:46:39 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #15)
+&gt; Allen, you did not answer Erik&apos;s question
+&gt; 
+&gt; 
+&gt; &gt;&gt; Then the get functions would be exposed and could be passed around. Instead we over-ride [[Get]].
+&gt; &gt;
+&gt; &gt; Why is that a problem?
+&gt; 
+&gt; Indeed, it seems to be no more of a problem than exposing `import * as foo
+&gt; from &apos;foo&apos;; export function getMNOProperty() { return foo.bar; }`.
+
+
+It would force an implementation to create and expose a distinct get function for each property of a Module Namespace object that is exposed via [[GetOwnProperty]]. Those function would only need to exist because of the need to populated the property descriptor. While those functions could be lazily created, they would presumably need to be indefinitely retained, because there would be a reasonable expectation that:
+    Reflect.getOwnOPropertyDescriptor(someModNS. &quot;foo&quot;).get === Reflect.getOwnOPropertyDescriptor(someModNS. &quot;foo&quot;).get
+
+But this is really about about something much deeper. Module Namespace objects are not ordinary objects and their properties are not accessor properties.
+
+Their essential behavior is defined in terms of their [[Get]] and [[Set]] internal methods, not in terms of [[GetOwnProperty]] and [[DefineOwnProperty]].
+
+Changing that intentional part of the design would be a much bigger issues, than what we have been talking about so far. (And not the topic of this bug)
+
+&gt; 
+&gt; I think it&apos;s not appropriate to close this without further discussion given
+&gt; there is implementer feedback that this will make the spec harder to
+&gt; implement.
+
+There are many implementors and many opinions. 
+(No disrespect to Arv, he just made a general observation and one that I don&apos;t necessarily disagree with. There are always trade-off involved when choosing to define exotic objects. The general observation applies at least as much to Typed Arrays as it does to Module Namespace objects.)
+
+ES6 is done, unless you are saying you don&apos;t think we should go for GA approval in June. 
+
+Feel free to proposal a change for ES7, but as far as ES6 is concerned WONTFIX seems like exactly the right resolution (giving that we lack a WORKSASINTENDED).
+The ES6 design is quite future proof in this regard (something that could not be said if [[GetOwnProperty]] did anything other than throw).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13916</commentid>
+    <comment_count>17</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-19 12:51:18 -0700</bug_when>
+    <thetext>We talked a bit about this.
+
+Data properties are fine. However, it would be preferable if getOwnPropertyDescriptor returns
+
+{
+  value: ...
+  configurable: false,
+  writable: true
+  enumerable: true
+}
+
+Note, that reporting writable false would be a violation since the value might change.
+
+Since [[Set]] always returns false without doing anything else this is no violation of the internal methods.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

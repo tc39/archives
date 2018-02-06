@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>48</bug_id>
+          
+          <creation_ts>2011-03-04 13:51:00 -0800</creation_ts>
+          <short_desc>Add harness support for test cases covering non-ES5, yet web de-facto standards?</short_desc>
+          <delta_ts>2012-02-29 09:04:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Low</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>106</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-04 13:51:22 -0800</bug_when>
+    <thetext>Should we have (at least) two categories of test cases:
+1.  Those that are directly from ES5 or those that can be inferred from ES5
+2.  Those that contradict ES5 yet are de-facto web standards
+
+Arguably the first category could be split in two as well.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>107</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-04 14:00:56 -0800</bug_when>
+    <thetext>My two cents on this is it&apos;d be extremely useful for TC-39 to know about the second category of tests so the de-facto functionality could be incorporated into ECMAScript v.Next.  That said, I do not think such a category should ever be exposed to the public on http://test262.ecmascript.org.  The test suite needs to remain true to the spec.  That said, I think it would be absolutely fine to be able to run this from the command-line version of Test262 (to be created) if one passes the appropriate flags to the harness.  Also, it&apos;s fine to keep such tests in the Test262 Mercurial repository provided they&apos;re separated from the category one tests  (e.g., test\suite\nonstandard\).
+
+A related opinion on this is that test cases covering ES5 errata should exist in the first category of tests.
+
+
+Based on a command-line extension only, I&apos;m guessing this could be done in well under a day.  Populating test\suite\nonstandard\ is an entirely different story though.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>559</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-10 12:24:49 -0800</bug_when>
+    <thetext>We now have a test\suite\bestPractices directory.  Just need to support this in some capacity from packager.py and possibly sth.js.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>706</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 08:37:53 -0800</bug_when>
+    <thetext>packager.py now generates a testcases_bestPractice.html directory alongside default.html.  E.g., http://test262.ecmascript.org/testcases_bestPractice.html
+
+All that needs to be done now is change the text on testcases_bestPractice.html so people don&apos;t confuse it with the &apos;required&apos; ES test suite.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>707</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:04:35 -0800</bug_when>
+    <thetext>Text on testcases_bestPractice.html has been updated as well to ensure no confusion between this and default.html.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

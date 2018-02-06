@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2068</bug_id>
+          
+          <creation_ts>2013-10-07 07:29:00 -0700</creation_ts>
+          <short_desc>Should the method name be added to the method body environment?</short_desc>
+          <delta_ts>2015-07-10 08:34:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5855</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-10-07 07:29:20 -0700</bug_when>
+    <thetext>There seems to be some uncertainty about whether the name of a method is bound to the function object inside the method body or not.
+
+https://twitter.com/awbjs/status/386690330180874240
+https://github.com/google/traceur-compiler/issues/354
+
+For example:
+
+var x = 1;
+
+class C {
+  x() {
+    print(typeof x);
+  }
+}
+
+new C().x();
+
+What does the above print? &quot;number&quot; or &quot;function&quot;?
+
+The current draft does not create an immutable binding to the PropertyName for the environment record.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5856</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-10-07 07:32:56 -0700</bug_when>
+    <thetext>Marking as invalid. There should be no name binding in the lexical scope.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5857</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-07 08:51:33 -0700</bug_when>
+    <thetext>In ES5:
+
+  var x = 1;
+
+  var o = {
+    x: function x() {
+      print(typeof x);
+    }
+  }
+
+  o.x(); // function
+
+...Which is exactly what I would expect. 
+
+ES6:
+
+  var x = 1;
+
+  var o = {
+    x() {
+      print(typeof x);
+    }
+  }
+
+  o.x(); // number
+
+
+That would surprise me and if it were an issue in the ES5 code, I would&apos;ve just renamed one or the other to ensure that &quot;x&quot; wasn&apos;t shadowed in the method&apos;s body.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5858</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-07 08:52:25 -0700</bug_when>
+    <thetext>Erik, I&apos;m going to reopen this because I don&apos;t think enough discussion has gone into the semantics as they are currently specified.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5859</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-07 08:55:46 -0700</bug_when>
+    <thetext>More here: https://github.com/google/traceur-compiler/issues/354#issuecomment-25816117</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5860</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-07 10:19:43 -0700</bug_when>
+    <thetext>The question is, given
+    var o = {
+      x() {
+       print(typeof x);
+     }
+   }
+
+what is the binding of x with the function body.  Should it be equivalent to:
+    var o = {
+     x: function x() {
+       print(typeof x);  //x is locally bound to the function object
+     }
+   }
+
+or to:
+    var o = {
+     x: function () {
+       print(typeof x);  //x  binds to any outer scope declarations
+     }
+   }
+
+I content that either is a plausible semantics.  But we must decide on only one.  I think that the no binding equivalences is the better choice for the following reasons:
+
+1) Legacy consistency.  We already have a literal property short hand that was introduced in ES5:
+
+    var o = {
+     get x () {
+       print(typeof x);  //x  binds to any outer scope declarations
+     }
+    }   
+As defined by ES5, getter and setter functions do not bind the property name as the function name. See http://www.ecma-international.org/ecma-262/5.1/#sec-11.1.5 and note that a scope containing a binding for the property name is not created. 
+
+Because there isn&apos;t any other strong reason for choosing between the alternative concise method name binding semantics, consistency between concise methods and getter/setter functions is probably enough to drive the decision.
+
+2) Lack of utility. The primary use case for binding the function name is so a function may recursively refer to itself.  However, we are talking about concise *methods*.  Methods are functions that are intended to be invoked via a property access and typically refer to a &apos;this&apos; binding.  The proper way for a method to recursively invoke itself is via a method invocation:
+    var o = {
+      x() {
+       //refine this
+       this.x();
+     }
+   }
+rather than via a direct call. Binding the name of the function is not needed and does not facilitate correct recursive methods. 
+
+Based upon these two points I think we should not bind the names of concise methods.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5861</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-07 10:58:06 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; I content that either is a plausible semantics.  But we must decide on only
+&gt; one.  I think that the no binding equivalences is the better choice for the
+&gt; following reasons:
+&gt; 
+&gt; 1) Legacy consistency.  We already have a literal property short hand that was
+&gt; introduced in ES5:
+&gt; 
+&gt;     var o = {
+&gt;      get x () {
+&gt;        print(typeof x);  //x  binds to any outer scope declarations
+&gt;      }
+&gt;     }   
+&gt; As defined by ES5, getter and setter functions do not bind the property name as
+&gt; the function name. See
+&gt; http://www.ecma-international.org/ecma-262/5.1/#sec-11.1.5 and note that a
+&gt; scope containing a binding for the property name is not created. 
+&gt; 
+&gt; Because there isn&apos;t any other strong reason for choosing between the
+&gt; alternative concise method name binding semantics, consistency between concise
+&gt; methods and getter/setter functions is probably enough to drive the decision.
+
+Yep, this makes sense. I had thought of the get/set case, but dismissed it because I hoped method shorthand was different enough.
+
+
+&gt; 
+&gt; 2) Lack of utility. The primary use case for binding the function name is so a
+&gt; function may recursively refer to itself.  However, we are talking about
+&gt; concise *methods*.  Methods are functions that are intended to be invoked via a
+&gt; property access and typically refer to a &apos;this&apos; binding.  The proper way for a
+&gt; method to recursively invoke itself is via a method invocation:
+&gt;     var o = {
+&gt;       x() {
+&gt;        //refine this
+&gt;        this.x();
+&gt;      }
+&gt;    }
+&gt; rather than via a direct call. Binding the name of the function is not needed
+&gt; and does not facilitate correct recursive methods. 
+&gt; 
+&gt; Based upon these two points I think we should not bind the names of concise
+&gt; methods.
+
+I agree, these are the arguments that I was looking for earlier, thank you.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

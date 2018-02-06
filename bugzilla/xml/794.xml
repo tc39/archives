@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>794</bug_id>
+          
+          <creation_ts>2012-10-15 08:00:00 -0700</creation_ts>
+          <short_desc>Missing period in indentation example</short_desc>
+          <delta_ts>2013-10-26 21:08:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mcluck90</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1933</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mcluck90</who>
+    <bug_when>2012-10-15 08:00:53 -0700</bug_when>
+    <thetext>The description of algorithm indentation is completed at the top of page 13. The final step described as &quot;Subsubsubsubstep&quot; is missing a period after the character &quot;a&quot; denoting it&apos;s position.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1935</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-15 14:04:08 -0700</bug_when>
+    <thetext>Note that steps at that depth, when they occur &apos;for real&apos;, are also formatted without that period. See, for example:
+
+     10.5.3 Function Declaration Instantiation
+        / step 11.a.ii.1.a
+
+     12.6.4 The for-in and for-of Statements
+        / Runtime Semantics: Labelled Evaluation
+        / For In/Of Body Evaluation
+        / step 3.e.iii.2.a</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1936</commentid>
+    <comment_count>2</comment_count>
+    <who name="">mcluck90</who>
+    <bug_when>2012-10-15 14:14:37 -0700</bug_when>
+    <thetext>Ah, I hadn&apos;t noticed that. Since there was no explicit statement mentioning dropping the period starting at the fifth depth level and only one example of a dropped period I assumed it was a typo.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1988</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-23 17:04:46 -0700</bug_when>
+    <thetext>This is an oddity of how the list style is defined.  Maybe some day I&apos;ll figure out how it fix it in Word</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6000</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 21:08:58 -0700</bug_when>
+    <thetext>these were fixed somewhere along the way prior to rev18</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

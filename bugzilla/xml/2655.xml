@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2655</bug_id>
+          
+          <creation_ts>2014-04-14 18:32:00 -0700</creation_ts>
+          <short_desc>Typos in 7.2.8 IsInteger</short_desc>
+          <delta_ts>2014-05-22 18:09:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7727</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-14 18:32:38 -0700</bug_when>
+    <thetext>- There are two periods at the end of the introductory sentence.
+
+- The algorithm numbering starts at step 5.
+
+- The fourth step says &quot;retun false&quot; rather than &quot;return false&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7728</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 03:49:55 -0700</bug_when>
+    <thetext>Also, the steps are numbered 5, 6, 7, 8, 7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7729</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 03:52:13 -0700</bug_when>
+    <thetext>- The text refers to the algorithm as &quot;IsConstructor&quot;.
+
+- There&apos;s an extra comma after &quot;argument&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7743</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-15 18:43:23 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7950</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-28 21:06:48 -0700</bug_when>
+    <thetext>In rev24, the preamble still refers to the operation as &quot;IsConstructor&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8010</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:25:18 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8043</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-30 15:26:34 -0700</bug_when>
+    <thetext>Reopening due to the leftovers noted in comment 4.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8343</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 14:10:08 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8610</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 18:09:12 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

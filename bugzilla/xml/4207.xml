@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4207</bug_id>
+          
+          <creation_ts>2015-03-24 09:22:00 -0700</creation_ts>
+          <short_desc>14.4.14 Evaluation: Step 6.b.iv.4 is unreachable</short_desc>
+          <delta_ts>2015-04-03 12:35:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13923</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-24 09:22:04 -0700</bug_when>
+    <thetext>14.4.14 Runtime Semantics: Evaluation
+  YieldExpression : yield * AssignmentExpression
+
+
+Step 6.b.iv.4 is unreachable because the algorithm always returns at 6.b.iv.3:
+
+Change 6.b.iv.2 from:
+&gt; Let closeResult be IteratorClose(iterator, received).
+
+to:
+&gt; Let closeResult be IteratorClose(iterator, Completion{[[type]]: normal, [[value]]: received.[[value]], [[target]]:empty}).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14009</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 06:33:07 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft
+
+Since IteratorClose is always going to produce an abrupt completion all that is needed is a &apos;Return&apos; of the result of 6.b.1v.2
+
+The only time IteratorClose will return something other than /received/ is if its GetMethod call fails.  In that case, it&apos;s fine to just propagate whatever exception that produced.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14013</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-02 07:03:21 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; Since IteratorClose is always going to produce an abrupt completion all that
+&gt; is needed is a &apos;Return&apos; of the result of 6.b.1v.2
+
+That means the &quot;protocol violation&quot; proposal from [1] is dropped?
+
+[1] https://esdiscuss.org/topic/a-weird-yield-edge-case#content-6</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14015</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 07:34:51 -0700</bug_when>
+    <thetext>ah, right!
+
+ok, your fix does it.  Except that I don&apos;t see any point in passing received.[[value]] into IteratorClose via the constructed completion record</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14016</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-02 07:40:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; ok, your fix does it.  Except that I don&apos;t see any point in passing
+&gt; received.[[value]] into IteratorClose via the constructed completion record
+
+Hmm, I&apos;ve got no idea why I did that...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14079</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:35 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1942</bug_id>
+          
+          <creation_ts>2013-09-28 12:00:00 -0700</creation_ts>
+          <short_desc>&quot;Error! Reference source not found.&quot;</short_desc>
+          <delta_ts>2013-10-29 09:46:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5612</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-09-28 12:00:37 -0700</bug_when>
+    <thetext>The text &quot;Error! Reference source not found.&quot; appears in:
+    4.4 / para 5
+    26.2.9.1 / step 2
+    26.2.9.2 / step 4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5728</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-30 14:00:04 -0700</bug_when>
+    <thetext>26.2.9.1 and 29.2.9.2 don&apos;t seem to correspond to anything in the document.  Diod you get the section number wrong?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5730</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-09-30 15:21:40 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; 26.2.9.1 and 29.2.9.2 don&apos;t seem to correspond to anything in the document. 
+&gt; Diod you get the section number wrong?
+
+I got the section numbers right, but it turns out they&apos;re in the Scrap Heap.
+
+As in Bug 1894, I encourage you to jettison the Scrap Heap.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5731</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-30 15:46:12 -0700</bug_when>
+    <thetext>fixed issue in 4.4.
+
+The scrapheap will go away when I&apos;m certain stuff won&apos;t get resurrected (it happens)
+
+fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5819</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-10-02 18:06:47 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; 
+&gt; The scrapheap will go away when I&apos;m certain stuff won&apos;t get resurrected
+&gt; (it happens)
+
+Sure, fine, but does it have to appear in published drafts? Couldn&apos;t you maintain it in a separate document?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6137</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:25 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

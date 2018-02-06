@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1129</bug_id>
+          
+          <creation_ts>2012-12-14 06:57:00 -0800</creation_ts>
+          <short_desc>More invalid tests for Annex B properties</short_desc>
+          <delta_ts>2013-06-07 04:38:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>brbaker</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3010</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-14 06:57:30 -0800</bug_when>
+    <thetext>escape:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-12
+
+unescape:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-13
+
+String.prototype.substr:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-74
+
+Date.prototype.getYear:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-119
+
+Date.prototype.setYear:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-137
+
+Date.prototype.toGTMString:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-155
+
+RegExp.prototype.compile:
+ch15/15.2/15.2.3/15.2.3.3/15.2.3.3-4-164</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4087</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-05-21 06:06:06 -0700</bug_when>
+    <thetext>Escape: bug #1125 (patch ready)
+Unescape: bug #1125 (patch ready)
+
+String.prototype.substr: bug #1131 (patch ready)
+
+Date.prototype.getYear()|setYear(): bug #1128  (patch ready)
+
+Date.prototype.toGTMString: (tracked in this bug, patch ready)
+
+RegExp.prototype.compile(), although this is NOT listed anywhere in the spec, all major VMs do implement this. It will be removed as this entire testsuite is for the SPEC and not what is actually implemented. (tracked in this bug, patch ready)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4088</commentid>
+    <comment_count>2</comment_count>
+      <attachid>43</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-05-21 06:06:38 -0700</bug_when>
+    <thetext>Created attachment 43
+remove Date.prototype.toGMTString from testsuite</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4089</commentid>
+    <comment_count>3</comment_count>
+      <attachid>44</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-05-21 06:07:04 -0700</bug_when>
+    <thetext>Created attachment 44
+remove RexExp.prototype.compile() from testsuite</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4131</commentid>
+    <comment_count>4</comment_count>
+      <attachid>48</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-04 08:29:14 -0700</bug_when>
+    <thetext>Created attachment 48
+Move Date.prototype.toGMTString into annexB</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4132</commentid>
+    <comment_count>5</comment_count>
+      <attachid>49</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-04 08:31:46 -0700</bug_when>
+    <thetext>Created attachment 49
+Move RegExp.prototype.compile into annexB
+
+This moves RegExp.prototype.compile test into &quot;annexB/RegExp.prototype.compile.js&quot;.
+
+NOTE: This function actually isn&apos;t in the 5.1 Annex B section, it is actually never mentioned in the entire spec, yet is implemented by most engines.
+
+NOTE: This function is now recorded in Annex B section of the 6 draft spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4139</commentid>
+    <comment_count>6</comment_count>
+      <attachid>56</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-05 04:53:38 -0700</bug_when>
+    <thetext>Created attachment 56
+Move Date.prototype.toGMTString into annexB
+
+Exported change, including commit message</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4140</commentid>
+    <comment_count>7</comment_count>
+      <attachid>57</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-05 04:59:59 -0700</bug_when>
+    <thetext>Created attachment 57
+Move RegExp.prototype.compile into annexB
+
+Exported change, including commit message</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4154</commentid>
+    <comment_count>8</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-07 04:38:55 -0700</bug_when>
+    <thetext>changeset:   371:971c2b8e0e2f
+user:        Brent Baker &lt;brbaker@adobe.com&gt;
+date:        Thu Jun 06 07:48:30 2013 -0400
+summary:     Bug 1129: Move Date.prototype.toGMTString into annexB
+
+changeset:   372:032499be5fa1
+user:        Brent Baker &lt;brbaker@adobe.com&gt;
+date:        Thu Jun 06 08:07:36 2013 -0400
+summary:     Bug 1129: Move RegExp.prototype.compile into annexB
+
+
+NOTE: I am still waiting to get access to update the live website @ http://test262.ecmascript.org</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="1"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>43</attachid>
+            <date>2013-05-21 06:06:00 -0700</date>
+            <delta_ts>2013-06-04 08:29:14 -0700</delta_ts>
+            <desc>remove Date.prototype.toGMTString from testsuite</desc>
+            <filename>bug_1129_toGMTString.patch</filename>
+            <type>text/plain</type>
+            <size>3177</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxMS8xMS4yLzExLjIuMS9TMTEuMi4xX0E0X1Q5Lmpz
+IGIvdGVzdC9zdWl0ZS9jaDExLzExLjIvMTEuMi4xL1MxMS4yLjFfQTRfVDkuanMKLS0tIGEvdGVz
+dC9zdWl0ZS9jaDExLzExLjIvMTEuMi4xL1MxMS4yLjFfQTRfVDkuanMKKysrIGIvdGVzdC9zdWl0
+ZS9jaDExLzExLjIvMTEuMi4xL1MxMS4yLjFfQTRfVDkuanMKQEAgLTg4LDE0ICs4OCwxMiBAQCBp
+ZiAodHlwZW9mIERhdGUucHJvdG90eXBlWydzZXRGdWxsWWVhciddCiBpZiAodHlwZW9mIERhdGUu
+cHJvdG90eXBlLnNldFVUQ0Z1bGxZZWFyICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjNzc6IHR5
+cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRVVENGdWxsWWVhciA9PT0gImZ1bmN0aW9uIi4gQWN0dWFs
+OiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRVVENGdWxsWWVhciApKTsKIGlmICh0eXBl
+b2YgRGF0ZS5wcm90b3R5cGVbJ3NldFVUQ0Z1bGxZZWFyJ10gIT09ICJmdW5jdGlvbiIpICAkRVJS
+T1IoJyM3ODogdHlwZW9mIERhdGUucHJvdG90eXBlWyJzZXRVVENGdWxsWWVhciJdID09PSAiZnVu
+Y3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90eXBlWyJzZXRVVENGdWxsWWVh
+ciJdICkpOwogaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRZZWFyICE9PSAiZnVuY3Rpb24i
+KSAgJEVSUk9SKCcjNzk6IHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRZZWFyID09PSAiZnVuY3Rp
+b24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90eXBlLnNldFllYXIgKSk7CiBpZiAo
+dHlwZW9mIERhdGUucHJvdG90eXBlWydzZXRZZWFyJ10gIT09ICJmdW5jdGlvbiIpICAkRVJST1Io
+JyM4MDogdHlwZW9mIERhdGUucHJvdG90eXBlWyJzZXRZZWFyIl0gPT09ICJmdW5jdGlvbiIuIEFj
+dHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInNldFllYXIiXSApKTsKIGlmICh0eXBl
+b2YgRGF0ZS5wcm90b3R5cGUudG9Mb2NhbGVTdHJpbmcgIT09ICJmdW5jdGlvbiIpICAkRVJST1Io
+JyM4MTogdHlwZW9mIERhdGUucHJvdG90eXBlLnRvTG9jYWxlU3RyaW5nID09PSAiZnVuY3Rpb24i
+LiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90eXBlLnRvTG9jYWxlU3RyaW5nICkpOwog
+aWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZVsndG9Mb2NhbGVTdHJpbmcnXSAhPT0gImZ1bmN0aW9u
+IikgICRFUlJPUignIzgyOiB0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInRvTG9jYWxlU3RyaW5nIl0g
+PT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInRvTG9j
+YWxlU3RyaW5nIl0gKSk7CiBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlLnRvVVRDU3RyaW5nICE9
+PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjODM6IHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b1VUQ1N0
+cmluZyA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50
+b1VUQ1N0cmluZyApKTsKIGlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbJ3RvVVRDU3RyaW5nJ10g
+IT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM4NDogdHlwZW9mIERhdGUucHJvdG90eXBlWyJ0b1VU
+Q1N0cmluZyJdID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90
+eXBlWyJ0b1VUQ1N0cmluZyJdICkpOwotaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0dNVFN0
+cmluZyAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzg1OiB0eXBlb2YgRGF0ZS5wcm90b3R5cGUu
+dG9HTVRTdHJpbmcgPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90
+b3R5cGUudG9HTVRTdHJpbmcgKSk7Ci1pZiAodHlwZW9mIERhdGUucHJvdG90eXBlWyd0b0dNVFN0
+cmluZyddICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjODY6IHR5cGVvZiBEYXRlLnByb3RvdHlw
+ZVsidG9HTVRTdHJpbmciXSA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRl
+LnByb3RvdHlwZVsidG9HTVRTdHJpbmciXSApKTsKIAogCiAKIApkaWZmIC0tZ2l0IGEvdGVzdC9z
+dWl0ZS9jaDE1LzE1LjIvMTUuMi4zLzE1LjIuMy4zLzE1LjIuMy4zLTQtMTU1LmpzIGIvdGVzdC9z
+dWl0ZS9jaDE1LzE1LjIvMTUuMi4zLzE1LjIuMy4zLzE1LjIuMy4zLTQtMTU1LmpzCmRlbGV0ZWQg
+ZmlsZSBtb2RlIDEwMDY0NAotLS0gYS90ZXN0L3N1aXRlL2NoMTUvMTUuMi8xNS4yLjMvMTUuMi4z
+LjMvMTUuMi4zLjMtNC0xNTUuanMKKysrIC9kZXYvbnVsbApAQCAtMSwyMSArMCwwIEBACi0vLy8g
+Q29weXJpZ2h0IChjKSAyMDEyIEVjbWEgSW50ZXJuYXRpb25hbC4gIEFsbCByaWdodHMgcmVzZXJ2
+ZWQuIA0KLS8vLyBFY21hIEludGVybmF0aW9uYWwgbWFrZXMgdGhpcyBjb2RlIGF2YWlsYWJsZSB1
+bmRlciB0aGUgdGVybXMgYW5kIGNvbmRpdGlvbnMgc2V0DQotLy8vIGZvcnRoIG9uIGh0dHA6Ly9o
+Zy5lY21hc2NyaXB0Lm9yZy90ZXN0cy90ZXN0MjYyL3Jhdy1maWxlL3RpcC9MSUNFTlNFICh0aGUg
+DQotLy8vICJVc2UgVGVybXMiKS4gICBBbnkgcmVkaXN0cmlidXRpb24gb2YgdGhpcyBjb2RlIG11
+c3QgcmV0YWluIHRoZSBhYm92ZSANCi0vLy8gY29weXJpZ2h0IGFuZCB0aGlzIG5vdGljZSBhbmQg
+b3RoZXJ3aXNlIGNvbXBseSB3aXRoIHRoZSBVc2UgVGVybXMuDQotLyoqDQotICogQHBhdGggY2gx
+NS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMuMy00LTE1NS5qcw0KLSAqIEBkZXNjcmlwdGlv
+biBPYmplY3QuZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yIHJldHVybnMgZGF0YSBkZXNjIGZvciBm
+dW5jdGlvbnMgb24gYnVpbHQtaW5zIChEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZykNCi0gKi8N
+Ci0NCi0NCi1mdW5jdGlvbiB0ZXN0Y2FzZSgpIHsNCi0gIHZhciBkZXNjID0gT2JqZWN0LmdldE93
+blByb3BlcnR5RGVzY3JpcHRvcihEYXRlLnByb3RvdHlwZSwgInRvR01UU3RyaW5nIik7DQotICBp
+ZiAoZGVzYy52YWx1ZSA9PT0gRGF0ZS5wcm90b3R5cGUudG9HTVRTdHJpbmcgJiYNCi0gICAgICBk
+ZXNjLndyaXRhYmxlID09PSB0cnVlICYmDQotICAgICAgZGVzYy5lbnVtZXJhYmxlID09PSBmYWxz
+ZSAmJg0KLSAgICAgIGRlc2MuY29uZmlndXJhYmxlID09PSB0cnVlKSB7DQotICAgIHJldHVybiB0
+cnVlOw0KLSAgfQ0KLSB9DQotcnVuVGVzdENhc2UodGVzdGNhc2UpOw0K
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="1"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>44</attachid>
+            <date>2013-05-21 06:07:00 -0700</date>
+            <delta_ts>2013-06-04 08:31:46 -0700</delta_ts>
+            <desc>remove RexExp.prototype.compile() from testsuite</desc>
+            <filename>bug_1129_regexp_compile.patch</filename>
+            <type>text/plain</type>
+            <size>1138</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMu
+My00LTE2NC5qcyBiL3Rlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMu
+My00LTE2NC5qcwpkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQKLS0tIGEvdGVzdC9zdWl0ZS9jaDE1
+LzE1LjIvMTUuMi4zLzE1LjIuMy4zLzE1LjIuMy4zLTQtMTY0LmpzCisrKyAvZGV2L251bGwKQEAg
+LTEsMjEgKzAsMCBAQAotLy8vIENvcHlyaWdodCAoYykgMjAxMiBFY21hIEludGVybmF0aW9uYWwu
+ICBBbGwgcmlnaHRzIHJlc2VydmVkLiANCi0vLy8gRWNtYSBJbnRlcm5hdGlvbmFsIG1ha2VzIHRo
+aXMgY29kZSBhdmFpbGFibGUgdW5kZXIgdGhlIHRlcm1zIGFuZCBjb25kaXRpb25zIHNldA0KLS8v
+LyBmb3J0aCBvbiBodHRwOi8vaGcuZWNtYXNjcmlwdC5vcmcvdGVzdHMvdGVzdDI2Mi9yYXctZmls
+ZS90aXAvTElDRU5TRSAodGhlIA0KLS8vLyAiVXNlIFRlcm1zIikuICAgQW55IHJlZGlzdHJpYnV0
+aW9uIG9mIHRoaXMgY29kZSBtdXN0IHJldGFpbiB0aGUgYWJvdmUgDQotLy8vIGNvcHlyaWdodCBh
+bmQgdGhpcyBub3RpY2UgYW5kIG90aGVyd2lzZSBjb21wbHkgd2l0aCB0aGUgVXNlIFRlcm1zLg0K
+LS8qKg0KLSAqIEBwYXRoIGNoMTUvMTUuMi8xNS4yLjMvMTUuMi4zLjMvMTUuMi4zLjMtNC0xNjQu
+anMNCi0gKiBAZGVzY3JpcHRpb24gT2JqZWN0LmdldE93blByb3BlcnR5RGVzY3JpcHRvciByZXR1
+cm5zIGRhdGEgZGVzYyBmb3IgZnVuY3Rpb25zIG9uIGJ1aWx0LWlucyAoUmVnRXhwLnByb3RvdHlw
+ZS5jb21waWxlKQ0KLSAqLw0KLQ0KLQ0KLWZ1bmN0aW9uIHRlc3RjYXNlKCkgew0KLSAgdmFyIGRl
+c2MgPSBPYmplY3QuZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yKFJlZ0V4cC5wcm90b3R5cGUsICJj
+b21waWxlIik7DQotICBpZiAoZGVzYy52YWx1ZSA9PT0gUmVnRXhwLnByb3RvdHlwZS5jb21waWxl
+ICYmDQotICAgICAgZGVzYy53cml0YWJsZSA9PT0gdHJ1ZSAmJg0KLSAgICAgIGRlc2MuZW51bWVy
+YWJsZSA9PT0gZmFsc2UgJiYNCi0gICAgICBkZXNjLmNvbmZpZ3VyYWJsZSA9PT0gdHJ1ZSkgew0K
+LSAgICByZXR1cm4gdHJ1ZTsNCi0gIH0NCi0gfQ0KLXJ1blRlc3RDYXNlKHRlc3RjYXNlKTsNCg==
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="1"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>48</attachid>
+            <date>2013-06-04 08:29:00 -0700</date>
+            <delta_ts>2013-06-05 04:53:38 -0700</delta_ts>
+            <desc>Move Date.prototype.toGMTString into annexB</desc>
+            <filename>bug_1129_toGMTString-2.patch</filename>
+            <type>text/plain</type>
+            <size>3995</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMu
+My00LTE1NS5qcyBiL3Rlc3Qvc3VpdGUvYW5uZXhCL2IuMi42LmpzCnJlbmFtZSBmcm9tIHRlc3Qv
+c3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMuMy00LTE1NS5qcwpyZW5hbWUg
+dG8gdGVzdC9zdWl0ZS9hbm5leEIvYi4yLjYuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaDE1LzE1LjIv
+MTUuMi4zLzE1LjIuMy4zLzE1LjIuMy4zLTQtMTU1LmpzCisrKyBiL3Rlc3Qvc3VpdGUvYW5uZXhC
+L2IuMi42LmpzCkBAIC0xLDE1ICsxLDE1IEBACiAvLy8gQ29weXJpZ2h0IChjKSAyMDEyIEVjbWEg
+SW50ZXJuYXRpb25hbC4gIEFsbCByaWdodHMgcmVzZXJ2ZWQuIA0KIC8vLyBFY21hIEludGVybmF0
+aW9uYWwgbWFrZXMgdGhpcyBjb2RlIGF2YWlsYWJsZSB1bmRlciB0aGUgdGVybXMgYW5kIGNvbmRp
+dGlvbnMgc2V0DQogLy8vIGZvcnRoIG9uIGh0dHA6Ly9oZy5lY21hc2NyaXB0Lm9yZy90ZXN0cy90
+ZXN0MjYyL3Jhdy1maWxlL3RpcC9MSUNFTlNFICh0aGUgDQogLy8vICJVc2UgVGVybXMiKS4gICBB
+bnkgcmVkaXN0cmlidXRpb24gb2YgdGhpcyBjb2RlIG11c3QgcmV0YWluIHRoZSBhYm92ZSANCiAv
+Ly8gY29weXJpZ2h0IGFuZCB0aGlzIG5vdGljZSBhbmQgb3RoZXJ3aXNlIGNvbXBseSB3aXRoIHRo
+ZSBVc2UgVGVybXMuDQogLyoqDQotICogQHBhdGggY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8x
+NS4yLjMuMy00LTE1NS5qcw0KKyAqIEBwYXRoIGFubmV4Qi9iLjIuNi5qcw0KICAqIEBkZXNjcmlw
+dGlvbiBPYmplY3QuZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yIHJldHVybnMgZGF0YSBkZXNjIGZv
+ciBmdW5jdGlvbnMgb24gYnVpbHQtaW5zIChEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZykNCiAg
+Ki8NCiANCiANCiBmdW5jdGlvbiB0ZXN0Y2FzZSgpIHsNCiAgIHZhciBkZXNjID0gT2JqZWN0Lmdl
+dE93blByb3BlcnR5RGVzY3JpcHRvcihEYXRlLnByb3RvdHlwZSwgInRvR01UU3RyaW5nIik7DQog
+ICBpZiAoZGVzYy52YWx1ZSA9PT0gRGF0ZS5wcm90b3R5cGUudG9HTVRTdHJpbmcgJiYNCiAgICAg
+ICBkZXNjLndyaXRhYmxlID09PSB0cnVlICYmDQpkaWZmIC0tZ2l0IGEvdGVzdC9zdWl0ZS9hbm5l
+eEIvYi4yLjYucHJvcGVydHlDaGVjay5qcyBiL3Rlc3Qvc3VpdGUvYW5uZXhCL2IuMi42LnByb3Bl
+cnR5Q2hlY2suanMKbmV3IGZpbGUgbW9kZSAxMDA2NDQKLS0tIC9kZXYvbnVsbAorKysgYi90ZXN0
+L3N1aXRlL2FubmV4Qi9iLjIuNi5wcm9wZXJ0eUNoZWNrLmpzCkBAIC0wLDAgKzEsMTYgQEAKKy8v
+IENvcHlyaWdodCAyMDA5IHRoZSBTcHV0bmlrIGF1dGhvcnMuICBBbGwgcmlnaHRzIHJlc2VydmVk
+LgorLy8gVGhpcyBjb2RlIGlzIGdvdmVybmVkIGJ5IHRoZSBCU0QgbGljZW5zZSBmb3VuZCBpbiB0
+aGUgTElDRU5TRSBmaWxlLgorCisvKioKKyAqIENoZWNrIHR5cGUgb2YgdmFyaW91cyBwcm9wZXJ0
+aWVzCisgKgorICogQHBhdGggYW5uZXhCL2IuMi42LnByb3BlcnR5Q2hlY2suanMKKyAqIEBkZXNj
+cmlwdGlvbiBDaGVja2luZyBwcm9wZXJ0aWVzIG9mIHRoZSBEYXRlIG9iamVjdCAodG9HTVRTdHJp
+bmcpCisgKi8KKworaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZyAhPT0gImZ1
+bmN0aW9uIikgICRFUlJPUignIzE6IHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZyA9
+PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0dNVFN0
+cmluZyApKTsKK2lmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbJ3RvR01UU3RyaW5nJ10gIT09ICJm
+dW5jdGlvbiIpICAkRVJST1IoJyMyOiB0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInRvR01UU3RyaW5n
+Il0gPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInRv
+R01UU3RyaW5nIl0gKSk7CisKKworCisKZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxMS8xMS4y
+LzExLjIuMS9TMTEuMi4xX0E0X1Q5LmpzIGIvdGVzdC9zdWl0ZS9jaDExLzExLjIvMTEuMi4xL1Mx
+MS4yLjFfQTRfVDkuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaDExLzExLjIvMTEuMi4xL1MxMS4yLjFf
+QTRfVDkuanMKKysrIGIvdGVzdC9zdWl0ZS9jaDExLzExLjIvMTEuMi4xL1MxMS4yLjFfQTRfVDku
+anMKQEAgLTg4LDE0ICs4OCwxMiBAQCBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlWydzZXRGdWxs
+WWVhciddCiBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlLnNldFVUQ0Z1bGxZZWFyICE9PSAiZnVu
+Y3Rpb24iKSAgJEVSUk9SKCcjNzc6IHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRVVENGdWxsWWVh
+ciA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRV
+VENGdWxsWWVhciApKTsKIGlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbJ3NldFVUQ0Z1bGxZZWFy
+J10gIT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM3ODogdHlwZW9mIERhdGUucHJvdG90eXBlWyJz
+ZXRVVENGdWxsWWVhciJdID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUu
+cHJvdG90eXBlWyJzZXRVVENGdWxsWWVhciJdICkpOwogaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlw
+ZS5zZXRZZWFyICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjNzk6IHR5cGVvZiBEYXRlLnByb3Rv
+dHlwZS5zZXRZZWFyID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJv
+dG90eXBlLnNldFllYXIgKSk7CiBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlWydzZXRZZWFyJ10g
+IT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM4MDogdHlwZW9mIERhdGUucHJvdG90eXBlWyJzZXRZ
+ZWFyIl0gPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVb
+InNldFllYXIiXSApKTsKIGlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9Mb2NhbGVTdHJpbmcg
+IT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM4MTogdHlwZW9mIERhdGUucHJvdG90eXBlLnRvTG9j
+YWxlU3RyaW5nID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90
+eXBlLnRvTG9jYWxlU3RyaW5nICkpOwogaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZVsndG9Mb2Nh
+bGVTdHJpbmcnXSAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzgyOiB0eXBlb2YgRGF0ZS5wcm90
+b3R5cGVbInRvTG9jYWxlU3RyaW5nIl0gPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBl
+b2YgRGF0ZS5wcm90b3R5cGVbInRvTG9jYWxlU3RyaW5nIl0gKSk7CiBpZiAodHlwZW9mIERhdGUu
+cHJvdG90eXBlLnRvVVRDU3RyaW5nICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjODM6IHR5cGVv
+ZiBEYXRlLnByb3RvdHlwZS50b1VUQ1N0cmluZyA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsg
+KHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b1VUQ1N0cmluZyApKTsKIGlmICh0eXBlb2YgRGF0ZS5w
+cm90b3R5cGVbJ3RvVVRDU3RyaW5nJ10gIT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM4NDogdHlw
+ZW9mIERhdGUucHJvdG90eXBlWyJ0b1VUQ1N0cmluZyJdID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6
+ICcgKyAodHlwZW9mIERhdGUucHJvdG90eXBlWyJ0b1VUQ1N0cmluZyJdICkpOwotaWYgKHR5cGVv
+ZiBEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZyAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzg1
+OiB0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9HTVRTdHJpbmcgPT09ICJmdW5jdGlvbiIuIEFjdHVh
+bDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9HTVRTdHJpbmcgKSk7Ci1pZiAodHlwZW9m
+IERhdGUucHJvdG90eXBlWyd0b0dNVFN0cmluZyddICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcj
+ODY6IHR5cGVvZiBEYXRlLnByb3RvdHlwZVsidG9HTVRTdHJpbmciXSA9PT0gImZ1bmN0aW9uIi4g
+QWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZVsidG9HTVRTdHJpbmciXSApKTsKIAog
+CiAKIAo=
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="1"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>49</attachid>
+            <date>2013-06-04 08:31:00 -0700</date>
+            <delta_ts>2013-06-05 04:59:59 -0700</delta_ts>
+            <desc>Move RegExp.prototype.compile into annexB</desc>
+            <filename>bug_1129_regexp_compile-2.patch</filename>
+            <type>text/plain</type>
+            <size>1182</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMu
+My00LTE2NC5qcyBiL3Rlc3Qvc3VpdGUvYW5uZXhCL1JlZ0V4cC5wcm90b3R5cGUuY29tcGlsZS5q
+cwpyZW5hbWUgZnJvbSB0ZXN0L3N1aXRlL2NoMTUvMTUuMi8xNS4yLjMvMTUuMi4zLjMvMTUuMi4z
+LjMtNC0xNjQuanMKcmVuYW1lIHRvIHRlc3Qvc3VpdGUvYW5uZXhCL1JlZ0V4cC5wcm90b3R5cGUu
+Y29tcGlsZS5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMTUvMTUuMi8xNS4yLjMvMTUuMi4zLjMvMTUu
+Mi4zLjMtNC0xNjQuanMKKysrIGIvdGVzdC9zdWl0ZS9hbm5leEIvUmVnRXhwLnByb3RvdHlwZS5j
+b21waWxlLmpzCkBAIC0xLDE1ICsxLDE1IEBACiAvLy8gQ29weXJpZ2h0IChjKSAyMDEyIEVjbWEg
+SW50ZXJuYXRpb25hbC4gIEFsbCByaWdodHMgcmVzZXJ2ZWQuIA0KIC8vLyBFY21hIEludGVybmF0
+aW9uYWwgbWFrZXMgdGhpcyBjb2RlIGF2YWlsYWJsZSB1bmRlciB0aGUgdGVybXMgYW5kIGNvbmRp
+dGlvbnMgc2V0DQogLy8vIGZvcnRoIG9uIGh0dHA6Ly9oZy5lY21hc2NyaXB0Lm9yZy90ZXN0cy90
+ZXN0MjYyL3Jhdy1maWxlL3RpcC9MSUNFTlNFICh0aGUgDQogLy8vICJVc2UgVGVybXMiKS4gICBB
+bnkgcmVkaXN0cmlidXRpb24gb2YgdGhpcyBjb2RlIG11c3QgcmV0YWluIHRoZSBhYm92ZSANCiAv
+Ly8gY29weXJpZ2h0IGFuZCB0aGlzIG5vdGljZSBhbmQgb3RoZXJ3aXNlIGNvbXBseSB3aXRoIHRo
+ZSBVc2UgVGVybXMuDQogLyoqDQotICogQHBhdGggY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8x
+NS4yLjMuMy00LTE2NC5qcw0KKyAqIEBwYXRoIGFubmV4Qi9SZWdFeHAucHJvdG90eXBlLmNvbXBp
+bGUuanMNCiAgKiBAZGVzY3JpcHRpb24gT2JqZWN0LmdldE93blByb3BlcnR5RGVzY3JpcHRvciBy
+ZXR1cm5zIGRhdGEgZGVzYyBmb3IgZnVuY3Rpb25zIG9uIGJ1aWx0LWlucyAoUmVnRXhwLnByb3Rv
+dHlwZS5jb21waWxlKQ0KICAqLw0KIA0KIA0KIGZ1bmN0aW9uIHRlc3RjYXNlKCkgew0KICAgdmFy
+IGRlc2MgPSBPYmplY3QuZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yKFJlZ0V4cC5wcm90b3R5cGUs
+ICJjb21waWxlIik7DQogICBpZiAoZGVzYy52YWx1ZSA9PT0gUmVnRXhwLnByb3RvdHlwZS5jb21w
+aWxlICYmDQogICAgICAgZGVzYy53cml0YWJsZSA9PT0gdHJ1ZSAmJg0K
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>56</attachid>
+            <date>2013-06-05 04:53:00 -0700</date>
+            <delta_ts>2013-06-05 04:53:38 -0700</delta_ts>
+            <desc>Move Date.prototype.toGMTString into annexB</desc>
+            <filename>bug_1129_toGMTString-export.patch</filename>
+            <type>text/plain</type>
+            <size>4260</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">IyBIRyBjaGFuZ2VzZXQgcGF0Y2gKIyBVc2VyIEJyZW50IEJha2VyIDxicmJha2VyQGFkb2JlLmNv
+bT4KIyBEYXRlIDEzNzA0MzMxMTggMTQ0MDAKIyBOb2RlIElEIDRiMDJhMjAzNDEzYmQxNTVkNzQy
+MjkxNGUwYTBhMmVhMTEyZWVmNmQKIyBQYXJlbnQgIDM3MzVjMzZjZDRmMjI0OGZkNjkyZTU5ODQz
+YjZjNGZlNjNhNTE4YjMKQnVnIDExMjk6IE1vdmUgRGF0ZS5wcm90b3R5cGUudG9HTVRTdHJpbmcg
+aW50byBhbm5leEIKCmRpZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoMTUvMTUuMi8xNS4yLjMvMTUu
+Mi4zLjMvMTUuMi4zLjMtNC0xNTUuanMgYi90ZXN0L3N1aXRlL2FubmV4Qi9iLjIuNi5qcwpyZW5h
+bWUgZnJvbSB0ZXN0L3N1aXRlL2NoMTUvMTUuMi8xNS4yLjMvMTUuMi4zLjMvMTUuMi4zLjMtNC0x
+NTUuanMKcmVuYW1lIHRvIHRlc3Qvc3VpdGUvYW5uZXhCL2IuMi42LmpzCi0tLSBhL3Rlc3Qvc3Vp
+dGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4yLjMuMy8xNS4yLjMuMy00LTE1NS5qcworKysgYi90ZXN0
+L3N1aXRlL2FubmV4Qi9iLjIuNi5qcwpAQCAtMSwxNSArMSwxNSBAQAogLy8vIENvcHlyaWdodCAo
+YykgMjAxMiBFY21hIEludGVybmF0aW9uYWwuICBBbGwgcmlnaHRzIHJlc2VydmVkLiANCiAvLy8g
+RWNtYSBJbnRlcm5hdGlvbmFsIG1ha2VzIHRoaXMgY29kZSBhdmFpbGFibGUgdW5kZXIgdGhlIHRl
+cm1zIGFuZCBjb25kaXRpb25zIHNldA0KIC8vLyBmb3J0aCBvbiBodHRwOi8vaGcuZWNtYXNjcmlw
+dC5vcmcvdGVzdHMvdGVzdDI2Mi9yYXctZmlsZS90aXAvTElDRU5TRSAodGhlIA0KIC8vLyAiVXNl
+IFRlcm1zIikuICAgQW55IHJlZGlzdHJpYnV0aW9uIG9mIHRoaXMgY29kZSBtdXN0IHJldGFpbiB0
+aGUgYWJvdmUgDQogLy8vIGNvcHlyaWdodCBhbmQgdGhpcyBub3RpY2UgYW5kIG90aGVyd2lzZSBj
+b21wbHkgd2l0aCB0aGUgVXNlIFRlcm1zLg0KIC8qKg0KLSAqIEBwYXRoIGNoMTUvMTUuMi8xNS4y
+LjMvMTUuMi4zLjMvMTUuMi4zLjMtNC0xNTUuanMNCisgKiBAcGF0aCBhbm5leEIvYi4yLjYuanMN
+CiAgKiBAZGVzY3JpcHRpb24gT2JqZWN0LmdldE93blByb3BlcnR5RGVzY3JpcHRvciByZXR1cm5z
+IGRhdGEgZGVzYyBmb3IgZnVuY3Rpb25zIG9uIGJ1aWx0LWlucyAoRGF0ZS5wcm90b3R5cGUudG9H
+TVRTdHJpbmcpDQogICovDQogDQogDQogZnVuY3Rpb24gdGVzdGNhc2UoKSB7DQogICB2YXIgZGVz
+YyA9IE9iamVjdC5nZXRPd25Qcm9wZXJ0eURlc2NyaXB0b3IoRGF0ZS5wcm90b3R5cGUsICJ0b0dN
+VFN0cmluZyIpOw0KICAgaWYgKGRlc2MudmFsdWUgPT09IERhdGUucHJvdG90eXBlLnRvR01UU3Ry
+aW5nICYmDQogICAgICAgZGVzYy53cml0YWJsZSA9PT0gdHJ1ZSAmJg0KZGlmZiAtLWdpdCBhL3Rl
+c3Qvc3VpdGUvYW5uZXhCL2IuMi42LnByb3BlcnR5Q2hlY2suanMgYi90ZXN0L3N1aXRlL2FubmV4
+Qi9iLjIuNi5wcm9wZXJ0eUNoZWNrLmpzCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Ci0tLSAvZGV2L251
+bGwKKysrIGIvdGVzdC9zdWl0ZS9hbm5leEIvYi4yLjYucHJvcGVydHlDaGVjay5qcwpAQCAtMCww
+ICsxLDE2IEBACisvLyBDb3B5cmlnaHQgMjAwOSB0aGUgU3B1dG5payBhdXRob3JzLiAgQWxsIHJp
+Z2h0cyByZXNlcnZlZC4KKy8vIFRoaXMgY29kZSBpcyBnb3Zlcm5lZCBieSB0aGUgQlNEIGxpY2Vu
+c2UgZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZS4KKworLyoqCisgKiBDaGVjayB0eXBlIG9mIHZh
+cmlvdXMgcHJvcGVydGllcworICoKKyAqIEBwYXRoIGFubmV4Qi9iLjIuNi5wcm9wZXJ0eUNoZWNr
+LmpzCisgKiBAZGVzY3JpcHRpb24gQ2hlY2tpbmcgcHJvcGVydGllcyBvZiB0aGUgRGF0ZSBvYmpl
+Y3QgKHRvR01UU3RyaW5nKQorICovCisKK2lmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9HTVRT
+dHJpbmcgIT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyMxOiB0eXBlb2YgRGF0ZS5wcm90b3R5cGUu
+dG9HTVRTdHJpbmcgPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90
+b3R5cGUudG9HTVRTdHJpbmcgKSk7CitpZiAodHlwZW9mIERhdGUucHJvdG90eXBlWyd0b0dNVFN0
+cmluZyddICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjMjogdHlwZW9mIERhdGUucHJvdG90eXBl
+WyJ0b0dNVFN0cmluZyJdID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUu
+cHJvdG90eXBlWyJ0b0dNVFN0cmluZyJdICkpOworCisKKworCmRpZmYgLS1naXQgYS90ZXN0L3N1
+aXRlL2NoMTEvMTEuMi8xMS4yLjEvUzExLjIuMV9BNF9UOS5qcyBiL3Rlc3Qvc3VpdGUvY2gxMS8x
+MS4yLzExLjIuMS9TMTEuMi4xX0E0X1Q5LmpzCi0tLSBhL3Rlc3Qvc3VpdGUvY2gxMS8xMS4yLzEx
+LjIuMS9TMTEuMi4xX0E0X1Q5LmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2gxMS8xMS4yLzExLjIuMS9T
+MTEuMi4xX0E0X1Q5LmpzCkBAIC04NCwxNCArODQsMTEgQEAgaWYgKHR5cGVvZiBEYXRlLnByb3Rv
+dHlwZVsnc2V0VVRDTW9udGgnXQogaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS5zZXRGdWxsWWVh
+ciAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzc1OiB0eXBlb2YgRGF0ZS5wcm90b3R5cGUuc2V0
+RnVsbFllYXIgPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5
+cGUuc2V0RnVsbFllYXIgKSk7CiBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlWydzZXRGdWxsWWVh
+ciddICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjNzY6IHR5cGVvZiBEYXRlLnByb3RvdHlwZVsi
+c2V0RnVsbFllYXIiXSA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnBy
+b3RvdHlwZVsic2V0RnVsbFllYXIiXSApKTsKIGlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGUuc2V0
+VVRDRnVsbFllYXIgIT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM3NzogdHlwZW9mIERhdGUucHJv
+dG90eXBlLnNldFVUQ0Z1bGxZZWFyID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9m
+IERhdGUucHJvdG90eXBlLnNldFVUQ0Z1bGxZZWFyICkpOwogaWYgKHR5cGVvZiBEYXRlLnByb3Rv
+dHlwZVsnc2V0VVRDRnVsbFllYXInXSAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzc4OiB0eXBl
+b2YgRGF0ZS5wcm90b3R5cGVbInNldFVUQ0Z1bGxZZWFyIl0gPT09ICJmdW5jdGlvbiIuIEFjdHVh
+bDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbInNldFVUQ0Z1bGxZZWFyIl0gKSk7CiBpZiAo
+dHlwZW9mIERhdGUucHJvdG90eXBlLnRvTG9jYWxlU3RyaW5nICE9PSAiZnVuY3Rpb24iKSAgJEVS
+Uk9SKCcjODE6IHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0xvY2FsZVN0cmluZyA9PT0gImZ1bmN0
+aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b0xvY2FsZVN0cmluZyAp
+KTsKIGlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGVbJ3RvTG9jYWxlU3RyaW5nJ10gIT09ICJmdW5j
+dGlvbiIpICAkRVJST1IoJyM4MjogdHlwZW9mIERhdGUucHJvdG90eXBlWyJ0b0xvY2FsZVN0cmlu
+ZyJdID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUucHJvdG90eXBlWyJ0
+b0xvY2FsZVN0cmluZyJdICkpOwogaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZS50b1VUQ1N0cmlu
+ZyAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzgzOiB0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9V
+VENTdHJpbmcgPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2YgRGF0ZS5wcm90b3R5
+cGUudG9VVENTdHJpbmcgKSk7CiBpZiAodHlwZW9mIERhdGUucHJvdG90eXBlWyd0b1VUQ1N0cmlu
+ZyddICE9PSAiZnVuY3Rpb24iKSAgJEVSUk9SKCcjODQ6IHR5cGVvZiBEYXRlLnByb3RvdHlwZVsi
+dG9VVENTdHJpbmciXSA9PT0gImZ1bmN0aW9uIi4gQWN0dWFsOiAnICsgKHR5cGVvZiBEYXRlLnBy
+b3RvdHlwZVsidG9VVENTdHJpbmciXSApKTsKLWlmICh0eXBlb2YgRGF0ZS5wcm90b3R5cGUudG9H
+TVRTdHJpbmcgIT09ICJmdW5jdGlvbiIpICAkRVJST1IoJyM4NTogdHlwZW9mIERhdGUucHJvdG90
+eXBlLnRvR01UU3RyaW5nID09PSAiZnVuY3Rpb24iLiBBY3R1YWw6ICcgKyAodHlwZW9mIERhdGUu
+cHJvdG90eXBlLnRvR01UU3RyaW5nICkpOwotaWYgKHR5cGVvZiBEYXRlLnByb3RvdHlwZVsndG9H
+TVRTdHJpbmcnXSAhPT0gImZ1bmN0aW9uIikgICRFUlJPUignIzg2OiB0eXBlb2YgRGF0ZS5wcm90
+b3R5cGVbInRvR01UU3RyaW5nIl0gPT09ICJmdW5jdGlvbiIuIEFjdHVhbDogJyArICh0eXBlb2Yg
+RGF0ZS5wcm90b3R5cGVbInRvR01UU3RyaW5nIl0gKSk7CiAKIAogCi0K
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>57</attachid>
+            <date>2013-06-05 04:59:00 -0700</date>
+            <delta_ts>2013-06-05 04:59:59 -0700</delta_ts>
+            <desc>Move RegExp.prototype.compile into annexB</desc>
+            <filename>bug_1129_regexp_compile-export.patch</filename>
+            <type>text/plain</type>
+            <size>1649</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">IyBIRyBjaGFuZ2VzZXQgcGF0Y2gKIyBVc2VyIEJyZW50IEJha2VyIDxicmJha2VyQGFkb2JlLmNv
+bT4KIyBEYXRlIDEzNzA0MzM0NjMgMTQ0MDAKIyBOb2RlIElEIDY4MGVmMzE2MWU4MDAxMjliYTM4
+NTRkNmI5MDc5ZDYyZDdjZWNkMGQKIyBQYXJlbnQgIDRiMDJhMjAzNDEzYmQxNTVkNzQyMjkxNGUw
+YTBhMmVhMTEyZWVmNmQKQnVnIDExMjk6IE1vdmUgUmVnRXhwLnByb3RvdHlwZS5jb21waWxlIGlu
+dG8gYW5uZXhCCgpOT1RFOiBUaGlzIGZ1bmN0aW9uIGFjdHVhbGx5IGlzbid0IGluIHRoZSA1LjEg
+QW5uZXggQiBzZWN0aW9uLCBpdCBpcyBhY3R1YWxseQpuZXZlciBtZW50aW9uZWQgaW4gdGhlIGVu
+dGlyZSBzcGVjLCB5ZXQgaXMgaW1wbGVtZW50ZWQgYnkgbW9zdCBlbmdpbmVzLgoKTk9URTogVGhp
+cyBmdW5jdGlvbiBpcyBub3cgcmVjb3JkZWQgaW4gQW5uZXggQiBzZWN0aW9uIG9mIHRoZSA2IGRy
+YWZ0IHNwZWMuCgpkaWZmIC0tZ2l0IGEvdGVzdC9zdWl0ZS9jaDE1LzE1LjIvMTUuMi4zLzE1LjIu
+My4zLzE1LjIuMy4zLTQtMTY0LmpzIGIvdGVzdC9zdWl0ZS9hbm5leEIvUmVnRXhwLnByb3RvdHlw
+ZS5jb21waWxlLmpzCnJlbmFtZSBmcm9tIHRlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8xNS4y
+LjMuMy8xNS4yLjMuMy00LTE2NC5qcwpyZW5hbWUgdG8gdGVzdC9zdWl0ZS9hbm5leEIvUmVnRXhw
+LnByb3RvdHlwZS5jb21waWxlLmpzCi0tLSBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4yLzE1LjIuMy8x
+NS4yLjMuMy8xNS4yLjMuMy00LTE2NC5qcworKysgYi90ZXN0L3N1aXRlL2FubmV4Qi9SZWdFeHAu
+cHJvdG90eXBlLmNvbXBpbGUuanMKQEAgLTEsMTUgKzEsMTUgQEAKIC8vLyBDb3B5cmlnaHQgKGMp
+IDIwMTIgRWNtYSBJbnRlcm5hdGlvbmFsLiAgQWxsIHJpZ2h0cyByZXNlcnZlZC4gDQogLy8vIEVj
+bWEgSW50ZXJuYXRpb25hbCBtYWtlcyB0aGlzIGNvZGUgYXZhaWxhYmxlIHVuZGVyIHRoZSB0ZXJt
+cyBhbmQgY29uZGl0aW9ucyBzZXQNCiAvLy8gZm9ydGggb24gaHR0cDovL2hnLmVjbWFzY3JpcHQu
+b3JnL3Rlc3RzL3Rlc3QyNjIvcmF3LWZpbGUvdGlwL0xJQ0VOU0UgKHRoZSANCiAvLy8gIlVzZSBU
+ZXJtcyIpLiAgIEFueSByZWRpc3RyaWJ1dGlvbiBvZiB0aGlzIGNvZGUgbXVzdCByZXRhaW4gdGhl
+IGFib3ZlIA0KIC8vLyBjb3B5cmlnaHQgYW5kIHRoaXMgbm90aWNlIGFuZCBvdGhlcndpc2UgY29t
+cGx5IHdpdGggdGhlIFVzZSBUZXJtcy4NCiAvKioNCi0gKiBAcGF0aCBjaDE1LzE1LjIvMTUuMi4z
+LzE1LjIuMy4zLzE1LjIuMy4zLTQtMTY0LmpzDQorICogQHBhdGggYW5uZXhCL1JlZ0V4cC5wcm90
+b3R5cGUuY29tcGlsZS5qcw0KICAqIEBkZXNjcmlwdGlvbiBPYmplY3QuZ2V0T3duUHJvcGVydHlE
+ZXNjcmlwdG9yIHJldHVybnMgZGF0YSBkZXNjIGZvciBmdW5jdGlvbnMgb24gYnVpbHQtaW5zIChS
+ZWdFeHAucHJvdG90eXBlLmNvbXBpbGUpDQogICovDQogDQogDQogZnVuY3Rpb24gdGVzdGNhc2Uo
+KSB7DQogICB2YXIgZGVzYyA9IE9iamVjdC5nZXRPd25Qcm9wZXJ0eURlc2NyaXB0b3IoUmVnRXhw
+LnByb3RvdHlwZSwgImNvbXBpbGUiKTsNCiAgIGlmIChkZXNjLnZhbHVlID09PSBSZWdFeHAucHJv
+dG90eXBlLmNvbXBpbGUgJiYNCiAgICAgICBkZXNjLndyaXRhYmxlID09PSB0cnVlICYmDQo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1795</bug_id>
+          
+          <creation_ts>2013-08-22 00:43:00 -0700</creation_ts>
+          <short_desc>Typo in 10.5-7-b-3-s.js</short_desc>
+          <delta_ts>2014-07-10 13:40:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Simon Hausmann">simon.hausmann</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>jaimelynschatz</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4996</commentid>
+    <comment_count>0</comment_count>
+    <who name="Simon Hausmann">simon.hausmann</who>
+    <bug_when>2013-08-22 00:43:40 -0700</bug_when>
+    <thetext>It appears that there is a small typo in the test case, where instead of a check it&apos;s doing an assignment:
+
+    16         function _10_5_7_b_3_fun() {
+    17             arguments[1] = 12;
+    18             return arguments[0] = 30 &amp;&amp; arguments[1] === 12;
+    19         };
+
+In line 18, it would seem that the correct use would be arguments[0] == 30 instead of assigning 30 to arguments[0].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6998</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jaime">jaimelynschatz</who>
+    <bug_when>2014-01-26 11:41:59 -0800</bug_when>
+    <thetext>Pull request submitted with fix.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

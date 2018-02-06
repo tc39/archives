@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>144</bug_id>
+          
+          <creation_ts>2011-07-17 09:18:00 -0700</creation_ts>
+          <short_desc>B.0: typos</short_desc>
+          <delta_ts>2011-07-27 21:30:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>315</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-07-17 09:18:37 -0700</bug_when>
+    <thetext>The first paragraph of Annex B says:
+    &quot;The ECMAScript language syntax and semantics
+    defined in this annex is required ...&quot;
+Change &quot;is&quot; to &quot;are&quot;.
+
+Also:
+    &quot;... when the ECMAScript host is a web browsers.&quot;
+Change &quot;browsers&quot; to &quot;browser&quot;.
+
+Also:
+    &quot;It is normative but optionalif the host is not a web browser.&quot;
+Change &quot;optionalif&quot; to &quot;optional if&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>333</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 13:58:44 -0700</bug_when>
+    <thetext>fixed in editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

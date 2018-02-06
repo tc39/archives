@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2206</bug_id>
+          
+          <creation_ts>2013-11-06 05:24:00 -0800</creation_ts>
+          <short_desc>12.13.4, 13.2.2.3, 13.2.1.6, 13.2.3.5, 13.2.3.6: Missing HasOwnProperty(&quot;name&quot;) check for anonymous class expression</short_desc>
+          <delta_ts>2013-11-08 13:08:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6467</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-06 05:24:51 -0800</bug_when>
+    <thetext>12.13.4, 13.2.2.3, 13.2.1.6, 13.2.3.5 and 13.2.3.6 need to perform the same HasOwnProperty(&quot;name&quot;) check for anonymous class expressions as already done in 14.5.16.
+
+
+js&gt; c = class {static get name(){}}
+java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryFunction.SetFunctionName(OrdinaryFunction.java:472)
+
+js&gt; var [c = class {static get name(){}}] = []
+java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryFunction.SetFunctionName(OrdinaryFunction.java:472)
+
+js&gt; var {c = class {static get name(){}}} = []
+java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryFunction.SetFunctionName(OrdinaryFunction.java:472)
+
+js&gt; var c = class {static get name(){}}
+java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryFunction.SetFunctionName(OrdinaryFunction.java:472)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6470</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-06 16:27:18 -0800</bug_when>
+    <thetext>1 out of 6 ... could have been worse....
+
+fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6517</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:08:50 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

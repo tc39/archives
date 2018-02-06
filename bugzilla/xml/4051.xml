@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4051</bug_id>
+          
+          <creation_ts>2015-02-21 08:33:00 -0800</creation_ts>
+          <short_desc>22.2.3.23 %TypedArray%.prototype.slice: Various issues</short_desc>
+          <delta_ts>2015-03-04 18:58:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13225</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-21 08:33:48 -0800</bug_when>
+    <thetext>22.2.3.23 %TypedArray%.prototype.slice ( start, end )
+
+Steps 17-18 should read:
+&gt; Let srcName be the string value of O’s [[TypedArrayName]] internal slot.
+&gt; Let srcType be the string value of the Element Type value in Table 49 for srcName.
+&gt; Let targetName be the string value of A’s [[TypedArrayName]] internal slot.
+&gt; Let targetType be the string value of the Element Type value in Table 49 for targetName.
+
+
+Step 19 should be removed.
+
+
+Step 21 should be changed to:
+&gt; Else if count &gt; 0, then
+
+To ensure same behaviour for detached buffers.
+
+
+Step 21.f should be:
+&gt; Let srcByteOffset be the value of O’s [[ByteOffset]] internal slot.
+&gt; Let srcByteIndex be k × elementSize + srcByteOffset.
+
+
+Step 21.g should be:
+&gt; Let targetByteIndex be 0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13241</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-21 10:41:22 -0800</bug_when>
+    <thetext>Also, in 21.h, change /ElementSize/ to /elementSize/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13371</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 17:56:29 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13488</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:14 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

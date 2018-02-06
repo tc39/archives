@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4379</bug_id>
+          
+          <creation_ts>2015-05-26 13:34:00 -0700</creation_ts>
+          <short_desc>Reference type and implementation reality</short_desc>
+          <delta_ts>2015-11-16 16:20:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>adamk</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14456</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-26 13:34:47 -0700</bug_when>
+    <thetext>Tests added to test262 [1] have revealed long-standing deviations [2] between the specification for the Reference type and actual implementation reality. Whether the specification should be changed to reflect implementation reality [3] or alternatively implementers should try to comply with specified behaviour should be discussed. 
+
+
+[1] Added/Proposed PRs for test262 coverage:
+ https://github.com/tc39/test262/pull/91
+ https://github.com/tc39/test262/pull/273
+ https://github.com/tc39/test262/pull/275
+
+[2] Mozilla source code from 1998 already shows the spec violation which is still present in modern engines. Details can be found in https://github.com/tc39/test262/pull/273.
+
+[3] The exact &quot;implementation reality&quot; still needs to be determined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14530</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-06-26 06:12:41 -0700</bug_when>
+    <thetext>V8 issues were filed:
+https://code.google.com/p/v8/issues/detail?id=4248
+https://code.google.com/p/v8/issues/detail?id=4249</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14896</commentid>
+    <comment_count>2</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-11-16 16:20:57 -0800</bug_when>
+    <thetext>Is there any movement on this issue?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

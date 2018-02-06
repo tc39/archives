@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>12</bug_id>
+          
+          <creation_ts>2011-02-10 14:51:00 -0800</creation_ts>
+          <short_desc>S7.5.3_A1.15.js is invalid outside of Strict Mode</short_desc>
+          <delta_ts>2011-09-25 11:34:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/a53cfb64396b</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>17</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-10 14:51:32 -0800</bug_when>
+    <thetext>According to 7.6.1.2, &apos;implements&apos; is only a FutureReservedWord under the context of Strict Mode.
+
+Disabling this test until we have a metadata story around specifying which tests are Strict Mode only, and Google has a chance to update the test case to include &quot;use strict&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>267</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-06 10:46:15 -0700</bug_when>
+    <thetext>Changes from Sputnik have been ported over, but they&apos;re incorrect.  The new file looks like:
+ &quot;use strict&quot;;
+implements = 1; 
+
+
+Notice that &apos;implements&apos; isn&apos;t preceded by &apos;var &apos; which is another strict mode violation =&gt; a pass of this test doesn&apos;t necessarily mean the feature has been implemented correctly.  It could just mean strict mode&apos;s &apos;var&apos; restriction has been implemented by a browser.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>278</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 09:36:47 -0700</bug_when>
+    <thetext>S7.5.3_A1.[15, 18, 21, 22, 23, 24, 26].js all have this issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>477</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-25 11:34:19 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/a53cfb64396b</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

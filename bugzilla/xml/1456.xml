@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1456</bug_id>
+          
+          <creation_ts>2013-04-29 06:08:00 -0700</creation_ts>
+          <short_desc>BestFitMatcher+ResolveLocale may produce invalid language tags</short_desc>
+          <delta_ts>2016-02-29 09:11:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>edf</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3686</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-29 06:08:12 -0700</bug_when>
+    <thetext>Let&apos;s suppose a BestFitMatcher algorithm returns the locale &quot;zh-Hant-TW&quot; for the input &quot;und-TW-u-kn-true&quot;. Per the current specification, this will give the following result:
+
+&gt; js&gt; new Intl.Collator(&quot;und-TW-u-kn-true&quot;,{localeMatcher: &quot;best fit&quot;}).resolvedOptions().locale
+&gt; &quot;zh-Hant--u-kn-trueTW&quot;
+
+
+This is due to the fact that BestFitMatcher is specified to store the &quot;index of the first Unicode locale extension sequence within the request locale language tag&quot;. For &quot;und-TW-u-kn-true&quot;, the index is 8 (or 6?). Later in ResolveLocale, this index position is used to splice the supportedExtension variable into the found locale. But since the found locale and the originally requested locale can have a different structure/length, this may produce invalid language tags.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12921</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 12:28:14 -0800</bug_when>
+    <thetext>André
+
+Do you have a recommendation for fixing this?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12948</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 16:16:51 -0800</bug_when>
+    <thetext>To be honest I don&apos;t think that step (step 16 in rev10) makes any sense (*). 
+
+I&apos;d just replace it with:
+---
+16.  If the number of code unit elements in supportedExtension is greater than 2, then
+  a.  Let foundLocale be the String value produced by concatenating foundLocale and supportedExtension.
+---
+
+
+(*) Maybe the preExtension and postExtension variables were intended to preserve other extension or private use subtags in `foundLocale` ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13186</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-20 07:02:50 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; To be honest I don&apos;t think that step (step 16 in rev10) makes any sense (*). 
+&gt; 
+&gt; I&apos;d just replace it with:
+&gt; ---
+&gt; 16.  If the number of code unit elements in supportedExtension is greater
+&gt; than 2, then
+&gt;   a.  Let foundLocale be the String value produced by concatenating
+&gt; foundLocale and supportedExtension.
+&gt; ---
+&gt; 
+&gt; 
+&gt; (*) Maybe the preExtension and postExtension variables were intended to
+&gt; preserve other extension or private use subtags in `foundLocale` ?
+
+
+@Norbert
+
+Can you provide any additional insight?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13340</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-24 20:02:36 -0800</bug_when>
+    <thetext>The point of step 12 in the 1.0 spec was to insert the supported part of the Unicode extension into a language tag that might have had other extensions or private use parts after the Unicode extension, e.g. if the original tag was zh-TW-u-kn-true-x-special and the implementation happened to support zh-u-kn-true-x-special.
+
+You&apos;re right that the extensionIndex returned by BestFitMatcher must indicate the position where the Unicode locale extension would go in the locale returned, which may have a different structure than the successful requested locale.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14932</commentid>
+    <comment_count>5</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-29 09:11:37 -0800</bug_when>
+    <thetext>https://github.com/tc39/ecma402/pull/74
+
+thanks André for the fix.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

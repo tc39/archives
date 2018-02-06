@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1416</bug_id>
+          
+          <creation_ts>2013-04-11 09:38:00 -0700</creation_ts>
+          <short_desc>ClassDefinitionEvaluation: unused variables and undefined behaviour if ConstructorMethod not present</short_desc>
+          <delta_ts>2013-05-14 18:13:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3609</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 09:38:14 -0700</bug_when>
+    <thetext>A couple of issues in ClassDefinitionEvaluation:
+- &quot;strict&quot; variable in step 8 not used
+- &quot;constructorParent&quot; variable not used (but should be as [[Prototype]] for constructor)
+- if ClassHeritage{opt} is not present and ConstructorMethod is empty, Property Definition Evaluation is applied to the empty object
+- if ConstructorMethod is not empty, Property Definition Evaluation is applied twice for the constructor, because PrototypeMethodDefinitions also includes the ConstructorMethod (step 9 and step 14)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3610</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 09:45:05 -0700</bug_when>
+    <thetext>Also step 2a is not properly defined, since there is currently no Runtime Semantics entry for ClassHeritage. 
+
+And after step 5c, InitializeBinding() needs to be called to initialise the new binding.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3843</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 17:16:47 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft.
+
+I know about the strict variable.  It is sort of a marker for me to make sure at some point that we are correctly determining the strictness of code in class bodies.
+
+ClassHeritage qualifies for the production chaining rule because it only has a since non-terminal on its RHS. I know this is sometimes confusing but it sure eliminates a lot of otherwise uninteresting chaining semantic rules.
+
+Fixed all the other items.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3887</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:14 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

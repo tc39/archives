@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2543</bug_id>
+          
+          <creation_ts>2014-02-12 16:52:00 -0800</creation_ts>
+          <short_desc>chapter 24: misc editorial</short_desc>
+          <delta_ts>2014-06-02 09:18:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7278</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:52:04 -0800</bug_when>
+    <thetext>----------------------------------------
+In 24.1.1.2 &quot;SetArrayBufferData(arrayBuffer, bytes)&quot;:
+
+24.1.1.2 / step 3:
+Assert: /bytes/ is positive integer.
+    After &quot;is&quot;, insert &quot;a&quot;
+
+24.1.1.2 / step 6:
+Set /arrayBuffer/&apos;s [[ArrayBufferData]] to /block/.
+    After &quot;[[ArrayBufferData]]&quot;, insert &quot;internal slot&quot;.
+
+----------------------------------------
+In 24.1.1.3 &quot;CloneArrayBuffer(srcBuffer, srcByteOffset)&quot;:
+
+24.1.1.3 / step 11:
+Let /status/ be the result of SetArrayBufferData(/data/, /cloneLength/).
+    &apos;data&apos; is not defined
+
+24.1.1.3 / step 14:
+Perform CopyDataBlock(...).
+    s|CopyDataBlock|CopyDataBlockBytes|
+
+----------------------------------------
+In 24.1.1.4 &quot;GetValueFromBuffer (arrayBuffer, byteIndex, type, isLittleEndian)&quot;:
+
+24.1.1.4 / step 1:
+... to represent a value of /valueType/.
+    s|valueType|type|
+
+24.1.1.4 / step 5:
+... specified in Table 43 for /valueType/.
+    s|valueType|type|
+
+24.1.1.4 / step 7:
+If /isLittleEndian/ is *undefined*, set /isLittleEndian/ to ...
+    The preamble says:
+        &quot;If isLitteleEndian is not present, its default value is undefined.&quot;
+    but the algorithm does not accomplish this.
+    You could insert a step:
+       If isLitteleEndian is not present, let isLitteleEndian be undefined.
+    before step 7, but instead, just change step 7 to begin:
+        If /isLittleEndian/ is not present, ...
+    and change or delete that sentence from the preamble.
+
+----------------------------------------
+In 24.1.1.5 &quot;SetValueInBuffer (...)&quot;:
+
+24.1.1.5 / step 1:
+... to represent a value of /valueType/.
+    s|valueType|type|
+
+24.1.1.5 / step 5:
+Let /elementSize/ be the Number value of the Element Size value specified in
+Table 43 for the row containing the value of /type/ as its Element Type entry.
+    Delete &quot;the row containing the value of&quot;
+
+24.1.1.5 / step 6:
+If /isLittleEndian/ is *undefined*, set /isLittleEndian/ to ...
+    [As in 24.1.1.4 / step 7.]
+
+24.1.1.5 / step 9.a:
+Let /n/ be the Size Element value in Table 43 for the row containing the value
+of /type/ as its Element Type entry.
+    s|Size Element|Element Size|
+    Delete &quot;the row containing the value of&quot;
+
+24.1.1.5 / step 9.b:
+Let /convOp/ be the abstract operation named in the Conversion Operation column
+in Table 43 for the row containing the value of /type/ as its Element Type entry
+    Delete &quot;the row containing the value of&quot;
+
+----------------------------------------
+In 24.1.4.3 &quot;ArrayBuffer.prototype.slice ( start , end)&quot;:
+
+24.1.4.3 / step 20:
+If the value of /new/&apos;s [[ArrayBufferByteLength]] &lt; /newLen/, then ...
+    After &quot;[[ArrayBufferByteLength]]&quot;, insert &quot;internal slot&quot;
+
+----------------------------------------
+In 24.2.2.1 &quot;DataView(buffer, byteOffset=0, byteLength=undefined)&quot;:
+
+24.2.2.1 / step 17:
+Set /O/&apos;s [[ViewedArrayBuffer]] to /buffer/.
+    After &quot;[[ViewedArrayBuffer]]&quot;, insert &quot;internal slot&quot;.
+
+----------------------------------------
+In 24.2.3 &quot;Properties of the DataView Constructor&quot;:
+
+24.2.3 / para 2:
+Besides the length &lt;code&gt;property&lt;/code&gt; (whose value is 3), ...
+    Put monospace font on &quot;length&quot;, remove it from &quot;property&quot;.
+
+----------------------------------------
+In 24.3.2.4 &quot;Runtime Semantics: JA Abstract Operation&quot;:
+
+24.3.2.4 / step 6:
+... and hence its &quot;length&quot; property is a non-negative integer.
+    s|non-negative|nonnegative|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8344</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 14:43:30 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8797</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 09:18:03 -0700</bug_when>
+    <thetext>confirmed fixed except for items I re-raised as Bug 2960 and Bug 2962.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

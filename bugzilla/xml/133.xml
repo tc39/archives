@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>133</bug_id>
+          
+          <creation_ts>2011-07-14 17:06:00 -0700</creation_ts>
+          <short_desc>S13.0_A5 checks for a syntax error in what could be (is, in Firefox) a language extension</short_desc>
+          <delta_ts>2011-09-25 11:41:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/8807c7b606a0</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>303</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2011-07-14 17:06:37 -0700</bug_when>
+    <thetext>S13.0_A5 checks for these things throwing SyntaxError exceptions:
+
+eval(&quot;function __func([arg1, arg2, arg3]){return arguments.length;}&quot;);
+eval(&quot;function __func((arg1, arg2, arg3)){return arguments.length;}&quot;);
+eval(&quot;function __func(arg1, arg2, arg3,){return arguments.length;}&quot;);
+
+In theory an implementation could extend syntax to permit all of these.  I&apos;m not aware of anything that implements the latter two as extensions, so I don&apos;t particularly care about them (although some policy on this -- I think I remember a bug on the matter -- is probably a good idea).  :-)  But the first is destructuring assignment, which Firefox implements (and which might end up in a future ECMAScript edition), so testing for it throwing a SyntaxError breaks us.
+
+Could the first check, at the very least, be removed from the test?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>316</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-18 08:07:06 -0700</bug_when>
+    <thetext>Yes, FormalParameterListopt in FunctionDeclaration/FunctionExpression could be replaced by an array or something else via ES5&apos;s extension clause.  Just disabled the test in source control, and now re-assigning to Mark to address (e.g., move to a &quot;Sputnik\Negative\*&quot; directory?).  Thanks for spotting this Jeff!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>478</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-25 11:41:10 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/8807c7b606a0</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>231</bug_id>
+          
+          <creation_ts>2011-12-01 22:51:00 -0800</creation_ts>
+          <short_desc>Coverage: Date.parse and Date.prototype.toISOString should be tested</short_desc>
+          <delta_ts>2012-04-04 11:16:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>vic99999</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>bruant.d</cc>
+    
+    <cc>kris</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>517</commentid>
+    <comment_count>0</comment_count>
+    <who name="">vic99999</who>
+    <bug_when>2011-12-01 22:51:50 -0800</bug_when>
+    <thetext>Most of browsers have bugs with Date.parse and Date.prototype.toISOString when ISO format for extended years should be used.
+
+See https://github.com/kriskowal/es5-shim/blob/master/tests/spec/s-date.js for test cases.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>856</commentid>
+    <comment_count>1</comment_count>
+    <who name="Kris Kowal">kris</who>
+    <bug_when>2012-04-04 10:53:53 -0700</bug_when>
+    <thetext>Correction on the URL https://github.com/Yaffle/es5-shim/blob/103d45de2062703cb41cd0e3a69c025b9833fbe4/tests/spec/s-date.js</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

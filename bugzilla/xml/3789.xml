@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3789</bug_id>
+          
+          <creation_ts>2015-02-08 14:59:00 -0800</creation_ts>
+          <short_desc>References to ISO 10646 and Unicode must be kept in sync</short_desc>
+          <delta_ts>2016-02-15 16:15:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12224</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 14:59:10 -0800</bug_when>
+    <thetext>The Unicode Standard and ISO/IEC 10646 are parallel standards that are kept in sync. References to them therefore must also be kept in sync. Specifically, a reference to The Unicode Standard, Version 5.1, must be paired up with a reference to ISO/IEC 10646:2003: Information Technology – Universal Multiple-Octet Coded Character Set (UCS) plus Amendment 1:2005, Amendment 2:2006, Amendment 3:2008, and Amendment 4:2008.
+
+See table C-1 at http://www.unicode.org/versions/latest/appC.pdf</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12260</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 13:06:45 -0800</bug_when>
+    <thetext>Fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12885</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 20:53:20 -0800</bug_when>
+    <thetext>The bug is fixed as requested, but now the URLs for the ISO documents come in two different forms:
+
+http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=39921 http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=40755 http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41419
+http://www.iso.org/iso/catalogue_detail.htm?csnumber=44871
+http://www.iso.org/iso/catalogue_detail.htm?csnumber=46311
+￼
+￼￼Can these be unified to the form used in the last two links?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12907</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 08:37:32 -0800</bug_when>
+    <thetext>Fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

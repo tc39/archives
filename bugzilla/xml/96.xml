@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>96</bug_id>
+          
+          <creation_ts>2011-04-25 13:20:00 -0700</creation_ts>
+          <short_desc>Modules: Shouldn&apos;t ProgramElement contain ModuleDeclaration?</short_desc>
+          <delta_ts>2015-07-10 08:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://wiki.ecmascript.org/doku.php?id=harmony:modules</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>192</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-04-25 13:20:07 -0700</bug_when>
+    <thetext>http://wiki.ecmascript.org/doku.php?id=harmony:modules
+
+Currently the syntax for ProgramElement is
+
+ProgramElement(load) ::= Statement
+                      | VariableDeclaration
+                      | FunctionDeclaration
+                      | ImportDeclaration(load)
+                      | ExportDeclaration(load)
+
+I would expect this to contain ModuleDeclaraion(load) so that a module can be decclared at the top level. For example:
+
+module m {}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>194</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2011-04-25 13:31:01 -0700</bug_when>
+    <thetext>Yes, thanks for the catch. I&apos;ve updated the wiki.
+
+Dave</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

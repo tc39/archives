@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4201</bug_id>
+          
+          <creation_ts>2015-03-19 05:20:00 -0700</creation_ts>
+          <short_desc>B.2.1.2 unescape: &quot;uneunscape&quot;</short_desc>
+          <delta_ts>2015-03-19 06:12:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>4172</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13912</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-03-19 05:20:48 -0700</bug_when>
+    <thetext>B.2.1.2 unescape
+second paragraph
+
+    &quot;The uneunscape function is...&quot;
+
+Replace &quot;uneunscape&quot; with &quot;unescape&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13914</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-19 06:12:05 -0700</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 4172 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

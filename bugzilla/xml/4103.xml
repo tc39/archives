@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4103</bug_id>
+          
+          <creation_ts>2015-03-03 14:31:00 -0800</creation_ts>
+          <short_desc>%TypedArray%.prototype.set should have a clear algorithm to invoke its two possible sub-algorithms</short_desc>
+          <delta_ts>2015-03-03 17:17:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13450</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-03-03 14:31:02 -0800</bug_when>
+    <thetext>The prose around the non-typed-array method suggests that it&apos;s to be called when a non-typed-array is passed as |target|.  Internally, that argument is passed to |ToObject| and its result ReturnIfAbrupt&apos;d.  This is inconsistent.  I would much prefer if there were a fundamental %TypedArray%.prototype.set algorithm, that invoked one or the other more-specific algorithm as desired, rather than make inconsistent claims about how the two algorithms are supposed to be used and/or work.
+
+This would also permit moving the common code between the two algorithms -- steps 1-10, approximately -- into that overarching algorithm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13455</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-03 17:17:38 -0800</bug_when>
+    <thetext>see Bug 4102 
+/target/ is the this value, not the argument.
+
+I&apos;ve also clarified the assert in step 1 a bit.
+
+Using this style of multiple algorithm for over-loaded methods is something that has some history in the ES spec. It&apos;s probably debatable whether it is better or worse than an simple method spec. that combines all the over-loads.
+
+I&apos;m not going to do any more restructuring of that sort in the ES6 spec. so I&apos;m marking this as deferred to ES7 so it can be considered in that context.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

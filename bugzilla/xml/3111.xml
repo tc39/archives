@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3111</bug_id>
+          
+          <creation_ts>2014-08-07 12:44:00 -0700</creation_ts>
+          <short_desc>MapConstructor &amp; WeakMapConstructor should do ToObject too?</short_desc>
+          <delta_ts>2015-07-10 08:34:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9710</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-07 12:44:37 -0700</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-weakmap-iterable
+
+7d: Let iter be the result of GetIterator(iterable).
+
+For Set &amp; WeakSet we are doing GetIteraror(ToObject(iterable))
+
+However, maybe we should just change GetIterator to not throw on non Objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9715</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 14:04:15 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9757</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-11 20:00:20 -0700</bug_when>
+    <thetext>Allen, what was the resolution?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9759</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 08:14:45 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; Allen, what was the resolution?
+
+By passing ToObject(iterable) to GetIterator
+
+If we made GetIterator not throw on none objects, then we&apos;d have to define what it does instead.  Return an empty iterator?  After reviewing everyplace GetIterator is used, I don&apos;t think it is necessary.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9764</commentid>
+    <comment_count>4</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-12 11:02:28 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; (In reply to Erik Arvidsson from comment #2)
+&gt; &gt; Allen, what was the resolution?
+&gt; 
+&gt; By passing ToObject(iterable) to GetIterator
+&gt; 
+&gt; If we made GetIterator not throw on none objects, then we&apos;d have to define
+&gt; what it does instead.  Return an empty iterator?  After reviewing everyplace
+&gt; GetIterator is used, I don&apos;t think it is necessary.
+
+GetIterator + CheckIterator throws if not an object or the value of Get(obj, @@iterator) is not callable. It also throws if the result of that call is not an object.
+
+An alternative approach would be to use CheckObjectCoercible and throw (throw for null and undefined). Then do the Get(value, @@iterator) and throw if not callable or the result of that call is not an object.
+
+This is of course observable if you have a getter for Number.prototype[Symbol.iterator] and you check the type of this (in strict mode).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9765</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 11:53:08 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #4)
+&gt; (In reply to Allen Wirfs-Brock from comment #3)
+&gt; &gt; (In reply to Erik Arvidsson from comment #2)
+&gt; &gt; &gt; Allen, what was the resolution?
+&gt; &gt; 
+&gt; &gt; By passing ToObject(iterable) to GetIterator
+&gt; &gt; 
+&gt; &gt; If we made GetIterator not throw on none objects, then we&apos;d have to define
+&gt; &gt; what it does instead.  Return an empty iterator?  After reviewing everyplace
+&gt; &gt; GetIterator is used, I don&apos;t think it is necessary.
+&gt; 
+&gt; GetIterator + CheckIterator throws if not an object or the value of Get(obj,
+&gt; @@iterator) is not callable. It also throws if the result of that call is
+&gt; not an object.
+&gt; 
+&gt; An alternative approach would be to use CheckObjectCoercible and throw
+&gt; (throw for null and undefined). Then do the Get(value, @@iterator) and throw
+&gt; if not callable or the result of that call is not an object.
+&gt; 
+&gt; This is of course observable if you have a getter for
+&gt; Number.prototype[Symbol.iterator] and you check the type of this (in strict
+&gt; mode).
+
+It&apos;s really up to the caller of GetIteator to decide if it wants to accept primitive values and and at what point it wants any observable ToObject operations to occur.  
+
+I don&apos;t really see any issues in the way it currently works.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9767</commentid>
+    <comment_count>6</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-12 12:36:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; (In reply to Erik Arvidsson from comment #4)
+&gt; &gt; (In reply to Allen Wirfs-Brock from comment #3)
+&gt; &gt; &gt; (In reply to Erik Arvidsson from comment #2)
+&gt; &gt; &gt; &gt; Allen, what was the resolution?
+&gt; &gt; &gt; 
+&gt; &gt; &gt; By passing ToObject(iterable) to GetIterator
+&gt; &gt; &gt; 
+&gt; &gt; &gt; If we made GetIterator not throw on none objects, then we&apos;d have to define
+&gt; &gt; &gt; what it does instead.  Return an empty iterator?  After reviewing everyplace
+&gt; &gt; &gt; GetIterator is used, I don&apos;t think it is necessary.
+&gt; &gt; 
+&gt; &gt; GetIterator + CheckIterator throws if not an object or the value of Get(obj,
+&gt; &gt; @@iterator) is not callable. It also throws if the result of that call is
+&gt; &gt; not an object.
+&gt; &gt; 
+&gt; &gt; An alternative approach would be to use CheckObjectCoercible and throw
+&gt; &gt; (throw for null and undefined). Then do the Get(value, @@iterator) and throw
+&gt; &gt; if not callable or the result of that call is not an object.
+&gt; &gt; 
+&gt; &gt; This is of course observable if you have a getter for
+&gt; &gt; Number.prototype[Symbol.iterator] and you check the type of this (in strict
+&gt; &gt; mode).
+&gt; 
+&gt; It&apos;s really up to the caller of GetIteator to decide if it wants to accept
+&gt; primitive values and and at what point it wants any observable ToObject
+&gt; operations to occur.  
+&gt; 
+&gt; I don&apos;t really see any issues in the way it currently works.
+
+The problem right now is that GetIterator requires the argument to be an object. I would prefer if GetIterator worked on values and if the caller does not want to iterator values they can throw if not an object.
+
+The way it is now creates a useless object (which is observable)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9768</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 12:53:45 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #6)
+ I don&apos;t really see any issues in the way it currently works.
+&gt; 
+&gt; The problem right now is that GetIterator requires the argument to be an
+&gt; object. I would prefer if GetIterator worked on values and if the caller
+&gt; does not want to iterator values they can throw if not an object.
+&gt; 
+&gt; The way it is now creates a useless object (which is observable)
+
+But that observable object is just the same as the semantics of 
+   44[anyKey]
+when anykey is an accessor property of Number.prototype which has a non-strict getter function. So I don&apos;t see why you are concerned about that observable object.
+
+We could special case all the places where we use GetIterator so they each decide exactly which primitive values they want to accept.  It it seems much more consistent for the normal behavior to just be ToObject.
+
+finbally, while Number.prototype doesn&apos;t have an standard @@iterator, I don&apos;t think we would want to preclude somebody from defining it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9769</commentid>
+    <comment_count>8</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-12 13:16:14 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #7)
+&gt; (In reply to Erik Arvidsson from comment #6)
+&gt;  I don&apos;t really see any issues in the way it currently works.
+&gt; &gt; 
+&gt; &gt; The problem right now is that GetIterator requires the argument to be an
+&gt; &gt; object. I would prefer if GetIterator worked on values and if the caller
+&gt; &gt; does not want to iterator values they can throw if not an object.
+&gt; &gt; 
+&gt; &gt; The way it is now creates a useless object (which is observable)
+&gt; 
+&gt; But that observable object is just the same as the semantics of 
+&gt;    44[anyKey]
+&gt; when anykey is an accessor property of Number.prototype which has a
+&gt; non-strict getter function. So I don&apos;t see why you are concerned about that
+&gt; observable object.
+
+I&apos;m not concerned about the observable effect but as it is now the spec mandates that you do a ToObject first or it will fail the test262 test for this edge case.
+
+&gt; We could special case all the places where we use GetIterator so they each
+&gt; decide exactly which primitive values they want to accept.  It it seems much
+&gt; more consistent for the normal behavior to just be ToObject.
+
+My point is that we should not special case GetIterator + CheckIterator. It should just do `value[Symbol.iterator]()` and not care what type value has.
+ 
+&gt; finbally, while Number.prototype doesn&apos;t have an standard @@iterator, I
+&gt; don&apos;t think we would want to preclude somebody from defining it.
+
+Of course. I used Number.prototype as an example because it does not have an iterator in ES6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9773</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 14:54:29 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #8)
+&gt; (In reply to Allen Wirfs-Brock from comment #7)
+&gt; &gt; 
+
+&gt; &gt; But that observable object is just the same as the semantics of 
+&gt; &gt;    44[anyKey]
+&gt; &gt; when anykey is an accessor property of Number.prototype which has a
+&gt; &gt; non-strict getter function. So I don&apos;t see why you are concerned about that
+&gt; &gt; observable object.
+&gt; 
+&gt; I&apos;m not concerned about the observable effect but as it is now the spec
+&gt; mandates that you do a ToObject first or it will fail the test262 test for
+&gt; this edge case.
+
+Right, the way I have it currently spec&apos;ed
+  1.  ToObject and any observable effects
+  2   Any oberable effects of Get @@iterator
+  3.  IsCallable exceptions
+  3.  object TypeCheck on result
+
+44[anykey]() does:
+  1. CheckObjectCoercible/ToObject
+  2. Get anykey
+  3. IsCallable
+
+So, the  ordering of observable events is the same, which is presumably something that could/should be checked by test262
+
+&gt; 
+&gt; &gt; We could special case all the places where we use GetIterator so they each
+&gt; &gt; decide exactly which primitive values they want to accept.  It it seems much
+&gt; &gt; more consistent for the normal behavior to just be ToObject.
+&gt; 
+&gt; My point is that we should not special case GetIterator + CheckIterator. It
+&gt; should just do `value[Symbol.iterator]()` and not care what type value has.
+
+But at the spec level we don&apos;t have a single abstraction operation that does the equivalent of &apos;value[Symbol.Iterator]()&apos;.  And we have plenty of places where we throw instead of coerce prior to calling a property.  
+
+I could do some restructuring and have some more abstract operations, but it wouldn&apos;t change the actual semantics and at this point in time, I doen&apos;t think it would be a high priority.  
+
+
+Of course, I may just be stubbornly missing your point.  If so keeping trying and I&apos;ll probably eventually see it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9774</commentid>
+    <comment_count>10</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-12 15:00:16 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #9)
+
+&gt; Of course, I may just be stubbornly missing your point.  If so keeping
+&gt; trying and I&apos;ll probably eventually see it.
+
+I think you are missing my point. I&apos;ll try to create a diff on the spec with what I mean tomorrow.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9918</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:25 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

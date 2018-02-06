@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1273</bug_id>
+          
+          <creation_ts>2013-03-08 16:31:00 -0800</creation_ts>
+          <short_desc>Don&apos;t allow bitwise comparison in String.prototype.localeCompare</short_desc>
+          <delta_ts>2015-02-17 21:21:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3402</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-03-08 16:31:19 -0800</bug_when>
+    <thetext>The ES5 specification of String.prototype.localeCompare first requires that the function &quot;return 0 when comparing Strings that are considered canonically equivalent by the Unicode standard&quot;, but then goes on &quot;if no language-sensitive comparison at all is available from the host environment, this function may perform a bitwise comparison.&quot;
+
+These two sentences are incompatible with each other: A bitwise comparison will return non-zero values for many string pairs that are considered canonically equivalent by the Unicode standard.
+
+I recommend removing the latter paragraph. This requires implementations to at least perform Unicode normalization, although still not language-sensitive comparison.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6183</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 13:22:08 -0700</bug_when>
+    <thetext>I really think the original intent was to permit basic implementations that only do bitwise comparison. 
+
+Rather than removing the bitwise comparison option I add a requirement that if &quot;language-sensitive comparison&quot; is performed then canonical equivalence is required.  
+
+fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6571</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:19 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9637</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 22:30:48 -0700</bug_when>
+    <thetext>This bug and bug 407 need to be resolved together. See bug 407 comment 3 there. Also, is there any documentation of the original intent referred to in comment 1?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12544</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 09:35:24 -0800</bug_when>
+    <thetext>fixed in rev27</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12889</commentid>
+    <comment_count>5</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 21:21:01 -0800</bug_when>
+    <thetext>Verified fixed in bug 407.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1549</bug_id>
+          
+          <creation_ts>2013-06-06 06:03:00 -0700</creation_ts>
+          <short_desc>9.3.3: Remove step 3 from CreateOwnDataProperty</short_desc>
+          <delta_ts>2013-07-15 17:03:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4145</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-06-06 06:03:47 -0700</bug_when>
+    <thetext>Remove this step from 9.3.3  CreateOwnDataProperty (O, P, V):
+
+3.  Assert: O does not have an own property whose key is P
+
+
+Test case which triggers the assertion:
+
+js&gt; Reflect.set({}, &quot;foo&quot;, 0, {foo: 0})
+Exception in thread &quot;main&quot; java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.AbstractOperations.CreateOwnDataProperty(AbstractOperations.java:516)
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryObject.set(OrdinaryObject.java:470)
+        at com.github.anba.es6draft.runtime.types.builtins.OrdinaryObject.set(OrdinaryObject.java:465)
+        at com.github.anba.es6draft.runtime.objects.reflect.Reflect$ReflectedFunctions.set(Reflect.java:183)
+
+
+The stack trace corresponds to the following methods:
+15.17.1.9  Reflect.set (target, propertyKey, V, receiver=target), step 6
+-&gt; 8.3.10  [[Set]] (P, V, Receiver), step 4.c.i
+--&gt; 8.3.10  [[Set]] (P, V, Receiver), step 4.d.ii
+---&gt; 9.3.3  CreateOwnDataProperty (O, P, V), step 3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4247</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-18 11:17:43 -0700</bug_when>
+    <thetext>Interesting misuse of Reflect.set
+
+Instead of eliminating the assertion (which really is intended to be the case, it caught this issue....) I restructured ordinary [[Put]] so that step 4.d.i sets ownDesc to the default data property descriptor.  It then falls into step 5.
+
+This way the same semantics apply to setting a receiver data property, regardless of whether or not it physically inherits from O (passing an object as the receiver means that it logically inherits from O).
+
+fixed in rev 16 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4269</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-06-19 23:58:23 -0700</bug_when>
+    <thetext>I think you meant step 4.d.i. in &quot;ordinary [[Set]]&quot; rather than &quot;ordinary [[Put]]&quot;.
+
+I like this change: it removes some redundancy in the [[Set]] algorithm.
+
+IIUC, the code snippet above would now be accepted. And if the property already exists on the receiver, it will now be *updated* rather than *overridden* with a new data property.
+
+IIUC, the following tests should now pass (please correct me if I&apos;m wrong):
+
+var target = {};
+var receiver = {};
+
+Reflect.set(target, &quot;foo&quot;, 1, receiver);
+assert(target.foo === undefined);
+assert(receiver.foo === 1); // new property added to receiver
+
+Object.defineProperty(receiver, &quot;bar&quot;,
+  { value: 0,
+    writable: true,
+    enumerable: false,
+    configurable: true });
+
+Reflect.set(target, &quot;bar&quot;, 1, receiver);
+
+assert(receiver.bar === 1); // value of existing receiver property updated
+assert(Object.getOwnPropertyDescriptor(receiver,&quot;bar&quot;).enumerable === false); // enumerability was not overridden</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4270</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-06-20 02:25:51 -0700</bug_when>
+    <thetext>The test in comment 2 as well as the original test case both succeed the proposed update. Also no regressions from test262.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4398</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:19 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

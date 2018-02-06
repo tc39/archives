@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3469</bug_id>
+          
+          <creation_ts>2014-12-17 13:14:00 -0800</creation_ts>
+          <short_desc>21.2.5.11 RegExp.prototype [ @@split ]: Wrong loop indexing and missing increment for lengthA</short_desc>
+          <delta_ts>2014-12-23 20:23:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11072</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-17 13:14:01 -0800</bug_when>
+    <thetext>21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+
+(1) Increment `lengthA` after step 23.f.iv.3
+(2) The capturing group indexing is wrong in 23.f.iv.9.
+
+Maybe change to:
+---
+Let captureLen be ToLength(Get(splitter, &quot;length&quot;)).
+ReturnIfAbrupt(captureLen).
+Let i be 1.
+Repeat while i &lt; captureLen.
+  Let nextCapture be Get(splitter, ToString(i)).
+  Let i be i + 1.
+  ...
+---
+
+Or:
+---
+Let nCaptures be ToLength(Get(result, &quot;length&quot;)).
+ReturnIfAbrupt(nCaptures).
+Let nCaptures be max(nCaptures − 1, 0).
+Let i be 1.
+Repeat while i ≤ nCaptures.
+  Let nextCapture be Get(splitter, ToString(i)).
+  Let i be i + 1.
+  ...
+---
+
+Also see step 17 in 21.2.5.8 RegExp.prototype [ @@replace ].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11082</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-17 17:32:46 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11224</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:34 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

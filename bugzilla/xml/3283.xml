@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3283</bug_id>
+          
+          <creation_ts>2014-10-15 07:55:00 -0700</creation_ts>
+          <short_desc>[[LocalExportEntries]] in Table 37</short_desc>
+          <delta_ts>2014-10-15 09:04:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Caridy Patiño">caridy</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10506</commentid>
+    <comment_count>0</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-15 07:55:38 -0700</bug_when>
+    <thetext>In Table 37, in the &quot;Meaning&quot; column for [[LocalExportEntries]], it refers to &quot;Module names within the ImportEntry records have been host normalized.&quot;, I wonder if that&apos;s needed since ExportDeclaration (for local entries) does not have FromClause.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10508</commentid>
+    <comment_count>1</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-15 09:04:05 -0700</bug_when>
+    <thetext>Ah, Table 39 states clearly that it could be String|null. We are good!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

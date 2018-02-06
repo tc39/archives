@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2054</bug_id>
+          
+          <creation_ts>2013-10-07 01:35:00 -0700</creation_ts>
+          <short_desc>19.1.4.6 Object.prototype.toString ( ): remove &quot;Math&quot; and &quot;JSON&quot; from censored list</short_desc>
+          <delta_ts>2013-10-29 09:46:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5841</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-07 01:35:14 -0700</bug_when>
+    <thetext>Math and JSON are no longer special cased in 19.1.4.6, but instead use the general @@toStringTag mechanism. But per the restriction in step 18.e `Math.toString()` currently returns `&quot;[object ~Math]&quot;`. 
+
+
+
+Also the NOTE isn&apos;t actually accurate anymore:
+&gt; The above definition of toString preserves the ability to use it as a reliable test
+&gt; for those specific kinds of built-in objects but it does not provide a reliable type
+&gt; testing mechanism for other kinds of built-in or program defined objects.
+
+js&gt; Object.defineProperty(Math, Symbol.toStringTag, {value: &quot;NotMath&quot;}).toString()
+&quot;[object NotMath]&quot;
+
+IIRC the current censoring approach is not yet set in stone, just a heads-up from me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5862</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-07 13:10:41 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; Also the NOTE isn&apos;t actually accurate anymore:
+
+Ah, manual @@toStringTag overrides are considered ok (bug 1459, comment 3), didn&apos;t remember that one when reporting this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5899</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-11 09:04:34 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+[[Class]] tagging for Math and JSON was added in ES5 specifically to support toString. Prior to that they were [[Class]]==&quot;Object&quot;  I don&apos;t think any one currently can rely on the toString result for those objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6125</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:15 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

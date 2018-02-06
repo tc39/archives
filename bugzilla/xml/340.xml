@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>340</bug_id>
+          
+          <creation_ts>2012-05-08 15:47:00 -0700</creation_ts>
+          <short_desc>ReturnIfAbrupt is not defined</short_desc>
+          <delta_ts>2012-06-16 09:31:47 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>908</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 15:47:58 -0700</bug_when>
+    <thetext>I can&apos;t find a definition for this fascinating device!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>909</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-08 15:54:32 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; I can&apos;t find a definition for this fascinating device!
+
+very end of section 8.8, page 38</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>910</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 16:38:53 -0700</bug_when>
+    <thetext>Sorry, I don&apos;t mean to be a pain, but I&apos;m not seeing it here:
+
+http://gyazo.com/0d93225ed67bd372a8cc47f62c4946e1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>911</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-08 17:47:52 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Sorry, I don&apos;t mean to be a pain, but I&apos;m not seeing it here:
+&gt; 
+&gt; http://gyazo.com/0d93225ed67bd372a8cc47f62c4946e1
+
+that&apos;s 8.9... look right above there</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>912</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-08 18:48:36 -0700</bug_when>
+    <thetext>Thanks, I see it now, but that to be honest it looks like a list, &quot;1. ReturnIfAbrupt(argument),&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>993</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-16 09:31:47 -0700</bug_when>
+    <thetext>fixed in &quot;REv 8&quot;, June 12,2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

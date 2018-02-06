@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>647</bug_id>
+          
+          <creation_ts>2012-09-05 08:34:00 -0700</creation_ts>
+          <short_desc>Pull in # of tests per chapter from testcases_ch*.json files</short_desc>
+          <delta_ts>2012-09-05 08:34:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Fugate">dave.fugate</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1594</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Fugate">dave.fugate</who>
+    <bug_when>2012-09-05 08:34:21 -0700</bug_when>
+    <thetext>test262 has an awesome new feature that allows dynamically selecting test chapters to run.  It appears to be pulling in the number of tests per chapter by loading the ch*.json files which includes the tests themselves.  From the east coast of the US, it takes quite some time to download these files (up to 11 megs each) from Mozilla&apos;s servers.
+
+A quick performance fix would be to simply load the testcases_ch*.json files (that live alongside the ch*.json files) which include the number of test cases per chapter.  These files are only about 46KB apiece.
+
+Keep up the good work!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

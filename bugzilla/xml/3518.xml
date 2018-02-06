@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3518</bug_id>
+          
+          <creation_ts>2015-01-07 14:45:00 -0800</creation_ts>
+          <short_desc>Array method ToObject language inconsistencies</short_desc>
+          <delta_ts>2015-02-12 12:51:25 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11318</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-01-07 14:45:59 -0800</bug_when>
+    <thetext>Two things: 
+
+1. Why this: 
+
+  &quot;Let O be the result of calling ToObject passing the this value as the argument.&quot;
+
+  And not this: 
+  
+  &quot;Let O be ToObject(this)&quot;
+
+2. Array.prototype.toString ( ) says: 
+
+  &quot;Let array be the result of calling ToObject on the this value.&quot;
+
+  But all the others have as shown above 
+
+
+String.prototype.* all appear to be satisfied with: 
+
+
+  Let O be RequireObjectCoercible(this value).
+  Let S be ToString(O).
+  ReturnIfAbrupt(S).
+
+
+Shouldn&apos;t Array.prototype methods read: 
+
+  Let O be RequireObjectCoercible(this value).
+  Let A be ToObject(O).
+  ReturnIfAbrupt(A).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11319</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-07 15:18:24 -0800</bug_when>
+    <thetext>Well, &quot;this&quot; isn&apos;t really precise enough.  The &quot;this value&quot; (or thisValue) has a specific meaning defined within the spec, for example: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-environment-records snd http://people.mozilla.org/~jorendorff/es6-draft.html#sec-built-in-function-objects 
+
+But mostly what you are seeing is just  accumulated editorial variations in a very old document that has been touched by several hands.  It would be nice to clean them all up, but we probably won&apos;t get that gone in ES6.
+
+Going forward, my preference is ToObject(this value), even though I continue to be a little hesitant to use phrases like that without functional notation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12486</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:51:25 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

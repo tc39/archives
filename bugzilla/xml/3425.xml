@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3425</bug_id>
+          
+          <creation_ts>2014-12-08 13:58:00 -0800</creation_ts>
+          <short_desc>21.1.3.* String.prototype.{match, search}: Provide a default matcher/searcher</short_desc>
+          <delta_ts>2014-12-23 20:23:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>toshok</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10961</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-08 13:58:52 -0800</bug_when>
+    <thetext>21.1.3.11 String.prototype.match
+21.1.3.15 String.prototype.search
+
+When the matcher/searcher found in step 4 is undefined, a new regexp is constructed in step 7a, but the original undefined matcher/searcher is incorrectly used in step 9.
+
+A step 7b should be added:
+
+  Let matcher/searcher be the original value of RegExp.prototype[@@match/@@search].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10965</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-08 14:51:55 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft.
+Several bugs besides the ones mentioned here.  Also fixes in replace and split.
+
+Here&apos;s what match now looks like
+
+1.	Let O be RequireObjectCoercible(this value).
+2.	Let S be ToString(O).
+3.	ReturnIfAbrupt(S).
+4.	Let matcher be GetMethod(regexp, @@match).
+5.	ReturnIfAbrupt(matcher).
+6.	If matcher is not undefined, then
+    a.	   Return  Call(matcher, regexp, «S»).
+7.	Let rx be RegExpCreate(regexp, undefined) (see .2.3.3).
+8.	Return Invoke(rx, @@match, «S»).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11043</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-15 13:37:37 -0800</bug_when>
+    <thetext>*** Bug 3444 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11191</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:30 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

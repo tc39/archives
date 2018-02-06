@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2530</bug_id>
+          
+          <creation_ts>2014-02-12 16:40:00 -0800</creation_ts>
+          <short_desc>chapter 9: misc editorial</short_desc>
+          <delta_ts>2014-06-01 22:35:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7264</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:40:38 -0800</bug_when>
+    <thetext>----------------------------------------
+In 9.2.3 &quot;FunctionAllocate Abstract Operation&quot;:
+
+9.2.3 / step 8:
+Set /F/&apos;s [[Call]] internal method to the definition specified in 9.2.1.
+    Change &quot;9.2.1&quot; to &quot;9.2.4&quot;.
+
+----------------------------------------
+In 9.2.5 &quot;FunctionInitialise Abstract Operation&quot;:
+
+9.2.5 / step 9:
+If /kind/ is Arrow, then set the [[ThisMode]] internal slot of /F/ to lexical.
+    Put &quot;Arrow&quot; in sans-serif.
+    Put &quot;lexical&quot; in sans-serif.
+
+----------------------------------------
+In 9.2.11 &quot;SetFunctionName Abstract Operation&quot;:
+
+9.2.11 / step 3.a:
+Let /description/ be the values of /name/&apos;s [[Description]].
+    s|values|value|
+    After &quot;[[Description]]&quot;, insert &quot;attribute&quot;.
+
+----------------------------------------
+In 9.2.12 &quot;GetSuperBinding(obj) Abstract Operation&quot;:
+
+    GetSuperBinding() is never used.
+    s|GetSuperBinding|GetSuperBase| ?
+
+----------------------------------------
+In 9.2.13 &quot;CloneMethod(function, newHome, newName) Abstract Operation&quot;:
+
+9.2.13 / para 1:
+The abstract operation Clone is called with ...
+    s|Clone|CloneMethod|
+
+9.2.13 / step 3:
+Assert: Type(newName) one of Undefined, String, or Symbol.
+    Insert &quot;is&quot; before &quot;one of&quot;.
+
+9.2.13 / step 5:
+If the value of function&apos;s [[NeedsSuper]] internal slot is true, then
+    This should be step 6.
+
+----------------------------------------
+In 9.3.2 &quot;CreateBuiltinFunction(realm, steps) Abstract Operation&quot;:
+
+9.3.2 / step 3:
+Let /func/ be a new built-in function object that
+when called performs the action described by /steps/.
+The [[Realm]] internal slot of /func/ is step to /realm/.
+
+    Split this step into two steps.
+
+    s|step|set| (= Bug 2422)
+
+    In the second sentence, change passive voice to active:
+        Set the [[Realm]] internal slot of /func/ to /realm/.
+
+----------------------------------------
+In 9.4.2.2 &quot;ArrayCreate(length) Abstract Operation&quot;:
+
+    Parameter list in section header omits &apos;proto&apos;.
+
+----------------------------------------
+In 9.4.3.3 &quot;[[Enumerate]] ()&quot;:
+
+    No algorithm.
+
+----------------------------------------
+In 9.4.3.4 &quot;[[OwnPropertyKeys]] ( )&quot;:
+
+    No algorithm.
+
+----------------------------------------
+In 9.4.5.5 &quot;[[Enumerate]] ()&quot;:
+
+    No algorithm.
+
+----------------------------------------
+In 9.4.5.6 &quot;[[OwnPropertyKeys]] ()&quot;:
+
+    No algorithm.
+
+----------------------------------------
+In 9.4.5.8 &quot;IntegerIndexedElementGet ( O, index ) Abstract Operation&quot;:
+
+    This algorithm has no preamble.
+
+9.4.5.8 / step 8:
+Let /arrayTypeName/ be the string value /O/&apos;s [[TypedArrayName]] internal slot.
+    After &quot;value&quot;, insert &quot;of&quot;
+
+----------------------------------------
+In 9.4.5.9 &quot;IntegerIndexedElementSet ( O, index, value ) Abstract Operation&quot;:
+
+    This algorithm has no preamble.
+
+9.4.5.9 / step 10:
+Let /arrayTypeName/ be the string value /O/&apos;s [[TypedArrayName]] internal slot.
+    After &quot;value&quot;, insert &quot;of&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8337</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 11:01:03 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8786</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 22:35:09 -0700</bug_when>
+    <thetext>confirmed fixed except for things I re-raised
+as Bug 2952, Bug 2953, and Bug 2954.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

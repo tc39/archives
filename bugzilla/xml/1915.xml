@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1915</bug_id>
+          
+          <creation_ts>2013-09-27 02:49:00 -0700</creation_ts>
+          <short_desc>initialize -&gt; initialise (BE spelling)</short_desc>
+          <delta_ts>2013-09-27 14:47:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5439</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 02:49:51 -0700</bug_when>
+    <thetext>More changes to be consistent when using &quot;initialise&quot;.
+
+9.1.16.5 - step 4: &quot;initialized&quot; -&gt; &quot;initialised&quot;
+9.1.16.9 - %ThrowTypeError% - step 1: &quot;initialized&quot; -&gt; &quot;initialised&quot;
+9.1.16.11 - step 18: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+12.1.7.2 - NOTE: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+19.2.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+19.3.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+19.4.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+19.4.6.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+20.1.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+20.3.2 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+21.1.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+21.2.3 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+22.1.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+22.2.1 - 2nd paragraph: &quot;initializes&quot; -&gt; &quot;initialises&quot;
+22.2.1 - 3rd paragraph: &quot;initialize&quot; -&gt; &quot;initialise&quot;
+22.2.2.2 - NOTE 2: &quot;initializes&quot; -&gt; &quot;initialises&quot;
+22.2.2.2 - NOTE 2: &quot;initialized&quot; -&gt; &quot;initialised&quot;
+24.2.2 - 1st paragraph: &quot;initializes&quot; -&gt; &quot;initialises&quot;
+24.2.2 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+25.3.1 - 1st paragraph: &quot;initialization&quot; -&gt; &quot;initialisation&quot;
+Annex F - ExpectedArgumentCount: &quot;initializing&quot; -&gt; &quot;initialising&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5440</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 03:01:00 -0700</bug_when>
+    <thetext>I wonder whether &quot;optimized&quot; and &quot;realized&quot; also needs to be changed to &quot;optimised&quot; and &quot;realised&quot;? Hopefully they can stay as-is. Well, as long as it&apos;s always the &quot;-ize&quot; form and not a mix of &quot;-ise&quot; and &quot;-ize&quot;...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5480</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 10:35:16 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft
+
+The MS Word BE spell checker seems to be happy with &quot;optimized&quot; and &quot;realized&quot;.  Maybe not the OED but seems good enough for now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5505</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:01 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

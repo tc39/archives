@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1260</bug_id>
+          
+          <creation_ts>2013-02-28 11:30:00 -0800</creation_ts>
+          <short_desc>Align with ECMAScript 6</short_desc>
+          <delta_ts>2016-02-15 16:53:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2383</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>axel</cc>
+    
+    <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3256</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-02-28 11:30:10 -0800</bug_when>
+    <thetext>Edition 2 of the ECMAScript Internationalization API Specification should be based on Edition 6 of the ECMAScript Language Specification. This includes (but may not be limited to) the following changes:
+
+- Update the minimum version of ECMA-262, and all references to sections of the standard.
+
+- Update the minimum version of the Unicode standard.
+
+- Update algorithms to use the more precise algorithm language of ES6.
+
+- Remove the text in the description of the ToLocalTime abstract operation that unties it from ES5, 15.9.1.7 and 15.9.1.8.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5415</commentid>
+    <comment_count>1</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2013-09-21 13:45:17 -0700</bug_when>
+    <thetext>Any plans to turn the API into a module?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9117</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-01 10:45:42 -0700</bug_when>
+    <thetext>add a specification for Array.prototype.toLocaleString</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9815</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-20 10:59:00 -0700</bug_when>
+    <thetext>What is (In reply to Norbert from comment #0)
+&gt; - Update the minimum version of the Unicode standard.
+
+ES6 specifies `Unicode Standard, Version 5.1.0 or later`, should 402 match this version?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9817</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-20 11:01:15 -0700</bug_when>
+    <thetext>(In reply to Norbert from comment #0)
+&gt; - Remove the text in the description of the ToLocalTime abstract operation
+&gt; that unties it from ES5, 15.9.1.7 and 15.9.1.8.
+
+
+&quot;If the calendar is &quot;gregory&quot;, then the calculations must match the algorithms specified in ES5, 15.9.1, except that calculations are not bound by the restrictions on the use of best available information on time zones for local time zone adjustment and daylight saving time adjustment imposed by ES5, 15.9.1.7 and 15.9.1.8.&quot;
+
+Is this to be removed or replaced?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10700</commentid>
+    <comment_count>5</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 21:09:19 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #3)
+
+&gt; &gt; - Update the minimum version of the Unicode standard.
+&gt; 
+&gt; ES6 specifies `Unicode Standard, Version 5.1.0 or later`, should 402 match
+&gt; this version?
+
+Yes, use the same references for both ISO/IEC 10646 and the Unicode Standard as in ES6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10701</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 21:12:51 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #4)
+
+&gt; &gt; - Remove the text in the description of the ToLocalTime abstract operation
+&gt; &gt; that unties it from ES5, 15.9.1.7 and 15.9.1.8.
+&gt; 
+&gt; 
+&gt; &quot;If the calendar is &quot;gregory&quot;, then the calculations must match the
+&gt; algorithms specified in ES5, 15.9.1, except that calculations are not bound
+&gt; by the restrictions on the use of best available information on time zones
+&gt; for local time zone adjustment and daylight saving time adjustment imposed
+&gt; by ES5, 15.9.1.7 and 15.9.1.8.&quot;
+&gt; 
+&gt; Is this to be removed or replaced?
+
+Replace with &quot;If the calendar is &quot;gregory&quot;, then the calculations must match the algorithms specified in ES6, 20.3.1.&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

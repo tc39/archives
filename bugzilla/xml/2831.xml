@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2831</bug_id>
+          
+          <creation_ts>2014-05-09 11:56:00 -0700</creation_ts>
+          <short_desc>25.4 Promises</short_desc>
+          <delta_ts>2014-08-24 11:29:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>fdohrendorf</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8260</commentid>
+    <comment_count>0</comment_count>
+    <who name="">fdohrendorf</who>
+    <bug_when>2014-05-09 11:56:34 -0700</bug_when>
+    <thetext>If an exception is thrown inside of an onFulfilled callback function that was given as Parameter to the then(25.4.5.3) method, without any Additional then(or catch) calls, that exception will be catched by PromiseReactionTask(25.4.2.1),  without being rethrown.
+
+This happens because inside of the then(25.4.5.3) method a new promisecapability record is created which includes a new promise, that doesn&apos;t get a Default callback handler for onRejected. So when the exception is thrown it goes up to PromiseReactionTask is then delegated to this new PromiseCapability record, and delegated to the reject method, and then to the TriggerPromiseReactions, which should Enqueue a PromiseReactionTask for every PromiseRejectReactions, but These are empty at that Point, so TriggerPromiseReactions just returns undefined, as a NormalCompletion.
+
+I would expect the exception to get rethrown so that it lands inside NextTask (8.4.2)  Operation.
+
+I created a working solution by adding a flag to Promise that tells if it was just created.
+Also i add a Default promiseRejectReaction to the promise of the new promiseCapability record that is created inside the then method.
+Finally i added a check in then beginnig of the then method and if the flag is set i clear the promiseRejectReactions and unset the flag.
+This throws the exception as expected.
+
+I tested my solution with:
+https://github.com/promises-aplus/promises-tests
+
+If this was actually the intended behavior i would pretty much love to hear why, because i obviously didn&apos;t get it. And i just spend alot of time figuring this out.
+Because my exceptions weren&apos;t showing up as expected.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8268</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-05-09 12:43:25 -0700</bug_when>
+    <thetext>This is how promises work. It allows code like
+
+```js
+var promise = anotherPromise.then(value =&gt; {
+  if (!isValid(value)) {
+    throw new Error(&apos;Invalid value &apos; + value + &apos;!&apos;);
+  }
+});
+
+// later, after some other async processing takes place:
+doAsyncStuff().then(() =&gt; {
+  promise.catch(error =&gt; showUser(error.message));
+});
+```
+
+Promises can hold rejections indefinitely, until someone listens to them. Modern promise environments provide debugging experiences that allow you to introspect any currently-rejected promises.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8313</commentid>
+    <comment_count>2</comment_count>
+    <who name="">fdohrendorf</who>
+    <bug_when>2014-05-11 07:02:59 -0700</bug_when>
+    <thetext>Ok i didn&apos;t know that. I expected this to work differently, is there any documentation how it came to this decision?
+
+I thought, since it is async, that the Operation that sets up the promises should also Setup exception handling, before giving control to the async Operation. Which then expects tobe Setup completly, and if it encounters an exception should behave as stated. So that an unhandled exception is really thrown. Thinking of async operations in a more synchronous way.
+
+Also what brought me to my conclusion was the line:
+1.If result is an abrupt completion, then perform implementation defined unhandled exception processing.
+-- in NextTask (8.4.2)
+Which will never be hit with an abrupt completion, at least not from any promise related Task.
+
+Thanks for the quick Response.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8314</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-11 08:16:55 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Also what brought me to my conclusion was the line:
+&gt; 1.If result is an abrupt completion, then perform implementation defined
+&gt; unhandled exception processing.
+&gt; -- in NextTask (8.4.2)
+&gt; Which will never be hit with an abrupt completion, at least not from any
+&gt; promise related Task.
+
+It is possible to take that step with promise tasks, for example using this code [1]. But the results are implementation defined, for example V8 simply ignores the exception (cf. the empty catch block in [2]). 
+
+[1] https://github.com/anba/es6draft/blob/f2255ae58fed3e8c4f7153c5bea654d2b14fa2df/src/test/scripts/suite/lib/promises.js#L13-L19
+[2] https://code.google.com/p/v8/source/browse/branches/bleeding_edge/src/promise.js?spec=svnr21247&amp;r=r21247#179</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

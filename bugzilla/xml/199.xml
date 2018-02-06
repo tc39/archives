@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>199</bug_id>
+          
+          <creation_ts>2011-08-30 10:31:00 -0700</creation_ts>
+          <short_desc>define function length property value for default-value and rest parameters</short_desc>
+          <delta_ts>2013-10-28 16:43:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 2: July 25, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="6"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>423</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-08-30 10:31:50 -0700</bug_when>
+    <thetext>The most reasonable definition seems to be:
+
+The number of parameter positions (including the rest parameter if specified) that precede the first default-value parameter (or the end of the list if there are no default-value parameters):
+ function (a,b,c) {}  //length==3
+ function (a,b,...c) {}  //length==3  
+ function (...c) {} // length=1
+ function (a=1,b=2) {}  //length==0
+function (a,b=1) {}  //length==1
+function (a,b=1,...c) {}  //length==1
+
+This treats rest as meaning &quot;usually at least one&quot; (unless following a default-value parameter) which seems to be the way open-ended parameter lists were interpreted in assigning length to most such Chapter 15 functions.  I think that this rule would yield the most matches  with the specified lengths of chapter 15 functions when their signatures are rewritten using default-value and rest parameter notation.
+
+See thread starting at https://mail.mozilla.org/pipermail/es-discuss/2011-August/016361.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6014</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 16:43:09 -0700</bug_when>
+    <thetext>this was settle a long time ago</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

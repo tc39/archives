@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2210</bug_id>
+          
+          <creation_ts>2013-11-08 18:29:00 -0800</creation_ts>
+          <short_desc>15.2.2: &quot;ExportSpecifier&quot; font</short_desc>
+          <delta_ts>2014-05-22 19:05:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6620</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-08 18:29:29 -0800</bug_when>
+    <thetext>In 15.1.2 &quot;Exports&quot;,
+in production 3,
+the first RHS is:
+    ExportSpecifier[?NoReference]
+where &apos;ExportSpecifier&apos; is in a small upright font.
+
+Change it to a larger italic font.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6621</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-09 09:28:35 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6982</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-21 09:42:10 -0800</bug_when>
+    <thetext>Nope, not fixed in rev22.
+
+(By the way, section number is now 15.2.2.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7100</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:05:26 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7155</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-29 12:55:21 -0800</bug_when>
+    <thetext>No really, it isn&apos;t fixed in rev22.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7609</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-06 17:49:27 -0700</bug_when>
+    <thetext>Still not fixed in rev 23.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8474</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 17:54:05 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8613</commentid>
+    <comment_count>7</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-22 19:05:24 -0700</bug_when>
+    <thetext>confirmed fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2070</bug_id>
+          
+          <creation_ts>2013-10-08 17:39:00 -0700</creation_ts>
+          <short_desc>\b should work for Unicode strings</short_desc>
+          <delta_ts>2015-10-04 09:08:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Oleg">oleg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5878</commentid>
+    <comment_count>0</comment_count>
+    <who name="Oleg">oleg</who>
+    <bug_when>2013-10-08 17:39:01 -0700</bug_when>
+    <thetext>In section 15.10.2.6, the assertion \b is currently defined for ASCII only, since the standard defines &quot;The abstract operation IsWordChar&quot; returning true for only 63 ASCII characters.
+
+I believe it should instead be phrased as &quot;The abstract operation IsWordChar returns true if and only if CharacterClassEscape w returns true&quot;.
+
+The reason I&apos;m requesting this change is that I&apos;m a C++ developer, and the C++11 standard points to ECMA-262 for Regular Expression syntax.  For Unicode strings, \w matches all Unicode alphanumeric characters, whereas \b only matches ASCII characters.  I am using the workaround of changing \b into (?!\w), and it works, but it&apos;s very confusing to have \w to match one set of characters and \b work with a different set.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14777</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-04 09:08:02 -0700</bug_when>
+    <thetext>Substantive changes should go through the proposal process defined here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

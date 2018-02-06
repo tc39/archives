@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>342</bug_id>
+          
+          <creation_ts>2012-05-09 17:33:00 -0700</creation_ts>
+          <short_desc>ES5.1 should not require incorrect daylight savings treatment</short_desc>
+          <delta_ts>2015-10-03 14:41:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>914</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-05-09 17:33:02 -0700</bug_when>
+    <thetext>** Request **
+Instead of constraining timezone offset behaviour as in 15.9.1.8, the spec should leave DaylightSavingsTA implementation dependent.
+
+
+** Issue **
+The current spec text in 15.9.1.8 allows implementations to be as wrong as they&apos;d like about daylight savings adjustments, but constrains how correct they should try to be.  This is somewhat counterintuitive, and in practice, has not succeeded in producing consensus between browsers.
+
+For example - here are browser results for a few dates in the US Pacific timezone:
+
+new Date(&quot;4/1/2000&quot;).getTimezoneOffset()
+
+		Windows					Debian	Mac
+		IE	CH	FF	OP	SF	Node	Node	CH	FF	SF
+4/1/2000	420	420	420	420	420	420	480	480	480	420
+Note that on this date Chrome, FireFox and Node are inconsistent between OSes.  Almost everyone is actually wrong though, the actual DST adjustment was 480.
+
+4/1/2028	420	420	420	420	420	420	420	420	420	420
+Note that on this date, everyone is consistent, and correct, but Chrome on Mac and Firefox on Mac are violating the ES5.1 spec (both 2000 and 2028 are leap years starting on a Saturday)
+
+3/10/2011	480	480	480	480	480	480	480	480	480	480	
+3/10/2109	480	480	480	480	420	480	480	480	420	420
+Note that on this date, a few environments are again violating ES5.1 rules (these two years both start on Tuesday and are not leap years), but here there are disagreements even on a single OS (both on Windows and Mac).
+
+In IE10, we are expecting to change our behaviour for 4/1/2000 above to be historically correct, match Chrome and Firefox on Mac and Node on Debian,  and violate the current ES5.1 spec text constraints.
+
+The second issue is with host APIs that provide Date objects to JavaScript code.  For example - the File.lastModifiedDate from the W3C File API [1].  If the OS reports in its file browser that a file was modified on 3/31/2000 at 11PM, JavaScript will report that the file was modified on 4/1/2000 at 12AM when run on the same system.  With an increasing number of host APIs exposing access to host OS resources like filesystems, and opportunities to round trip Date objects between host APIs and JavaScript, both in browser hosts and server hosts, this disconnect will get increasingly serious for JavaScript application reliability.
+
+** Recommendation **
+I would love to be able to solve this by specifying DaylightSavingsTA more fully and requiring implementations to be more correct, but this is not a realistic option as there is no oracle of truth on timezone adjustments.  Given that browsers are already inconsistent on timezone adjustment behaviour, there is limited value in trying to prevent implementations from at least being historically correct when they can.  
+
+Instead of constraining timezone offset behaviour as in 15.9.1.8, the spec should leave DaylightSavingsTA implementation dependent.
+
+[0] http://www.w3.org/International/wiki/JavaScriptInternationalization
+[1] http://www.w3.org/TR/FileAPI/#dfn-lastModifiedDate</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>915</commentid>
+    <comment_count>1</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-05-09 17:34:02 -0700</bug_when>
+    <thetext>See also Norbert&apos;s mail response about how this relates to text in the Internationalization spec.
+
+https://mail.mozilla.org/pipermail/es-discuss/2012-March/020832.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14761</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 14:41:59 -0700</bug_when>
+    <thetext>ES2015 contains language allowing DaylightSavingsTA to be implementation dependent.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

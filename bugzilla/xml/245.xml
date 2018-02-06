@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>245</bug_id>
+          
+          <creation_ts>2012-01-18 17:09:00 -0800</creation_ts>
+          <short_desc>Coverage: need check that setter defined for Array.prototype[0] gets called on [].push(...)</short_desc>
+          <delta_ts>2012-01-18 17:09:54 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>610</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-18 17:09:54 -0800</bug_when>
+    <thetext>&lt;Thanks&gt;David Bruant&lt;/Thanks&gt;
+
+Le 18/10/2011 21:37, Allen Wirfs-Brock a écrit :
+&gt; On Oct 18, 2011, at 12:31 PM, felix wrote:
+&gt;
+&gt;&gt; If I define a setter for Array.prototype[0], does [].push invoke that setter?
+&gt; It&apos;s supposed to.
+&gt;
+&gt;&gt; Test code:
+&gt;&gt;
+&gt;&gt; &lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;
+&gt;&gt; &lt;script&gt;
+&gt;&gt;  Object.defineProperty(
+&gt;&gt;    Array.prototype, 0,
+&gt;&gt;    { get : function() { alert(&apos;get 0&apos;); return this.zero; },
+&gt;&gt;      set : function(v) { alert(&apos;set 0 &apos; + v); this.zero = v; },
+&gt;&gt;      enumerable : true,
+&gt;&gt;      configurable : false });
+&gt;&gt;  var a = [];
+&gt;&gt;  alert(&apos;before push a[0] = &apos; + a[0]);  a.push(44);  alert(&apos;after push 
+&gt;&gt; a[0] = &apos; + a[0]); &lt;/script&gt; &lt;/body&gt;&lt;/html&gt;
+&gt;&gt;
+&gt;&gt; On all the browsers I&apos;ve tried so far, the setter doesn&apos;t get invoked.
+&gt;&gt;
+&gt;&gt; However, it looks to me like the ES5.1 spec says the setter should get invoked:
+&gt; Yes, that is what it says and it is intentional.
+&gt;
+&gt;&gt; 15.4.4.7 says push() invokes the [[Put]] internal method
+&gt;&gt;
+&gt;&gt; 8.12.5 says [[Put]] tries to use an inherited property descriptor if 
+&gt;&gt; there isn&apos;t an own property descriptor.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

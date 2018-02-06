@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2984</bug_id>
+          
+          <creation_ts>2014-06-10 08:57:00 -0700</creation_ts>
+          <short_desc>Ch.14, cumulative bugs &amp; suggestions</short_desc>
+          <delta_ts>2014-07-18 14:40:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3005</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8875</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-06-10 08:57:25 -0700</bug_when>
+    <thetext>Ch.14, cumulative bugs &amp; suggestions
+
+[Note: this is against Rev. 23, some things might have been fixed or changed already.]
+
+
+TECHNICAL ISSUES
+
+14.1.2, 1st case, last bullet: I thought we decided to drop this restriction (at the 2014/09/18 meeting)
+14.2.1, 1st case, 2nd bullet: dito
+14.2.1, 2nd case: &quot;if any early errors are present&quot; seems an inadequate formulation. For example, there might be early ReferenceErrors. It doesn&apos;t make sense to convert them to SyntaxErrors in this rule.
+
+14.3.1, 1st case, 2nd bullet: we decided to drop this, see above
+14.3.1, 2nd case, last bullet: dito
+14.4.1, 1st case, 2nd bullet: dito
+14.4.1, 2nd case, last bullet: dito
+
+14.5.17: steps 15.b and 17.b return without resetting the context&apos;s environment
+
+14.6: The specification of IsInTailPosition seems broken. It just verifies that there exists _some_ occurrence of the phrase in question in tail position, but does not check that it is the one we are looking for. For example, consider &quot;() =&gt; { f(); return f() }&quot;. AFAICS, given the definition as is, IsInTailPosition would give true no matter which call to f() we are asking for.
+
+14.6.2.1, last case: &quot;Finally&quot; -&gt; &quot;Block&quot;
+14.6.3, step 3: &quot;it remains in its suspended state&quot; -- I&apos;m not sure I understand, &quot;it&quot; refers to the now-on-top context, which is not the suspended one
+
+
+SUGGESTIONS
+
+14.1.8: Why not define that in terms of BoundNames being empty/non-empty?
+
+
+TYPOS &amp; FORMATTING
+
+14.1.2: layout of first production
+14.1.14: bogus xref to 13.11.2
+14.2.16: bogus xref to 14.1.18 (should be 14.1.19)
+14.2.16, Note: &quot;is&quot; -&gt; &quot;in&quot;
+14.4.11: spurious comma in xrefs
+14.4.13: bogus xref to 14.1.18 (should be 14.1.19)
+14.5.1, 2nd case, 1st bullet: formatting
+14.6.2.2, cases for Expression: formatting of &apos;Expression&apos; and &apos;AssignmentExpression&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9123</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-02 11:13:27 -0700</bug_when>
+    <thetext>Re: let redeclaration of parameters in body issues (14.1.2, 14.2.1):
+
+https://github.com/rwaldron/tc39-notes/blob/master/es6/2013-09/sept-18.md#--rules-about-redeclaration show an example: 
+
+function f(x = {}) {
+  let x;
+}
+
+// Error for redeclaration.
+
+and I don&apos;t see any discussion or recorded decision that changes that. 
+
+As the the rationale, consider:
+
+function (x  = { } {
+   var x;
+   let x;
+}
+
+would definitely be an error under our current static semantics. It&apos;s a var/let conflict. And formal parameters are var-like, in the sense that in:
+
+function (x= { }) {
+   var x;
+}
+
+the var declaration of x does not introduce a new x binding the body scope.  Hence, it is equivalent to: 
+
+function (x= { }) {
+}
+
+Given that equivalence, it seems that
+function (x  = { } {
+   var x;
+   let x;
+}
+
+and 
+
+function (x  = { } {
+   let x;
+}
+
+should use the static &apos;let/var conflict rules.
+
+The rule: It is a Syntax Error if any element of the BoundNames of FormalParameters also occurs in the LexicallyDeclaredNames of FunctionBody.
+
+Is an easy to understand statement of this restriction.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9124</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-02 13:19:10 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft.
+
+Except for the the parameter/let conflict which I don&apos;t I believe is correct.
+
+For 14.6 added a note that the algorithms are comparing an actual matched production corresponding to a specific source code range and looking for the equivalent source.  A round about way to avoid talking about ASTs and AST subtree matching.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9125</commentid>
+    <comment_count>3</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-03 04:51:14 -0700</bug_when>
+    <thetext>Hm, it&apos;s the logical consequence of the two scopes decision. I notedly remember this point being clarified in the discussion (by Brendan?), but yeah, I can&apos;t find that in the notes. OTOH, I think the code snippet you cite was merely a discussion item, not a resolution.
+
+The arguments were: Minimise rules and special cases. {} indicates a block, it should behave like one. No reason for special nannying in this one case.
+
+In particular, I think one can reasonably expect the following equivalence to hold for arrow functions and do expressions in ES7:
+
+  (...) =&gt; {...}    ===    (...) =&gt; do {...}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9126</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-03 05:48:08 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Hm, it&apos;s the logical consequence of the two scopes decision.
+
+Two scopes are only created if parameter defaults are present. If no defaults are present a single scope is required to preserve backwards compatibility (-&gt; deletable eval bindings). 
+
+
+&gt; The arguments were: Minimise rules and special cases. {} indicates a block, it
+&gt; should behave like one. No reason for special nannying in this one case.
+
+Except in `catch` blocks, but that&apos;s a different story...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9128</commentid>
+    <comment_count>5</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-03 22:36:58 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Two scopes are only created if parameter defaults are present. If no defaults
+&gt; are present a single scope is required to preserve backwards compatibility (-&gt;
+&gt; deletable eval bindings). 
+
+The question only affects block-scoped bindings, so there shouldn&apos;t be any compatibility issue either way.
+
+&gt; &gt; The arguments were: Minimise rules and special cases. {} indicates a block, it
+&gt; &gt; should behave like one. No reason for special nannying in this one case.
+&gt; 
+&gt; Except in `catch` blocks, but that&apos;s a different story...
+
+Right. I think the same principle should apply there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9129</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-03 23:47:34 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; The question only affects block-scoped bindings, so there shouldn&apos;t be any
+&gt; compatibility issue either way.
+&gt; 
+
+Does that mean that in the following function `f`, `p` and `a` are in the same scope, whereas `b` is in a different (nested) scope?
+
+function f(p) {
+  var a;
+  let b;
+}
+
+Var-scoped variables and parameters need to live in the same scope, so compatibility is preserved for this example:
+
+function g(x) {
+  print(x);
+  eval(&quot;var x = 1&quot;);
+  print(x);
+  delete x;
+  print(x);
+}
+g(0); // Prints &quot;0 1 1&quot;
+
+NB: If `x` is a default parameter, the example will print &quot;0 1 0&quot; instead (per the current semantics in rev25).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9131</commentid>
+    <comment_count>7</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-07 02:42:35 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; (In reply to comment #5)
+&gt; &gt; The question only affects block-scoped bindings, so there shouldn&apos;t be any
+&gt; &gt; compatibility issue either way.
+&gt; 
+&gt; Does that mean that in the following function `f`, `p` and `a` are in the same
+&gt; scope, whereas `b` is in a different (nested) scope?
+&gt; 
+&gt; function f(p) {
+&gt;   var a;
+&gt;   let b;
+&gt; }
+
+This would simply behave like
+
+ function f(p) {{
+   var a;
+   let b;
+ }}
+
+does with what&apos;s currently spec&apos;ed. That is, `a` is hoisted to the same scope as `p`, but `b`, being block-scoped, isn&apos;t.
+
+I&apos;m not sure I understand what your concern is. The question is whether function bodies should behave as block scopes. That&apos;s irrelevant to `var`, because its meaning is never affected by the absence or presence of block scopes. Var-scoping is broken beyond repair, nobody suggests we could fix that. But having as simple &amp; uniform rules as possible for lexical scoping would be preferable.
+
+&gt; Var-scoped variables and parameters need to live in the same scope, so
+&gt; compatibility is preserved for this example:
+&gt; 
+&gt; function g(x) {
+&gt;   print(x);
+&gt;   eval(&quot;var x = 1&quot;);
+&gt;   print(x);
+&gt;   delete x;
+&gt;   print(x);
+&gt; }
+&gt; g(0); // Prints &quot;0 1 1&quot;
+&gt; 
+&gt; NB: If `x` is a default parameter, the example will print &quot;0 1 0&quot; instead (per
+&gt; the current semantics in rev25).
+
+Yes, no change here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9132</commentid>
+    <comment_count>8</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-07 05:38:09 -0700</bug_when>
+    <thetext>(In reply to comment #7)
+&gt; This would simply behave like
+&gt; 
+&gt;  function f(p) {{
+&gt;    var a;
+&gt;    let b;
+&gt;  }}
+&gt; 
+&gt; does with what&apos;s currently spec&apos;ed. That is, `a` is hoisted to the same scope
+&gt; as `p`, but `b`, being block-scoped, isn&apos;t.
+
+IIUC: Functions without default parameters will have two scopes - one scope for parameters and var-declared bindings and an additional scope for lexical bindings. Functions with defaults will have three scopes - the parameter list scope, the var-declared bindings scope and the lexical bindings scope. Is that correct?
+
+&gt; I&apos;m not sure I understand what your concern is. The question is whether
+&gt; function bodies should behave as block scopes.
+
+I just wanted to point out that parameters and var-declared bindings in functions without defaults should live in the same scope. That way (unnecessary?) differences between ES5 and ES6 semantics are reduced. Cf. the wrong &quot;invisible environment&quot; statement in [1].
+
+[1] https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-04/apr-8.md#41-review-latest-spec-draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9144</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-10 13:14:24 -0700</bug_when>
+    <thetext>added bug 3005 to track issue regard parameter/let name conflict early error</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9283</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:40:27 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

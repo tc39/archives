@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>811</bug_id>
+          
+          <creation_ts>2012-10-22 17:29:00 -0700</creation_ts>
+          <short_desc>12.6.4: &quot;Perform Binding Instantiation&quot;</short_desc>
+          <delta_ts>2014-06-02 12:41:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1975</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-22 17:29:27 -0700</bug_when>
+    <thetext>In 12.6.4 &quot;The for-in and for-of Statements&quot;,
+under &quot;Runtime Semantics: Labelled Evaluation&quot;,
+in the definition of the abstract operation &apos;For In/Of Body Evaluation&apos;,
+step 3.e.v.4 says:
+    Perform Binding Instantiation for lhs passing nextValue and iterationEnv
+    as arguments.
+
+but this ignores the result returned by Binding Instantiation.
+
+Maybe change to:
+    Let biResult be the result of performing Binding Instantiation ...
+    ReturnIfAbrupt(biResult).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1978</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-23 16:22:12 -0700</bug_when>
+    <thetext>This appears to be intentional as next step explicitly sets the status variable that is used as the equivalent result in the other legs of the case analysis. Need to explain why it is ok/necessary to ignore the actual result of Binding Instantiation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8496</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-15 09:25:40 -0700</bug_when>
+    <thetext>In rev24, it&apos;s at 13.6.4.8 &quot;Runtime Semantics: ForIn/OfBodyEvaluation&quot;,
+step 3.h.iv.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8497</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-15 09:56:39 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8836</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 12:41:05 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>131</bug_id>
+          
+          <creation_ts>2011-07-14 09:01:00 -0700</creation_ts>
+          <short_desc>15.4.4.4 and 15.4.4.7 concat and push don&apos;t wrap at 2^32</short_desc>
+          <delta_ts>2011-07-20 17:09:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>146</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>299</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-14 09:01:08 -0700</bug_when>
+    <thetext>On Jul 14, 2011, at 5:21 AM, Andrew Oakley wrote:
+
+The other complication I&apos;ve spotted (I think it crops up elsewhere too)
+is what to do if n becomes larger than the maximum array index.  My
+reading of ECMAScript 3 says that we *should* throw a RangeError but
+nobody seems to do that.
+
+Opera and Firefox seem to store n as a 32bit unsigned number - the
+length wraps and they start putting properties at the beginning of the
+array again.  I&apos;m not sure what Chrome is doing (I can&apos;t find my values
+in the returned array), IE says &quot;out of memory&quot; and I got bored waiting
+for Safari.
+
+-- 
+Andrew Oakley</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>300</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-14 09:02:46 -0700</bug_when>
+    <thetext>This appears to be a (possible) specification bug that first occurs in ES3 and which was not corrected in ES5.
+
+I appears in concat and push. But no other algorithms.  The problem occurs when when a length value is incremented and then used as an array index without first applying ToUint32 to the value.  It only occurs concat and push because all the other algorithms are bounded by a length value that has had ToUint32 applied to it.
+
+It is probably a bug, because array index based operations generally warp around to 0 at 2^32.  I assume that the Firefox implementation was the  initial one and it reflects that behavior.  However, all array objects (ad generic array like objects) are permitted to have integer  property names &gt;= 2^32.  These properties are not reflected in the value of the &apos;length&apos; property (when set by generic array methods for array-like objects).  So, there is a slim chance that the specified behavior was intentional in allowing concat and push to leak past the 2^32 element boundary. 
+
+We have to possible courses of action:
+   1) consider the specification to be correct as written. 
+   2) consider this to be a spec. but that we correct in the errata and in future editions.
+
+This is an edge case that probably never occurs in the real world so the choice probably has no real impact.  #1 is most consistent with the rest of the ES spec.  However, the 2^32 length wrap semantics of arrays is kind of bogus and it might be nice to try to eliminate it in the future.  #2 would be a step away from that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>301</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2011-07-14 09:36:55 -0700</bug_when>
+    <thetext>I think we should fix this.
+
+/be</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

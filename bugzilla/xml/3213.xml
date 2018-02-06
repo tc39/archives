@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3213</bug_id>
+          
+          <creation_ts>2014-09-07 11:13:00 -0700</creation_ts>
+          <short_desc>13.2.2.5 Evaluation: RTL or LTR evaluation order for VariableDeclaration?</short_desc>
+          <delta_ts>2014-12-23 20:23:23 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3463</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10162</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-09-07 11:13:50 -0700</bug_when>
+    <thetext>13.2.2.5 Runtime Semantics: Evaluation
+VariableDeclaration : BindingIdentifier Initializer 
+
+ES5 specifies a left-to-right evaluation order, rev3 for ES6 changed this to right-to-left. Was this change intentional?
+
+
+Test case:
+---
+function testFunction() {
+  var scope = {x: 0};
+  with (scope) {
+    var x = (delete scope.x, 1);
+  }
+  print(&quot;scope.x: &quot; + scope.x);
+  print(&quot;x: &quot; + x);
+}
+testFunction();
+---
+
+ES5 expected results: scope.x = 1, x = undefined
+ES6 expected results: scope.x = undefined, x = 1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10228</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-21 11:34:30 -0700</bug_when>
+    <thetext>no, it&apos;s not intentional.
+
+I&apos;ll have do to a little refactoring to fix it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11132</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-22 15:09:55 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11143</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:23 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

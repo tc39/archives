@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4097</bug_id>
+          
+          <creation_ts>2015-02-27 09:51:00 -0800</creation_ts>
+          <short_desc>Editorial issues in 12.1.1 Static Semantics: Early Errors</short_desc>
+          <delta_ts>2015-03-04 18:58:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Bei Zhang">ikarienator</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bugs.ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13418</commentid>
+    <comment_count>0</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-27 09:51:08 -0800</bug_when>
+    <thetext>1. The first item in second paragraph:
+
+IdentifierReference[Yield] : yield
+BindingIdentifier[Yield] : yield
+LabelIdentifier[Yield] : yield
+
+  It is a Syntax Error if this production has a [Yield] parameter.
+
+is redundant because yield is not a production when a [Yield] parameter is present.
+
+
+2. The third paragraph:
+
+IdentifierReference[Yield] : Identifier
+BindingIdentifier[Yield] : Identifier
+LabelIdentifier[Yield] : Identifier
+  It is a Syntax Error if this production has a [Yield] parameter and StringValue of Identifier is &quot;yield&quot;.
+
+is redundant because Identifier&apos;s StringValue cannot be &quot;yield&quot;.
+
+The NOTE below states:
+
+&gt; StringValue of IdentifierName normalizes any Unicode escape sequences in IdentifierName hence such escapes cannot be used to write an Identifier whose code point sequence is the same as a ReservedWord.
+
+This two implies that &quot;although Identifier can have the same code point sequence as a ReservedWord, but it cannot be achieved through Unicode escape&quot;, which is not true.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13420</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-27 11:13:32 -0800</bug_when>
+    <thetext>(In reply to Bei Zhang from comment #0)
+&gt; 1. The first item in second paragraph:
+&gt; 
+&gt; IdentifierReference[Yield] : yield
+&gt; BindingIdentifier[Yield] : yield
+&gt; LabelIdentifier[Yield] : yield
+&gt; 
+&gt;   It is a Syntax Error if this production has a [Yield] parameter.
+&gt; 
+&gt; is redundant because yield is not a production when a [Yield] parameter is
+&gt; present.
+
+agreed
+
+
+&gt; 
+&gt; 
+&gt; 2. The third paragraph:
+&gt; 
+&gt; IdentifierReference[Yield] : Identifier
+&gt; BindingIdentifier[Yield] : Identifier
+&gt; LabelIdentifier[Yield] : Identifier
+&gt;   It is a Syntax Error if this production has a [Yield] parameter and
+&gt; StringValue of Identifier is &quot;yield&quot;.
+&gt; 
+&gt; is redundant because Identifier&apos;s StringValue cannot be &quot;yield&quot;.
+
+It can, in non-strict code, if the IdentifierName that Identifier derives contains Unicode escape sequences. Note that the 2nd bullet item of the following rules for Identifier explicitly permit that. this is because prior to ES6 &apos;yield&apos; was not a reserved word so valid identifiers could have been &apos;yield&apos; written with escape sequences.
+
+
+&gt; 
+&gt; The NOTE below states:
+&gt; 
+&gt; &gt; StringValue of IdentifierName normalizes any Unicode escape sequences in IdentifierName hence such escapes cannot be used to write an Identifier whose code point sequence is the same as a ReservedWord.
+&gt; 
+&gt; This two implies that &quot;although Identifier can have the same code point
+&gt; sequence as a ReservedWord, but it cannot be achieved through Unicode
+&gt; escape&quot;, which is not true.
+
+How do you arrive at that conclusion?  What the note says is exactly what the two early error rules for Identifier is enforcing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13424</commentid>
+    <comment_count>2</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-27 13:42:06 -0800</bug_when>
+    <thetext>It conflicts with 11.6:
+
+&gt; All interpretations of IdentifierName within this specification are based upon 
+&gt; their actual code points regardless of whether or not an escape sequence was used 
+&gt; to contribute any particular code point.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13429</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-27 15:45:40 -0800</bug_when>
+    <thetext>(In reply to Bei Zhang from comment #2)
+&gt; It conflicts with 11.6:
+&gt; 
+&gt; &gt; All interpretations of IdentifierName within this specification are based upon 
+&gt; &gt; their actual code points regardless of whether or not an escape sequence was used 
+&gt; &gt; to contribute any particular code point.
+
+The definition of StringValue for Identifier name is the normative specification language that makes the 11.6 statement operative.
+
+StringValue for IdentifierName replaces Unicode escape sequences with the equivalent code points (actually code unit sequences). The use of Unicode escapes does not effect IdentifierName  Stringvalue comparisons.
+
+The grammar rule
+   Identifer : IdentifierName but not ReservedWrod
+
+does a lexical match of of the source code of IdentifierName against the ReservedWord&apos;s, not a StringValue comparison. So v\u0061r is first parsed as an Identifier.  
+
+The 2nd Identifier early error rule in 12.1.1 then use a StringValue comparison to determine that v\u0061r has the same StringValue as &quot;var&quot; triggering a syntax error.
+
+&apos;yield&apos; is a special case which is why it is excluded from the 2nd Identifier early error rule.  In non-strict code that is outside of a generator function &apos;yield&apos; is a valid identifier.  The early error rule for IdentifierReference : Identifier (etc.) make sure that &apos;yield&apos; containing Unicode escapes doesn&apos;t pass as an Identifier in those generator function contexts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13430</commentid>
+    <comment_count>4</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-27 17:14:12 -0800</bug_when>
+    <thetext>If I understand correctly, is this the case that 
+
+var var
+
+is a grammar error and 
+
+var v\u0061r
+
+is an early error?
+
+function* a() {
+  yield
+}
+
+is a generator declaration with a yield expression and
+
+function* a() {
+  \u0079ield
+}
+
+is an early error?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13431</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-27 20:43:11 -0800</bug_when>
+    <thetext>(In reply to Bei Zhang from comment #4)
+&gt; If I understand correctly, is this the case that 
+&gt; 
+&gt;
+
+yes, those all look correct.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13432</commentid>
+    <comment_count>6</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-28 15:30:46 -0800</bug_when>
+    <thetext>When I read section 11.6, I would assume that any two IdentifierNames are the same in every way in syntactic rules of the the spec. I&apos;m under-informed that there are &quot;exceptions&quot; to this rule later on in section 12.1.1.
+
+We shall state in section 11.6 that the rule:
+
+&gt; All interpretations of IdentifierName within this specification are based upon their actual code points regardless of whether or not an escape sequence was used to contribute any particular code point.
+
+can be overruled by section 12.1.1. As a spec reader, when reading 11.6, I was not informed that rules in 11.6 exists and, in fact, discriminate the interpretation of IdentifierNames.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13439</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-02 11:28:41 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+
+The paragraph in 11.6 that is giving you trouble is actually about Unicode canonical equivalence rather than the use of escape sequences. I eliminated the parenthetical phrase and upate the result of that paragraph so it now reads:
+
+Two /IdentifierName/ that are canonically equivalent according to the Unicode standard are /not/ equal unless, after replacement of each /UnicodeEscapeSequence/, they are represented by the exact same sequence of code points.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13506</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:16 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

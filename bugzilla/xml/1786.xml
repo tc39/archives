@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1786</bug_id>
+          
+          <creation_ts>2013-08-16 03:27:00 -0700</creation_ts>
+          <short_desc>10.2.1.2.2, 10.2.1.4.16, 10.2.1.4.17: Invalid assertions</short_desc>
+          <delta_ts>2013-08-23 08:21:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4925</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-16 03:27:22 -0700</bug_when>
+    <thetext>10.2.1.2.2, step 3:
+&gt; 3.  Assert: The result of HasProperty(bindings, N) is false .
+
+10.2.1.4.16, step 3:
+&gt; 3.  Assert: The result of calling envRec’s CanDeclareGlobalVar concrete method with argument N is true.
+
+10.2.1.4.17, step 3, step 8:
+&gt; 3.  Assert: The result of calling envRec’s CanDeclareGlobalFunction concrete method with argument N is true.
+&gt; 8.  NOTE  The assertion in step 3 means that the above [[DefineOwnProperty]] calls will never return false or an abrupt completion.
+
+
+These assertions are no longer true because of Proxies and modifiable [[Prototype]]. 
+
+(BTW: Should assertions ever call user code? I don&apos;t think so...)
+
+
+test cases:
+---
+function triggerAssertion(global, callCounter, code) {
+  Object.setPrototypeOf(global, new Proxy(Object.create(null), {
+    has(t, pk) {
+      if (pk == &quot;foo&quot; &amp;&amp; callCounter &gt; 0 &amp;&amp; --callCounter == 0) {
+        Object.preventExtensions(global);
+        return true;
+      }
+      return false;
+    }
+  }));
+  (1,eval)(`eval(&quot;${code}&quot;)`)
+}
+
+// 10.2.1.2.2, step 3
+triggerAssertion(this, 4, &quot;var foo = 0&quot;)
+
+// 10.2.1.4.16, step 3
+triggerAssertion(this, 1, &quot;var foo = 0&quot;)
+
+// 10.2.1.4.17
+triggerAssertion(this, 1, &quot;function foo(){}&quot;)
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4929</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 10:10:50 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5018</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:21:57 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

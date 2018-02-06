@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1075</bug_id>
+          
+          <creation_ts>2012-11-27 12:35:00 -0800</creation_ts>
+          <short_desc>ES5 forgot to specify safe .caller and .arguments behaviors for built-in functions</short_desc>
+          <delta_ts>2015-02-19 22:03:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://wiki.ecmascript.org/doku.php?id=conventions:make_non-standard_properties_configurable</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2876</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2012-11-27 12:35:31 -0800</bug_when>
+    <thetext>ES5 was only careful for three categories of functions: strict, non-strict, and bound, all of which were specified to enable an SES initialization to secure the realm for ocap safety. However, ES5 forgot to do so for built-in functions, and some allowed implementations in the past were not practically securable for this reason: they had the old magic behavior *and* were not deletable.
+
+There&apos;s another leak as well: [[Get]] on non-strict functions were specified not to reveal a strict caller. But we forgot to specify that it couldn&apos;t reveal a built-in or bound caller.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12548</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 10:02:43 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+paragraph one has was addressed a long time ago
+
+in rev34 modified 9.2.1 such that all callables, except for sloppy mode ES functions are censored.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13062</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:57 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13173</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-19 22:03:38 -0800</bug_when>
+    <thetext>See https://bugs.ecmascript.org/show_bug.cgi?id=1223</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

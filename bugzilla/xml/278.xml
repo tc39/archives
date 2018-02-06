@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>278</bug_id>
+          
+          <creation_ts>2012-02-24 05:06:00 -0800</creation_ts>
+          <short_desc>Coverage: Test for 7.6, keywords with unicode escapes.</short_desc>
+          <delta_ts>2013-07-27 01:10:56 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>mathias</cc>
+    
+    <cc>muratsu</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>661</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2012-02-24 05:06:08 -0800</bug_when>
+    <thetext>There is no test checking the correct treatment of keywords with identifier names, and Section 7.6 of the spec isn&apos;t particularly clear on the subject either (see bug 277).
+
+Implementations differ. For example,
+
+v\u0061r x = 0
+eval(&quot;v\\u0061r y = 1&quot;)
+
+Is accepted by FF 10, rejected by V8 3.8, and JSC seems to reject the former
+but accepts the latter. Conversely,
+
+var v\u0061r = 1
+eval(&quot;var v\\u0061r = 2&quot;)
+
+is rejected by FF but accepted by V8 (actually introducing a variable named
+&quot;var&quot;).
+
+Note that test262 contains several tests of the form
+
+eval(&quot;var v\u0061r = 2&quot;)
+
+which is rejected by all implementations. However, here the escape sequence is decoded as part of string parsing in the meta program, not as part of identifier parsing in the object program.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>664</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-24 08:37:48 -0800</bug_when>
+    <thetext>Related from Mathias Byens:
+I recently did some research on valid JavaScript identifiers (http://mathiasbynens.be/notes/javascript-identifiers) and found some interesting implementation bugs.
+
+E.g. `a\u200c\u200d` is a valid identifier as per ES5.1 (http://mothereff.in/js-variables#a%5Cu200c%5Cu200d), yet a lot of JavaScript engines claiming full ES5 support fail to support it. Out of all stable browser versions, Firefox 10 and IE9 are the only two that handle it correctly.
+
+For this reason, I propose a new test is added to the suite. Something like:
+
+    var supportsZeroWidthInIdentifierPart = (function() {
+      try {
+        return eval(&apos;var a\u200c\u200d = true&apos;);
+      } catch(e) { }
+    }());
+```
+
+`supportsZeroWidthInIdentifierPart` will be `true` if ZWJ and ZWNJ characters are supported in `IdentifierPart`, else `undefined` (which is falsy).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4547</commentid>
+    <comment_count>2</comment_count>
+    <who name="Murat Sutunc">muratsu</who>
+    <bug_when>2013-07-17 13:48:03 -0700</bug_when>
+    <thetext>Along with 7.6, there are other places that need unicode escape tests. ES5 spec section 11.1.2 explains that identifiers can be used as expressions. Test cases targeting expressions should also be included.
+
+// Invalid use of a reserved keyword in an expression. Should throw a syntax error
+var c = var;
+var c = v\\u0061r;
+var c = else;
+var c = els\\u0065;
+
+// valid uses
+var a = fals\\u0065;
+var b = tru\\u0065;
+
+// Also unicode escape tests should include properties and function names
+var x2={};
+x2.els\\u0065 = 10
+
+var x2={};
+x2.doubl\\u0065 = 10;
+
+function else\\u0065() {};
+
+function doubl\\u0065() {};</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4571</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-07-27 01:10:56 -0700</bug_when>
+    <thetext>I’ll just link to my old (but still relevant) tests on the subject: http://mathias.html5.org/tests/javascript/identifiers/
+
+The tests expect the non-standard `var v\u0061r;` behavior (where keywords are allowed as identifiers as long as at least one character is escaped) to throw an error, as browser vendors seemed to agree that this behavior isn’t required for Web compatibility. (For this reason, it has been removed from http://javascript.spec.whatwg.org/ as well.)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>376</bug_id>
+          
+          <creation_ts>2012-06-07 00:54:00 -0700</creation_ts>
+          <short_desc>12.6.4 &amp; 13.1: &quot;Asset&quot;</short_desc>
+          <delta_ts>2012-06-16 09:37:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>967</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-06-07 00:54:36 -0700</bug_when>
+    <thetext>Change &quot;Asset&quot; to &quot;Assert:&quot;...
+
+... in 12.6.4 &quot;The for-in and for-of Statements&quot;,
+under &quot;Runtime Semantics: Labelled Evaluation&quot;,
+in the abstraction operation &apos;For In/Of Expression Evaluation&apos;,
+step 8.b.
+
+... in the abstraction operation &apos;For In/Of Body Evaluation&apos;,
+step 3.e.v.1.
+
+.. in section 13.1 &quot;Function Definitions&quot;,
+under &quot;Runtime Semantics: Indexed Binding Initialisation&quot;,
+3rd rule, step 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1002</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-16 09:37:07 -0700</bug_when>
+    <thetext>fixed in &quot;Rev 8&quot;, June 12,2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

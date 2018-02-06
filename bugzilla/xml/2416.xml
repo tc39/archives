@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2416</bug_id>
+          
+          <creation_ts>2014-01-15 23:01:00 -0800</creation_ts>
+          <short_desc>22.1.2.1 usingIterator=true when Array.from&apos;s arg is an Array</short_desc>
+          <delta_ts>2014-07-15 13:23:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>medikoo+ecmascript.org</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6970</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-01-15 23:01:47 -0800</bug_when>
+    <thetext>Since 22.1.3.30 specifies that Array.prototype.@@iterator exists, the test in step 6 of Array.from (22.1.2.1) will set usingIterator to true when the &quot;arrayLike&quot; is an actual Array.  This doesn&apos;t seem correct, it means that the length information in the passed array will be ignored, the result can&apos;t be preallocated to the correct length, and sparse elements skipped:
+
+var a = [];
+a[1] = &apos;a&apos;;
+a[9] = &apos;b&apos;;
+Array.from(a) // [&apos;a&apos;,&apos;b&apos;]?
+
+I suggest that step 6a ought to read something like, &quot;If Array.isArray(items) is true, the set usingIterator to false.&quot; (or &quot;If items is an exotic Array object...&quot;).  Since typed arrays also have iterators, you might also want to include a step 6b, &quot;If items is a typed array...&quot;, so that the following works as expected:
+
+var a = new Uint8Array(2);
+var b = Array.from.call(Uint8Array, a); // 0-length array?
+
+As the algorithm is currently written, the Uint8Array constructor would be called with no arguments and the result of Array.from() would be a zero-length array.
+
+If the behavior in the spec as it is currently written is desired, the author could pass the iterator explicitly:
+
+Array.from(a.values()) // collapses sparse array
+Array.from.call(Uint8Array, a.values()) // makes zero-length Uint8Array
+
+So no functionality is lost by making Array and TypedArray *not* use the usingIterator path.
+
+The algorithm in 22.2.2.1 (%TypedArray%.from) should also be similarly updated to match the fixes to Array.from.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6971</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-16 06:38:03 -0800</bug_when>
+    <thetext>It is not possible to apply Array.from() on TypedArray constructors, regardless of whether the @@iterator or .length path is taken. Either CreateDataPropertyOrThrow() or the final Put() will throw a TypeError when `A` is TypedArray object.
+
+And array iterators don&apos;t skip holes, that means `0 in Array.from([,])` yields true.
+
+Related:
+http://esdiscuss.org/topic/overly-complicated-array-from
+http://esdiscuss.org/topic/why-does-array-from-accept-non-iterable-arraylikes</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6972</commentid>
+    <comment_count>2</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-01-16 07:42:25 -0800</bug_when>
+    <thetext>Sorry about the sparse thing, I was looking at es6-shim&apos;s implementation, which had a hole-skipping ArrayIterator that must be left over from some earlier version of the spec.  I&apos;ll submit a patch to es6-shim.
+
+I think the TypedArray case is still significant.
+
+u = Uint8Array(8)
+u[&quot;1&quot;] = 2
+u.length = 8
+
+doesn&apos;t currently throw an exception, why would Array.from() do so?  It seems like Array.from should work with TypedArray if it is to be properly generic.  (Or a @TypedArray@.from() method could be added, but -- ugh.)
+
+And it seems like there are still significant performance gains to be had by preallocating arrays.  That holds even for custom classes:
+
+Array.from.call(MyClass, [1, 2, 3])
+
+The MyClass constructor might be also able to benefit from knowing the length of the array up-front.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6973</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-16 09:50:52 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; I think the TypedArray case is still significant.
+&gt; 
+&gt; u = Uint8Array(8)
+&gt; u[&quot;1&quot;] = 2
+&gt; u.length = 8
+&gt; 
+&gt; doesn&apos;t currently throw an exception, why would Array.from() do so?
+
+It does not throw an exception, because the JavaScript implementation you&apos;re using does not comply to the current ES6 draft. ;-)
+
+V8 bleeding edge (rev18548, version 3.24.15):
+---
+d8&gt; &quot;use strict&quot;; var u = new Uint8Array(8); u.length = 8
+(d8):1: TypeError: Cannot set property length of #&lt;Uint8Array&gt; which has only a getter
+&quot;use strict&quot;; var u = new Uint8Array(8); u.length = 8
+                                                  ^
+TypeError: Cannot set property length of #&lt;Uint8Array&gt; which has only a getter
+    at (d8):1:51
+---
+
+The &quot;use strict&quot; directive is important to get the same semantics as in `Put(A, &quot;length&quot;, len, true)`, the last parameter defines the strictness of the Put() operation.
+
+
+&gt; And it seems like there are still significant performance gains to be had by
+&gt; preallocating arrays.  That holds even for custom classes:
+&gt; 
+&gt; Array.from.call(MyClass, [1, 2, 3])
+&gt; 
+&gt; The MyClass constructor might be also able to benefit from knowing the length
+&gt; of the array up-front.
+
+For the standard Array it&apos;s actually not too import which path is preferred, as long as there are no funny properties (read: accessor properties) which introduce arbitrary side effects. Changes like https://bugzil.la/952891 will further improve array iteration. And custom classes can use the TypedArray.from() function if it&apos;s necessary or helpful to know the expected length in the constructor invocation.
+
+(Note: I&apos;m not strictly in favour of one or the other approach, I&apos;m merely providing some input for this discussion.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7374</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mariusz Nowak">medikoo+ecmascript.org</who>
+    <bug_when>2014-02-19 13:36:37 -0800</bug_when>
+    <thetext>I&apos;d like to go back to sparse array&apos;s case, as I think it&apos;s still not right.
+
+Indeed result array&apos;s length will match length of input array, but it won&apos;t be perfect copy of it.
+
+var input = [1,,2];
+var result = Array.from(input); // [1,undefined,2];
+
+input.hasOwnProperty(1); // false
+result.hasOwnProperty(1); // true
+input.forEach(x =&gt; console.log(x)); // 1, 2
+result.forEach(x =&gt; console.log(x)); // 1, undefined, 2
+
+It seems not consistent, especially that there are cases for which Array.from will produce sparse arrays:
+
+Array.from({0: 1, 2: 2, length: 2 }); // 1,,2 (sparse array)
+
+I thik as C. Scott Ananian propopsed, arrays should go through logic specified for `usingIterator = true`.
+
+If it stays as it is it makes this function not viable to produce array copies, which is very common use case, currently addressed with `arr.slice()`, and as `arr.slice()` will now create objects of input type it&apos;s no longer safe for creation of plain arrays, it&apos;ll be great if Array.from could be used for that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7375</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mariusz Nowak">medikoo+ecmascript.org</who>
+    <bug_when>2014-02-19 23:45:59 -0800</bug_when>
+    <thetext>Sorry, of course I meant:
+
+====
+(...)
+Array.from({0: 1, 2: 2, length: 3 }); // 1,,2 (sparse array)
+
+I think as C. Scott Ananian propopsed, arrays should *not* go through logic specified for `usingIterator = true`.
+(...)
+====</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7378</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-20 08:35:25 -0800</bug_when>
+    <thetext>Array.from was discussed at the last TC39 meeting.  See https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-01/jan-28.md#arrayfrom 
+
+I don&apos;t think those notes capture the entire discussion, but the conclusion is clear: &quot;Keep as spec&apos;ed.&quot;
+
+However, I don&apos;t think the points brought up here were fully explored at the meeting.
+
+In particular, I don&apos;t think it was clear to everybody that:
+
+Array.from([1,,3,,5])
+
+returns [1,3,5] rather than [1,undefined,3,undefined,5].
+
+I think an appropriate next step would be for Scott to start a new es-discuss thread that specifically addresses that concern and references this bug.
+
+Allen</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7390</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-21 10:13:15 -0800</bug_when>
+    <thetext>(In reply to comment #6)
+
+&gt; 
+&gt; In particular, I don&apos;t think it was clear to everybody that:
+&gt; 
+&gt; Array.from([1,,3,,5])
+&gt; 
+&gt; returns [1,3,5] rather than [1,undefined,3,undefined,5].
+&gt; 
+
+I&apos;m not sure where my head was sutick when I wrote the above, but it&apos;s wrong.
+
+As currently specified,
+   Array.from([1,,3,,5])
+returns [1,undefined,3,undefined,5]
+
+Array Array.from uses @@interator which for Array.prototype is the same as Array.prototype.values.  the values iterator for arrays returns undefined as the value of sparse holes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7392</commentid>
+    <comment_count>8</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-21 13:20:33 -0800</bug_when>
+    <thetext>Let&apos;s open a new bug for whether Array.from({0: 1, 2: 2, length: 3 }) should result in a sparse array.
+
+This bug is *not* about behavior changes, just whether ArrayIterator should be involved in Array.from([ ... ]).  This is purely an efficiency issue: since the invocation of Array.@@iterator is potentially observable, are we foreclosing optimization opportunities by forcing Array.from() to go through the iterator path.
+
+Input from implementors is probably called for.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7398</commentid>
+    <comment_count>9</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-21 13:29:21 -0800</bug_when>
+    <thetext>Bug 2562 is for the &quot;sparse arrays from array-like&quot; issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9127</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-03 16:59:31 -0700</bug_when>
+    <thetext>You are essentially talking about enabling an implementation to inline the IsIterable (now called CheckIterable) check. This  check is potentially observable via a proxy or if @@iterator is an accessor property.
+
+However, this type of observability is possible for pretty much every potential inline site so an implementation that is going to do inlining is going to have to have a mechanism for determining whether or not any specific inlining can be done unobservably.
+
+So, this seems like a general issue that optimizing implementation have to take into account and something that we shouldn&apos;t try to special case just for this one specific instance of the problem.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

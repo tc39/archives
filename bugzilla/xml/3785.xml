@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3785</bug_id>
+          
+          <creation_ts>2015-02-06 03:39:00 -0800</creation_ts>
+          <short_desc>22.1.5.2.1, 23.1.5.2.1, 23.2.5.2.1: Use CreateArrayFromList in {Array, Map, Set}Iterator#next() ?</short_desc>
+          <delta_ts>2015-02-12 12:17:40 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12182</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-06 03:39:25 -0800</bug_when>
+    <thetext>The next() methods can be simplified when CreateArrayFromList is used instead of manually calling ArrayCreate + CreateDataProperty. 
+
+
+22.1.5.2.1 %ArrayIteratorPrototype%.next( )
+- steps 17.b-e
+
+&gt; Let result be CreateArrayFromList(« index, elementValue »).
+
+
+23.1.5.2.1 %MapIteratorPrototype%.next ( )
+- steps 10.d.iii.2-5
+
+&gt; Let result be CreateArrayFromList(« e.[[key]], e.[[value]] »).
+
+
+23.2.5.2.1 %SetIteratorPrototype%.next ( )
+- steps 10.d.i.1-4
+
+&gt; Let result be CreateArrayFromList(« e, e »).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12193</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 10:41:09 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+strangely enough, I had the same idea the afternoon before you submitted this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12448</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:40 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

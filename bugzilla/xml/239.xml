@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>239</bug_id>
+          
+          <creation_ts>2011-12-25 03:13:00 -0800</creation_ts>
+          <short_desc>15.11.4.4 Error.prototype.toString, step 6 is duplicated</short_desc>
+          <delta_ts>2015-10-02 13:29:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>other</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>241</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Tom Schuster">evilpies</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>526</commentid>
+    <comment_count>0</comment_count>
+    <who name="Tom Schuster">evilpies</who>
+    <bug_when>2011-12-25 03:13:44 -0800</bug_when>
+    <thetext>After some Specification change (dunno es5.github.com is off here), Step 6. and Step 7. are the same.
+
+This also the case in the ES6 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>570</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 11:33:06 -0800</bug_when>
+    <thetext>yes, step 7 is an unnecessary duplicate of step 6 and should be deleted.  However, the duplicated step has no impact on the result of the algorithm and there isn&apos;t any thing else that should be have been there instead of step 7.
+
+This should go into the next ES5.1 errata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>573</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:11:46 -0800</bug_when>
+    <thetext>set IN_PROGRESS to indicated this should go into ES5.1 Errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14716</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 13:29:05 -0700</bug_when>
+    <thetext>Fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>262</bug_id>
+          
+          <creation_ts>2012-02-03 08:28:00 -0800</creation_ts>
+          <short_desc>Math.expm1(-Infinity) is -1</short_desc>
+          <delta_ts>2012-03-28 08:25:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>lukeh</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>629</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-02-03 08:28:28 -0800</bug_when>
+    <thetext>in http://wiki.ecmascript.org/doku.php?id=harmony:more_math_functions
+expm1&apos;s result
+
+  If x is -∞, the result is +1.
+
+I think -1 is correct, is it right?
+If it is known issue, I&apos;m sorry to trouble you.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>827</commentid>
+    <comment_count>1</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-03-28 08:23:01 -0700</bug_when>
+    <thetext>I&apos;ve uploaded an update to http://wiki.ecmascript.org/doku.php?id=harmony:more_math_functions which fixes this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>828</commentid>
+    <comment_count>2</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-03-28 08:25:18 -0700</bug_when>
+    <thetext>Thanks!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

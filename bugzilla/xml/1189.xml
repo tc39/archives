@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1189</bug_id>
+          
+          <creation_ts>2013-01-07 14:32:00 -0800</creation_ts>
+          <short_desc>“=” instead of “===” in test S13.2_A4_T2</short_desc>
+          <delta_ts>2013-06-07 04:37:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Martin Bodin">martin.bodin</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>brbaker</cc>
+    
+    <cc>prsriniv</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3110</commentid>
+    <comment_count>0</comment_count>
+    <who name="Martin Bodin">martin.bodin</who>
+    <bug_when>2013-01-07 14:32:33 -0800</bug_when>
+    <thetext>Hi,
+
+I’m not 100% confident that this is actually a bug in the test suite, but I’ve seen in test “S13.2_A4_T1” and “S13.2_A4_T2” (and I guess probably with neighbouring tests...) such a code:
+var __constructor_was__enumed;
+
+for (__prop in __gunc.prototype){
+  if (__prop = &apos;constructor&apos;)
+    __constructor_was__enumed = true;
+}
+
+I actually found them quite surprising.  Why putting an assignement there (even if it’s correct with respect to the JavaScript syntax)?  It seems to me that it does not serve the current purpose of this test.  Of course, I may be misinterpreting this particular test.  If it is the case, sorry for the noise.
+
+Here is the code I think should be instead:
+
+for (__prop in __gunc.prototype){
+  if (__prop === &apos;constructor&apos;)
+    __constructor_was__enumed = true;
+}
+
+Hoping it will help,
+Martin.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4076</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-05-20 07:44:05 -0700</bug_when>
+    <thetext>I agree that the intent of the test is to loop through the prototype of the object and try to find the &apos;constructor&apos;, therefore the if should be &quot;===&quot; not an assignment.
+
+for (__prop in __gunc.prototype){
+  if (__prop === &apos;constructor&apos;)
+    __constructor_was__enumed = true;
+}
+
+NOTE: This if test is never actually executed since the prototype of the Function object is not enumerable.
+
+http://www.ecma-international.org/ecma-262/5.1/#sec-E
+15.3.5.2: In Edition 5, the prototype property of Function instances is not enumerable. In Edition 3, this property was enumerable.
+
+I&apos;ll provide a patch to switch the test to use &quot;===&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4077</commentid>
+    <comment_count>2</comment_count>
+      <attachid>39</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-05-20 07:51:19 -0700</bug_when>
+    <thetext>Created attachment 39
+use &quot;===&quot; instead of &quot;=&quot;
+
+I checked other enumeration loops in the ch13/13.2 section and all others are properly using &quot;===&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4093</commentid>
+    <comment_count>3</comment_count>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-05-21 12:17:09 -0700</bug_when>
+    <thetext>Reviewed patches and is good to go.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4152</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-07 04:37:08 -0700</bug_when>
+    <thetext>changeset:   374:c0b147580eee
+user:        Brent Baker &lt;brbaker@adobe.com&gt;
+date:        Fri Jun 07 06:57:45 2013 -0400
+summary:     Bug 1189: use &quot;===&quot; instead of &quot;=&quot; for S13.2_A4_T1 and T2
+
+NOTE: I am still waiting to get access to update the live website @ http://test262.ecmascript.org</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>39</attachid>
+            <date>2013-05-20 07:51:00 -0700</date>
+            <delta_ts>2013-05-20 07:51:19 -0700</delta_ts>
+            <desc>use &quot;===&quot; instead of &quot;=&quot;</desc>
+            <filename>bug_1189.patch</filename>
+            <type>text/plain</type>
+            <size>1760</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxMy8xMy4yL1MxMy4yX0E0X1QxLmpzIGIvdGVzdC9z
+dWl0ZS9jaDEzLzEzLjIvUzEzLjJfQTRfVDEuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaDEzLzEzLjIv
+UzEzLjJfQTRfVDEuanMKKysrIGIvdGVzdC9zdWl0ZS9jaDEzLzEzLjIvUzEzLjJfQTRfVDEuanMK
+QEAgLTI4LDE3ICsyOCwxNyBAQCBpZiAoX19mdW5jLnByb3RvdHlwZS5jb25zdHJ1Y3RvciAhPT0g
+X19mCiAJJEVSUk9SKCcjMjogX19mdW5jLnByb3RvdHlwZS5jb25zdHJ1Y3RvciA9PT0gX19mdW5j
+LiBBY3R1YWw6IF9fZ3VuYy5wcm90b3R5cGUuY29uc3RydWN0b3IgPT09JytfX2d1bmMucHJvdG90
+eXBlLmNvbnN0cnVjdG9yKTsKIH0KIC8vCiAvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KIAogdmFyIF9f
+Y29uc3RydWN0b3Jfd2FzX19lbnVtZWQ7CiAKIGZvciAoX19wcm9wIGluIF9fZnVuYy5wcm90b3R5
+cGUpewotICAgIGlmIChfX3Byb3AgPSAnY29uc3RydWN0b3InKQorICAgIGlmIChfX3Byb3AgPT09
+ICdjb25zdHJ1Y3RvcicpCiAgICAgICAgIF9fY29uc3RydWN0b3Jfd2FzX19lbnVtZWQgPSB0cnVl
+OwogfQogCiAvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KIC8vQ0hFQ0sjMwogaWYgKF9fY29uc3RydWN0
+b3Jfd2FzX19lbnVtZWQpIHsKIAkkRVJST1IoJyMzOiBfX2NvbnN0cnVjdG9yX3dhc19fZW51bWVk
+ID09PSBmYWxzZS4gQWN0dWFsOiBfX2NvbnN0cnVjdG9yX3dhc19fZW51bWVkID09PScrX19jb25z
+dHJ1Y3Rvcl93YXNfX2VudW1lZCk7CiB9CmRpZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoMTMvMTMu
+Mi9TMTMuMl9BNF9UMi5qcyBiL3Rlc3Qvc3VpdGUvY2gxMy8xMy4yL1MxMy4yX0E0X1QyLmpzCi0t
+LSBhL3Rlc3Qvc3VpdGUvY2gxMy8xMy4yL1MxMy4yX0E0X1QyLmpzCisrKyBiL3Rlc3Qvc3VpdGUv
+Y2gxMy8xMy4yL1MxMy4yX0E0X1QyLmpzCkBAIC0yOCwxNyArMjgsMTcgQEAgaWYgKF9fZ3VuYy5w
+cm90b3R5cGUuY29uc3RydWN0b3IgIT09IF9fZwogCSRFUlJPUignIzI6IF9fZ3VuYy5wcm90b3R5
+cGUuY29uc3RydWN0b3IgPT09IF9fZ3VuYy4gQWN0dWFsOiBfX2d1bmMucHJvdG90eXBlLmNvbnN0
+cnVjdG9yID09PScrX19ndW5jLnByb3RvdHlwZS5jb25zdHJ1Y3Rvcik7CiB9CiAvLwogLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vCiAKIHZhciBfX2NvbnN0cnVjdG9yX3dhc19fZW51bWVkOwogCiBmb3Ig
+KF9fcHJvcCBpbiBfX2d1bmMucHJvdG90eXBlKXsKLSAgICBpZiAoX19wcm9wID0gJ2NvbnN0cnVj
+dG9yJykKKyAgICBpZiAoX19wcm9wID09PSAnY29uc3RydWN0b3InKQogICAgICAgICBfX2NvbnN0
+cnVjdG9yX3dhc19fZW51bWVkID0gdHJ1ZTsKIH0KIAogLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vCiAv
+L0NIRUNLIzMKIGlmIChfX2NvbnN0cnVjdG9yX3dhc19fZW51bWVkKSB7CiAJJEVSUk9SKCcjMzog
+X19jb25zdHJ1Y3Rvcl93YXNfX2VudW1lZCA9PT0gZmFsc2UuIEFjdHVhbDogX19jb25zdHJ1Y3Rv
+cl93YXNfX2VudW1lZCA9PT0nK19fY29uc3RydWN0b3Jfd2FzX19lbnVtZWQpOwogfQo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3062</bug_id>
+          
+          <creation_ts>2014-07-25 03:13:00 -0700</creation_ts>
+          <short_desc>various typos</short_desc>
+          <delta_ts>2014-08-25 08:29:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9548</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 03:13:25 -0700</bug_when>
+    <thetext>Having run a spelling corrector against rev. 26, I have found these typos:
+
+4.2.1: syntatic → syntactic (missing c)
+4.4: includings → including
+5.1.5: preceeded → preceded (too much e&apos;s)
+12.2.9.2.3 (4x), 22.2.1.5 (1x): preceeding → preceding (5x) (idem)
+5.2: souce → source
+6.1.7.2, Table 5 (2x): indentified → identified (2x) (spurious n)
+6.2.1: convience → convenience
+7.4: Commmon → Common (too much m&apos;s)
+7.4.1: CompundIterator → CompoundIterator
+8.1.1.4, Table 19 (2x): approate → appropriate (2x)
+8.1.1.4.14: Redundent → Redundant
+8.2.3, 26.2.3.4 [[instrinsics]] → [[intrinsics]] (2x)
+BTW, 8.2.3: &quot;.[[%ObjectPrototype%]]&quot; → &quot;, %ObjectPrototype%&quot;
+&lt;del&gt;9.1.11: deterime → determine&lt;/del&gt; (see Bug 3059)
+19.2.3.8: deterimine → determine
+9.1.11: vistor → visitor
+9.2.13: ContainsExpresson → ContainsExpression (missing last i)
+9.2.13, 19.1.3.6: compatability → compatibility (2x) (the last a should be i)
+21.5.2.1: compatable → compatible (idem)
+9.4.4: aguments → arguments
+&lt;del&gt;9.4.4: ordinany → ordinary&lt;/del&gt; (see Bug 3058)
+9.5: obeject → object
+9.5.9: Cannnot → Cannot (too much n&apos;s)
+&lt;del&gt;9.5.15: nad → and&lt;/del&gt; (see Bug 3057)
+11.6: grammer → grammar
+11.8.4.3, Table 33: All Unicode Character Names must be all-caps
+12.2.7.2: Comprehesion → Comprehension (missing n)
+13.1.11: declarated → declared
+13.2.2: VariableEnvironemnt → VariableEnvironment (m and e swapped)
+13.5.1, 13.6.0.1, 13.10.1: inplemented → implemented (3x) (im- and not in-)
+19.1.3.5: inplementations → implementations (idem)
+13.12.3: compoenent → component
+13.12.12: LabbelledItem → LabelledItem (too much b&apos;s)
+14.1.2: FormalParamterList → FormalParameterList (missing e in Parameter)
+14.2.17: resoved → resolved
+25.4.1.1: resoves → resolves
+15.2.1.6: identifed → identified (missing i)
+15.2.3.2, Table 36: Largerest → Largest (?)
+15.2.3.2: corresonding → corresponding (missing p)
+15.2.5.1, Table 37: [Dependenies]] → [Dependencies]] (missing c)
+15.2.5.1.1: Modulebody → ModuleBody (b miscapitalised)
+16, 24.2.3.2: presense → presence (2x)
+18.2.6.1: codce → code
+19.2.1.1: Funtion → Function (missing c)
+19.2.3.1, 19.2.3.3: transfromations → transformations (2x) (o and r swapped)
+19.2.3.6 (2x): GeneratorExpession → GeneratorExpression (2x) (missing r in Expression)
+20.1.3.5: fromed → formed
+20.3.4.34: methold → method
+21.1.3.10: comparisions → comparisons (too much i&apos;s)
+23.1, 23.2: comparision → comparison (2x) (idem)
+21.1.3.10: Stardard → Standard
+21.2.3.3.1: [[Enumberable]] → [[Enumerable]] (spurious b)
+21.2.5.2.1: algoritm → algorithm
+21.2.5.2.2: isgreater → is greater
+21.2.5.7: nCaptues → nCaptures (missing r)
+22.2.3.26: comparsion → comparison (i and s swapped)
+22.2.5: specifried → specified
+24.1.1.7 (2x): choosen → chosen (2x)
+25.1.3, unnamed Table: languge → language
+25.3.1: GeneratorFrunction.prototype → GeneratorFunction.prototype (spurious r after F)
+25.3.3.3: compation → computation (?)
+25.4.4.5: construtor → constructor (missing c)
+26.3.1.4: interal → internal
+A.1: HexDigist → HexDigits
+B.1.4.1: OctalscapeSequence → OctalEscapeSequence
+B.1.4.1: ony → only
+B.2.5.1: implementaton → implementation (missing i)
+B.3.5: VariableStatment → VariableStatement (missing first e of Statement)
+D.3: ArrayInitialiser → ArrayInitializer (OED spelling)
+E.1: Editon → Edition
+E.1: occurance → occurrence (two r&apos;s; e rather than a)
+E.1: propertie → properties
+E.1 (4x): coerecion → coercion (4x) (spurious e)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9550</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 03:27:52 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #0)
+&gt; 9.1.11: vistor → visitor
+
+This one is also mentioned in Bug 3059.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9551</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 03:45:14 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #0)
+&gt; 15.2.5.1, Table 37: [Dependenies]] → [Dependencies]] (missing c)
+&gt; 15.2.5.1.1: Modulebody → ModuleBody (b miscapitalised)
+
+These two are also mentioned in the not-yet-resolved Bug 2536.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9552</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 04:37:58 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #0)
+&gt; 13.12.3: compoenent → component
+mentioned in Bug 3049 
+
+&gt; 19.1.3.5: inplementations → implementations (idem)
+mentioned in Bug 3050</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9679</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-05 15:46:15 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft
+
+thank you!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9885</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:21 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

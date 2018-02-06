@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2874</bug_id>
+          
+          <creation_ts>2014-05-19 04:23:00 -0700</creation_ts>
+          <short_desc>20.2.2.28 Math.round: Incorrect information in NOTE 2</short_desc>
+          <delta_ts>2014-06-16 16:26:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8548</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-19 04:23:53 -0700</bug_when>
+    <thetext>20.2.2.28 Math.round ( x ), NOTE 2:
+
+&gt; NOTE 2  The value of Math.round(x) is the same as the value of  
+&gt; Math.floor(x+0.5), except when x is -0 or is less than 0 but
+&gt; greater than or equal to -0.5; for these cases Math.round(x) 
+&gt; returns -0, but Math.floor(x+0.5) returns +0.
+
+The note suggests `Math.round(x)` can be implemented as `Math.floor(x + 0.5)` if x &gt; 0 (and x being an ECMAScript number value - not a mathematical real number as defined in &quot;5.2 Algorithm Conventions&quot;). This violates bullet point 6:
+
+&gt; If x is greater than 0 but less than 0.5, the result is +0.
+
+Various implementations follow the note rather than the exact specification (IE11, Nashorn, JSC, SpiderMonkey), so the note should probably be altered to say that `Math.round(x)` is not the same as `Math.floor(x + 0.5)` if x ∈ [-0.5, 0.5).
+
+Related: https://bugzilla.mozilla.org/show_bug.cgi?id=1000606
+
+
+test case:
+---
+0 === Math.round(0.499999999999999944488848768742172978818416595458984375)
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8550</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 09:04:36 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9026</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:26:18 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

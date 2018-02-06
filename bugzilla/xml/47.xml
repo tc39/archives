@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>47</bug_id>
+          
+          <creation_ts>2011-03-02 16:58:00 -0800</creation_ts>
+          <short_desc>(Running) test chapters should require opt-in</short_desc>
+          <delta_ts>2014-08-18 05:00:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>gbor.kopasz</cc>
+    
+    <cc>sam.mikes</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>103</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 16:58:23 -0800</bug_when>
+    <thetext>We should not run all ES5 test chapters by default.  Instead, we should require an end-user to opt into running all the tests or select chapter individually.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>126</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:49:27 -0800</bug_when>
+    <thetext>Implementing this is not entirely trivial as we do things like hardcode the total number of tests expected to run (and do not &apos;finish&apos; the test run until this many tests have actually been executed).  Setting the estimate for this at one day.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9805</commentid>
+    <comment_count>2</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-08-18 05:00:13 -0700</bug_when>
+    <thetext>I believe this is implemented.  Currently the user can either &apos;run all&apos; or &apos;run selected tests&apos;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

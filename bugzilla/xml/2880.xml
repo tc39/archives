@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2880</bug_id>
+          
+          <creation_ts>2014-05-19 18:23:00 -0700</creation_ts>
+          <short_desc>8.1.1.4 Table 19 CreateGlobalVarBinding API has missing initial value parameter</short_desc>
+          <delta_ts>2014-07-18 23:18:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="B Abhijith Chatra">abchatra</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8567</commentid>
+    <comment_count>0</comment_count>
+    <who name="B Abhijith Chatra">abchatra</who>
+    <bug_when>2014-05-19 18:23:00 -0700</bug_when>
+    <thetext>Where:
+8.1.1.4 Global Environment Records
+Table 19 — Additional Methods of Global Environment Records
+CreateGlobalVarBinding(N, D)  
+
+What:
+Missing V (initial value) from method CreateGlobalVarBinding(N, D)
+
+This should have been CreateGlobalVarBinding(N,V, D)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9080</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 12:46:26 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft.
+
+eliminated V from table&apos;s description of CrateGlobalVarBinding.  Added description of V argument to descriptionof CreateGlobalFunctionBinding</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9302</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:18:11 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

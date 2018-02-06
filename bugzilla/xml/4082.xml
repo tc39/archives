@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4082</bug_id>
+          
+          <creation_ts>2015-02-23 14:22:00 -0800</creation_ts>
+          <short_desc>13.5.1 + 13.6.0.1: &quot;any occurrence of Statement in these rules&quot;</short_desc>
+          <delta_ts>2015-03-04 18:58:17 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13259</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-23 14:22:53 -0800</bug_when>
+    <thetext>In 13.5.1 &quot;Static Semantics: Early Errors&quot;
+and 13.6.0.1 &quot;Static Semantics: Early Errors&quot;,
+the bullet says:
+    It is a Syntax Error if IsLabelledFunction(Statement) is true
+    for any occurrence of Statement in these rules.
+
+The phrase &quot;in these rules&quot; is puzzling.
+Changing it to &quot;in this production&quot; would make a bit more sense.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13260</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-23 16:14:29 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+...in code matching these productions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13273</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-23 18:52:46 -0800</bug_when>
+    <thetext>So:
+    &quot;... for any occurrence of /Statement/ in code matching these productions&quot;
+
+But this could be interpreted to mean statements occurring *anywhere*
+(i.e., at any level) within that code, which presumably is not intended.
+
+
+(The terminology could be something like:
+    &quot;... for any /Statement/ that is a child of this /IfStatement/&quot;
+or
+    &quot;... for any /Statement/ that is a child of the target node&quot;
+but that&apos;s probably too much of a shift for ES6.)
+
+---
+
+Here&apos;s a different approach:
+
+In 13.6.0.1, every RHS has exactly one /Statement/, so you can just say:
+    It is a Syntax Error if IsLabelledFunction(/Statement/) is true.
+
+In 13.5.1, it&apos;s not so easy, since one RHS has 2 /Statement/s and the other has
+ 1. Probably the clearest approach is to handle the two RHSs separately:
+ -- For the single-Statement form, you can use the same rule as in 13.6.0.1.
+ -- For the two-Statement form, you can say:
+      It is a Syntax Error if IsLabelledFunction(the first /Statement/) is true,
+      or IsLabelledFunction(the second /Statement/) is true.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13275</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 09:35:45 -0800</bug_when>
+    <thetext>I think it is sufficient to say
+
+•	It is a Syntax Error if IsLabelledFunction(Statement) is true.
+
+for 13.5.1 it is obvious enough that when Statement occurs twice that the test has to be applied twice.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13277</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-24 09:48:14 -0800</bug_when>
+    <thetext>Well, I disagree, but I&apos;ll live with it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13513</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:17 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

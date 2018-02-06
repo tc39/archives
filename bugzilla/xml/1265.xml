@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1265</bug_id>
+          
+          <creation_ts>2013-03-08 10:49:00 -0800</creation_ts>
+          <short_desc>remove seal/freeze operations from the internal MOP and proxy/Reflect APIs</short_desc>
+          <delta_ts>2013-07-15 17:03:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3308</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 10:49:25 -0800</bug_when>
+    <thetext>tomvc said:
+
+8.5.14 Proxy [[Freeze]]
+8.5.15 Proxy [[Seal]]
+8.5.16 Proxy [[IsFrozen]]
+8.5.17 Proxy [[IsSealed]]
+
+I think I&apos;m ready to give up on all of these (and so drop these methods from the internal MOP and the Reflect module altogether).
+
+(although I don&apos;t agree with your Comment[56-57-58] that keeping them would entail a lot of additional invariant checks: the checks are still there even without these internal methods, they&apos;re just performed implicitly by the Object.freeze algorithm when it loops over all the properties and calls [[DefineOwnProperty]] for each property)
+
+------
+
+In terms of rev 14, we could revert [[HasIntegrity]]/[[SetIntegrity]] back to [[IsExtensible]]/[[PreventExtensions]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3428</commentid>
+    <comment_count>1</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-03-12 09:31:28 -0700</bug_when>
+    <thetext>I just had a look at the Rev14 draft.
+
+In this draft, since Object.defineProperty does not actually check or set the integrity level, Object.isFrozen is changed in a backwards-incompatible way as discussed on es-discuss: &lt;https://mail.mozilla.org/pipermail/es-discuss/2013-February/028854.html&gt;
+
+Is the plan really to proceed down this path? From your comment, it seems like the change might be reverted.
+
+In any case, do you feel that the simplification of consolidating freeze/seal/preventExtensions is really worth the backwards-incompatible change? I feel like it is not. In addition, this change breaks the 1-to-1 correspondence between internal methods and user-facing APIs (on Object, Proxy handlers and Reflect).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3489</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-03-18 12:30:48 -0700</bug_when>
+    <thetext>I withdraw my earlier comment. I now understand where you want to go with this. I agree with moving back to [[IsExtensible]]/[[PreventExtensions]] MOP methods.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4319</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-24 16:54:43 -0700</bug_when>
+    <thetext>fixed in rev16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4407</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:25 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

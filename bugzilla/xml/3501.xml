@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3501</bug_id>
+          
+          <creation_ts>2014-12-26 21:20:00 -0800</creation_ts>
+          <short_desc>21.2.5.11: &quot;size&quot; not defined</short_desc>
+          <delta_ts>2015-01-15 16:19:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11253</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-26 21:20:59 -0800</bug_when>
+    <thetext>In 21.2.5.11 &quot;RegExp.prototype [ @@split ] ( string, limit )&quot;,
+step 21.e.i.2 and 21.f.iii.1.b both say:
+    If first ≥ 0xD800 and first ≤ 0xDBFF and q+1 ≠ size, then
+but /size/ is not defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11254</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-26 21:24:57 -0800</bug_when>
+    <thetext>And in the same algorithm, step 21.f.iv.12.b says
+    ReturnIfAbrupt(next).
+but /next/ is not defined.
+
+Change /next/ to /nextCapture/?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11260</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-29 15:38:02 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft
+
+rename s to size</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11426</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:02 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

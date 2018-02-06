@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3997</bug_id>
+          
+          <creation_ts>2015-02-17 22:37:00 -0800</creation_ts>
+          <short_desc>Update Unicode version</short_desc>
+          <delta_ts>2015-10-15 17:10:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12892</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 22:37:29 -0800</bug_when>
+    <thetext>ES6 specifies Unicode 5.1 as its minimum Unicode version. 5.1 was chosen because it&apos;s the Unicode version supported in Windows 7, and at the time we chose the Unicode version we assumed that Windows 7 is the oldest Windows version on which an ES6 compliant Internet Explorer (which relies on the operating system for Unicode support) might run. Other browsers targeting ES6 either implement their own Unicode infrastructure or run on more up-to-date operating systems.
+
+For ES7, we need to check:
+
+- Does IE still rely on Windows for Unicode support?
+
+- If so, what&apos;s the oldest Windows version on which an ES7 compliant IE might run, and which Unicode version does that Windows version support? Is it safe to move ES7 to that Unicode version, or is there any other browser that will implement ES7 but relies on even more outdated Unicode support?
+
+- If IE now uses its own Unicode infrastructure like most other browsers, which is the minimum version that everybody can agree on?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14808</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:10:33 -0700</bug_when>
+    <thetext>Proposals should use the proposal process documented here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.
+
+(Note that Chakra still depends on Windows for Unicode support, and that Chakra will be supported on Win7 for some time).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

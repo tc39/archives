@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>809</bug_id>
+          
+          <creation_ts>2012-10-22 14:53:00 -0700</creation_ts>
+          <short_desc>the result of DefineOwnProperty</short_desc>
+          <delta_ts>2014-05-15 10:18:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1971</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-22 14:53:46 -0700</bug_when>
+    <thetext>Table 8 says that [[DefineOwnProperty]] returns a Boolean.
+
+(1) It would be helpful if the Description said what the return-value means.
+
+(2)
+Many invocations of [[DefineOwnProperty]] ignore the fact that it has a result. Are these invocations implicitly asserting that the result is true?
+
+(3)
+When the result isn&apos;t true, it&apos;s generally either false (if the &apos;Throw&apos; argument is false) or an abrupt completion (if the &apos;Throw&apos; argument is true).
+
+However, in 15.4.5.1 &quot;[[DefineOwnProperty]] (P, Desc, Throw)&quot;, step 3.d says:
+    If newLen is not equal to ToNumber( Desc.[[Value]]),
+    throw a RangeError exception.
+meaning that the result can also be an abrupt completion if &apos;Throw&apos; is false. Is this intentional?
+
+(4)
+In 13.3 &quot;Method Definitions&quot;,
+under &quot;Runtime Semantics: Property Definition Evaluation&quot;,
+rules 1+2+3+4 steps 9+10 say:
+    9. Let status be the result of calling the [[DefineOwnProperty]]
+       internal method of object with arguments propName, desc, and false.
+   10. ReturnIfAbrupt(status).
+
+But since the &apos;Throw&apos; argument is false, I believe status can only be abrupt via the anomaly in point (3) above. Is this the intent (i.e., that&apos;s the only case that 10 is meant to catch), or should the &apos;Throw&apos; arg be true?
+
+Similarly in:
+    15.4.4.19 &quot;Array.prototype.map&quot;, step 10.c.v
+    15.4.4.20 &quot;Array.prototype.filter&quot;, step 11.c.v.1
+    15.5.4.10 &quot;String.prototype.match&quot;, step 10.g.iv.7
+    15.12.2 &quot;parse&quot;, algorithm 2, step 3.a.iv.3.a + 3.b.ii.3.a
+
+And similarly the various places that invoke [[DefineOwnProperty]] with &apos;Throw&apos; = false, and then assert that the result isn&apos;t an abrupt completion. Are they merely asserting that the anomaly in point (3) doesn&apos;t occur?
+
+(5)
+In 15.13.6.5.1 &quot;[[DefineOwnProperty]] ( p, desc, throw )&quot;,
+steps 1+2 say:
+   1. Let succeeded be the result of calling the default [[DefineOwnProperty]]
+      internal method (8.12.9) on A passing P, Desc, and Throw as arguments.
+   2. If succeeded is false, return false.
+
+I&apos;m guessing step 2 should also handle any abrupt completions, so it should
+probably be:
+   2. If succeeded is not true, return succeeded.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8499</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-15 10:18:13 -0700</bug_when>
+    <thetext>I think these points were more or less resolved in rev12 and rev13.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

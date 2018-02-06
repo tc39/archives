@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4008</bug_id>
+          
+          <creation_ts>2015-02-18 16:33:00 -0800</creation_ts>
+          <short_desc>ToDateTimeOptions must not apply defaults if at least one required option is present</short_desc>
+          <delta_ts>2016-02-11 09:49:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>edf</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12951</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 16:33:55 -0800</bug_when>
+    <thetext>ToDateTimeOptions must not apply defaults if at least one required option is present.
+
+For example:
+ToDateTimeOptions({weekday: &quot;long&quot;}, &quot;date&quot;, &quot;date&quot;) currently returns `{weekday: &quot;long&quot;, year: &quot;numeric&quot;, month: &quot;numeric&quot;, day: &quot;numeric&quot;}`, but expected is `{weekday: &quot;long&quot;}`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12972</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-19 10:52:39 -0800</bug_when>
+    <thetext>I see where the mistake that was made and the fix is simple, but I have question: why is &quot;weekday&quot; not present in 7.a?
+
+http://www.ecma-international.org/ecma-402/1.0/index.html#ToDateTimeOptions</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12976</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-19 11:43:54 -0800</bug_when>
+    <thetext>Because we don&apos;t want to include the weekday in the default date format string. `new Intl.DateTimeFormat(&quot;en-US&quot;).format(new Date)` and `new Date().toLocaleDateString(&quot;en-US&quot;)` should both return &quot;2/19/2015&quot; instead of &quot;Thu, 2/19/2015&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12983</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-19 13:15:26 -0800</bug_when>
+    <thetext>Ah, that makes sense. I think a non-normative note is in order.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13185</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-20 06:53:15 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; Because we don&apos;t want to include the weekday in the default date format
+&gt; string. `new Intl.DateTimeFormat(&quot;en-US&quot;).format(new Date)` and `new
+&gt; Date().toLocaleDateString(&quot;en-US&quot;)` should both return &quot;2/19/2015&quot; instead
+&gt; of &quot;Thu, 2/19/2015&quot;.
+
+
+Please confirm:
+
+
+1.  If options is undefined, then let options be null, else let options be ToObject(options).
+2.  ReturnIfAbrupt(options).
+3.  Let opts  be ObjectCreate(options).
+4.  Let needDefaults be true.
+5.  If required is &quot;date&quot; or &quot;any&quot;, then
+  a.  For each of the property names &quot;weekday&quot;, &quot;year&quot;, &quot;month&quot;, &quot;day&quot;:
+    i.  Let prop  be the property name.
+    ii. If the result of Get(options, prop) is undefined, then let needDefaults be false.
+6.  If required is &quot;time&quot; or &quot;any&quot;, then
+  a.  For each of the property names &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;:
+    i.  Let prop  be the property name.
+    ii. If the result of Get(options, prop) is not undefined, then let needDefaults be false.
+7.  If needDefaults is true and defaults is either &quot;date&quot; or &quot;all&quot;, then
+  a.  For each of the property names &quot;year&quot;, &quot;month&quot;, &quot;day&quot;:
+    i.  Let prop be the property name.
+    ii. Let desc be PropertyDescriptor { [[Value]]: &quot;numeric&quot;, [[Configurable]]: true, [[Enumerable]]: true, [[Writable]]: true }. 
+    iii.  Let status be DefinePropertyOrThrow(options, prop, desc).
+8.  If needDefaults is true and defaults is either &quot;time&quot; or &quot;all&quot;, then
+  a.  For each of the property names &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;:
+    i.  Let prop be the property name.
+    ii. Let desc be PropertyDescriptor { [[Value]]: &quot;numeric&quot;, [[Configurable]]: true, [[Enumerable]]: true, [[Writable]]: true }. 
+    iii.  Let status be DefinePropertyOrThrow(options, prop, desc).
+9.  Return options.
+
+
+This is essentially reverting to the 1st edition, but with updates to ES6 language and mechanisms.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13187</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-20 07:23:00 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #4)
+&gt; Please confirm:
+&gt; 
+
+LGTM except for a typo in step 5.a.ii: &quot;is undefined&quot; -&gt; &quot;is not undefined&quot;.
+
+
+Furthermore these steps:
+---
+ii.  Let desc be PropertyDescriptor { [[Value]]: &quot;numeric&quot;, [[Configurable]]: true, [[Enumerable]]: true, [[Writable]]: true }. 
+iii. Let status be DefinePropertyOrThrow(options, prop, desc).
+---
+
+can be reduced to:
+---
+ii.  Let status be CreateDataPropertyOrThrow(options, prop, &quot;numeric&quot;).
+iii. ReturnIfAbrupt(status).
+---
+
+
+And calling Get() actually needs an ReturnIfAbrupt check:
+---
+ii. If the result of Get(options, prop) is undefined, then let needDefaults be false.
+---
+
+Like:
+---
+ii.  Let value be Get(options, prop).
+iii. ReturnIfAbrupt(value).
+iv.  If value is not undefined, then let needDefaults be false.
+---
+
+Do you plan to fix all places in the intl spec where ReturnIfAbrupt calls are necessary? Or do you want to leave this as-is for the time being?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13192</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-20 07:57:18 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #5)
+&gt; (In reply to Rick Waldron from comment #4)
+&gt; &gt; Please confirm:
+&gt; &gt; 
+&gt; 
+&gt; LGTM except for a typo in step 5.a.ii: &quot;is undefined&quot; -&gt; &quot;is not undefined&quot;.
+
+Fixed
+
+&gt; 
+&gt; 
+&gt; Furthermore these steps:
+&gt; ---
+&gt; ii.  Let desc be PropertyDescriptor { [[Value]]: &quot;numeric&quot;,
+&gt; [[Configurable]]: true, [[Enumerable]]: true, [[Writable]]: true }. 
+&gt; iii. Let status be DefinePropertyOrThrow(options, prop, desc).
+&gt; ---
+&gt; 
+&gt; can be reduced to:
+&gt; ---
+&gt; ii.  Let status be CreateDataPropertyOrThrow(options, prop, &quot;numeric&quot;).
+&gt; iii. ReturnIfAbrupt(status).
+&gt; ---
+
+Fixed.
+
+
+&gt; 
+&gt; 
+&gt; And calling Get() actually needs an ReturnIfAbrupt check:
+&gt; ---
+&gt; ii. If the result of Get(options, prop) is undefined, then let needDefaults
+&gt; be false.
+&gt; ---
+&gt; 
+&gt; Like:
+&gt; ---
+&gt; ii.  Let value be Get(options, prop).
+&gt; iii. ReturnIfAbrupt(value).
+&gt; iv.  If value is not undefined, then let needDefaults be false.
+&gt; ---
+
+Fixed.
+
+&gt; 
+&gt; Do you plan to fix all places in the intl spec where ReturnIfAbrupt calls
+&gt; are necessary? Or do you want to leave this as-is for the time being?
+
+I would like to make sure that these are all fixed. Any that might appear as &quot;missed&quot; were probably considered and determined unnecessary, however I realize now that I overlooked the possibility that user code may pass in objects with accessors that may throw, so another pass is necessary and if you have the time and resources to help me with that, I would greatly appreciate it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14916</commentid>
+    <comment_count>7</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2016-02-11 09:49:14 -0800</bug_when>
+    <thetext>Fixed in ECMA-402, 2nd ed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

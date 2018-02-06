@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3401</bug_id>
+          
+          <creation_ts>2014-12-04 08:54:00 -0800</creation_ts>
+          <short_desc>Math.round() returns a -0 (note the negative) when performed on a negative decimal -0.5 or greater</short_desc>
+          <delta_ts>2015-10-03 19:54:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>Macintosh</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Clif">cbergmann</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10722</commentid>
+    <comment_count>0</comment_count>
+    <who name="Clif">cbergmann</who>
+    <bug_when>2014-12-04 08:54:20 -0800</bug_when>
+    <thetext>Overview:
+
+While performing a Math.round() calculation on any decimal between -0.5 and zero, the Math.round() function returns NEGATIVE ZERO. 
+
+Behavior verified on Mac OSX 10.9.5, on: 
+  Google Chrome 9.0.2171.71
+  Mozilla Firefox 33.1 &amp; 34.0
+
+Expected behavior observed on:
+  Safari Version 7.1 (9537.85.10.17.1)
+
+Steps to Reproduce: 
+
+1) Open the JavaScript console in a current browser.
+
+2) Enter: Math.round(-0.5)
+
+Actual Results: 
+-0
+
+Expected Results:
+0
+
+Additional Information:
+
+The negative sign does not break any Math-based calculations that I am aware of, but if you are expecting a number that you can use as an index in an array, the index will not be found.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12797</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 18:15:59 -0800</bug_when>
+    <thetext>note that
+   anArray[-0]
+is equivalent to
+   anArray[&quot;0&quot;]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14769</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 19:54:22 -0700</bug_when>
+    <thetext>Don&apos;t think we want to change Math.round semantics at this point, but proposals can be made on es-discuss.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

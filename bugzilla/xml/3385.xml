@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3385</bug_id>
+          
+          <creation_ts>2014-11-13 14:49:00 -0800</creation_ts>
+          <short_desc>Require that the mandatory parameter to object literal setter syntax not have an overall default</short_desc>
+          <delta_ts>2014-11-13 15:33:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10635</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-11-13 14:49:24 -0800</bug_when>
+    <thetext>The grammar for a setter in an object literal is:
+
+&gt; MethodDefinition [Yield] :
+&gt;   ...
+&gt;   set PropertyName ( PropertySetParameterList ) { FunctionBody }
+
+And we have
+
+&gt; PropertySetParameterList :
+&gt;   FormalParameter
+
+and then
+
+&gt; FormalParameter [Yield,GeneratorParameter] :
+&gt;   BindingElement [?Yield, ?GeneratorParameter]
+
+and then
+
+&gt; BindingElement [Yield, GeneratorParameter ] :
+&gt;   SingleNameBinding [?Yield, ?GeneratorParameter]
+&gt;   [+GeneratorParameter] BindingPattern [?Yield,GeneratorParameter] Initializer [In]opt
+&gt;   [~GeneratorParameter] BindingPattern [?Yield] Initializer [In, ?Yield]opt
+
+and
+
+&gt; SingleNameBinding [Yield,GeneratorParameter] :
+&gt;   [+GeneratorParameter] BindingIdentifier [Yield] Initializer [In]opt
+&gt;   [~GeneratorParameter] BindingIdentifier [?Yield] Initializer [In, ?Yield]opt
+
+Every expansion of BindingElement permits an initializer.  But setter method syntax is unique and unusual in that it is specifically tailored to setters, in that exactly one argument must be present.  No provision is made for the setter being a general function taking any number of arguments other than 1.  Given that precedent and the ongoing existence of PropertySetParameterList, it seems strange that top-level initializers are permitted here.
+
+Instead of the current grammar, I think we should instead have
+
+PropertySetFormalParameter :
+  BindingIdentifier
+  BindingPattern
+
+to restrict this argument to a name or a destructuring pattern *without* an initializer.  (Note that nested initializers would still be fine with this, as in the following example -- this just prohibits an initializer for the single argument passed to the setter.)
+
+var API =
+  {
+    _count: 0,
+    _rational: true,
+    set options({ count = 17, rational = true }) {
+     this._count = count;
+     this._rational = rational;
+    }
+  };
+API.options = { count: 25 }; // would imply rational = true</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10636</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-13 15:11:49 -0800</bug_when>
+    <thetext>But, default parameter value initializes are also trigger by passing the value undefined.  So you might reasonably say:
+
+var o={set foo(value=null) {doSomething(value)}};
+o.value = undefined;  //null gets passed to doSomething
+
+It since use cases like this are possible, it seems reasonable to not try to special case away the initializer.  Even though it will be very infrequently used. Fewer special cases is better.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10637</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-11-13 15:33:15 -0800</bug_when>
+    <thetext>Oh, right, I forgot that defaults aren&apos;t just for not-present arguments (a decision I don&apos;t particularly like, but whatever).  Never mind then.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

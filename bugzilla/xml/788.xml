@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>788</bug_id>
+          
+          <creation_ts>2012-10-11 09:43:00 -0700</creation_ts>
+          <short_desc>15.14.7.2.2: &quot;redetermine&quot;</short_desc>
+          <delta_ts>2013-08-23 08:22:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1925</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-11 09:43:05 -0700</bug_when>
+    <thetext>In 15.14.7.2.2 &quot;MapIterator.prototype.next&quot;,
+step 9 says:
+    Repeat while index is less than the total number of element of entries. The
+    number of elements must be redetermine each time this method is evaluated.
+
+Change &quot;redetermine&quot; to &quot;redetermined&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1926</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-11 10:07:06 -0700</bug_when>
+    <thetext>Also, in &quot;number of element&quot;, change &quot;element&quot; to &quot;elements&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1953</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-20 14:47:50 -0700</bug_when>
+    <thetext>corrected in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2126</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:14 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2226</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-26 22:50:09 -0700</bug_when>
+    <thetext>The typo noted in comment #1 is still there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4742</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-05 16:09:16 -0700</bug_when>
+    <thetext>comment 1 fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5088</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:37 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

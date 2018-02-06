@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1906</bug_id>
+          
+          <creation_ts>2013-09-24 06:53:00 -0700</creation_ts>
+          <short_desc>More &quot;an&quot; and &quot;a&quot; typos</short_desc>
+          <delta_ts>2013-09-27 14:47:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5420</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-24 06:53:37 -0700</bug_when>
+    <thetext>6.1.6: &quot;A accessor&quot; -&gt; &quot;An accessor&quot;
+6.2.5.4 - step 9: &quot;a [[Enumerable]]&quot; -&gt; &quot;an [[Enumerable]]&quot;
+6.2.5.6 - step 7: &quot;a [[Enumerable]]&quot; -&gt; &quot;an [[Enumerable]]&quot;
+8.1.1.4 - Table 18: &quot;A Object Environment&quot; -&gt; &quot;An Object Environment&quot;
+8.2 - Table 20: &quot;A ECMAScript&quot; -&gt; &quot;An ECMAScript&quot;
+9.1.16.10 - step 1: &quot;a ordinary&quot; -&gt; &quot;an ordinary&quot;
+9.3.5 - NOTE: &quot;a own&quot; -&gt; &quot;an own&quot; (twice)
+9.3.6 - NOTE: &quot;a own&quot; -&gt; &quot;an own&quot; (thrice)
+9.3.8 - NOTE: &quot;a own&quot; -&gt; &quot;an own&quot;
+12.1.7.2 - step 8: &quot;a empty&quot; -&gt; &quot;an empty&quot;
+18.3 - Decode operation - step 8: &quot;an URIError&quot; -&gt; &quot;a URIError&quot;
+19.2.3.1 - NOTE: &quot;a undefined&quot; -&gt; &quot;an undefined&quot;
+19.2.3.3 - NOTE: &quot;a undefined&quot; -&gt; &quot;an undefined&quot;
+19.4.6 - text: &quot;an new&quot; -&gt; &quot;a new&quot;
+22.1.5.2.2 - step 3: &quot;a Array&quot; -&gt; &quot;an Array&quot;
+24.1.3.3 - text: &quot;a ArrayBuffer&quot; -&gt; &quot;an ArrayBuffer&quot;
+Annex E - E1: &quot;a Array&quot; -&gt; &quot;an Array&quot; (twice)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5428</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-26 17:53:31 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5593</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:59 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

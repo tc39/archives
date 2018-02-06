@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3966</bug_id>
+          
+          <creation_ts>2015-02-16 23:53:00 -0800</creation_ts>
+          <short_desc>&quot;Well-Known Intrinsic Objects&quot; missing global names</short_desc>
+          <delta_ts>2015-02-17 10:40:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jordan Harband">ljharb</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12803</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-02-16 23:53:49 -0800</bug_when>
+    <thetext>Promise, Symbol, DataView, and all of the Error types have empty &quot;global name&quot; cells - it seems like these should be filled in based on Set/Map/etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12819</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 10:37:29 -0800</bug_when>
+    <thetext>Are you actually looking at the rev33 draft.  In rev33 all of those names are filled in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12820</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-02-17 10:40:24 -0800</bug_when>
+    <thetext>Oops, you&apos;re right - I&apos;d originally been looking at the Rev 33 draft, but had switched to the web version which apparently isn&apos;t up to date. Sorry for the noise!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

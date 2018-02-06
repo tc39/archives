@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>335</bug_id>
+          
+          <creation_ts>2012-04-24 02:34:00 -0700</creation_ts>
+          <short_desc>a new Object.setProperty() method</short_desc>
+          <delta_ts>2012-05-05 13:51:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 3: September 23, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>pincopalla00</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>870</commentid>
+    <comment_count>0</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-04-24 02:34:07 -0700</bug_when>
+    <thetext>Hello everyone!
+My proposal is to implement a new Object method named &quot;setProperty&quot; (similar to the Object.defineProperty method) but which uses binary flags instead of a property descriptor object. Here is a possible example:
+
+https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty#Example_.232:_a_new_custom_Object.setProperty%28%29_method
+
+It could be very a very useful possibility if you have to define many properties of an object, because the Object.defineProperty() method is very expensive of code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>871</commentid>
+    <comment_count>1</comment_count>
+      <attachid>23</attachid>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-04-24 03:55:43 -0700</bug_when>
+    <thetext>Created attachment 23
+Object.setProperty() example</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>872</commentid>
+    <comment_count>2</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-04-24 05:13:35 -0700</bug_when>
+    <thetext>New link:
+
+https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty#Example_.232:_create_a_new_non-native_Object.setProperty%28%29_method</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>892</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-04 14:47:01 -0700</bug_when>
+    <thetext>The bit mask was consider and not adopted during the development of ES5.  See http://wiki.ecmascript.org/lib/exe/fetch.php?id=es3.1%3Aes3.1_proposal_working_draft&amp;cache=cache&amp;media=es3.1:rationale_for_es3_1_static_object_methodsaug26.pdf</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>896</commentid>
+    <comment_count>4</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-05-05 13:51:57 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; The bit mask was consider and not adopted during the development of ES5.  See
+&gt; http://wiki.ecmascript.org/lib/exe/fetch.php?id=es3.1%3Aes3.1_proposal_working_draft&amp;cache=cache&amp;media=es3.1:rationale_for_es3_1_static_object_methodsaug26.pdf
+
+Yes, of course regarding the Object.defineProperty() method... But, what&apos;s about a new faster method, like the Object.setProperty() of my example?
+
+...when you have to define tens of new properties, the actual Object.defineProperty() method is too mutch expensive of code (I know this problem very well).
+
+The official motivation is that a bitmask is difficult to remember... but... for a developer?? And it would be another, faster method, over and above the Object.defineProperty() method.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>23</attachid>
+            <date>2012-04-24 03:55:00 -0700</date>
+            <delta_ts>2012-04-24 03:55:43 -0700</delta_ts>
+            <desc>Object.setProperty() example</desc>
+            <filename>Object.setProperty.html</filename>
+            <type>text/html</type>
+            <size>4298</size>
+            <attacher>pincopalla00</attacher>
+            
+              <data encoding="base64">PCFkb2N0eXBlIGh0bWw+CjxodG1sPgo8aGVhZD4KPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1U
+eXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9VVRGLTgiIC8+Cjx0aXRsZT5PYmplY3Qu
+c2V0UHJvcGVydHkgbWV0aG9kPC90aXRsZT4KPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQi
+PgovKgoqIDo6IE9iamVjdC5zZXRQcm9wZXJ0eSgpIG1ldGhvZCA6OgoqCiogbk1hc2sgaXMgYSBi
+aXRtYXNrOgoqICBmbGFnIDB4MTogcHJvcGVydHkgaXMgZW51bWVyYWJsZSwKKiAgZmxhZyAweDI6
+IHByb3BlcnR5IGlzIGNvbmZpZ3VyYWJsZSwKKiAgZmxhZyAweDQ6IHByb3BlcnR5IGlzIHdyaXRh
+YmxlLAoqICBmbGFnIDB4ODogcHJvcGVydHkgaXMgYWNjZXNzb3IgZGVzY3JpcHRvci4KKiBvT2Jq
+IGlzIHRoZSBvYmplY3Qgb24gd2hpY2ggdG8gZGVmaW5lIHRoZSBwcm9wZXJ0eTsKKiBzS2V5IGlz
+IHRoZSBuYW1lIG9mIHRoZSBwcm9wZXJ0eSB0byBiZSBkZWZpbmVkIG9yIG1vZGlmaWVkOwoqIHZW
+YWxfZkdldCBpcyB0aGUgdmFsdWUgdG8gYXNzaWduIHRvIGEgZGF0YSBkZXNjcmlwdG9yIG9yIHRo
+ZSBnZXR0ZXIgZnVuY3Rpb24gdG8gYXNzaWduIHRvIGFuIGFjY2Vzc29yIGRlc2NyaXB0b3IgKGRl
+cGVuZGluZyBvbiB0aGUgYml0bWFzayk7CiogZlNldCBpcyB0aGUgc2V0dGVyIGZ1bmN0aW9uIHRv
+IGFzc2lnbiB0byBhbiBhY2Nlc3NvciBkZXNjcmlwdG9yOwoqCiogQml0bWFzayBwb3NzaWJsZSB2
+YWx1ZXM6CioKKiAgMCAgOiByZWFkb25seSBkYXRhIGRlc2NyaXB0b3IgLSBub3QgY29uZmlndXJh
+YmxlLCBub3QgZW51bWVyYWJsZSAoMDAwMCkuCiogIDEgIDogcmVhZG9ubHkgZGF0YSBkZXNjcmlw
+dG9yIC0gbm90IGNvbmZpZ3VyYWJsZSwgZW51bWVyYWJsZSAoMDAwMSkuCiogIDIgIDogcmVhZG9u
+bHkgZGF0YSBkZXNjcmlwdG9yIC0gY29uZmlndXJhYmxlLCBub3QgZW51bWVyYWJsZSAoMDAxMCku
+CiogIDMgIDogcmVhZG9ubHkgZGF0YSBkZXNjcmlwdG9yIC0gY29uZmlndXJhYmxlLCBlbnVtZXJh
+YmxlICgwMDExKS4KKiAgNCAgOiB3cml0YWJsZSBkYXRhIGRlc2NyaXB0b3IgLSBub3QgY29uZmln
+dXJhYmxlLCBub3QgZW51bWVyYWJsZSAoMDEwMCkuCiogIDUgIDogd3JpdGFibGUgZGF0YSBkZXNj
+cmlwdG9yIC0gbm90IGNvbmZpZ3VyYWJsZSwgZW51bWVyYWJsZSAoMDEwMSkuCiogIDYgIDogd3Jp
+dGFibGUgZGF0YSBkZXNjcmlwdG9yIC0gY29uZmlndXJhYmxlLCBub3QgZW51bWVyYWJsZSAoMDEx
+MCkuCiogIDcgIDogd3JpdGFibGUgZGF0YSBkZXNjcmlwdG9yIC0gY29uZmlndXJhYmxlLCBlbnVt
+ZXJhYmxlICgwMTExKS4KKiAgOCAgOiBhY2Nlc3NvciBkZXNjcmlwdG9yIC0gbm90IGNvbmZpZ3Vy
+YWJsZSwgbm90IGVudW1lcmFibGUgKDEwMDApLgoqICA5ICA6IGFjY2Vzc29yIGRlc2NyaXB0b3Ig
+LSBub3QgY29uZmlndXJhYmxlLCBlbnVtZXJhYmxlICgxMDAxKS4KKiAgMTAgOiBhY2Nlc3NvciBk
+ZXNjcmlwdG9yIC0gY29uZmlndXJhYmxlLCBub3QgZW51bWVyYWJsZSAoMTAxMCkuCiogIDExIDog
+YWNjZXNzb3IgZGVzY3JpcHRvciAtIGNvbmZpZ3VyYWJsZSwgZW51bWVyYWJsZSAoMTAxMSkuCioK
+KiAgTm90ZTogSWYgdGhlIGZsYWcgMHg4IGlzIHNldHRlZCB0byAiZGF0YSBkZXNjcmlwdG9yIiB0
+aGUgZlNldCBhcmd1bWVudCB3aWxsIGJlIGlnbm9yZWQuCiogICAgICAgIElmIHRoZSBmbGFnIDB4
+OCBpcyBzZXR0ZWQgdG8gImFjY2Vzc29yIGRlc2NyaXB0b3IiIHRoZSBmbGFnIDB4NCAoIndyaXRh
+YmxlIikgd2lsbCBiZSBpZ25vcmVkLgoqLwoKbmV3IChmdW5jdGlvbigpIHsKICB2YXIgb0Rlc2Mg
+PSB0aGlzOwogIE9iamVjdC5zZXRQcm9wZXJ0eSA9IGZ1bmN0aW9uIChuTWFzaywgb09iaiwgc0tl
+eSwgdlZhbF9mR2V0LCBmU2V0KSB7CiAgICBpZiAobk1hc2sgJiA4KSB7CiAgICAgIC8vIGRhdGEg
+ZGVzY3JpcHRvcgogICAgICBpZiAodlZhbF9mR2V0KSB7CiAgICAgICAgb0Rlc2MuZ2V0ID0gdlZh
+bF9mR2V0OwogICAgICB9IGVsc2UgewogICAgICAgIGRlbGV0ZSBvRGVzYy5nZXQ7CiAgICAgIH0K
+ICAgICAgaWYgKGZTZXQpIHsKICAgICAgICBvRGVzYy5zZXQgPSBmU2V0OwogICAgICB9IGVsc2Ug
+ewogICAgICAgIGRlbGV0ZSBvRGVzYy5zZXQ7CiAgICAgIH0KICAgICAgZGVsZXRlIG9EZXNjLnZh
+bHVlOwogICAgICBkZWxldGUgb0Rlc2Mud3JpdGFibGU7CiAgICB9IGVsc2UgewogICAgICAvLyBh
+Y2Nlc3NvciBkZXNjcmlwdG9yCiAgICAgIGlmIChhcmd1bWVudHMubGVuZ3RoID4gMykgewogICAg
+ICAgIG9EZXNjLnZhbHVlID0gdlZhbF9mR2V0OwogICAgICB9IGVsc2UgewogICAgICAgIGRlbGV0
+ZSBvRGVzYy52YWx1ZTsKICAgICAgfQogICAgICBvRGVzYy53cml0YWJsZSA9IEJvb2xlYW4obk1h
+c2sgJiA0KTsKICAgICAgZGVsZXRlIG9EZXNjLmdldDsKICAgICAgZGVsZXRlIG9EZXNjLnNldDsK
+ICAgIH0KICAgIG9EZXNjLmVudW1lcmFibGUgPSBCb29sZWFuKG5NYXNrICYgMSk7CiAgICBvRGVz
+Yy5jb25maWd1cmFibGUgPSBCb29sZWFuKG5NYXNrICYgMik7CiAgICBPYmplY3QuZGVmaW5lUHJv
+cGVydHkob09iaiwgc0tleSwgb0Rlc2MpOwogIHJldHVybiBvT2JqOwogIH07Cn0pKCk7CgovLyBj
+cmVhdGluZyBhIG5ldyBlbXB0eSBvYmplY3QKdmFyIG15T2JqID0ge307CgovLyBhZGRpbmcgYSB3
+cml0YWJsZSBkYXRhIGRlc2NyaXB0b3IgLSBub3QgY29uZmlndXJhYmxlLCBub3QgZW51bWVyYWJs
+ZQpPYmplY3Quc2V0UHJvcGVydHkoNCwgbXlPYmosICJteU51bWJlciIsIDI1KTsKCi8vIGFkZGlu
+ZyBhIHJlYWRvbmx5IGRhdGEgZGVzY3JpcHRvciAtIG5vdCBjb25maWd1cmFibGUsIGVudW1lcmFi
+bGUKT2JqZWN0LnNldFByb3BlcnR5KDEsIG15T2JqLCAibXlTdHJpbmciLCAiSGVsbG8gd29ybGQh
+Iik7CgovLyBhZGRpbmcgYW4gYWNjZXNzb3IgZGVzY3JpcHRvciAtIG5vdCBjb25maWd1cmFibGUs
+IGVudW1lcmFibGUKT2JqZWN0LnNldFByb3BlcnR5KDksIG15T2JqLCAibXlBcnJheSIsIGZ1bmN0
+aW9uKCkgewogIGZvciAodmFyIGlCaXQgPSAwLCBpRmxhZyA9IDEsIGFCb29sQXJyID0gW2ZhbHNl
+XTsKICAgICAgICBpRmxhZyA8IHRoaXMubXlOdW1iZXIgKyAxIHx8ICh0aGlzLm15TnVtYmVyICYg
+aUZsYWcpOyBpRmxhZyA9IGlGbGFnIDw8IDEpIHsKICAgIGFCb29sQXJyW2lCaXQrK10gPSBCb29s
+ZWFuKHRoaXMubXlOdW1iZXIgJiBpRmxhZyk7CiAgfQogIHJldHVybiBhQm9vbEFycjsKfSwgZnVu
+Y3Rpb24oYU5ld01hc2spIHsKICBmb3IgKHZhciBuTmV3ID0gMCwgaUJpdCA9IDA7IGlCaXQgPCBh
+TmV3TWFzay5sZW5ndGg7IGlCaXQrKykgewogICAgbk5ldyB8PSBCb29sZWFuKGFOZXdNYXNrW2lC
+aXRdKSA8PCBpQml0OwogIH0KICB0aGlzLm15TnVtYmVyID0gbk5ldzsKfSk7CgovLyBhZGRpbmcg
+YSB3cml0YWJsZSBkYXRhIGRlc2NyaXB0b3IgKHVuZGVmaW5lZCB2YWx1ZSkgLSBjb25maWd1cmFi
+bGUsIGVudW1lcmFibGUKT2JqZWN0LnNldFByb3BlcnR5KDcsIG15T2JqLCAibXlVbmRlZmluZWQi
+KTsKCi8vIGFkZGluZyBhbiBhY2Nlc3NvciBkZXNjcmlwdG9yIChvbmx5IGdldHRlcikgLSBjb25m
+aWd1cmFibGUsIGVudW1lcmFibGUKT2JqZWN0LnNldFByb3BlcnR5KDExLCBteU9iaiwgIm15RGF0
+ZSIsIGZ1bmN0aW9uKCkgeyByZXR1cm4gbmV3IERhdGUoKTsgfSk7CgovLyBhZGRpbmcgYW4gYWNj
+ZXNzb3IgZGVzY3JpcHRvciAob25seSBzZXR0ZXIpIC0gbm90IGNvbmZpZ3VyYWJsZSwgbm90IGVu
+dW1lcmFibGUKT2JqZWN0LnNldFByb3BlcnR5KDgsIG15T2JqLCAibXlBbGVydCIsIG51bGwsIGZ1
+bmN0aW9uKHNUeHQpIHsgYWxlcnQoc1R4dCk7IH0pOwoKbXlPYmoubXlBbGVydCA9IG15T2JqLm15
+RGF0ZS50b0xvY2FsZVN0cmluZygpICsgIlxuXG4iICsgbXlPYmoubXlTdHJpbmcgKwogICAgICAi
+XG5UaGUgbnVtYmVyICIgKyBteU9iai5teU51bWJlciArICIgcmVwcmVzZW50cyB0aGUgZm9sbG93
+aW5nIGJpdG1hc2s6ICIgKwogICAgICBteU9iai5teUFycmF5LmpvaW4oIiwgIikgKyAiLiI7Cgov
+LyBsaXN0aW5nIHRoZSBlbnVtZXJhYmxlIHByb3BlcnRpZXMKdmFyIHNMaXN0ID0gIkhlcmUgYXJl
+IHRoZSBlbnVtZXJhYmxlIHByb3BlcnRpZXMgb2YgbXlPYmogb2JqZWN0OlxuIjsKZm9yICh2YXIg
+c1Byb3AgaW4gbXlPYmopIHsKICAgIHNMaXN0ICs9ICJcbm15T2JqLiIgKyBzUHJvcCArICIgPT4g
+IiArIG15T2JqW3NQcm9wXSArICI7Igp9CgphbGVydChzTGlzdCk7Cjwvc2NyaXB0Pgo8L2hlYWQ+
+Cjxib2R5PjwvYm9keT4KPC9odG1sPgo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

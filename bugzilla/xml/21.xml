@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>21</bug_id>
+          
+          <creation_ts>2011-02-14 16:03:00 -0800</creation_ts>
+          <short_desc>String.prototype.match should not require built-in exec method</short_desc>
+          <delta_ts>2013-03-08 14:44:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Low</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>37</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-02-14 16:03:28 -0800</bug_when>
+    <thetext>String.prototype.match (15.5.4.10) in ES5 is specified as calling the &quot;standard built-in&quot; RegExp.prototype.exec method.  In ES3 the &quot;standard built-in&quot; qualification was not present.  In general, for ES5 we tried to be explicit about when we expected to call the actual built-in method as opposed to whatever the actual current value of the property happens to be.  However, in some cases, such as this we may have unnecessarily over specified the requirement.
+
+For example,the current specification precludes someone from extending RegExpo semantics and replacing the exec method with a new one that works by dispatching to either the built-in exec or extension code for the new semantics.  The match spec. requires actual [[Call]]&apos;s of the exec and the algorithm doesn&apos;t really have any obvious dependency upon using the built-in method and not an ECMAScript code method.
+
+Instead of specifying use of the standard built-in method it should just do a [[Get]] to access the objects exec method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>39</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-02-15 15:05:17 -0800</bug_when>
+    <thetext>In fact there are some dependencies upon using the built-in exec method.  The way the algorithm is coded assumes that after a call to exec, that the lastIndex property of the regexp object will have a Number value.  It doesn&apos;t do any coercion to ensure this. This assumption is valid for the built-in exec but might not be correct for an alternative exec method.
+
+To correctly generalize the match method, the appropriate coercions would need to be added to the algorith.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3300</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-07 14:43:37 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3326</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:13 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

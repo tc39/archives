@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1391</bug_id>
+          
+          <creation_ts>2013-03-22 14:09:00 -0700</creation_ts>
+          <short_desc>A bound function should have [[Construct]] only if the target function has [[Construct]]</short_desc>
+          <delta_ts>2013-07-15 17:03:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3547</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-03-22 14:09:21 -0700</bug_when>
+    <thetext>With proxies, a program can test whether an object has [[Construct]] or not.
+
+  function hasConstruct(f) {
+      var p = new Proxy(f, {construct: () =&gt; { throw true }});
+      try {
+          new p;  // handler.construct hook fires iff f has [[Construct]]
+      } catch (exc) {
+          return exc === true;
+      }
+  }
+
+  hasConstruct(function () {});   // true
+  hasConstruct(a =&gt; a);           // false (true in Firefox, a bug)
+  hasConstruct(Math.sin);         // false (true in Firefox, a bug)
+
+The way the spec is currently written, *all* bound functions have [[Construct]].
+
+  hasConstruct(function () {}.bind());   // true
+  hasConstruct((a =&gt; a).bind());         // true (I propose making it false)
+  hasConstruct(Math.sin.bind());         // true (I propose making it false)
+
+I think it&apos;s more sensible for a bound function to be a constructor only if the target function is.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4337</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-30 13:32:16 -0700</bug_when>
+    <thetext>fixed in rev16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4448</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:49 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

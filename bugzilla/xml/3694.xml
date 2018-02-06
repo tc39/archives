@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3694</bug_id>
+          
+          <creation_ts>2015-01-30 16:07:00 -0800</creation_ts>
+          <short_desc>22.2.3.22.2%TypedArray%.prototype.set: Special case same element to allow memmove?</short_desc>
+          <delta_ts>2015-02-19 19:11:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11763</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-30 16:07:53 -0800</bug_when>
+    <thetext>22.2.3.22.2%TypedArray%.prototype.set(typedArray [, offset ] )
+
+Implementors like their memmoves, but the loop in step 28 makes it impossible to use memmove for Float32/64 because of NaN canonicalization in GetValueFromBuffer.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12199</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 15:32:42 -0800</bug_when>
+    <thetext>Looking at ArrayBuffer SetValueInBuffer, it seems that the only things that prevents using memmove is that fact the SetValueInBuffer says that NaNs must be stored as non-signaling value.  So, if somebody had placed placed signaling NaN bit patterns into the source buffer, the current language requires that an implementation transform them.
+
+I&apos;m think I probably originally inserted the &quot;non-signaling&quot; language into the spec and now it isn&apos;t clear to me that it has any value given that any possible bit value can be placed into an ArrayBuffer by attaching an appropiate view to it.
+I&apos;m inclined to simply delete the words &quot;non-signaling&quot; from the SetValueInBuffer spec.
+
+To you think this is reasonable and sufficient?
+
+I&apos;m also inclined to put a statement somewhere in the TypedArray section that says that a bit level transfer must occur anytime an algorithm  retrieves a value from a typed array using [[Get]] and immediately stores it back into a typed array, of the same type, using [[Set]].  It seem this would have to be stated as a mandatory requirement, in order to avoid interop hazards.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12610</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-13 16:45:11 -0800</bug_when>
+    <thetext>&gt; anytime an algorithm  retrieves a value from a typed array using [[Get]] and
+&gt; immediately stores it back into a typed array, of the same type, using [[Set]].
+
+I don&apos;t think this is viable. How would you define &quot;immediately&quot;? When doing a [[Set]] of a NaN, I agree we don&apos;t need to say &quot;non-signaling&quot;, but we still need to allow any NaN bit pattern.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12612</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 17:11:33 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #2)
+&gt; &gt; anytime an algorithm  retrieves a value from a typed array using [[Get]] and
+&gt; &gt; immediately stores it back into a typed array, of the same type, using [[Set]].
+&gt; 
+&gt; I don&apos;t think this is viable. How would you define &quot;immediately&quot;? When doing
+&gt; a [[Set]] of a NaN, I agree we don&apos;t need to say &quot;non-signaling&quot;, but we
+&gt; still need to allow any NaN bit pattern.
+
+By immediately I mean equivalently to doing a [[Get]] immediately followed by a [[Set]] with no interesting operations between them.  The language can be tweaked, as necessary to make that precise enough.
+
+I&apos;m not sure what you&apos;re trying to say in your last sentence. Are you saying that it is important that an implementation is allowed  (but not required) to change NaN patterns on any such [[Get]]/[[Set]] sequence.  If so, then there may be observable difference between implementations and it might even revealing of implementation details such as its preferred.
+
+finally, I assume that implementations already do memmove where ever they think they can.  What we are trying to do here is make sure that we don&apos;t unintentionally have spec. languages that says they can&apos;t do that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12613</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-13 17:21:45 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; (In reply to Mark Miller from comment #2)
+&gt; &gt; &gt; anytime an algorithm  retrieves a value from a typed array using [[Get]] and
+&gt; &gt; &gt; immediately stores it back into a typed array, of the same type, using [[Set]].
+&gt; &gt; 
+&gt; &gt; I don&apos;t think this is viable. How would you define &quot;immediately&quot;? When doing
+&gt; &gt; a [[Set]] of a NaN, I agree we don&apos;t need to say &quot;non-signaling&quot;, but we
+&gt; &gt; still need to allow any NaN bit pattern.
+&gt; 
+&gt; By immediately I mean equivalently to doing a [[Get]] immediately followed
+&gt; by a [[Set]] with no interesting operations between them.  The language can
+&gt; be tweaked, as necessary to make that precise enough.
+
+Perhaps, depending on what you mean by &quot;interesting&quot;. But I don&apos;t understand what you&apos;d be accomplishing. It seems weird to me that
+
+const x = ta[i];
+ta[j] = x;
+
+means something different than
+
+const x = ta[i];
+noop();
+ta[j] = x;
+
+This non-equivalence breaks what are otherwise algebraic properties of the language that code transformation tools (including transpilers) depend on. This non-equivalence would, AFAICT, be an unprecedented special case in the language semantics.
+
+
+&gt; I&apos;m not sure what you&apos;re trying to say in your last sentence. Are you saying
+&gt; that it is important that an implementation is allowed  (but not required)
+&gt; to change NaN patterns on any such [[Get]]/[[Set]] sequence.
+
+When they are being gotten as floating point numbers, yes.
+
+
+&gt;  If so, then
+&gt; there may be observable difference between implementations and it might even
+&gt; revealing of implementation details such as its preferred.
+
+In for a penny....
+
+We already paid this cost when we allowed storing a NaN to store any NaN bit pattern. Since we only have one abstract NaN value at the JavaScript level, and we decided we can&apos;t afford to canonicalize the bit pattern, I don&apos;t see that we have any other choice.
+
+
+&gt; finally, I assume that implementations already do memmove where ever they
+&gt; think they can.  What we are trying to do here is make sure that we don&apos;t
+&gt; unintentionally have spec. languages that says they can&apos;t do that.
+
+Having the spec allow the implementation more freedom does not threaten this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12614</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 17:40:49 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #4)
+&gt; 
+&gt; Perhaps, depending on what you mean by &quot;interesting&quot;. But I don&apos;t understand
+&gt; what you&apos;d be accomplishing. It seems weird to me that
+&gt; 
+&gt; const x = ta[i];
+&gt; ta[j] = x;
+&gt; 
+&gt; means something different than
+&gt; 
+&gt; const x = ta[i];
+&gt; noop();
+&gt; ta[j] = x;
+&gt; 
+
+I&apos;m not talking about JS level code. I&apos;m talking about spec. algorithms like the substeps on step 28 of http://people.mozilla.org/~jorendorff/es6-draft.html#sec-%typedarray%.prototype.set-typedarray-offset which looks like: 
+
+28.	Repeat, while targetByteIndex &lt; limit
+   a.	   Let value be GetValueFromBuffer(srcBuffer, srcByteIndex, srcType).
+   b.	   Let status be SetValueInBuffer (targetBuffer, targetByteIndex, targetType, value).
+   c.	   Set srcByteIndex to srcByteIndex + srcElementSize.
+   d.	Set targetByteIndex to targetByteIndex + targetElementSize.
+
+These aren&apos;t even actual [[Get]] or [[Set]] mop operations but the direct buffer access that are used to implemented [[Get]] and [[Set]].
+
+
+
+
+
+
+
+
+
+&gt; This non-equivalence breaks what are otherwise algebraic properties of the
+&gt; language that code transformation tools (including transpilers) depend on.
+&gt; This non-equivalence would, AFAICT, be an unprecedented special case in the
+&gt; language semantics.
+&gt; 
+&gt; 
+&gt; &gt; I&apos;m not sure what you&apos;re trying to say in your last sentence. Are you saying
+&gt; &gt; that it is important that an implementation is allowed  (but not required)
+&gt; &gt; to change NaN patterns on any such [[Get]]/[[Set]] sequence.
+&gt; 
+&gt; When they are being gotten as floating point numbers, yes.
+&gt; 
+&gt; 
+&gt; &gt;  If so, then
+&gt; &gt; there may be observable difference between implementations and it might even
+&gt; &gt; revealing of implementation details such as its preferred.
+&gt; 
+&gt; In for a penny....
+&gt; 
+&gt; We already paid this cost when we allowed storing a NaN to store any NaN bit
+&gt; pattern. Since we only have one abstract NaN value at the JavaScript level,
+&gt; and we decided we can&apos;t afford to canonicalize the bit pattern, I don&apos;t see
+&gt; that we have any other choice.
+&gt; 
+&gt; 
+&gt; &gt; finally, I assume that implementations already do memmove where ever they
+&gt; &gt; think they can.  What we are trying to do here is make sure that we don&apos;t
+&gt; &gt; unintentionally have spec. languages that says they can&apos;t do that.
+&gt; 
+&gt; Having the spec allow the implementation more freedom does not threaten this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12616</commentid>
+    <comment_count>6</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-13 17:53:41 -0800</bug_when>
+    <thetext>I see. I misunderstood. I withdraw the objection. Looks fine to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12671</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 10:50:48 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+In the end, I decided that the best thing to do was to explicitly specify encoding preserving data transfers in the situations where that makes sense.
+
+the three places are TypedType copyWithin, slice, and set(TypedArray)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13092</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:01 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2566</bug_id>
+          
+          <creation_ts>2014-02-27 00:37:00 -0800</creation_ts>
+          <short_desc>Promise.p.then: defaulting of handlers inconsistent with normal default arguments</short_desc>
+          <delta_ts>2014-05-06 16:46:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7402</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-02-27 00:37:47 -0800</bug_when>
+    <thetext>In 25.4.5.3, Promise.prototype.then, the resolve handler is defaulted with the following steps:
+
+7. If IsCallable(onRejected) is true, then
+   a. Let rejectionHandler be onRejected.
+8. Else,
+   a. Let rejectionHandler be a new Thrower Function (see 25.4.5.3.3).
+
+This implies that not just undefined will be replaced by the default function, but arbitrary arguments, e.g. 65. That seems both weird and inconsistent with the behaviour of default arguments of ordinary JS functions. I think the logic should be:
+
+7. If onRejected is undefined, then
+   a. Let rejectionHandler be a new Thrower Function (see 25.4.5.3.3).
+8. Else, if IsCallable(onRejected) is false, then
+   a. Throw a TypeError
+8&apos;. Else,
+   a. Let rejectionHandler be onRejected.
+
+Similarly for steps 9-10 handling the reject handler.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7414</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-03-03 13:08:48 -0800</bug_when>
+    <thetext>Around seven months ago it was decided to use `JSON.parse`/`JSON.stringify`-style optional functions instead of `Array.prototype.sort`-style:
+
+http://esdiscuss.org/topic/promises-consensus-with-a-terminology#content-10
+
+This feature has been present in all drafts presented since then and has not seen objections until now. It is shipping in Blink and Firefox.
+
+Throwing synchronously as a behavior of `then` would be horrible, in any case; returning a rejected promise is more coherent, as noted in the above thread.
+
+Some previous discussion in Promises/A+ space:
+
+https://github.com/promises-aplus/promises-spec/pull/32#issuecomment-10335630</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7415</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 14:01:32 -0800</bug_when>
+    <thetext>A agree with Andreas on this.  Treating any non-function as a request to use the default is not idiomatic ES, even if JSON.stringify/parse work that way. We should have sanitized those in ES5, but missed it. 
+
+I also don&apos;t agree that the associated error (if any) should be asynchronous. Passing a non-function in those argument positions is an error relating to the  the then call site rather than an error related to the  deferred action:
+
+aPromise.then(new Array, new Map)// oops passing the wrong things to &apos;then&apos;
+            //should be an immediate exception.
+
+There are already other synchronous exceptions: steps 4 and 6 in Rev22 draft of &apos;then&apos;. A wrong argument type exception would be comparable in nature to those.
+
+Finally, I don&apos;t think what FF and Blink is particularly relevant.  In TC39 we try not to let early implementation choices prevent us from spec&apos;ing the right thing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7416</commentid>
+    <comment_count>3</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-03-03 14:04:16 -0800</bug_when>
+    <thetext>The other precedence for IsCallable checks is valueOf, toString, etc. Somewhat different, but still.
+
+Literally the only place where non-callable arguments result in a thrown error is Array.prototype.sort.
+
+Anyway this would break tons of promise code in the wild that is using falsy sentinels (`null` and `false` in particular). So you would have to special-case those two at the very least.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7418</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 14:12:11 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; 
+&gt; Anyway this would break tons of promise code in the wild that is using falsy
+&gt; sentinels (`null` and `false` in particular). So you would have to special-case
+&gt; those two at the very least.
+
+Really?? Do you have examples? (I&apos;m not questioning your assertion, I just curious to see why somebody would do that.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7419</commentid>
+    <comment_count>5</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-03-03 14:15:13 -0800</bug_when>
+    <thetext>Lots of examples on GitHub with https://github.com/search?l=javascript&amp;q=%2B%22.then%28null%22&amp;ref=searchresults&amp;type=Code; hard to narrow down which of those are using native promises, if any.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7420</commentid>
+    <comment_count>6</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-03-03 14:15:58 -0800</bug_when>
+    <thetext>First of all, code like
+
+    p.then(null, handler)
+
+is extremely common in idiomatic promise code.
+
+Second of all, we as TC39 need to respect the fact that promises started out in DOM-land and have already landed in both Chrome and Firefox. Moreover, the January changes are causing genuine hardship for Chrome implementors. I understand that ES6 isn&apos;t completely finalized, but promises are a high-visibility, highly desired feature, and are already implemented in two browsers. It&apos;s well past time for changes that break common development idioms.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7421</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 14:36:34 -0800</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; First of all, code like
+&gt; 
+&gt;     p.then(null, handler)
+&gt; 
+&gt; is extremely common in idiomatic promise code.
+&gt; 
+And that makes sense coming from DOM land (and even arguably in s pure JS context).  But do we really want to enable:
+
+p.then({a:42}, handler);
+
+Do we think anybody ever coded that where it wasn&apos;t a misunderstanding of the then API?  Allowing it is obscuring a bug.
+
+&gt; Second of all, we as TC39 need to respect the fact that promises started out in
+&gt; DOM-land and have already landed in both Chrome and Firefox. Moreover, the
+&gt; January changes are causing genuine hardship for Chrome implementors. I
+&gt; understand that ES6 isn&apos;t completely finalized, but promises are a
+&gt; high-visibility, highly desired feature, and are already implemented in two
+&gt; browsers. It&apos;s well past time for changes that break common development idioms.
+
+Well, any webidl based API definition would throw an exception if an non-callable object was passed to a parameter position that expected callback. And, it was Andreas Rossberg who opened this bug.
+
+Clearly null needs to be accepted. But it is a lot less clear that other numbers, strings, booleans, and non-callable objects should be accepted or that rejecting them would breaking anythng.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7423</commentid>
+    <comment_count>8</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-03-04 03:47:57 -0800</bug_when>
+    <thetext>I agree it&apos;s fine to special-case &apos;null&apos; for legacy compatibility. But as Allen said, it is difficult to imagine any other case that is not actually a bug. (FWIW, I just searched some representative patterns on both GitHub and Google&apos;s internal CodeSearch, and neither did come up with anything.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7442</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-18 12:35:43 -0700</bug_when>
+    <thetext>(In reply to comment #8)
+&gt; I agree it&apos;s fine to special-case &apos;null&apos; for legacy compatibility. But as Allen
+&gt; said, it is difficult to imagine any other case that is not actually a bug.
+&gt; (FWIW, I just searched some representative patterns on both GitHub and Google&apos;s
+&gt; internal CodeSearch, and neither did come up with anything.)
+
+I also did some searching and couldn&apos;t find any on github.  I&apos;m going to only allow undefined and null unless  somebody can find real examples where values other than null or undefined are used as defaulting values.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7444</commentid>
+    <comment_count>10</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-03-18 14:44:33 -0700</bug_when>
+    <thetext>I don&apos;t care much which values are allowed, but I feel strongly that when interfacing with asynchronous APIs, the errors given should be asynchronous. Otherwise, programmers cannot isolate errors reliably in sections of their code using a single catching technique, and they are forced to double-wrap code in .catch() and try { } catch { }.
+
+Using promise APIs to isolate errors is one of their primary use cases. Trying to distinguish between &quot;an error relating to the the then call site rather than an error related to the deferred action&quot; is fruitless: no APIs distinguish this way currently. If you do
+
+try {
+  doSomethingSync(badArg);
+} catch (e) {
+  // isolate e from other parts of my app, allowing them to continue
+}
+
+there is no exception for the fact that badArg is a &quot;call-site error&quot;; it gets caught anyway. Similarly, if you do
+
+doSomethingAsync(badArg).catch(e =&gt; {
+  // isolate e from other parts of my app, allowing them to continue
+});
+
+you would not expect the error to escape your catch and bubble up to other parts of the program, or possibly crash your server if you are using something like Node.js.
+
+---
+
+I am strongly against this consensus-breaking change, as I believe are Mark and Yehuda. It should not be done.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7716</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-14 09:15:53 -0700</bug_when>
+    <thetext>TC39 at its April 2014 meeting agreed to treat all non-callable then arguments as defaulting values
+
+changed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7758</commentid>
+    <comment_count>12</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 15:52:38 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8187</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:46:52 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

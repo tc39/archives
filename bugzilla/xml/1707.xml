@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1707</bug_id>
+          
+          <creation_ts>2013-08-02 11:17:00 -0700</creation_ts>
+          <short_desc>15.13.7.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:22:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4721</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-02 11:17:07 -0700</bug_when>
+    <thetext>15.13.7.1 / both operations / preambles
+    The abstract operation GetViewValue(view, requestIndex, ...
+    The abstract operation SetViewValue(view, requestIndex, ...
+
+Italicize all the parameter names.
+
+---
+
+15.13.7.1 / both operations / step 3
+    If v does not have [[ViewedArrayBuffer]] internal data property, ...
+
+After &quot;have&quot;, insert &quot;a&quot;.
+
+---
+
+15.13.7.1 / both operations / steps 11,17
+    11. ReturnIfAbrupt(isLittleEndean).
+    17. Return the result of ... isLittleEndean).
+
+s|Endean|Endian|
+
+---
+
+15.13.7.1 / both operations / step 16
+    Let bufferIndex be getOffset+viewOffset.
+
+&apos;getOffset&apos; is not defined. Change to &quot;getIndex&quot;?
+
+---
+
+15.13.7.1 / both operations / step 17
+    Return the result of the GetValueFromBuffer(...).
+    Return the result of the SetValueInBuffer(...).
+
+s|of the|of|
+
+---
+
+15.13.7.1 / SetViewValue / step 17
+    SetValueInBuffer(buffer, bufferIndex, type, value isLittleEndean).
+
+After &quot;value&quot;, insert comma.
+
+---
+
+15.13.7.2.1 / step 15
+    Set O’s [[ByteLength]] internal data property to newByteLength.
+
+&apos;newByteLength&apos; is not defined. Change to &apos;viewByteLength&apos;?
+
+---
+
+15.13.7.4.{4-9,12-17}
+
+s|littleEndean|littleEndian|
+
+---
+
+15.13.7.4.{4-9,12-17}
+    If littleEndean is not preset, ...
+
+&quot;preset&quot; is odd. It&apos;s probably a typo for &quot;present&quot;, but I think &quot;passed&quot;
+would be more appropriate for an optional argument.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4744</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-05 16:27:51 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5124</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:59 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

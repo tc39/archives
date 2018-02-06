@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2523</bug_id>
+          
+          <creation_ts>2014-02-11 10:42:00 -0800</creation_ts>
+          <short_desc>13.11.5: suggested restructuring</short_desc>
+          <delta_ts>2014-06-01 20:55:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7244</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-11 10:42:10 -0800</bug_when>
+    <thetext>In 13.11.5 &quot;Runtime Semantics: CaseBlockEvaluation&quot;:
+
+13.11.5 / group 1
+
+I suggest restructuring steps 4 and 5 to:
+
+    Repeat, letting C be each CaseClause in A
+        If /searching/ is *true*, then
+            [steps 4.b - 4.e]
+        else
+            [step 5.b]
+    Return NormalCompletion(/V/).
+
+Reasons:
+
+ -- Currently, steps 4.a and 5.a say &quot;Let C be the next CaseClause in A. ...&quot;
+    I think these are the only points where an algorithm asks for the
+    &apos;next&apos; element in a List, as if the List carries around a cursor.
+    Eliminating them simplifies the implicit data model for Lists.
+
+ -- It&apos;s more obvious that each CaseClause in A is being processed exactly
+    once (modulo an early return via ReturnIfAbrupt).
+
+ -- It makes this algorithm closer in structure to (the first 4 steps of)
+    the algorithm in group 2. (And you could easily make them even closer.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8329</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 09:44:06 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8780</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 20:55:19 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

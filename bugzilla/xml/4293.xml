@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4293</bug_id>
+          
+          <creation_ts>2015-04-16 10:38:00 -0700</creation_ts>
+          <short_desc>12.1.1 ToDateTimeOptions: Typo + editorial</short_desc>
+          <delta_ts>2015-04-29 09:54:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14205</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 10:38:51 -0700</bug_when>
+    <thetext>12.1.1 ToDateTimeOptions
+
+Step 3: Typo &quot;opts&quot; -&gt; &quot;options&quot;
+Step 5.a.iv: Omit &quot;then&quot;
+Step 6.a.iv: Omit &quot;then&quot;
+
+Also: There are extra steps i. and ii. before and iii. and iv. after the algorithm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14208</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 11:46:51 -0700</bug_when>
+    <thetext>Unfortunately, I&apos;ve already submitted 2nd edition to Ecma. I&apos;ve just emailed Allen to find out what the hard deadline is, maybe I have time to fix all of these.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14209</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 11:57:41 -0700</bug_when>
+    <thetext>&gt; Step 3: Typo &quot;opts&quot; -&gt; &quot;options&quot;
+
+Fixed. 
+
+&gt; Step 5.a.iv: Omit &quot;then&quot;
+&gt; Step 6.a.iv: Omit &quot;then&quot;
+
+Fixed.
+
+&gt; Also: There are extra steps i. and ii. before and iii. and iv. after the algorithm.
+
+
+Fixed. 
+
+Word seems to have re-numbered many lists and added phantom items everywhere.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14250</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:01 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #1)
+&gt; Unfortunately, I&apos;ve already submitted 2nd edition to Ecma. I&apos;ve just emailed
+&gt; Allen to find out what the hard deadline is, maybe I have time to fix all of
+&gt; these.
+
+Hmm okay. I just did a real quick review of the rest of the spec, so some more bug reports will follow.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14268</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 19:20:55 -0700</bug_when>
+    <thetext>I appreciate your help, but I&apos;m being put in a very tight position now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14335</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 09:09:48 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #4)
+&gt; I appreciate your help, but I&apos;m being put in a very tight position now.
+
+Sorry about these last minute reviews, I thought ECMA-402 was published (*) after ES2015. 
+
+(*) or sent to ECMA for review? I don&apos;t know the exact procedure for ECMA specifications.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14342</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-29 09:54:59 -0700</bug_when>
+    <thetext>Don&apos;t be sorry, I was just panicking. I appreciate all the work you put in to review and file these bugs. In the future, I will make sure I have a better idea of when the submission date is, and I will make sure you&apos;re also aware.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

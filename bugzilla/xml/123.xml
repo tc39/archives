@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>123</bug_id>
+          
+          <creation_ts>2011-07-08 08:37:00 -0700</creation_ts>
+          <short_desc>Spec is confusing on what constitutes unicode whitespace</short_desc>
+          <delta_ts>2015-10-14 17:33:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>156</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>285</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-08 08:37:51 -0700</bug_when>
+    <thetext>Section 7.2 of ES5.1 contains Table 2 which lists out all valid whitespace characters.  Note that the unicode character, \u0085, does not fall under any categories of this table. \u0085 is &quot;NEXT LINE&quot; and is referred to generically as a &quot;line break&quot; character in the Unicode 3.0 standard - see ftp://ftp.unicode.org/Public/3.0-Update/LineBreak-5.txt.  Also, note that Unicode 3.0 is the version of the standard that ES5.1 &apos;lines&apos; up with as far as character encodings are concerned.
+
+Section 7.3 of ES5.1 contains Table 3 which lists out all valid line terminator characters.  &quot;NEXT LINE&quot; does not full under any of the categories of this table either.  7.3 then goes on to state that:
+    Only the characters in Table 3 are treated as line 
+    terminators. Other new line or line breaking characters 
+    are treated as white space but not as line terminators.
+
+
+Based on this info, a reasonable person would infer that \u0085, a &quot;line breaking&quot; character as defined by Unicode 3.0, is treated as white space by conforming implementations.  In fact, the JavaScript community documented this exactly at http://en.wikipedia.org/wiki/Newline:
+    ECMAScript[5] accepts LS and PS as line breaks, but 
+    considers U+0085 (NEL) white space, not a line break.
+Also, this confused the author of several test262 tests who had assumed \u0085 was considered white space.
+
+
+ES5.2/ES6 should clarify this situation by changing the text in section 7.3 to be something like:
+    Only the characters in Table 3 are treated as line 
+    terminators. Other new line or line breaking characters 
+    are treated as white space but not as line terminators.  Note 
+    however that being treated as white space in this case is not
+    the same as being added to Table 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14801</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-14 17:33:28 -0700</bug_when>
+    <thetext>It looks like this text got cleaned up in ES2015. I find the current text to be more than acceptable.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4000</bug_id>
+          
+          <creation_ts>2015-02-18 07:22:00 -0800</creation_ts>
+          <short_desc>25.2 GeneratorFunction Objects</short_desc>
+          <delta_ts>2015-03-04 18:58:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12898</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-02-18 07:22:03 -0800</bug_when>
+    <thetext>In the informal diagram:
+
+* Move @@iterator() from (Generator).prototype to (IteratorPrototype)
+* Suggestion: REPLACE function *g1() {yield} WITH function* g1() {}
+* Object name: REPLACE new g1() WITH g1()</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12902</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 08:24:30 -0800</bug_when>
+    <thetext>@@iterator has been moved
+
+I think the &quot;yield&quot; is ok an a reinforcement that this is a generator function
+
+have new on the g1 instance is consistent (other than the missing () ) with what is shown for f. It seems like a good re-enforcement that it is an instance.
+
+I think I&apos;ll keep the new, but drop the ()</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12954</commentid>
+    <comment_count>2</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-02-18 16:55:23 -0800</bug_when>
+    <thetext>I find it interesting that:
+
+1. a generator function is so much like a constructor function,
+2. but not invoked via `new`.
+
+#1 is nicely explained diagrammatically, via the `instanceof` line and because g1 has a prototype. I would explain #2 by showing that g1 is invoked without `new`, that its invocation looks like a function call. You are showing something that is not legal JavaScript and I suspect that that may confuse readers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12968</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 09:19:22 -0800</bug_when>
+    <thetext>Generator functions are new-able. See http://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions-runtime-semantics-evaluatebody
+
+BTW, the main purpose of diagram is to help implementors (and others) understand how this is all wired-up</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12969</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 09:21:37 -0800</bug_when>
+    <thetext>(In reply to Axel Rauschmayer from comment #2)
+
+BTW, feel free to borrow that diagram or a variation of it if you&apos;re so inclined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13189</commentid>
+    <comment_count>5</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-02-20 07:48:02 -0800</bug_when>
+    <thetext>“Generator functions are new-able.”
+Ah, wasn’t aware. That nullifies my objection.
+
+“feel free to borrow that diagram”
+Thanks! Working on it, first try: https://twitter.com/rauschma/status/568063153755594752</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13320</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 14:16:30 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13504</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:16 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

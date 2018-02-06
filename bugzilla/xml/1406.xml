@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1406</bug_id>
+          
+          <creation_ts>2013-04-10 08:19:00 -0700</creation_ts>
+          <short_desc>15.14.1.1, 15.15.1.1, 15.16.1.1: Collection objects require &quot;new&quot;</short_desc>
+          <delta_ts>2013-08-07 13:56:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="10"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3587</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-10 08:19:09 -0700</bug_when>
+    <thetext>See step 1-2 of 15.14.1.1:
+&gt; 1.  Let map be the this value.
+&gt; 2.  If Type(map) is not Object then, throw a TypeError exception.
+
+That means `var map = Map()` throws a TypeError instead of creating a new Map object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3845</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 08:42:02 -0700</bug_when>
+    <thetext>needs TC39 resolution.  Do we want Map/Set/Weakmap to act as factory functions?
+
+As a general policy do we want to encourage that usage?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4794</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-07 12:08:03 -0700</bug_when>
+    <thetext>Resolve as INVALID or WONTFIX based on bug 1732?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4802</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-07 13:56:20 -0700</bug_when>
+    <thetext>see comment 2</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

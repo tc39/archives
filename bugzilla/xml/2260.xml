@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2260</bug_id>
+          
+          <creation_ts>2013-11-12 18:42:00 -0800</creation_ts>
+          <short_desc>9.1.10: mis-labelled algorithm steps</short_desc>
+          <delta_ts>2014-01-27 10:03:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6695</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-12 18:42:15 -0800</bug_when>
+    <thetext>In 9.1.10 &quot;[[Delete]] (P)&quot;,
+steps 4-7 say:
+    4. If desc.[[Configurable]] is true, then
+    5. Remove the own property with name P from O.
+    6. Return true.
+    7. Return false.
+
+I think steps 5 and 6 should be indented and labelled &apos;a&apos; and &apos;b&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6716</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-13 16:37:31 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7054</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:03:24 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

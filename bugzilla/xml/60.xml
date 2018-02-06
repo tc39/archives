@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>60</bug_id>
+          
+          <creation_ts>2011-03-10 02:51:00 -0800</creation_ts>
+          <short_desc>Tests S15.10.2.12_A1_T1 &amp; S15.10.2.12_A2_T1 are incorrect wrt BOM handling.</short_desc>
+          <delta_ts>2012-01-13 13:31:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>barraclough</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>138</commentid>
+    <comment_count>0</comment_count>
+    <who name="">barraclough</who>
+    <bug_when>2011-03-10 02:51:04 -0800</bug_when>
+    <thetext>Character class \s should match BOM (\ufeff).
+(see: http://code.google.com/p/sputniktests/issues/detail?id=34)
+
+
+The \s character class in regular expressions should match the BOM marker, however the test S15.10.2.12_A1_T1.js generates the error:
+    &quot;#63: Error matching character class \s between character fc00 and ffff&quot;
+
+S15.10.2.12_A2_T1.js (testing \S) contains a mirroring bug.
+
+
+From the spec, section 15.10.2.12 CharacterClassEscape contains:
+
+The production CharacterClassEscape :: s evaluates by returning the set of characters containing the
+characters that are on the right-hand side of the WhiteSpace (7.2) or LineTerminator (7.3) productions.
+
+Table 2 in section 7.2 of the ECMAScript 5 spec contains:
+\uFEFF Byte Order Mark &lt;BOM&gt;
+
+
+(I believe this is a change between ES3 &amp; ES5 - the sputnik test was correct with respect to ES3, but the definition of WhiteSpace changed).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>172</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-23 17:58:37 -0700</bug_when>
+    <thetext>Great spot!  Disabled these two test cases on the live website about half an hour ago.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>601</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-13 13:31:59 -0800</bug_when>
+    <thetext>Added the following to the &apos;i63&apos; for-loops:
+  if (j===65279) { continue;} //Ignore BOM
+
+and extended the test files to include explicit BOM testing:
+    var i64 = String.fromCharCode(65279);
+    if (i64.replace(/\s/g, &quot;&quot;) !== &quot;&quot;) {
+      $ERROR(&quot;#64: Error matching character class \s for BOM (feff)&quot;);
+    }</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

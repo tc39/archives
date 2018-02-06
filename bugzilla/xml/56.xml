@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>56</bug_id>
+          
+          <creation_ts>2011-03-07 13:20:00 -0800</creation_ts>
+          <short_desc>Coverage: Need academic-like review of existing test coverage versus ES5.1</short_desc>
+          <delta_ts>2012-01-13 09:07:36 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Lowest</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>bruant.d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>118</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:20:36 -0800</bug_when>
+    <thetext>To be thorough, we could verify every line of every algorithm in ES5 is indeed hit by one or more test cases.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>119</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:22:59 -0800</bug_when>
+    <thetext>As such an effort would require a tremendous test effort, it&apos;s debatable whether our limited resources should be spent on this.  Perhaps instead it&apos;s enough to verify we have coverage for each and every &apos;section&apos; (e.g., 11.1.1) of ES5.1.
+
+As an extremely wild estimate, I&apos;d imagine a couple of man-months of time would be needed to rigorously verify algorithm coverage versus several days for simple &apos;section&apos; coverage.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>139</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-10 14:37:34 -0800</bug_when>
+    <thetext>Another approach could be to test coverage of the test suite against ES5.1 implementations. This would require access to the implementation code. 
+But SpiderMonkey is open source, so is the default WebKit JS engine, so is BESEN (http://besen.sourceforge.net/ not sure there exists coverage tools for Object Pascal though). 
+Maybe that it wouldn&apos;t be that hard to obtain cooperation of closed-source implementors to provide feedback on what aspects of their implementation isn&apos;t covered by the test suite and how in could be improved to do so.
+
+I think that if several implementations passes all tests and the test suite covers entirely all implementations, it should mean with decent probability that the test suite is complete is very high.
+
+I&apos;m aware that there is some flaw in my point, but there are several ES5 implementations out there. After checking on Wikipedia, the most popular are written in C/C++. For such programs, there are tools such as gcov (http://gcc.gnu.org/onlinedocs/gcc/Gcov.html) which test coverage. Let&apos;s just test the different implementations against such tools, see for each what part isn&apos;t covered and see if the holes can be covered by other ES tests or if the hole is implementation specific.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>143</commentid>
+    <comment_count>3</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-11 15:30:43 -0800</bug_when>
+    <thetext>I&apos;ve been thinking more of my approach.
+
+One of the issue with the spec is that it isn&apos;t in any formal language. As you note, it makes it almost impossible to review each step of every algorithm and note on the spec to make sure the test suite covers everything.
+On the other hands, ES5.1 implementations are written in a formal language (C, C++ most of the time). As I said earlier, there are tools that can test program coverage against a test suite. 
+
+The only remaining issue I see with testing implementation coverage instead of the spec itself is that implementation could be incomplete. We could consider this issue as minor because:
+- All implementors (especially web browsers) are &quot;motivated&quot; in providing full implementation to their users. 
+- The more implementation we test coverage on, the less likely they are to all be incomplete toward the exact same aspect of the spec.
+
+I have never used coverage tools at a such scale, but they might also be able to provide information on the test suite, like if some test always test the same things, maybe they&apos;re duplicated. Implementors are going to check test failures, so these will be reviewed, but no one is going to manually review test that passes. The coverage tools could help to provide information on these.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>145</commentid>
+    <comment_count>4</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-12 07:21:17 -0800</bug_when>
+    <thetext>Filed https://bugzilla.mozilla.org/show_bug.cgi?id=641214 in order to see what can be done to test Mozilla JS engine against test262 test suite.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>542</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-05 14:28:26 -0800</bug_when>
+    <thetext>*** Bug 55 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

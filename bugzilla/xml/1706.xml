@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1706</bug_id>
+          
+          <creation_ts>2013-08-02 11:16:00 -0700</creation_ts>
+          <short_desc>15.13.6.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:23:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4720</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-02 11:16:03 -0700</bug_when>
+    <thetext>15.13.6.1.1 / step 2
+
+Empty step.
+
+---
+
+15.13.6.1.1 / step 16
+    Let status be the result of SetArrayBufferData(data, byteLength)5.
+
+Delete spurious &quot;5&quot;.
+
+---
+
+15.13.6.1.2 / step 14
+    Let elementSize be the Size Element value in Table 36 constructorName.
+
+After &quot;36&quot;, insert &quot;for&quot;
+
+---
+
+15.13.6.2.3 / step 5
+    If mapfn is undefined, then let mapping be true.
+
+s|true|false|, I&apos;m pretty sure.
+
+---
+
+15.13.6.2.3 / step 9.a
+    Let iterator be the result of performing GetIterator(obj).
+
+&apos;obj&apos; is not defined. Change to &apos;items&apos;?
+
+---
+
+15.13.6.2.3 / step 9.l
+    Asert: values is now an empty List.
+
+s|Asert|Assert|
+
+---
+
+15.13.6.3.6 / step 9
+    ReturnIfAbrupt(targetOffset).
+
+In &quot;targetOffset&quot;, the middle &quot;t&quot; is upright. Change it to italic.
+
+---
+
+15.13.6.5 / para 2
+    ... whose String value is the the constructor name ...
+
+Delete one &quot;the&quot;.
+
+---
+
+15.13.6.7 / para 1
+    TypedArray instances are exotic Integer Indexed Delegation objects.
+
+s|exotic Integer Indexed Delegation objects|Integer Indexed exotic objects| ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4745</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-05 16:38:35 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5188</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:37 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

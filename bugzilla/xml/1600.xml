@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1600</bug_id>
+          
+          <creation_ts>2013-07-28 02:02:00 -0700</creation_ts>
+          <short_desc>test ch15/15.2/15.2.3/15.2.3.2/15.2.3.2-2-30.js assumes Object.getPrototypeOf returns an object</short_desc>
+          <delta_ts>2013-08-07 06:47:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Alan Schmitt">alan.schmitt</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>bruant.d</cc>
+    
+    <cc>bugs.ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4572</commentid>
+    <comment_count>0</comment_count>
+    <who name="Alan Schmitt">alan.schmitt</who>
+    <bug_when>2013-07-28 02:02:25 -0700</bug_when>
+    <thetext>Test ch15/15.2/15.2.3/15.2.3.2/15.2.3.2-2-30.js tests Object.getPrototypeOf for the global object. However, it checks the returned prototype by calling isPrototypeOf on it, thus failing if it does not define it (for instance if the prototype is null, or if does not derive from the object prototype object).
+
+Here is a suggested change for the test (credits to Paul Ruizendaal who suggested it on the list):
+
+function testcase() {
+  var proto = Object.getPrototypeOf(fnGlobalObject());
+  return proto===null || Object.prototype.isPrototypeOf.call(proto, fnGlobalObject());
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4727</commentid>
+    <comment_count>1</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2013-08-03 09:48:34 -0700</bug_when>
+    <thetext>I worry the global object having Object.prototype *somewhere* in its prototype chain might be required for the web.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4728</commentid>
+    <comment_count>2</comment_count>
+    <who name="Alan Schmitt">alan.schmitt</who>
+    <bug_when>2013-08-03 13:22:37 -0700</bug_when>
+    <thetext>Currently, the specification says the following for the global object (15.1):
+
+  The values of the [[Prototype]] and [[Class]] internal properties of the global object are implementation- dependent.
+
+If constraints are assumed by web browsers, the specification may need to be changed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4792</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Ficarra">bugs.ecmascript</who>
+    <bug_when>2013-08-07 06:47:30 -0700</bug_when>
+    <thetext>Regardless of whether we end up changing the spec requirement for the global object&apos;s [[Prototype]], this test should be changed. Here&apos;s my suggestion:
+
+function testcase() {
+  var proto = {};
+  return proto === Object.getPrototypeOf(Object.create(proto)) &amp;&amp; null === Object.getPrototypeOf(Object.create(null));
+}</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3226</bug_id>
+          
+          <creation_ts>2014-09-16 00:22:00 -0700</creation_ts>
+          <short_desc>8.1.*: HomeObject: Empty -&gt; undefined?</short_desc>
+          <delta_ts>2014-10-14 15:17:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10192</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-09-16 00:22:03 -0700</bug_when>
+    <thetext>It appears that a Function Environment Record&apos;s HomeObject is either an Object or the ad hoc value &apos;Empty&apos;. However:
+
+(1) 8.1.1.3 / para 2 says that the default value for HomeObject is *undefined*.
+
+(2) There doesn&apos;t seem to be a particular need to introduce the value &apos;Empty&apos;.
+
+(3) Given the precedent of Undefined/undefined and Null/null, there&apos;s a temptation to think that &apos;Empty&apos; is the name of the type whose only value is &apos;empty&apos;.
+
+So I suggest changing occurrences of &apos;Empty&apos; to *undefined* in:
+  8.1.1.3 / Table 17
+  8.1.1.3.2 / step 1
+  8.1.1.3.4 / step 2
+  8.1.2.4 / step 6.a
+
+(And if not, I think you have to at least fix point 1.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10221</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-21 10:34:19 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+changed to use undefined</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10397</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:46 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

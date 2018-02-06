@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4246</bug_id>
+          
+          <creation_ts>2015-04-02 13:34:00 -0700</creation_ts>
+          <short_desc>15.2.1.15.3 ResolveExport: overzealous assert for ambiguous StarExport resolution</short_desc>
+          <delta_ts>2015-04-03 12:35:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Adam Klein">adamk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14032</commentid>
+    <comment_count>0</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 13:34:30 -0700</bug_when>
+    <thetext>In step 10.f.ii of ResolveExport, the following Assert appears:
+
+&quot;Assert: there is more than one * import that includes the requested name.&quot;
+
+yet it not until the next step (10.f.iii) that we discover whether or not the assertion holds:
+
+&quot;If resolution.[[module]] and starResolution.[[module]] are not the same Module Record or SameValue(resolution.[[exportName]], starResolution.[[exportName]]) is false, return &apos;ambiguous&apos;.&quot;
+
+At this point, it&apos;s entirely possible that resolution === starResolution.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14033</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 13:53:42 -0700</bug_when>
+    <thetext>I think the Asset will be fine, i9f I just move 10.f.11 and iii into an else clause for 10.f.i
+
+The current assert is really only confusing  immediately after the first resolution is found</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14034</commentid>
+    <comment_count>2</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 13:56:32 -0700</bug_when>
+    <thetext>Yes, I agree that that fix will work.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14035</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 14:29:33 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14109</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:40 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

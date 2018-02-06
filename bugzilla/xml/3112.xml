@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3112</bug_id>
+          
+          <creation_ts>2014-08-08 04:27:00 -0700</creation_ts>
+          <short_desc>Define behavior of `Date.UTC` when called with fewer than two arguments</short_desc>
+          <delta_ts>2015-03-16 14:31:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugzilla.mozilla.org/show_bug.cgi?id=1050755</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9726</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-08 04:27:53 -0700</bug_when>
+    <thetext>Section 20.3.3.4 on `Date.UTC` says:
+
+&gt; When the UTC function is called with fewer than two arguments, the behaviour is implementation-dependent. 
+
+Please define this behavior rather than leaving it up to implementors. This would improve interoperability.
+
+Web reality seems to except a return value of `NaN` in this case. http://javascript.spec.whatwg.org/#date.utc
+
+Results for:
+
+    [ Date.UTC(), Date.UTC(1) ]
+
+Safari/JavaScriptCore: [ NaN, NaN ]
+Chrome/Opera/V8: [ NaN, NaN ]
+Safari/JavaScriptCore: [ NaN, NaN ]
+Old Opera/Carakan: [ NaN, NaN ]
+
+Only Firefox returns a non-`NaN` value: [ -2208988800000, -2177452800000 ]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9727</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-08 04:47:03 -0700</bug_when>
+    <thetext>IE11: [-2208988800000, -2177452800000]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9731</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-08 07:55:06 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #0)
+&gt; Section 20.3.3.4 on `Date.UTC` says:
+&gt; 
+&gt; &gt; When the UTC function is called with fewer than two arguments, the behaviour is implementation-dependent. 
+&gt; 
+&gt; Please define this behavior rather than leaving it up to implementors. This
+&gt; would improve interoperability.
+&gt; 
+&gt; Web reality seems to except a return value of `NaN` in this case.
+&gt; http://javascript.spec.whatwg.org/#date.utc
+&gt; 
+&gt; Results for:
+&gt; 
+&gt;     [ Date.UTC(), Date.UTC(1) ]
+&gt; 
+&gt; Safari/JavaScriptCore: [ NaN, NaN ]
+&gt; Chrome/Opera/V8: [ NaN, NaN ]
+&gt; Safari/JavaScriptCore: [ NaN, NaN ]
+&gt; Old Opera/Carakan: [ NaN, NaN ]
+&gt; 
+&gt; Only Firefox returns a non-`NaN` value: [ -2208988800000, -2177452800000 ]
+
+The above (plus the IE) result says to me that &quot;web reality&quot; is that the result is implementation defined, just like the spec. says.
+
+We could consider changing the spec if implementations are willing to go along, but it should be a principle changed.  Why shouldn&apos;t Date.UTC produce a valid timevalue when called with fewer than one arguments?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12205</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 18:02:55 -0800</bug_when>
+    <thetext>deferring to ES7 where we&apos;ll see if anybody wants to champion this</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

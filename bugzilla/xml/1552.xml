@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1552</bug_id>
+          
+          <creation_ts>2013-06-07 12:39:00 -0700</creation_ts>
+          <short_desc>English typo in Tests S11.8.6_A5_T2 and S11.8.6_A5_T1.</short_desc>
+          <delta_ts>2014-07-10 13:45:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Martin Bodin">martin.bodin</reporter>
+          <assigned_to name="Prashanth Srinivasan">prsriniv</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>jaimelynschatz</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4158</commentid>
+    <comment_count>0</comment_count>
+    <who name="Martin Bodin">martin.bodin</who>
+    <bug_when>2013-06-07 12:39:13 -0700</bug_when>
+    <thetext>Hi,
+This is very minor, but I’ve read several time the message “poit of view” instead of “point of view” in the Tests S11.8.6_A5_T2 and S11.8.6_A5_T1.
+I thought it might be reported. :)
+Martin.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7001</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jaime">jaimelynschatz</who>
+    <bug_when>2014-01-26 14:58:19 -0800</bug_when>
+    <thetext>pull request submitted to Github.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

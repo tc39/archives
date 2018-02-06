@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>325</bug_id>
+          
+          <creation_ts>2012-03-28 16:57:00 -0700</creation_ts>
+          <short_desc>Unicode digits is not well-specified</short_desc>
+          <delta_ts>2012-10-16 15:13:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roozbeh Pournader">roozbeh</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>845</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roozbeh Pournader">roozbeh</who>
+    <bug_when>2012-03-28 16:57:57 -0700</bug_when>
+    <thetext>The spec says &quot;... must not contain digits as specified by the Unicode Standard&quot; in a couple of places. But it&apos;s not clear what that means. Unicode has various number-like properties, and it&apos;s not clear which one is meant. Examples of possible meanings:
+
+Numeric_Type = Decimal (the tightest definition, only contains simple digits)
+
+Numeric_Type = Digit | Decimal (includes dingbat, superscript, circled, parenthesized, etc digits, together with digits from historical numbering systems without a zero)
+
+Numeric_Type = Digit | Decimal | Numeric (includes anything with a number value, from vulgar fractions to non-decimal systems to the CJK ideograph for one thousand)
+
+For examples of characters, see:
+http://www.unicode.org/Public/UNIDATA/extracted/DerivedNumericType.txt
+
+We need to make clear what we mean here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>875</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-04-29 18:48:22 -0700</bug_when>
+    <thetext>The intent here is to provide a testable guarantee for the digits occurring in formatted numeric strings. Such a guarantee can only be provided for those numbering systems that strictly follow the algorithms in the spec, not for those that are implementation dependent. Most of the numbering systems that follow the spec use digits in the General Category “Number, decimal digit”, so I&apos;m changing the spec to disallow those digits in pattern strings. The &quot;hanidec&quot; numbering system uses characters in the General Category &quot;Letter, other&quot; as digits, so it won’t be covered by the guarantee. Also, a number of currency names and codes contain digits, so currency formats can&apos;t be covered by the guarantee either.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

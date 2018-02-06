@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4415</bug_id>
+          
+          <creation_ts>2015-06-23 01:27:00 -0700</creation_ts>
+          <short_desc>Extraneous text near some cross-references in the HTML rendering</short_desc>
+          <delta_ts>2015-07-27 10:16:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+    
+    <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14529</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-06-23 01:27:46 -0700</bug_when>
+    <thetext>In the HTML version of the spec, located at http://www.ecma-international.org/ecma-262/6.0/ , there are five cross-references preceded by garbage text of the form:
+
+  { REF _Ref.... }
+
+where &quot;....&quot; is a sequence of digits followed by a sequence of some tokens separated by spaces.
+
+This can probably be fixed at the level of the HTML generator. See:
+
+https://github.com/jorendorff/es-spec-html/pull/88#issuecomment-112898093</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14566</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-27 10:16:07 -0700</bug_when>
+    <thetext>Manually fixed in Jun 23, 2015 update to the ECMA distribution copy.
+
+The HTML generator still needs to be fixed to not reintroduce this problem for any future revisions that it generates.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>691</bug_id>
+          
+          <creation_ts>2012-10-02 14:36:00 -0700</creation_ts>
+          <short_desc>Support &quot;kr&quot;/reorder property in Collator</short_desc>
+          <delta_ts>2012-12-05 15:25:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>addison</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1811</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-02 14:36:06 -0700</bug_when>
+    <thetext>LDML 21.0.1 added a &quot;kr&quot;/reorder property for collation. This key is followed by a sequence of subtags, something that the resolveLocale abstract operation is
+currently not prepared to handle.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2993</commentid>
+    <comment_count>1</comment_count>
+    <who name="Addison Phillips">addison</who>
+    <bug_when>2012-12-05 15:25:16 -0800</bug_when>
+    <thetext>Script-reordering in the Collator is important for our Web applications as we do a lot of multilingual content sorting and would prefer to do it using the browser on regular JSON structured data (than having to do it server side). The reordering allows us to present a user experience in which local-language content is pull to the front of the list, which is unlike what the untailored UCA-based collator returns.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

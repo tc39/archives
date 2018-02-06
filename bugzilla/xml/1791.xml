@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1791</bug_id>
+          
+          <creation_ts>2013-08-19 14:38:00 -0700</creation_ts>
+          <short_desc>Need to be able to indicate no preference (other than to include) a component of date and time format</short_desc>
+          <delta_ts>2013-08-19 14:38:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>eric.albright</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4978</commentid>
+    <comment_count>0</comment_count>
+    <who name="">eric.albright</who>
+    <bug_when>2013-08-19 14:38:30 -0700</bug_when>
+    <thetext>Suggest adding &quot;default&quot; as a valid value for each of the components of date and time formats:
+
+Property      Values
+weekday       &quot;default&quot;, &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;
+era           &quot;default&quot;, &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;
+year          &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;
+month         &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;, &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;
+day           &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;
+hour          &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;
+minute        &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;
+second        &quot;default&quot;, &quot;2-digit&quot;, &quot;numeric&quot;
+timeZoneName  &quot;default&quot;, &quot;short&quot;, &quot;long&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2694</bug_id>
+          
+          <creation_ts>2014-04-19 16:20:00 -0700</creation_ts>
+          <short_desc>chapter 11: misc editorial</short_desc>
+          <delta_ts>2014-04-29 22:23:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7841</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:20:14 -0700</bug_when>
+    <thetext>----------------------------------------
+In 11.6 &quot;Names and Keywords&quot;:
+
+{1}
+11.6 / para 1:
+/ReservedWord/ is is an enumerated subset of /IdentifierName/.
+    Delete extra &quot;is&quot;
+
+{2}
+11.6 / Syntax / prod 4:
+UnicodeIDStart :: any Unicode code point with the Unicode property &quot;ID_Start&quot;.
+    Delete final dot
+
+----------------------------------------
+In 11.6.1.1 &quot;Static Semantics: Early Errors&quot;:
+
+{3}
+11.6.1.1 / group 1 / production:
+IdentifierStart :: \ UnicodeEscapeSequence
+    &apos;IdentifierStart&apos; is in sans-serif italic, should be in serif italic.
+
+{4}
+11.6.1.1 / group 2 / production:
+IdentifierPart :: \ UnicodeEscapeSequence
+    &apos;IdentifierPart&apos; is in sans-serif italic, should be in serif italic.
+
+----------------------------------------
+In 11.6.1.2 &quot;Static Semantics: StringValue&quot;:
+
+{5}
+11.6.1.2 / header:
+Static Semantics: StringValue
+    &quot;StringValue&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 11.8.4.2 &quot;Static Semantics: StringValue&quot;:
+
+{6}
+11.8.4.2 / header:
+Static Semantics: StringValue
+    &quot;StringValue is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 11.8.4.3 &quot;Static Semantics: SV&apos;s and CV&apos;s&quot;:
+
+{7}
+11.8.4.3 / header:
+Static Semantics: SV&apos;s and CV&apos;s
+    &quot;SV&apos;s and CV&apos;s&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 11.8.5.2 &quot;Static Semantics: BodyText&quot;:
+
+{8}
+11.8.5.2 / header:
+Static Semantics: BodyText
+    &quot;BodyText&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 11.8.5.3 &quot;Static Semantics: FlagText&quot;:
+
+{9}
+11.8.5.3 / header:
+Static Semantics: FlagText
+    &quot;FlagText&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 11.8.6.1 &quot;Static Semantics: TV&apos;s and TRV&apos;s&quot;:
+
+{10}
+11.8.6.1 / header:
+Static Semantics: TV&apos;s and TRV&apos;s
+    &quot;TV&apos;s and TRV&apos;s&quot; is serif italic, should be sans-serif upright.
+
+{11}
+11.8.6.1 / ul 1 / item 36 (11 from the end):
+The TRV of
+UnicodeEscapeSequence :: u HexDigit HexDigit HexDigit HexDigit
+    That production doesn&apos;t exist, it goes through Hex4Digit now.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7885</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-22 16:02:27 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7961</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 10:56:57 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8008</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:23:01 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

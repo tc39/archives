@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2413</bug_id>
+          
+          <creation_ts>2014-01-10 13:36:00 -0800</creation_ts>
+          <short_desc>Required &quot;new&quot; to create DataView()</short_desc>
+          <delta_ts>2014-02-15 13:48:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>sureshja</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>sureshja</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6965</commentid>
+    <comment_count>0</comment_count>
+    <who name="">sureshja</who>
+    <bug_when>2014-01-10 13:36:31 -0800</bug_when>
+    <thetext>According to Sep2013 draft change notes (http://esdiscuss.org/topic/a-new-es6-draft-is-available) “new” is required to create DataView(). However the spec appears to still say (https://people.mozilla.org/~jorendorff/es6-draft.html#sec-dataview-constructor) DataView can be called without “new”. 
+
+Is this change still not added to spec ? Probably ArrayBuffer and other TypedArray types also should be inline with DataView.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6966</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-10 14:18:15 -0800</bug_when>
+    <thetext>(In reply to comment #0)
+
+&gt; 
+&gt; Is this change still not added to spec ? Probably ArrayBuffer and other
+&gt; TypedArray types also should be inline with DataView.
+
+See http://people.mozilla.org/~jorendorff/es6-draft.html#sec-dataview-buffer-byteoffset-bytelength step 2.  
+
+A call like DataView(buff) will have undefined as its this value which throws in step 2.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

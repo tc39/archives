@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2567</bug_id>
+          
+          <creation_ts>2014-02-27 14:13:00 -0800</creation_ts>
+          <short_desc>9.5.*: Some proxy trap implementations use incorrect check for revocation</short_desc>
+          <delta_ts>2014-04-06 11:30:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Eric Faust">efaustbmo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7403</commentid>
+    <comment_count>0</comment_count>
+    <who name="Eric Faust">efaustbmo</who>
+    <bug_when>2014-02-27 14:13:23 -0800</bug_when>
+    <thetext>The header in 9.5 reads:
+
+&quot;When a proxy is revoked, its [[ProxyHander]] and [[ProxyTarget]] internal slots are set to null causing subsequent invocations of internal methods on that proxy obeject to throw a TypeError exception.&quot;
+
+and most of the proxy traps in 9.5.* have a check against if |handler| is |null|, but a few use a check against |undefined|. This seems like the check that implements revocation, and is just a bug in the specification. These checks should check against |null| instead.
+
+The effected operations are:
+
+9.5.4  [[PreventExtensions]]
+9.5.9  [[Set]]
+9.5.12 [[OwnPropertyKeys]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7413</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 12:52:43 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7558</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:25 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

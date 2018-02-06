@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2785</bug_id>
+          
+          <creation_ts>2014-05-01 08:49:00 -0700</creation_ts>
+          <short_desc>26.2.3.7.4 Reflect.Realm.prototype.nonEval: Typo &quot;CreateListFromArray&quot; -&gt; &quot;CreateListFromArrayLike&quot;</short_desc>
+          <delta_ts>2014-06-16 14:53:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>till</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8079</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 08:49:15 -0700</bug_when>
+    <thetext>26.1.1  Reflect.apply, step 4
+26.1.2  Reflect.construct, step 4
+26.2.3.7.4 Reflect.Realm.prototype.nonEval, step 8
+
+Change &quot;CreateListFromArray&quot; to &quot;CreateListFromArrayLike&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8129</commentid>
+    <comment_count>1</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 11:31:20 -0700</bug_when>
+    <thetext>First two of these are gone entirely.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8241</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 09:28:36 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8980</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:51:11 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8981</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:53:12 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

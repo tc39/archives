@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2381</bug_id>
+          
+          <creation_ts>2013-12-11 01:34:00 -0800</creation_ts>
+          <short_desc>Fix &quot;It may have an exponent of ten&quot;</short_desc>
+          <delta_ts>2013-12-11 01:34:39 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Martin Dürst">duerst</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6923</commentid>
+    <comment_count>0</comment_count>
+    <who name="Martin Dürst">duerst</who>
+    <bug_when>2013-12-11 01:34:39 -0800</bug_when>
+    <thetext>The wording &quot;It may have an exponent of ten&quot; in Section 8 is highly misleading. I interpreted this as e.g. something like the number 1.1 (mantissa in technical terms) having an exponent of 10, and thus a value of 1.1 to the power of 10, i.e. 2.5937424601. But this is surely not what&apos;s meant, and I&apos;m sure the language can be improved to avoid misunderstandings such as the above.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>333</bug_id>
+          
+          <creation_ts>2012-04-15 12:51:00 -0700</creation_ts>
+          <short_desc>Coverage: this value in Object.prototype getters applied to numbers</short_desc>
+          <delta_ts>2012-05-18 11:24:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>billti</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>865</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2012-04-15 12:51:19 -0700</bug_when>
+    <thetext>IE10 Consumer Preview (as well as IE9) fails the following test:
+
+&gt; Object.defineProperty(Object.prototype, &quot;x&quot;, { get: function () { return this; } });
+&gt; (5).x == 0 // IE gives true
+&gt; (5).x == 5 // IE gives false
+
+&gt; Object.defineProperty(Object.prototype, &quot;y&quot;, { get: function () { &quot;use strict&quot;; return this; } });
+&gt; (5).y === 0 // IE gives false
+&gt; (5).y === 5 // IE gives false
+
+The expected results are, of course, false/true/false/true
+
+This is related to bug #284, but that bug only discussed the `typeof` value inside such getters. I didn&apos;t realize until now that some browsers might be crazy enough to get the wrong value entirely.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>950</commentid>
+    <comment_count>1</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2012-05-18 11:24:02 -0700</bug_when>
+    <thetext>I&apos;ve added the tests outlined below.  See changelist http://hg.ecmascript.org/tests/test262/rev/ff16b87df1a3</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

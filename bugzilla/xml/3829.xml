@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3829</bug_id>
+          
+          <creation_ts>2015-02-11 16:58:00 -0800</creation_ts>
+          <short_desc>chapter 15: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:41 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12321</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:58:16 -0800</bug_when>
+    <thetext>----------------------------------------
+In 15.1.8 &quot;Runtime Semantics: GlobalDeclarationInstantiation (script, env)&quot;:
+
+{1}
+15.1.8 / step 2:
+Assert: /envRec/ is a Global Environment Record.
+
+    De-captalize &quot;Global Environment Record&quot;
+
+----------------------------------------
+In 15.1.9 &quot;Runtime Semantics: ScriptEvaluationJob (sourceCodeId)&quot;:
+
+{2}
+15.1.9 / step 4.b:
+Parse /source/ ... let /script/ the resulting parse tree. ...
+
+    Insert &quot;be&quot; before &quot;the resulting parse tree&quot;
+
+----------------------------------------
+In 15.2.1.1 &quot;Static Semantics: Early Errors&quot;:
+
+{3}
+15.2.1.1 / group 1 / bullet 4:
+It is a Syntax Error if any element of the ExportedBindings of /ModuleItemList/
+do not also occurs in ...
+
+    s|do not also occurs|does not also occur|
+
+----------------------------------------
+In 15.2.1.15.1 &quot;CreateModule(sourceCodeId) Abstract Operation&quot;:
+
+{4}
+15.2.1.15.1 / preamble:
+The abstract operation CreateModule creates and returns a new Module Record.
+The argument /sourceCodeId/ is a host supplied module identifier.
+
+    s|module identifier|module source code identifier|
+
+----------------------------------------
+In 15.2.1.16 &quot;Static Semantics: ParseModuleAndImports ( ... )&quot;:
+
+{5}
+15.2.1.16 / step 20.b:
+ReturnIfAbrupt(/normalizedRequest/).
+
+    s|normalizedRequest|requestedSrcID|
+
+----------------------------------------
+In 15.2.1.18 &quot;Static Semantics: ResolveExport(...)&quot;:
+
+{6}
+15.2.1.18 / step 2:
+For each Record /r/ {[[module]], [[exportName]]} in /circularitySet/, do:
+
+    Everywhere else has &quot;Record {...} /var/&quot;, not &quot;Record /var/ {...}&quot;
+
+----------------------------------------
+In 15.2.3.2 &quot;Static Semantics: BoundNames&quot;:
+
+{7+8}
+15.2.3.2 / group 4 / step 2:
+15.2.3.2 / group 5 / step 2:
+If /declarationNames/ does not include the element &quot;*default*&quot;, append
+&quot;*default*&quot;to /declarationNames/.
+
+    Insert a space before &quot;to&quot;
+
+----------------------------------------
+In 15.2.3.11 &quot;Runtime Semantics: Evaluation&quot;:
+
+{9}
+15.2.3.11 / group 5 / step 1:
+Let /value/ the result of BindingClassDeclarationEvaluation ...
+
+    Insert &quot;be&quot; before &quot;the result&quot;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12344</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:25:40 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12450</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:41 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>280</bug_id>
+          
+          <creation_ts>2012-02-27 09:58:00 -0800</creation_ts>
+          <short_desc>Date ranges in [15.9.1.15.1 Extended years] are invalid</short_desc>
+          <delta_ts>2012-02-27 09:58:36 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>672</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-02-27 09:58:36 -0800</bug_when>
+    <thetext>First sentence in [15.9.1.15.1 Extended years]:
+---
+ECMAScript requires the ability to specify 6 digit years (extended years); approximately 285,426 years, either forward or backward, from 01 January, 1970 UTC.
+---
+
+The date range &quot;approx. 285,426 years&quot; is
+1. inconsistent with [15.9.1.1  Time Values and Time Range] 
+2. and actually wrong (or least wrongly worded).
+
+
+Concerning 1)
+In [15.9.1.1  Time Values and Time Range], the theoretical date range is given as &quot;appr. 285,616 years&quot; which can be easily recalculated given the size of a double precision floating point number. The &quot;285,426&quot; number in [15.9.1.1] is slightly lower, I guess due to additional leap year calculation.
+For an approximation &quot;285,616&quot; seems to be the better choice. But at least the numbers should be consistent within the specification. 
+
+Concerning 2)
+ECMAScript does not require to specify &quot;approx. 285,426 years&quot; but instead only requires from implementations to support ±100,000,000 days from midnight 01/01/1970. So the theoretical limit of double precision floating point numbers shouldn&apos;t actually appear in [15.9.1.15.1], instead the actual range ±100,000,000 days should be used. That also means the &quot;Examples of extended years&quot; part needs to be updated to use date values which are actually supported.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

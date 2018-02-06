@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>638</bug_id>
+          
+          <creation_ts>2012-09-01 00:23:00 -0700</creation_ts>
+          <short_desc>mid-file BOM</short_desc>
+          <delta_ts>2013-05-16 13:30:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Trevor Baker">trbaker</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1576</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-09-01 00:23:13 -0700</bug_when>
+    <thetext>The following test cases have a BOM in the middle of the file:
+  7.8.4-1gs.js
+  11.1.5-1gs.js
+  11.1.5-2gs.js
+  13.1-13gs.js</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1577</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-09-01 00:25:57 -0700</bug_when>
+    <thetext>(It&apos;s allowed, but it&apos;s not the point of the test.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3713</commentid>
+    <comment_count>2</comment_count>
+      <attachid>32</attachid>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-07 12:36:16 -0700</bug_when>
+    <thetext>Created attachment 32
+fix for testcases containing mid-file BOM
+
+simple fix, removed &lt;feff&gt; that was present after the metadata comment block.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4033</commentid>
+    <comment_count>3</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-16 13:30:43 -0700</bug_when>
+    <thetext>fixed in rev 5438759531d2
+
+http://hg.ecmascript.org/tests/test262/rev/5438759531d2</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>32</attachid>
+            <date>2013-05-07 12:36:00 -0700</date>
+            <delta_ts>2013-05-07 12:36:16 -0700</delta_ts>
+            <desc>fix for testcases containing mid-file BOM</desc>
+            <filename>bug638.patch</filename>
+            <type>text/plain</type>
+            <size>2214</size>
+            <attacher name="Trevor Baker">trbaker</attacher>
+            
+              <data encoding="base64">IyBIRyBjaGFuZ2VzZXQgcGF0Y2gKIyBVc2VyIFRyZXZvciBCYWtlciA8dHJiYWtlckBhZG9iZS5j
+b20+CiMgRGF0ZSAxMzY3OTU1MTAxIDE0NDAwCiMgTm9kZSBJRCBjYTk1ODU0NGFkZWYwOTY3ZjZh
+OTQ5Yjc1NGU1OGJhMGIwY2JkNTgwCiMgUGFyZW50ICA4YmQ4NzQzNjNlZDcwYTg3NjYyNGNhZjYy
+NjQ4NDI3NDY4NWJlOWFiCmJ1ZyA2Mzg6IG1pZC1maWxlIEJPTQoKQSBmZXcgZmlsZXMgaGFkIEJP
+TSBtaWQtZmlsZSwgd2hpY2ggaXMgYWxsb3dlZCBidXQgbm90IHJlbGV2YW50IHRvIHRoZSB0ZXN0
+cy4KdGVzdHMgcGFzcyB3aXRoIHNwaWRlcm1vbmtleSwgdjggYW5kIGpzYy4KCmRpZmYgLXIgOGJk
+ODc0MzYzZWQ3IC1yIGNhOTU4NTQ0YWRlZiB0ZXN0L3N1aXRlL2NoMDcvNy44LzcuOC40LzcuOC40
+LTFncy5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMDcvNy44LzcuOC40LzcuOC40LTFncy5qcwlNb24g
+QXByIDE1IDIwOjA1OjUwIDIwMTMgLTA3MDAKKysrIGIvdGVzdC9zdWl0ZS9jaDA3LzcuOC83Ljgu
+NC83LjguNC0xZ3MuanMJVHVlIE1heSAwNyAxNTozMTo0MSAyMDEzIC0wNDAwCkBAIC05LDYgKzks
+NiBAQAogICogQG9ubHlTdHJpY3QNCiAgKiBAbmVnYXRpdmUgXigoPyFOb3RFYXJseUVycm9yKS4p
+KiQNCiAgKi8NCi3vu78idXNlIHN0cmljdCI7DQorInVzZSBzdHJpY3QiOw0KIHRocm93IE5vdEVh
+cmx5RXJyb3I7DQotdmFyIF83XzhfNF8yID0gJzEwMGFiY1wwMTEwZGVmJzsKXCBObyBuZXdsaW5l
+IGF0IGVuZCBvZiBmaWxlCit2YXIgXzdfOF80XzIgPSAnMTAwYWJjXDAxMTBkZWYnOw0KZGlmZiAt
+ciA4YmQ4NzQzNjNlZDcgLXIgY2E5NTg1NDRhZGVmIHRlc3Qvc3VpdGUvY2gxMS8xMS4xLzExLjEu
+NS8xMS4xLjUtMWdzLmpzCi0tLSBhL3Rlc3Qvc3VpdGUvY2gxMS8xMS4xLzExLjEuNS8xMS4xLjUt
+MWdzLmpzCU1vbiBBcHIgMTUgMjA6MDU6NTAgMjAxMyAtMDcwMAorKysgYi90ZXN0L3N1aXRlL2No
+MTEvMTEuMS8xMS4xLjUvMTEuMS41LTFncy5qcwlUdWUgTWF5IDA3IDE1OjMxOjQxIDIwMTMgLTA0
+MDAKQEAgLTksNiArOSw2IEBACiAgKiBAb25seVN0cmljdA0KICAqIEBuZWdhdGl2ZSBeKCg/IU5v
+dEVhcmx5RXJyb3IpLikqJA0KICAqLw0KLe+7vyJ1c2Ugc3RyaWN0IjsNCisidXNlIHN0cmljdCI7
+DQogdGhyb3cgTm90RWFybHlFcnJvcjsNCi12YXIgb2JqID0geyBzZXQgXzExXzFfNV8xX2Z1bihl
+dmFsKSB7fX07ClwgTm8gbmV3bGluZSBhdCBlbmQgb2YgZmlsZQordmFyIG9iaiA9IHsgc2V0IF8x
+MV8xXzVfMV9mdW4oZXZhbCkge319Ow0KZGlmZiAtciA4YmQ4NzQzNjNlZDcgLXIgY2E5NTg1NDRh
+ZGVmIHRlc3Qvc3VpdGUvY2gxMS8xMS4xLzExLjEuNS8xMS4xLjUtMmdzLmpzCi0tLSBhL3Rlc3Qv
+c3VpdGUvY2gxMS8xMS4xLzExLjEuNS8xMS4xLjUtMmdzLmpzCU1vbiBBcHIgMTUgMjA6MDU6NTAg
+MjAxMyAtMDcwMAorKysgYi90ZXN0L3N1aXRlL2NoMTEvMTEuMS8xMS4xLjUvMTEuMS41LTJncy5q
+cwlUdWUgTWF5IDA3IDE1OjMxOjQxIDIwMTMgLTA0MDAKQEAgLTksNiArOSw2IEBACiAgKiBAb25s
+eVN0cmljdA0KICAqIEBuZWdhdGl2ZSBeKCg/IU5vdEVhcmx5RXJyb3IpLikqJA0KICAqLw0KLe+7
+vyJ1c2Ugc3RyaWN0IjsNCisidXNlIHN0cmljdCI7DQogdGhyb3cgTm90RWFybHlFcnJvcjsNCi12
+YXIgb2JqID0geyBfMTFfMV81XzJfZ3M6IDEwLCBfMTFfMV81XzJfZ3M6IDEwIH07ClwgTm8gbmV3
+bGluZSBhdCBlbmQgb2YgZmlsZQordmFyIG9iaiA9IHsgXzExXzFfNV8yX2dzOiAxMCwgXzExXzFf
+NV8yX2dzOiAxMCB9Ow0KZGlmZiAtciA4YmQ4NzQzNjNlZDcgLXIgY2E5NTg1NDRhZGVmIHRlc3Qv
+c3VpdGUvY2gxMy8xMy4xLzEzLjEtMTNncy5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMTMvMTMuMS8x
+My4xLTEzZ3MuanMJTW9uIEFwciAxNSAyMDowNTo1MCAyMDEzIC0wNzAwCisrKyBiL3Rlc3Qvc3Vp
+dGUvY2gxMy8xMy4xLzEzLjEtMTNncy5qcwlUdWUgTWF5IDA3IDE1OjMxOjQxIDIwMTMgLTA0MDAK
+QEAgLTksNiArOSw2IEBACiAgKiBAb25seVN0cmljdA0KICAqIEBuZWdhdGl2ZSBeKCg/IU5vdEVh
+cmx5RXJyb3IpLikqJA0KICAqLw0KLe+7vyJ1c2Ugc3RyaWN0IjsNCisidXNlIHN0cmljdCI7DQog
+dGhyb3cgTm90RWFybHlFcnJvcjsNCi1mdW5jdGlvbiBhcmd1bWVudHMoKSB7IH07ClwgTm8gbmV3
+bGluZSBhdCBlbmQgb2YgZmlsZQorZnVuY3Rpb24gYXJndW1lbnRzKCkgeyB9Ow0K
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

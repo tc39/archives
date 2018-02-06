@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>617</bug_id>
+          
+          <creation_ts>2012-08-13 12:33:00 -0700</creation_ts>
+          <short_desc>Spelling errors and style remarks (1)</short_desc>
+          <delta_ts>2015-10-03 14:52:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Peter van der Zee">ecma</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1430</commentid>
+    <comment_count>0</comment_count>
+    <who name="Peter van der Zee">ecma</who>
+    <bug_when>2012-08-13 12:33:08 -0700</bug_when>
+    <thetext>This is the beginning of my list of all the &quot;editorial&quot; things I&apos;ve spotted while reading the spec. Warning, many Oxford comma remarks pending... ;) I&apos;m aware it&apos;s still a work in progress. This will be a part one because I don&apos;t think I&apos;ll manage to copy everything in one go.
+
+Will use backticks for code, double quotes for quoting. p2 = paragraph two (etc) and is relative to the page (not section/header).
+
+Page number; approximate position; quote; comment
+
+
+3; 4.2.1 line 2; &quot;literal notation&quot;; make this bold too (consistent with &quot;constructors&quot; being bold)
+
+3; p5; &quot;implicit&quot;; it&apos;s (going to be) explicitly exposed through `__proto__`, when that happens this sentence should probably adjusted accordingly
+
+3; p5; &quot;prototype chain&quot;; isn&apos;t this &quot;prototypal chain&quot;?
+
+3; 4.2.1 figure 1; this really needs fixing. Even knowing exactly what it does I don&apos;t think this clearly represents prototypal inheritance. I&apos;m sure we can create a better example? Maybe one that simply uses `Foo` as the parent class and `foo` for the children?
+
+3; p1; &quot;objects and structure&quot;; the &quot;and&quot; should be &quot;objects, structure&quot; because there&apos;s another &quot;and&quot; following this list.
+
+4; p2; ; should this mention the `class` way of defining an object too? Aside from replacing the cryptic symbols with some concrete words, a codified example would be very welcome here. Maybe even two; one with and one without the class keyword.
+
+4; 4.3; in general; The repetitive value vs type headers here could be caught in a more generic sense.
+
+4; 4.3; general; There&apos;s a lot of topics missing that deserve to be in here. Especially new topics. I&apos;ve not written them down centrally so I have no immediate list here. Instead I&apos;ll add this note down the road. To start, &quot;generators&quot; should be in this list.
+
+4; note at bottom; &quot;has a single prototype object&quot;; add &quot;optional&quot; somewhere
+
+5; 4.3.4 and 4.3.5; ; code examples welcome here
+
+5; 4.3.8; ; &quot;supplied by the host environment&quot; was explicitly removed but I feel like it should still be there.
+
+5; last note ; ; kind of redundant with 4.3.14 following immediately, stating the same thing.
+
+6; 4.3.15 note; ; could be noted that a primitive is not strictly equal to it&apos;s boxed version (as it is in as3). This goes for all the primitives of course.
+
+6; 4.3.19; &quot;A Number value is a member of the Number type and&quot;, is kind of redundant. Especially with 4.3.20 following it, but even without.
+
+6; 4.3.20; &quot;(NaN) values&quot;; &quot;(NaN) value&quot;, js only knows one.
+
+6; 4.3.23; &quot;is a IEEE&quot; ... &quot;value&quot;; &quot;is any of the IEEE&quot; ... &quot;values&quot;. (Sorry if just bikeshed, this feels better).
+
+7; 4.3.24; &quot;subroutine&quot;; very odd word for the ES language.
+
+7; 4.3.24 note; &quot;A function&apos;s ... in ECMAScript&quot;; apart from a tautology, this comment either needs clarification (here), a reference to the clarification, or should be removed from this note here. It doesn&apos;t help.
+
+7; 4.3.24; &quot;built-in object that is a function&quot;; &quot;... that is specified by this specification&quot;, otherwise it&apos;s merely stating the obvious (and even with that suffix, it&apos;s still just stating the obvious). Maybe &quot;A regular object that also contains executable code and can be invoked&quot;/called/executed/whatever.
+
+7; 4.3.25 note; &quot;An implementation ... this specification&quot;; not sure whether this sentence adds anything.
+
+7; 4.3.27; &quot;function that ... a property&quot;; &quot;any property that is a function&quot;
+
+7; 4.3.30 4.3.31; ; these sections should probably be re-ordered such that they follow 4.3.26 (&quot;property&quot;) immediately?
+
+7; 4.3.31; ; please change the wording of this sentence. It breaks my fragile informal mind :)
+
+7; 5; in general; do we really need to go into parser theory in this specification? Might it be legacy that could be removed while still capable of using formal grammar in the spec? If not removed, I&apos;d suggest moving it to an appendix, as it&apos;s not really important to the language.
+
+7; 5.1.1; last sentence; Is that important? (I know there are some references to &quot;chain&quot; later, but the term didn&apos;t feel relevant to those context either).
+
+8; p4; ; If you&apos;re going to cover regex, why not add JSON and quasis as well?
+
+8; p5; ; The whole concept of colon count confused me to hell the first time I read the spec (few years ago). Reading it again now I&apos;d say it&apos;s very much not important and the whole colon count thing should be thrown out. I&apos;d suggest to not make the distinction with something insignificant as colons, but instead use clear production names to make sure productions stick to their own grammar. If not that, then choose another way of clarifying to which (sub-)grammar a production belongs. And make them unique per such grammar.
+
+8; p10; ; drop this (see above)
+
+9; p1; &quot;to avoid ambiguities&quot;; Like what? (regex, quasi, etc.). No need to go deeper into it, just an example so the reader knows what you&apos;re talking about or when this applies.
+
+9; p2; ; the JSON grammar is only applied by `JSON.parse`. Wouldn&apos;t it make more sense to explain that this is the case? Rather than go for the generic case like it is now.
+
+9; p4; ; drop (see above)
+
+9; 5.1.6; &quot;Grammar Notation&quot; (title); &quot;Grammar Formatting&quot;
+
+9; p5; &quot;Terminal symbols ... are shown ...&quot;; No point in going through all the grammar names. Just say &quot;Terminal symbols are shown in fixed ...&quot;.
+
+On a side note; especially for print; it might be useful to also mark up terminal symbols with a slight gray background. Just to clarify that this is in fact a terminal symbol. In most cases the fixed with font is sufficient, but sometimes (especially in one or two character cases), it&apos;s not.
+
+Fun fact; the first time I read the spec (a few years ago) it really took me a few pages to realize that &quot;terminal symbol&quot; did not refer to a (keyboard) character entered in a console (terminal). Even with all the parser theory and p5 specifically, this fact was not at first clear to me. Not sure how this could have been prevented though.
+
+9; p6; &quot;(The number ... production belongs.)&quot;; drop if the colon thing is dropped (see above).
+
+9; p9; ; the opt sub could be replaced by a question mark. This is partially a bikeshed, but also might help in some cases where the production names and opt sub is literally quoted in regular text. The &quot;opt&quot; sub sometimes looks odd to me in such cases. And it&apos;s shorter, so that counts too... ;)
+
+Nothing on page 10!
+
+Will continue this. If any preferences in my formatting above or anything else please let me know.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1431</commentid>
+    <comment_count>1</comment_count>
+    <who name="Peter van der Zee">ecma</who>
+    <bug_when>2012-08-13 13:35:23 -0700</bug_when>
+    <thetext>p6; 4.3.16; &quot;integer&quot;; should be &quot;integers&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1606</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-25 14:14:59 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+
+&gt; 
+&gt; 3; 4.2.1 line 2; &quot;literal notation&quot;; make this bold too (consistent with
+&gt; &quot;constructors&quot; being bold)
+
+This section uses bold italic to introduce the definition of a new term.  In this case &quot;constructors&quot; is such a term, but &quot;literal notation&quot; seems to be just a descriptive phrase. So, I think the current emphasis is correct. This is all ancient text and perhaps someday it will get rewritten and restyled but doing so isn&apos;;t an immediate priority.
+
+
+&gt; 
+&gt; 3; p5; &quot;implicit&quot;; it&apos;s (going to be) explicitly exposed through `__proto__`,
+&gt; when that happens this sentence should probably adjusted accordingly
+&gt; 
+&gt; 3; p5; &quot;prototype chain&quot;; isn&apos;t this &quot;prototypal chain&quot;?
+&gt; 
+&gt; 3; 4.2.1 figure 1; this really needs fixing. Even knowing exactly what it does
+&gt; I don&apos;t think this clearly represents prototypal inheritance. I&apos;m sure we can
+&gt; create a better example? Maybe one that simply uses `Foo` as the parent class
+&gt; and `foo` for the children?
+&gt; 
+&gt; 3; p1; &quot;objects and structure&quot;; the &quot;and&quot; should be &quot;objects, structure&quot;
+&gt; because there&apos;s another &quot;and&quot; following this list.
+
+replaced &quot;and&quot; with &quot;while&quot;
+&gt; 
+&gt; 4; p2; ; should this mention the `class` way of defining an object too? Aside
+&gt; from replacing the cryptic symbols with some concrete words, a codified example
+&gt; would be very welcome here. Maybe even two; one with and one without the class
+&gt; keyword.
+&gt; 
+&gt; 4; 4.3; in general; The repetitive value vs type headers here could be caught
+&gt; in a more generic sense.
+
+This is the required ISO standard style for definitions.
+
+
+
+&gt; 
+&gt; 4; 4.3; general; There&apos;s a lot of topics missing that deserve to be in here.
+&gt; Especially new topics. I&apos;ve not written them down centrally so I have no
+&gt; immediate list here. Instead I&apos;ll add this note down the road. To start,
+&gt; &quot;generators&quot; should be in this list.
+
+yes, needs to be updated
+
+
+&gt; 
+&gt; 4; note at bottom; &quot;has a single prototype object&quot;; add &quot;optional&quot; somewhere
+&gt; 
+I think the next sentence covering a null prototype value is adequate.
+
+
+&gt; 5; 4.3.4 and 4.3.5; ; code examples welcome here
+&gt; 
+&gt; 5; 4.3.8; ; &quot;supplied by the host environment&quot; was explicitly removed but I
+&gt; feel like it should still be there.
+
+No, there are exotic objects that are part of the core language.
+
+
+
+&gt; 
+&gt; 5; last note ; ; kind of redundant with 4.3.14 following immediately, stating
+&gt; the same thing.
+&gt; 
+&gt; 6; 4.3.15 note; ; could be noted that a primitive is not strictly equal to it&apos;s
+&gt; boxed version (as it is in as3). This goes for all the primitives of course.
+&gt; 
+&gt; 6; 4.3.19; &quot;A Number value is a member of the Number type and&quot;, is kind of
+&gt; redundant. Especially with 4.3.20 following it, but even without.
+&gt; 
+&gt; 6; 4.3.20; &quot;(NaN) values&quot;; &quot;(NaN) value&quot;, js only knows one.
+
+ok
+&gt; 
+&gt; 6; 4.3.23; &quot;is a IEEE&quot; ... &quot;value&quot;; &quot;is any of the IEEE&quot; ... &quot;values&quot;. (Sorry
+&gt; if just bikeshed, this feels better).
+&gt; 
+&gt; 7; 4.3.24; &quot;subroutine&quot;; very odd word for the ES language.
+&gt; 
+&gt; 7; 4.3.24 note; &quot;A function&apos;s ... in ECMAScript&quot;; apart from a tautology, this
+&gt; comment either needs clarification (here), a reference to the clarification, or
+&gt; should be removed from this note here. It doesn&apos;t help.
+&gt; 
+&gt; 7; 4.3.24; &quot;built-in object that is a function&quot;; &quot;... that is specified by this
+&gt; specification&quot;, otherwise it&apos;s merely stating the obvious (and even with that
+&gt; suffix, it&apos;s still just stating the obvious). Maybe &quot;A regular object that also
+&gt; contains executable code and can be invoked&quot;/called/executed/whatever.
+&gt; 
+&gt; 7; 4.3.25 note; &quot;An implementation ... this specification&quot;; not sure whether
+&gt; this sentence adds anything.
+&gt; 
+&gt; 7; 4.3.27; &quot;function that ... a property&quot;; &quot;any property that is a function&quot;
+&gt; 
+&gt; 7; 4.3.30 4.3.31; ; these sections should probably be re-ordered such that they
+&gt; follow 4.3.26 (&quot;property&quot;) immediately?
+&gt; 
+&gt; 7; 4.3.31; ; please change the wording of this sentence. It breaks my fragile
+&gt; informal mind :)
+&gt; 
+&gt; 7; 5; in general; do we really need to go into parser theory in this
+&gt; specification? Might it be legacy that could be removed while still capable of
+&gt; using formal grammar in the spec? If not removed, I&apos;d suggest moving it to an
+&gt; appendix, as it&apos;s not really important to the language.
+
+This section isn&apos;t about parser theory.  It is about defining the grammar terminology used within the specification.
+
+
+
+&gt; 
+&gt; 7; 5.1.1; last sentence; Is that important? (I know there are some references
+&gt; to &quot;chain&quot; later, but the term didn&apos;t feel relevant to those context either).
+&gt; 
+&gt; 8; p4; ; If you&apos;re going to cover regex, why not add JSON and quasis as well?
+
+JSON is convered in 5.1.5.  Quasis don&apos;t use a distinct grammar.
+&gt; 
+&gt; 8; p5; ; The whole concept of colon count confused me to hell the first time I
+&gt; read the spec (few years ago). Reading it again now I&apos;d say it&apos;s very much not
+&gt; important and the whole colon count thing should be thrown out. I&apos;d suggest to
+&gt; not make the distinction with something insignificant as colons, but instead
+&gt; use clear production names to make sure productions stick to their own grammar.
+&gt; If not that, then choose another way of clarifying to which (sub-)grammar a
+&gt; production belongs. And make them unique per such grammar.
+&gt; 
+&gt; 8; p10; ; drop this (see above)
+&gt; 
+&gt; 9; p1; &quot;to avoid ambiguities&quot;; Like what? (regex, quasi, etc.). No need to go
+&gt; deeper into it, just an example so the reader knows what you&apos;re talking about
+&gt; or when this applies.
+&gt; 
+&gt; 9; p2; ; the JSON grammar is only applied by `JSON.parse`. Wouldn&apos;t it make
+&gt; more sense to explain that this is the case? Rather than go for the generic
+&gt; case like it is now.
+&gt; 
+&gt; 9; p4; ; drop (see above)
+&gt; 
+&gt; 9; 5.1.6; &quot;Grammar Notation&quot; (title); &quot;Grammar Formatting&quot;
+&gt; 
+&gt; 9; p5; &quot;Terminal symbols ... are shown ...&quot;; No point in going through all the
+&gt; grammar names. Just say &quot;Terminal symbols are shown in fixed ...&quot;.
+&gt; 
+&gt; On a side note; especially for print; it might be useful to also mark up
+&gt; terminal symbols with a slight gray background. Just to clarify that this is in
+&gt; fact a terminal symbol. In most cases the fixed with font is sufficient, but
+&gt; sometimes (especially in one or two character cases), it&apos;s not.
+&gt; 
+&gt; Fun fact; the first time I read the spec (a few years ago) it really took me a
+&gt; few pages to realize that &quot;terminal symbol&quot; did not refer to a (keyboard)
+&gt; character entered in a console (terminal). Even with all the parser theory and
+&gt; p5 specifically, this fact was not at first clear to me. Not sure how this
+&gt; could have been prevented though.
+&gt; 
+&gt; 9; p6; &quot;(The number ... production belongs.)&quot;; drop if the colon thing is
+&gt; dropped (see above).
+&gt; 
+&gt; 9; p9; ; the opt sub could be replaced by a question mark. This is partially a
+&gt; bikeshed, but also might help in some cases where the production names and opt
+&gt; sub is literally quoted in regular text. The &quot;opt&quot; sub sometimes looks odd to
+&gt; me in such cases. And it&apos;s shorter, so that counts too... ;)
+&gt; 
+&gt; Nothing on page 10!
+&gt; 
+&gt; Will continue this. If any preferences in my formatting above or anything else
+&gt; please let me know.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13799</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 14:59:30 -0700</bug_when>
+    <thetext>There are still some good suggestions here so I&apos;m going to keep this open but deferred to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

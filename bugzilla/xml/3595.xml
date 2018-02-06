@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3595</bug_id>
+          
+          <creation_ts>2015-01-23 07:36:00 -0800</creation_ts>
+          <short_desc>ClassDefinitionEvaluation</short_desc>
+          <delta_ts>2015-07-10 08:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3735</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11605</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-23 07:36:39 -0800</bug_when>
+    <thetext>Step 10a: If ClassHeritageopt is present and SameValue(constructorParent, %FunctionPrototype%) is
+false, then
+
+I think this would be clearer if this just said:
+
+10a. If _ClassBody_opt_ is not present or _superClass_ is *null*, then</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11712</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-24 21:09:09 -0800</bug_when>
+    <thetext>how about:
+
+8.	If ClassBodyopt is present, let constructor be ConstructorMethod of ClassBody.
+9.	Else,
+  a.	  If ClassHeritageopt is present and superclass is not null, then
+    i.	    Let constructor be the result of parsing the String &quot;constructor(... args){ super (...args);}&quot; using the syntactic grammar with the goal symbol MethodDefinition.
+  b.	  Else,
+    i.	    Let constructor be the result of parsing the String &quot;constructor( ){ }&quot; using the syntactic grammar with the goal symbol MethodDefinition.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11730</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-25 10:02:58 -0800</bug_when>
+    <thetext>LGTM</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12287</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-10 12:46:02 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12463</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:42 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

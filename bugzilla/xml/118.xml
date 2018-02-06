@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>118</bug_id>
+          
+          <creation_ts>2011-07-05 15:37:00 -0700</creation_ts>
+          <short_desc>Various tests assumine U+0085 is a Unicode space separator (Zs), but it&apos;s not</short_desc>
+          <delta_ts>2011-07-07 15:22:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>barraclough</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>256</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2011-07-05 15:37:25 -0700</bug_when>
+    <thetext>U+0085 NEXT LINE is a control character, but it&apos;s not a space character.  Yet various tests expect it is:
+
+15.5.4.20-3-2	String.prototype.trim - &apos;S&apos; is a string with all WhiteSpace	fail
+15.5.4.20-3-3	String.prototype.trim - &apos;S&apos; is a string with all union of WhiteSpace and LineTerminator	fail
+15.5.4.20-3-4	String.prototype.trim - &apos;S&apos; is a string start with union of all LineTerminator and all WhiteSpace	fail
+15.5.4.20-3-5	String.prototype.trim - &apos;S&apos; is a string end with union of all LineTerminator and all WhiteSpace	fail
+15.5.4.20-3-6	String.prototype.trim - &apos;S&apos; is a string start with union of all LineTerminator and all WhiteSpace and end with union of all LineTerminator and all WhiteSpace	fail</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>262</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-05 16:40:54 -0700</bug_when>
+    <thetext>According to Table 2 (Whitespace Characters), an ES5 implementation has to contend with:
+    Other category ―Zs
+    Any other Unicode ―space separator
+    &lt;USP&gt;
+from the Unicode Standard 3.0.
+
+
+The question then is does \u0085 (i.e., next line) fall under &lt;USP&gt; in Unicode 3.0?  My gut reaction was also no until I saw the description under Table 3:
+    Only the characters in Table 3 are treated as line terminators. Other new line or line breaking characters are treated as white space but not as line terminators.
+
+Isn&apos;t NEXT LINE considered to be a line breaking/newline character? This also seems to be the interpretation on Wikipedia (http://en.wikipedia.org/wiki/Newline):
+    ECMAScript[5] accepts LS and PS as line breaks, but considers U+0085 (NEL) white space, not a line break.
+although I don&apos;t place much faith in Wikipedia:)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>263</commentid>
+    <comment_count>2</comment_count>
+    <who name="">barraclough</who>
+    <bug_when>2011-07-05 21:06:37 -0700</bug_when>
+    <thetext>Hi David,
+
+I was just investigating this test failure on WebKit, and thought I&apos;d weigh in with my 2 cents.  I agree that the text under table 3 is a little confusing, but to quote Allen WB from an ES 5-discuss email of July 1st, &quot;Always follow the algorithm if there is a conflict between an algorithm and descriptive text.&apos;.  ES5 white space seems to be clearly defined by section 7.2, &quot;White Space&quot;, as &quot;The ECMAScript white space characters are listed in Table 2.&quot;  I cannot really see how section 7.2 can be seen as anything but normative, and if the descriptive text in a different section appears to contradict this, then I think it has to be disregarded.
+
+The presence of form-feed (U+000C) in Table 2 would also seem to be illustrative, since like U+0085 it too is a category [Cc] vertical spacing character.  Form feed is considered white space in ES5, but this arises from the spec only because U+000C appears in table 2.  Conversely, since U+0085 is excluded from table 2, it cannot considered whitespace in ES5.
+
+cheers,
+G.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>270</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-06 15:38:18 -0700</bug_when>
+    <thetext>Thanks for the clarification.  I&apos;ll fix this in source control tomorrow morning, and file a spec bug to get the &quot;Other new
+line or line breaking characters are treated as white space but not as line
+terminators&quot; bit either removed or re-worded.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>271</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 07:47:17 -0700</bug_when>
+    <thetext>Changes have been to Mercurial.  I&apos;ll close the bug once the website gets updated.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>282</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 15:22:53 -0700</bug_when>
+    <thetext>Website has been updated.  The only usage of \u0085 in IE Test Center-based tests should now be 15.5.4.20-4-39.js which is valid, albeit not all that useful.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1229</bug_id>
+          
+          <creation_ts>2013-01-26 16:47:00 -0800</creation_ts>
+          <short_desc>15.3.2.1 stale text about .prototype</short_desc>
+          <delta_ts>2013-03-08 14:44:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3160</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-01-26 16:47:05 -0800</bug_when>
+    <thetext>15.3.2.1 say &quot;A prototype property is automatically created for every function, to provide for the possibility that the function will be used as a constructor.&quot;
+
+except arrow functions and ch15 builtin functions. Btw, what about methods?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3280</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 17:36:44 -0800</bug_when>
+    <thetext>clarified that the state is only about functions created via the functions constructors
+
+corrected in rev 14 editor&apos;s draft
+
+also, methods are like arrows in that they are constructable and don&apos;t have a prototype property.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3354</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:21 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1672</bug_id>
+          
+          <creation_ts>2013-07-31 05:56:00 -0700</creation_ts>
+          <short_desc>15.13.6.1: %TypedArray% constructors and constructor selection issues</short_desc>
+          <delta_ts>2013-08-23 08:22:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4646</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-31 05:56:41 -0700</bug_when>
+    <thetext>The constructor &quot;15.13.6.1.1 %TypedArray% (length)&quot;:
+- change end of first sentence in preamble from &quot;is not Number&quot; to &quot;is not Object&quot;.
+- step 2 is empty
+
+
+The constructor &quot;15.13.6.1.2 %TypedArray% (typedArray)&quot;:
+- add an additional step to throw a TypeError if srcArray&apos;s [[ViewedArrayBuffer]] is undefined
+- srcArray&apos;s [[ByteOffset]] data property is not taken into account when the array buffer is cloned
+- remove step 16-17, the data was already cloned in step 12, calling SetArrayBufferData() would erase the contents resp. create a new clear buffer
+
+
+The constructor &quot;15.13.6.1.3 %TypedArray% (array)&quot;:
+- step 3, variable &quot;srcArray&quot; is unused
+- step 12, change TypeError to RangeError
+- step 17, change &quot;status&quot; to &quot;data&quot;
+- step 19b, change &quot;Get(O, Pk)&quot; to &quot;Get(array, Pk)&quot;
+
+
+The constructor &quot;15.13.6.1.4 %TypedArray% (buffer, byteOffset=0, length=undefined)&quot;:
+- missing step? If buffer&apos;s [[ArrayBufferData]] is undefined then throw TypeError. Or should it be possible to initialise a TypedArray object with an uninitialised ArrayBuffer object?
+- add test after step 15b, if newByteLength &lt; 0 then throw RangeError
+
+
+&quot;15.13.6.1.6 %TypedArray% (all other argument combinations)&quot;:
+- Typo &quot;that do match&quot; -&gt; &quot;that do not match&quot;
+
+
+The constructor selection does not reflect the current browser situation, e.g. SpiderMonkey/V8/JSC accept `new Int8Array(16, 0)` and treat it as an equivalent call to `new Int8Array(16)` whereas the current selection algorithm requires this call to throw a TypeError.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4965</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-18 12:46:20 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5086</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:36 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3852</bug_id>
+          
+          <creation_ts>2015-02-12 22:25:00 -0800</creation_ts>
+          <short_desc>6.1.7.4: various typos</short_desc>
+          <delta_ts>2015-02-19 19:11:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12504</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-12 22:25:08 -0800</bug_when>
+    <thetext>In 6.1.7.4 &quot;Well-Known Intrinsic Objects&quot;,
+in Table 7,
+&quot;%ObjProto_values%&quot; should presumably be &quot;%ObjProto_toString%&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12510</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-13 05:30:12 -0800</bug_when>
+    <thetext>The middle column has:
+    JSON%
+    Math%
+    Reflect%
+
+Presumably delete the &quot;%&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12511</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-13 05:34:30 -0800</bug_when>
+    <thetext>The middle column has:
+    Float32Array.prototype
+    Float64Array.prototype
+with &quot;Float&quot; in sans-serif font, should be monospace.
+
+and
+    Object.prototype
+    Symbol.Prototype
+all in sans-serif
+
+and
+    Uint8ClampedArray
+    Uint8ClampedArray. prototype
+with &quot;Clamped&quot; in sans-serif.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12512</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-13 05:38:01 -0800</bug_when>
+    <thetext>&quot;Symbol.Prototype&quot;: &quot;P&quot; should be &quot;p&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12513</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-13 05:39:07 -0800</bug_when>
+    <thetext>&quot;%DataaViewPrototype%&quot;: s|aa|a|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12528</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 08:37:41 -0800</bug_when>
+    <thetext>xed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12555</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-13 10:23:27 -0800</bug_when>
+    <thetext>Also, on the row for %SetPrototype%,
+    s|Sset|Set|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13124</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:06 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

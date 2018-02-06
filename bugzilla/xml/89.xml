@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>89</bug_id>
+          
+          <creation_ts>2011-04-12 13:47:00 -0700</creation_ts>
+          <short_desc>JSON files have Content-Type header set as &quot;text/plain&quot;</short_desc>
+          <delta_ts>2012-03-27 09:37:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>TC39 Infrastructure</product>
+          <component>other</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Lowest</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>184</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-04-12 13:47:51 -0700</bug_when>
+    <thetext>And it should probably be &quot;text/json&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>204</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-10 11:42:35 -0700</bug_when>
+    <thetext>This is a change that needs to be performed on the web server itself I believe.  Seems trivial with admin rights.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>823</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-27 09:37:44 -0700</bug_when>
+    <thetext>Reassigning - this is a TC39 infrastructure issue at heart.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

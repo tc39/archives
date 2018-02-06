@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3291</bug_id>
+          
+          <creation_ts>2014-10-19 10:43:00 -0700</creation_ts>
+          <short_desc>15.2.1.21 set module namespace</short_desc>
+          <delta_ts>2014-12-05 15:49:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10523</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-10-19 10:43:11 -0700</bug_when>
+    <thetext>In step 8. a) v) there should be a third step here:
+
+3. Set importedModule.[[Namespace]] to namespace
+
+This way the created namespace can be reused again later. I couldn&apos;t see the namespace being set anywhere else otherwise.
+
+Note it may be worth considering separating namespace creation into an easier function to share, as the browser loader spec would also need to create namespaces for loading modules that don&apos;t already have them. Perhaps this is a completely separate process though, but they should ideally share the module.[[Namespace]] object somehow.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10546</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-30 07:39:50 -0700</bug_when>
+    <thetext>This is already handled in 9.4.6.13 ModuleNamespaceCreate, step 11.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

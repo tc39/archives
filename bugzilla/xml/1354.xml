@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1354</bug_id>
+          
+          <creation_ts>2013-03-19 00:35:00 -0700</creation_ts>
+          <short_desc>11.1.9 + 15.17.1.{14,15,16,17}: [[Freeze]], [[Seal]], [[IsFrozen]], [[IsSealed]]</short_desc>
+          <delta_ts>2013-07-15 17:04:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3500</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-19 00:35:08 -0700</bug_when>
+    <thetext>The [[Freeze]] internal method is referred to
+in 11.1.9&apos;s GetTemplateCallSite Abstract Operation
+and in 15.17.1.14 Reflect.freeze,
+but there is no definition of it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3512</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-20 14:23:22 -0700</bug_when>
+    <thetext>Similarly, 15.17.1.15 &quot;Reflect.seal (target)&quot; refers to the internal method [[Seal]], which is not defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3513</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-20 14:26:40 -0700</bug_when>
+    <thetext>Also,
+    15.17.1.16 &quot;Reflect.isFrozen (target)&quot; refers to [[IsFrozen]]
+    15.17.1.17 &quot;Reflect.isSealed (target)&quot; refers to [[IsSealed]]
+neither of which are defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4238</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-17 18:44:57 -0700</bug_when>
+    <thetext>fixed in rev16 editor&apos;s draft.
+
+Because [[Freeze]],[[Seal]],[[IsFrozen]]. [[IsSealed]] are no longer internal methods also deleted the corresponding Reflect functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4494</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:04:15 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

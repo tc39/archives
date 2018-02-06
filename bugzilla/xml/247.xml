@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>247</bug_id>
+          
+          <creation_ts>2012-01-24 17:27:00 -0800</creation_ts>
+          <short_desc>11.1.5.1 &quot;Early Errors&quot; missing &quot;Static Semantics&quot;</short_desc>
+          <delta_ts>2012-10-26 15:34:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>612</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-01-24 17:27:26 -0800</bug_when>
+    <thetext>[Change this bug&apos;s &apos;Version&apos; to January 16, 2012 when that becomes possible.]
+
+In 11.1.5.1, there is an unnumbered sub-section titled &quot;Early Errors&quot;.
+For consistency, the title should be &quot;Static Semantics: Early Errors&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>613</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-24 17:32:37 -0800</bug_when>
+    <thetext>changed draft version</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1026</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-06-16 13:00:38 -0700</bug_when>
+    <thetext>This hasn&apos;t been fixed.
+Section 11.1.5 (and also 13.3) still has the section header
+    Static Semantics
+followed by the header
+    Early Errors
+
+Compare this to, e.g. 11.2.4, which has
+    Static Semantics
+followed by
+    Static Semantics: Early Errors</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2073</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 16:57:07 -0700</bug_when>
+    <thetext>finally fixed 13.3 in rev 11, 11.1.5 was fixed in rev 9</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2100</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:07 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

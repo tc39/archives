@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4291</bug_id>
+          
+          <creation_ts>2015-04-16 10:38:00 -0700</creation_ts>
+          <short_desc>12.1.2 Intl.DateTimeFormat: Steps can be merged; + editorial</short_desc>
+          <delta_ts>2015-04-16 20:43:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14203</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 10:38:45 -0700</bug_when>
+    <thetext>12.1.2 Intl.DateTimeFormat([ locales [, options ]])
+
+Title: Remove &quot;,&quot; before &quot;locales&quot;.
+
+Preamble: Missing parameter names
+
+&gt; When the Intl.DateTimeFormat function is called with optional arguments locales and options, the following steps are taken:
+
+Step 1: Missing full stop
+
+Steps 4-6 can be merged:
+&gt; 4. Return InitializeDateTimeFormat(dateTimeFormat, locales, options).
+
+Step 4: Change `dateTimeFormat`, `locales` and `options` to italic font.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14213</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 12:09:02 -0700</bug_when>
+    <thetext>&gt; Title: Remove &quot;,&quot; before &quot;locales&quot;.
+
+Fixed.
+
+&gt; Preamble: Missing parameter names
+
+Fixed.
+
+&gt; When the Intl.DateTimeFormat function is called with optional arguments locales and options, the following steps are taken:
+
+&gt; Step 1: Missing full stop
+
+Fixed.
+
+
+
+&gt; Steps 4-6 can be merged:
+&gt; 4. Return InitializeDateTimeFormat(dateTimeFormat, locales, options).
+
+&gt; Step 4: Change `dateTimeFormat`, `locales` and `options` to italic font.
+
+Fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

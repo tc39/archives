@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1283</bug_id>
+          
+          <creation_ts>2013-03-11 08:16:00 -0700</creation_ts>
+          <short_desc>13.4: Static Semantics Early Errors too strict</short_desc>
+          <delta_ts>2013-07-15 17:03:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andy Wingo">wingo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>rossberg</cc>
+    
+    <cc>usrbincc</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3418</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-03-11 08:16:23 -0700</bug_when>
+    <thetext>Hi
+
+Section 13.4 of the new draft specifies two early errors that are needlessly restrictive:
+
+  * It is a Syntax Error if FunctionBody Contains YieldExpression is false.
+
+&quot;function* () {}&quot; is well-defined, and might come about through use of eval code.
+
+  * It is a Syntax Error if AssignmentExpression Contains YieldExpression.
+
+&quot;yield yield 3&quot; is also perfectly well-defined.
+
+In both of these cases, an implementation would have to do more work to implement the restrictions than it would to not implement them.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4017</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-05-15 06:48:50 -0700</bug_when>
+    <thetext>This bug is still present in revision 15.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4022</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-15 09:06:43 -0700</bug_when>
+    <thetext>Do you have a real use case for a generator function body without a yield other than a by-product of a degenerate case of mechanical code generation?
+
+If not, it&apos;s a trade-off between early diagnostics for human written code and a slight simplification of a code generator.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4023</commentid>
+    <comment_count>3</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2013-05-15 09:22:02 -0700</bug_when>
+    <thetext>One important use case is prototyping with a dummy generator. Or the case where you comment out a yield for debugging. That shouldn&apos;t render the program illegal.
+
+A zero iterator/generator could also be a perfectly sensible part of a generic iterator library. There is no reason to believe that you don&apos;t occasionally need an empty generator in the same manner you sometimes need empty functions.
+
+Also, I don&apos;t think it simplifies code generators. If anything, it&apos;s more work to diagnose this case.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4168</commentid>
+    <comment_count>4</comment_count>
+    <who name="Ben Chan">usrbincc</who>
+    <bug_when>2013-06-11 14:14:39 -0700</bug_when>
+    <thetext>The fixed issue looks to be handled already in bug 1551.
+
+In the interest of not filing duplicate bugs, I&apos;ll just add my +1 to
+the remaining issue:
+
+* It is a Syntax Error if AssignmentExpression Contains YieldExpression.
+
+I don&apos;t really know what else to add aside from what Andy Wingo has
+already said. At the very least, it would be useful to be able to know
+what the rationale behind this limitation is.
+
+Okay, maybe I will add something.
+
+----
+
+On the implementation side:
+
+Once you have the capability to do something like:
+
+  function* G() {
+    f(yield a(), (yield b) + (yield c), 42 + yield d);
+    return yield e;
+  }
+
+then you have almost certainly already implemented
+
+  function* G() {
+    yield f(yield a(), (yield b) + (yield c), 42 + yield d);
+    yield yield e;
+  }
+
+Going back and disabling that particular case is almost certainly
+going to be more work.
+
+----
+
+On the language-design side, having this limitation means that
+programmers have to remember one more special-case rule. Normally you
+would expect expressions to be freely nestable (modulo the use of
+parens to handle precedence and parsing issues). If there are to be
+exceptions, there should a clear reason for them.
+
+So at the very least, there should be some rationale for this
+exception in the spec.
+
+Note that some people may prefer to have their lint tools disallow
+nested yield expressions, but this should probably be a separate issue
+from what is allowed in the language itself.
+
+----
+
+P.S. I have no experience with the conventions of bugzilla, much less
+ecmascript.org&apos;s particular usage of bugzilla. Does the &quot;CONFIRMED&quot;
+bug status mean that this is going to be fixed in the next revision of
+the spec? If so, sorry for the extra noise.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4244</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-18 10:35:05 -0700</bug_when>
+    <thetext>fixed (both items) in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4404</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:22 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

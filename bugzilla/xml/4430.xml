@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4430</bug_id>
+          
+          <creation_ts>2015-07-28 14:59:00 -0700</creation_ts>
+          <short_desc>NativeError message property of prototype object is both implementation defined and the empty string</short_desc>
+          <delta_ts>2015-07-28 14:59:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Alan Schmitt">alan.schmitt</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14586</commentid>
+    <comment_count>0</comment_count>
+    <who name="Alan Schmitt">alan.schmitt</who>
+    <bug_when>2015-07-28 14:59:33 -0700</bug_when>
+    <thetext>The object structure of NativeError (19.5.6, http://www.ecma-international.org/ecma-262/6.0/#sec-nativeerror-object-structure) indicates the message property of the prototype object is an implementation dependent string in the introduction of this section: “Each of these objects has the structure described below, differing only in the name used as the constructor name instead of NativeError, in the name property of the prototype object, and in the implementation-defined message property of the prototype object.”
+
+The detailed specification, however, specifies it to be the empty string (19.5.6.3.2, http://www.ecma-international.org/ecma-262/6.0/#sec-nativeerror.prototype.message): “The initial value of the message property of the prototype for a given NativeError constructor is the empty String.”</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3395</bug_id>
+          
+          <creation_ts>2014-11-20 17:10:00 -0800</creation_ts>
+          <short_desc>7.4.7.5 IteratorClose should throw if hasReturn and !iterator.return().done</short_desc>
+          <delta_ts>2015-01-28 12:11:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Ben Newman">ben</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10668</commentid>
+    <comment_count>0</comment_count>
+    <who name="Ben Newman">ben</who>
+    <bug_when>2014-11-20 17:10:44 -0800</bug_when>
+    <thetext>The current implementation of IteratorClose(iterator, completion) is as follows:
+
+  Assert: Type(iterator) is Object.
+  Assert: completion is a Completion Record.
+  Let hasReturn be HasProperty(iterator, &quot;return&quot;).
+  ReturnIfAbrupt(hasReturn).
+  If hasReturn is true, then
+    Let innerResult be Invoke(iterator, &quot;return&quot;, ( )).
+    If completion.[[type]] is not throw and innerResult.[[type]] is throw, then
+      Return innerResult.
+  Return completion.
+
+Per David Herman&apos;s recommendation, we should report an error if innerResult.[[type]] is normal and ToObject(innerResult.[[value]]).done is not true:
+
+  Assert: Type(iterator) is Object.
+  Assert: completion is a Completion Record.
+  Let hasReturn be HasProperty(iterator, &quot;return&quot;).
+  ReturnIfAbrupt(hasReturn).
+  If hasReturn is true, then
+    Let innerResult be Invoke(iterator, &quot;return&quot;, ( )).
+    If completion.[[type]] is throw, then
+      Return completion.
+    If innerResult.[[type]] is throw, then
+      Return innerResult.
+    If innerResult.[[type]] is normal, then
+      Let done be Get(ToObject(innerResult.[[value]]), &quot;done&quot;).
+      If done is not true, throw a TypeError exception.
+  Return completion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10669</commentid>
+    <comment_count>1</comment_count>
+    <who name="Ben Newman">ben</who>
+    <bug_when>2014-11-20 17:18:58 -0800</bug_when>
+    <thetext>Motivation: https://speakerdeck.com/dherman/closing-iterators</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11740</commentid>
+    <comment_count>2</comment_count>
+    <who name="Ben Newman">ben</who>
+    <bug_when>2015-01-28 12:11:04 -0800</bug_when>
+    <thetext>After discussion in the TC39 meeting of 28 January 2015, it was decided an exception should NOT be thrown by the for-of loop when the result of the iterator.return() call is an object with a falsy .done property. Note that an exception should still be thrown if the result of the .return() call is not an object.
+
+Iterator implementors who really want an exception to be thrown if .return() is called early can implement their own return method that throws an exception.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

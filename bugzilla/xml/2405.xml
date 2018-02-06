@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2405</bug_id>
+          
+          <creation_ts>2013-12-18 11:58:00 -0800</creation_ts>
+          <short_desc>Name binding in ClassDeclaration</short_desc>
+          <delta_ts>2015-07-10 08:35:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6953</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-12-18 11:58:09 -0800</bug_when>
+    <thetext>We used to not add an internal const binding to the internal class environment for the name of the ClassDeclaration. That was so we would match FunctionDeclaration.
+
+In the latest spec this has changed and now we always have a const binding. This is a change in behavior and we had consensus on the old behavior.
+
+class C {
+  m() {
+    return C;
+  }
+}
+
+var C2 = C;
+C = 42;
+assert.equal(new C().m(), 42);
+
+I&apos;m not opposed to this new behavior but it is not what we agreed upon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12751</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 17:09:00 -0800</bug_when>
+    <thetext>It&apos;s pretty clear that the binding behavior of function declarations (and how it differs from FunctinonExpression) is a legacy design bug that we would do over if we weren&apos;t afraid of breakage.
+
+The argument for preserving that behavior in class declarations was for consistency with function declarations. But we seem to have abandoned the goal of class declaration/function declaration consistency in a number of other ways.
+
+Finally, there are many reasons (not just recursion) that various parts of a class body might need to reliably reference its actual class by name(and fixes for functions, such as function.callee wouldn&apos;t cover all those use cases).
+
+So, I&apos;m planning on leaving the binding as current specified and expect the world to be a better place because of it.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

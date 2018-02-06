@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>240</bug_id>
+          
+          <creation_ts>2012-01-10 04:54:00 -0800</creation_ts>
+          <short_desc>UTF-8 BOM makes parseTestRecord fail for certain tests</short_desc>
+          <delta_ts>2012-03-28 16:31:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>Macintosh</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Joost-Wim Boekesteijn">joost-wim</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>551</commentid>
+    <comment_count>0</comment_count>
+    <who name="Joost-Wim Boekesteijn">joost-wim</who>
+    <bug_when>2012-01-10 04:54:01 -0800</bug_when>
+    <thetext>When running the tests for ch07 or ch15, the command line test runner fails with this message:
+
+Traceback (most recent call last):
+  File &quot;tools/packaging/test262.py&quot;, line 453, in &lt;module&gt;
+    Main()
+  File &quot;tools/packaging/test262.py&quot;, line 448, in Main
+    options.full_summary)
+  File &quot;tools/packaging/test262.py&quot;, line 412, in Run
+    cases = self.EnumerateTests(tests)
+  File &quot;tools/packaging/test262.py&quot;, line 363, in EnumerateTests
+    strict_case = TestCase(self, name, full_path, True)
+  File &quot;tools/packaging/test262.py&quot;, line 185, in __init__
+    del testRecord[&quot;commentary&quot;]
+KeyError: &apos;commentary&apos;
+
+The problem seems to be that some files start with a UTF-8 Byte Order Mark (which ends up in the source string) causing the parseTestRecord function to fail.
+
+My guess is that there are two approaches to fixing this:
+
+1. Removing the BOM from the offending files. Using the next command, I produced a list of these files:
+
+find ./test/suite -name &apos;*.js&apos; | xargs file | grep BOM
+
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-2-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-3-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-4-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-5-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-6-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-7-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-8-s.js
+./test/suite/ch07/7.6/7.6.1/7.6.1.2/7.6.1.2-9-s.js
+./test/suite/ch15/15.11/15.11.4/15.11.4.2/15.11.4.2-1.js
+./test/suite/ch15/15.11/15.11.4/15.11.4.3/15.11.4.3-1.js
+
+I&apos;m not sure if the BOM is there for any reason. Probably not.
+
+2. Changing the way the files are read.
+
+As a quick hack, I changed TestCase.__init__ in tools/packaging/test262.py by replacing the call to &apos;open&apos; with &apos;codecs.open&apos;:
+
+-f = open(self.full_path)
++f = codecs.open(self.full_path, &quot;r&quot;, &quot;utf-8-sig&quot;)
+
+With this change, Python skips the BOM when reading the file. This also needs an extra line &apos;import codecs&apos; at the top of the file.
+
+Tested with Python 2.7.1 on OS X 10.7.2 against revision 282, changeset 99ff7d59530c.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>552</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-10 09:42:18 -0800</bug_when>
+    <thetext>Changing open(self.full_path) to open(self.full_path, &apos;rb&apos;) might be a smaller fix.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>553</commentid>
+    <comment_count>2</comment_count>
+    <who name="Joost-Wim Boekesteijn">joost-wim</who>
+    <bug_when>2012-01-10 09:56:25 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Changing open(self.full_path) to open(self.full_path, &apos;rb&apos;) might be a smaller
+&gt; fix.
+
+In fact, specifying &apos;rb&apos; does not change the way the BOM is handled. To illustrate this, I created a text file containing the word &apos;test&apos; and saved it as UTF-8 with a BOM.
+
+Reading this file in different ways then yields these results:
+
+Python 2.7.1 (r271:86832, Jun 25 2011, 05:09:01) 
+[GCC 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2335.15.00)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; open(&quot;withbom.txt&quot;).read()
+&apos;\xef\xbb\xbftest&apos;
+&gt;&gt;&gt; open(&quot;withbom.txt&quot;, &quot;rb&quot;).read()
+&apos;\xef\xbb\xbftest&apos;
+&gt;&gt;&gt; import codecs
+&gt;&gt;&gt; codecs.open(&quot;withbom.txt&quot;, &quot;r&quot;, &quot;utf-8-sig&quot;).read()
+u&apos;test&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>755</commentid>
+    <comment_count>3</comment_count>
+    <who name="Joost-Wim Boekesteijn">joost-wim</who>
+    <bug_when>2012-03-13 06:14:09 -0700</bug_when>
+    <thetext>Update: in revision 324, there is a single file left that starts with a UTF-8 Byte Order Mark. From the root directory, running the command from the first line returns the filename on the second line:
+
+&gt; find ./test/suite -name &apos;*.js&apos; | xargs file | grep BOM
+&gt; ./test/suite/ch07/7.8/7.8.5/S7.8.5_A3.1_T7.js
+
+This is also the only file that results in a KeyError on this line from test262.py:
+
+&gt; del testRecord[&quot;commentary&quot;]
+
+If the BOM is removed from this single file, https://bugs.ecmascript.org/show_bug.cgi?id=271 will also be solved since the BOM is the only thing that causes the KeyError on the commentary key.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>758</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-14 14:25:01 -0700</bug_when>
+    <thetext>Should be fixed now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>760</commentid>
+    <comment_count>5</comment_count>
+    <who name="Joost-Wim Boekesteijn">joost-wim</who>
+    <bug_when>2012-03-14 14:57:13 -0700</bug_when>
+    <thetext>Thanks! Issue is indeed resolved, the KeyError has disappeared.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

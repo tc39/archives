@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4102</bug_id>
+          
+          <creation_ts>2015-03-03 14:21:00 -0800</creation_ts>
+          <short_desc>22.2.3.22.1 %TypedArray%.prototype.set wrongly accesses array.[[ArrayLength]]</short_desc>
+          <delta_ts>2015-03-03 16:15:29 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13449</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-03-03 14:21:59 -0800</bug_when>
+    <thetext>This is the method for non-typed-array use, so this should be a Get of &quot;length&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13451</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-03 15:16:07 -0800</bug_when>
+    <thetext>Actually, I just noticed that you are reporting this against rev32 which is a month out of date.  
+
+The current Rev34 uses a Get of &quot;length&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13452</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-03-03 15:40:07 -0800</bug_when>
+    <thetext>Sorry, last time I checked a few days ago there was no component for the latest spec.  I was consulting the Feb20 spec, and it definitely does not have a Get of &quot;length&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13453</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-03 15:51:25 -0800</bug_when>
+    <thetext>(In reply to Jeff Walden (remove +beo to mail) from comment #2)
+&gt; Sorry, last time I checked a few days ago there was no component for the
+&gt; latest spec.  I was consulting the Feb20 spec, and it definitely does not
+&gt; have a Get of &quot;length&quot;.
+
+
+??? step 18 of http://people.mozilla.org/~jorendorff/es6-draft.html#sec-%typedarray%.prototype.set-array-offset</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13454</commentid>
+    <comment_count>4</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-03-03 16:15:29 -0800</bug_when>
+    <thetext>Baaah, I was somehow misreading step 11 as referring to the uncertainly-valued argument -- not to |this| which is definitely a typed array.  Sorry about that!  :-(</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

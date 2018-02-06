@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4144</bug_id>
+          
+          <creation_ts>2015-03-08 14:32:00 -0700</creation_ts>
+          <short_desc>&quot;strict mode&quot; vs &quot;strict&quot;</short_desc>
+          <delta_ts>2015-03-17 16:57:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13649</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-08 14:32:13 -0700</bug_when>
+    <thetext>The spec is inconsistent on using &quot;strict mode&quot; vs just &quot;strict&quot;. E.g.:
+
+   1 &quot;strict mode binding&quot;  vs  4 &quot;strict binding&quot;
+  48 &quot;strict mode code&quot;     vs 36 &quot;strict code&quot;
+   1 &quot;strict mode variant&quot;  vs  6 &quot;strict variant&quot;
+
+Personally, I&apos;d say drop &quot;mode&quot;:
+
+(1) You don&apos;t need it.
+
+(2) A one-word adjective is simpler than a two-word adjectival phrase.
+
+(3) Phrases like &quot;non-strict mode functions&quot; read (at first glance) like
+       (non-strict) (mode functions)
+    rather than
+       non-(strict mode) functions
+
+(4) To me, the strict variant doesn&apos;t seem like a &apos;mode&apos; anyway.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13750</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 12:58:38 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft
+
+&quot;strict binding&quot; is has a distinct meaning, separate from &quot;strict mode&quot;.  Eliminated the 1 occurrence of &quot;strict mode binding&quot;
+
+&quot;strict variant&quot; is only used in 4.2.2. Eliminate the one occurrence of &quot;strict mode variant&quot;
+
+In 9.2 defined the terms &quot;strict function&quot; and &quot;non-strict&quot; function
+
+In 10.2.1 defined the term &quot;non-strict code&quot; meaning code that is not strict mode code.
+
+Update rest of spec. text to use those terms.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13823</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:06 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

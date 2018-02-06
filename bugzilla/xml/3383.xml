@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3383</bug_id>
+          
+          <creation_ts>2014-11-13 09:03:00 -0800</creation_ts>
+          <short_desc>9.2.13, 18.2.1.2: Direct eval + default parameter expression</short_desc>
+          <delta_ts>2015-02-12 12:17:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10632</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-13 09:03:38 -0800</bug_when>
+    <thetext>9.2.13  FunctionDeclarationInstantiation(func, argumentsList, env ) Abstract Operation
+18.2.1.2 Runtime Semantics: EvalDeclarationInstantiation( body, varEnv, lexEnv, strict)  
+
+
+9.2.13 sets &quot;topLex&quot; in step 30, but default parameter expressions may contain direct eval expressions, that means when accessing &quot;topLex&quot; in 18.2.1.2 step 6.b won&apos;t be successful (it&apos;s value is still `undefined`). 
+
+Also: When parameter expressions are present, the execution context&apos;s &quot;VariableEnvironment&quot; is not a FunctionEnviroment, so the condition in 18.2.1.2 step 6.b is not fulfilled, but IIUC it needs to be to perform the lexical redeclaration checks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10705</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-03 12:37:08 -0800</bug_when>
+    <thetext>I&apos;d think we should scope direct evals in parameter list expressions the same as we do for strict direct evals -- all declaration get created in a new environment that is discard when the eval completes.
+
+I&apos;m going to start an es-discuss thread on this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12113</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-04 17:54:37 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+direct evals in parameter initializers now create their var bindings in their own scope, even if they aren&apos;t strict.
+
+Because of that direct eval in an initializer won&apos;t access topLex and don&apos;t need to do the 6.b validation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12114</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-04 17:55:26 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12123</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-05 11:30:31 -0800</bug_when>
+    <thetext>Actually, each parameter position gets one Var environment that is used by all of its direct evals:
+
+So:
+var x=0;&quot;, 
+function f(a=(eval(&quot;var x=1;&quot;),eval(&quot;log(x)&quot;)),
+           b=eval(&quot;log(x)&quot;)
+          ) {log(x)}
+f();
+
+should log: 1 0 0</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12473</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:43 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2293</bug_id>
+          
+          <creation_ts>2013-11-14 21:49:00 -0800</creation_ts>
+          <short_desc>22.2.1.2: missing &quot;while&quot;</short_desc>
+          <delta_ts>2014-06-02 12:01:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6789</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-14 21:49:37 -0800</bug_when>
+    <thetext>In 22.2.1.2 &quot;%TypedArray% ( typedArray )&quot;,
+step 20.j says:
+    Repeat, count &gt;0
+
+Insert &quot;while&quot; before &quot;count&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6805</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-15 12:16:11 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6992</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-23 16:54:08 -0800</bug_when>
+    <thetext>In rev22, you inserted the &quot;while&quot;, but now there&apos;s no space after the comma.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7082</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:04:37 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7158</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-29 13:01:28 -0800</bug_when>
+    <thetext>See comment #2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8467</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 17:36:06 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8826</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 12:01:02 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2648</bug_id>
+          
+          <creation_ts>2014-04-11 19:16:00 -0700</creation_ts>
+          <short_desc>Instantiate double normalization</short_desc>
+          <delta_ts>2015-03-16 14:40:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7696</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-04-11 19:16:10 -0700</bug_when>
+    <thetext>Currently all module names for dynamic modules would be normalized twice. This is unnecessary and could lead to unwanted side effects.
+
+This happens in the following way:
+
+1. The instantiate hook takes unnormalized dependencies for its &quot;deps&quot; argument.
+2. In the execute function of the instantiate hook, we then need access to the normalized dependency names in order to do dependency lookups from a side table.
+3. We thus have to know the normalized dependency names in execution, and so we end up normalizing the dependencies anyway before returning the instantiation result.
+
+Initially I thought it would be possible simply to return the normalized dependencies as arguments into the &quot;execute&quot; function, but unfortunately this does not solve the problem.
+
+The reason for this is that when dealing with circular references in a side table, we need to be able to run the factory functions of sub-dependencies. In order to do this we need to know the normalized dependency names of sub-dependencies, which could would happen before the execute call of a given sub-dependency.
+
+The easiest solution here that I can see is simply to let the instantiate result take fully-normalized dependencies. There may be alternatives as well.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13769</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:40:12 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

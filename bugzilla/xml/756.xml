@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>756</bug_id>
+          
+          <creation_ts>2012-10-07 10:49:00 -0700</creation_ts>
+          <short_desc>built-in [[Construct]] behavior: recast as algorithms</short_desc>
+          <delta_ts>2013-10-22 18:50:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1888</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-07 10:49:16 -0700</bug_when>
+    <thetext>Within section 15, I&apos;m looking at the sections with titles like &quot;new Foo(...)&quot;, i.e. the sections that define the behaviour that is bound to the [[Construct]] internal property of built-in constructor-objects.
+
+For some of these, the behavior is given as an algorithm:
+    15.2.2.1  new Object ( [ value ] )
+    15.3.2.1  new Function (p1, p2, ..., pn, body)
+    15.4.2.1  new Array ( [ item0 [ , item1 [ , ... ] ] ] )
+    15.4.2.2  new Array (len)
+    15.14.3.1 new Map (iterable = [ ])
+
+For the rest, the behaviour is given in prose, but could be straightforwardly recast as an algorithm.
+
+---
+
+For instance,
+    15.5.2.1 new String ( [ value ] )
+could say (something like):
+    1. Let /S/ be a newly created ECMAScript object.
+    2. Set the [[Prototype]] internal property of /S/ to the standard
+       built-in String prototype object that is the initial value of
+       String.prototype (15.5.3.1).
+    3. Set the [[NativeBrand]] internal property of /S/ to StringWrapper.
+    4. Set the [[Extensible]] internal property of /S/ to true.
+    5. Set the [[PrimitiveValue]] internal property of /S/ to
+       ToString(/value/), or to the empty String if /value/ is not supplied.
+    6. Return /S/
+
+As an algorithm, the behavior is more concrete and more uniformly expressed. It also clarifies that this method is responsible for creating (and returning) the object. (The existing prose simply refers to &quot;the newly constructed object&quot;, which isn&apos;t very clear.)
+
+---
+
+In a few cases:
+    15.9.3.1 new Date (year, month [, date [, hours etc )
+    15.9.3.2 new Date (value)
+    15.13.6.2.1 new TypeArray(arg0 [, arg1 [, arg2 ] )
+    15.13.7.2.1 new DataView(buffer [, byteOffset [, byteLength]])
+the [[Construct]] behavior is currently given partly in prose and partly in algorithm; here, the prose parts could be recast as steps and added to the algorithm.
+
+Also, in
+    15.10.4.1 new RegExp(pattern, flags)
+the behavior is given as an algorithm, but it&apos;s a single step that just calls RegExpCreate, and the latter is expressed in prose. But it looks like the prose could be fairly easily recast as an algorithm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5959</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 18:50:25 -0700</bug_when>
+    <thetext>there has been a general rewrite of all built-in constructor definitions</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

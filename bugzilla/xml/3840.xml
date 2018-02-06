@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3840</bug_id>
+          
+          <creation_ts>2015-02-11 17:48:00 -0800</creation_ts>
+          <short_desc>IsArray, IsCallable, IsConstructor, IsRegExp should all throw when used on a revoked proxy, just like Object.isExtensible does</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>evilpies</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12338</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-02-11 17:48:44 -0800</bug_when>
+    <thetext>Revoked proxies throw on attempts to examine them, touch them, &amp;c.  This should include yes-or-no queries about their internal natures, including all the ones in the summary.  Currently they&apos;re inconsistent: IsRegExp throws, IsArray returns false, IsCallable and IsConstructor return the nature of the original target of the proxy.
+
+It&apos;s also worth noting that Object.isExtensible throws on a revoked proxy.  It seems pretty clear that if the other predicates noted consulted traps (as only IsRegExp does right now), they would throw for that reason.  Seems like everything should throw.  (And for what it&apos;s worth, SpiderMonkey&apos;s dead-object/membrane precedent is for these things to throw, too, as I recall.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12373</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 08:42:21 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+Fixed IsArray, GetFunctionRealm to throw when applied to a revoked proxy. Also made ProxyCreate throw if either the handler or target object is a direct proxy.
+
+As far as I can see, those are the only remaining places that drill through a proxy and didn&apos;t either explicitly or implicitly (via internal method calls check for revocation.
+
+I don&apos;t want to make IsCallable and IsConstructor throw because they are used too many places within the spec. as direct predicates of an if and hence don&apos;t have  a subsequent ReturnIfAbrupt check.  It looks to me, that those uses will generally detect revoked proxies because they ultimately do something that invokes an internal method. Let me know if you see any that don&apos;t</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12399</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

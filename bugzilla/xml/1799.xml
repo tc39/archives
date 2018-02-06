@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1799</bug_id>
+          
+          <creation_ts>2013-08-22 06:58:00 -0700</creation_ts>
+          <short_desc>15.19.4.3.4 CreateItrResultObject (value, done)</short_desc>
+          <delta_ts>2013-08-22 07:30:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>other</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andy Wingo">wingo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5000</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-08-22 06:58:23 -0700</bug_when>
+    <thetext>It doesn&apos;t seem that the &quot;value&quot; property need be present on an iterator object if the value is undefined.  Likewise &quot;done&quot; need not be present if it is false, as undefined is falsey.  Consider relaxing the specification to say &quot;create an object in such a way that IteratorValue(result) would return value, and IteratorDone(result) would return done&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5001</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-08-22 07:30:45 -0700</bug_when>
+    <thetext>André Bargull notes in https://bugzilla.mozilla.org/show_bug.cgi?id=907744#c4:
+
+&gt; [Eliding value or done properties] is a bit problematic because the object created in CreateItrResultObject inherits from Object.prototype which means &quot;value&quot; or &quot;done&quot; on Object.prototype can mix up things.
+
+Indeed.  I guess the properties should always be there, unless we allow the result object to not inherit from Object.prototype.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

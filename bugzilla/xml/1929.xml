@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1929</bug_id>
+          
+          <creation_ts>2013-09-27 05:26:00 -0700</creation_ts>
+          <short_desc>19.2.3.5, Function.prototype.toString(): missing &quot;not&quot;?</short_desc>
+          <delta_ts>2014-06-16 13:55:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5455</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 05:26:29 -0700</bug_when>
+    <thetext>19.2.3.5, Function.prototype.toString(), 2nd paragraph, last sentence:
+
+&quot;If the source code string does meet these criteria then it must be a string for which eval will throw a SyntaxError exception.&quot;
+
+Change &quot;will throw&quot; to &quot;will not throw&quot; or &quot;does meet&quot; to &quot;does not meet&quot;? The latter restriction is more strict.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5470</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 09:49:58 -0700</bug_when>
+    <thetext>I believe that the intent is what the current text says:  if the stated criteria can not be met then trying to eval that toString text should produce a syntax error.
+
+MarkM should know</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5608</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-09-27 17:29:22 -0700</bug_when>
+    <thetext>I think &quot;these criteria&quot; are malformed, as it doesn&apos;t state any requirement on how the original function was expressed, only on which production it is rendered as. But even once these are brought into sync, then André is correct. The text should read &quot;does not meet&quot;.
+
+As currently written, the text is self contradictory anyway, as the function source cannot both preserve the original functionality when evaluated and throw a Syntax error when evaluated.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8479</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 18:12:07 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8956</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 13:55:34 -0700</bug_when>
+    <thetext>in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

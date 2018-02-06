@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3508</bug_id>
+          
+          <creation_ts>2015-01-03 05:46:00 -0800</creation_ts>
+          <short_desc>6.1.6 The Number Type: Paragraph about NaN value detection requires updates</short_desc>
+          <delta_ts>2015-05-29 06:19:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dehrenberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11301</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-03 05:46:48 -0800</bug_when>
+    <thetext>6.1.6  The Number Type
+
+&gt; In some implementations, external code might be able to detect a
+&gt; difference between various Not-a-Number values, but such behaviour 
+&gt; is implementation-dependent; to ECMAScript code, all NaN values are 
+&gt; indistinguishable from each other.
+
+The last part is no longer true, ECMAScript user code is now able to distinguish between different NaN values, because Float{32,64}Arrays do not canonicalize NaN values on write operations.
+
+
+Unfortunate side-effect of the new ability to distinguish between different NaN values: The MOP level changes from ES3 -&gt; ES5 in [[Put]] are now visible to user code. 
+
+ES3, 8.6.2.2 [[Put]], step 4:
+The value of an own, writable property is always updated. 
+
+ES5.1, 8.12.5 [[Put]], 3.b + 8.12.9 [[DefineOwnProperty]], step 6:
+The value of an own, writable property is not updated if the value stays the same if compared with the SameValue algorithm.
+
+Note: Implementations [1,2] seem to follow ES3 [[Put]] semantics with NaN values, but I guess this is more a performance thing than an ES3 compatibility decision.
+
+[1] Tested with JavaScriptCore, V8, Nashorn, IE11 (Win10 9879), SpiderMonkey
+
+
+Test code:
+---
+function numberToRawBits(v) {
+  var isLittleEndian = new Uint8Array(new Uint16Array([1]).buffer)[0] === 1;
+  var reduce = Array.prototype[isLittleEndian ? &apos;reduceRight&apos; : &apos;reduce&apos;];
+  var float64 = new Float64Array(1);
+  float64[0] = v;
+  var uint8 = new Uint8Array(float64.buffer);
+  return reduce.call(uint8, function(a, v) {
+    return (a * 256) + v;
+  }, 0);
+}
+
+var o = {};
+Object.defineProperty(o, &quot;p&quot;, {value: 0, writable: true, enumerable: true, configurable: true});
+
+// nan1 and nan2 are two different NaN values
+o.p = nan1;
+o.p = nan2;
+
+print(&quot;nan1:&quot;, numberToRawBits(nan1).toString(16));
+print(&quot;nan2:&quot;, numberToRawBits(nan2).toString(16));
+print(&quot;o.p:&quot;, numberToRawBits(o.p).toString(16)); // same as nan2 in ES3, same as nan1 in ES5/6
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11302</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-03 06:14:23 -0800</bug_when>
+    <thetext>There&apos;s also a slightly inconsistent behaviour for own, writable property updates when you take a look at mapped arguments objects, because mapped properties are always updated in ES5/6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11343</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 16:11:03 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #0)
+&gt; 6.1.6  The Number Type
+&gt; 
+&gt; &gt; In some implementations, external code might be able to detect a
+&gt; &gt; difference between various Not-a-Number values, but such behaviour 
+&gt; &gt; is implementation-dependent; to ECMAScript code, all NaN values are 
+&gt; &gt; indistinguishable from each other.
+&gt; 
+&gt; The last part is no longer true, ECMAScript user code is now able to
+&gt; distinguish between different NaN values, because Float{32,64}Arrays do not
+&gt; canonicalize NaN values on write operations.
+
+But, only by examining the bytes of  a binary ArrayBuffer.  I&apos;m not sure that this is fundamentally different from using &quot;external code&quot; to write a Number to a file and then using byte level reads to examine what was written. Also, in ES6 the ArrayBuffer SetValueInBuffer operations state that the actual value stored for NaN values is implementation dependent, so what you see in the buffer doesn&apos;t imply anything about the NaN encoding of the original value that was stored.
+
+6.1.6 is really talking about the ECMAScript Number data type, and such values aren&apos;t directly stored in ArrayBuffers but instead are converted to IEEE binary64  values. Arguably, 6.1.6 doesn&apos;t even apply to such values in a buffer.
+
+Finally, I suspect what the original authors had in mind for the quoted sentence was Number values passed as arguments to native code procedures which could directly inspect the bit-level encoding of the arguments.  Nothing has changed in that regard in either ES5 or ES6.
+
+To sum up, it&apos;s not clear to me that there is anything wrong in what 6.1.6 says or whether anything else really need to be stated.  But I added this note immediately following that paragraph:
+
+&quot;NOTE	The bit pattern that might be observed in an ArrayBuffer (see 24.1) after a Number value has been stored into it is not necessarily the same as the internal representation of that Number value used by the ECMAScript implementation. &quot;
+
+&gt; 
+&gt; 
+&gt; Unfortunate side-effect of the new ability to distinguish between different
+&gt; NaN values: The MOP level changes from ES3 -&gt; ES5 in [[Put]] are now visible
+&gt; to user code. 
+&gt; 
+&gt; ES3, 8.6.2.2 [[Put]], step 4:
+&gt; The value of an own, writable property is always updated. 
+&gt; 
+&gt; ES5.1, 8.12.5 [[Put]], 3.b + 8.12.9 [[DefineOwnProperty]], step 6:
+&gt; The value of an own, writable property is not updated if the value stays the
+&gt; same if compared with the SameValue algorithm.
+
+In ES6, [[Set]] has an over-riding definition for IntegerIndexed Exotic objects (ie, Typed Arrays) that doesn&apos;t do that SameValue check</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11353</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-14 09:16:34 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #2)
+&gt; But, only by examining the bytes of  a binary ArrayBuffer.  I&apos;m not sure
+&gt; that this is fundamentally different from using &quot;external code&quot; to write a
+&gt; Number to a file and then using byte level reads to examine what was
+&gt; written. 
+
+Yes. 
+
+
+&gt; Also, in ES6 the ArrayBuffer SetValueInBuffer operations state that
+&gt; the actual value stored for NaN values is implementation dependent, so what
+&gt; you see in the buffer doesn&apos;t imply anything about the NaN encoding of the
+&gt; original value that was stored.
+
+Hmm, I hope the current spec for SetValueInBuffer won&apos;t create a loophole where a non-configurable + non-writable data property with a NaN value is allowed to change to a different NaN value (as observed by using ArrayBuffers like in the `numberToRawBits` function from above). That would be bad because it creates a communication channel, right? More below...
+
+
+&gt; 6.1.6 is really talking about the ECMAScript Number data type, and such
+&gt; values aren&apos;t directly stored in ArrayBuffers but instead are converted to
+&gt; IEEE binary64  values. Arguably, 6.1.6 doesn&apos;t even apply to such values in
+&gt; a buffer.
+
+6.1.6 in context of ECMAScript user code only means to express: Given any operation `op` when `op` is applied to two distinct NaN values `nan1` and `nan2`, the result will be the same. Basically `SameValue(op(nan1), op(nan2))` is true. (Well, except when `op` returns an Object value, but let&apos;s ignore that issue for the time being.)
+
+
+&gt; Finally, I suspect what the original authors had in mind for the quoted
+&gt; sentence was Number values passed as arguments to native code procedures
+&gt; which could directly inspect the bit-level encoding of the arguments. 
+&gt; Nothing has changed in that regard in either ES5 or ES6.
+
+Yes. 
+
+
+&gt; 
+&gt; To sum up, it&apos;s not clear to me that there is anything wrong in what 6.1.6
+&gt; says or whether anything else really need to be stated.  But I added this
+&gt; note immediately following that paragraph:
+&gt; 
+&gt; &quot;NOTE	The bit pattern that might be observed in an ArrayBuffer (see 24.1)
+&gt; after a Number value has been stored into it is not necessarily the same as
+&gt; the internal representation of that Number value used by the ECMAScript
+&gt; implementation. &quot;
+&gt; 
+
+Ok.
+
+
+&gt; &gt; ES3, 8.6.2.2 [[Put]], step 4:
+&gt; &gt; The value of an own, writable property is always updated. 
+&gt; &gt; 
+&gt; &gt; ES5.1, 8.12.5 [[Put]], 3.b + 8.12.9 [[DefineOwnProperty]], step 6:
+&gt; &gt; The value of an own, writable property is not updated if the value stays the
+&gt; &gt; same if compared with the SameValue algorithm.
+&gt; 
+&gt; In ES6, [[Set]] has an over-riding definition for IntegerIndexed Exotic
+&gt; objects (ie, Typed Arrays) that doesn&apos;t do that SameValue check
+
+So, should 9.1.6 [[DefineOwnProperty]] resp. ValidateAndApplyPropertyDescriptor be changed to omit the SameValue check for writable and/or configurable properties?
+
+
+Even if SetValueInBuffer is allowed to change a NaN value to a different (quiet) NaN value, this example should not assert:
+---
+// Let nan1 and nan2 be two different NaN values.
+
+var o = {};
+
+Object.defineProperty(o, &quot;p&quot;, {value: nan1});
+var bitsNan1 = numberToRawBits(o.p).toString(16);
+
+Object.freeze(o);
+
+Object.defineProperty(o, &quot;p&quot;, {value: nan2});
+var bitsNan2 = numberToRawBits(o.p).toString(16);
+
+assertEq(bitsNan1, bitsNan2);
+---
+
+Otherwise an attacker is able to create a communication channel which seems unfortunate. (Also: An attacker probably knows how SetValueInBuffer is implemented in a given implementation and therefore knows how NaNs are handled.)
+
+
+
+Let&apos;s summarize this issue:
+When an own, writable property is updated in the ordinary [[Set]] internal method, [[Set]] calls the ordinary [[DefineOwnProperty]] method which in turn calls ValidateAndApplyPropertyDescriptor. The `Desc` parameter for ValidateAndApplyPropertyDescriptor in this case is `Desc = PropertyDescriptor{[[Value]]: V}`. Step 4 of ValidateAndApplyPropertyDescriptor will then perform a SameValue check on `Desc.Value` and if the SameValue check returns true, ValidateAndApplyPropertyDescriptor simply returns. 
+In implementations this SameValue check does not take place when ValidateAndApplyPropertyDescriptor is called from [[Set]]. It is performed when ValidateAndApplyPropertyDescriptor is called from [[DefineOwnProperty]], for example when `Object.defineProperty` is invoked. And users are able to observe this difference with the example code given in comment #0.
+
+IIUC implementations are allowed to skip the SameValue check for [[Set]] because SetValueInBuffer may use a different quiet NaN value when a NaN value is written into an ArrayBuffer. And that means it is perfectly valid for an implementation to write different binary64 values into an ArrayBuffer if even SetValueInBuffer is called with the same NaN value. For example the first call to SetValueInBuffer with a specific NaN value writes the binary64 value `binary64Value1`, the next call to SetValueInBuffer with the same NaN value writes `binary64Value2`. And `binary64Value1` is not equal to `binary64Value2`.
+
+That explanation allows to skip the SameValue check for [[Set]], but it also provides a loophole to create a communication channel for non-writable + non-configurable NaN properties. Because when [[Set]] is allowed to skip the SameValue check, why not also skip it in [[DefineOwnProperty]]? An implementor could just excuse herself by saying that NaN detection through SetValueInBuffer leads to implementation defined behaviour and be done with it. 
+
+If you ask yourself whether or not this actually matters in practice - yes it does. For example Nashorn used to allow to change non-configurable + non-writable NaN properties to a different NaN value. An old bug report from me: https://bugs.openjdk.java.net/browse/JDK-8030197</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11354</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-14 15:22:27 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #3)
+&gt; (In reply to Allen Wirfs-Brock from comment #2)
+&gt; 
+&gt; 
+&gt; So, should 9.1.6 [[DefineOwnProperty]] resp.
+&gt; ValidateAndApplyPropertyDescriptor be changed to omit the SameValue check
+&gt; for writable and/or configurable properties?
+&gt; 
+&gt; 
+&gt; Even if SetValueInBuffer is allowed to change a NaN value to a different
+&gt; (quiet) NaN value, this example should not assert:
+&gt; ---
+&gt; // Let nan1 and nan2 be two different NaN values.
+&gt; 
+&gt; var o = {};
+&gt; 
+&gt; Object.defineProperty(o, &quot;p&quot;, {value: nan1});
+&gt; var bitsNan1 = numberToRawBits(o.p).toString(16);
+&gt; 
+&gt; Object.freeze(o);
+
+Note that ES6 specifies that the indexable properties of Typed Array are implicitly non-confiburable, and writable and that such a property can not be made non-writable (see http://people.mozilla.org/~jorendorff/es6-draft.html#sec-integer-indexed-exotic-objects-defineownproperty-p-desc steps 3.c.viii-x )
+
+So, trying to freeze such an object will fail. So if you are passing a typed array around you already have a much bigger communications channel.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11364</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 05:50:43 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; Note that ES6 specifies that the indexable properties of Typed Array are
+&gt; implicitly non-confiburable, [...]
+
+Yup, except in my examples there are no Typed Arrays, but ordinary objects using the ordinary internal method definitions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11366</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 06:46:05 -0800</bug_when>
+    <thetext>WDYT about this change for SetValueInBuffer:
+  https://gist.github.com/anba/284212fe803be2d06d8a
+
+And this change for ValidateAndApplyPropertyDescriptor:
+  https://gist.github.com/anba/5bc82dc36549d8f5b149</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11367</commentid>
+    <comment_count>7</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 07:11:16 -0800</bug_when>
+    <thetext>I guess I should have explained the intention behind the ValidateAndApplyPropertyDescriptor change:
+
+By removing step 4 of the original algorithm, a property update takes place even if the property value does not change when compared with the SameValue algorithm. That way implementations are no longer required to perform a SameValue check in the ordinary [[Set]] internal method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11555</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-19 15:54:25 -0800</bug_when>
+    <thetext>OK, I think I now get what you concern is all about.
+
+I think you added sentence for setValueInBuffer is a good idea and I have incorporated that into the ES6 spec.
+
+WRT your rewrite of ValidateAndApplyPropertyDescriptor, I think it looks promising.  However, I&apos;m hesitant to apply it to ES6 at this stage of its development. One of the hardest parts of ES5 development was getting that algorithm to point where everyone was convinced it was correct. (for example, see http://wiki.ecmascript.org/doku.php?id=es3.1:attribute_states) I probably needs to get more review then just you and me. However, right now there seems like there are many more important things in ES6 that people should be focusing on reviewing.
+
+Right now, step 4 of the current algorithm, seems like an early-out optimization that doesn&apos;t need to be there. However, I have a vague recollection that including it allowed us to simplify the rest of the algorithm. But that recollection might be wrong. (we might find some hints by comparing it in various ES5 drafts http://wiki.ecmascript.org/doku.php?id=es3.1:es3.1_proposal_working_draft but that also doesn&apos;t seem like the most important think to spend time on right now).
+
+I think we should probably take the time to do a more thorough review and target fixing it for ES7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12682</commentid>
+    <comment_count>9</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 14:19:08 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #8)
+&gt; I think we should probably take the time to do a more thorough review and
+&gt; target fixing it for ES7.
+
+Agreed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14465</commentid>
+    <comment_count>10</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-28 12:25:28 -0700</bug_when>
+    <thetext>It seems like the security issue primarily comes up due to this:
+
+&quot;In implementations this SameValue check does not take place when ValidateAndApplyPropertyDescriptor is called from [[Set]]. It is performed when ValidateAndApplyPropertyDescriptor is called from [[DefineOwnProperty]], for example when `Object.defineProperty` is invoked. And users are able to observe this difference with the example code given in comment #0.&quot;
+
+Wouldn&apos;t those implementations be non-conformant? I tried it in V8, and V8 seems to be conformant in returning the initial NaN representation for the code in #3 (whether using = or defineOwnProperty).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14466</commentid>
+    <comment_count>11</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-28 13:27:02 -0700</bug_when>
+    <thetext>(In reply to Daniel Ehrenberg from comment #10)
+&gt; It seems like the security issue primarily comes up due to this:
+&gt; 
+&gt; &quot;In implementations this SameValue check does not take place when
+&gt; ValidateAndApplyPropertyDescriptor is called from [[Set]]. It is performed
+&gt; when ValidateAndApplyPropertyDescriptor is called from
+&gt; [[DefineOwnProperty]], for example when `Object.defineProperty` is invoked.
+&gt; And users are able to observe this difference with the example code given in
+&gt; comment #0.&quot;
+
+The next two paragraphs are more important for the potential communication channel issue:
+
+&quot;IIUC implementations are allowed to skip the SameValue check for [[Set]] because SetValueInBuffer may use a different quiet NaN value when a NaN value is written into an ArrayBuffer. [...]
+
+That explanation allows to skip the SameValue check for [[Set]], but it also provides a loophole to create a communication channel for non-writable + non-configurable NaN properties. Because when [[Set]] is allowed to skip the SameValue check, why not also skip it in [[DefineOwnProperty]]? An implementor could just excuse herself by saying that NaN detection through SetValueInBuffer leads to implementation defined behaviour and be done with it. &quot;
+
+
+The &quot;IIUC&quot; refers to Allen&apos;s response in comment #2:
+&quot;But, only by examining the bytes of  a binary ArrayBuffer.  I&apos;m not sure that this is fundamentally different from using &quot;external code&quot; to write a Number to a file and then using byte level reads to examine what was written. Also, in ES6 the ArrayBuffer SetValueInBuffer operations state that the actual value stored for NaN values is implementation dependent, so what you see in the buffer doesn&apos;t imply anything about the NaN encoding of the original value that was stored.&quot;
+
+
+&gt; 
+&gt; Wouldn&apos;t those implementations be non-conformant? I tried it in V8, and V8
+&gt; seems to be conformant in returning the initial NaN representation for the
+&gt; code in #3 (whether using = or defineOwnProperty).
+
+All major engines are spec-conformant for the example in #3, but no engine is spec-conformant for the example in #0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14469</commentid>
+    <comment_count>12</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-28 23:00:10 -0700</bug_when>
+    <thetext>It could really be useful to have more flexibility with NaN representation than the current spec text allows. I don&apos;t know if any implementation wants to do this, but it&apos;d be useful to have this flexibility, for example: Say an ECMAScript implementation wants to serialize and deserialize the execution state of an executing program. Maybe NaNs aren&apos;t normally canonicalized. Then the implementation would be prohibited from canonicalizing NaNs when serializing or deserializing.
+
+The whole argument about this potential optimization feels a bit off to me. Because the spec doesn&apos;t specify how NaNs are encoded, what if an implementation got ready the next value that it was going to return for Math.random() and stashed part of it in the next NaN payload for a new NaN value that was generated? Then, you could observe that part of the next random number, which would be a security issue! And it would be spec compliant to put the next random number there. But an implementation would have no reason to set the NaN payload to that value. Unless there&apos;s a reason that an implementation would want to do it, I see this &quot;optimization&quot; as something similar.
+
+While it&apos;d be spec-compliant, I can&apos;t really imagine why an implementation would want to &quot;optimize&quot; DefineOwnProperty by doing this sort of write when a property is not writable or configurable, leading to this leak. So can we just prohibit this &quot;optimization&quot;?
+
+I wonder if there&apos;s some other way we can block this, more on the DefineOwnProperty end than on the SetValueInBuffer end. The reasoning motivating the current spec text is actually pretty obscure: we only put the restriction in SetValueInBuffer so that it&apos;s observable that DefineOwnProperty really does do that SameValue check and doesn&apos;t set the property when it&apos;s the SameValue. What the we made SetValueInBuffer prohibit the runtime changing NaN values silently behind the user&apos;s back?
+
+If we can just prohibit the &quot;optimization&quot; when writing a property, I think we can prevent this communications channel. It&apos;s a little funny to spec out the change because the spec already, in fact, says that if it&apos;s the same value! What if we wrote a non-normative note near the definition of ValidateAndApplyPropertyDescriptor, step 4, emphasizing that a different NaN value shouldn&apos;t be written into the property just because it is the SameValue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14470</commentid>
+    <comment_count>13</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-29 06:19:10 -0700</bug_when>
+    <thetext>The current specification of SetValueInBuffer tries to express that NaN encoding has to be performed deterministically. If NaN encoding is allowed to be a non-deterministic function, then all bets are off w.r.t. observing different NaN values.
+
+That includes it&apos;s no longer possible to verify ValidateAndApplyPropertyDescriptor performs the SameValue check for NaN values. But there could be also different applications where deterministic behaviour of NaN encoding is expected. 
+
+
+It&apos;s probably possible to change the spec to:
+---
+If value is NaN, rawValue may be set to any implementation
+chosen non-signaling NaN encoding. An implementation must always choose the same non-signaling NaN encoding for a distinct Not-a-Number value within the execution of an ECMAScript program.
+---
+
+That makes it possible to use a different NaN encoding of a distinct Not-a-Number value in different executions of an ECMAScript program (*). Does this help to implement the outlined serializing/deserializing use case?
+
+(*) &quot;execution of an ECMAScript program&quot; requires a proper definition based on the OS process running the ECMAScript implementation.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1452</bug_id>
+          
+          <creation_ts>2013-04-26 11:44:00 -0700</creation_ts>
+          <short_desc>Specify Math.imul</short_desc>
+          <delta_ts>2013-05-14 18:13:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3671</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-04-26 11:44:28 -0700</bug_when>
+    <thetext>Despite no record of consensus, it appears that v8, SpiderMonkey and JSC have implemented Math.imul following Dave Herman&apos;s proposal here: https://mail.mozilla.org/pipermail/es-discuss/2012-November/026126.html
+
+
+Implementation tickets/announcements:
+
+v8 
+- https://code.google.com/p/v8/source/detail?r=14450
+
+SpiderMonkey
+- https://bugzilla.mozilla.org/show_bug.cgi?id=808148
+
+JSC
+- https://mail.mozilla.org/pipermail/es-discuss/2013-April/030268.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3847</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 10:42:21 -0700</bug_when>
+    <thetext>added to rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3942</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:46 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

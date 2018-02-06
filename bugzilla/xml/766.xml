@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>766</bug_id>
+          
+          <creation_ts>2012-10-09 14:13:00 -0700</creation_ts>
+          <short_desc>Language detection</short_desc>
+          <delta_ts>2012-12-17 17:56:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1901</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:13:34 -0700</bug_when>
+    <thetext>Given a chunk of text, detect the language.
+
+We feel it would be very hard to write a specification, and that it belongs more to the browser layer than to a low level API.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3025</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 17:56:51 -0800</bug_when>
+    <thetext>The 2012-10-05 internationalization meeting decided that language detection is out of scope for the internationalization API since it&apos;s big, complicated, specialized, and hard to standardize.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

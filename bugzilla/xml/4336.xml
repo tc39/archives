@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4336</bug_id>
+          
+          <creation_ts>2015-04-29 06:12:00 -0700</creation_ts>
+          <short_desc>10.5 Declaration binding instantiation</short_desc>
+          <delta_ts>2015-10-03 18:56:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Garrett">dhtmlkitchen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14332</commentid>
+    <comment_count>0</comment_count>
+    <who name="Garrett">dhtmlkitchen</who>
+    <bug_when>2015-04-29 06:12:38 -0700</bug_when>
+    <thetext>There is an English problem here:
+
+10.5 Declaration Binding Instantiation
+
+&quot;Let existingProp be the resulting of calling the [[GetProperty]]
+internal method of go with argument fn.&quot;
+
+— Should be &quot;result&quot; not &quot;resulting&quot;.
+
+If the spec be made easier to read... The first introductory paragraph is easy to understand but the algorithm is not so easy to grok. I know this is intended for implementors and I don&apos;t have a proposal of how to rewrite it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14344</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-04-29 09:56:43 -0700</bug_when>
+    <thetext>Which revision of the spec are you looking at? (Selecting &quot;Version: All&quot; for the bug is not very helpful.)
+
+It looks to me like that sentence hasn&apos;t been in the spec since rev 1 (July 12, 2011). So that bug was fixed about 4 years ago.
+
+(My guess is, you&apos;re looking at the 5th edition. Note that the 6th edition will likely be official within a few months.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14358</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-29 14:23:45 -0700</bug_when>
+    <thetext>changed to 5th edition bug</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14372</commentid>
+    <comment_count>3</comment_count>
+    <who name="Garrett">dhtmlkitchen</who>
+    <bug_when>2015-05-01 16:05:10 -0700</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #1)
+&gt; Which revision of the spec are you looking at? (Selecting &quot;Version: All&quot; for
+&gt; the bug is not very helpful.)
+&gt; 
+&gt; It looks to me like that sentence hasn&apos;t been in the spec since rev 1 (July
+&gt; 12, 2011). So that bug was fixed about 4 years ago.
+&gt; 
+&gt; (My guess is, you&apos;re looking at the 5th edition. Note that the 6th edition
+&gt; will likely be official within a few months.)
+
+Yes, I was looking at the fifth edition. I see now that 10.4.3 and 10.5 were removed from ES6. Is it just down to Section 8? http://people.mozilla.org/~jorendorff/es6-draft.html#sec-lexical-environments Allen changed it to the right version. 
+
+I read the ECMAScript specifation insomuch as doing so is necessary to maintain the desired level of professional skill and integrity. 
+
+To be fair, I haven&apos;t applied the right amount of time and concentration to sit down and study the new way that Declaration Binding Instatiation Variable Instantionation, is now defined.
+
+Alternate courses of education include topics of war, banking, globalization, social psychology (a tool of the global elite), health and food/medicine. Arriving at valauble truths in these subjects, on a larger scale, is time consuming. 
+
+There are also things that I must do on my own, such as laundry, personal organization, phone calls, hygeine, paperwork, and buying things (like toilet paper, ginger, etc). 
+
+Personal aspirations forgone.
+
+Although my time is currently not overly constrained by occupational garbage (work), the opporunity cost of grokking the spec is greater than reading about the other aforementioned things, which are more useful and more important. But if the spec were easier to read, the cost of reading it would be lower, and it would be more worth it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14767</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 18:56:09 -0700</bug_when>
+    <thetext>No longer applies to ES6.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

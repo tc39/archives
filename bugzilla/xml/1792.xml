@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1792</bug_id>
+          
+          <creation_ts>2013-08-19 17:00:00 -0700</creation_ts>
+          <short_desc>Array splice, slice, indexOf, &amp; lastIndexOf before other args are coerced.</short_desc>
+          <delta_ts>2013-08-22 11:42:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="John-David Dalton">john.david.dalton</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4979</commentid>
+    <comment_count>0</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2013-08-19 17:00:49 -0700</bug_when>
+    <thetext>Wanted to see if this was a spec bug.
+
+var a = [1, 2, 3];
+a.slice({ valueOf: function() { a.push(4,5,6); return 1; } });
+// =&gt; [2, 3] in many implementations
+// because ToUint32(lenVal) is performed before ToInteger(start).
+
+var a = [1, 2, 3];
+var b = a.slice({ valueOf: function() { a.shift(); return 1; } });
+// =&gt; b is [3, undefined] 
+1 in b; // false because it&apos;s a hole
+
+against a reasonable assumption that those params are evaluated before the slice and friends operation is actually performed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5006</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-22 11:07:04 -0700</bug_when>
+    <thetext>For slice and splice, that&apos;s the way they were specified going back to ES3.  Es5 andd indexof and lastIndexOf  and followed the same pattern.
+
+If modern IE (or others) is doing the more rational ordering and it isn&apos;t breaking things on the web then perhaps it could be changed in the ES6 spec.
+
+You should bring this up on es-discuss and/or have Luke bring it to the the next TC39 meeting</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5011</commentid>
+    <comment_count>2</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2013-08-22 11:42:01 -0700</bug_when>
+    <thetext>Thanks, I was curious more than anything. I believe IE currently follows the spec&apos;ed order of things. I&apos;ll pass this on to Luke.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

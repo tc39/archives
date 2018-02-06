@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4165</bug_id>
+          
+          <creation_ts>2015-03-16 23:40:00 -0700</creation_ts>
+          <short_desc>Move Symbol.split, Symbol.match etc. into a sub-object of Symbol</short_desc>
+          <delta_ts>2015-03-17 13:28:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Leon Arnott">leonarnott</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13787</commentid>
+    <comment_count>0</comment_count>
+    <who name="Leon Arnott">leonarnott</who>
+    <bug_when>2015-03-16 23:40:41 -0700</bug_when>
+    <thetext>Probably not worth posting this in March 2015, but w/e. 
+
+In short: this is solely a built-in name quibble. I think the RegExp double-dispatch symbol names are too esoteric to be put directly into, and thus pollute, the Symbol static property namespace. I think they need to be ensconced in a separate sub-object inside Symbol which better hints at their meaning and purpose to end-users.
+
+Primary suggestion:
+
+Symbol.RegExp = {} (a bare object, similar to the deferred Reflect.Realm)
+
+Symbol.split -&gt; Symbol.RegExp.split
+Symbol.search -&gt; Symbol.RegExp.search
+Symbol.replace -&gt; Symbol.RegExp.replace
+Symbol.match -&gt; Symbol.RegExp.match
+
+Alternative (which moves them off Symbol altogether):
+
+Symbol.split -&gt; RegExp.Symbol.split
+Symbol.search -&gt; RegExp.Symbol.search
+Symbol.replace -&gt; RegExp.Symbol.replace
+Symbol.match -&gt; RegExp.Symbol.match
+
+Full justification: https://esdiscuss.org/topic/does-symbol-split-symbol-search-etc-have-to-be-in-the-symbol-namespace.
+
+Thanks for reading anyway.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13797</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 13:28:00 -0700</bug_when>
+    <thetext>It&apos;s to late for this sort of change.
+
+The thread shows that there are multiple options on a &quot;better&quot; naming or placement of this properties and there is no time available to to discuss alternatives.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

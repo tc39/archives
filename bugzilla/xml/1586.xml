@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1586</bug_id>
+          
+          <creation_ts>2013-07-16 19:06:00 -0700</creation_ts>
+          <short_desc>12[&quot;__proto__&quot;] should probably not be a TypeError</short_desc>
+          <delta_ts>2015-07-10 08:35:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4539</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2013-07-16 19:06:37 -0700</bug_when>
+    <thetext>All current engines I could try return Number.prototype for:
+ 
+  12[&quot;__proto__&quot;]
+ 
+But the new spec says this should be a TypeError.
+ 
+
+It’s more consistent with the other members of Object.prototype to do an implicit ToObject here, and apparently matches existing implementations.  Is it intentional that the spec is treating this as a TypeError?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4540</commentid>
+    <comment_count>1</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2013-07-16 19:06:51 -0700</bug_when>
+    <thetext>Allen commented in mail:
+
+
+Well, it was intentional, but perhaps wrong. As you say, the  set accessor probably needs to do a ToObject.  The set accessor probably only needs to do a CheckObjectCoercible  followed by an immediate return if the type of this is not Object (the wrapper and hence it&apos;s modified [[Prototype]] isn&apos;t observable, so it doesn&apos;t actually need to be created).
+
+File a bug, and I&apos;ll put the revised algorithms into the ticket.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4541</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-17 08:38:48 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft. 
+
+Here are the revised definitions:
+
+B.2.2.1.1	get Object.prototype.__proto__ 
+The value of the [[Get]] attribute is a built-in function that requires no arguments. It performs the following steps:
+
+1.	Let O be the result of calling ToObject passing the this value as the argument.
+2.	ReturnIfAbrupt(O).
+3.	Return the result of calling the [[GetInheritance]] internal method of O.
+
+B.2.2.1.2	set Object.prototype.__proto__ 
+The value of the [[Set]] attribute is a built-in function that takes an argument proto. It performs the following steps:
+
+1.	Let O be CheckObjectCoercible(this value).
+2.	ReturnIfAbrupt(O).
+3.	If Type(proto) is neither Object or Null, then throw a TypeError exception.
+4.	If Type(O) is not Object, then return proto.
+5.	Let status be the result of calling the [[SetInheritance]] internal method of O with argument proto.
+6.	ReturnIfAbrupt(status).
+7.	If status is false, then throw a TypeError exception.
+8.	Return proto.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4544</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-17 09:25:14 -0700</bug_when>
+    <thetext>I also updated Object.setPrototypeOf 
+
+15.2.3.19	Object.setPrototypeOf ( O, proto )
+When the setPrototypeOf function is called with arguments O and proto, the following steps are taken:
+
+1.	Let O be CheckObjectCoercible(O).
+2.	ReturnIfAbrupt(O).
+3.	If Type(proto) is neither Object or Null, then throw a TypeError exception.
+4.	If Type(O) is not Object, then return O.
+5.	Let status be the result of calling the [[SetInheritance]] internal method of O with argument proto.
+6.	ReturnIfAbrupt(status).
+7.	If status is false, then throw a TypeError exception.
+8.	Return O.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4566</commentid>
+    <comment_count>4</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2013-07-24 10:20:37 -0700</bug_when>
+    <thetext>Are we sure that Object.setPrototypeOf should do ToObject?  None of the other Object.* methods do this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5180</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:32 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

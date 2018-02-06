@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>276</bug_id>
+          
+          <creation_ts>2012-02-23 20:40:00 -0800</creation_ts>
+          <short_desc>S15.5.4.13_A3_T3 and S15.5.4.14_A3_T3 and S15.5.4.15_A3_T7 are invalid</short_desc>
+          <delta_ts>2012-02-24 10:50:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>654</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-02-23 20:40:29 -0800</bug_when>
+    <thetext>Both tests require Function.prototype.toString to return a string starting with the prefix &quot;function&quot;. But according to 15.3.4.2 Function.prototype.toString() returns an implementation-dependent representation of a function. And there is the following note:
+---
+Note in particular that the use and placement of white space, line terminators, and semicolons within the representation String is implementation-dependent.
+---
+
+That means the spec clearly allows for an implementation to return a string with leading whitespace before the &quot;function&quot; keyword. S15.5.4.13_A3_T3 and S15.5.4.14_A3_T3 wouldn&apos;t pass in this situation since they only expect the prefix &quot;function&quot; without any other leading characters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>655</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-02-23 20:43:07 -0800</bug_when>
+    <thetext>Applies to S15.5.4.15_A3_T7 as well</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>667</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-24 10:50:53 -0800</bug_when>
+    <thetext>In all three test cases:
+    var __instance =  function(){};
+
+has been changed to:
+    var __instance = { toString: function() { return &quot;function(){}&quot;;} };
+
+
+Changes have been pushed to Hg, but are not yet on the live website.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2513</bug_id>
+          
+          <creation_ts>2014-02-07 15:12:00 -0800</creation_ts>
+          <short_desc>25.4.5.3 Promise.prototype.then uses constructor, not [[PromiseConstructor]]</short_desc>
+          <delta_ts>2015-02-02 16:13:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7212</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-07 15:12:16 -0800</bug_when>
+    <thetext>Other Promise methods use the value of the internal [[PromiseConstructor]] slot.  The definition of Promise.prototype.then uses ordinary (mutable) &quot;constructor&quot; instead, in step 3.  That should probably be changed to use the [[PromiseConstructor]] slot for consistency.
+
+Re: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise.prototype.then</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7282</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-02-12 17:30:35 -0800</bug_when>
+    <thetext>This is as intended. The only other &quot;methods&quot; that use [[PromiseConstructor]] are `Promise.cast` (now `Promise.resolve`), which is specifically designed for allowing tamper-proof casting via private slots. `then` should use normal publicly-accessibly properties; compare e.g. `Array.prototype.map`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7284</commentid>
+    <comment_count>2</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-12 19:13:11 -0800</bug_when>
+    <thetext>Promise#then uses Promise Resolution Handler which uses [[PromiseConstructor]], is this expected to change?
+
+In particular, for a has-resolution promise &apos;p&apos;, where p.[[PromiseConstructor]] = A and p.constructor = B and the resolved value is a thenable t:
+
+p.then() will return a new promise &apos;b&apos; of type B, then immediately enqueue a task which will create a promise &apos;a&apos; of type A.  It will then call t.then(resolve-of-a, reject-of-a) and a.then(resolve-of-b, reject-of-b).
+
+I guess this makes sense, if you think of the public constructor property as &quot;what type of promise do I want to return from then()&quot; and the internal [[PromiseConstructor]] as &quot;what type of promise do I want to create internally to handle promise chaining&quot;.
+
+Just checking that this behavior is intentional.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7287</commentid>
+    <comment_count>3</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-12 20:26:24 -0800</bug_when>
+    <thetext>Don&apos;t mean to be a pest, reopening just to ensure that domenic sees that Promise.then is actually specified currently to use *both* constructor *and* [[PromiseConstructor]].  Double-checking that this is intentional; feel free to close again if this really is the desired behavior.
+
+https://github.com/domenic/promises-unwrapping/issues/73 might be related; perhaps the trusted &quot;PromiseThen&quot; implementation would use [[PromiseConstructor]] here?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7289</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-02-13 01:50:19 -0800</bug_when>
+    <thetext>That is a great point. Thanks for reopening. I will have to investigate further and make sure we have a consistent model here.
+
+My guess is we will move to using `constructor` in the Promise Resolution Handler functions. But I will need to devote more time to it, soon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11741</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-28 14:30:21 -0800</bug_when>
+    <thetext>Domenic,
+
+Do you have an additional response to this, particularly given the availability of @@species.
+
+I&apos;d like to get this closed before wrapping up E6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11871</commentid>
+    <comment_count>6</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-02 09:32:51 -0800</bug_when>
+    <thetext>Thanks for the ping.
+
+It looks to me after re-tracing the spec that the inconsistency here has been eliminated, probably via some of the refactorings that have happened over time.
+
+The [[PromiseConstructor]] now only appear in the one place I thought it did (viz. Promise.resolve). And just to be sure, I also traced through the logic in comment #2 and found that these days only type B is involved---no promise of type A is created.
+
+So I think this can be closed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11891</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 16:13:06 -0800</bug_when>
+    <thetext>fixed sometime in 2014</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

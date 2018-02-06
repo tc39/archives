@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>62</bug_id>
+          
+          <creation_ts>2011-03-11 10:26:00 -0800</creation_ts>
+          <short_desc>legacy bugs in Array toLocaleString algorithm v15.4.4.3</short_desc>
+          <delta_ts>2015-10-02 13:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>https://mail.mozilla.org/pipermail/es5-discuss/2011-March/003950.html</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>149</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>141</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-11 10:26:04 -0800</bug_when>
+    <thetext>There are two bugs that exist in ES3 and which were carried forward into ES5:
+
+1) the calls to toLocaleString in steps 8.d and 10.d.iv incorrectly assume that the return value will be a string.  ToString should be applied to their results.
+
+2) The this value passed in the above calls should be the original element value (firstElement and nextElement, respectively) rather than elementObject.
+
+The second bug is mostly editorial, but may be observable is the toLocaleString method of Boolean/Number/String.prototype is set to a strict mode function.
+
+There may be some behavioral differences among current browsers for issue 1 but both FF and IE do the implicit ToString and that behavior seems most consistent with other situations in the specificati</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>575</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:16:16 -0800</bug_when>
+    <thetext>set IN_PROGRESS to indicated this should go into ES5.1 Errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14717</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 13:33:33 -0700</bug_when>
+    <thetext>Fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

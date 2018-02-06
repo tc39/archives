@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2229</bug_id>
+          
+          <creation_ts>2013-11-11 18:16:00 -0800</creation_ts>
+          <short_desc>14.6.1: various</short_desc>
+          <delta_ts>2014-01-27 10:05:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6662</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-11 18:16:46 -0800</bug_when>
+    <thetext>In 14.6.1 &quot;Static Semantics: Tail Position&quot;, ...
+
+-- Since it isn&apos;t keyed on a particular production, it seems to me it should be presented as an abstract operation.
+
+-- There&apos;s an inconsistency re &quot;nonterminal&quot; vs &quot;nonTerminal&quot;. Pick one and change occurrences of the other. (I think the lower-case &quot;t&quot; is better.) (Similarly in 14.6.2.)
+
+-- Step 6 sets metavariable &apos;has&apos;, but nothing happens to it. Return it?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6663</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-11 20:01:57 -0800</bug_when>
+    <thetext>And step 2 says:
+    If the source code match nonterminal is not strict code, then return false.
+
+Change &quot;match&quot; to &quot;matching&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6747</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-14 10:37:24 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7113</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:05:59 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

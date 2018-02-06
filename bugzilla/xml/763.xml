@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>763</bug_id>
+          
+          <creation_ts>2012-10-09 14:01:00 -0700</creation_ts>
+          <short_desc>Message formatting</short_desc>
+          <delta_ts>2012-12-17 16:43:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Nebojša Ćirić">cira</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1898</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:01:33 -0700</bug_when>
+    <thetext>Write a strawman for message formatting - plural and gender support, date, number formatting within a message.
+
+Our proposal should offer support for plural and gender formatting that is compatible with Template Strings.
+
+An example functionality:
+
+Anne invited you and 5 other people to her party.
+
+&quot;5 people&quot;, and &quot;her&quot; are language dependent.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2405</commentid>
+    <comment_count>1</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-11-02 14:20:35 -0700</bug_when>
+    <thetext>Looking at comments from Nicholas (http://www.nczonline.net/blog/2012/08/01/a-critical-review-of-ecmascript-6-quasi-literals/) string templates are hard to use for string reuse (early binding of parameters) and localization (again early binding).
+
+We could define a new tag - plural - to deal with plural messages, but I don&apos;t see a nice way in string template mechanism to specify parameters:
+
+1. Locale (it could be global)
+2. Plural number
+
+All parameters in the tagged string get pre-evaled and passed in as a string to a function. So we could say that fist two placeholders are locale and plural num, but that seems hacky to me:
+
+plural &apos;${locale}${plural_count}The actual plural string with rules...&apos;.
+
+function plural() {
+  var locale = arguments[0];
+  var pluralCount = arguments[1];
+  // the rest of the logic for formatting.
+}
+
+The same applies to gender formatting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3017</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 15:56:31 -0800</bug_when>
+    <thetext>TC 39 suggested looping in Alex Sexton, who has been working on message formatting and may have input.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3021</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 16:43:18 -0800</bug_when>
+    <thetext>At the 2012-12-14 internationalization meeting, Nebojša was asked to write a
+strawman.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

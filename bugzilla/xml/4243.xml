@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4243</bug_id>
+          
+          <creation_ts>2015-04-02 07:30:00 -0700</creation_ts>
+          <short_desc>Function name in strict functions</short_desc>
+          <delta_ts>2015-07-17 00:32:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>adamk</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>mike</cc>
+    
+    <cc>rossberg</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14014</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-04-02 07:30:42 -0700</bug_when>
+    <thetext>All existing engines treat the function name of a strict function as strict. However, the spec seems to imply that only the formal parameters and the function body is strict.
+
+All existing engines treat this as error:
+
+// sloppy code
+function static() {
+  &apos;use strict&apos;;
+}
+
+But the spec seems to imply that that is valid?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14024</commentid>
+    <comment_count>1</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-02 09:46:01 -0700</bug_when>
+    <thetext>Here&apos;s the reading of the spec that prompted my reports against SpiderMonkey
+[1] and V8 [2].
+
+From the ES5 spec:
+
+&gt; The following tokens are also considered to be FutureReservedWords when they
+&gt; occur within strict mode code (see 10.1.1). [3]
+
+...which defines &quot;strict mode code&quot;:
+
+&gt; Function code that is part of a FunctionDeclaration, FunctionExpression, or
+&gt; accessor PropertyAssignment is strict function code if its
+&gt; FunctionDeclaration, FunctionExpression, or PropertyAssignment is contained
+&gt; in strict mode code or if the function code begins with a Directive Prologue
+&gt; that contains a Use Strict Directive. [4]
+
+...and &quot;function code&quot;:
+
+&gt; Function code is source text that is parsed as part of a FunctionBody. The
+&gt; function code of a particular FunctionBody does not include any source text
+&gt; that is parsed as part of a nested FunctionBody. Function code also denotes
+&gt; the source text supplied when using the built-in Function object as a
+&gt; constructor. More precisely, the last parameter provided to the Function
+&gt; constructor is converted to a String and treated as the FunctionBody. If more
+&gt; than one parameter is provided to the Function constructor, all parameters
+&gt; except the last one are converted to Strings and concatenated together,
+&gt; separated by commas. The resulting String is interpreted as the
+&gt; FormalParameterList for the FunctionBody defined by the last parameter. The
+&gt; function code for a particular instantiation of a Function does not include
+&gt; any source text that is parsed as part of a nested FunctionBody. [5]
+
+So since the BindingIdentifier is not considered part of the function code, it
+should not be interpreted according to the strictness of the function itself.
+This interpretation also holds in ECMAScript 6 [6].
+
+[1] https://bugzilla.mozilla.org/show_bug.cgi?id=1145191
+[2] https://code.google.com/p/v8/issues/detail?id=3975
+[3] http://es5.github.io/#x11
+[4] http://es5.github.io/#x10.1.1
+[5] http://es5.github.io/#function-code
+[6] Relevant definitions in the ES6 spec draft:
+    - https://people.mozilla.org/~jorendorff/es6-draft.html#sec-identifiers-static-semantics-early-errors
+    - https://people.mozilla.org/~jorendorff/es6-draft.html#sec-strict-mode-code
+    - https://people.mozilla.org/~jorendorff/es6-draft.html#sec-types-of-source-code
+    - https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-definitions</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14025</commentid>
+    <comment_count>2</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-02 09:47:44 -0700</bug_when>
+    <thetext>As to whether this is a bug in the spec itself: the spec seems intuitive (and
+the current implementation seems unintuitive) because of the effect function
+declarations have on the environment record.
+
+    function static() {
+      &apos;use strict&apos;;
+    }
+
+From the perspective of the identifiers themselves (i.e. disregarding
+hoisting), this is similar to:
+
+    var static;
+    static = function() {
+      &apos;use strict&apos;;
+    };
+
+In both cases, the identifier `static` is used to create an entry in the outer
+(sloppy) environment record. The strictness of the function has no effect here.
+Contrast this with function expressions, where the spec and current
+implementations are in alignment. This example generates a SyntaxError:
+
+    (function static() {
+      &apos;use strict&apos;;
+    });
+
+...and this behavior maps to the version that does not use an identifier in the
+function expression:
+
+    var __tmp = function() {
+      &apos;use strict&apos;;
+      var static = __tmp;
+    };</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14030</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-04-02 11:40:48 -0700</bug_when>
+    <thetext>mike: I think your explanation makes total sense.
+
+Maybe it is safe to change the existing engines?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14112</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-04-03 13:13:44 -0700</bug_when>
+    <thetext>This seems unlikely to be problematic. Let&apos;s see if we can make the change in our engines before we push for a spec change.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14156</commentid>
+    <comment_count>5</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-04-07 16:24:49 -0700</bug_when>
+    <thetext>That said, according to #174 (https://bugs.ecmascript.org/show_bug.cgi?id=174) seems to have decided that browsers&apos; current behavior is what the spec should reflect. I wonder why this bug was not resolved? Is that no longer the intention?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14157</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-08 07:49:07 -0700</bug_when>
+    <thetext>(In reply to Brian Terlson from comment #5)
+&gt; That said, according to #174
+&gt; (https://bugs.ecmascript.org/show_bug.cgi?id=174) seems to have decided that
+&gt; browsers&apos; current behavior is what the spec should reflect. I wonder why
+&gt; this bug was not resolved? Is that no longer the intention?
+
+A slippery slope ;)
+
+If this argument is used for all cases in which browsers/runtimes/etc have implemented the spec incorrectly, then even</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14159</commentid>
+    <comment_count>7</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-08 07:54:01 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #6)
+&gt; (In reply to Brian Terlson from comment #5)
+&gt; &gt; That said, according to #174
+&gt; &gt; (https://bugs.ecmascript.org/show_bug.cgi?id=174) seems to have decided that
+&gt; &gt; browsers&apos; current behavior is what the spec should reflect. I wonder why
+&gt; &gt; this bug was not resolved? Is that no longer the intention?
+&gt; 
+&gt; A slippery slope ;)
+&gt; 
+&gt; If this argument is used for all cases in which browsers/runtimes/etc have
+&gt; implemented the spec incorrectly, then even
+
+Please ignore this idiotic non-sense. 
+
+I had typed this before fully considering the argument being made and how it applies to anything we&apos;re discussing here. At some point, I scrolled to the top of the bug and then I left the page entirely. After reading the linked bug and cc&apos;ing myself there, I returned to this bug&apos;s tab and clicked &quot;save changes&quot; at the top of the page to cc myself on this as well. Of course, I completely forgot the Bugzilla (being the crappiest pile of garbage ever cobbled together) treats the entire page as the same form and as a result of hitting &quot;save changes&quot; (in a completely different region of the page), I also accidentally posted comments that no longer reflected my current thoughts on the subject. 
+
+Sorry about that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14537</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-09 14:33:46 -0700</bug_when>
+    <thetext>While I stand by the argument in made in Bug #174 for that point in time, I also think that Mike has a strong argument that for FunctionDeclaration the binding identifier is part of the code of the surrounding scope and hence the strictness of that scope should apply to it.
+
+Here is another case, that I think adds some insight:
+
+&quot;don&apos;t use strict&quot;;
+var foo = {bar: &quot;baz&quot;};
+var obj = {
+   [()=&gt;{with (foo) return bar}()] () {
+       &quot;use strict&quot;;
+       //method body...
+   },
+   strict() {
+      &quot;use strict&quot;
+      //method body
+   }
+}
+
+The computed property name is part of the MethodDefinition but it is computing a property name for a sloppy mode object literal.  It doesn&apos;t seem right that strict mode be applied to the property name computation in the first method.  But if that is the case, then for consistency sake it also should not apply to the second method definition.
+
+I don&apos;t think we can arrive a single consistently apply rule.  Instead, here is an enumeration of what I think the rules should be for the various cases (in all cases we are talking about a strict mode function in sloppy mode code):
+
+1) BindingIdentifier of a FunctionDeclaration/GeneratorDeclaraton: sloppy mode because the identifier is only bound in the sloppy mode scope
+2) BindingIdentifier of a FunctionExpression/GeneratorExpression: strict because the identifier is only bound in an inner scope of the function
+3) BindingIdentifier of a ClassDeclaration: strict because the identifier in addition to being bound in the sloppy mode scope is also bound in an inner scope of the class body and the a class body is always strict.
+4) BindingIdentifer of a ClassExpression: strict because the identifier is  bound in an inner scope of the class body
+5) PropertyName of a MethodDefinition in a sloppy mode ObjectLiteral: sloppy mode
+6) PropertyName of a MethodDefinition in a ClassBody: strict because all parts of a class body are strict</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14538</commentid>
+    <comment_count>9</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-07-09 14:37:58 -0700</bug_when>
+    <thetext>Those rules looks good to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14548</commentid>
+    <comment_count>10</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-17 00:32:04 -0700</bug_when>
+    <thetext>Closely related, but more serious: bug 4426.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

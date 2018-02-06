@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3007</bug_id>
+          
+          <creation_ts>2014-07-13 19:17:00 -0700</creation_ts>
+          <short_desc>for..of throws away final `return` value from generator</short_desc>
+          <delta_ts>2015-07-10 08:35:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=1523</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>m.goleb</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9181</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-13 19:17:12 -0700</bug_when>
+    <thetext>The semantics for this kind of loop are well known:
+
+for (var v=0; v&lt;4; v++) {
+   console.log(v);
+}
+// 1 2 3
+ 
+console.log(v); // 4
+
+IOW, the `v` gets the final update of value, and then the loop terminating condition is consulted, and terminates the loop. But `v` has the value that it had at time of termination of the loop.
+
+-----
+
+However, the analog of this semantic does not hold for generators iterated by the `for..of` loop:
+
+function* foo() {
+   yield 1;
+   yield 2;
+   yield 3;
+   return 4;
+}
+ 
+for (var v of foo()) {
+   console.log(v);
+}
+// 1 2 3
+ 
+console.log(v); // still `3`, not `4` :(
+
+
+I understand why the loop needs to terminate the way that it does. I also understand that the `return 4` isn&apos;t technically required to send its value out to a `next(..)` call.
+
+However, in the case where we have an implementation that *does* send it out, like the current browser JS engines do, it would be nice if that value could be assigned to the `v` iteration variable **before** the terminating condition (`done:true`) is consulted to stop the loop.
+
+That way, the final returned value `4` is not thrown away in the `for..of` loop case in the same way that a manual `.next(..)` call (in a supporting browser) would have given you the `4` and not thrown it away.
+
+-----
+
+Since I doubt there&apos;s a way (is there?) for `for..of` to tell the difference between a generator which has no `return`, has just `return;` or has `return undefined`, another result of my suggestion is:
+
+function* foo() {
+   yield 1;
+   yield 2;
+   yield 3;
+   // no return here!
+}
+ 
+for (var v of foo()) {
+   console.log(v);
+}
+// 1 2 3
+ 
+console.log(v); // undefined
+
+IOW, if the generator has no (non-undefined) `return`, the variable `v` would always be `undefined` at the end of the `for..of` loop.
+
+But I don&apos;t think that&apos;s such a bad thing, because:
+
+1. Most people will be using `let` anyway, so they wouldn&apos;t expect `v` outside the loop.
+2. If you use `var v`, and handle `v = 3` state in the loop, it&apos;s rarer that you want to ALSO handle the same `v = 3` state outside the loop.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9183</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-14 01:16:36 -0700</bug_when>
+    <thetext>This is going to be problematic for destructuring contexts, because it will require the final value to be destructible (= to be an object). Or do you suggest to apply the proposed change only when the assignment is not a destructuring assignment?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9184</commentid>
+    <comment_count>2</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-14 06:14:35 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; problematic for destructuring contexts, because it will
+&gt; require the final value to be destructible (= to be an object).
+
+Do you mean:
+
+function* foo() {
+  yield [1,2];
+  yield [3,4];
+  return [5,6];
+}
+
+for (var [x,y] of foo()) {
+   console.log(x, y);
+}
+// 1 2
+// 3 4
+
+console.log(x, y); // 5 6
+
+
+I would expect that should work, right? Is there some reason that couldn&apos;t work?
+
+------
+
+Furthermore, this seems logical to me, though it might require a special case handling to swallow the error only in that final terminating case:
+
+function *bar() {
+  yield [1,2];
+  yield [3,4];
+}
+
+for (var [a,b] of bar()) {
+  console.log(a, b);
+}
+// 1 2
+// 3 4
+
+console.log(a, b); // undefined undefined
+
+
+&gt; Or do you suggest to apply the proposed change only
+&gt; when the assignment is not a destructuring assignment?
+
+That seems like it would be a troublesome inconsistency. I think (as above) I only suggest the special case handling if there&apos;s no final object to destructure.
+
+
+------
+
+Or... maybe there&apos;s no special case error swallowing, and [a,b] just errors like it would any other time you use destructuring against an incompatible return value. That&apos;d be a tiny bit annoying that you needed a `try..catch` or to add a final `return []` in your generator, but it seems like a small tax to me compared to the greater consistency.
+
+
+The `for` loop analogs:
+
+
+function incXY(x,y) { return [x+1,y+1]; }
+
+for (var x = 0, y = 0; x &lt; 3; [x,y] = incXY(x,y)) {
+  console.log(x,y);
+}
+// 0 0
+// 1 1
+// 2 2
+
+
+Works fine, right? However, this seems like it would be expected to error, so exception is the &quot;right&quot; thing to do:
+
+
+function incXY(x,y) {
+  if (x &lt; 2) {
+    return [x+1,y+1];
+  }
+}
+
+for (var x = 0, y = 0; x &lt; 3; [x,y] = incXY(x,y)) {
+  console.log(x,y);
+}
+// 0 0
+// 1 1
+// 2 2
+// TypeError: undefined is not an Object
+
+
+Can&apos;t imagine anyone would complain that the error here is &quot;wrong&quot;. Maybe same reasoning should apply to destructuring + `for..of` + generator-with-no-return-value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9185</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-07-14 07:18:27 -0700</bug_when>
+    <thetext>Lets keep it simple. We do not need to optimize for this case. The common case is that you do not depend on the variable outside the loop and we should just optimize for performance in these cases.
+
+Another point for not doing this is that we want to be in a world where people only use let so in that case the extra update would never be observable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9186</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-14 08:36:30 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; (In reply to comment #1)
+&gt; &gt; problematic for destructuring contexts, because it will
+&gt; &gt; require the final value to be destructible (= to be an object).
+&gt; 
+&gt; Do you mean:
+&gt; 
+&gt; function* foo() {
+&gt;   yield [1,2];
+&gt;   yield [3,4];
+&gt;   return [5,6];
+&gt; }
+&gt; 
+&gt; for (var [x,y] of foo()) {
+&gt;    console.log(x, y);
+&gt; }
+&gt; // 1 2
+&gt; // 3 4
+&gt; 
+&gt; console.log(x, y); // 5 6
+&gt; 
+&gt; 
+&gt; I would expect that should work, right? Is there some reason that couldn&apos;t
+&gt; work?
+
+It means a shift in the importance of return-statements in generators.
+Currently return-statements are barely needed/useful in generators, this may
+make them mandatory. (More below.)
+
+
+&gt; 
+&gt; Furthermore, this seems logical to me, though it might require a special case
+&gt; handling to swallow the error only in that final terminating case:
+&gt; 
+&gt; function *bar() {
+&gt;   yield [1,2];
+&gt;   yield [3,4];
+&gt; }
+&gt; 
+&gt; for (var [a,b] of bar()) {
+&gt;   console.log(a, b);
+&gt; }
+&gt; // 1 2
+&gt; // 3 4
+&gt; 
+&gt; console.log(a, b); // undefined undefined
+
+So basically different execution paths based on the final iterator result value
+(`undefined` vs. non-`undefined` result values). 
+
+
+&gt; &gt; Or do you suggest to apply the proposed change only
+&gt; &gt; when the assignment is not a destructuring assignment?
+&gt; 
+&gt; That seems like it would be a troublesome inconsistency. 
+
+Agreed!
+
+
+&gt; Or... maybe there&apos;s no special case error swallowing, and [a,b] just errors
+&gt; like it would any other time you use destructuring against an incompatible
+&gt; return value. That&apos;d be a tiny bit annoying that you needed a `try..catch` or
+&gt; to add a final `return []` in your generator, but it seems like a small tax to
+&gt; me compared to the greater consistency.
+
+Both alternatives don&apos;t look too compelling. I can&apos;t imagine there will be any
+support to make try-catch a de facto requirement around every for-of loop with
+destructuring. The other alternative requires to have a matching empty element,
+which acts as a dummy value. And depending on the data types, such an element
+may not even exist. Granted, you can move the destructuring operation into the
+loop body to avoid these problems, but then again you can also perform a manual
+iteration to retrieve the final iterator result value. 
+
+
+Also: for-in loop iteration uses the same mechanics as for-of loops, but I
+guess you don&apos;t want to change for-in loop semantics? 
+---
+for (var pk in {prop: 0}) print(pk);
+print(pk);
+// &quot;prop&quot;  &quot;prop&quot;
+// or: &quot;prop&quot;  undefined  ?
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9194</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-14 18:15:45 -0700</bug_when>
+    <thetext>I agree that trying to special case outer scope destructuring assignments on loop completion would be pretty arbitrary.
+
+But if may make sense for the final iterator value to be the normal completion value of the for-of statement (in the &quot;completion reform&quot; sense)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9198</commentid>
+    <comment_count>6</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-14 18:40:50 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; It means a shift in the importance of return-statements in generators.
+&gt; Currently return-statements are barely needed/useful in generators, this may
+&gt; make them mandatory. (More below.)
+
+I hear conflicting statements about the importance of them. I&apos;m dubious that there&apos;s any defensible position which says either &quot;they are important&quot; vs. &quot;they are not important&quot;. Ergo, they are important because they are important to some.
+
+
+
+&gt; So basically different execution paths based on the final iterator result value
+&gt; (`undefined` vs. non-`undefined` result values). 
+
+Not necessarily different paths. In a JS sense, a `try { x = final_value } catch(e){}` -- just a suppression and throw-away of the error if the final de-structuring assignment fails -- seems like it would be sufficient.
+
+
+
+&gt; Also: for-in loop iteration uses the same mechanics as for-of loops, but I
+&gt; guess you don&apos;t want to change for-in loop semantics? 
+&gt; ---
+&gt; for (var pk in {prop: 0}) print(pk);
+&gt; print(pk);
+&gt; // &quot;prop&quot;  &quot;prop&quot;
+&gt; // or: &quot;prop&quot;  undefined  ?
+
+The important difference is that a `for..in` loop completely exhausts all enumerable keys in the object, so there&apos;s no final `undefined` value to overwrite `pk` with.
+
+Moreover, the `for..in` loop doesn&apos;t omit the final property (as `for..of` does purely for the sake of making it work sensibly with generators -- see this twitter conversation: https://twitter.com/awbjs/status/453262038676946945)
+
+What I am suggesting is that `pk` or `v` or whatever is always the last value from some iteration with `for..of`, just like it is with `for` and `for..in`.
+
+In the case of a normal `for` loop, it&apos;s the final value that triggers the terminating condition. In the case of `for..in` property enumeration, it&apos;s the final key enumerated. In the case of `for..of` iteration over a normal data structure, it&apos;s the final value in that data structure.
+
+So, in the case of `for..of` over a generator (the odd one out), it should be the final `return` value (whatever it is, even if it&apos;s omitted).
+
+That&apos;s what I mean by arguing for consistency here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9199</commentid>
+    <comment_count>7</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-14 18:48:03 -0700</bug_when>
+    <thetext>&gt; In the case of `for..of` iteration over a normal data
+&gt; structure, it&apos;s the final value in that data structure.
+
+Actually, I was a bit unclear/incomplete here. Let me clarify.
+
+What I&apos;m saying is, because generators have this special behavior (ability to return a value &quot;at/after completion&quot;) that&apos;s not true of regular data structures, the special casing behavior should apply only when `for..of` is used on a generator, not when `for..of` is used on normal data structure iterations.
+
+For example:
+
+for (var v of [1,2,3]) {
+   console.log(v);
+}
+// 1 2 3
+
+console.log(v); // 3
+
+The array iterator&apos;s `value:undefined` doesn&apos;t (and shouldn&apos;t) overrwite `v`, because there&apos;s no possible way for that array iterator to do `return` and send along another value (that wasn&apos;t in the array enumeration) with `done:true`.
+
+But since generators *can*, and many do, send along another return value with `done:true`, then we need to get that value out, and not swallow it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9200</commentid>
+    <comment_count>8</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-14 19:19:05 -0700</bug_when>
+    <thetext>Actually, upon further reflection, I completely disagree with myself in that previous comment. Wish I could delete it. :P
+
+So here&apos;s what I actually meant and intend:
+
+Any `for..of` loop will be using an iterator. That might be an iterator of a generator, it might be the built in Array[@@iterator], or it might be your own custom iterator.
+
+But in any case, since iterators *can* return values along with `done:true`, `for..of` should never discard those, regardless of what kind of structure the iterator is attached to.
+
+And to answer André&apos;s question about `for..in` from earlier, the reason `for..of` should behave differently to the `for..in` is because `for..in` isn&apos;t using an iterator, so there&apos;s no way that `pk` could ever get overwritten. If there ever was a way to define your own enumerator for `for..in` loops, and if that *thing* let you return values with the termination signal, then `for..in` would need to act like `for..of`. For consistency sake, obviously.
+
+
+for (var v of [1,2,3]) {
+  console.log(v);
+}
+// 1 2 3
+
+console.log(v); // undefined
+
+// --------------
+
+function* foo() { yield 1; yield 2; yield 3; }
+
+for (var v of foo()) {
+  console.log(v);
+}
+// 1 2 3
+
+console.log(v); // undefined
+
+// --------------
+
+var customObj = {
+  [Symbol.iterator]: function(){
+     var __v = 0;
+     return {
+       next: function(){
+         if (__v &lt; 3) return { value: ++__v, done: false };
+         return { value: &quot;foobar&quot;, done: true };
+       }
+     };
+  }
+};
+
+for (var v of customObj) {
+   console.log(v);
+}
+// 1 2 3
+
+console.log(v); // foobar
+
+// --------------
+
+function* customGen() { yield 1; yield 2; yield 3; return &quot;foobar&quot;; }
+
+for (var v of customGen()) {
+  console.log(v);
+}
+// 1 2 3
+
+console.log(v); // foobar</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9201</commentid>
+    <comment_count>9</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-15 01:22:10 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; (In reply to comment #4)
+&gt; &gt; It means a shift in the importance of return-statements in generators.
+&gt; &gt; Currently return-statements are barely needed/useful in generators, this may
+&gt; &gt; make them mandatory. (More below.)
+&gt; 
+&gt; I hear conflicting statements about the importance of them. I&apos;m dubious that
+&gt; there&apos;s any defensible position which says either &quot;they are important&quot; vs.
+&gt; &quot;they are not important&quot;. Ergo, they are important because they are important
+&gt; to some.
+
+The eight (or eleven when counting general availability) time gap between PEP 255 and PEP 380 may show that return statements are not one of the most important features in generators. 
+
+
+&gt; &gt; So basically different execution paths based on the final iterator result value
+&gt; &gt; (`undefined` vs. non-`undefined` result values). 
+&gt; 
+&gt; Not necessarily different paths. In a JS sense, a `try { x = final_value }
+&gt; catch(e){}` -- just a suppression and throw-away of the error if the final
+&gt; de-structuring assignment fails -- seems like it would be sufficient.
+
+Exception suppression is way too error prone to be applicable in this case. Too many side effects are possible during destructuring.
+
+
+
+&gt; &gt; Also: for-in loop iteration uses the same mechanics as for-of loops, but I
+&gt; &gt; guess you don&apos;t want to change for-in loop semantics? 
+&gt; &gt; ---
+&gt; &gt; for (var pk in {prop: 0}) print(pk);
+&gt; &gt; print(pk);
+&gt; &gt; // &quot;prop&quot;  &quot;prop&quot;
+&gt; &gt; // or: &quot;prop&quot;  undefined  ?
+&gt; 
+&gt; The important difference is that a `for..in` loop completely exhausts all
+&gt; enumerable keys in the object, so there&apos;s no final `undefined` value to
+&gt; overwrite `pk` with.
+
+For-in loop iteration sure does omit the final iterator result value. See 7.4.8, 9.1.11, 13.6.4. TLDR: The final iterator result is `{done: true, value: undefined}`. 
+
+
+&gt; In the case of a normal `for` loop, it&apos;s the final value that triggers the
+&gt; terminating condition. In the case of `for..in` property enumeration, it&apos;s the
+&gt; final key enumerated. In the case of `for..of` iteration over a normal data
+&gt; structure, it&apos;s the final value in that data structure.
+
+C-style for loops enable greater configurability over their termination condition, so the term &quot;final value&quot; may not even apply here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9202</commentid>
+    <comment_count>10</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-15 01:25:30 -0700</bug_when>
+    <thetext>(In reply to comment #8)
+&gt; And to answer André&apos;s question about `for..in` from earlier, the reason
+&gt; `for..of` should behave differently to the `for..in` is because `for..in` isn&apos;t
+&gt; using an iterator, so there&apos;s no way that `pk` could ever get overwritten. If
+&gt; there ever was a way to define your own enumerator for `for..in` loops, and if
+&gt; that *thing* let you return values with the termination signal, then `for..in`
+&gt; would need to act like `for..of`. For consistency sake, obviously.
+&gt; 
+
+This is already possible:
+---
+function* g() { yield &quot;a&quot;; yield &quot;b&quot;; return &quot;c&quot;; }
+
+// Prints: a b
+for (var k of g()) print(k);
+
+// Prints: a b
+for (var k in new Proxy({}, {enumerate: g})) print(k);
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9203</commentid>
+    <comment_count>11</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-15 07:05:56 -0700</bug_when>
+    <thetext>&gt; For-in loop iteration sure does omit the final iterator result
+&gt; value. See 7.4.8, 9.1.11, 13.6.4. TLDR: The final iterator
+&gt; result is `{done: true, value: undefined}`.
+&gt;
+&gt; If there ever was a way to define your own enumerator for `for..in`
+&gt; loops, and if that *thing* let you return values with the termination
+&gt; signal, then `for..in` would need to act like `for..of`. For
+&gt; consistency sake, obviously.
+&gt;
+&gt; This is already possible:
+&gt; function* g() { yield &quot;a&quot;; yield &quot;b&quot;; return &quot;c&quot;; }
+&gt; for (var k in new Proxy({}, {enumerate: g})) print(k);
+
+OK, I stand corrected.
+
+I&apos;d argue you should change `for..in` to behave the same way I&apos;m suggesting `for..of` should work. But I&apos;m pretty sure the answer will be: &quot;we can&apos;t break existing code.&quot;
+
+Of course, you don&apos;t have the same argument against changing `for..of`.
+
+What you&apos;ve proven is that it&apos;s &quot;hard&quot; (complexity, trade-offs, etc) to do what I&apos;m suggesting. I&apos;ll grant that.
+
+Whether it&apos;s &quot;hard&quot; or not, I think consistency/coherence (in the mental/teachability sense) should be an important goal of designing such mechanisms.
+
+One conclusion of such problematic design is &quot;avoid `for..of` iteration if there might be a terminating return value that you care about.&quot; This is nonsensical, because if I&apos;m just consuming some iterator, how am I supposed to know such a detail?
+
+So turning the situation around, you could say &quot;don&apos;t design an iterator that returns terminating values&quot;, or even &quot;terminating return values from iterators should be disallowed&quot;.
+
+This thread rejects that premise, preserving (and I would argue, endorsing) terminating return values: http://esdiscuss.org/topic/proposal-generator-returning-a-value-should-throw-syntaxerror
+
+So we&apos;re left with &quot;don&apos;t design an iterator with a terminating return value if someone may consume your iterator with a `for..of` loop.&quot; This is equally nonsensical, because I have no control over how someone consumes my iterator.
+
+In other words, we&apos;re pitting iterator-design against iterator-consumption, and intentionally leaving this footgun gap where if those two don&apos;t match, information loss occurs.
+
+I think this intolerable design. But I don&apos;t really have any more to say on the topic. So I&apos;ll leave it to the rest of the discussion to adjudicate.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9208</commentid>
+    <comment_count>12</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 14:11:49 -0700</bug_when>
+    <thetext>(In reply to comment #11)
+Your key point seems to be there is no way to access the final &quot;return&quot; of an iterator invoked using a for-of.  That&apos;s certainly true with the current design and their isn&apos;t an obvious way to extend for-of, in all of its forms, to expose the return value.  That doesn&apos;t seem so bad because if you care about that value you can code the loop in other ways.  For example:
+
+let itr = collection.values().
+let next;
+while (next=itr.next(), !next.done) {
+   let v = next.value;
+   //loop body
+}
+console.log(next.value)  //the return value from the iterator.
+
+However, like I said in Comment #5, it may make sense to set the completion value of the for-of statement to the final &quot;return&quot; value of the iterator.  If we do that and eventually add do expressions to the language you will someday be able to write the loop in Comment #0 like this:
+
+let ret = do { for (v of foo()) console.log(v)}// logs: 1,2,3
+console.log(ret);  /4
+
+I&apos;ll further explore whether changing the for-of completion value seems reasonable. I don&apos;t think we will go down the other path of trying to assign to the loop variable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12745</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 15:54:56 -0800</bug_when>
+    <thetext>Not going to change the completion values of for-of.  As it stands right now, all control structure statement are consistent in returning the value of the last block they evaluated (or undefined if none)
+
+The bigger problem of access the iterator result object is something we can&apos;t address for ES6.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

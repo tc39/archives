@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>480</bug_id>
+          
+          <creation_ts>2012-07-09 10:04:00 -0700</creation_ts>
+          <short_desc>7.8.x numbering is out of order</short_desc>
+          <delta_ts>2012-07-09 18:01:42 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>468</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1218</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-07-09 10:04:51 -0700</bug_when>
+    <thetext>7.8.2 Boolean Literals is present after 7.9 Syntax
+
+7.8.1 Null Literals is immediately followed by 7.8.3 Numeric Literals</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1219</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-07-09 10:09:33 -0700</bug_when>
+    <thetext>Also, 
+
+7.9 appears to have been used twice in error, 
+
+The current 7.9 Syntax should be 7.8.6.1 (This is a guess, since it appears to be a subset of isntructions for 7.8.6 Quasi Literals)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1246</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-09 15:03:37 -0700</bug_when>
+    <thetext>and the second item duplicates 467
+
+*** This bug has been marked as a duplicate of bug 468 ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1248</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-07-09 15:11:58 -0700</bug_when>
+    <thetext>Sorry about that - I try to type the titles as similarly to the existing bugs - hoping that any dups might get caught as I type. 
+
+Take a look at this: http://gyazo.com/b6d182b39781336b963c7c5e3f651b3e</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1265</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-09 18:01:42 -0700</bug_when>
+    <thetext>Yeah, I&apos;m pretty sure that Bugzilla&apos;s &quot;Possible Duplicates&quot; feature ignores numbers.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

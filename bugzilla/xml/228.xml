@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>228</bug_id>
+          
+          <creation_ts>2011-11-29 17:57:00 -0800</creation_ts>
+          <short_desc>Allow IANA time zone names in DateTimeFormat constructor</short_desc>
+          <delta_ts>2015-02-08 13:38:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>514</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2011-11-29 17:57:50 -0800</bug_when>
+    <thetext>The DateTimeFormat constructor currently only allows the time zone ID &quot;UTC&quot; because not all implementations support the full set of time zones. We should however consider allowing those implementations that do to accept all IANA time zone names (http://www.iana.org/time-zones).
+
+To specify:
+
+- Well-formed time zone names: As far as I know, there&apos;s no formal specification of the syntax of IANA time zone names. Current usage seems to indicate /(Africa|America|Antarctica|Asia|Atlantic|Australia|Europe|Indian|Pacific)(\/[-_a-z]{1,14}){1,2}/i for canonical IDs, plus a number of deprecated IDs in the &quot;backward&quot; file that don&apos;t follow this pattern.
+
+- Handling of well-formed but unrecognized time zone IDs: use host environment&apos;s current time zone, or UTC?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12218</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 13:38:26 -0800</bug_when>
+    <thetext>Support for all IANA time zones is specified in the 2013-02-28 draft. Rather than trying to defined well-formedness for the IANA time zone names, we simply accept as valid the actual names defined in the database, and throw exceptions for anything else.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

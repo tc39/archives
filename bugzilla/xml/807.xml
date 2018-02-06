@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>807</bug_id>
+          
+          <creation_ts>2012-10-17 13:21:00 -0700</creation_ts>
+          <short_desc>Conflicting default values for &quot;Enumerable&quot; property in __proto__ defined in the draft spec</short_desc>
+          <delta_ts>2013-11-01 20:35:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>sureshja</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1951</commentid>
+    <comment_count>0</comment_count>
+    <who name="">sureshja</who>
+    <bug_when>2012-10-17 13:21:23 -0700</bug_when>
+    <thetext>There is a conflict with the default value for “enumerable” in the following two sections seems to be an unintentional bug. The section B.3.1.2 should be corrected with setting Enumerable as false.
+
+-------
+B.3.1.1 Object.prototype.__proto__
+The initial value of the __proto__ property of the Object prototype object is a data property whose initial value is  null. This property initially has the attributes { [[Writable]]: true, [[Enumerable]]: false, [[Configurable]]: true }.
+-------
+B.3.1.2 Changes To Internal Methods
+…
+
+The definition of the [[DefineOwnProperty]] internal method given in 8.12.9 is replaced with the following:
+1.	If UnderscoreProtoEnabled is true and P is the string value &quot;__proto__&quot; and O is the standard built-in Object prototype object, then 
+a.	If any attribute contained in Desc is not present or has a different value from the corresponding attribute in { [[Writable]]: true, [[Enumerable]]: true, [[Configurable]]: true }then,
+i.	Set UnderscoreProtoEnabled to false.
+-------</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1057</bug_id>
+          
+          <creation_ts>2012-11-26 09:37:00 -0800</creation_ts>
+          <short_desc>13.6.3: leftover reference to 8.12</short_desc>
+          <delta_ts>2013-07-15 17:04:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2820</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-26 09:37:57 -0800</bug_when>
+    <thetext>In 13.6.3 &quot;The [[ThrowTypeError]] Function Object&quot;,
+step 2 says:
+    Set all the internal methods of F as described in 8.12.
+
+This should presumably be changed to:
+    Set F&apos;s essential internal methods to the default ordinary object
+    definitions specified in 8.3.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2858</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-26 18:45:35 -0800</bug_when>
+    <thetext>Also, step 5 has a leftover reference to 13.6.1,
+which should be changed to 8.3.19.1, I think.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3505</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-19 18:56:14 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; which should be changed to 8.3.19.1, I think.
+
+Now 8.3.15.1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4372</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:24:21 -0700</bug_when>
+    <thetext>The old [[ThrowTypeError]] definition in 13.6.3 has been replace with the definition of %ThrowTypeError% in 8.3.16.9 and the bogus section references have been eliminated.
+
+In Rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4502</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:04:19 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

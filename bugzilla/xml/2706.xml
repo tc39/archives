@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2706</bug_id>
+          
+          <creation_ts>2014-04-19 16:29:00 -0700</creation_ts>
+          <short_desc>chapter 25: misc editorial</short_desc>
+          <delta_ts>2014-06-01 12:19:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7854</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:29:26 -0700</bug_when>
+    <thetext>----------------------------------------
+In 25.2.1.1 &quot;GeneratorFunction (p1, p2, [...] , pn, body)&quot;:
+
+{1}
+25.2.1.1 / step 20:
+Perform the FunctionInitialize abstract operation with arguments
+/F/, Normal, /parameters/, /body/, and /scope/.
+    Put &apos;Normal&apos; in sans-serif.
+
+{2}
+25.2.1.1 / step 25:
+Let /hasName/ be HasOwnProprty(/F/, &quot;name&quot;).
+    s|Proprty|Property|
+
+----------------------------------------
+In 25.4.1.3.1 &quot;Promise Reject Functions&quot;:
+
+{3}
+25.4.1.3.1 / step 3:
+Let /alreadyResolved/ by the value of /F/&apos;s [[AlreadyResolved]] internal slot.
+    s|by|be|
+
+----------------------------------------
+In 25.4.1.3.2 &quot;Promise Resolve Functions&quot;:
+
+{4}
+25.4.1.3.2 / step 3:
+Let /alreadyResolved/ by the value of /F/&apos;s [[AlreadyResolved]] internal slot.
+    s|by|be|
+
+----------------------------------------
+In 25.4.1.4 &quot;FulfillPromise ( promise, value)&quot;:
+
+{5}
+25.4.1.4 / step 2:
+Let /reactions/ be the value of /promise/&apos;s [[PromiseFulfullReactions]] ...
+    s|Fulfull|Fulfill|
+
+{6}
+25.4.1.4 / step 3:
+Set the value of /promise/&apos;s [[PromiseResult]] internal slot to /resolution/.
+    &apos;resolution&apos; is not defined.
+
+{7}
+25.4.1.4 / step 4:
+Set the value of /promise/&apos;s [[PromiseFulfullReactions]] internal slot ...
+    s|Fulfull|Fulfill|
+
+----------------------------------------
+In 25.4.5.3 &quot;Promise.prototype.then ( onFulfilled , onRejected )&quot;:
+
+{9}
+25.4.5.3 / step 5:
+If IsCallable(/onFulfilled/) is *false* or if IsCallable(/onRejected/)
+is *false*, then throw a *TypeError* exception.
+    De-italicize &quot;is false or if&quot; + &quot;is false, then throw a TypeError exception&quot;
+
+----------------------------------------
+In 25.4.5.3.2 &quot;Promise Resolution Handler Functions&quot;:
+
+{10}
+25.4.5.3.2:
+    The spec doesn&apos;t indicate how/where Promise Resolution Handler Functions
+    are created.
+
+----------------------------------------
+In 25.4.6 &quot;Properties of Promise Instances&quot;:
+
+{11}
+25.4.6 / para 1:
+... from the Promise prototype object (the intrinsic, %PromiseProtype%). ...
+    s|Protype|Prototype|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7893</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-23 17:16:26 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7956</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 04:27:34 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7957</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 04:29:35 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7975</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 17:07:04 -0700</bug_when>
+    <thetext>confirmed fixed except for the last:
+
+----------------------------------------
+In 25.4.6 &quot;Properties of Promise Instances&quot;:
+
+{11}
+25.4.6 / para 1:
+... from the Promise prototype object (the intrinsic, %PromiseProtype%). ...
+    s|Protype|Prototype|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8277</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 15:05:49 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8753</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 12:19:19 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

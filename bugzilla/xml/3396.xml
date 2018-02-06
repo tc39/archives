@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3396</bug_id>
+          
+          <creation_ts>2014-11-24 13:23:00 -0800</creation_ts>
+          <short_desc>20.2 The Math Object... should use %ObjectPrototype%</short_desc>
+          <delta_ts>2014-12-23 20:23:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10677</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-11-24 13:23:24 -0800</bug_when>
+    <thetext>Currently: 
+
+  The value of the [[Prototype]] internal slot of the Math object is the standard built-in Object prototype object (19.1.3).
+
+Expected: 
+  
+  The value of the [[Prototype]] internal slot of the Math object is the intrinsic object %ObjectPrototype% (19.1.3)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10678</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-11-24 13:25:35 -0800</bug_when>
+    <thetext>Same thing for: 
+
+- JSON https://people.mozilla.org/~jorendorff/es6-draft.html#sec-json-object
+- Reflect https://people.mozilla.org/~jorendorff/es6-draft.html#sec-reflect-object
+- System (seems to be missing, but this would apply there as well)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10679</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-11-24 13:26:55 -0800</bug_when>
+    <thetext>Also, I believe the section number &quot;(19.1.3)&quot; can be removed from all of these and all other occurrences as well, since the definition won&apos;t change but the section may.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10971</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-08 17:07:25 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+Changed all of the built-ins to use %names% for initializing constructor, prototype, and [[Prototype]].
+
+I left in the section references.  The number are fairly stable and people seem to like such hyperlinks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11177</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:28 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

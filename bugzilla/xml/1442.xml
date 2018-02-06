@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1442</bug_id>
+          
+          <creation_ts>2013-04-16 02:10:00 -0700</creation_ts>
+          <short_desc>Typo: 12.6.4 runtime semantics: &quot;statement&quot; should be &quot;expression&quot;</short_desc>
+          <delta_ts>2013-05-14 18:13:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gareth Smith">bugzilla</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3642</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gareth Smith">bugzilla</who>
+    <bug_when>2013-04-16 02:10:31 -0700</bug_when>
+    <thetext>In Section 12.6.4 &quot;Runtime Semantics: Labelled Evaluation&quot;, step 1 in the first three cases is:
+
+&quot;Let keyResult be the result of performing For In/Of Expression Evaluation with Statement, enumerate, and labelSet.&quot;
+
+If I understand correctly, then in these cases, this should read:
+
+&quot;Let keyResult be the result of performing For In/Of Expression Evaluation with Expression, enumerate, and labelSet.&quot;
+
+A similar typo has been corrected for later cases, but these first three seem to have been missed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3643</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-16 03:15:17 -0700</bug_when>
+    <thetext>Dup of Bug 1421</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3657</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-19 12:49:24 -0700</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3730</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 12:54:41 -0700</bug_when>
+    <thetext>Fixed in rev 15 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3870</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:03 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

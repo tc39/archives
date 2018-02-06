@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3421</bug_id>
+          
+          <creation_ts>2014-12-08 09:17:00 -0800</creation_ts>
+          <short_desc>6.1.7.4 %Loader%, %LoaderPrototype%, and %LoaderIteratorPrototype% are all unused</short_desc>
+          <delta_ts>2014-12-23 20:23:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>impinball</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10943</commentid>
+    <comment_count>0</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2014-12-08 09:17:24 -0800</bug_when>
+    <thetext>The following entries in Table 7, &quot;Well-known Intrinsic Objects&quot;, located under 6.1.7.4, are unused in the specification:
+
+- %Loader%
+- %LoaderPrototype%
+- %LoaderIteratorPrototype%
+- %Int8ArrayPrototype%
+- %ReturnUndefined%
+
+All of these are only mentioned in Table 7, and may be better off removed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10945</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-08 09:37:00 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+Table 7 will be completely reorganized prior to the final draft.  %Int8ArrayPrototype% is currently serving as place holder for all of the typed array prototype objects. I haven&apos;t decided yet whether they will be in the final version of Table 7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10979</commentid>
+    <comment_count>2</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2014-12-10 02:48:51 -0800</bug_when>
+    <thetext>What about the other four? I suspect the %Loader*% ones will be removed as they are artifacts from the removal of the Loader specification, but %ReturnUndefined% seems clearly redundant.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11220</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:34 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

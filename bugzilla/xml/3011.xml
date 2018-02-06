@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3011</bug_id>
+          
+          <creation_ts>2014-07-19 01:54:00 -0700</creation_ts>
+          <short_desc>13.6.3, 13.6.4, 13.14, 12.2.4.2: Different visibility for captured bindings in lexical declarations</short_desc>
+          <delta_ts>2014-09-20 12:24:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>princexcess69</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9324</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-19 01:54:07 -0700</bug_when>
+    <thetext>13.6.3  The for Statement
+13.6.4  The for-in and for-of Statements
+13.14  The try Statement
+12.2.4.2  Array Comprehension
+
+Captured bindings in lexical declarations with destructuring and defaults have different visibility depending on where they appear. 
+
+(A) C-style for-loops use this approach:
+1. Create new declarative lexical environment
+2. Create bindings in the new environment
+3. Set the new environment to the currently active lexical environment
+4. Perform binding initialization
+
+(B) for-in/of loops, comprehension and catch blocks use this approach:
+1. Create new declarative lexical environment
+2. Create bindings in the new environment
+3. Perform binding initialization
+4. Set the new environment to the currently active lexical environment
+
+Use same semantics for both types of statements?
+
+
+Test case:
+---
+function f() { let v = 0; for (let {v = () =&gt; v} = {};;) return v }
+f()(); // () =&gt; v
+
+function g() { let v = 0; for (let {v = () =&gt; v} of [{}]) return v }
+g()(); // 0
+
+function h() { let v = 0; try { throw {} } catch ({v = () =&gt; v}) { return v } }
+h()(); // 0
+
+function k() { let v = 0; return [for ({v = () =&gt; v} of [{}]) v][0] }
+k()(); // 0
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9441</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-21 09:07:27 -0700</bug_when>
+    <thetext>agreed, they should all work, like A.
+
+I&apos;ll fix it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9443</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-21 12:05:50 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9934</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:27 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4382</bug_id>
+          
+          <creation_ts>2015-05-27 17:25:00 -0700</creation_ts>
+          <short_desc>Allow any NaN, signalling or not, to be written into TypedArrays</short_desc>
+          <delta_ts>2015-05-28 11:18:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>4381</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Daniel Ehrenberg">dehrenberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14459</commentid>
+    <comment_count>0</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-27 17:25:31 -0700</bug_when>
+    <thetext>In &quot;24.1.1.6 SetValueInBuffer&quot;, 9.a and 10.a specifies special behavior to avoid writing signalling NaN out to TypedArrays. However, signalling NaN shouldn&apos;t really cause any problems for anyone, and this requirement has performance implications. Just remove the word &quot;non-signalling&quot;.
+
+(Parenthetically, I&apos;m also wondering, do we need the sentence, &quot;An implementation must always choose the same non-signaling NaN encoding for a distinct Not-a-Number value.&quot;? Do existing implementations do this, and does it create a big implementation burden?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14460</commentid>
+    <comment_count>1</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-27 17:26:10 -0700</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 4381 ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14462</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-28 04:38:59 -0700</bug_when>
+    <thetext>(In reply to Daniel Ehrenberg from comment #0)
+&gt; (Parenthetically, I&apos;m also wondering, do we need the sentence, &quot;An
+&gt; implementation must always choose the same non-signaling NaN encoding for a
+&gt; distinct Not-a-Number value.&quot;? Do existing implementations do this, and does
+&gt; it create a big implementation burden?)
+
+That sentence was added as part of bug 3508.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14463</commentid>
+    <comment_count>3</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-28 11:02:21 -0700</bug_when>
+    <thetext>Is that other channel still a concern with the current definition of everything? In https://people.mozilla.org/~jorendorff/es6-draft.html#sec-validateandapplypropertydescriptor ValidateAndApplyPropertyDescriptor, looks like if SameValue, then it just exits early, returning true without writing into the property. So is anything being communicated across the frozen object in that case?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14464</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-28 11:18:40 -0700</bug_when>
+    <thetext>Yes, that issue is still a concern. The summary given in bug 3508 comment 3 describes why using the same NaN encoding for a distinct Not-a-Number value is required.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

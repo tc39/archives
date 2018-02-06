@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3506</bug_id>
+          
+          <creation_ts>2015-01-02 03:02:00 -0800</creation_ts>
+          <short_desc>@@toStringTag protected builtins list not complete?</short_desc>
+          <delta_ts>2015-01-28 16:22:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jordan Harband">ljharb</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11292</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-01-02 03:02:54 -0800</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring step 17b lists the following built in string tags:
+ &quot;Arguments&quot;, &quot;Array&quot;, &quot;Boolean&quot;, &quot;Date&quot;, &quot;Error&quot;, &quot;Function&quot;, &quot;Number&quot;, &quot;RegExp&quot;, or &quot;String&quot;
+
+I understand that new things added in ES6 will not have the same protection for legacy purposes (that&apos;s a separate discussion) - but what about Math and JSON, both of which are in ES5 and might have the same legacy code checks?
+
+Also, what about objects without a @@toStringTag specified, which return &quot;[object Object]&quot;?
+
+In other words, it appears to me that &quot;Math&quot;, &quot;JSON&quot;, and &quot;Object&quot; should all be in this same unspoof-able list. Thoughts?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11315</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-06 14:05:21 -0800</bug_when>
+    <thetext>The built-in objects Math and JSON are regular ordinary objects that could be entirely reimplemented by user code. IMHO, there isn&apos;t much value in protecting such objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11316</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-01-06 14:06:21 -0800</bug_when>
+    <thetext>However, currently they can be brand-checked via Object.prototype.toString.call - isn&apos;t the purpose of this protection to ensure that such brand-checking never breaks?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11328</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 10:37:12 -0800</bug_when>
+    <thetext>However, we&apos;d have to add some sort of branding internal slot to Math and JSON in order to do this.  
+
+How likely to you think that anybody is actually brand checking Math and JSON  using O.p.toString.  It seems pointless as it doesn&apos;t guarantee anything about the their properties.
+
+I&apos;m inclined to forgo the added complexity and see if this slip by.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11558</commentid>
+    <comment_count>4</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-20 03:47:23 -0800</bug_when>
+    <thetext>For completeness, among the tags defined before ES6, there is also &quot;Undefined&quot; and &quot;Null&quot;.
+
+(Not that I&apos;d like to protect those any more than &quot;JSON&quot;, etc.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11743</commentid>
+    <comment_count>5</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-01-28 16:22:53 -0800</bug_when>
+    <thetext>To summarize the discussion at today&apos;s TC39 meeting:
+
+Given that the style of checks that Allen proposed (using non-side-effecty non-generic methods that rely on internal slots, in a try/catch) is indeed reliable in ES3, and will continue to be reliable in ES6, any security-conscious code should update itself to use these kinds of checks rather than an Object.prototype.toString.call check. v8 (and any other implementations that are working on @@toStringTag) will leave Symbol.toStringTag behind a flag for a full two months, to give the relevant code time to release updates.
+
+In addition, anybody who modifies a builtin so that, say, a Boolean reports itself as a Number, intends the effects of this change, and so there is no concern about them. In accordance with this, step 17b of https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring will be removed - if a developer wants to make a non-builtin value masquerade as a builtin, they similarly are intending those effects.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

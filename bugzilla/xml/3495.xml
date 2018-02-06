@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3495</bug_id>
+          
+          <creation_ts>2014-12-26 19:15:00 -0800</creation_ts>
+          <short_desc>12.14.5.3: &quot;lref&quot; not defined</short_desc>
+          <delta_ts>2014-12-26 19:19:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11243</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-26 19:15:03 -0800</bug_when>
+    <thetext>In 12.14.5.3 &quot;Runtime Semantics: IteratorDestructuringAssignmentEvaluation&quot;,
+in group 7,
+steps 9.c.i and 10 refer to /lref/,
+but it looks like the /lref/ is not necessarily defined there,
+since step 1.a hasn&apos;t necessarily been executed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11244</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-26 19:19:53 -0800</bug_when>
+    <thetext>Never mind, I see that the cases where /lref/ is not defined terminate in step 8.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

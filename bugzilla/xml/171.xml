@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>171</bug_id>
+          
+          <creation_ts>2011-07-25 16:51:00 -0700</creation_ts>
+          <short_desc>should review primitive value conversion in JSON.stringify</short_desc>
+          <delta_ts>2015-02-16 12:57:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>384</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-25 16:51:39 -0700</bug_when>
+    <thetext>see https://mail.mozilla.org/pipermail/es5-discuss/2011-March/003945.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12779</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 12:57:47 -0800</bug_when>
+    <thetext>this is legacy of the ES5 spec. and changing it would be a breaking change (although an unlikely one that requires monkey patching the valueOf method of Number.prototype or the toString method of String.prototype).
+
+It traces back to json2.js which prior to ES5 added toJSON methods to String.prototype, Number.prototype, Boolean.prototype.  In ES5 those methods where eliminated and folded into str().  I&apos;m not sure why we didn&apos;t invoke valueOf on Boolean obejcts to get the boolean value.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2733</bug_id>
+          
+          <creation_ts>2014-04-24 10:11:00 -0700</creation_ts>
+          <short_desc>19.1.3.6 Object.prototype.toString handling for Proxy objects</short_desc>
+          <delta_ts>2014-06-16 16:33:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7910</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-24 10:11:07 -0700</bug_when>
+    <thetext>Currently, the default behavior is to report a proxy as &quot;[object Proxy]&quot;.
+
+Somebody might try to use this as a Proxy type test. But note that it isn&apos;t reliable because &quot;Proxy&quot; is intentionally not on the legacy toStringTag back. list. 
+
+Also: 
+
+On Apr 24, 2014, at 9:27 AM, Allen Wirfs-Brock wrote:
+
+
+On Apr 24, 2014, at 9:03 AM, Tom Van Cutsem wrote:
+
+(reiterating what I already mentioned at the hangout, but to bring Brian up to date)
+
+Based on feedback I received from developers that are using my Proxy shim, they clearly want Object.prototype.toString to be transparent in the face of proxies (i.e. O.p.toString.call(proxy) should return whatever O.p.toString.call(target) returns).
+
+Allen raised the issue that this breaks the proxy&apos;s encapsulation, but a Proxy that wants to hide its target&apos;s type can still implement the @ToStringTag symbol to override the default behavior.
+
+Mark and I continued discussing this quite a bit.  Consider this:
+
+let exec = RegExp.prototype.exec;
+let toString = Object.prototype.toString;
+...
+if (toString.call(obj) === &apos;RegExp&apos;) {
+    exec.call(obj, string)
+} else {
+    //something else
+}
+
+The above with throw on the exec.call if obj is a Proxy because obj does not have the internal state required of a RegExp object.  In general proxies aren&apos;t transparent when passed as this values, so it isn&apos;t clear to me what your developers think they are asking for.
+
+Allen
+
+
+
+Cheers,
+Tom
+(adding Mark and Tom)
+
+Yes, O.p.toString as an isProxy test has always been a bit of a concern since we eliminated Proxy.isProxy.
+
+Mark and Tom, what do you think? Is this a concern?  Is there some other way you know of for detecting a Proxy that makes this a non-issue.
+
+If you think it is a problem, it would be easy enough to spec. O.p.toString to report &quot;[object Object]&quot; for Proxies. 
+
+Allen
+
+On Apr 23, 2014, at 11:57 AM, Brian Terlson wrote:
+
+That makes sense, thanks for explaining to me. I think the only other option would be ‘[object Object]’ but I don’t have a strong desire for this. I have a vague worry that people will write an isProxy function based on this, which would be a bad idea, but that’s about it.
+ 
+From: Allen Wirfs-Brock [mailto:allen@wirfs-brock.com] 
+Sent: Tuesday, April 22, 2014 5:24 PM
+To: Brian Terlson
+Subject: Re: (new Proxy({},{})).toString() === &apos;[object Proxy]&apos;?
+ 
+ 
+On Apr 22, 2014, at 4:26 PM, Brian Terlson wrote:
+
+
+At least, according to the current spec. And, if I understand correctly, that’s unless the target has an @@toStringTag, in which case that will be used. Is this what we want for sure? I tried to search for rationale and failed…
+ 
+Thanks for any insight!!
+ 
+Well, it&apos;s mostly a byproduct of the fact that method invocation on proxies, by default, looks up the method on the Proxy target, but invoke it with the Proxy as the this value. But it seems like as a good a default as any.  There are lots of ways the Proxy provider might define toString behavior (including by defined @@toStringTag on the target object.
+ 
+I&apos;m not sure any other default for O.p.toString on a Proxy would be any better.  It seems like it would be a bit presumptuous for for O.p.toString to violate encapsulation by reach inside the Proxy and directly trying to invoke something on the target.
+ 
+allen</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8533</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-17 08:43:38 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+Proxy objects default to either [object Object] or [object Function] depending upon whether or not they are callable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8570</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 19:14:14 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9032</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:33:49 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2027</bug_id>
+          
+          <creation_ts>2013-10-01 06:40:00 -0700</creation_ts>
+          <short_desc>11.8.6.1: TRV of LineContinuation also normalises escaped \r and \r\n to \n</short_desc>
+          <delta_ts>2013-10-01 07:15:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5763</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-01 06:40:33 -0700</bug_when>
+    <thetext>Relevant entries from draft:
+
+- The TRV of TemplateCharacter :: LineContinuation is the TRV of LineContinuation.
+- The TRV of LineContinuation :: \ LineTerminatorSequence is the sequence consisting of the code unit value 0x005C followed by the code units of TRV of LineTerminatorSequence.
+- The TRV of LineTerminatorSequence ::  &lt;CR&gt; [lookahead  &lt;LF&gt; ]  is the code unit value 0x000A
+- The TRV of LineTerminatorSequence  ::  &lt;CR&gt;&lt;LF&gt;  is the sequence consisting of the code unit value 0x000A.
+
+TRV of LineContinuation uses TRV of LineTerminatorSequence, but TRV of LineTerminatorSequence normalises line endings.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5764</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-01 06:48:00 -0700</bug_when>
+    <thetext>I&apos;d suggest to add TV of LineTerminatorSequence to perform line ending normalisation and revert the changes for TRV of LineTerminatorSequence:
+
+- The TV of TemplateCharacter :: LineTerminatorSequence is the TV of LineTerminatorSequence.
+- The TRV of TemplateCharacter :: LineTerminatorSequence is the TV of LineTerminatorSequence.
+
+- The TV of LineTerminatorSequence :: &lt;LF&gt; is the code unit value 0x000A.
+- The TV of LineTerminatorSequence :: &lt;CR&gt; [lookahead  &lt;LF&gt; ] is the code unit value 0x000A.
+- The TV of LineTerminatorSequence :: &lt;LS&gt; is the code unit value 0x2028.
+- The TV of LineTerminatorSequence :: &lt;PS&gt; is the code unit value 0x2029.
+- The TV of LineTerminatorSequence :: &lt;CR&gt;&lt;LF&gt; is the sequence consisting of the code unit value 0x000A.
+
+- The TRV of LineTerminatorSequence :: &lt;LF&gt; is the code unit value 0x000A.
+- The TRV of LineTerminatorSequence :: &lt;CR&gt; [lookahead  &lt;LF&gt; ] is the code unit value 0x000D.
+- The TRV of LineTerminatorSequence :: &lt;LS&gt; is the code unit value 0x2028.
+- The TRV of LineTerminatorSequence :: &lt;PS&gt; is the code unit value 0x2029.
+- The TRV of LineTerminatorSequence :: &lt;CR&gt;&lt;LF&gt; is the sequence consisting of the code unit value 0x000D followed by the code unit value 0x000A.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5765</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-01 07:15:43 -0700</bug_when>
+    <thetext>Invalid -&gt; misunderstanding on my part</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

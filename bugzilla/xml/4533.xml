@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4533</bug_id>
+          
+          <creation_ts>2015-08-30 22:02:00 -0700</creation_ts>
+          <short_desc>Object.keys is missing &quot;length&quot; note</short_desc>
+          <delta_ts>2015-10-04 04:19:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=4508</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jordan Harband">ljharb</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14694</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-08-30 22:02:58 -0700</bug_when>
+    <thetext>Object.keys doesn&apos;t specify (as most other methods do) that it should have a length of 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14704</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-09-18 07:59:29 -0700</bug_when>
+    <thetext>The default length for functions as specified in ch. 17 applies for Object.keys, therefore it is not needed to explicitly specify the length property. Redundant function length definitions should be avoided (bug 4442).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14770</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2015-10-04 00:04:21 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #1)
+&gt; The default length for functions as specified in ch. 17 applies for
+&gt; Object.keys, therefore it is not needed to explicitly specify the length
+&gt; property. Redundant function length definitions should be avoided (bug 4442).
+
+Given that, are there any occurrences in the entire spec of functions whose length doesn&apos;t follow the rules in Chapter 17?
+
+I think there&apos;s value in explicitly mentioning both the name and the length on every function - implementors get this wrong periodically.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14771</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-10-04 04:19:05 -0700</bug_when>
+    <thetext>(In reply to Jordan Harband from comment #2)
+&gt; Given that, are there any occurrences in the entire spec of functions whose
+&gt; length doesn&apos;t follow the rules in Chapter 17?
+
+Yes, there are plenty of functions which don&apos;t use the default length per ch17:
+
+Object.assign: Default 1, Actual 2
+Object.prototype.toLocaleString: Default 2, Actual 0
+Number.prototype.toLocaleString: Default 2, Actual 0
+Date.prototype.toLocaleDateString: Default 2, Actual 0
+Date.prototype.toLocaleString: Default 2, Actual 0
+Date.prototype.toLocaleTimeString: Default 2, Actual 0
+String.fromCharCode: Default 0, Actual 1
+String.fromCodePoint: Default 0, Actual 1
+String.prototype.concat: Default 0, Actual 1
+String.prototype.endsWith: Default 2, Actual 1
+String.prototype.includes: Default 2, Actual 1
+String.prototype.indexOf: Default 2, Actual 1
+String.prototype.lastIndexOf: Default 2, Actual 1
+String.prototype.localeCompare: Default 3, Actual 1
+String.prototype.normalize: Default 1, Actual 0
+String.prototype.startsWith: Default 2, Actual 1
+String.prototype.toLocaleLowerCase: Default 2, Actual 0
+String.prototype.toLocaleUpperCase: Default 2, Actual 0
+Array.from: Default 3, Actual 1
+Array.prototype.concat: Default 0, Actual 1
+Array.prototype.copyWithin: Default 3, Actual 2
+Array.prototype.every: Default 2, Actual 1
+Array.prototype.fill: Default 3, Actual 1
+Array.prototype.filter: Default 2, Actual 1
+Array.prototype.find: Default 2, Actual 1
+... more</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

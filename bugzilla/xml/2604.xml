@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2604</bug_id>
+          
+          <creation_ts>2014-04-06 18:36:00 -0700</creation_ts>
+          <short_desc>7.1.11: incorrect rounding behaviour</short_desc>
+          <delta_ts>2014-06-16 15:58:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>qantas94heavy</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7610</commentid>
+    <comment_count>0</comment_count>
+    <who name="">qantas94heavy</who>
+    <bug_when>2014-04-06 18:36:59 -0700</bug_when>
+    <thetext>Currently, ToUint8Clamp is specified to round numbers up if the number is halfway between two integers:
+
+&gt; 6. Let f be floor(number).
+&gt; 7. If f+0.5 ≤ number, then return f+1.
+
+This is inconsistent with the WebIDL specification (referenced by the Khronos Typed Array specification):
+
+&gt; 1. Round x to the nearest integer, choosing the even integer if it lies halfway between two.
+&gt; 2. Set x to min(max(x, 0), 2^8 − 1).
+&gt; 3. Return the IDL octet value that represents the same numeric value as x.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7795</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 12:42:33 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8161</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 15:15:34 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8507</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-15 12:36:28 -0700</bug_when>
+    <thetext>actually, still not right in rev24.  It needs to do &quot;round half to even&quot; tie-breaking.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8508</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-15 12:37:06 -0700</bug_when>
+    <thetext>Fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9003</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 15:58:00 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

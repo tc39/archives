@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2315</bug_id>
+          
+          <creation_ts>2013-11-17 12:13:00 -0800</creation_ts>
+          <short_desc>19.2.3.2 Function.prototype.bind: Issues in the computation of the length of the bound function</short_desc>
+          <delta_ts>2014-07-19 18:02:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6832</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2013-11-17 12:13:54 -0800</bug_when>
+    <thetext>In the algorithm of Function.prototype.bind, the computation the length of the bound function being constructed is performed by steps 5 and 6, which read:
+
+5. If Target has a [[BoundTargetFunction]] internal slot, then
+    a. Let targetLen be the result of Get(Target, &quot;length&quot;).
+    b. ReturnIfAbrupt(targetLen).
+    c. Let L be the larger of 0 and the result of targetLen minus the number of elements of A.
+6. Else let L be 0.
+
+There are two issues:
+
+First, it is not clear why step 5 apparently restricts its scope to bound functions. It seems more reasonable to restrict to any function (as in ES5.1). (I may have missed issues with proxies, however.)
+
+Second, there is an implicit assumption that getting the value of the &quot;length&quot; property of `Target` will produce a number. It is no longer true since the &quot;length&quot; property of non-builtin functions is configurable (even under the current restriction of step 5). Therefore, the value of `targetLen` should be coerced to a nonnegative integer before its use in step 5c.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9226</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-16 16:15:08 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9361</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:02:45 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

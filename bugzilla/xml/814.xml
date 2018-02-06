@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>814</bug_id>
+          
+          <creation_ts>2012-10-24 17:39:00 -0700</creation_ts>
+          <short_desc>13.2: bad arguments to FunctionCreate</short_desc>
+          <delta_ts>2014-05-15 09:12:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2023</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-24 17:39:17 -0700</bug_when>
+    <thetext>In 13.2 &quot;Arrow Function Definitions&quot;,
+under &quot;Runtime Semantics: Evaluation&quot;,
+rule 1 step 3 says:
+    Let closure be the result of performing the FunctionCreate abstract operation
+    with arguments Arrow, ArrowParameters, ConciseBody, scope, and strict.
+
+However, this passes:
+-- ArrowParameters where FunctionCreate expects a FormalParameterList, and
+-- ConciseBody where FunctionCreate expects a FunctionBody.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2024</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-24 17:52:25 -0700</bug_when>
+    <thetext>Similarly, in 13.3 &quot;Method Definitions&quot;,
+under &quot;Runtime Semantics: Property Definition Evaluation&quot;,
+rule 4 steps 6.a and 7.a
+try to pass PropertySetParameterList where FunctionCreate expects a FormalParameterList.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2028</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-24 19:35:58 -0700</bug_when>
+    <thetext>Actually, it FunctionCreate doesn&apos;t (and downstream consummers of the function objects) don&apos;t need to get a /FormalParameterList/ AST in that parameter position.  All they need is an AST is is polymorphic WRT the specs semantics rules with /FormalParameterList/.  similarly for FunctionBody
+
+However, I can see that the parameter names to FunctionCreate are misleading in that regard so I&apos;ll change them</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2036</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-24 22:44:15 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt;
+&gt; However, I can see that the parameter names to FunctionCreate are misleading in
+&gt; that regard so I&apos;ll change them
+
+Ah, good. That should take care of the other problem I had with FunctionCreate:
+it has (I think) the only two cases where a parameter name is the same as a nonterminal name.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2154</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:23 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2476</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-19 16:00:28 -0800</bug_when>
+    <thetext>Okay, so in the definition of FunctionCreate, you renamed:
+    FormalParameterList  -&gt; ParameterList
+    FunctionBody         -&gt; Body
+
+But a few of the invocations of FunctionCreate refer to its parameters by name, and so you need to make the corresponding changes there:
+
+10.6 &quot;Arguments Object&quot; / MakeArgGetter / step 4
+10.6 &quot;Arguments Object&quot; / MakeArgSetter / step 5
+15.3.2.1 &quot;new Function&quot; / step 11
+
+(The last of these doesn&apos;t reference FunctionCreate explicitly, but presumably should.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6348</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-01 20:32:42 -0700</bug_when>
+    <thetext>fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6572</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:20 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6645</commentid>
+    <comment_count>8</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-10 17:15:26 -0800</bug_when>
+    <thetext>This one hasn&apos;t been fixed: (The section number is now 9.4.4.1.)
+&gt; 10.6 &quot;Arguments Object&quot; / MakeArgSetter / step 5
+
+It refers to FunctionCreate&apos;s 3rd parameter as &quot;FunctionBody&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8493</commentid>
+    <comment_count>9</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-15 09:12:54 -0700</bug_when>
+    <thetext>That last one was fixed in rev23.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

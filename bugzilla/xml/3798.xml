@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3798</bug_id>
+          
+          <creation_ts>2015-02-08 20:22:00 -0800</creation_ts>
+          <short_desc>Abstract operation Get called with List specification type</short_desc>
+          <delta_ts>2016-02-15 16:51:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12233</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 20:22:01 -0800</bug_when>
+    <thetext>The abstract operation Get is specified to take an object as its first argument – see ES6, 7.3.1. Several algorithms in the 2015-01-12 spec draft however call it with an instance of the List specification type.
+
+Some algorithms doing this:
+9.2.3 LookupMatcher steps 2 and 5b.
+9.2.6 LookupSupportedLocales steps 1 and 4b.
+
+There may be more.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12246</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 08:55:15 -0800</bug_when>
+    <thetext>Fixed in rev7
+
+(All changes marked with comments pointing to this bug)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12352</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 21:48:53 -0800</bug_when>
+    <thetext>The updated algorithms now use ToObject to convert from the List specification type to an object. ToObject however is not specified to handle such a conversion.
+
+Allen, what&apos;s the best way in ES6 spec language to determine the length of a List?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12368</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-12 07:37:28 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #2)
+&gt; The updated algorithms now use ToObject to convert from the List
+&gt; specification type to an object. ToObject however is not specified to handle
+&gt; such a conversion.
+&gt; 
+&gt; Allen, what&apos;s the best way in ES6 spec language to determine the length of a
+&gt; List?
+
+I just need to do another pass and use `ArrayCreateFromList`</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12369</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-12 07:50:24 -0800</bug_when>
+    <thetext>While fixing this, I learned a new thing about Word: If you select some text and insert a comment, then copy that text, it will copy the comment as well. All of the relevant fixes for this latest pass are marked with a comment containing &quot;https://bugs.ecmascript.org/show_bug.cgi?id=3798#c2&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4126</bug_id>
+          
+          <creation_ts>2015-03-06 08:20:00 -0800</creation_ts>
+          <short_desc>Completion reform missing pieces</short_desc>
+          <delta_ts>2015-03-17 16:57:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13599</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 08:20:02 -0800</bug_when>
+    <thetext>Completion reform changes are still incomplete. I&apos;ve tried to fill in the missing pieces, but I&apos;m not sure whether or not I&apos;ve covered everything (e.g. completion values for loops with break/continue).
+
+
+Completion semantics in rev35:
+https://gist.github.com/anba/2288c4501bf3799c44a1
+
+Completion semantics with completion reform applied:
+https://gist.github.com/anba/24438972880d30327480
+
+Diff:
+https://gist.github.com/anba/d1671fc7deff21a4ead9</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13600</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 08:22:22 -0800</bug_when>
+    <thetext>I&apos;ve also removed a few LoopContinues calls, because there are currently not needed and complicate things.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13601</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-06 08:38:12 -0800</bug_when>
+    <thetext>I which of the algorithms are the changes  specifically covering cases that were missing?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13604</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-06 08:58:27 -0800</bug_when>
+    <thetext>I&apos;m trying to avoid unnecessary churn and want to focus on things that are missing or buggy.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13605</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 09:01:44 -0800</bug_when>
+    <thetext>- Finally block completion values should be ignored (except for throw and return).
+- CaseBlockEvaluation is a complete mess, e.g.
+  Completion value for this switch statement is empty:
+    `switch(1){ case 1: ; }`
+  Completion value for this switch statement is `undefined`:
+    `switch(1){ case 0: ; default: ; case 1: ; }`
+- break with and without labels, e.g.
+  Completion value is empty:
+    `var i=0; L: do { if(++i==2)break L; i; } while (1);`
+  Completion value is `undefined`:
+    `var i=0; do { if(++i==2)break; i; } while (1);`
+
+General question:
+```
+var i = 0;
+while (true) {
+  if (++i == 2) break;
+  42;
+}
+```
+
+What is the expected completion value for the while loop according to the completion reform - `42` or `undefined`? With the rev35 semantics it&apos;s `undefined`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13606</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 09:06:21 -0800</bug_when>
+    <thetext>Unfortunately completion value semantics aren&apos;t really popular, so there is little to no interest to review this part of the spec. And 
+http://wiki.ecmascript.org/doku.php?id=harmony:completion_reform doesn&apos;t provide enough information to say how things should work. :-(</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13609</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 09:48:27 -0800</bug_when>
+    <thetext>This is a less invasive patch to handle finally-blocks and labeled statements, remove dead steps with LoopContinues and CaseSelectorEvaluation, and fix an empty completion value issue in CaseBlockEvaluation:
+
+https://gist.github.com/anba/03e1aa285ca8808d149d
+
+
+Those changes don&apos;t handle loops and empty completions values from break/continue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13623</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-07 10:46:20 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #4)
+
+&gt; 
+&gt; General question:
+&gt; ```
+&gt; var i = 0;
+&gt; while (true) {
+&gt;   if (++i == 2) break;
+&gt;   42;
+&gt; }
+&gt; ```
+&gt; 
+&gt; What is the expected completion value for the while loop according to the
+&gt; completion reform - `42` or `undefined`? With the rev35 semantics it&apos;s
+&gt; `undefined`.
+
+My call is undefined:  Because we have started evaluation of the statement block, the completion value of the previous evaluation is irrelevant.  However, at the point of the break, the completion value of the statement list is empty.  Because the while statement under completion reform never produces an empty completion value, the empty is transformed into undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13637</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-07 17:43:11 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #4)
+&gt; - Finally block completion values should be ignored (except for throw and
+&gt; return).
+
+why do you think this should be the case.  consider
+
+while (true) 
+   try {1} finally{2; break};
+// we reach here because the finally took over exit control
+// completion value: 1 or 2?
+
+Why should the completion value be 1? By executing a break (or throw/return/continue) the finally block has taken control completely away from the try block. why should that transfer of the locus of control also imply a transfer of the responsibility of providing the return value?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13640</commentid>
+    <comment_count>9</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-08 04:09:53 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #8)
+&gt; (In reply to André Bargull from comment #4)
+&gt; &gt; - Finally block completion values should be ignored (except for throw and
+&gt; &gt; return).
+&gt; 
+&gt; why do you think this should be the case.  consider
+&gt; 
+
+&quot;Additional changes&quot; from http://wiki.ecmascript.org/doku.php?id=harmony:completion_reform describes this semantics.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13641</commentid>
+    <comment_count>10</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-08 04:14:32 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #7)
+&gt; (In reply to André Bargull from comment #4)
+&gt; 
+&gt; &gt; 
+&gt; &gt; General question:
+&gt; &gt; ```
+&gt; &gt; var i = 0;
+&gt; &gt; while (true) {
+&gt; &gt;   if (++i == 2) break;
+&gt; &gt;   42;
+&gt; &gt; }
+&gt; &gt; ```
+&gt; &gt; 
+&gt; &gt; What is the expected completion value for the while loop according to the
+&gt; &gt; completion reform - `42` or `undefined`? With the rev35 semantics it&apos;s
+&gt; &gt; `undefined`.
+&gt; 
+&gt; My call is undefined:  Because we have started evaluation of the statement
+&gt; block, the completion value of the previous evaluation is irrelevant. 
+&gt; However, at the point of the break, the completion value of the statement
+&gt; list is empty.  Because the while statement under completion reform never
+&gt; produces an empty completion value, the empty is transformed into undefined.
+
+```
+var i = 0;
+while (i &lt; 2) {
+  if (++i == 2) continue;
+  42;
+}
+```
+
+And here? Currently it&apos;s `42`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13642</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-08 09:47:41 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #9)
+&gt; (In reply to Allen Wirfs-Brock from comment #8)
+&gt; &gt; (In reply to André Bargull from comment #4)
+&gt; &gt; &gt; - Finally block completion values should be ignored (except for throw and
+&gt; &gt; &gt; return).
+&gt; &gt; 
+&gt; &gt; why do you think this should be the case.  consider
+&gt; &gt; 
+&gt; 
+&gt; &quot;Additional changes&quot; from
+&gt; http://wiki.ecmascript.org/doku.php?id=harmony:completion_reform describes
+&gt; this semantics.
+
+Yes, but that and the es-scuss message it references only talks about normal completion of the finally block. I don&apos;t see anything from (the very limited  discussion) or from legacy ES that suggests that the completion value of a break/continue in a finally block should be ignored.
+
+From the perspective of the try statement such a break/continue is an abnormal exit just like return or throw.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13702</commentid>
+    <comment_count>12</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-11 18:16:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #11)
+&gt; Yes, but that and the es-scuss message it references only talks about normal
+&gt; completion of the finally block. I don&apos;t see anything from (the very limited
+&gt; discussion) or from legacy ES that suggests that the completion value of a
+&gt; break/continue in a finally block should be ignored.
+
+(Unfortunately) the es-discuss message doesn&apos;t event get into the details of normal and abrupt completions, so it&apos;s more or less open for interpretation what he meant when he said &quot;without changing the completion value of the expression&quot;. The same goes for the initial revision of http://wiki.ecmascript.org/doku.php?id=harmony:completion_reform&amp;rev=1321054410. 
+
+I interpreted the sentence:
+&gt; should make the completion of a try-finally be the result of the try block
+
+that completion values from break/continue abrupt completions should be dropped. 
+
+If completion values from break/continue abrupt completions are not dropped, implementations will need to store the try-block&apos;s completion value somehow in case the finally block returns with a normal completion. Correct?
+
+Example:
+---
+L: try {
+  1;
+} finally {
+  2;
+  if (cond) break L;
+}
+---
+
+If [cond = false], the completion value is `1`.
+If [cond = true], the completion value is `2`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13704</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-11 18:30:40 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #12)
+...
+&gt; 
+&gt; If completion values from break/continue abrupt completions are not dropped,
+&gt; implementations will need to store the try-block&apos;s completion value somehow
+&gt; in case the finally block returns with a normal completion. Correct?
+&gt; 
+&gt; Example:
+&gt; ---
+&gt; L: try {
+&gt;   1;
+&gt; } finally {
+&gt;   2;
+&gt;   if (cond) break L;
+&gt; }
+&gt; ---
+&gt; 
+&gt; If [cond = false], the completion value is `1`.
+&gt; If [cond = true], the completion value is `2`.
+
+Already have to do that for return and throw:
+
+try {
+   return 1}
+} finally {
+   if (cond) return 2
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13706</commentid>
+    <comment_count>14</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-12 06:52:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #13)
+&gt; Already have to do that for return and throw:
+
+Yes, in function contexts. I don&apos;t know how engines (other than my own) implement script completion values. Therefore I wanted to make it clear that completion values need to be stored temporarily, so other implementors are aware of this change. It may not be a change within the spec, but definitely for implementations:
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=819125
+https://code.google.com/p/v8/issues/detail?id=2446</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13714</commentid>
+    <comment_count>15</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-12 11:51:17 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #14)
+&gt; (In reply to Allen Wirfs-Brock from comment #13)
+&gt; &gt; Already have to do that for return and throw:
+&gt; 
+&gt; Yes, in function contexts. I don&apos;t know how engines (other than my own)
+&gt; implement script completion values. Therefore I wanted to make it clear that
+&gt; completion values need to be stored temporarily, so other implementors are
+&gt; aware of this change. It may not be a change within the spec, but definitely
+&gt; for implementations:
+&gt; 
+&gt; https://bugzilla.mozilla.org/show_bug.cgi?id=819125
+&gt; https://code.google.com/p/v8/issues/detail?id=2446
+
+yes, they&apos;re all buggy according to ES specs going back to ES3 when try-catch was added.
+
+It probably doesn&apos;t make much difference today, but if we add do expressions in ES7 it will become more easily observable so now might be a good time for implementations to start thinking about fixing it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13729</commentid>
+    <comment_count>16</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 11:11:22 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13806</commentid>
+    <comment_count>17</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:04 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

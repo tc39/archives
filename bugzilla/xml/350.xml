@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>350</bug_id>
+          
+          <creation_ts>2012-05-11 14:56:00 -0700</creation_ts>
+          <short_desc>B.2.3 String.prototype.substr needs to check for null/undefined this value</short_desc>
+          <delta_ts>2015-10-02 14:33:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>934</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-11 14:56:11 -0700</bug_when>
+    <thetext>Immediately before the current step 1 of the algorithm insert the step:
+
+Call CheckObjectCoercible passing the this value as its argument.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10116</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-02 14:50:21 -0700</bug_when>
+    <thetext>Fixed in 20140824 draft, and probably earlier.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10118</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-02 14:58:04 -0700</bug_when>
+    <thetext>Rick,
+
+This is an ES5.1 bug (note the produce field above).
+
+For those, I use &quot;In Progress&quot; as a flag to indicate that the the bug has been verified and that it is something that needs to be documented in the next ES5.1 errata (although there probably never will be one).
+
+When such bugs turn up that also apply to Es6, I clone the bug for ES6.
+
+Changing the status back to  Confirmed and then In Progress.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10119</commentid>
+    <comment_count>3</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-02 15:05:33 -0700</bug_when>
+    <thetext>Oh, bleh, sorry about that.  :-(</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14731</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:02 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

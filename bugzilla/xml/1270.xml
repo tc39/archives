@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1270</bug_id>
+          
+          <creation_ts>2013-03-08 11:30:00 -0800</creation_ts>
+          <short_desc>Naming of MOP operations that access/mutate [[Prototype]]</short_desc>
+          <delta_ts>2013-10-01 17:33:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3313</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 11:30:12 -0800</bug_when>
+    <thetext>tomvc says:
+
+[[GetInheritance]]/[[SetInheritance]] =&gt; why not [[GetProto]]/[[SetProto]]?
+  - More familiar to ECMAScript programmers
+  - No risk of confusion with function &quot;prototype&quot; property
+  - For ordinary objects, [[GetInheritance]] returns the value of the [[Prototype]] field</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3821</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 17:11:18 -0700</bug_when>
+    <thetext>My thinking is that in the presence of proxies (and the proto-climbing changes to the MOP) that inheritance isn&apos;t actually solely defined via [[Prototyupe]].  that&apos;s how ordinary objects do it, but it is easy enough to define a proxy based object (or some other form of exotic object) that doesn&apos;t use [[Prototype]] to represent its inheritance structure.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3825</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-05-13 00:55:01 -0700</bug_when>
+    <thetext>I understand. However, simply because the internal method is named [[GetProto]] doesn&apos;t mean that it must be a simple getter for [[Prototype]]. It could be arbitrarily complex, as you note, but that&apos;s why we introduce an internal method rather than internal attribute. The name [[GetProto]] would hint better at what the &quot;default implementation&quot; does, IMHO.
+
+In any case, feel free to use your judgment as the spec editor on what terminology fits best. I&apos;m fine either way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5792</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-01 17:33:03 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

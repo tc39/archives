@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4469</bug_id>
+          
+          <creation_ts>2015-08-21 11:11:00 -0700</creation_ts>
+          <short_desc>9.4.5 Integer Indexed Exotic Objects: Missing words</short_desc>
+          <delta_ts>2015-11-03 11:49:07 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14629</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 11:11:02 -0700</bug_when>
+    <thetext>9.4.5 Integer Indexed Exotic Objects, 2nd paragraph
+
+&quot;[...] same internal slots as ordinary objects additionally [...]&quot;
+
+Some words are missing before &quot;additionally&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14890</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-11-03 11:49:07 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (3158957).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

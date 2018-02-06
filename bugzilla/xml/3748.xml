@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3748</bug_id>
+          
+          <creation_ts>2015-02-04 13:32:00 -0800</creation_ts>
+          <short_desc>refactor out ParseModule as its own operation</short_desc>
+          <delta_ts>2015-02-19 19:11:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12107</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-04 13:32:54 -0800</bug_when>
+    <thetext>The parsing of modules is currently open-coded in the middle of ParseModuleAndImports. It should be its own stand-alone ParseModule operation. (It should construct a Normal Module Record per bug 3747 and initialize the [[Realm]] property per bug 3746.)
+
+See https://gist.github.com/dherman/cad85565e0eb16d0a22d for details.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12213</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-07 18:43:41 -0800</bug_when>
+    <thetext>Wouldn&apos;t it be better to make the setting of the Module Rcord [[Realm]] a separate step of TopLevelModuleEvaluationJob (or other clients) rather than making it a parameter of of ParseModule?
+
+There aren&apos;t any other other dependencies upon the Realm in ParseModule and I can imagine that other specifications might want to parse a module prior to having a realm to associate it with.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12830</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-17 12:48:29 -0800</bug_when>
+    <thetext>&gt; Wouldn&apos;t it be better to make the setting of the Module Rcord [[Realm]] a
+&gt; separate step of TopLevelModuleEvaluationJob (or other clients) rather than
+&gt; making it a parameter of of ParseModule?
+
+Either way works fine for me. The loader spec needs to set the [[Realm]] property after parsing but it can do this imperatively.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12856</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:30:51 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13096</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:02 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

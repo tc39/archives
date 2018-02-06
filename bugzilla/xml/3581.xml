@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3581</bug_id>
+          
+          <creation_ts>2015-01-21 01:13:00 -0800</creation_ts>
+          <short_desc>7.1.4 ToInteger(-0.2) does not clearly produce -0 according to the algorithm</short_desc>
+          <delta_ts>2015-02-02 18:38:56 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>3582</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11571</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-21 01:13:43 -0800</bug_when>
+    <thetext>Step 5 of the ToInteger abstract operation reads:
+
+5. Return the result of computing sign(number) × floor(abs(number)).
+
+--
+
+First interpretation: × is a mathematical operator:
+
+sign, floor, and abs, as well as the multiplication, operate on mathematical finite real number (according to 5.2 Algorithm Conventions), where +0 = -0 = 0. Thus, when number = -0.2, the output of the mathematical expression is simply 0. 
+
+Then, there is an implicit operation in this step, which is &quot;taking the Number value of the result&quot;; and for 0, it is +0.
+
+--
+
+Second interpretation: × is part of the representation of a Number value as
+s × m × 2^e:
+
+In that interpretation the result is correct; but the fact that the m × 2^e part is expressed as a result of a mathematical expression and the use of &quot;computing&quot; in that step don&apos;t favor that interpretation.
+
+--
+
+It should be made clear both the fact we return a Number value (rather than a mathematical number), and (more importantly) that the sign is preserved even if the result is zero. For example:
+
+5. Return the Number value of same sign as number and of magnitude floor(abs(number)).
+
+--
+
+(There is a similar issues for ToInt32, etc.; I&apos;m opening another bug for those.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11601</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-22 16:01:43 -0800</bug_when>
+    <thetext>Oh, this is very old text, probably going all the way back to ES1
+
+It actually isn&apos;t obvious to me that that the intent was to return -0 for ToInteger(-0.2) as I think your first interpretation is quite plausable .
+
+Also, based upon a quick can of all usages to ToInteger (especially the ones that date to ES3 or earlier) it isn&apos;t clear that anything in the spec. is actually sensitive to whether 0 or -1 is returned for the this case.
+
+However, given that it is clearly returning number values (including -0) in other cases, I think it is probably correct to assume that ToInteger(-0.2) should return -0 
+
+so, fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11986</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:56 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

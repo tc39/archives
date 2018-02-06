@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1973</bug_id>
+          
+          <creation_ts>2013-09-29 05:06:00 -0700</creation_ts>
+          <short_desc>25.4.3.9: IteratorStep should use IteratorComplete</short_desc>
+          <delta_ts>2013-10-29 09:44:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5647</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-29 05:06:17 -0700</bug_when>
+    <thetext>IteratorStep 25.4.3.9, step 4 should be replaced with a call to IteratorComplete. The ToBoolean call in step 6 can then be removed. Justification: Using IteratorNext to retrieve the iteration result, but not using IteratorComplete to check the iteration status looks inconsequent. And IteratorComplete provides better separation of concerns than the manual Get().</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5739</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-30 17:56:19 -0700</bug_when>
+    <thetext>The reason IteratorComplete wasn&apos;t used is because IteratorStep inverts the meaning of the Boolean result, relative to IteratorComplete.
+
+You might argue that this is confusing, but it seemed to be more natural in the places where IteratorStep is used.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5834</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-03 01:45:58 -0700</bug_when>
+    <thetext>The `Get(result, &quot;done&quot;)` and `ToBoolean(done)` parts in IteratorStep() are exactly the same in IteratorComplete(). Specifically I was thinking of the following change.
+
+From:
+---
+4.  Let done be the result of Get(result, &quot;done&quot;).
+5.  ReturnIfAbrupt(done).
+6.  If ToBoolean(done) is true, then return false.
+7.  Return result.
+---
+
+To:
+---
+4.  Let done be the result of IteratorComplete(result).
+5.  ReturnIfAbrupt(done).
+6.  If done is true, then return false.
+7.  Return result.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5968</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-24 14:07:58 -0700</bug_when>
+    <thetext>ok
+
+fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6020</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:44:32 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

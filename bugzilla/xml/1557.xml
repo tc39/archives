@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1557</bug_id>
+          
+          <creation_ts>2013-06-11 16:28:00 -0700</creation_ts>
+          <short_desc>StringView - a proposal for a native typed arrays API</short_desc>
+          <delta_ts>2015-10-02 14:36:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>strawmen</component>
+          <version>Initial draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>pincopalla00</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>kbr</cc>
+    
+    <cc>princexcess69</cc>
+    
+    <cc>rodneyd.teal</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4169</commentid>
+    <comment_count>0</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-06-11 16:28:59 -0700</bug_when>
+    <thetext>Hello everyone,
+could be this a proposal for a native typed arrays API?
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays/StringView</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5888</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 12:44:39 -0700</bug_when>
+    <thetext>this would be considered a strawman, rather than a proposal</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6862</commentid>
+    <comment_count>2</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-11-23 13:26:29 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; this would be considered a strawman, rather than a proposal
+
+???</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6863</commentid>
+    <comment_count>3</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-11-23 13:37:54 -0800</bug_when>
+    <thetext>http://www.google.com/search?q=%22mdn%22+%22stringview%22
+http://www.google.com/search?q=%22typed%20arrays%22+%22stringview%22</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6864</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-23 19:26:11 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; (In reply to comment #1)
+&gt; &gt; this would be considered a strawman, rather than a proposal
+&gt; 
+&gt; ???
+
+I&apos;m referring to the process by which TC39 works to define ECMAScript
+
+A &quot;strawman&quot; is a suggestion to add a new feature to ECMAScript.  It typically includes a fairly complete but not specification-level description of the feature and a justification for why it should be added to ECMAScript.
+
+After TC-39 reviews a strawman, it may decide that the feature is a likely candidate for inclusion in an upcoming ECMAScript edition.  If that occurs, the feature advances to &quot;proposal&quot; status and works begins on an actual specification of the feature.
+
+Anybody can writeup a strawman and post it for discussion on es-discuss.
+
+If there seems to be interest in the feature on es-discuss, the next step is to find a TC39 member to champion the strawman at an actual TC39 meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6867</commentid>
+    <comment_count>5</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-11-30 16:46:53 -0800</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Anybody can writeup a strawman and post it for discussion on es-discuss.
+
+Thank for your reply. What is the procedure to propose a &quot;strawman&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6962</commentid>
+    <comment_count>6</comment_count>
+    <who name="decipher">rodneyd.teal</who>
+    <bug_when>2014-01-10 03:49:21 -0800</bug_when>
+    <thetext>What is the current status of this bug?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6964</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-10 09:54:41 -0800</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; What is the current status of this bug?
+
+To more forward, it needs a TC39 champion to drive it through the process.
+
+I&apos;ll post a message to es-discuss calling attention to this bug and asking for volunteers for the champion role.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14742</commentid>
+    <comment_count>8</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:14 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

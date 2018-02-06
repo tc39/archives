@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4538</bug_id>
+          
+          <creation_ts>2015-09-18 07:22:00 -0700</creation_ts>
+          <short_desc>6.1.7.3: Missing invariant for [[IsExtensible]] ?</short_desc>
+          <delta_ts>2015-11-03 11:58:45 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14700</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-09-18 07:22:50 -0700</bug_when>
+    <thetext>6.1.7.3 Invariants of the Essential Internal Methods
+
+The required invariants for [[IsExtensible]] seem to missing. I&apos;d expect the following definition:
+
+---
+
+[[IsExtensible]] ( )
+- The Type of the return value must be Boolean.
+- If [[IsExtensible]] returns false, all future calls to [[IsExtensible]] on the target must return false.
+
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14893</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-11-03 11:58:45 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (0e423ef).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

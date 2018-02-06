@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2598</bug_id>
+          
+          <creation_ts>2014-03-26 07:26:00 -0700</creation_ts>
+          <short_desc>FutureReservedWords in Annex A Lexical Grammar</short_desc>
+          <delta_ts>2014-03-27 09:45:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>164</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7475</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-03-26 07:26:11 -0700</bug_when>
+    <thetext>In Annex A, Lexical Grammar, FutureReservedWords still includes
+
+ class, extends, super, const, export, import
+
+And should be updated to match 11.6.2.2 http://people.mozilla.org/~jorendorff/es6-draft.html#sec-future-reserved-words (which is just `enum`)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7477</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-27 09:03:10 -0700</bug_when>
+    <thetext>Annex A is due to be complete refreshed with revised grammar
+
+*** This bug has been marked as a duplicate of bug 164 ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7482</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-03-27 09:45:12 -0700</bug_when>
+    <thetext>Ok
+
+I had seen the other bug, but filed this anyway since it&apos;s not so much a &quot;missing thing&quot;, but it certainly is a &quot;refresh&quot;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

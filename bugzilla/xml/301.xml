@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>301</bug_id>
+          
+          <creation_ts>2012-03-10 00:01:00 -0800</creation_ts>
+          <short_desc>15.7.4.6: Bugs in Number.prototype.toExponential algorithm</short_desc>
+          <delta_ts>2015-10-03 14:34:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>305</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jin DX">dox.jin</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>743</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jin DX">dox.jin</who>
+    <bug_when>2012-03-10 00:01:58 -0800</bug_when>
+    <thetext>When this Number value is 0 and fractionDigits &gt; 0, according to the algorithm in 15.7.4.6, result is wrong. For example, here are the steps taken for (0).toExponential(1):
+
+1. x = 0
+2. f = 1
+3. skip
+4. s = &quot;&quot;
+5. skip
+6. skip
+7. skip
+8. then
+	a. f = 0
+	b. m = &quot;0&quot;
+	c. e = 0
+9. skip
+10. skip
+11. then
+	a. c = &quot;+&quot;
+	b. d = &quot;0&quot;
+12. skip
+13. m = &quot;0e+0&quot;
+14. return &quot;0e+0&quot;
+
+
+The step 8.a &quot;a. Let f = 0.&quot; should be &quot;a. if fractionDigits is undefined, then let f = 0.&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>746</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jin DX">dox.jin</who>
+    <bug_when>2012-03-10 07:39:41 -0800</bug_when>
+    <thetext>see https://mail.mozilla.org/pipermail/es-discuss/2012-March/021095.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>750</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-03-12 17:51:38 -0700</bug_when>
+    <thetext>(reclassified as a technical content issue)
+
+This is apparently a bug introduced when the ES3 algorithm was restructured for ES5.
+
+Line 8.a should read:
+   a. If fractionDigit is undefined, then Let f = 0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4369</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:12:29 -0700</bug_when>
+    <thetext>it&apos;s also valid to simply delete step 8.a because f is already 0 when fractionDigit is undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14758</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 14:34:10 -0700</bug_when>
+    <thetext>Fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

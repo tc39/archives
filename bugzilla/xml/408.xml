@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>408</bug_id>
+          
+          <creation_ts>2012-06-22 16:00:00 -0700</creation_ts>
+          <short_desc>Information on date/time components</short_desc>
+          <delta_ts>2016-02-15 16:27:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>princexcess69</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1046</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-06-22 16:00:30 -0700</bug_when>
+    <thetext>From Markus Scherer&apos;s comments on internationalization support in ECMAScript
+edition 4:
+
+ECMAScript provides the Date object for parsing and formatting of dates with an unknown format. For validation and localized UI elements, it is required to know the format and elements of the date/time format patterns.
+
+For example, HTML forms for date/time input often use separate fields for the year, month, day, etc. It is necessary to determine the order of those fields programmatically in order to generate such a form appropriately for the browser&apos;s locale. For selection UI elements (dropdown controls), the names of the fields are required as well to populate the selection choices.
+
+Proposal: To add functions to the Date object to get each month and day name (&quot;März&quot;, &quot;Dienstag&quot;), to get localized AM/PM names, and to get date, time, and date+time format patterns as used by the Date object (e.g., an array like [&quot;Y&quot;, &quot;M&quot;, &quot;D&quot;, &quot;h&quot;, &quot;m&quot;]).
+
+There are various ways to do this. For example: getDayName(index), getMonthName(index), getAMName(), getPMName(), getDatePattern(), getTimePattern(), getDateTimePattern().
+
+The getXYZPattern() functions could return array objects corresponding to the order and types of fields used for formatting and parsing date/time strings. Each array element could be
+
+• A single-letter string like &quot;Y&quot; for the year field (using Java date/time pattern characters).
+• A string like &quot;year&quot; for the year field (using Java date/time pattern field names).
+• A number like 1 for the year field (using Java date/time pattern field indexes).
+
+https://sites.google.com/site/markusicu/unicode/es/i18n-2003#DateTime</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14927</commentid>
+    <comment_count>1</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:27:28 -0800</bug_when>
+    <thetext>The `formatToParts()` proposal for dates can help with this, more details here: https://github.com/tc39/ecma402/issues/30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

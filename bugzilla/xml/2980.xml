@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2980</bug_id>
+          
+          <creation_ts>2014-06-08 20:34:00 -0700</creation_ts>
+          <short_desc>Promise.race behavior with empty Iterable is surprising</short_desc>
+          <delta_ts>2014-07-19 18:48:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sam Mikes">sam.mikes</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8871</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-06-08 20:34:13 -0700</bug_when>
+    <thetext>I discovered this behavior as I was writing a test suite for ES6 promises.
+
+Promise.race([]) returns a Promise which is pending and will reliably never settle.
+
+Furthermore, Promise.race(iterable) is legal, where iterable is some object which satisfies the Iterable interface.  The risk I am concerned about is that at runtime, the iterator will be empty, and neither the onFulfilled nor onRejected functions will ever be called, and that this behavior will be difficult for the programmer to identify.
+
+My initial suggestion would have been to make Promise.race() behave as if TypeError had been thrown, and cause the steps in IfAbruptRejectPromise to be followed, leaving the resulting promise in a rejected state.
+
+However, I note that @domenic writes &quot;Regarding Promise.race([]), this has been discussed extensively. It is required for consistency and is not a bug.&quot;
+see https://github.com/getify/native-promise-only/pull/20#issuecomment-45457923
+
+Therefore my suggestion is merely to modify the ES6 spec to explicitly note that Promise.race([]) creates a pending promise that will never settle, and that this behavior is by design.
+
+Thanks to @rwaldron for asking me to file this issue, see https://github.com/getify/native-promise-only/pull/20#issuecomment-45457586</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9147</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-10 13:38:27 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+added a note</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9398</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:48:02 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

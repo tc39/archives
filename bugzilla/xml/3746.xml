@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3746</bug_id>
+          
+          <creation_ts>2015-02-04 13:24:00 -0800</creation_ts>
+          <short_desc>Module Records need a realm property</short_desc>
+          <delta_ts>2015-02-19 19:11:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12105</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-04 13:24:17 -0800</bug_when>
+    <thetext>Module Records need a [[Realm]] property to close over the realm they come from. This is used for constructing the lexical environment of the module, which affects evaluation of the module&apos;s top-level code as well as closures defined in the module.
+
+In addition to adding the [[Realm]] property, the spec changes needed include:
+
+- when parsing to construct a new Module Record, properly initialize the [[Realm]] property
+- instantiation and evaluation of modules should consult the module record&apos;s [[Realm]] property
+- when calling ModuleNamespaceCreate, use the [[Realm]] property of the module record
+
+See https://gist.github.com/dherman/cad85565e0eb16d0a22d for details.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12860</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:30:51 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13169</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:13 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

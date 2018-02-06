@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1474</bug_id>
+          
+          <creation_ts>2013-05-13 07:30:00 -0700</creation_ts>
+          <short_desc>Excludelist.xml currently only has file names with no path information</short_desc>
+          <delta_ts>2013-05-14 08:26:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>Macintosh</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Prashanth Srinivasan">prsriniv</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3826</commentid>
+    <comment_count>0</comment_count>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-05-13 07:30:17 -0700</bug_when>
+    <thetext>The excludelist.xml file, specifies test cases which need to be skipped/excluded. This file does not have any path information, having only the file name. Even though the file names are unique, the file names could be listed with path relative to root, to understand directory structure of skipped file, when this list gets too big.
+
+The test harness splits the absolute path into a list and compares the last element to the exclude list.
+
+Current Excludelist.xml:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;excludeList&gt;  
+&lt;test id=&quot;10.3_a&quot;&gt;&lt;reason&gt; International characters out of range &lt;/reason&gt;&lt;/test&gt;
+&lt;/excludeList&gt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3844</commentid>
+    <comment_count>1</comment_count>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-05-14 08:26:58 -0700</bug_when>
+    <thetext>This issue is further evidenced by the discussion at the test262-discuss mailing thread.
+https://mail.mozilla.org/pipermail/test262-discuss/2013-April/000169.html
+
+If test cases are to be renamed based on functionality or if there is any spec refactoring done, there might be cases where just one test case needs to be skipped, but other testcases with same case name (but in different sub-directory) would also be skipped if the path relative to the test directory root is not provided.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

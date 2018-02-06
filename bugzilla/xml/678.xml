@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>678</bug_id>
+          
+          <creation_ts>2012-09-30 05:33:00 -0700</creation_ts>
+          <short_desc>Rename [[Home]] to [[HomeObject]]</short_desc>
+          <delta_ts>2013-10-22 18:02:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1795</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2012-09-30 05:33:40 -0700</bug_when>
+    <thetext>Method environment records have HomeObject and MethodName, whereas function objects have the properties [[Home]] and [[MethodName]]. This is really just a minor nitpick, but it might make sense to rename [[Home]] to [[HomeObject]], to be consistent with environment records.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2419</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-05 16:17:10 -0800</bug_when>
+    <thetext>This change has mostly happened, but:
+in 13.6 &quot;Creating Function Objects and Constructors&quot;,
+under &quot;Runtime Semantics: FunctionCreate Abstract Operation&quot;,
+step 13 says:
+     If the homeObject argument was provided, set the
+     [[Home]] internal property of F to homeObject.
+
+Change &quot;[[Home]]&quot; to &quot;[[HomeObject]]&quot;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

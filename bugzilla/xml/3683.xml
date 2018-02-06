@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3683</bug_id>
+          
+          <creation_ts>2015-01-28 10:32:00 -0800</creation_ts>
+          <short_desc>Example import declaration below Table 38 uses non-existent syntax</short_desc>
+          <delta_ts>2015-02-12 12:17:39 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Adam Klein">adamk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11739</commentid>
+    <comment_count>0</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-01-28 10:32:28 -0800</bug_when>
+    <thetext>The last entry of the table below Table 38 lists the following import declaration:
+
+
+import from &quot;mod&quot;;
+
+
+and notes that &quot;An ImportEntry Records is not created&quot; (besides the wrong syntax, this sentence has a typo in it: &quot;Record&quot; should not be plural). My guess is that this example was meant to be:
+
+
+import &quot;mod&quot;;
+
+
+as there&apos;s no production of ImportDeclaration featuring a FromClause without something between it and &apos;import&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12210</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-07 15:20:49 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12436</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:39 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

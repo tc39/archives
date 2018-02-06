@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3796</bug_id>
+          
+          <creation_ts>2015-02-08 19:16:00 -0800</creation_ts>
+          <short_desc>9.2.1 Steps miscounted</short_desc>
+          <delta_ts>2016-02-15 16:13:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12231</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 19:16:09 -0800</bug_when>
+    <thetext>Steps in 9.2.1 count 1, 2, 3, 4, 5, 1, 6, 7, 8. Should be 1-9.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12235</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 20:31:29 -0800</bug_when>
+    <thetext>Similar problem in 9.2.6: 1, 2, 3, 2, 4, 5, 6.
+In 10.1.1.1: starts at 3.
+
+Looks like all algorithms have to be checked.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12245</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 08:36:55 -0800</bug_when>
+    <thetext>I despise Microsoft Word. 
+
+I&apos;ve done this exercise too many times now that there is no way Word can claim to be &quot;productivity software&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12253</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 09:43:30 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #0)
+&gt; Steps in 9.2.1 count 1, 2, 3, 4, 5, 1, 6, 7, 8. Should be 1-9.
+
+Fixed in rev7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12254</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 09:46:19 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #1)
+&gt; Similar problem in 9.2.6: 1, 2, 3, 2, 4, 5, 6.
+
+Fixed in rev7
+
+&gt; In 10.1.1.1: starts at 3.
+
+Fixed in rev7
+
+&gt; 
+&gt; Looks like all algorithms have to be checked.
+
+These were all fixed later in January, but sometimes they &quot;just happen&quot;. I have no idea how to explain it, but I literally see lists go out of order before my eyes without any interaction to trigger it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12361</commentid>
+    <comment_count>5</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 22:53:58 -0800</bug_when>
+    <thetext>Spotted one more in 13.3.3: 1, 2, 3, 1, 4.
+
+And yes, I agree that we need a better word processor than Word.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14924</commentid>
+    <comment_count>6</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:13:18 -0800</bug_when>
+    <thetext>This is not longer the case, we use ecmarkup now :p</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

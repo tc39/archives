@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>36</bug_id>
+          
+          <creation_ts>2011-03-02 15:23:00 -0800</creation_ts>
+          <short_desc>Test262 harness needs to be extended to support non-eval&apos;ed negative scenarios and Strict Mode</short_desc>
+          <delta_ts>2011-05-02 16:25:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Highest</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>39</dependson>
+          <blocked>38</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>82</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:23:46 -0800</bug_when>
+    <thetext>The situation today is any test case covering a negative syntax error must be wrapped within an eval call to accurately detect the exception and it&apos;s type.  Most JavaScript implementations will follow a different code path for eval&apos;ed versus literal program syntax meaning we&apos;re missing some coverage here.
+
+To fix this, one solution would be to move the metadata from existing test case/test objects into a separate file of some format.  In this manner, the separate file would indicate whether an exception is expected, it&apos;s type, etc., and the test case could have the literal syntax expected to fail.
+
+This enhancement also seems critical for test cases specifically covering global scoping.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>83</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:26:08 -0800</bug_when>
+    <thetext>I&apos;m guesstimating around ten days will be needed to implement this.  Should we go the easy route of simply extending the test harness to support a new type of test cases, this could take far less time.  On the other hand, modifying all test cases to follow this paradigm could take considerably longer.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>198</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-02 16:24:24 -0700</bug_when>
+    <thetext></thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

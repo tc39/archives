@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1890</bug_id>
+          
+          <creation_ts>2013-09-03 03:50:00 -0700</creation_ts>
+          <short_desc>15.13.6.*: Empty steps</short_desc>
+          <delta_ts>2013-09-06 13:58:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5304</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-03 03:50:53 -0700</bug_when>
+    <thetext>15.13.6.1.2 %TypedArray% ( typedArray )
+- step 19 is empty
+
+15.13.6.1.3 %TypedArray% ( array )
+- step 21 is empty
+
+15.13.6.3.7 %TypedArray%.prototype.set(typedArray, offset = 0 )
+- step 26 is empty</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5315</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-06 13:58:31 -0700</bug_when>
+    <thetext>fixed in rev18 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

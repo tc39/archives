@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3312</bug_id>
+          
+          <creation_ts>2014-11-13 08:34:00 -0800</creation_ts>
+          <short_desc>4.4 Organization of This Specification: Wrong reference 8.5.1 -&gt; 9</short_desc>
+          <delta_ts>2014-12-07 14:35:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10561</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-13 08:34:33 -0800</bug_when>
+    <thetext>4.4  Organization of This Specification, 3rd entry.
+
+Change reference from 8.5.1 to 9.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10794</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-05 12:22:17 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10875</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:03 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

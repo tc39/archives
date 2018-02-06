@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1863</bug_id>
+          
+          <creation_ts>2013-08-30 03:33:00 -0700</creation_ts>
+          <short_desc>Insufficient/Incorrect duplicate computed property key checks</short_desc>
+          <delta_ts>2013-10-29 09:46:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5272</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-30 03:33:21 -0700</bug_when>
+    <thetext>Two issues:
+
+(1) Order of computed and literal property keys should be irrelevant when reporting errors. That means the duplicate property key check needs to be performed for all kinds of property keys. (Obviously implementations are free to omit the check for all-literal-property-keys objects.)
+
+js&gt; &quot;use strict&quot;; ({a: 0, [&quot;a&quot;]: 0})
+uncaught exception: TypeError: duplicate property-id: a
+js&gt; &quot;use strict&quot;; ({[&quot;a&quot;]: 0, a: 0})
+{a:0}
+
+
+(2) The duplicate key check needs to use [[GetOwnProperty]] instead of [[HasOwnProperty]] for the accessor property case.
+
+js&gt; ({get [&quot;x&quot;](){}, set [&quot;x&quot;](v){}})
+uncaught exception: TypeError: duplicate property-id: x</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5980</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 12:17:27 -0700</bug_when>
+    <thetext>see https://mail.mozilla.org/pipermail/es-discuss/2013-October/034401.html 
+
+I pretty convinced that these dynamic checks are unnecessary and probably a bad idea.  Unless there is overwhelming push to keep them, I&apos;m going to remove them from the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6006</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 11:43:43 -0700</bug_when>
+    <thetext>dynamic checks removed in rev20</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6129</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:17 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

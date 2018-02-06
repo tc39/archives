@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>45</bug_id>
+          
+          <creation_ts>2011-03-02 16:50:00 -0800</creation_ts>
+          <short_desc>Website needs a bug template link on Results page</short_desc>
+          <delta_ts>2012-02-22 13:31:58 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>100</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 16:50:07 -0800</bug_when>
+    <thetext>Link should pre-populate the bug with the test harness version, test suite version, browser name, etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>125</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:46:56 -0800</bug_when>
+    <thetext>Guessing this will take up to four hours (conservative estimate) largely dependent upon how nice the final solution ends up being.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>652</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-22 13:31:58 -0800</bug_when>
+    <thetext>This is checked into Hg now for failing tests on the &apos;Run&apos; tab, and you can view the changes at http://hg.ecmascript.org/tests/test262/raw-file/9808d959879a/website/default.html until the live test262 website gets updated with this.  Specifically, we pre-populate the new bug with:
+- Test262 as the &quot;Product&quot;
+- Tests as the &quot;Component&quot;
+- normal as the &quot;Importance&quot;
+- bug ID in the &quot;Title&quot;
+- bug path, link to Hg source, error message, browser version, etc. in the &quot;Description&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

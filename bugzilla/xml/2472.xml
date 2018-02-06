@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2472</bug_id>
+          
+          <creation_ts>2014-01-28 07:10:00 -0800</creation_ts>
+          <short_desc>12.1.5.8 PropertyDefinitionEvaluation: Updating [[HomeObject]] for anonymous Function/GeneratorExpression inconsistent?</short_desc>
+          <delta_ts>2014-04-07 22:22:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7137</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-28 07:10:47 -0800</bug_when>
+    <thetext>12.1.5.8 Runtime Semantics: PropertyDefinitionEvaluation
+- PropertyDefinition : PropertyName : AssignmentExpression
+
+Updating [[HomeObject]] for Function/GeneratorExpressions only if they&apos;re anonymous looks a bit strange. I wonder if [[HomeObject]] should be set here at all.
+
+Test case for the current behaviour:
+---
+let obj = {
+  __proto__: {
+    a: () =&gt; &quot;A&quot;,
+    b: () =&gt; &quot;B&quot;,
+  },
+  a: function a() { return super() },
+  b: function() { return super() },
+};
+
+obj.a(); // throws a ReferenceError because [[HomeObject]] not set, cf. 8.1.2.4 NewFunctionEnvironment
+obj.b(); // returns &quot;B&quot; because [[HomeObject]] was set in 12.1.5.8
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7625</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-07 22:22:12 -0700</bug_when>
+    <thetext>I&apos;m not sure why it is testing for anonymous, and it doesn&apos;t seem right to me.
+
+The intend was to test for an actual literal function expression and only binding the home for those.  the a and b property functions should both get bound in your eample.  however, if there was an additional property
+   c: c   //this doesn&apos;t get its home bound.  It would require an explicit toMethod
+
+where 
+  let c= function() {return super()} 
+
+
+
+The above is basically what Rev23 does do I&apos;m going to resolve this as fixed.
+
+Reopen it if you this there is still an issue after you look at rev23.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

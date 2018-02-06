@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1357</bug_id>
+          
+          <creation_ts>2013-03-19 09:45:00 -0700</creation_ts>
+          <short_desc>Make new Date(-0) always be equivalent to new Date(0)</short_desc>
+          <delta_ts>2013-05-14 18:13:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Simon Pieters">simonp</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3503</commentid>
+    <comment_count>0</comment_count>
+    <who name="Simon Pieters">simonp</who>
+    <bug_when>2013-03-19 09:45:53 -0700</bug_when>
+    <thetext>https://mail.mozilla.org/pipermail/es-discuss/2013-March/029280.html
+
+On Tue, 19 Mar 2013 17:12:35 +0100, Allen Wirfs-Brock &lt;allen@wirfs-brock.com&gt; wrote:
+
+&gt; sounds reasonable to me.  Please file a ticket at bugs.ecmascript.org  
+&gt; against the ES6 draft and classify it as a normative change form ES5
+&gt;
+&gt;
+&gt; On Mar 19, 2013, at 8:05 AM, Simon Pieters wrote:
+&gt;
+&gt;&gt; Hi
+&gt;&gt;
+&gt;&gt; The spec allows two different behaviors for new Date(-0):
+&gt;&gt;
+&gt;&gt; [[
+&gt;&gt; Return an implementation-dependent choice of either ToInteger(time) or
+&gt;&gt; ToInteger(time) + (+0). (Adding a positive zero converts −0 to +0.)
+&gt;&gt; ]]
+&gt;&gt;
+&gt;&gt; jwalden said in #whatwg as to why:
+&gt;&gt;
+&gt;&gt; [[
+&gt;&gt; implementation of new Date(-0) has two representations *only* so that
+&gt;&gt; implementations can store dates, internally, as either an int64_t or a
+&gt;&gt; double; SpiderMonkey stores internally as double but adds 0 in TimeClip  
+&gt;&gt; so
+&gt;&gt; -0 doesn&apos;t have weird behavior; for any implementation using double
+&gt;&gt; representation it&apos;s easy to look like int64_t, but probably far harder  
+&gt;&gt; the
+&gt;&gt; other way; thus mandating +0 behavior is probably the thing the most
+&gt;&gt; people&apos;d be compatible with; I can&apos;t think of a good reason to support
+&gt;&gt; this difference at the hardware level -- anyone using double
+&gt;&gt; representation can do +0 to pretend to be int64_t-represented, and
+&gt;&gt; implementations have to have double capabilities to represent math
+&gt;&gt; generally, so I don&apos;t see why mandating as-if-by-int64_t would be
+&gt;&gt; prevented by hardware issues
+&gt;&gt; ]]
+&gt;&gt; http://krijnhoetmer.nl/irc-logs/whatwg/20130318#l-708
+&gt;&gt;
+&gt;&gt; Could the spec be changed to require -0 to be converted to +0? Doing so
+&gt;&gt; would make it easier to write test cases and would remove a possible
+&gt;&gt; interop hole that Web pages can fall into (it seems unlikely that they
+&gt;&gt; would, but, well, it&apos;s the Web we&apos;re talking about here).
+&gt;&gt;
+&gt;&gt; cheers</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3852</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 11:15:07 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3940</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:44 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

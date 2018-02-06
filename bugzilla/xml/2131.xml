@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2131</bug_id>
+          
+          <creation_ts>2013-10-30 10:09:00 -0700</creation_ts>
+          <short_desc>Keywords vs unicode escapes in IdentifierName</short_desc>
+          <delta_ts>2013-10-30 10:09:47 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>277</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>odinho</cc>
+    
+    <cc>rossberg</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6245</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-30 10:09:05 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #277 +++
+
+Section 7.6 isn&apos;t particularly clear on whether identifier names with unicode escapes can be treated as keywords. The only respective text is the sentence &quot;All interpretations of identifiers within this specification are based upon their actual characters regardless of whether or not an escape sequence was used to contribute any particular characters.&quot;  It is probably intended, but not clear, that this overrides/amends the formal grammar definition.
+
+Implementations differ in their interpretation. For example,
+
+v\u0061r x = 0
+eval(&quot;v\\u0061r y = 1&quot;)
+
+Is accepted by FF 10, rejected by V8 3.8, and JSC seems to reject the former but accepts the latter. Conversely,
+
+var v\u0061r = 1
+eval(&quot;var v\\u0061r = 2&quot;)
+
+is rejected by FF but accepted by V8 (actually introducing a variable named &quot;var&quot;).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

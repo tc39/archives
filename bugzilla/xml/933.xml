@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>933</bug_id>
+          
+          <creation_ts>2012-11-06 10:39:00 -0800</creation_ts>
+          <short_desc>15.4: &quot;NativeArray&quot; font</short_desc>
+          <delta_ts>2013-07-15 17:03:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2426</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-06 10:39:57 -0800</bug_when>
+    <thetext>In 15.4 &quot;Array Objects&quot;,
+under &quot;Runtime Semantics: ArrayCreate Abstract Operation&quot;,
+step 5 says:
+    Set the [[NativeBrand]] internal property of A to the value NativeArray.
+where &quot;NativeArray&quot; is in a sans-serif font.
+
+I believe this is the only place in the spec where a value of the NativeBrand enumeration is called out with a different font from the surrounding text.
+
+For consistency, change it to a serif font. (Personally, I&apos;d prefer that all the *other* occurrences were called out, but that&apos;d be more work.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2524</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 10:21:38 -0800</bug_when>
+    <thetext>eliminated in rev 12 internal method refactoring.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2604</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:28 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2908</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-29 13:12:54 -0800</bug_when>
+    <thetext>I don&apos;t think this has really been resolved.
+
+Allowing for the change from &apos;NativeFoo&apos; to &apos;BuiltinFoo&apos;, this bug is about the pseudo-code&apos;s inconsistency in denoting values of the BuiltinBrand enumeration. i.e. whether or not to call them out via a different font from the surrounding text.
+
+You could fix the bug by making them all not-called-out (which I suggested), or all called-out (which I&apos;d prefer). The former would have involved changing just the one occurrence I noted; the latter would have involved changing every *other* occurrence.
+
+The occurrence of &apos;BuiltinArray&apos; in the defn of ArrayCreate is still in a distinct font from its surrounding text, and more such occurrences have been called out, suggesting that you were going for the latter (&quot;all called-out&quot;) fix. However, many &apos;BuiltinFoo&apos; values are not called out, so the inconsistency still exists.
+
+(I count about 10 occurrences called out versus about 50 not called-out.)
+
+(Possibly this is a Word vs PDF discrepancy: I&apos;m looking at the PDF.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4376</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:36:29 -0700</bug_when>
+    <thetext>we don&apos;t use built-in brands at all anymore, but now brand built-ins using double bracketed internal properties so this font issue should now be completely gone.
+
+fixed in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4432</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:40 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

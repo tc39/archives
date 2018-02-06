@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1288</bug_id>
+          
+          <creation_ts>2013-03-12 10:14:00 -0700</creation_ts>
+          <short_desc>Typos and minor issues</short_desc>
+          <delta_ts>2015-07-10 08:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3429</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-03-12 10:14:40 -0700</bug_when>
+    <thetext>Page 38, Typo: interator =&gt; iterator
+
+
+8.4.2.3, step 7, typo: lenth =&gt; length
+
+
+9.2.7 &quot;A boolean value is return&quot; =&gt; &quot;A boolean value is returned&quot;
+
+
+9.2.7 Typo: an be added =&gt; can be added
+
+
+9.2.7. Let notExtensible be the result of calling the [[HasIntegrity]] internal method of globalObject with
+argument &quot;nonextensible&quot;.
+
+should be O and not globalObject
+
+
+9.2.7 notExtensib le =&gt; notExtensible
+
+
+9.3.3 CreateOwnProperty =&gt; CreateOwnDataProperty
+
+
+9.3.13 theconstructor’s =&gt; the constructor’s
+
+
+Page 129, MemberExpression : new super Argumentsopt, step 2: .. instead of .
+
+
+15.10.4.14 RegExp.prototype.@@isRegExp
+The initial value of the @@iterator property is true.
+
+Should be @@isRegExp
+
+
+15.14.1.1 Map (iterable = undefined , comparator = undefined )
+
+  &quot;6. If iterable is neither undefined or null, then let itr be undefined.&quot;
+
+This seems wrong. Should be?
+
+  &quot;6. If iterable is either undefined or null, then let itr be undefined.&quot;
+
+
+15.14.6.1 CreateMapIterator Abstract Operation
+
+typo: interator =&gt; iterator
+
+
+Annex E
+
+15.5.4 In Edition 6, the String prototype object is not a String instance. In previous editions it was a String instance whose number value was the empty string.
+15.6.4 In Edition 6, the Boolean prototype object is not a Boolean instance. In previous editions it was a Boolean instance whose number value was false.
+
+Should be string value and boolean value respectively.
+
+
+Annex #
+
+15.7.4 In Edition 6, the Number prototype object is not a Number instance. In previous editions it was a Date instance whose number value was +0.
+
+Not a Date instance.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3822</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 17:32:33 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3955</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:53 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

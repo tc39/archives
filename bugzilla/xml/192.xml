@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>192</bug_id>
+          
+          <creation_ts>2011-08-04 22:30:00 -0700</creation_ts>
+          <short_desc>8.7.1 + 8.7.2: odd use of &apos;this&apos;</short_desc>
+          <delta_ts>2015-10-02 14:41:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>415</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-08-04 22:30:17 -0700</bug_when>
+    <thetext>8.7.{1,2} / alg 1 / step 4.b say:
+    &quot;Return the result of calling the /get/ internal method
+     using /base/ as its &apos;this&apos; value, ...&quot;
+    (where /get/ is either the standard or special [[Get]] method)
+and
+    &quot;Call the /put/ internal method
+     using /base/ as its &apos;this&apos; value, ...&quot;
+    (where /put/ is either the standard or special [[Put]] method)
+
+This is odd, because the [[Get]] and [[Put]] internal methods don&apos;t take a &apos;this&apos; value. (Note that other invocations of them don&apos;t say what to use as a &apos;this&apos; value.)
+
+The wording used elsewhere that I think applies here is:
+    &quot;... calling the /get/ internal method on /base/, ...&quot;
+    &quot;Call the /put/ internal method on /base/, ...&quot;
+
+Note that there&apos;s a similar oddity in the preamble to the &apos;special&apos; versions of [[Get]] and [[Put]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>418</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-08-05 15:01:47 -0700</bug_when>
+    <thetext>Oh, and if you make the suggested wording change, then you also need to change the immediately following &quot;and passing&quot; to just &quot;passing&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>592</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:49:05 -0800</bug_when>
+    <thetext>The &quot;this value&quot; language is trying to deal with the fact that we are essentially do an &quot;apply&quot; of an internal method and we need to indicate what the &quot;this value&quot; for the apply.
+
+I&apos;ve modified the language in the ES6 draft, but I don&apos;t think the current language is sufficiently confusing to both including this issue in the ES5.1 errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14752</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:41:27 -0700</bug_when>
+    <thetext>Fixed in 2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

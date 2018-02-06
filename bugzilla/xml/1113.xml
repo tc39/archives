@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1113</bug_id>
+          
+          <creation_ts>2012-12-02 11:20:00 -0800</creation_ts>
+          <short_desc>Iterables &amp; Array-Likes: for-of, spread and Array.from</short_desc>
+          <delta_ts>2013-10-29 09:45:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jorendorff</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2980</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-12-02 11:20:05 -0800</bug_when>
+    <thetext>Per Nov 29 Resolution:
+
+
+
+
+
+Array.from:
+1. Iterator protocol
+2. Array-Like
+
+for-of &amp; spread:
+1. Iterator protocol
+
+
+
+
+
+
+(I can break this into several bugs if you&apos;d like)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5398</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-09-18 11:13:24 -0700</bug_when>
+    <thetext>Allen, please take a crack at this in the next cycle?
+
+A volunteer recently implemented spread-call syntax in Firefox, following the 29 Nov 2012 consensus, and it&apos;s too bad that the spec is still lagging.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5399</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-09-18 13:41:55 -0700</bug_when>
+    <thetext>Jason, can you link to the bug where this work is in progress? Just for record—thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5400</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-09-18 13:56:26 -0700</bug_when>
+    <thetext>Found it!
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=762363</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6013</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 16:41:43 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6116</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:58 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

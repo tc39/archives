@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2983</bug_id>
+          
+          <creation_ts>2014-06-10 08:51:00 -0700</creation_ts>
+          <short_desc>Ch.13, cumulative bugs &amp; suggestions</short_desc>
+          <delta_ts>2014-07-18 23:24:51 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3005</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8874</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-06-10 08:51:46 -0700</bug_when>
+    <thetext>Ch.13, cumulative bugs &amp; suggestions
+
+[Note: this is against Rev. 23, some things might have been fixed or changed already.]
+
+
+TECHNICAL ISSUES
+
+13.2.1: there needs to be a definition of VarDeclaredNames for LexicalDeclaration (used via Statement)
+13.2.2: dito for VariableStatement
+
+13.6.3.2, 1st case, step 2: &quot;first&quot; -&gt; &quot;second&quot; and &quot;second&quot; -&gt; &quot;third&quot;
+13.6.4.1, 1st, case, 3rd bullet: &quot;can be statically determined&quot; is too imprecise, see above
+13.6.4.1, 2nd case, 2nd bullet: Why does a similar restriction not also apply in the first case?
+
+13.9: doesn&apos;t this need to define that &apos;return&apos; is a syntax error if this appears outside a function?
+
+13.11.5, 1st case, step 2: &quot;CaseClause items&quot; -&gt; &quot;CaseClause items in CaseClauses_opt&quot;
+
+13.12, Note: The comment about the initial &apos;empty&apos; element in label sets seems inaccurate.
+
+13.14.1, 1st bullet: this restriction is unnecessary, and inconsistent with what we decided on for function parameters
+
+
+SUGGESTIONS
+
+13.1.5: rename to TopLevelLexicalDeclarations, for consistency with LexicalDeclarations function
+13.1.11, step 4: &quot;in list order&quot; -- this should not matter here
+13.1.11: why have the separate loop? It seems none of this can have any other side effect, so order doesn&apos;t matter, and you can invoke Create and Instantiate immediately in the same loop
+
+13.2.2.3, 4th case: a variation of step 4 and its substeps for setting &quot;name&quot; reappears in various places. It might make sense to factor this out into an algorithm like SetNameIfFunction(value, string)
+
+13.4.1: aren&apos;t steps 3 and 4 equivalent to simply returning value?
+
+13.6.1.2: perhaps swap steps 2.b and 2.c
+13.6.2.2: dito with steps 2.f and 2.g
+13.6.3.2, 3rd case, step 9: Is the special-casing of const necessary? Why not simply copy all of the env in CreatePerIterationEnv? AFAICT, the difference is not observable.
+13.6.3.3: perhaps swap steps 4.c and 4.d
+
+13.14.3, step: fold this into BindingInitialization
+
+
+TYPOS &amp; FORMATTING
+
+13.0: weird section numbering?
+13.1.11, Note: &quot;each block scoped variable, constant or function&quot; -- or class
+13.2.1, Note: &quot;[-A] let and const declarations&quot;
+13.2.2.2, Note: &quot;This is the case for var statements [+and] formal parameter lists&quot;
+13.2.2.3, 4th case, Note: &quot;step 3&quot; -&gt; &quot;step 5&quot;; also, formatting of &apos;value&apos;
+13.6.1.2, step 1: formatting of &apos;undefined&apos;
+13.6.2.2, step 1: dito
+13.6.3.2, 3rd case, step 9: &quot;perI[n]terationList&quot;
+13.6.4.3, 3rd case: formatting of &apos;in&apos; in production
+13.11.4, 3rd case, step 3: formatting of DefaultClause</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9133</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-07 18:16:38 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+
+&gt; 13.2.1: there needs to be a definition of VarDeclaredNames for
+&gt; LexicalDeclaration (used via Statement)
+&gt; 13.2.2: dito for VariableStatement
+
+This was fixed in VariableStatement in rev25
+
+But, I don&apos;t see a path where applying VarDeclaredNames  to Statement can reach a LexicalDeclaration.  What did you have in mind?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9134</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-07 18:33:38 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; 
+&gt; 13.6.4.1, 2nd case, 2nd bullet: Why does a similar restriction not also apply
+&gt; in the first case?
+&gt; 
+Because in first case (for (expr in ...) the loop head can&apos;t create any lexical bindings. The rule in question is intended to issue an error for cases like this:
+
+  for (let x of foo) {var x};// can&apos;t hoist a var declaration over a like-named let declaration. 
+
+Were you thinking of something else?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9135</commentid>
+    <comment_count>3</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-08 01:59:05 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; (In reply to comment #0)
+&gt; 
+&gt; &gt; 13.2.1: there needs to be a definition of VarDeclaredNames for
+&gt; &gt; LexicalDeclaration (used via Statement)
+&gt; &gt; 13.2.2: dito for VariableStatement
+&gt; 
+&gt; This was fixed in VariableStatement in rev25
+&gt; 
+&gt; But, I don&apos;t see a path where applying VarDeclaredNames  to Statement can reach
+&gt; a LexicalDeclaration.  What did you have in mind?
+
+Hm, me neither. I&apos;m not sure what I had in mind (and can&apos;t find my respective notes anymore). Let&apos;s just assume I was confused. :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9136</commentid>
+    <comment_count>4</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-08 02:33:33 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; (In reply to comment #1)
+&gt; &gt; (In reply to comment #0)
+&gt; &gt; 
+&gt; &gt; &gt; 13.2.1: there needs to be a definition of VarDeclaredNames for
+&gt; &gt; &gt; LexicalDeclaration (used via Statement)
+&gt; &gt; &gt; 13.2.2: dito for VariableStatement
+&gt; &gt; 
+&gt; &gt; This was fixed in VariableStatement in rev25
+&gt; &gt; 
+&gt; &gt; But, I don&apos;t see a path where applying VarDeclaredNames  to Statement can reach
+&gt; &gt; a LexicalDeclaration.  What did you have in mind?
+&gt; 
+&gt; Hm, me neither. I&apos;m not sure what I had in mind (and can&apos;t find my respective
+&gt; notes anymore). Let&apos;s just assume I was confused. :)
+
+On the other hand, VarDeclaredNames _is_ explicitly defined for {Function,Generator,Class}Declaration. How are they reachable?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9137</commentid>
+    <comment_count>5</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-08 03:38:22 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; (In reply to comment #0)
+&gt; &gt; 
+&gt; &gt; 13.6.4.1, 2nd case, 2nd bullet: Why does a similar restriction not also apply
+&gt; &gt; in the first case?
+&gt; &gt; 
+&gt; Because in first case (for (expr in ...) the loop head can&apos;t create any lexical
+&gt; bindings. The rule in question is intended to issue an error for cases like
+&gt; this:
+&gt; 
+&gt;   for (let x of foo) {var x};// can&apos;t hoist a var declaration over a like-named
+&gt; let declaration. 
+&gt; 
+&gt; Were you thinking of something else?
+
+Sorry, &quot;first case&quot; was misleading, what I meant were C-style for-loops. That is, why is
+
+  for (let x; ;) {var x}
+
+not restricted in the same manner? Or am I missing something?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9138</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-08 08:10:45 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+
+&gt; 
+&gt; On the other hand, VarDeclaredNames _is_ explicitly defined for
+&gt; {Function,Generator,Class}Declaration. How are they reachable?
+
+It&apos;s needed for FunctionDeclaration to support an Annex B extensions that makes
+  label: function f() {};
+legal for non-strict code.
+
+As far as I can tell it is not needed for ClassDeclaration.
+
+It is only needed for GeneratorDeclarations if the Annex B LabelledStatement extensions is also applied to them. Current I only define it for FunctionDeclarations because GeneratorDeclarations aren&apos;t a legacy feature.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9141</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-08 16:19:48 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+
+&gt; 
+&gt; Sorry, &quot;first case&quot; was misleading, what I meant were C-style for-loops. That
+&gt; is, why is
+&gt; 
+&gt;   for (let x; ;) {var x}
+&gt; 
+&gt; not restricted in the same manner? Or am I missing something?
+
+Right, that restriction is also need for those cases.  Fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9142</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-09 16:19:44 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+
+&gt; 
+&gt; 13.9: doesn&apos;t this need to define that &apos;return&apos; is a syntax error if this
+&gt; appears outside a function?
+
+No, statement list is parametrized such that ReturnStatement is only allowed in certain contexts. 
+
+&gt; 
+&gt; 13.14.1, 1st bullet: this restriction is unnecessary, and inconsistent with
+&gt; what we decided on for function parameters
+
+Disagree
+&gt; 
+&gt; 
+&gt; SUGGESTIONS
+&gt; 
+&gt; 13.1.5: rename to TopLevelLexicalDeclarations, for consistency with
+&gt; LexicalDeclarations function
+already done
+&gt; 13.1.11, step 4: &quot;in list order&quot; -- this should not matter here
+ok
+&gt; 13.1.11: why have the separate loop? It seems none of this can have any other
+&gt; side effect, so order doesn&apos;t matter, and you can invoke Create and Instantiate
+&gt; immediately in the same loop
+
+merged loops
+
+&gt; 
+&gt; 13.2.2.3, 4th case: a variation of step 4 and its substeps for setting &quot;name&quot;
+&gt; reappears in various places. It might make sense to factor this out into an
+&gt; algorithm like SetNameIfFunction(value, string)
+
+Plausible, but there is enough local variation to make it non-trivial. I&apos;m disinclined to put the time into it.
+&gt; 
+&gt; 13.4.1: aren&apos;t steps 3 and 4 equivalent to simply returning value?
+yes, fixed
+&gt; 
+&gt; 13.6.1.2: perhaps swap steps 2.b and 2.c
+&gt; 13.6.2.2: dito with steps 2.f and 2.g
+ok
+
+&gt; 13.6.3.2, 3rd case, step 9: Is the special-casing of const necessary? Why not
+&gt; simply copy all of the env in CreatePerIterationEnv? AFAICT, the difference is
+&gt; not observable.
+The current formulation simplifies CreatPerIterationEnvironment such that it doesn&apos;t have to deal with creating both mutable and immutable bindings.
+
+&gt; 13.6.3.3: perhaps swap steps 4.c and 4.d
+ok
+
+&gt; 
+&gt; 13.14.3, step: fold this into BindingInitialization
+
+This would be purely cosmetic and the cascading effects of this are bigger than what I want to deal with at this time. 
+&gt; 
+&gt; 
+&gt; TYPOS &amp; FORMATTING
+&gt; 
+&gt; 13.0: weird section numbering?
+yes, it&apos;s intentional
+ 
+&gt; 13.1.11, Note: &quot;each block scoped variable, constant or function&quot; -- or class
+ok
+&gt; 13.2.1, Note: &quot;[-A] let and const declarations&quot;
+ok
+&gt; 13.2.2.2, Note: &quot;This is the case for var statements [+and] formal parameter
+&gt; lists&quot;
+ok
+&gt; 13.2.2.3, 4th case, Note: &quot;step 3&quot; -&gt; &quot;step 5&quot;; also, formatting of &apos;value&apos;
+ok
+&gt; 13.6.1.2, step 1: formatting of &apos;undefined&apos;
+&gt; 13.6.2.2, step 1: dito
+fixed
+&gt; 13.6.3.2, 3rd case, step 9: &quot;perI[n]terationList&quot;
+fixed
+&gt; 13.6.4.3, 3rd case: formatting of &apos;in&apos; in production
+&gt; 13.11.4, 3rd case, step 3: formatting of DefaultClause
+fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9145</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-10 13:16:45 -0700</bug_when>
+    <thetext>fixed (or not) as noted above in rev26 editor&apos;s draft
+
+open Bug 3005 relating to disagreement on whether
+
+try {} catch(x) {let x};
+
+should be an error</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9307</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:24:51 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

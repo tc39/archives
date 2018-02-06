@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4099</bug_id>
+          
+          <creation_ts>2015-03-02 11:27:00 -0800</creation_ts>
+          <short_desc>13.6: ambiguity re do-while statement</short_desc>
+          <delta_ts>2015-03-04 18:58:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=8</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13438</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-02 11:27:09 -0800</bug_when>
+    <thetext>In 13.6 &quot;Iteration Statements&quot;,
+the syntax of a do-while statement is:
+    do Statement while ( Expression ) ;_opt
+(ignoring parameters).
+
+The optionality of the semicolon leads to a grammatical ambiguity. E.g., consider
+    do {} while (0) ;
+In a StatementList context, this could be a do-while statement in which the semicolon is not omitted, or it could be a do-while statement in which the semicolon *is* omitted, followed by an empty statement.
+
+
+An alternative approach would be to remove the &quot;opt&quot; subscript in the BNF, and extend ASI to handle cases in which the semicolon is omitted. (E.g., in 11.9.1, add a bullet to rule 1: &quot;The token before the offending token is the right parenthesis of a do-while statement.&quot; Or is this a broader condition than what web reality allows?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13441</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-02 13:42:28 -0800</bug_when>
+    <thetext>I think ASI is the right way to do it.
+
+Unfortunately, I can&apos;t think was any way to describe it that is substantially different from you suggest and that makes inserting of the ; conditional upon  recognizing the ) as part of a do-while statement. Yet in order to recognize a do-while the ; first needs to be present.  Seems a little to circular.
+
+The best I&apos;ve come up with is:
+
+• The previous token is ) and inserting ; will allow the token input stream immediately preceding the offending token to be parsed as a do-while statement (13.6.1).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13442</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-02 14:10:10 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; 
+&gt; ... that makes inserting of the ; conditional upon recognizing the )
+&gt; as part of a do-while statement. Yet in order to recognize a do-while
+&gt; the ; first needs to be present.  Seems a little to circular.
+
+Hm, yeah, okay.
+
+&gt; The best I&apos;ve come up with is:
+&gt; 
+&gt; • The previous token is ) and inserting ; will allow the token input stream
+&gt; immediately preceding the offending token to be parsed as a do-while
+&gt; statement (13.6.1).
+
+Well, ASI&apos;s &apos;additional overriding condition&apos; uses wording such as
+   &quot;the semicolon would then be parsed as X&quot;
+and
+   &quot;that semicolon would become Y&quot;,
+so you could use similar wording:
+
+   • The previous token is ) and the inserted semicolon would be parsed as
+     the terminating semicolon of a do-while statement.
+
+which is a bit simpler.
+
+Moreover, you could drop &quot;The previous token is )&quot;, since it&apos;s redundant.
+
+   • The inserted semicolon would be parsed as the terminating semicolon
+     of a do-while statement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13443</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-02 14:28:47 -0800</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #2)
+&gt; 
+&gt; Well, ASI&apos;s &apos;additional overriding condition&apos; uses wording such as
+&gt;    &quot;the semicolon would then be parsed as X&quot;
+&gt; and
+&gt;    &quot;that semicolon would become Y&quot;,
+&gt; so you could use similar wording:
+
+yes, I saw that and it made me feel a little less dirty.
+
+&gt; 
+&gt;    • The previous token is ) and the inserted semicolon would be parsed as
+&gt;      the terminating semicolon of a do-while statement.
+
+yes, I like this a little better than my formulation.
+
+&gt; 
+&gt; Moreover, you could drop &quot;The previous token is )&quot;, since it&apos;s redundant.
+&gt; 
+&gt;    • The inserted semicolon would be parsed as the terminating semicolon
+&gt;      of a do-while statement.
+
+I prefer to keep the mention of the ) as it provides some additional context for why this rule exists.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13444</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-02 14:47:08 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13481</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:13 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4007</bug_id>
+          
+          <creation_ts>2015-02-18 15:34:00 -0800</creation_ts>
+          <short_desc>20.3.1.9 Local Time: local time computation at DST</short_desc>
+          <delta_ts>2015-02-18 15:34:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12944</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:34:34 -0800</bug_when>
+    <thetext>From https://code.google.com/p/v8/source/detail?r=24499
+
+Or more specifically:
+https://code.google.com/p/v8/source/diff?spec=svn24499&amp;r=24499&amp;format=side&amp;path=/branches/bleeding_edge/src/date.h#sc_svn24499_113
+
+The utc to local time computation as specified in 20.3.1.9 does not seem to be correct when the given time is during a DST transition. 
+
+I&apos;m directly filing this bug against ES7 because it&apos;s highly unlikely someone is going to verify this issue right now.
+
+
+Related:
+https://code.google.com/p/v8/issues/detail?id=3116
+https://code.google.com/p/v8/issues/detail?id=3637
+https://bugzilla.mozilla.org/show_bug.cgi?id=1084434</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

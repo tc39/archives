@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>216</bug_id>
+          
+          <creation_ts>2011-10-20 09:53:00 -0700</creation_ts>
+          <short_desc>15.11.4.4-8-2 errObj.toString() returns &quot;Error&quot;</short_desc>
+          <delta_ts>2012-01-13 09:05:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>500</commentid>
+    <comment_count>0</comment_count>
+      <attachid>6</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2011-10-20 09:53:23 -0700</bug_when>
+    <thetext>Created attachment 6
+patch for 15.11.4.4-8-2
+
+in chapter15/15.11/15.11.4/15.11.4.4/15.11.4.4^8-2.js, errObj.toString() should return &quot;Error&quot;.
+
+First, errObj.name is &quot;&quot;
+
+Quoted from section 15.11.2.1
+  If the argument message is not undefined, the message own property of the newly constructed object is set to ToString(message).
+
+And errObj instance is created by Error constructor with argument is undefined, so errObj.message is not own property and if [[Get]] is called, returns &quot;&quot; because Error.prototype.message is &quot;&quot;.
+
+So in section 15.11.4.4, step 7
+http://es5.github.com/#x15.11.4.4
+  7. If name and msg are both the empty String, return &quot;Error&quot;.
+
+Because errObj.name is &quot;&quot; and errObj.message is &quot;&quot;, errObj.toString() returns &quot;Error&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>565</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 10:39:59 -0800</bug_when>
+    <thetext>I believe the test case is actually correct here according to my version of the spec.  After the line:
+    var errObj = new Error();
+
+errObj.name===&quot;Error&quot; (15.11.4.2) and errObj.message===&quot;&quot; (15.11.4.3).
+
+
+The next line causes us to use &quot;&quot; for the value of the &apos;name&apos; property rather than Error.prototype.name&apos;s value:
+    errObj.name = &quot;&quot;;
+
+
+
+The next part might be contentious.  My version of ES5.1 - Rev. 5 – 10 January 2011 (15.11.4.4 Step 7) reads:
+    &quot;If msg is undefined, then let msg be the empty String; else let msg be ToString(msg).&quot;
+
+and Annex F (corrections between ES5 and ES5.1) states:
+    15.11.4.4: Steps 6-10 modified/added to correctly deal with missing or empty message property value.
+
+To complicate things a bit more, steps 6 and 7 in 15.11.4.4 (of ES5.1) are identical which is an issue in and of itself.
+
+I&apos;ll do a bit of digging and see if this is a known spec issue or if there&apos;s a newer revision available yet.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>566</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 10:48:17 -0800</bug_when>
+    <thetext>There is indeed a newer version of ES5.1 (June 2011 edition) found at http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf.  Unfortunately, it has the same issue I mentioned before and the full 15.11.4.4 algorithm given is:
+
+15.11.4.4 Error.prototype.toString ( )
+The following steps are taken:
+1. Let O be the this value.
+2. If Type(O) is not Object, throw a TypeError exception.
+3. Let name be the result of calling the [[Get]] internal method of O with argument &quot;name&quot;.
+4. If name is undefined, then let name be &quot;Error&quot;; else let name be ToString(name).
+5. Let msg be the result of calling the [[Get]] internal method of O with argument &quot;message&quot;.
+6. If msg is undefined, then let msg be the empty String; else let msg be ToString(msg).
+7. If msg is undefined, then let msg be the empty String; else let msg be ToString(msg).
+8. If name is the empty String, return msg.
+9. If msg is the empty String, return name.
+10. Return the result of concatenating name, &quot;:&quot;, a single space character, and msg.
+
+This issue has been filed as https://bugs.ecmascript.org/show_bug.cgi?id=239, and we can modify the tests as needed once we get clarification on the expected behavior.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>567</commentid>
+    <comment_count>3</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-01-12 11:11:54 -0800</bug_when>
+    <thetext>Thanks!
+
+I saw ES5 Errata (Updated July 31, 2010) http://wiki.ecmascript.org/doku.php?id=
+http://wiki.ecmascript.org/lib/exe/fetch.php?id=start&amp;cache=cache&amp;media=resources:es5_errata_7-31-10.pdf
+
+in Errata P.5 and P.6
+
+statement of 15.11.1.1 and 15.11.2.1, &quot;Otherwise, the message own property is set to the empty String.&quot; is removed.
+
+And 15.11.4.4 is modified to
+
+15.11.4.4 Error.prototype.toString ( )
+(Algorithm incorrect when message is the empty string or undefined)
+6. If msg is undefined, then let msg be the empty String; else let msg be ToString(msg).
+7. If name and msg are both the empty String, return &quot;Error&quot;.
+8. If name is the empty String, return msg.
+9. If msg is the empty String, return name.
+10. Return the result of concatenating name, &quot;:&quot;, a single space character, and msg.
+
+So I thought when errObj.name===&quot;&quot; and errObj.message===&quot;&quot;, toString result is &quot;Error&quot;.
+If I overlooked something, please point out.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>572</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:09:51 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Thanks!
+&gt; 
+&gt; I saw ES5 Errata (Updated July 31, 2010)
+&gt; http://wiki.ecmascript.org/doku.php?id=
+&gt; http://wiki.ecmascript.org/lib/exe/fetch.php?id=start&amp;cache=cache&amp;media=resources:es5_errata_7-31-10.pdf
+
+The only normative source is the http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf please use source except where it is clearly by a confirmed ES5.1 at bugs.ecmascript.org 
+
+The ES5 errata are obsolete and do not apply to the ES5.1 spec.
+
+&gt; 
+&gt; in Errata P.5 and P.6
+&gt; 
+&gt; statement of 15.11.1.1 and 15.11.2.1, &quot;Otherwise, the message own property is
+&gt; set to the empty String.&quot; is removed.
+
+Yes, this correction was made in ES5.1.  new Error objects that do not explicitly provide a (non-undefined) name or message value do not have corresponding own properties created for them.  They inherit those properties from Error.prototype where their default values are &quot;Error&quot; and &quot;&quot;.
+
+&gt; 
+&gt; And 15.11.4.4 is modified to
+
+The actual algorithm used in the ES5.1 spec is different from the algorithm given in the Errata but the results should be the same.
+
+   (new Error(undefined)).toString() 
+
+should produce &quot;Error&quot; because that is normally the value of the name property that is inherited from Error.prototype.
+
+However, this logic is only correct if the values of the name and message properties of have Error.prototype have not been modified (or deleted).  That probably need to be a precondition of this test.  If such tests don&apos;t already exist, there should also be tests that ensure that such modification actually produce correct output according to 15.11.4.4.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>591</commentid>
+    <comment_count>5</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-01-12 12:35:56 -0800</bug_when>
+    <thetext>&gt;&gt; The ES5 errata are obsolete and do not apply to the ES5.1 spec.
+Oh, I didn&apos;t know this.
+
+Now I see. I understood that this test case is actually correct.
+Thank you for your clarification.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>6</attachid>
+            <date>2011-10-20 09:53:00 -0700</date>
+            <delta_ts>2011-10-20 09:53:23 -0700</delta_ts>
+            <desc>patch for 15.11.4.4-8-2</desc>
+            <filename>res2.patch</filename>
+            <type>application/octet-stream</type>
+            <size>683</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2hhcHRlcjE1LzE1LjExLzE1LjExLjQvMTUuMTEuNC40
+LzE1LjExLjQuNC04LTIuanMgYi90ZXN0L3N1aXRlL2NoYXB0ZXIxNS8xNS4xMS8xNS4xMS40LzE1
+LjExLjQuNC8xNS4xMS40LjQtOC0yLmpzCi0tLSBhL3Rlc3Qvc3VpdGUvY2hhcHRlcjE1LzE1LjEx
+LzE1LjExLjQvMTUuMTEuNC40LzE1LjExLjQuNC04LTIuanMKKysrIGIvdGVzdC9zdWl0ZS9jaGFw
+dGVyMTUvMTUuMTEvMTUuMTEuNC8xNS4xMS40LjQvMTUuMTEuNC40LTgtMi5qcwpAQCAtMjIsMTEg
+KzIyLDExIEBACiAgKiBAcGF0aCBjaGFwdGVyMTUvMTUuMTEvMTUuMTEuNC8xNS4xMS40LjQvMTUu
+MTEuNC40LTgtMi5qcwogICogQGRlc2NyaXB0aW9uIEVycm9yLnByb3RvdHlwZS50b1N0cmluZyBy
+ZXR1cm4gZW1wdHkgc3RyaW5nIHdoZW4gJ25hbWUnIGlzIGVtcHR5IHN0cmluZyBhbmQgJ21zZycg
+aXMgdW5kZWZpbmVkCiAgKi8KIAogCiBmdW5jdGlvbiB0ZXN0Y2FzZSgpIHsKICAgICAgICAgdmFy
+IGVyck9iaiA9IG5ldyBFcnJvcigpOwogICAgICAgICBlcnJPYmoubmFtZSA9ICIiOwotICAgICAg
+ICByZXR1cm4gZXJyT2JqLnRvU3RyaW5nKCkgPT09ICIiOworICAgICAgICByZXR1cm4gZXJyT2Jq
+LnRvU3RyaW5nKCkgPT09ICJFcnJvciI7CiAgICAgfQogcnVuVGVzdENhc2UodGVzdGNhc2UpOwo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

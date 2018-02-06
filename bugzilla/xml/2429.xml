@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2429</bug_id>
+          
+          <creation_ts>2014-01-23 14:31:00 -0800</creation_ts>
+          <short_desc>Minor typos in “5.2 Algorithm Conventions”</short_desc>
+          <delta_ts>2014-05-23 07:44:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6990</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-01-23 14:31:57 -0800</bug_when>
+    <thetext>These range from trivial to negligible...
+
+1. &quot;but there is no evalution algorithm&quot;: I think &quot;evaluation&quot; should
+   be capitalized.
+
+2. Also &quot;evaluation&quot; is misspelled.
+
+3. The example text says &quot;Return the result of evaluating StatementList.&quot;
+   StatementList should be italicized, and was in rev 21,
+   but isn&apos;t in rev 22.
+
+4. In the example list showing how substeps are formatted,
+   &quot;Top-level step&quot; should be numbered, and was in rev 21,
+   but isn&apos;t in rev 22.
+
+5. &quot;(see clause 15.2.3)&quot;: Elsewhere the word &quot;clause&quot; is used exclusively
+   before main clause numbers (&quot;clause 9&quot;, &quot;clause 12&quot;) and not dotted
+   subclause numbers. &quot;(see 15.2.3)&quot; would be more consistent.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8424</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 12:08:02 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8628</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-23 07:44:06 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

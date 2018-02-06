@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>263</bug_id>
+          
+          <creation_ts>2012-02-08 12:58:00 -0800</creation_ts>
+          <short_desc>Deprecation of arguments.callee: how to deal with the case of instances of Function constructor?</short_desc>
+          <delta_ts>2015-10-02 14:36:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter>pincopalla00</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bart.humphries</cc>
+    
+    <cc>bsdmac</cc>
+    
+    <cc>cmaj10</cc>
+    
+    <cc>jab_creations</cc>
+    
+    <cc>jrishe</cc>
+    
+    <cc>pbi</cc>
+    
+    <cc>swivelgames</cc>
+    
+    <cc>wthit56</cc>
+    
+    <cc>your.sheepy</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>630</commentid>
+    <comment_count>0</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-02-08 12:58:03 -0800</bug_when>
+    <thetext>Early versions of javascript did not allow named function expressions, and for this reason you could not make a recursive function expression.
+
+For example, this syntax worked:
+
+    function factorial (n) {
+     return !(n &gt; 1) ? 1 : factorial(n - 1) * n;
+    }
+
+    [1,2,3,4,5].map(factorial);
+
+but:
+
+    [1,2,3,4,5].map(function (n) {
+      return !(n &gt; 1) ? 1 : /* what goes here? */ (n - 1) * n;
+    });
+
+did not. To get around this arguments.callee was added so you could do
+
+    [1,2,3,4,5].map(function (n) {
+      return !(n &gt; 1) ? 1 : arguments.callee(n - 1) * n;
+    });
+
+However this was actually a really bad solution as this (in conjunction with other arguments, callee, and caller issues) make inlining and tail recursion impossible in the general case (you can achieve it in select cases through tracing etc, but even the best code is sub optimal due to checks that would not otherwise be necessary). The other major issue is that the recursive call will get a different this value, eg.
+
+    var global = this;
+    var sillyFunction = function (recursed) {
+     if (!recursed) { return arguments.callee(true); }
+     if (this !== global) { alert(&quot;This is: &quot; + this); }
+     else { alert(&quot;This is the global&quot;); }
+    }
+    sillyFunction();
+
+Anyhoo, EcmaScript 3 resolved this issues by allowing named function expressions. For example:
+
+    [1,2,3,4,5].map(function factorial (n) {
+      return !(n &gt; 1) ? 1 : factorial(n-1)*n;
+    });
+
+This has numerous benefits
+
+    * the function can be called like any other from inside your code
+    * it does not pollute the namespace
+    * the value of this does not change
+    * it&apos;s more performant (accessing the arguments object is expensive)
+
+Whoops, just realised that in addition to everything else the question was about arguments.callee.caller, or more specifically Function.caller. At any point in time you can find the deepest caller of any function on the stack, and as I said above looking at the call stack has one single major effect: It makes a large number of optimisations impossible, or much much more difficult. Eg. if you cannot guarantee that a function f will not call an unknown function it is not possible to inline f. Basically it means that any call site that may have been trivially inlinable accumulates a large number of guards, take:
+
+    function f (a, b, c, d, e) { return a ? b * c : d * e; }
+
+If the js interpreter cannot guarantee that all the provided arguments are numbers at the point that the call is made, it needs to either insert checks for all the arguments before the inlined code, or it cannot inline the function. Now in this particular case a smart interpreter should be able to rearrange the checks to be more optimal and not check any values that would not be used. However in many cases that&apos;s just not possible and therefore it becomes impossible to inline.
+
+But when you use the Function constructor there are not alternatives to argument.callee, so its deprecation could be a bug:
+
+    function createPerson (sIdentity) {
+        var oPerson = new Function(&quot;alert(arguments.callee.identity);&quot;);
+        oPerson.identity = sIdentity;
+        return oPerson;
+    }
+
+    var john = createPerson(&quot;John Smith&quot;);
+
+    john();</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>631</commentid>
+    <comment_count>1</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-02-08 12:58:44 -0800</bug_when>
+    <thetext>See also: https://bugzilla.mozilla.org/show_bug.cgi?id=725398</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>632</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-02-09 09:33:44 -0800</bug_when>
+    <thetext>(changed bug to a Harmony feature request)
+
+
+An eval call can be used as an alternative to the Function constructor to dynamically construct such self referential functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>633</commentid>
+    <comment_count>3</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-02-09 18:31:53 -0800</bug_when>
+    <thetext>&gt; An eval call can be used as an alternative to the Function constructor to
+dynamically construct such self referential functions.
+
+Of course. But eval works in the local context, Function constructor does not. If you want to return a new function from another one, using eval() will create a closure to the calling context, using the Function constructor does not (it implies greater waste of resources).
+But, above all, denying to those functions the possibility of calling themselves means making impossible to create recursive functions from a local scope using the Function constructor.
+So, what good is the Function constructor??
+
+It is well to warn programmers of the drawbacks of arguments.callee, as is done with the use of eval(). But you would never remove eval() from the language, because in rare cases is vital and the ability to compile new code on the fly is one of the things which make fascinating this language.
+
+Well, I think the same can be said with regard to arguments.callee. In rare cases it is vital.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>634</commentid>
+    <comment_count>4</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-02-09 18:41:20 -0800</bug_when>
+    <thetext>Take this example: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Example
+
+If you have a little time, try to eliminate arguments.callee from the local function oQuery without creating closures...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>635</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-02-09 20:31:25 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; &gt; An eval call can be used as an alternative to the Function constructor to
+&gt; dynamically construct such self referential functions.
+&gt; 
+&gt; Of course. But eval works in the local context, Function constructor does not.
+
+Not if you make it an &quot;indirect eval&quot;, see ES5.1 spec. 10.4.1.  For example:
+
+var  f = (0,eval)(&quot;function f() {/*closed over global scope */})&quot;);
+
+&gt; If you want to return a new function from another one, using eval() will create
+&gt; a closure to the calling context, using the Function constructor does not (it
+&gt; implies greater waste of resources).
+&gt; But, above all, denying to those functions the possibility of calling
+&gt; themselves means making impossible to create recursive functions from a local
+&gt; scope using the Function constructor.
+&gt; So, what good is the Function constructor??
+&gt; 
+&gt; It is well to warn programmers of the drawbacks of arguments.callee, as is done
+&gt; with the use of eval(). But you would never remove eval() from the language,
+&gt; because in rare cases is vital and the ability to compile new code on the fly
+&gt; is one of the things which make fascinating this language.
+
+You can easily define your own function that does exactly what you want:
+
+function makeFunction(name,arg1.argn,body) {
+   var src = &quot;(function &quot;+name+&quot;(&quot;;
+   i (arguments.length &gt;2) src += [].slice.call(arguments,1,-1).join(&quot;,&quot;);
+   src += &quot;){&quot;;
+   if (arguments.length&gt;1) src +=  arguments[arguments.length-1];
+   src += &quot;})&quot;;
+   return (0,eval)(src);
+}
+
+&gt; 
+&gt; Well, I think the same can be said with regard to arguments.callee. In rare
+&gt; cases it is vital.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>636</commentid>
+    <comment_count>6</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2012-02-10 05:07:10 -0800</bug_when>
+    <thetext>&gt; You can easily define your own function that does exactly what you want:
+
+You are saying that in order to create some custom functions with some custom text we must use eval() instead of the Function constructor.
+Ok sirs, the code is yours...
+
+P.S. What good is the Function constructor??</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4330</commentid>
+    <comment_count>7</comment_count>
+    <who name="JosephD">swivelgames</who>
+    <bug_when>2013-06-26 15:55:51 -0700</bug_when>
+    <thetext>&gt; You can easily define your own function that does exactly what you want: [...]
+
+And how is the abuse of eval in this context better than the utilization of the Function constructor?
+
+The original deprecation of arguments.callee was due to the introduction of named functions, correct? But in the introduction of named functions, the deprecation of anonymous functions did not occur. pincopalla00&apos;s is spot on that, just because there are problem areas surrounding this language&apos;s capabilities, does not mean the deprecation of its capabilities are the solution. That notion is completely ludicrous.
+
+In the end, bad practices are associated with the abuses of a language&apos;s capabilities, not the capabilities themselves. There are many vital and valuable uses for arguments.callee, and while there are dangers and bad practices surrounding its use, there are best practices as well.
+
+The defense being made here is slightly hypocritical in that somehow we should use eval, rather than a perfectly good solution that is already baked into current implementations of JavaScript.
+
+The deprecation and removal of arguments.callee serves no purpose and will only serve to make this more difficult in situations where it is vital and can be used properly. In this case, utilizing eval instead of arguments.callee is a silly recommendation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4363</commentid>
+    <comment_count>8</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2013-07-10 03:04:13 -0700</bug_when>
+    <thetext>I don&apos;t have any real opinion on whether arguments.callee should be removed or not. However, I have found one way of solving the problems raised without using eval or arguments.callee.
+
+The following code should allow self-referencing a &quot;build&quot; function using the Function constructor:
+
+    var built = new Function(&quot;parameter&quot;, &quot;self&quot;, &quot;return [this, parameter, self.property];&quot;);
+    built.property = true;
+
+    var push = Array.prototype.push;
+    var wrapped = function(parameter){
+        push.call(arguments, built);
+        return built.apply(this, arguments);
+    };
+
+    wrapped.call(window, true); // [window, true, true]
+
+This technique should also work with the aforementioned Function example, too. https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function#Example
+
+And while arguments.callee may or may not become deprecated in the future, I think the above code would be &quot;future-proof&quot; either way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4729</commentid>
+    <comment_count>9</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-08-04 06:50:20 -0700</bug_when>
+    <thetext>@Thomas Giles
+
+EXERCISE
+Look at the following code:
+
+    function createPerson (sIdentity) {
+        var oPerson = new Function(&quot;alert(arguments.callee.identity);&quot;);
+        oPerson.identity = sIdentity;
+        return oPerson;
+    }
+
+    var john = createPerson(&quot;John Smith&quot;);
+
+    john();
+
+Please, translate ONLY the function &quot;createPerson()&quot;:
+
+1) avoiding arguments.callee
+2) avoiding eval()
+3) avoiding closures
+
+Bye</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4730</commentid>
+    <comment_count>10</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2013-08-04 09:22:32 -0700</bug_when>
+    <thetext>(In reply to comment #9)
+&gt; 3) avoiding closures
+
+I can do it using closures, but not without. I am unsure as to why avoiding closures is a requirement, however?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4731</commentid>
+    <comment_count>11</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-08-04 16:22:37 -0700</bug_when>
+    <thetext>(In reply to comment #10)
+&gt; (In reply to comment #9)
+&gt; &gt; 3) avoiding closures
+&gt; 
+&gt; I can do it using closures, but not without. I am unsure as to why avoiding
+&gt; closures is a requirement, however?
+
+This is a minimalist example. But there are cases in which closures can be very very expensive for the JS engine. Functions created by Function constructor are created in the global scope, so they don&apos;t create closures. So, in that example there are not closures. If, for some reasons, you want to do something like that without arguments.callee, you can&apos;t. You can ever use eval(): but eval() is more expensive than Function constructor.
+A deprecation is a bad deprecation if it reduces the power of a language, I think. I like freedom when I programme.
+
+Bye.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4732</commentid>
+    <comment_count>12</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2013-08-05 06:30:32 -0700</bug_when>
+    <thetext>(In reply to comment #11)
+
+@pincopalla00
+
+You say this deprecation reduces the power of the language. But as far as I can see, removing arguments.callee does not stop you from doing anything. You can get exactly the same effect by using closures to wrap around a Function.
+
+I feel the cases where closures cause performance problems, etc., are few and far between. As you mentioned, there are drawbacks to arguments.callee also, so it looks like either are not ideal.
+
+But I think the point of this bug is to discuss how much impact removing arguments.callee would have; what it would stop you from doing, etc. And as far as I can see, it wouldn&apos;t stop you from doing anything.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4735</commentid>
+    <comment_count>13</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-08-05 15:13:12 -0700</bug_when>
+    <thetext>(In reply to comment #12)
+&gt; (In reply to comment #11)
+&gt; 
+&gt; @pincopalla00
+&gt; 
+&gt; And as far as I can see, it wouldn&apos;t stop you from doing anything.
+
+It will STOP the possibility to create recursive functions using Function constructor within a local scope, for example: the only possibility will become eval().
+If you consider it a good idea, it&apos;s ok. But you must accept that you are theorizing a kind of constructor not able to create whatever you could create using its literal homologous. There will be differences in &quot;power&quot; between a literal declaration of a function and an instantiation of a function throught its &quot;Function&quot; constructor. It will be the first case of a &quot;halved&quot; constructor in JS: less powerful than its &quot;literal&quot; homologous.
+My opinion is that if it is a good idea to deprecate arguments.callee, than it will be a good idea to deprecate also the Function constructor. I&apos;m serious: a constructor in such a bad is embarrassing.
+
+Bye.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4760</commentid>
+    <comment_count>14</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2013-08-06 04:28:49 -0700</bug_when>
+    <thetext>(In reply to comment #13)
+
+@pincopalla00
+
+An interesting point... I would, in fact, argue that this has always been the case anyway. You cannot give a &quot;constructed&quot; Function a name, for example, which could also fix this problem. Then you would be able to truly use the same code for a literal and constructed function.
+
+However, constructed functions have never had any sort of scoping abilities, which also has made them unequal to function literals. The way I see it, constructed functions have never and will never be equal to their literal counterparts. So in my opinion, losing arguments.callee wouldn&apos;t really change this &quot;balance of power&quot; all that much anyway.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4781</commentid>
+    <comment_count>15</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2013-08-06 12:10:04 -0700</bug_when>
+    <thetext>(In reply to comment #14)
+
+@Thomas Giles
+
+&gt; An interesting point... I would, in fact, argue that this has always been the
+&gt; case anyway. You cannot give a &quot;constructed&quot; Function a name, for example,
+&gt; which could also fix this problem. Then you would be able to truly use the same
+&gt; code for a literal and constructed function.
+
+It could be possible to reserve the word &quot;anonymous&quot; in the language as default name for ALL the &quot;constructed&quot; functions, like in SpiderMonkey. But reserving a word like &quot;anonymous&quot; wouldn&apos;t be the same thing (or even worse) as to keep &quot;arguments.callee&quot; in the language??
+
+&gt; However, constructed functions have never had any sort of scoping abilities,
+&gt; which also has made them unequal to function literals. The way I see it,
+&gt; constructed functions have never and will never be equal to their literal
+&gt; counterparts. So in my opinion, losing arguments.callee wouldn&apos;t really change
+&gt; this &quot;balance of power&quot; all that much anyway.
+
+I can flip your point of view, stating, for example, that &quot;constructed&quot; functions have the ABILITY to skip the local scope, directly nestling in the global one. Only eval([…], 0) has the same ABILITY.
+It is an important opportunity, in many cases, if I want to avoid closures.
+
+Bye.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4787</commentid>
+    <comment_count>16</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2013-08-07 04:55:02 -0700</bug_when>
+    <thetext>(In reply to comment #15)
+
+Sure, I guess you could reserve anonymous, etc... But that wasn&apos;t what I was suggesting. I meant something more along the lines of `new Function(name, arg1, arg2..., code);`, letting you name the resulting function when constructing it.
+
+It is true that using a constructed function would remove any possibility of including the scope. I&apos;m not too sure as to why this would be desirable, however? If you don&apos;t want to use closures, could you just not use closures? If you want to avoid using scoped variables, could you just not use scoped variables? And what does this have to do with arguments.callee?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6882</commentid>
+    <comment_count>17</comment_count>
+    <who name="John">jab_creations</who>
+    <bug_when>2013-12-08 11:22:57 -0800</bug_when>
+    <thetext>I think it&apos;s important for a different language reference here because if all you know is JavaScript...
+
+&lt;?php
+$query1 = &quot;...;&quot;;
+$result1 = mysql_query($query1);
+
+if ($result1)
+{
+ $query2 = &quot;...;&quot;;
+ $result2 = mysql_query($query2);
+
+ if ($result2)
+ {
+  //etc
+ }
+ else {mysql_error_report($query2,mysql_error(),__FUNCTION__);}
+}
+else {mysql_error_report($query1,mysql_error(),__FUNCTION__);}
+?&gt;
+
+Here is how I execute SQL queries. Note that when a query is not executed successfully for whatever reason the function&apos;s name is DYNAMICALLY passed on. This is extremely easy for me to implement because I don&apos;t have to MANUALLY add STATICALLY defined function names for a function that I may later on rename. In fact when I rename things I often do so without ever opening the file to look at it (Advanced Find and Replace). This is one of the ways I get stuff done so I&apos;m not up until 6am every morning working on code, life doesn&apos;t allow that. This allows me to remain vigilant for cases of broken queries or failed attempts at SQL injections (since everything is obviously escaped).
+
+The problem with removing arguments.callee is that there is no dynamic way to pass on the function&apos;s name. The examples of what can NOT be done in the presence of arguments.callee require two critical questions...
+
+1. Are these REAL WORLD examples or example examples? Just because you can write code that breaks or does something undesirable doesn&apos;t mean what you&apos;re doing with the code will actually be useful in a real world scenario and thus it negates the point of writing an example example.
+
+2. If using arguments.callee creates a problem in the example examples then why is someone using arguments.callee instead of something else or working to expand the capabilities of ECMAScript?
+
+From my perspective there is no valid reason to deprecate arguments.callee as it reduces the ability to maintain a higher level of quality code. Simply ask yourself this: do we really want to make it more difficult to keep websites from breaking because web developers have no dynamic means of tracking what is happening with their code and thus decide to not fix things because they have only a broken approach to implement error-reporting?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10670</commentid>
+    <comment_count>18</comment_count>
+    <who name="BartHumphries">bart.humphries</who>
+    <bug_when>2014-11-21 22:12:17 -0800</bug_when>
+    <thetext>@Thomas Giles posted a function that he didn&apos;t think could be handled under this current version.
+function createPerson (sIdentity) {
+   var oPerson = new Function(&quot;alert(arguments.callee.identity);&quot;);
+   oPerson.identity = sIdentity;
+   return oPerson;
+}
+var john = createPerson(&quot;John Smith&quot;);
+john();
+
+Perhaps I don&apos;t understand what he was trying to do, but it seems as though this is easy.  This works whether or not you use strict JavaScript.  Just create the object first, remove the word &quot;new&quot; (because we don&apos;t want the function evaluated yet),  replace callee.identity with [this object].identity then assign identity (so that when you reference the function it will return the appropriate value).  If you don&apos;t assign identity, then an appropriate &quot;undefined&quot; value is instead returned when the function is finally &quot;opened&quot;.
+
+function createPerson (sIdentity) {
+&quot;use strict&quot;;
+   var oPerson;
+   oPerson = function() {alert(oPerson.identity);}
+   oPerson.identity = sIdentity;
+   return oPerson;
+}
+//Test
+var john = createPerson(&quot;John Smith&quot;);
+var susan = createPerson(&quot;Susan Smith&quot;);
+var mike = createPerson(&quot;Mike Jones&quot;);
+
+susan(); // returns alert(&quot;Susan Smith&quot;)
+john(); // returns alert(&quot;John Smith&quot;)
+mike(); // returns alert(&quot;Mike Jones&quot;)
+
+The alerts are returned in the proper order, Susan, John, Mike, so we see that the proper value is appropriately saved.
+
+This works because you can&apos;t call an object until you&apos;ve created that object (you can&apos;t do &quot;var x += 5;&quot;), so you first have to create the object and then you can reference the object (+= 5 or object.whatever).  So you have to declare the variable and then you can set the variable equal to something that depends on that variable.  We still haven&apos;t set that property yet, which is why it&apos;s in a function, so it won&apos;t be resolved until it&apos;s called  (and which won&apos;t be resolved until the function is called).
+
+Then you need to set the identity property that you&apos;re going to be referencing when the new createPerson object is called -- you can&apos;t set the identity property earlier because the variable has to actually be &quot;something&quot; (and not simply reference an empty space that nothing has been assigned to yet).
+
+So 1) create the variable, 2) assign the variable to the function just like the original had but reference a different variable, 3) set the value that the function will have asked for once the function is later resolved.
+
+This works because people assume that JavaScript is a strict progression from cause to effect, but actually, from a non-linear, non-subjective viewpoint, it&apos;s more like a big ball of wibbely wobbely timey wimey stuff, to quote Doctor Who.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10671</commentid>
+    <comment_count>19</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2014-11-22 03:42:28 -0800</bug_when>
+    <thetext>(In reply to BartHumphries from comment #18)
+
+I did not post that code, @pincopalla00 did. He (or she) was saying that there was no way of achieving the same effect without using arguments.callee, eval, or closures. I too do not think closures need be avoided, as demonstrated in your comment.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10672</commentid>
+    <comment_count>20</comment_count>
+    <who name="BartHumphries">bart.humphries</who>
+    <bug_when>2014-11-22 12:38:22 -0800</bug_when>
+    <thetext>(In reply to Thomas Giles from comment #19)
+&gt; (In reply to BartHumphries from comment #18)
+&gt; I did not post that code, @pincopalla00 did.
+
+You&apos;re right, my apologies. :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11021</commentid>
+    <comment_count>21</comment_count>
+    <who name="">pbi</who>
+    <bug_when>2014-12-12 06:58:09 -0800</bug_when>
+    <thetext>I have another example, where there is no real alternative to using arguments.callee. Assume this general function:
+
+function mixIn(target, source){
+  for (property in source) {
+    func = source[property];
+    if (typeof func === &apos;function&apos;) {
+      func.hidden = target[property];
+      target[property] = func;
+    }
+  }
+}
+
+Used to mixin functionality from one protype to another:
+
+A = function(){};
+A.prototype.foo = function() {
+  return &apos;A&apos;;
+}
+
+AMixin = function(){};
+AMixin.prototype.foo = function() {
+  return arguments.callee.hidden.call(this) + &apos;mix&apos;;
+}
+mixIn(A.prototype, AMixin.prototype);
+
+a = new A();
+a.foo(); // -&gt; &apos;Amix&apos;
+
+(http://jsfiddle.net/11Ldj0fe/)
+
+Exercise: Remove the arguments.callee from the Mixin-Method, but let it still have access to the &quot;overwritten&quot; method, without:
+* Polluting the A.prototype-namespace (which would prohibit mixin-chaining: http://jsfiddle.net/wn7mmd9m/)
+* Modifying the arguments-list (which would prohibt mixing-in methods from existing prototypes)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11022</commentid>
+    <comment_count>22</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2014-12-12 08:01:14 -0800</bug_when>
+    <thetext>(In reply to pascal.bihler from comment #21)
+
+This should work:
+
+&gt; AMixin = function(){};
+&gt; var foo = AMixin.prototype.foo = function() {
+&gt;   return foo.hidden.call(this) + &apos;mix&apos;;
+&gt; }
+&gt; mixIn(A.prototype, AMixin.prototype);</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11140</commentid>
+    <comment_count>23</comment_count>
+    <who name="JRishe">jrishe</who>
+    <bug_when>2014-12-23 10:27:48 -0800</bug_when>
+    <thetext>(In reply to pincopalla00 from comment #9)
+&gt; EXERCISE
+&gt; Look at the following code:
+&gt; 
+&gt;     function createPerson (sIdentity) {
+&gt;         var oPerson = new Function(&quot;alert(arguments.callee.identity);&quot;);
+&gt;         oPerson.identity = sIdentity;
+&gt;         return oPerson;
+&gt;     }
+&gt; 
+&gt; Please, translate ONLY the function &quot;createPerson()&quot;:
+&gt; 
+&gt; 1) avoiding arguments.callee
+&gt; 2) avoiding eval()
+&gt; 3) avoiding closures
+&gt; 
+&gt; Bye
+
+Easy:
+
+function createPerson(sIdentity) {
+    function person() { alert(person.identity); };
+    person.identity = sIdentity;
+    return person;
+}
+
+This is using exactly what you&apos;re supposed to use instead of arguments.callee - a self-referencing named function.
+
+I trust that a self-referencing named function is not a closure (although I don&apos;t see why closures are out of the question).
+
+Now can we remove the obviously false claim that this is &quot;impossible&quot; without arguments.callee from the MDN page on arguments.callee?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11368</commentid>
+    <comment_count>24</comment_count>
+    <who name="Sheepy">your.sheepy</who>
+    <bug_when>2015-01-15 07:15:40 -0800</bug_when>
+    <thetext>&gt; Easy:
+&gt; 
+&gt; function createPerson(sIdentity) {
+&gt;     function person() { alert(person.identity); };
+&gt;     person.identity = sIdentity;
+&gt;     return person;
+&gt; }
+
+When we can use function declaration or function expression, we will.
+
+So, when we have to use Function constructor, it means we cannot just declare them.
+
+For example, I have a program that dynamically build thousands of functions based on external business logic and on demand.  I can eval, or I can new Function.  Would you prefer eval?
+
+I also assigned these functions some properties.  Now if I want to access these properties, I can&apos;t.
+
+There are workarounds, sure.  We can bind.  We can delegate the construction to minimize closure / eval impact.  We can keep arguments.callee and hope for the best.
+
+I understand that arguments.callee is often misused, and removing it is perhaps for the greater good.  But I stand by the thought that it has good uses and ES6 is removing it without offering clean solutions.
+
+A solution as simple as Function.create( name, arg1, arg2 ... body ), for example.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11469</commentid>
+    <comment_count>25</comment_count>
+    <who name="JRishe">jrishe</who>
+    <bug_when>2015-01-16 04:16:17 -0800</bug_when>
+    <thetext>@pincopalla
+
+How about this. Would this meet your needs?
+
+function createPerson (sIdentity) {
+    var oPerson = (new Function(&quot;return function me() { console.log(me.identity); };&quot;))();
+    oPerson.identity = sIdentity;
+    return oPerson;
+}
+
+var p = createPerson(&quot;Guy&quot;);
+
+p();    // writes &quot;Guy&quot; to the log</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12198</commentid>
+    <comment_count>26</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2015-02-06 14:40:24 -0800</bug_when>
+    <thetext>(In reply to JRishe from comment #25)
+&gt; @pincopalla
+&gt; 
+&gt; How about this. Would this meet your needs?
+&gt; 
+&gt; function createPerson (sIdentity) {
+&gt;     var oPerson = (new Function(&quot;return function me() {
+&gt; console.log(me.identity); };&quot;))();
+&gt;     oPerson.identity = sIdentity;
+&gt;     return oPerson;
+&gt; }
+&gt; 
+&gt; var p = createPerson(&quot;Guy&quot;);
+&gt; 
+&gt; p();    // writes &quot;Guy&quot; to the log
+
+@JRishe
+
+Quoting from myself:
+
+&gt; 1) avoiding arguments.callee
+&gt; 2) avoiding eval()
+&gt; 3) avoiding closures
+
+Your example creates closures.
+
+As said before, removing the possibility for a function to call itself looks simply creazy to me.
+
+If the target is *to forbid bad practices with the brute force*, then you should remove also eval() from ECMAScript, which is definitely the most misused function of ES.
+
+Nevertheless, I think that even eval() is an important ability of ES, which a professional programmer is able to not misuse – as well as arguments.callee.
+
+Use *books* for avoiding bad practices! Do not repress able programmers!!
+
+Best</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12216</commentid>
+    <comment_count>27</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2015-02-08 07:57:58 -0800</bug_when>
+    <thetext>I tend to agree with you here. I am not really sure why arguments.callee should be removed, though I can see that there are plenty of ways of getting the same effects with that feature.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12217</commentid>
+    <comment_count>28</comment_count>
+    <who name="JRishe">jrishe</who>
+    <bug_when>2015-02-08 08:13:53 -0800</bug_when>
+    <thetext>(In reply to pincopalla00 from comment #26)
+&gt; 
+&gt; Quoting from myself:
+&gt; 
+&gt; &gt; 1) avoiding arguments.callee
+&gt; &gt; 2) avoiding eval()
+&gt; &gt; 3) avoiding closures
+&gt; 
+&gt; Your example creates closures.
+&gt; 
+
+Could you tell me where the closure is? Are you saying that a named function expression that refers to itself is using a closure? The function name is  local to the function&apos;s body, so I&apos;m not so sure that this qualifies as a closure.
+
+Weren&apos;t you indeed proposing a way to create NFEs via the Function constructor as a way out of all of this?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12240</commentid>
+    <comment_count>29</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2015-02-09 06:25:46 -0800</bug_when>
+    <thetext>(In reply to JRishe from comment #28)
+&gt; Could you tell me where the closure is? Are you saying that a named function
+&gt; expression that refers to itself is using a closure?
+
+No, of course not! The following code is not a closure, despite a named function is referring to itself:
+
+  function me () {
+    alert(me.identity);
+  }
+
+  me.identity = &quot;John&quot;;
+
+  me();
+
+Referring to itself has nothing to do with closures. Nevertheless, the following examples are all closures:
+
+  var closure1 = (new Function(&quot;return function me() { alert(me.identity); };&quot;))();
+
+  var closure2 = (new Function(&quot;return function () { };&quot;))();
+
+  var closure3 = (new Function(&quot;return function () { alert(\&quot;Hello world!\&quot;); };&quot;))();
+
+  var closure4 = (function () {
+    return function () {
+      alert(&quot;Hello guys!&quot;);
+    };
+  })();
+
+&gt; The function name is local to the function&apos;s body, so I&apos;m not so sure that
+&gt; this qualifies as a closure.
+
+As I said, function naming has *nothing to do* with closures
+
+&gt; Weren&apos;t you indeed proposing a way to create NFEs via the Function
+&gt; constructor as a way out of all of this?
+
+I am asking how a function created via the Function constructor might call itself avoiding strange stuff like closures or whatever else, just like normal functions normally do!
+Is that strange to ask why we have to change our programming logic just because a function is *constructed* instead of *declared*?!?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13325</commentid>
+    <comment_count>30</comment_count>
+    <who name="">pincopalla00</who>
+    <bug_when>2015-02-24 14:35:38 -0800</bug_when>
+    <thetext>Interesting post from webreflection:
+
+http://webreflection.blogspot.co.at/2009/06/do-not-remove-argumentscallee-part-ii.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13433</commentid>
+    <comment_count>31</comment_count>
+    <who name="cmaj">cmaj10</who>
+    <bug_when>2015-02-28 15:53:08 -0800</bug_when>
+    <thetext>(In reply to pincopalla00 from comment #30)
+&gt; Interesting post from webreflection:
+&gt; 
+&gt; http://webreflection.blogspot.co.at/2009/06/do-not-remove-argumentscallee-
+&gt; part-ii.html
+
+I would be equally upset if this feature were deprecated. But what is being deprecated is not what you think. There is an &apos;arguments&apos; PROPERTY in Function. That&apos;s what is getting deprecated. Not the &apos;arguments&apos; object available within any function block.
+
+So every example you have given will remain valid without any change.
+
+Deprecated:
+myFunction.arguments
+
+Not Deprecated:
+function myFunction(){
+    var x = arguments;
+    var y = arguments.callee;
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13434</commentid>
+    <comment_count>32</comment_count>
+    <who name="Thomas Giles">wthit56</who>
+    <bug_when>2015-02-28 16:03:45 -0800</bug_when>
+    <thetext>(In reply to cmaj from comment #31)
+
+We&apos;re talking about arguments.callee, not arguments. In &quot;strict mode&quot;, arguments.callee is deprecated. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/callee</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13435</commentid>
+    <comment_count>33</comment_count>
+    <who name="cmaj">cmaj10</who>
+    <bug_when>2015-02-28 16:25:24 -0800</bug_when>
+    <thetext>(In reply to Thomas Giles from comment #32)
+&gt; (In reply to cmaj from comment #31)
+&gt; 
+&gt; We&apos;re talking about arguments.callee, not arguments. In &quot;strict mode&quot;,
+&gt; arguments.callee is deprecated.
+&gt; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/
+&gt; arguments/callee
+
+I see. I took my info from this page:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments#Properties
+
+As you can see, neither &apos;arguments&apos; nor &apos;arguments.callee&apos; is deprecated according to it. Only &apos;arguments.caller&apos;. And that page is even slightly more recent.
+
+I&apos;m not sure everyone is on the same page. I hope the strict mode behavior is only the result of that kind of confusion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13436</commentid>
+    <comment_count>34</comment_count>
+    <who name="JRishe">jrishe</who>
+    <bug_when>2015-02-28 21:01:20 -0800</bug_when>
+    <thetext>(In reply to cmaj from comment #33)
+&gt; I see. I took my info from this page:
+&gt; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/
+&gt; arguments#Properties
+&gt; 
+&gt; As you can see, neither &apos;arguments&apos; nor &apos;arguments.callee&apos; is deprecated
+&gt; according to it. Only &apos;arguments.caller&apos;. And that page is even slightly
+&gt; more recent.
+&gt; 
+&gt; I&apos;m not sure everyone is on the same page. I hope the strict mode behavior
+&gt; is only the result of that kind of confusion.
+
+It would seem that this one detail is missing from that page. MDN is not the ultimate authority on the ES language. It&apos;s basically just a wiki.
+
+arguments.caller and arguments.callee are BOTH deprecated in strict mode.
+The arguments object is NOT deprecated in any mode.
+
+It&apos;s in the spec.
+http://www.ecma-international.org/ecma-262/5.1/#sec-C
+http://www.ecma-international.org/ecma-262/5.1/#sec-10.6</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13437</commentid>
+    <comment_count>35</comment_count>
+    <who name="JRishe">jrishe</who>
+    <bug_when>2015-02-28 21:24:14 -0800</bug_when>
+    <thetext>Clarification: I suspect the reason that arguments.caller is listed as deprecated on that MDN page while arguments.callee is not is that arguments.caller is deprecated in SpiderMonkey in ALL modes. 
+When it existed, arguments.caller was an implementation-specific feature and was never a formally defined ES feature.
+
+Again, from the spec:
+
+&gt; Arguments objects for strict mode functions define non-configurable accessor properties named &quot;caller&quot; and &quot;callee&quot; which throw a TypeError exception on access. The &quot;callee&quot; property has a more specific meaning for non-strict mode functions and a &quot;caller&quot; property has historically been provided as an implementation-defined extension by some ECMAScript implementations. The strict mode definition of these properties exists to ensure that neither of them is defined in any other manner by conforming ECMAScript implementations.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14739</commentid>
+    <comment_count>36</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:13 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

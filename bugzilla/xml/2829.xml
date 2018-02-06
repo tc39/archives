@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2829</bug_id>
+          
+          <creation_ts>2014-05-08 04:40:00 -0700</creation_ts>
+          <short_desc>9.4.5.2 [[DefineOwnProperty]]: Throw if object is not initialized?</short_desc>
+          <delta_ts>2014-06-16 16:32:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8218</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-08 04:40:35 -0700</bug_when>
+    <thetext>9.4.5.2 [[DefineOwnProperty]]:
+
+All property operations but [[DefineOwnProperty]] throw a TypeError if the object is not initialized and the property key is an integer index. It may make sense to throw a TypeError in [[DefineOwnProperty]], too.
+
+
+Test case:
+---
+let ta = Int8Array[Symbol.create]();
+
+Reflect.defineProperty(ta, 0, {value: 0}); // returns false
+
+Reflect.get(ta, 0);            // throws
+Reflect.set(ta, 0, 1);         // throws
+Reflect.deleteProperty(ta, 0); // throws
+Reflect.getOwnPropertyDescriptor(ta, 0); // throws
+Reflect.ownKeys(ta);           // throws
+Reflect.enumerate(ta);         // throws
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8553</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 09:37:42 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9031</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:32:33 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

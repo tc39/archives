@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2554</bug_id>
+          
+          <creation_ts>2014-02-17 13:12:00 -0800</creation_ts>
+          <short_desc>indexOfIdentical uses reference comparison instead of equality comparison</short_desc>
+          <delta_ts>2015-10-02 14:36:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>Initial draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Marc Garcia">markcial</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7350</commentid>
+    <comment_count>0</comment_count>
+    <who name="Marc Garcia">markcial</who>
+    <bug_when>2014-02-17 13:12:12 -0800</bug_when>
+    <thetext>when using object as a key, if the key is not the same instance of object, map doesn&apos;t found related enty, there is a need for exact object, would be better to have equality comparison
+
+// it works
+var map = new Map();
+var k = {&apos;x&apos;:5};
+map.set(k,&apos;foo&apos;);
+console.log(map.get(k));
+
+// it does not work
+var map = new Map();
+map.set({&apos;x&apos;:5},&apos;foo&apos;);
+console.log(map.get({&apos;x&apos;:5}));</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7355</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 15:30:14 -0800</bug_when>
+    <thetext>This is by design and won&apos;t change for ES6.
+
+It&apos;s possible that in the future the Map constructor might be extended to accept an optional comparisons function.  This would require someone developing a more comprehensive proposal for such an extension.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14746</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:16 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

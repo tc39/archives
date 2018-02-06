@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1558</bug_id>
+          
+          <creation_ts>2013-06-12 09:30:00 -0700</creation_ts>
+          <short_desc>15.14.4.4 Map.prototype.forEach step 8.a</short_desc>
+          <delta_ts>2013-07-15 17:04:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>evilpies</cc>
+    
+    <cc>sankha93</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4173</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-06-12 09:30:02 -0700</bug_when>
+    <thetext>8. Repeat for each Record {[[key]], [[value]]} e that is an element of entries, in original key insertion order
+   a. If e.[[key]] is not empty, then
+
+
+Can you clarify what is meant by &quot;is not empty&quot;? Current prototype implementations allow any of &quot;&quot; (empty string), false, null or undefined as a valid map key.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4174</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-12 09:57:37 -0700</bug_when>
+    <thetext>That should probably be *empty*.
+
+*empty* is a specification value (it&apos;s not an ECMAScript value) that is generally used to indicated that an internal field has not yet been assigned an ECMASript value. See 8.2.3.  I probably should make this definition more explicit.
+
+If you look at the Map delete method you will see that delete is specified as setting the key of a key/value record to *empty*.  This is totally a specification device for talking about the effect of delete.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4185</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-06-12 14:09:58 -0700</bug_when>
+    <thetext>Ok, that makes sense. The issue was that the implementor had translated that to something like...
+
+for (let [k, v] of map) {
+  if (k) {
+    ...
+  }
+}
+
+Which didn&apos;t seem right considering the accepted keys cases</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4242</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-18 10:17:28 -0700</bug_when>
+    <thetext>added to clarify note to Map/Set/WeakMap/WeakSet delete specifications.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4526</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:04:33 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

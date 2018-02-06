@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4055</bug_id>
+          
+          <creation_ts>2015-02-21 08:34:00 -0800</creation_ts>
+          <short_desc>9.2.2.1 PrepareForOrdinaryCall: Unnecessary ReturnIfAbrupt in step 8</short_desc>
+          <delta_ts>2015-03-04 18:58:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>4076</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13229</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-21 08:34:17 -0800</bug_when>
+    <thetext>9.2.2.1 PrepareForOrdinaryCall( F, newTarget )
+
+Steps 8-9 can be removed, because PrepareForOrdinaryCall is no longer fallible.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13362</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 15:48:29 -0800</bug_when>
+    <thetext>This isn&apos;t explicitly dealt with in NewFunctionEnvironment but what if the new Environment can&apos;t be created because of low memory or stack overflow?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13383</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 02:52:53 -0800</bug_when>
+    <thetext>OOM or stack overflow should be ignored by the specification, otherwise a whole lot more operations need ReturnIfAbrupt calls. For example, string concatenation or recursive abstract operation calls etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13391</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 10:00:44 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+yes, that&apos;s generally how it&apos;s done except for AllocateArrayBuffer which does need an explicit can&apos;t allocate exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13521</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:18 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

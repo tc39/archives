@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2656</bug_id>
+          
+          <creation_ts>2014-04-15 04:04:00 -0700</creation_ts>
+          <short_desc>26.3.5.2.1 %LoaderIteratorPrototype%.next ( ): Numbering</short_desc>
+          <delta_ts>2014-06-16 15:08:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7730</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 04:04:15 -0700</bug_when>
+    <thetext>The numbering in this section uses ordinary Arabic numbering at all levels, rather than using letters and then Roman numerals in nested lists.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7731</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 04:12:16 -0700</bug_when>
+    <thetext>The same thing happens in
+  26.1.4 Reflect.get ( target, propertyKey [ , receiver ])
+  26.1.12 Reflect.set ( target, propertyKey, V [ , receiver ] )
+  26.2.3.4 get Reflect.Realm.prototype.intrinsics
+  26.2.3.5 get Reflect.Realm.prototype.stdlib
+
+Also in
+  22.2.2.1 %TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )
+under step 9.f, the substep is indented an extra level, so it gets the number &quot;1.&quot; rather than &quot;i.&quot;
+
+Same thing in
+  22.2.2.1 %TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )
+again under step 9.f.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7742</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-15 18:41:10 -0700</bug_when>
+    <thetext>
+&gt; 
+&gt; Also in
+&gt;   22.2.2.1 %TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )
+&gt; under step 9.f, the substep is indented an extra level, so it gets the number
+&gt; &quot;1.&quot; rather than &quot;i.&quot;
+&gt; 
+&gt; Same thing in
+&gt;   22.2.2.1 %TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )
+&gt; again under step 9.f.
+
+Is one of these supposed to be something else?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8351</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 16:58:28 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8992</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 15:08:21 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

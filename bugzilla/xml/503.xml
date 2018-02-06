@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>503</bug_id>
+          
+          <creation_ts>2012-07-11 19:12:00 -0700</creation_ts>
+          <short_desc>Issues in 7.8.4 String Literals</short_desc>
+          <delta_ts>2014-07-20 20:48:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1278</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-11 19:12:15 -0700</bug_when>
+    <thetext>(1) For string literals, it is essential that we interpret them as Unicode code points, not Unicode characters. The Unicode standard doesn&apos;t define the term &quot;Unicode character&quot;, but from the usage it&apos;s clear that it&apos;s a subset of Unicode code points that certainly excludes all code points that are reserved for future allocation. String literals must be able to express all possible values of String values, i.e., all sequences of 16-bit integers.
+
+(2) First note: &quot;Basic MultilingualPlane&quot; -&gt; &quot;Basic Multilingual Plane&quot;
+
+(3) First note: Representing Unicode code points in the BMP as single code units is part of UTF-16 just like encoding supplementary characters as two code units. The note could just say that the source code point sequence is mapped to its corresponding UTF-16 code unit sequence.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1571</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 16:32:59 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1677</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:10 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9426</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 20:48:06 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

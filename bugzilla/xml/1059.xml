@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1059</bug_id>
+          
+          <creation_ts>2012-11-26 15:36:00 -0800</creation_ts>
+          <short_desc>[12.5 Runtime Semantics: Evaluation] Completion reform for If-Statement</short_desc>
+          <delta_ts>2015-02-19 19:11:12 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2857</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-11-26 15:36:37 -0800</bug_when>
+    <thetext>Step 4 of the [Runtime Semantics: Evaluation] for the production `IfStatement : if ( Expression ) Statement` has been changed to return `NormalCompletion(undefined)` based on the proposed completion reform. 
+
+That means the following code will now return `undefined` instead of `&quot;pre&quot;`:
+---
+eval(&quot;&apos;pre&apos;; if(false) {&apos;if-true&apos;}&quot;)
+---
+
+This code is not affected by the proposed completion reform, so it still returns `&quot;pre&quot;`:
+---
+eval(&quot;&apos;pre&apos;; if(true) {}&quot;)
+---
+
+
+However `IfStatement : if ( Expression ) Statement else Statement` has not been changed and therefore the following code also preserves the completion value of previous ECMAScript versions, i.e. it returns `&quot;pre&quot;`:
+---
+eval(&quot;&apos;pre&apos;; if(false) {&apos;if-true&apos;} else {}&quot;)
+---
+
+To ensure `if (&lt;cond&gt;) {&lt;stmt&gt;}` and `if (&lt;cond&gt;) {&lt;stmt&gt;} else {}` yield the same result, [Runtime Semantics: Evaluation] for the production `IfStatement : if ( Expression ) Statement else Statement` needs to be changed as follows (Note: I&apos;ve changed step 4 in addition to step 5 to cover both cases):
+---
+1. leave-as-is
+2. leave-as-is
+3. leave-as-is
+4. If exprValue is true, then
+  a. Let stmt be the result of evaluating the first Statement
+  b. ReturnIfAbrupt(stmt)
+  c. If stmt.[[value]] is not empty, return stmt
+  d. Return NormalCompletion(undefined)
+5. Else,
+  a. Let stmt be the result of evaluating the second Statement
+  b. ReturnIfAbrupt(stmt)
+  c. If stmt.[[value]] is not empty, return stmt
+  d. Return NormalCompletion(undefined)
+---
+
+Applying that change will lead to changing [Runtime Semantics: Evaluation] for the production `IfStatement : if ( Expression ) Statement` as follows:
+---
+1. leave-as-is
+2. leave-as-is
+3. leave-as-is
+4. If exprValue is false, return NormalCompletion(undefined)
+5. Else,
+  a. Let stmt be the result of evaluating Statement
+  b. ReturnIfAbrupt(stmt)
+  c. If stmt.[[value]] is not empty, return stmt
+  d. Return NormalCompletion(undefined)
+---
+
+
+
+Similar problems can be shown for the While-Statement, for example consider:
+---
+eval(&quot;&apos;pre&apos;; while(false);&quot;)
+
+eval(&quot;&apos;pre&apos;; while(true)break;&quot;)
+---
+
+With the current changes for the completion reform, the first eval() call will return `undefined` whereas the second call will return `&quot;pre&quot;`. I&apos;d expect both calls to yield the same result, that means `undefined`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2997</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-06 13:50:49 -0800</bug_when>
+    <thetext>sounds right....
+
+Also, my reading of the completion reform proposal, is that every Statement except EmptyStatement (and Declarations) should have a non-empty value.
+
+this means that a BlockStatemnt like:
+  { }
+should return NormalCompletion(undefind).
+
+and that
+   while (true) {break};
+should also evaluate to NormalCopletion(undefined);
+
+But 
+   while (true) {42; break};
+should also evaluate to NormalCopletion(42); 
+
+dherman, Do you agree???</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3007</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-13 09:08:29 -0800</bug_when>
+    <thetext>On a related note, `finally`&apos;s completion value semantics may also need to be changed. When a `finally` statement returns with an abrupt completion, its completion value is used whereas when it returns with a normal completion the `try`-statement&apos;s completion value is used. I&apos;m not sure if this is intended...
+
+---
+&quot;in-try&quot; === eval(&quot;while(true){ try{ &apos;in-try&apos; }finally{ &apos;in-finally&apos;; } break; }&quot;)
+
+
+&quot;in-finally&quot; === eval(&quot;while(true){ try{ &apos;in-try&apos; }finally{ &apos;in-finally&apos;; break; } }&quot;)
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12502</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 19:28:12 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+fixed a rather nasty bug in LabelledEvaluation of  BreakableStatement
+
+Also, {} at the statement list  level is now equivalent to an empty statement. That maintains legacy compat for eval(&apos;1; {}&apos;) which had been explicitly document as having a value of 1;  This fix doesn&apos;t change control structure the completion values of statements like :
+    if (true) {}
+Those all still have completion values of undefined. 
+
+Added, missing undefined completion defaulting to WithStatement
+
+Also, dealt with force empty try and catch blocks to NormalCompetion(undefined).  Break in finally get&apos;s turned in NormalCompletion(undefined) by enclosing Breakable or LabelledStatment</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13168</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:12 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

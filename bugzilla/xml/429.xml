@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>429</bug_id>
+          
+          <creation_ts>2012-07-03 12:33:00 -0700</creation_ts>
+          <short_desc>Array.prototype.splice called with single argument should match de-facto standard</short_desc>
+          <delta_ts>2013-08-23 08:22:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://mathias.html5.org/specs/javascript/#array.prototype.splice</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>john.david.dalton</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1073</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-07-03 12:33:32 -0700</bug_when>
+    <thetext>Per discussion on the wiki recently [0] as well as two years ago [1], the now de-facto standard behavior of splice with a single argument should be included in the ES6 specification.
+
+[0] https://mail.mozilla.org/pipermail/es-discuss/2012-July/023875.html
+[1] https://mail.mozilla.org/pipermail/es-discuss/2010-October/012012.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1074</commentid>
+    <comment_count>1</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2012-07-03 14:28:23 -0700</bug_when>
+    <thetext>The title should be &quot;Array.prototype.splice&quot; and not &quot;String.prototype.splice&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1078</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-03 22:56:34 -0700</bug_when>
+    <thetext>I’ve documented this here, for now: http://mathias.html5.org/specs/javascript/#array.prototype.splice
+
+This can easily be fixed in the ECMAScript spec by adding an extra step to the algorithm (http://ecma-international.org/ecma-262/5.1/#sec-15.4.4.12) saying:
+
+&gt; If `deleteCount` is `undefined`, set the value of `deleteCount` to `Infinity`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1079</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-03 22:57:54 -0700</bug_when>
+    <thetext>Tests: http://mathias.html5.org/tests/javascript/array/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1080</commentid>
+    <comment_count>4</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2012-07-03 23:02:17 -0700</bug_when>
+    <thetext>In Chrome at least array.splice() will return [], so stating `undefined` won&apos;t
+work as also `array.splice(start, void 0) currently is treated as`0`. It seems
+to be only when the arguments.length of `Array#splice` is equal to 1 that the
+extension kicks in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1085</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-04 00:10:03 -0700</bug_when>
+    <thetext>Good catch, JDD! Actually, another special case applies to the first argument.
+
+I guess something among the lines of the following could be added to the algorithm:
+
+1. If the `start` argument is omitted (`arguments.length == 0`), set its value to `Infinity`. 
+2. If the `deleteCount` argument is omitted (`arguments.length &lt; 2`), set its value to `Infinity`.
+
+(I’ve updated the abovementioned spec and tests.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1087</commentid>
+    <comment_count>6</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2012-07-04 00:17:20 -0700</bug_when>
+    <thetext>There is no need to address the `arguments.length` equals `0` case as the existing logic/rules in the spec cover it. For the case of `arguments.length` equals `1` the `actualDeleteCount` would be `len – actualStart`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4913</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-15 16:02:21 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5060</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:21 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

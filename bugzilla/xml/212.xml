@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>212</bug_id>
+          
+          <creation_ts>2011-10-04 20:27:00 -0700</creation_ts>
+          <short_desc>no VERIFIED state for bugs?</short_desc>
+          <delta_ts>2013-05-09 13:40:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>TC39 Infrastructure</product>
+          <component>bugzilla</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>495</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-10-04 20:27:28 -0700</bug_when>
+    <thetext>When a new draft of the ES spec comes out, I check whether it fixes bugs I&apos;ve submitted in the &quot;Draft for 6th Edition&quot; product. When I find it has, I&apos;ve been setting the status to CONFIRMED, but I&apos;ve just realized that that means something else, and I should instead be using VERIFIED. However, there doesn&apos;t appear to be a VERIFIED status in this Bugzilla instance.
+
+Is that intentional? If so, what should I do?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3721</commentid>
+    <comment_count>1</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-09 07:43:49 -0700</bug_when>
+    <thetext>I suggest you use RESOLVED-&gt;FIXED for this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3722</commentid>
+    <comment_count>2</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-09 07:51:35 -0700</bug_when>
+    <thetext>MInd you, it is strange that there are 5 &quot;status&quot; options in the search interface and only 4 on the bug edit screen.  VERIFIED is indeed missing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3723</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-05-09 13:40:25 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; I suggest you use RESOLVED-&gt;FIXED for this.
+
+No, that&apos;s what the assignee uses to indicate that he believes he&apos;s fixed the bug.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4217</bug_id>
+          
+          <creation_ts>2015-03-26 16:06:00 -0700</creation_ts>
+          <short_desc>Ch. 21: Various editorial issues</short_desc>
+          <delta_ts>2015-04-03 12:35:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13934</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-26 16:06:44 -0700</bug_when>
+    <thetext>21.1.2.4 String.raw ( template , ...substitutions )
+  Step 5: Wrong font for full stop
+  Step 7: Wrong font for full stop
+
+
+21.1.3.4 String.prototype.concat ( ...args )
+  Step 6a: Missing full stop
+
+
+21.1.3.6 String.prototype.endsWith ( searchString [ , endPosition] )
+  Note 2: Typo &quot;extends&quot; -&gt; &quot;extensions&quot;
+
+
+21.1.3.10 String.prototype.localeCompare ( that [, reserved1 [ , reserved2 ] ] )
+  Note 2: &quot;that this function not honour&quot; -&gt; &quot;that this function does not honour&quot;
+
+
+21.1.3.12 String.prototype.normalize ( [ form ] )
+  Step 4: Missing comma between &quot;undefined let&quot;
+  Step 7: &quot;Exception&quot; -&gt; lower case &quot;exception&quot;
+
+
+21.1.3.14.1 Runtime Semantics: GetReplaceSubstitution Abstract Operation
+  Title: -&gt; &quot;Runtime Semantics: GetReplaceSubstitution(matched, string, position, captures, replacement)&quot;
+  Preamble: Remove &quot;(matched, string, position, captures, replacement)&quot; parameter list after title is changed
+
+
+Table 45 — Replacement Text Symbol Substitutions
+  5th row, Replacement text: &quot;nth&quot; -&gt; super script &quot;th&quot;
+
+
+21.1.3.15 String.prototype.search ( regexp )
+  Step 3.c.i: Missing full stop
+
+
+21.1.3.17 String.prototype.split ( separator, limit )
+  Step 15.a: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 16.c: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 18.c.ii.2: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 20: &quot;Call&quot; -&gt; &quot;Perform&quot;
+
+
+21.1.3.18 String.prototype.startsWith ( searchString [, position ] )
+  Note 2: &quot;extends&quot; -&gt; &quot;extensions&quot;
+
+
+21.1.3.17.1 Runtime Semantics: SplitMatch Abstract Operation
+  Title: -&gt; &quot;Runtime Semantics: SplitMatch(S, q, R)&quot;
+  Preamble: &quot;the following in&quot; -&gt; &quot;the following steps in&quot;
+
+
+21.1.3.27 String.prototype [ @@iterator ]( )
+  Preamble: Remove first &quot;The following steps are taken:&quot;
+
+
+21.2.2 Pattern Semantics
+  2nd para: &apos;contain an &quot;u&quot;&apos; -&gt; &apos;contain a &quot;u&quot;&apos;.
+
+21.2.2.2 Pattern
+  Step 2: &quot;performs the following&quot; -&gt; &quot;performs the following steps&quot;
+
+
+21.2.2.3 Disjunction
+  Step 3.2: &quot;isn&apos;t&quot; -&gt; &quot;is not&quot;
+
+
+21.2.2.8.2 Runtime Semantics: Canonicalize Abstract Operation
+  Title: -&gt; &quot;Runtime Semantics: Canonicalize(ch)&quot;
+
+
+21.2.5.2 RegExp.prototype.exec ( string )
+  Step 4: Missing full stop
+
+
+21.2.5.4 get RegExp.prototype.global
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+21.2.5.5 get RegExp.prototype.ignoreCase
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+21.2.5.7 get RegExp.prototype.multiline
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+21.2.5.9 RegExp.prototype [ @@search ] ( string )
+  Step 7: Missing full stop
+  Step 8: Missing full stop
+  Step 11: Missing full stop
+  Step 12: Missing full stop
+
+
+21.2.5.10 get RegExp.prototype.source
+  Step 3: Missing comma between &quot;slot throw&quot;
+  Step 4: Missing comma between &quot;slot throw&quot;
+
+
+21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+  Step 7: Missing full stop
+  Step 22.e: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 24.f.iv.3: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 24.f.iv.12.c: &quot;Call&quot; -&gt; &quot;Perform&quot;
+  Step 27: &quot;Call&quot; -&gt; &quot;Perform&quot;
+
+
+21.2.5.12 get RegExp.prototype.sticky
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+21.2.5.15 get RegExp.prototype.unicode
+  Step 3: Missing comma between &quot;slot throw&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13975</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 08:19:07 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14103</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:39 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2999</bug_id>
+          
+          <creation_ts>2014-06-25 20:55:00 -0700</creation_ts>
+          <short_desc>Dependency execution order is not deterministic</short_desc>
+          <delta_ts>2014-10-14 15:17:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9103</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-25 20:55:30 -0700</bug_when>
+    <thetext>When a module is executed, its dependencies are executed in the order they appear in [[Module]].[[Dependencies]].
+
+This order matches the same order as [[Load]].[[Dependencies]], which is populated in 15.2.4.6.1 AddDependencyLoad (4).
+
+The AddDependencyLoad function is asynchronously run for dependencies as they normalize through ProcessLoadDependencies, so they can call back in any order.
+
+As a result, execution order is non-deterministic.
+
+I&apos;m not sure whether this is a bug or not, but a deterministic execution could be a nice thing.
+
+The fix is to alter 15.2.4.6.1 AddDependencyLoad step 4 to have an index argument sent into it, and insert the item into the given index of parentLoad.[[Dependencies]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10325</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-11 17:40:14 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10457</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:57 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

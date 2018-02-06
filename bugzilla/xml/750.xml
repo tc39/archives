@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>750</bug_id>
+          
+          <creation_ts>2012-10-06 13:10:00 -0700</creation_ts>
+          <short_desc>[10.5, 10.6] Confusion between LexicalEnvironment and EnvironmentRecord</short_desc>
+          <delta_ts>2015-10-14 17:46:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1881</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-10-06 13:10:48 -0700</bug_when>
+    <thetext>(Bug no. 1):
+[10.5 Declaration Binding Instantiation] uses the EnvironmentRecord of the context&apos;s VariableEnvironment and assigns it to `env` in step 1. Later in step 7a, this EnvironmentRecord `env` is passed to the abstract operation CreateArgumentsObject. CreateArgumentsObject [10.6] actually expects its `env` parameter to be of type LexicalEnvironment.
+
+(Bug no. 2):
+CreateArgumentsObject calls in step 11c[ii-2/3] MakeArgGetter/MakeArgSetter passing the parameter `env` (which is expected to be a LexicalEnvironment, but actually is a EnvironmentRecord). The introductory text for MakeArgGetter/MakeArgSetter even describes MakeArgGetter/MakeArgSetter&apos;s `env` parameter to be of type EnvironmentRecord. Then in step 2 (resp. 3) this `env` parameter is passed to the [13.2 Creating Function Objects] operation as the `Scope` parameter, but `Scope` must be of type LexicalEnvironment!
+
+
+Suggestions to fix (Bug no. 1):
+
+Change [10.5 Declaration Binding Instantiation] as follows:
+---
+1.  Let env be the running execution context‘s VariableEnvironment.
+2.  Let envRec be env‘s environment record.
+(Change every occurrence of `env` to `envRec` in the following algorithm steps expect for 7a which calls CreateArgumentsObject)
+---
+
+
+Suggestions to fix (Bug no. 2):
+
+Change the introductory text for MakeArgGetter/MakeArgSetter to describe the `env` parameter to be a lexical/variable environment.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1882</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-10-06 13:16:10 -0700</bug_when>
+    <thetext>This also needs to be changed in the ES6-draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14803</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-14 17:46:20 -0700</bug_when>
+    <thetext>This seems fixed in ES2015 (probably due to extensive refactorings in this area).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

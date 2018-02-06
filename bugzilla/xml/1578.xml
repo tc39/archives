@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1578</bug_id>
+          
+          <creation_ts>2013-07-14 00:45:00 -0700</creation_ts>
+          <short_desc>Add some tests for frozen arrays and non-extensible objects.</short_desc>
+          <delta_ts>2014-07-17 23:20:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jasvir Nagra">jasvir</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>sam.mikes</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4387</commentid>
+    <comment_count>0</comment_count>
+      <attachid>67</attachid>
+    <who name="Jasvir Nagra">jasvir</who>
+    <bug_when>2013-07-14 00:45:37 -0700</bug_when>
+    <thetext>Created attachment 67
+Tests for frozen arrays and non-extensible objects
+
+Adds tests:
+* to S8.6.2 that non-extensible objects cannot be mutated using defineProperty.
+* to S15.4.4.6 that a frozen array cannot be modified by pop().
+
+Patch also uploaded to http://codereview.appspot.com/11249043 for easier review.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4388</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-07-15 06:54:42 -0700</bug_when>
+    <thetext>LGTM. See my comments on the codereview site.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4389</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2013-07-15 10:41:46 -0700</bug_when>
+    <thetext>LGTM, although the location of the __proto__ tests is suspicious. Should the __proto__ tests be put into an AnnexB folder maybe?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4390</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-07-15 10:59:51 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; LGTM, although the location of the __proto__ tests is suspicious. Should the
+&gt; __proto__ tests be put into an AnnexB folder maybe?
+
+As of ES5 the existence of __proto__ is non-normative, so this would seem attractive. However, the requirement that non-extensible objects cannot have their [[Prototype]] mutated is normative. This test tests for a violation of that requirement, so I think it is in the right place.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4537</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2013-07-16 17:11:22 -0700</bug_when>
+    <thetext>Ok, I agree that makes sense Mark. In that case, please make these tests strict-mode only (add &quot;use strict&quot; directive, and there&apos;s also an @onlyStrict attribute). Non-strict assignment to non-extensible object shouldn&apos;t throw I believe.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4538</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-07-16 17:19:59 -0700</bug_when>
+    <thetext>Good point about non-strict. Yes, these tests should be @onlyStrict.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9255</commentid>
+    <comment_count>6</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 23:20:31 -0700</bug_when>
+    <thetext>As of 2014-Jul-18, these tests are not in test262.
+
+I would be willing to convert the patch into a github pull request.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>67</attachid>
+            <date>2013-07-14 00:45:00 -0700</date>
+            <delta_ts>2013-07-14 00:45:37 -0700</delta_ts>
+            <desc>Tests for frozen arrays and non-extensible objects</desc>
+            <filename>extensible-262.patch</filename>
+            <type>application/octet-stream</type>
+            <size>5538</size>
+            <attacher name="Jasvir Nagra">jasvir</attacher>
+            
+              <data encoding="base64">ZGlmZiAtciBkMDY3ZDJmMGNhMzAgdGVzdC9zdWl0ZS9jaDA4LzguNi84LjYuMi9TOC42LjJfQTgu
+anMKLS0tIGEvdGVzdC9zdWl0ZS9jaDA4LzguNi84LjYuMi9TOC42LjJfQTguanMJVGh1IEp1biAx
+MyAxMDowNzo0NSAyMDEzIC0wNDAwCisrKyAvZGV2L251bGwJVGh1IEphbiAwMSAwMDowMDowMCAx
+OTcwICswMDAwCkBAIC0xLDIyICswLDAgQEAKLS8vIENvcHlyaWdodCAyMDExIEdvb2dsZSBJbmMu
+ICBBbGwgcmlnaHRzIHJlc2VydmVkLgotLy8gVGhpcyBjb2RlIGlzIGdvdmVybmVkIGJ5IHRoZSBC
+U0QgbGljZW5zZSBmb3VuZCBpbiB0aGUgTElDRU5TRSBmaWxlLgotCi0vKioKLSAqIEBwYXRoIGNo
+MDgvOC42LzguNi4yL1M4LjYuMl9BOC5qcwotICogQGRlc2NyaXB0aW9uIEl0IHNob3VsZCBub3Qg
+YmUgcG9zc2libGUgdG8gY2hhbmdlIHRoZSBbW1Byb3RvdHlwZV1dCi0gKiBvZiBhIG5vbi1leHRl
+bnNpYmxlIG9iamVjdAotICovCi0KLXZhciB4ID0gT2JqZWN0LnByZXZlbnRFeHRlbnNpb25zKHt9
+KTsKLXZhciB5ID0ge307Ci10cnkgewotICB4Ll9fcHJvdG9fXyA9IHk7Ci19IGNhdGNoIChlcnIp
+IHsKLSAgLy8gQXMgZmFyIGFzIHRoaXMgdGVzdCBpcyBjb25jZXJuZWQsIHdlIGFsbG93IHRoZSBh
+Ym92ZSBhc3NpZ25tZW50Ci0gIC8vIHRvIGZhaWwuIFRoaXMgZmFpbHVyZSBkb2VzIHZpb2xhdGUg
+dGhlIHNwZWMgYW5kIHNob3VsZCBwcm9iYWJseQotICAvLyBiZSB0ZXN0ZWQgc2VwYXJhdGVseS4K
+LX0KLWlmIChPYmplY3QuZ2V0UHJvdG90eXBlT2YoeCkgIT09IE9iamVjdC5wcm90b3R5cGUpIHsK
+LSAgJEVSUk9SKCJQcm90b3R5cGUgb2Ygbm9uLWV4dGVuc2libGUgb2JqZWN0IG11dGF0ZWQiKTsK
+LX0KLQpkaWZmIC1yIGQwNjdkMmYwY2EzMCB0ZXN0L3N1aXRlL2NoMDgvOC42LzguNi4yL1M4LjYu
+Ml9BOF9UMS5qcwotLS0gL2Rldi9udWxsCVRodSBKYW4gMDEgMDA6MDA6MDAgMTk3MCArMDAwMAor
+KysgYi90ZXN0L3N1aXRlL2NoMDgvOC42LzguNi4yL1M4LjYuMl9BOF9UMS5qcwlTdW4gSnVsIDE0
+IDAwOjQ0OjI5IDIwMTMgLTA3MDAKQEAgLTAsMCArMSw0NiBAQAorLy8gQ29weXJpZ2h0IDIwMTEg
+R29vZ2xlIEluYy4gIEFsbCByaWdodHMgcmVzZXJ2ZWQuCisvLyBUaGlzIGNvZGUgaXMgZ292ZXJu
+ZWQgYnkgdGhlIEJTRCBsaWNlbnNlIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUuCisKKy8qKgor
+ICogQHBhdGggY2gwOC84LjYvOC42LjIvUzguNi4yX0E4X1QxLmpzCisgKiBAZGVzY3JpcHRpb24g
+SXQgc2hvdWxkIG5vdCBiZSBwb3NzaWJsZSB0byBjaGFuZ2UgdGhlIFtbUHJvdG90eXBlXV0KKyAq
+IG9mIGEgbm9uLWV4dGVuc2libGUgb2JqZWN0IGJ5IGRpcmVjdCBhc3NpZ25tZW50IHRvIF9fcHJv
+dG9fXy4KKyAqLworCit2YXIgeCA9IE9iamVjdC5wcmV2ZW50RXh0ZW5zaW9ucyh7fSk7Cit2YXIg
+eSA9IHt9OwordmFyIHRocm93bkVycm9yID0gdW5kZWZpbmVkOwordHJ5IHsKKyAgeC5fX3Byb3Rv
+X18gPSB5OworfSBjYXRjaCAoZXJyKSB7CisgIHRocm93bkVycm9yID0gZXJyOworfQorCisvLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8KKy8vQ0hFQ0sjMQoraWYgKE9iamVjdC5nZXRQcm90b3R5cGVPZih4
+KSAhPT0gT2JqZWN0LnByb3RvdHlwZSkgeworICAkRVJST1IoIlByb3RvdHlwZSBvZiBub24tZXh0
+ZW5zaWJsZSBvYmplY3QgbXV0YXRlZCIpOworfQorLy8KKy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLwor
+CisvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KKy8vQ0hFQ0sjMgoraWYgKHZvaWQgMCA9PT0gdGhyb3du
+RXJyb3IpIHsKKyAgJEVSUk9SKCdNdXRhdGluZyBwcm90b3R5cGUgb2Ygbm9uLWV4dGVuc2libGUg
+b2JqZWN0IHdpdGggYXNzaWdubWVudCBkaWQgJworICAgICsgJ25vdCB0aHJvdyBhbiBlcnJvcicp
+OworfQorLy8KKy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLworCisvLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8K
+Ky8vQ0hFQ0sjMworaWYgKCEodGhyb3duRXJyb3IgaW5zdGFuY2VvZiBUeXBlRXJyb3IpKSB7Cisg
+ICRFUlJPUignTXV0YXRpbmcgcHJvdG90eXBlIG9mIG5vbi1leHRlbnNpYmxlIG9iamVjdCB3aXRo
+IGFzc2lnbm1lbnQgdGhyZXcgJworICAgICsgJ2FuIHVudXN1YWwgZXJyb3InKTsKK30KKy8vCisv
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8KKworCisKZGlmZiAtciBkMDY3ZDJmMGNhMzAgdGVzdC9zdWl0
+ZS9jaDA4LzguNi84LjYuMi9TOC42LjJfQThfVDIuanMKLS0tIC9kZXYvbnVsbAlUaHUgSmFuIDAx
+IDAwOjAwOjAwIDE5NzAgKzAwMDAKKysrIGIvdGVzdC9zdWl0ZS9jaDA4LzguNi84LjYuMi9TOC42
+LjJfQThfVDIuanMJU3VuIEp1bCAxNCAwMDo0NDoyOSAyMDEzIC0wNzAwCkBAIC0wLDAgKzEsNDUg
+QEAKKy8vIENvcHlyaWdodCAyMDEzIEdvb2dsZSBJbmMuICBBbGwgcmlnaHRzIHJlc2VydmVkLgor
+Ly8gVGhpcyBjb2RlIGlzIGdvdmVybmVkIGJ5IHRoZSBCU0QgbGljZW5zZSBmb3VuZCBpbiB0aGUg
+TElDRU5TRSBmaWxlLgorCisvKioKKyAqIEBwYXRoIGNoMDgvOC42LzguNi4yL1M4LjYuMl9BOF9U
+Mi5qcworICogQGRlc2NyaXB0aW9uIEl0IHNob3VsZCBub3QgYmUgcG9zc2libGUgdG8gY2hhbmdl
+IHRoZSBbW1Byb3RvdHlwZV1dCisgKiBvZiBhIG5vbi1leHRlbnNpYmxlIG9iamVjdCB1c2luZyBP
+YmplY3QuZGVmaW5lUHJvcGVydHkuCisgKi8KKwordmFyIHggPSBPYmplY3QucHJldmVudEV4dGVu
+c2lvbnMoe30pOwordmFyIHkgPSB7fTsKK3ZhciB0aHJvd25FcnJvciA9IHVuZGVmaW5lZDsKK3Ry
+eSB7CisgIE9iamVjdC5kZWZpbmVQcm9wZXJ0eSh4LCAnX19wcm90b19fJywgeyB2YWx1ZTogeSB9
+KTsKK30gY2F0Y2ggKGVycikgeworICB0aHJvd25FcnJvciA9IGVycjsKK30KKworLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vCisvL0NIRUNLIzEKK2lmIChPYmplY3QuZ2V0UHJvdG90eXBlT2YoeCkgIT09
+IE9iamVjdC5wcm90b3R5cGUpIHsKKyAgJEVSUk9SKCJQcm90b3R5cGUgb2Ygbm9uLWV4dGVuc2li
+bGUgb2JqZWN0IG11dGF0ZWQiKTsKK30KKy8vCisvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KKworLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vCisvL0NIRUNLIzIKK2lmICgndW5kZWZpbmVkJyA9PT0gdHlwZW9m
+IHRocm93bkVycm9yKSB7CisgICRFUlJPUignTXV0YXRpbmcgcHJvdG90eXBlIG9mIG5vbi1leHRl
+bnNpYmxlIG9iamVjdCB3aXRoICcKKyAgICArICdPYmplY3QuZGVmaW5lUHJvcGVydHkgZGlkIG5v
+dCB0aHJvdyBhbiBlcnJvcicpOworfQorLy8KKy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLworCisvLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8KKy8vQ0hFQ0sjMworaWYgKCEodGhyb3duRXJyb3IgaW5zdGFuY2Vv
+ZiBUeXBlRXJyb3IpKSB7CisgICRFUlJPUignTXV0YXRpbmcgcHJvdG90eXBlIG9mIG5vbi1leHRl
+bnNpYmxlIG9iamVjdCB3aXRoICcKKyAgICArICdPYmplY3QuZGVmaW5lUHJvcGVydHkgdGhyZXcg
+YW4gdW51c3VhbCBlcnJvcicpOworfQorLy8KKy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8v
+Ly8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLworCisKZGlm
+ZiAtciBkMDY3ZDJmMGNhMzAgdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC42L1Mx
+NS40LjQuNl9BNl9UMS5qcwotLS0gL2Rldi9udWxsCVRodSBKYW4gMDEgMDA6MDA6MDAgMTk3MCAr
+MDAwMAorKysgYi90ZXN0L3N1aXRlL2NoMTUvMTUuNC8xNS40LjQvMTUuNC40LjYvUzE1LjQuNC42
+X0E2X1QxLmpzCVN1biBKdWwgMTQgMDA6NDQ6MjkgMjAxMyAtMDcwMApAQCAtMCwwICsxLDQxIEBA
+CisvLyBDb3B5cmlnaHQgMjAxMyBHb29nbGUgSW5jLiAgQWxsIHJpZ2h0cyByZXNlcnZlZC4KKy8v
+IFRoaXMgY29kZSBpcyBnb3Zlcm5lZCBieSB0aGUgQlNEIGxpY2Vuc2UgZm91bmQgaW4gdGhlIExJ
+Q0VOU0UgZmlsZS4KKworLyoqCisgKiBBcnJheS5wb3AoKSBvZiBhIGZyb3plbiBhcnJheSBzaG91
+bGQgbm90IG1vZGlmeSB0aGUgYXJyYXkuCisgKgorICogQHBhdGggY2gxNS8xNS40LzE1LjQuNC8x
+NS40LjQuNi9TMTUuNC40LjZfQTZfVDEuanMKKyAqIEBkZXNjcmlwdGlvbiBDYWxsIHRoZSBbW0Rl
+bGV0ZV1dIGludGVybmFsIG1ldGhvZCBvZiBPIHdpdGggYXJndW1lbnRzIGluZHgKKyAqIGFuZCB0
+cnVlIHdoaWNoIGluIHR1cm4gbXVzdCB0aHJvdyBhIFR5cGVFcnJvciBleGNlcHRpb24gaWYKKyAq
+IGRlc2MuW1tDb25maWd1cmFibGVdXSBpcyBmYWxzZS4KKyAqLworCit2YXIgb2JqID0gWzEsMl07
+CitPYmplY3QuZnJlZXplKG9iaik7Cit2YXIgdGhyb3dzRXJyb3IgPSBmYWxzZTsKK3RyeSB7Cisg
+IG9iai5wb3AoKTsKK30gY2F0Y2ggKGUpIHsKKyAgdGhyb3dzRXJyb3IgPSB0cnVlOworfQorCisv
+L0NIRUNLIzEKK2lmICghdGhyb3dzRXJyb3IpIHsKKyAgJEVSUk9SKCcjMDogQ2FsbGluZyBwb3Ao
+KSBvbiBhIGZyb3plbiBhcnJheSBkaWQgbm90IHRocm93IGFuIGVycm9yJyk7Cit9CisKKy8vQ0hF
+Q0sjMgoraWYgKG9iai5sZW5ndGggIT09IDIpIHsKKyAgJEVSUk9SKCcjMTogdmFyIG9iaiA9IFsx
+LDJdOyBPYmplY3QuZnJlZXplKG9iaik7IG9iai5wb3AoKTsgJworICAgICsgJ29iai5sZW5ndGgg
+PT09IDIuIEFjdHVhbDogJyArIChvYmoubGVuZ3RoKSk7Cit9CisvL0NIRUNLIzMKK2lmICh4WzBd
+ICE9PSAxKSB7CisgICRFUlJPUignIzI6IHZhciBvYmogPSBbMSwyXTsgT2JqZWN0LmZyZWV6ZShv
+YmopOyBvYmoucG9wKCk7ICcKKyAgICArICdvYmpbMF0gPT09IDEuIEFjdHVhbDogJyArIChvYmpb
+MF0pKTsKK30KKy8vQ0hFQ0sjNAoraWYgKHhbMV0gIT09IDIpIHsKKyAgJEVSUk9SKCcjMzogdmFy
+IG9iaiA9IFsxLDJdOyBPYmplY3QuZnJlZXplKG9iaik7IG9iai5wb3AoKTsgJworICAgICsgJ29i
+alsxXSA9PT0gMi4gQWN0dWFsOiAnICsgKG9ialsxXSkpOworfQpcIE5vIG5ld2xpbmUgYXQgZW5k
+IG9mIGZpbGUK
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

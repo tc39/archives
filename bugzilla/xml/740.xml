@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>740</bug_id>
+          
+          <creation_ts>2012-10-05 22:36:00 -0700</creation_ts>
+          <short_desc>15.14.7.2.*: italic &quot;MapIterator&quot;</short_desc>
+          <delta_ts>2013-10-29 09:46:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1871</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-05 22:36:16 -0700</bug_when>
+    <thetext>In 15.14.7.2.*, the section headers have &quot;MapIterator&quot; in italics,
+for no apparent reason.
+
+Change to an upgright font.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1962</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-20 15:19:18 -0700</bug_when>
+    <thetext>An italic constructor is the convention established in previous editions to identify a metavariable in a name position of chapter 15 signatures.  In particular, see 15.11 Native Error Object Structure.
+
+This seems like a reasonable convention to apply in this section where we essentially are defining anonymous classes</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2188</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:32 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2457</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-12 16:54:09 -0800</bug_when>
+    <thetext>Ah, so there isn&apos;t any built-in property with the name &quot;MapIterator&quot;.
+It would probably be worth saying so before the first use.
+
+&gt; In particular, see 15.11 Native Error Object Structure.
+
+The difference is that there, /NativeError/ stands for each of the six
+predefined error types, but in 15.14.7.2, /MapIterator/ doesn&apos;t stand for any predefined map iterator types (because there aren&apos;t any), it sort of stands for map iterator objects that might be created at runtime.
+
+Mind you, even that interpretation is misleading, because then a section header like
+    /MapIterator/.prototype.next()
+suggests that every map iterator object has a property named &quot;prototype&quot; whose value is the %MapIteratorPrototype%, which doesn&apos;t appear to be true. (Map iterator objects don&apos;t have *any* named properties [of their own].)
+
+So instead, it might be clearer to say (e.g.)
+    %MapIteratorPrototype%.next()
+
+(Ditto all that for &quot;SetIterator&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2460</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-12 18:09:56 -0800</bug_when>
+    <thetext>And ditto for &quot;ArrayIterator&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5961</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 19:14:04 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+%MapIteratorPrototype%
+%ArrayIteratorPrototype%
+etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6172</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:58 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

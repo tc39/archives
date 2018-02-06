@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3817</bug_id>
+          
+          <creation_ts>2015-02-10 23:36:00 -0800</creation_ts>
+          <short_desc>Maybe get rid of [[ErrorData]] and define appropriate Error.prototype[@@toStringTag] instead?</short_desc>
+          <delta_ts>2015-02-15 15:00:09 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3816</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12302</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-10 23:36:14 -0800</bug_when>
+    <thetext>Error objects are ordinary objects; the only thing in the spec that distinguishes them from others ordinary objects, is an internal [[ErrorData]] property, whose only use is to flag them for Object.prototype.toString (cf. bug 3816).
+
+One could get rid of [[ErrorData]] and have Error.prototype[@@toStringTag] = &quot;Error&quot; instead. A consequence of that change, is that Error.prototype and objects inherited from it will be tagged as [object Error] by O.p.toString. That doesn&apos;t seem dangerous, because AFAICS, Error instances have no method that would choke on non-Error objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12743</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 15:00:09 -0800</bug_when>
+    <thetext>the final ES6 changes WRT O.p.toString and @@toStringTag were made at the Jan 2015 TC39 meeting https://github.com/tc39/tc39-notes/blob/master/es6/2015-01/jan-28.md#45-tostringtag
+
+However, this looks like a change that could be made in a future edition so I&apos;m marking this one as deferred to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

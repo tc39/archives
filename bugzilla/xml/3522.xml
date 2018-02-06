@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3522</bug_id>
+          
+          <creation_ts>2015-01-13 21:12:00 -0800</creation_ts>
+          <short_desc>Single argument Array.prototype.splice</short_desc>
+          <delta_ts>2015-01-13 21:33:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>other</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Adam Ahmed">aahmed</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11348</commentid>
+    <comment_count>0</comment_count>
+    <who name="Adam Ahmed">aahmed</who>
+    <bug_when>2015-01-13 21:12:19 -0800</bug_when>
+    <thetext>Following on from https://esdiscuss.org/topic/single-argument-array-prototype-splice (yes that thread is 4 years old), it would seem that Array.prototype.splice&apos;s definition needs an update to spec the single -arg version as being equivalent to calling it with a second argument equal to the length of the array.
+
+All major browsers and engines were in agreement, until Nashorn entered the game. Because they follow the spec as written, they have broken the de-facto standard. https://bugs.openjdk.java.net/browse/JDK-8023252</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11349</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 21:30:28 -0800</bug_when>
+    <thetext>Isn&apos;t that already handled in the ES6 spec.
+See http://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.prototype.splice 
+step 10</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11350</commentid>
+    <comment_count>2</comment_count>
+    <who name="Adam Ahmed">aahmed</who>
+    <bug_when>2015-01-13 21:33:18 -0800</bug_when>
+    <thetext>Yes it is, I overlooked that! Thanks so much!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

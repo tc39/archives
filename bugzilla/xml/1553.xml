@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1553</bug_id>
+          
+          <creation_ts>2013-06-08 12:40:00 -0700</creation_ts>
+          <short_desc>Change “EscapeSequence 0 [lookahead ∉ DecimalDigit]” to match reality</short_desc>
+          <delta_ts>2014-12-18 06:54:05 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>3477</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>3124</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>bugs.ecmascript</cc>
+    
+    <cc>claude.pache</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>lukeh</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4159</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-06-08 12:40:35 -0700</bug_when>
+    <thetext>As posted by Yusuke Suzuki (https://mail.mozilla.org/pipermail/es-discuss/2013-June/031149.html):
+
+EscapeSequence ::
+    CharacterEscapeSequence
+    0 [lookahead ∉ DecimalDigit]
+    HexEscapeSequence
+    UnicodeEscapeSequence
+
+Because of &quot;[lookahead ∉ DecimalDigit]&quot;, strictly speaking, &quot;\08&quot; and &quot;\09&quot; are ill-formed StringLiterals.
+But engines in the wild (at least V8, SpiderMonkey, JSC) accept this form and recognize it as &quot;\x008&quot;.
+
+To bridge the gap, I think it would be better to introduce this form to the spec officially.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4170</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-06-12 03:17:12 -0700</bug_when>
+    <thetext>Added some tests here: http://mathias.html5.org/tests/javascript/string/ (see the last two tests)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4171</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-06-12 06:31:35 -0700</bug_when>
+    <thetext>Behaviour for noctal escapes in strict-mode is different across engines, e.g. the proposed tests only work in V8 and Presto, other engines report a strict-mode error (SpiderMonkey/JSC/IE).
+
+EscapeSequence with leading &quot;0&quot;:
+- sloppy mode
+=&gt; accepted in major engines as &quot;\08&quot; == &quot;\0&quot; + &quot;8&quot;
+
+- strict mode
+=&gt; accepted in V8/Presto as &quot;\08&quot; == &quot;\0&quot; + &quot;8&quot;
+=&gt; SyntaxError in IE/JSC/SpiderMonkey
+
+
+EscapeSequence without leading &quot;0&quot;:
+- sloppy mode
+=&gt; accepted in major engines as &quot;\8&quot; == &quot;8&quot;
+
+- strict mode
+=&gt; accepted in IE/SpiderMonkey/V8/Presto as &quot;\8&quot; == &quot;8&quot;
+=&gt; SyntaxError in JSC
+
+
+OctalInteger
+- sloppy mode
+=&gt; accepted in major engines as 08 == 8
+=&gt; Note: SpiderMonkey reports warning in shell
+
+- strict mode
+=&gt; accepted in IE/Presto/JSC/V8 as 08 == 8
+=&gt; SyntaxError in SpiderMonkey</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8938</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-06-14 00:13:52 -0700</bug_when>
+    <thetext>Quoting https://bugzilla.mozilla.org/show_bug.cgi?id=957513#c25
+
+&gt; While this is a perfectly valid error to throw, it apparently breaks banks. https://bugzilla.mozilla.org/show_bug.cgi?id=1025107 Throwing a warning and automatically falling back to handling the literal as decimal rather than octal would possibly be preferable (at least for the time being).
+
+Sounds like the spec needs to be changed to match reality after all.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8945</commentid>
+    <comment_count>4</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-06-16 11:35:48 -0700</bug_when>
+    <thetext>That bug is about number literals like 08, not string escape sequences.
+
+But yes, alas, I think we will have to back out the patch we landed in  &lt;https://bugzilla.mozilla.org/show_bug.cgi?id=957513&gt;. The spec should do the same.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9772</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-12 13:53:04 -0700</bug_when>
+    <thetext>See also Bug #3124, (which relates to legacy octal escape sequences followed by 8 or 9 in sloppy mode, rather than \0  followed by 8 or 9 in all modes).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11095</commentid>
+    <comment_count>6</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:54:05 -0800</bug_when>
+    <thetext>I&apos;ve open Bug 3477 for a definite answer to the more general issue of backslash followed by one ore more digits in string and template literals.
+
+*** This bug has been marked as a duplicate of bug 3477 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

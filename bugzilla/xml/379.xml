@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>379</bug_id>
+          
+          <creation_ts>2012-06-08 23:33:00 -0700</creation_ts>
+          <short_desc>13.1: &quot;Performing&quot;</short_desc>
+          <delta_ts>2012-06-16 13:20:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>391</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>970</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-06-08 23:33:37 -0700</bug_when>
+    <thetext>In 13.1 &quot;Function Definitions&quot;,
+under &quot;Runtime Semantics: Instantiate Function Declaration&quot; / rule 1
+and &quot;Runtime Semantics: Evaluation&quot; / rule 2+3,
+there&apos;s a step that says:
+    &quot;Performing the abstract operation MakeConstructor with argument ...&quot;
+
+Change &quot;Performing&quot; to &quot;Perform&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1000</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-16 09:36:38 -0700</bug_when>
+    <thetext>fixed in &quot;Rev 8&quot;, June 12,2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

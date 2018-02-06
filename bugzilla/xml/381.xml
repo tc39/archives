@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>381</bug_id>
+          
+          <creation_ts>2012-06-10 14:42:00 -0700</creation_ts>
+          <short_desc>Generator comprehension and array comprehension should use ForBinding instead of LeftHandSideExpression</short_desc>
+          <delta_ts>2015-07-10 08:34:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>972</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2012-06-10 14:42:20 -0700</bug_when>
+    <thetext>The draft currently have:
+
+ComprehensionFor :
+  for LeftHandSideExpression of Expression
+
+This leads to the following being allowed:
+
+(a for b.c of d)
+
+What is the intention of allowing LeftHandSideExpression above? Who is responsible for creating the bindings here?
+
+If we change ComprehensionFor to use a ForBinding it is clearer where the bindings come from.
+
+ComprehensionFor :
+  for ForBinding of Expression</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>981</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-14 17:42:48 -0700</bug_when>
+    <thetext>Are you looking at an old draft.  My draft has ForBinding in that spot and and says that change was made 4/12/12.  It should be in the 5/4 draft.  Also I new draft will probably go out on 6/15</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>988</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2012-06-14 23:39:45 -0700</bug_when>
+    <thetext>5/4 draft has ForBinding for Array Comprehension but not for Generator
+Comprehension.
+
+11.1.7 Generator Comprehensions
+
+Syntax
+
+GeneratorComprehension :
+  ( Expression ComprehensionForList )
+  ( Expression ComprehensionForList if ( Expression ) )
+
+ComprehensionForList :
+  ComprehensionFor
+  ComprehensionForList ComprehensionFor
+
+ComprehensionFor :
+  for LeftHandSideExpression of Expression</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>989</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-15 08:43:55 -0700</bug_when>
+    <thetext>Ah, the generator productions are redundant and I&apos;ll delete them.  Although, they might come back when I do the semantics</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

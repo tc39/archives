@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>223</bug_id>
+          
+          <creation_ts>2011-11-21 16:10:00 -0800</creation_ts>
+          <short_desc>Coverage: Missing test for undefined being non-writable</short_desc>
+          <delta_ts>2012-05-18 11:20:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>billti</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>509</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-11-21 16:10:26 -0800</bug_when>
+    <thetext>It seems that the test suite lacks tests for &apos;undefined&apos; being non-writable.
+&apos;undefined&apos; is still writable in Chrome and it shouldn&apos;t.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>949</commentid>
+    <comment_count>1</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2012-05-18 11:20:27 -0700</bug_when>
+    <thetext>I&apos;ve added some tests to cover this.  See changelist http://hg.ecmascript.org/tests/test262/rev/e05317dc5494 .</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

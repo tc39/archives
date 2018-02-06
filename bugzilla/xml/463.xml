@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>463</bug_id>
+          
+          <creation_ts>2012-07-08 04:56:00 -0700</creation_ts>
+          <short_desc>String.prototype HTML methods in Annex B should escape &quot; as &amp;quot; in argument values for security reasons</short_desc>
+          <delta_ts>2012-07-08 15:56:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>406</dup_id>
+          <see_also>https://bugzilla.mozilla.org/show_bug.cgi?id=352437</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1146</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-08 04:56:11 -0700</bug_when>
+    <thetext>Following the algorithms of these methods in the current ES6 draft:
+
+&gt; &apos;_&apos;.link(&apos;a&quot;b&apos;)
+&apos;&lt;a href=&quot;a&quot;b&quot;&gt;_&lt;/a&gt;&apos;
+
+However, this would be a better result:
+
+&gt; &apos;_&apos;.link(&apos;a&quot;b&apos;)
+&apos;&lt;a href=&quot;a&amp;quot;b&quot;&gt;_&lt;/a&gt;&apos;
+
+The problem here is &quot; doesn’t escape into &amp;quot; at the moment, which is a potential security risk (XSS vector).
+
+For this reason, Chrome/V8 escapes &quot; into &amp;quot;. Firefox/Spidermonkey is going to change its behavior to do the same: https://bugzilla.mozilla.org/show_bug.cgi?id=352437 Opera/Carakan will change its behavior too, as soon as other browsers change (bug DSK-369206). The IE bug is here: https://connect.microsoft.com/IE/feedback/details/752391
+
+http://mathias.html5.org/specs/javascript/#escapeattributevalue requires escaping the &quot;.
+
+Tests: http://mathias.html5.org/tests/javascript/string/
+
+Here’s a list of the methods that have this issue:
+
+* String.prototype.anchor(name)
+* String.prototype.fontcolor(color)
+* String.prototype.fontsize(size)
+* String.prototype.link(href)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1183</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-08 15:56:59 -0700</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 406 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4328</bug_id>
+          
+          <creation_ts>2015-04-20 11:00:00 -0700</creation_ts>
+          <short_desc>Remove comments about stack-unlike behaviour of execution context stack</short_desc>
+          <delta_ts>2015-04-20 11:00:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>a.d.bergi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14310</commentid>
+    <comment_count>0</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-04-20 11:00:48 -0700</bug_when>
+    <thetext>Section 8.3 Execution Contexts states
+
+| Transition of the running execution context status among execution
+| contexts usually occurs in stack-like last-in/first-out manner.
+| However, some ECMAScript features require non-LIFO transitions of the
+| running execution context.
+
+In fact, all transitions are stack-like, even those of generators. The &quot;usually&quot; and the second sentence should be removed.
+
+If generators should be mentioned, I&apos;d recommend to change the sentence
+
+| At some later time a suspended execution context may again become the
+| running execution context and continue evaluating its code at the
+| point where it had previously been suspended.
+
+to something like:
+
+Usually, an execution context will destroyed after being suspended, however some ECMAScript features require execution contexts that may again become the running execution context, which would then continue evaluating its code at the point where it had previously been suspended.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

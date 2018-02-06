@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3114</bug_id>
+          
+          <creation_ts>2014-08-08 14:39:00 -0700</creation_ts>
+          <short_desc>Mathematical operations on infinities</short_desc>
+          <delta_ts>2015-02-19 19:10:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9736</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-08 14:39:02 -0700</bug_when>
+    <thetext>For example, String.prototype.indexOf.
+
+&quot;aa&quot;.indexOf(&quot;a&quot;, +Infinity) will result in a _position_ argument of +Infinity. Then, &quot;Let pos be ToInteger(position)&quot; just means that pos = +Infinity as well, since ToInteger passes through those values. But step 9 then does max(pos, 0), and the clause on algorithm conventions says:
+
+&gt; Mathematical operations such as addition, subtraction, negation, multiplication, division, and the mathematical functions defined later in this clause should always be understood as computing exact mathematical results on mathematical real numbers, which do not include infinities and do not include a negative zero that is distinguished from positive zero.
+
+So max() is not defined for handling a pos of +Infinity.
+
+A similar problem occurs with Array.prototype.indexOf, which passes through infinities to abs().
+
+This bug also appears in the ES5 spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9737</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-08 14:53:21 -0700</bug_when>
+    <thetext>This ties into the confusion where IsInteger(+∞) is false, but ToInteger(+∞) returns +∞.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9738</commentid>
+    <comment_count>2</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-08 15:19:18 -0700</bug_when>
+    <thetext>It&apos;s also unclear whether you can say &quot;if k &gt; 0&quot; without first separately handling the case where k is an infinity. Since &gt; is a mathematical operation.
+
+Another data point: V8 handles this much as you would expect, with its min(), max(), and abs() functions able to handle infinities, and its relational operators able to compare them. The path of least resistance here may indeed be to fix the math operations to handle infinities.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9739</commentid>
+    <comment_count>3</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-08 16:43:42 -0700</bug_when>
+    <thetext>ToLength also has this problem: ToLength(+∞) passes the +∞ to min(len, 2^{53}-1).
+
+I am increasingly convinced that the right thing to do is allow min/max/abs/etc. to work on infinities.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12956</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 18:26:54 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+I made ToLength explicitly deal with +Infinity
+
+also updated clause 5 to say that min/max accept +-Infinity
+
+It&apos;s not clear that any other clause 5 functions need to.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13015</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:52 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

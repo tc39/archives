@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3575</bug_id>
+          
+          <creation_ts>2015-01-17 21:55:00 -0800</creation_ts>
+          <short_desc>22.2.1.1.1 AllocateTypedArray steps 1-2 can be omitted</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="ziyunfei">446240525</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11541</commentid>
+    <comment_count>0</comment_count>
+    <who name="ziyunfei">446240525</who>
+    <bug_when>2015-01-17 21:55:22 -0800</bug_when>
+    <thetext></thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11542</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-18 11:43:02 -0800</bug_when>
+    <thetext>Why do you say that?
+
+Both of those lines exist for specific purposes relating to the use of the %TypedArray% intrinsic, and primarily come into play when AllocateTypedArray is called from it.
+
+The first line says that you get an exception if you attempt to directly call %TypedArray%
+
+%TypedArray% is intended to only be super new&apos;ed by its subclass constructors.
+
+The second line says that you get an exception if you try to directly invoke &apos;new&apos; on %TypedArray%</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11598</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-22 10:47:29 -0800</bug_when>
+    <thetext>do you have a follow up.  If not, I&apos;ll close this as invalid.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11604</commentid>
+    <comment_count>3</comment_count>
+    <who name="ziyunfei">446240525</who>
+    <bug_when>2015-01-22 22:10:40 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; The first line says that you get an exception if you attempt to directly
+&gt; call %TypedArray%
+&gt; 
+&gt; The second line says that you get an exception if you try to directly invoke
+&gt; &apos;new&apos; on %TypedArray%
+
+Allen, I think steps 5.a-b can do these two things, or am i missing something?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12267</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-09 17:14:32 -0800</bug_when>
+    <thetext>You&apos;re technically correct. But, I think the redundancy is good, from a specification perspective as lines 1-2 and 5-5e are actually addressing distinct requirements.  The first is that you aren&apos;t alled to directly call or new %TypedArray&quot;.
+
+Step 5 is saying that valid subclass must have a [[TypedArrayonstructorName]] somewhere on its subclass chain but below %TypedArray% 
+
+While the mechanism used to do step 5 also covers 1-2 we could leave out 1-2. But that conflates the separate requirements in a way that may make the 1-2 requirements less obvious. 
+
+In fact, I went the other direction.  I added a NOTE after step two clarify the purpose of the first two lines.
+
+But implementations, of course, are free to do that sort of optimization.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12279</commentid>
+    <comment_count>5</comment_count>
+    <who name="ziyunfei">446240525</who>
+    <bug_when>2015-02-09 23:04:00 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; You&apos;re technically correct. But, I think the redundancy is good, from a
+&gt; specification perspective as lines 1-2 and 5-5e are actually addressing
+&gt; distinct requirements.  The first is that you aren&apos;t alled to directly call
+&gt; or new %TypedArray&quot;.
+&gt; 
+&gt; Step 5 is saying that valid subclass must have a
+&gt; [[TypedArrayonstructorName]] somewhere on its subclass chain but below
+&gt; %TypedArray% 
+&gt; 
+&gt; While the mechanism used to do step 5 also covers 1-2 we could leave out
+&gt; 1-2. But that conflates the separate requirements in a way that may make the
+&gt; 1-2 requirements less obvious. 
+&gt; 
+&gt; In fact, I went the other direction.  I added a NOTE after step two clarify
+&gt; the purpose of the first two lines.
+&gt; 
+&gt; But implementations, of course, are free to do that sort of optimization.
+
+I see now. Thank you.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12397</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

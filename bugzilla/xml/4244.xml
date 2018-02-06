@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4244</bug_id>
+          
+          <creation_ts>2015-04-02 08:10:00 -0700</creation_ts>
+          <short_desc>15.2.1.15.3 ResolveExport: unclear use of &quot;leaf binding&quot; in assertion</short_desc>
+          <delta_ts>2015-04-03 12:35:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Adam Klein">adamk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14018</commentid>
+    <comment_count>0</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 08:10:17 -0700</bug_when>
+    <thetext>Step 4.a.i is:
+
+Assert: module provides the leaf binding for this export.
+
+It&apos;s not clear to me if &quot;leaf binding&quot; is supposed to mean something like &quot;direct binding&quot;. If so, that seems too strong, as the exported binding could itself have been imported (see example on es-discuss: https://esdiscuss.org/topic/re-exporting-imports-and-createimportbinding-assertions)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14019</commentid>
+    <comment_count>1</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 08:12:45 -0700</bug_when>
+    <thetext>This same usage of &quot;leaf binding&quot; (and the same issue) occurs in GetExportedNames, step 5.a.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14023</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 09:24:12 -0700</bug_when>
+    <thetext>(In reply to Adam Klein from comment #0)
+&gt; Step 4.a.i is:
+&gt; 
+&gt; Assert: module provides the leaf binding for this export.
+&gt; 
+&gt; It&apos;s not clear to me if &quot;leaf binding&quot; is supposed to mean something like
+&gt; &quot;direct binding&quot;. If so, that seems too strong, as the exported binding
+&gt; could itself have been imported (see example on es-discuss:
+&gt; https://esdiscuss.org/topic/re-exporting-imports-and-createimportbinding-
+&gt; assertions)
+
+Nope.  Note that the step 4 loops is over the [[LocalExportEntries]] which Table 38 defines as corresponding to actual declarations that occur within the module. Reexported imports show up in the [[IndirectExportEntries]] list.
+
+I changed the two occurence of &quot;leaf&quot; to &quot;direct&quot;.  Does that help?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14026</commentid>
+    <comment_count>3</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 10:28:27 -0700</bug_when>
+    <thetext>Ah, interesting, this is why I sent a mail to es-discuss first, as I thought I might be missing something. Here&apos;s my example from the mailing list:
+
+module &apos;a&apos;:
+
+import { x } from &apos;b&apos;;
+
+module &apos;b&apos;:
+
+import { x } from &apos;c&apos;; export { x };
+
+module &apos;c&apos;:
+
+export let x = 42;
+
+
+Can you explain how the &quot;export { x };&quot; declaration in module &apos;b&apos; results in an ExportEntry record in b&apos;s [[IndirectExportEntries]]?
+
+My reading of the static semantics suggests that the generated ExportEntry is:
+
+{ [[ExportName]]: &apos;x&apos;, [[ModuleRequest]]: null, [[ImportName]]: null, [[LocalName]]: &apos;x&apos; }
+
+and step 10.a of ParseModule requires an entry with a null [[ModuleRequest] slot to be placed in [[LocalExportEntries]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14031</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 11:44:56 -0700</bug_when>
+    <thetext>(In reply to Adam Klein from comment #3)
+&gt; Ah, interesting, this is why I sent a mail to es-discuss first, as I thought
+&gt; I might be missing something. Here&apos;s my example from the mailing list:
+&gt; 
+...
+&gt; 
+&gt; { [[ExportName]]: &apos;x&apos;, [[ModuleRequest]]: null, [[ImportName]]: null,
+&gt; [[LocalName]]: &apos;x&apos; }
+&gt; 
+&gt; and step 10.a of ParseModule requires an entry with a null [[ModuleRequest]
+&gt; slot to be placed in [[LocalExportEntries]].
+
+Ah, good catch!! (It&apos;s scary that nobody else has caught that yet)
+
+I&apos;m fixing Step 10 of ParseModule so it places such export entries (with the import info) into [[IndirectExportEntries]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14051</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:31 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

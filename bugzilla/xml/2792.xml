@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2792</bug_id>
+          
+          <creation_ts>2014-05-01 11:38:00 -0700</creation_ts>
+          <short_desc>B.1.1 should specify decimal integer literals starting with 0 and containing at least one of 8 or 9</short_desc>
+          <delta_ts>2014-10-14 15:18:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Oliver Hunt">oliver</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>claude.pache</cc>
+    
+    <cc>jmdyck</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>oliver</cc>
+    
+    <cc>princexcess69</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8090</commentid>
+    <comment_count>0</comment_count>
+    <who name="Oliver Hunt">oliver</who>
+    <bug_when>2014-05-01 11:38:15 -0700</bug_when>
+    <thetext>The LegacyOctalIntegerLiteral syntax in B.1.1 specifies
+LegacyOctalIntegerLiteral ::
+    0 OctalDigit
+    LegacyOctalIntegerLiteral OctalDigit
+
+However all engines that recognise LegacyOctalIntegerLiteral actually recognise
+
+LegacyOctalIntegerLiteral ::
+    0 DecimalDigit
+    LegacyOctalIntegerLiteral DecimalDigit
+
+And interpret the value as decimal if any digit is greater than 7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8128</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 11:30:10 -0700</bug_when>
+    <thetext>(Changing this bug&apos;s &apos;Product&apos; from &apos;ECMA-262&apos; to &apos;Draft for 6th Edition&apos;, since LegacyOctalIntegerLiteral appears only in the 6th edition drafts.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9667</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-05 00:24:41 -0700</bug_when>
+    <thetext>https://github.com/whatwg/javascript/issues/17
+https://bugzilla.mozilla.org/show_bug.cgi?id=957513
+https://code.google.com/p/v8/issues/detail?id=3091
+https://bugs.webkit.org/show_bug.cgi?id=126618
+https://connect.microsoft.com/IE/feedback/details/813193
+http://esdiscuss.org/topic/early-error-on-0-followed-by-8-or-9-in-numeric-literals-does-not-seem-to-be-web-compatible</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9669</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-05 07:43:37 -0700</bug_when>
+    <thetext>(In reply to Oliver Hunt from comment #0)
+&gt; The LegacyOctalIntegerLiteral syntax in B.1.1 specifies
+&gt; LegacyOctalIntegerLiteral ::
+&gt;     0 OctalDigit
+&gt;     LegacyOctalIntegerLiteral OctalDigit
+&gt; 
+&gt; However all engines that recognise LegacyOctalIntegerLiteral actually
+&gt; recognise
+&gt; 
+&gt; LegacyOctalIntegerLiteral ::
+&gt;     0 DecimalDigit
+&gt;     LegacyOctalIntegerLiteral DecimalDigit
+&gt; 
+&gt; And interpret the value as decimal if any digit is greater than 7.
+
+This is inaccurate. `08` for example is not a `LegacyOctalIntegerLiteral` nor is it treated as one by the majority of JavaScript engines:
+
+    &gt; (function() { &apos;use strict&apos;; return 01; }())
+    &lt; SyntaxError: Octal escapes are forbidden in strict mode
+
+But…
+
+    &gt; (function() { &apos;use strict&apos;; return 08; }())
+    &lt; 8
+
+Only SpiderMonkey seems to (incorrectly) recognize `08` as a `LegacyOctalIntegerLiteral`:
+
+    &gt; (function() { &apos;use strict&apos;; return 08; }())
+    &lt; SyntaxError: octal literals and octal escape sequences are deprecated
+
+Changing the spec for `LegacyOctalIntegerLiteral` seems like the wrong way to solve this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9670</commentid>
+    <comment_count>4</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-08-05 11:44:36 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #3)
+&gt; Only SpiderMonkey seems to (incorrectly) recognize `08` as a
+&gt; `LegacyOctalIntegerLiteral`:
+&gt; 
+&gt;     &gt; (function() { &apos;use strict&apos;; return 08; }())
+&gt;     &lt; SyntaxError: octal literals and octal escape sequences are deprecated
+&gt; 
+&gt; Changing the spec for `LegacyOctalIntegerLiteral` seems like the wrong way
+&gt; to solve this.
+
+I will defend SpiderMonkey&apos;s honor here: The error message above is incorrect in using the word &quot;octal&quot;, but the SyntaxError is correct: `08` doesn&apos;t match any productions in ES1-5 as far as I know, or in any ES6 draft.
+
+But there are scripts on the web that match it, so we can&apos;t drop support for it in sloppy mode.
+
+Therefore this syntax should be banned in strict mode and specified as a special (sloppy-mode-only) legacy decimal integer literal in B.1.1. That is what implementations must do regardless; TC39 does not have a practical choice, just an editorial one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9701</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-07 00:29:19 -0700</bug_when>
+    <thetext>The issue of non-octal numbers starting with 0 is not limited to integers.
+First, the good news: all implementations I&apos;ve tested agree on this:
+
+  07e3 // Syntax Error
+  07.9 // Syntax Error
+
+So far, so good. But:
+
+  08e3 // 800
+  08.9 // 8.9
+
+Yech. Let&apos;s try strict mode: 
+
+  (function() { &quot;use strict&quot;; return 08e3 })() // 800, except FF: Syntax Error
+  (function() { &quot;use strict&quot;; return 08.9 })() // 8.9, except FF: Syntax Error
+
+Ugh. Only FF does the Right Thing in strict mode (except maybe the wording of the error message, but error messages are not specced).
+
+That said, it is not LegacyOctalIntegerLiteral, here. It is rather DecimalLiteralWithLeadingZeroAndNoctalDigitInIntegralPart.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9702</commentid>
+    <comment_count>6</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-07 02:19:36 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #4)
+&gt; (In reply to Mathias Bynens from comment #3)
+&gt; &gt; Only SpiderMonkey seems to (incorrectly) recognize `08` as a
+&gt; &gt; `LegacyOctalIntegerLiteral`:
+&gt; &gt; 
+&gt; &gt;     &gt; (function() { &apos;use strict&apos;; return 08; }())
+&gt; &gt;     &lt; SyntaxError: octal literals and octal escape sequences are deprecated
+&gt; &gt; 
+&gt; &gt; Changing the spec for `LegacyOctalIntegerLiteral` seems like the wrong way
+&gt; &gt; to solve this.
+&gt; 
+&gt; I will defend SpiderMonkey&apos;s honor here: The error message above is
+&gt; incorrect in using the word &quot;octal&quot;, but the SyntaxError is correct: `08`
+&gt; doesn&apos;t match any productions in ES1-5 as far as I know, or in any ES6 draft.
+
+Correct; see comment #2. No other implementation flags `08` as a syntax error, though.
+
+&gt; But there are scripts on the web that match it, so we can&apos;t drop support for
+&gt; it in sloppy mode.
+&gt; 
+&gt; Therefore this syntax should be banned in strict mode and specified as a
+&gt; special (sloppy-mode-only) legacy decimal integer literal in B.1.1. That is
+&gt; what implementations must do regardless; TC39 does not have a practical
+&gt; choice, just an editorial one.
+
+That goes against Allen’s plans to make leading 0 constants legal decimal integer literals. See http://esdiscuss.org/topic/early-error-on-0-followed-by-8-or-9-in-numeric-literals-does-not-seem-to-be-web-compatible#content-19.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9703</commentid>
+    <comment_count>7</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-07 02:57:39 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #6)
+&gt; That goes against Allen’s plans to make leading 0 constants legal decimal
+&gt; integer literals. See
+&gt; http://esdiscuss.org/topic/early-error-on-0-followed-by-8-or-9-in-numeric-
+&gt; literals-does-not-seem-to-be-web-compatible#content-19.
+
+Having leading-zero decimal constants allowed is really useful only when it is allowed for *every* constant. Currently, what non-FF browsers do is at best useless and at worst harmful (e.g., some automatically generated JS might work during the test phase, then unexpected fail in production, because it wasn&apos;t tested against an account number containing only digits from 0 to 7).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9704</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-07 05:05:07 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #7)
+&gt; Having leading-zero decimal constants allowed is really useful only when it
+&gt; is allowed for *every* constant.
+
+My proposal describes what it takes to spec the existing behavior in the majority of engines (i.e. all but SpiderMonkey). I agree that’s not the most ideal behavior, but it is what it is – there’s only so much we can do without breaking the Web.
+
+Leading-zero decimal literals can probably only happen in strict mode (as currently octal literals throw there, so we’d go from throwing to evaluating to a value), and can never fully (i.e. for all digits) be implemented for sloppy mode (without breaking compatibility with existing Web content).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9707</commentid>
+    <comment_count>9</comment_count>
+    <who name="Oliver Hunt">oliver</who>
+    <bug_when>2014-08-07 10:11:26 -0700</bug_when>
+    <thetext>We (JSC) are incorrectly allowing 08/09 in strict mode :-/
+
+https://bugs.webkit.org/show_bug.cgi?id=135704
+
+This is an unintentional error and i will fix shortly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9708</commentid>
+    <comment_count>10</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-07 11:55:05 -0700</bug_when>
+    <thetext>(In reply to Oliver Hunt from comment #9)
+&gt; We (JSC) are incorrectly allowing 08/09 in strict mode :-/
+
+Don’t feel bad – all engines except SpiderMonkey do this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9728</commentid>
+    <comment_count>11</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-08 06:13:39 -0700</bug_when>
+    <thetext>Proposed patch
+==============
+
+Explanations and notes
+----------------------
+
+* The patch adds (in sloppy mode) a NoctalDecimalIntegerLiteral production to the RHS of the DecimalIntegerLiteral production. Recall that DecimalIntegerLiteral is in turn used in DecimalLiteral, so that things like `08.5e2` will work, per Comment #5.
+
+* NoctalDecimalIntegerLiteral describes sequences of decimal digits beginning with 0 and containing at least one occurrence of 8 or 9.
+
+* LegacyOctalLikeDecimalIntegerLiteral describes the same sequences of digits as LegacyOctalIntegerLiteral, but the MV is different.
+
+
+Stuff to be added in Section B.1.1 Numeric Literals
+---------------------------------------------------
+(reflecting web reality)
+
+Syntax:
+
+    DecimalIntegerLiteral ::
+        0
+        NonZeroDigit DecimalDigits[opt]
+        NoctalDecimalIntegerLiteral
+
+    NoctalDecimalIntegerLiteral ::
+        0 NoctalDigit
+        LegacyOctalLikeDecimalIntegerLiteral NoctalDigit
+        NoctalDecimalIntegerLiteral DecimalDigit
+
+    LegacyOctalLikeDecimalIntegerLiteral ::
+        0 OctalDigit
+        LegacyOctalLikeDecimalIntegerLiteral OctalDigit
+
+    NoctalDigit :: one of 8 9
+
+Static semantics (lengthy but trivial):
+
+* The MV of DecimalIntegerLiteral :: NoctalDecimalIntegerLiteral is the MV of NoctalDecimalIntegerLiteral.
+
+* The MV of NoctalDecimalIntegerLiteral :: 0 NoctalDigit is the MV of NoctalDigit.
+
+* The MV of NoctalDecimalIntegerLiteral :: LegacyOctalLikeDecimalIntegerLiteral NoctalDigit is (the MV of LegacyOctalLikeDecimalIntegerLiteral × 10) plus the MV of NoctalDigit.
+
+* The MV of NoctalDecimalIntegerLiteral :: NoctalDecimalIntegerLiteral DecimalDigit is (the MV of NoctalDecimalIntegerLiteral × 10) plus the MV of DecimalDigit.
+
+* The MV of LegacyOctalLikeDecimalIntegerLiteral :: 0 OctalDigit is the MV of OctalDigit,
+
+* The MV of LegacyOctalLikeDecimalIntegerLiteral :: LegacyOctalLikeDecimalIntegerLiteral OctalDigit is (the MV of LegacyOctalLikeDecimalIntegerLiteral × 10) plus the MV of OctalDigit.
+
+* The MV of NoctalDigit :: 8 is 8.
+
+* The MV of NoctalDigit :: 9 is 9.
+
+
+Stuff to be changed in Section 11.8.3 if we want to ban the thing in strict mode
+--------------------------------------------------------------------------------
+(a breaking change for several engines)
+
+Just after:
+    must not extend the syntax of NumericLiteral to include LegacyOctalIntegerLiteral
+add:
+   , nor the syntax of DecimalIntegerLiteral to include NoctalDecimalIntegerLiteral</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9730</commentid>
+    <comment_count>12</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-08 07:26:35 -0700</bug_when>
+    <thetext>added some V8 and IE names to the CC list</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10308</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-09 17:17:06 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+using the patch from Comment 11</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10477</commentid>
+    <comment_count>14</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:18:01 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

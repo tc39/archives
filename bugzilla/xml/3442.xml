@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3442</bug_id>
+          
+          <creation_ts>2014-12-14 11:09:00 -0800</creation_ts>
+          <short_desc>inconsistent capitalization of &quot;environment record&quot;</short_desc>
+          <delta_ts>2015-03-17 16:57:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11036</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-14 11:09:37 -0800</bug_when>
+    <thetext>The spec is inconsistent on whether &quot;environment record&quot; (and its specializations such as &quot;declarative environment record&quot;) should be capitalized or not. There are more occurrences of lowercase, but still lots of uppercase.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13790</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 11:14:29 -0700</bug_when>
+    <thetext>deferring to ES7 for cleanup</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13793</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 13:03:53 -0700</bug_when>
+    <thetext>end up fixing this in Rev36 editor&apos;s draft
+
+Environment Record is a specification type and always written usings caps.
+
+the concrete subtypes are written as &quot;object Environment Record&quot;, &quot;function Environment Record:, etc.
+
+A lexical environment&apos;s &quot;Environment Record&quot; component/field is now referred to as its &quot;EnvirobnmentRecord&quot;  (note no space)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13798</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-17 13:54:43 -0700</bug_when>
+    <thetext>Okay, thanks for stating the &quot;house style&quot; rules.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13822</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:06 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

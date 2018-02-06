@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3432</bug_id>
+          
+          <creation_ts>2014-12-10 04:54:00 -0800</creation_ts>
+          <short_desc>Accessing `RegExp.prototype.global` etc. directly must not throw to match existing implementations</short_desc>
+          <delta_ts>2015-07-10 08:35:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>dslomov</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10980</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-12-10 04:54:36 -0800</bug_when>
+    <thetext>The `RegExp.prototype.global` getter algorithm in 21.2.5.4 contains:
+
+    3. If R does not have an [[OriginalFlags]] internal slot throw a TypeError exception.
+
+This means that the following code should throw, since `R = RegExp.prototype` in that case, and `RegExp.prototype` does not have [[OriginalFlags]] internal slot:
+
+    RegExp.prototype.global
+
+However, none of the existing major ECMAScript engines seem to implement this, and instead return `false`.
+
+The same goes for the following other getters on `RegExp.prototype`: `ignoreCase`, `multiline`, `sticky`, and `unicode` (although that last one is not implemented anywhere yet).
+
+Please consider removing this step from those algorithms to match existing implementations.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10981</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-12-10 04:56:25 -0800</bug_when>
+    <thetext>Note that this also (indirectly) affects whether accessing `RegExp.prototype.flags` directly throws or returns `&apos;&apos;`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10983</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-10 07:28:40 -0800</bug_when>
+    <thetext>I don&apos;t see how this is any different from `RegExp.prototype.exec()` throwing a TypeError in ES6, whereas in ES5 (= major ECMAScript engines) it returns `[&quot;&quot;]`. Adding special case code in everyplace to handle this breaking change is non-constructive (IMHO), simply going back to specify that RegExp.prototype is RegExp object almost seems to be the better choice... 
+
+The same issue applies to Date.prototype, Array.prototype, String.prototype etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10984</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-12-10 07:59:59 -0800</bug_when>
+    <thetext>When we decided to make RegExp.prototype a non RegExp instance we talked about these edge cases and IIRC then these new exceptions are what we want.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10987</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-10 16:12:44 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #3)
+&gt; When we decided to make RegExp.prototype a non RegExp instance we talked
+&gt; about these edge cases and IIRC then these new exceptions are what we want.
+
+Right, the only places we have reverted from this approach has been situations where we could actually identify code in the wild that depended upon the prototypes of legacy built-ins behaving as actual instances.
+
+Mathias are you aware of any such situations WRT RegExp.prototype?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11004</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-12-10 23:14:50 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; (In reply to Erik Arvidsson from comment #3)
+&gt; &gt; When we decided to make RegExp.prototype a non RegExp instance we talked
+&gt; &gt; about these edge cases and IIRC then these new exceptions are what we want.
+&gt; 
+&gt; Right, the only places we have reverted from this approach has been
+&gt; situations where we could actually identify code in the wild that depended
+&gt; upon the prototypes of legacy built-ins behaving as actual instances.
+&gt; 
+&gt; Mathias are you aware of any such situations WRT RegExp.prototype?
+
+No.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12203</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 17:58:48 -0800</bug_when>
+    <thetext>closing as invalid
+
+The current spec. reflects what TC39 discussed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

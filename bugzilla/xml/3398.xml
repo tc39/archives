@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3398</bug_id>
+          
+          <creation_ts>2014-12-02 07:45:00 -0800</creation_ts>
+          <short_desc>Native implementation of reduceRight in JavaScript is wrong</short_desc>
+          <delta_ts>2015-10-04 08:59:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc>http://stackoverflow.com/q/27252657/783743</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Aadit M Shah">aaditmshah</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10703</commentid>
+    <comment_count>0</comment_count>
+    <who name="Aadit M Shah">aaditmshah</who>
+    <bug_when>2014-12-02 07:45:25 -0800</bug_when>
+    <thetext>For an associative operation `f` over the elements of an array `a`, the following relation should hold true: `a.reduce(f)` should be equivalent to `a.reduceRight(f)`.
+
+Indeed, it does hold true for operations that are both associative and commutative. For example:
+
+    var a = [1,2,3,4,5,6,7,8,9,0];
+
+    alert(a.reduce(add) === a.reduceRight(add));
+
+    function add(a, b) {
+        return a + b;
+    }
+
+However it doesn&apos;t hold true for operations that are associative but not commutative. For example:
+
+    var a = [[1,2],[3,4],[5,6],[7,8],[9,0]];
+
+    alert(equals(a.reduce(concat), a.reduceRight(concat)));
+
+    function concat(a, b) {
+        return a.concat(b);
+    }
+
+    function equals(a, b) {
+        var length = a.length;
+        if (b.length !== length) return false;
+        for (var i = 0; i &lt; length; i++)
+            if (a[i] !== b[i]) return false;
+        return true;
+    }
+
+We need to flip the arguments of `f` for `reduceRight` to make them equivalent:
+
+    var a = [[1,2],[3,4],[5,6],[7,8],[9,0]];
+
+    alert(equals(a.reduce(concat), a.reduceRight(concatRight)));
+
+    function concat(a, b) {
+        return a.concat(b);
+    }
+
+    function concatRight(b, a) {
+        return a.concat(b);
+    }
+
+    function equals(a, b) {
+        var length = a.length;
+        if (b.length !== length) return false;
+        for (var i = 0; i &lt; length; i++)
+            if (a[i] !== b[i]) return false;
+        return true;
+    }
+
+This makes me believe that the native implementation of `reduceRight` is wrong.
+
+I believe that the `reduceRight` function should be implemented as follows:
+
+    var REDUCE_ERROR = &quot;Reduce of empty array with no initial value&quot;;
+
+    Array.prototype.reduceRight = function (f, acc) {
+        var a = this, length = a.length;
+
+        if (arguments.length &lt; 2) {
+            if (length !== 0) var right = a[--length];
+            else throw new TypeError(REDUCE_ERROR);
+        } else var right = acc;
+
+        while (length !== 0) right = f(a[--length], right, length, a);
+
+        return right;
+    };
+
+Since `right` represents the previous value (right-hand side value), it makes sense to make it the second parameter of the function `f`. The current value represent the left-hand side value. Hence, it makes sense to make the current value the first parameter of the function `f`. This way, even for non-commutative associative operations, the aforementioned relation holds true.
+
+My suggestions are:
+
+1. Either fix this in ECMAScript Harmony (not backwards compatible and will in all probability break existing code).
+2. Or provide a separate native operation which does the right thing. You could call it `reduceR` (shorter and sweeter).
+
+Linked StackOverflow question: http://stackoverflow.com/q/27252657/783743</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14773</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-04 08:59:34 -0700</bug_when>
+    <thetext>We can&apos;t break reduceRight. To propose a new API, see https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

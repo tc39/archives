@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>218</bug_id>
+          
+          <creation_ts>2011-10-20 21:18:00 -0700</creation_ts>
+          <short_desc>S15.10.4.1_A3_T1 ~ S15.10.4.1_A3_T5 and S15.10.4.1_A4_T2, T3, T5, empty String RegExp pattern source is &quot;(:?)&quot;</short_desc>
+          <delta_ts>2012-01-12 16:40:19 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>502</commentid>
+    <comment_count>0</comment_count>
+      <attachid>8</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2011-10-20 21:18:27 -0700</bug_when>
+    <thetext>Created attachment 8
+patch for this issue
+
+According to section 15.10.4.1
+http://es5.github.com/#x15.10.4.1
+
+  let P be the empty String if pattern is undefined
+then, P is empty String &quot;&quot;.
+
+And,
+  If P is the empty String, this specification can be met by letting S be &quot;(?:)&quot;.
+then, S is string &quot;(?:)&quot;.
+
+And,
+  The source property of the newly constructed object is set to S.
+
+So, new RegExp().source is &quot;(:?)&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>595</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 16:40:19 -0800</bug_when>
+    <thetext>Exceptional spot Yusuke, and all browsers I tried this on get it wrong.  I&apos;ve added a regression to ensure RegExp().source!===&quot;&quot; and this will be a part of Microsoft&apos;s next contribution to test262.
+
+While 15.10.4.1 recommends empty RegExp&apos;s source properties be &quot;(?:)&quot;, the wordage doesn&apos;t actually require this.  Consequently, I&apos;ve simply removed the checks for &apos;*.source === &quot;&quot;&apos; in the Sputnik tests.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>8</attachid>
+            <date>2011-10-20 21:18:00 -0700</date>
+            <delta_ts>2011-10-20 21:18:27 -0700</delta_ts>
+            <desc>patch for this issue</desc>
+            <filename>res.patch</filename>
+            <type>application/octet-stream</type>
+            <size>5728</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNf
+VDEuanMgYi90ZXN0L3N1aXRlL2NoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1QxLmpz
+Ci0tLSBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDEuanMK
+KysrIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UMS5qcwpA
+QCAtNiwxNyArNiwxNyBAQAogICoKICAqIEBwYXRoIGNoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAu
+NC4xX0EzX1QxLmpzCiAgKiBAZGVzY3JpcHRpb24gUmVnRXhwIGlzIG5ldyBSZWdFeHAKICAqLwog
+CiBfX3JlID0gbmV3IFJlZ0V4cDsKIAogLy9DSEVDSyMxCi1pZiAoX19yZS5zb3VyY2UgIT09ICIi
+KSB7CitpZiAoX19yZS5zb3VyY2UgIT09ICIoPzopIikgewogICAkRVJST1IoJyMxOiBfX3JlID0g
+bmV3IFJlZ0V4cDsgX19yZS5zb3VyY2UgPT09ICIiLiBBY3R1YWw6ICcrIChfX3JlLnNvdXJjZSkp
+OwogfQogCiAvL0NIRUNLIzIKIGlmIChfX3JlLm11bHRpbGluZSAhPT0gZmFsc2UpIHsKICAgJEVS
+Uk9SKCcjMjogX19yZSA9IG5ldyBSZWdFeHA7IF9fcmUubXVsdGlsaW5lID09PSBmYWxzZS4gQWN0
+dWFsOiAnICsgKF9fcmUubXVsdGlsaW5lKSk7CiB9CiAKZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUv
+Y2gxNS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDIuanMgYi90ZXN0L3N1aXRlL2NoMTUv
+MTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1QyLmpzCi0tLSBhL3Rlc3Qvc3VpdGUvY2gxNS8x
+NS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDIuanMKKysrIGIvdGVzdC9zdWl0ZS9jaDE1LzE1
+LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UMi5qcwpAQCAtNiwxNyArNiwxNyBAQAogICoKICAq
+IEBwYXRoIGNoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1QyLmpzCiAgKiBAZGVzY3Jp
+cHRpb24gUmVnRXhwIGlzIG5ldyBSZWdFeHAodm9pZCAwKQogICovCiAKIF9fcmUgPSBuZXcgUmVn
+RXhwKHZvaWQgMCk7CiAKIC8vQ0hFQ0sjMQotaWYgKF9fcmUuc291cmNlICE9PSAiIikgeworaWYg
+KF9fcmUuc291cmNlICE9PSAiKD86KSIpIHsKICAgJEVSUk9SKCcjMTogX19yZSA9IG5ldyBSZWdF
+eHAodm9pZCAwKTsgX19yZS5zb3VyY2UgPT09ICIiLiBBY3R1YWw6ICcrIChfX3JlLnNvdXJjZSkp
+OwogfQogCiAvL0NIRUNLIzIKIGlmIChfX3JlLm11bHRpbGluZSAhPT0gZmFsc2UpIHsKICAgJEVS
+Uk9SKCcjMjogX19yZSA9IG5ldyBSZWdFeHAodm9pZCAwKTsgX19yZS5tdWx0aWxpbmUgPT09IGZh
+bHNlLiBBY3R1YWw6ICcgKyAoX19yZS5tdWx0aWxpbmUpKTsKIH0KIApkaWZmIC0tZ2l0IGEvdGVz
+dC9zdWl0ZS9jaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UMy5qcyBiL3Rlc3Qvc3Vp
+dGUvY2gxNS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDMuanMKLS0tIGEvdGVzdC9zdWl0
+ZS9jaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UMy5qcworKysgYi90ZXN0L3N1aXRl
+L2NoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1QzLmpzCkBAIC02LDE3ICs2LDE3IEBA
+CiAgKgogICogQHBhdGggY2gxNS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDMuanMKICAq
+IEBkZXNjcmlwdGlvbiBSZWdFeHAgaXMgbmV3IFJlZ0V4cCh4KSwgd2hlcmUgeCBpcyB1bmRlZmlu
+ZWQgdmFyaWFibGUKICAqLwogCiBfX3JlID0gbmV3IFJlZ0V4cCh4KTsKIAogLy9DSEVDSyMxCi1p
+ZiAoX19yZS5zb3VyY2UgIT09ICIiKSB7CitpZiAoX19yZS5zb3VyY2UgIT09ICIoPzopIikgewog
+ICAkRVJST1IoJyMxOiBfX3JlID0gbmV3IFJlZ0V4cCh4KTsgdmFyIHg7IF9fcmUuc291cmNlID09
+PSAiIi4gQWN0dWFsOiAnKyAoX19yZS5zb3VyY2UpKTsKIH0KIAogLy9DSEVDSyMyCiBpZiAoX19y
+ZS5tdWx0aWxpbmUgIT09IGZhbHNlKSB7CiAgICRFUlJPUignIzI6IF9fcmUgPSBuZXcgUmVnRXhw
+KHgpOyB2YXIgeDsgX19yZS5tdWx0aWxpbmUgPT09IGZhbHNlLiBBY3R1YWw6ICcgKyAoX19yZS5t
+dWx0aWxpbmUpKTsKIH0KIApkaWZmIC0tZ2l0IGEvdGVzdC9zdWl0ZS9jaDE1LzE1LjEwLzE1LjEw
+LjQvUzE1LjEwLjQuMV9BM19UNC5qcyBiL3Rlc3Qvc3VpdGUvY2gxNS8xNS4xMC8xNS4xMC40L1Mx
+NS4xMC40LjFfQTNfVDQuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaDE1LzE1LjEwLzE1LjEwLjQvUzE1
+LjEwLjQuMV9BM19UNC5qcworKysgYi90ZXN0L3N1aXRlL2NoMTUvMTUuMTAvMTUuMTAuNC9TMTUu
+MTAuNC4xX0EzX1Q0LmpzCkBAIC02LDE3ICs2LDE3IEBACiAgKgogICogQHBhdGggY2gxNS8xNS4x
+MC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDQuanMKICAqIEBkZXNjcmlwdGlvbiBSZWdFeHAgaXMg
+bmV3IFJlZ0V4cCh1bmRlZmluZWQpCiAgKi8KIAogX19yZSA9IG5ldyBSZWdFeHAodW5kZWZpbmVk
+KTsKIAogLy9DSEVDSyMxCi1pZiAoX19yZS5zb3VyY2UgIT09ICIiKSB7CitpZiAoX19yZS5zb3Vy
+Y2UgIT09ICIoPzopIikgewogICAkRVJST1IoJyMxOiBfX3JlID0gbmV3IFJlZ0V4cCh1bmRlZmlu
+ZWQpOyBfX3JlLnNvdXJjZSA9PT0gIiIuIEFjdHVhbDogJysgKF9fcmUuc291cmNlKSk7CiB9CiAK
+IC8vQ0hFQ0sjMgogaWYgKF9fcmUubXVsdGlsaW5lICE9PSBmYWxzZSkgewogICAkRVJST1IoJyMy
+OiBfX3JlID0gbmV3IFJlZ0V4cCh1bmRlZmluZWQpOyBfX3JlLm11bHRpbGluZSA9PT0gZmFsc2Uu
+IEFjdHVhbDogJyArIChfX3JlLm11bHRpbGluZSkpOwogfQogCmRpZmYgLS1naXQgYS90ZXN0L3N1
+aXRlL2NoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1Q1LmpzIGIvdGVzdC9zdWl0ZS9j
+aDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UNS5qcwotLS0gYS90ZXN0L3N1aXRlL2No
+MTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0EzX1Q1LmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2gx
+NS8xNS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTNfVDUuanMKQEAgLTYsMTcgKzYsMTcgQEAKICAq
+CiAgKiBAcGF0aCBjaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BM19UNS5qcwogICogQGRl
+c2NyaXB0aW9uIFJlZ0V4cCBpcyBuZXcgUmVnRXhwKChmdW5jdGlvbigpe30pKCkpCiAgKi8KIAog
+X19yZSA9IG5ldyBSZWdFeHAoKGZ1bmN0aW9uKCl7fSkoKSk7CiAKIC8vQ0hFQ0sjMQotaWYgKF9f
+cmUuc291cmNlICE9PSAiIikgeworaWYgKF9fcmUuc291cmNlICE9PSAiKD86KSIpIHsKICAgJEVS
+Uk9SKCcjMTogX19yZSA9IG5ldyBSZWdFeHAoKGZ1bmN0aW9uKCl7fSkoKSk7IF9fcmUuc291cmNl
+ID09PSAiIi4gQWN0dWFsOiAnKyAoX19yZS5zb3VyY2UpKTsKIH0KIAogLy9DSEVDSyMyCiBpZiAo
+X19yZS5tdWx0aWxpbmUgIT09IGZhbHNlKSB7CiAgICRFUlJPUignIzI6IF9fcmUgPSBuZXcgUmVn
+RXhwKChmdW5jdGlvbigpe30pKCkpOyBfX3JlLm11bHRpbGluZSA9PT0gZmFsc2UuIEFjdHVhbDog
+JyArIChfX3JlLm11bHRpbGluZSkpOwogfQogCmRpZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoMTUv
+MTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0E0X1QyLmpzIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjEw
+LzE1LjEwLjQvUzE1LjEwLjQuMV9BNF9UMi5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMTUvMTUuMTAv
+MTUuMTAuNC9TMTUuMTAuNC4xX0E0X1QyLmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2gxNS8xNS4xMC8x
+NS4xMC40L1MxNS4xMC40LjFfQTRfVDIuanMKQEAgLTYsMTcgKzYsMTcgQEAKICAqCiAgKiBAcGF0
+aCBjaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BNF9UMi5qcwogICogQGRlc2NyaXB0aW9u
+IFJlZ0V4cCBpcyBuZXcgUmVnRXhwKHVuZGVmaW5lZCx1bmRlZmluZWQpCiAgKi8KIAogX19yZSA9
+IG5ldyBSZWdFeHAodW5kZWZpbmVkLCB1bmRlZmluZWQpOwogCiAvL0NIRUNLIzEKLWlmIChfX3Jl
+LnNvdXJjZSAhPT0gIiIpIHsKK2lmIChfX3JlLnNvdXJjZSAhPT0gIig/OikiKSB7CiAgICRFUlJP
+UignIzE6IF9fcmUgPSBuZXcgUmVnRXhwKHVuZGVmaW5lZCwgdW5kZWZpbmVkKTsgX19yZS5zb3Vy
+Y2UgPT09ICIiLiBBY3R1YWw6ICcrIChfX3JlLnNvdXJjZSkpOwogfQogCiAvL0NIRUNLIzIKIGlm
+IChfX3JlLm11bHRpbGluZSAhPT0gZmFsc2UpIHsKICAgJEVSUk9SKCcjMjogX19yZSA9IG5ldyBS
+ZWdFeHAodW5kZWZpbmVkLCB1bmRlZmluZWQpOyBfX3JlLm11bHRpbGluZSA9PT0gZmFsc2UuIEFj
+dHVhbDogJyArIChfX3JlLm11bHRpbGluZSkpOwogfQogCmRpZmYgLS1naXQgYS90ZXN0L3N1aXRl
+L2NoMTUvMTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0E0X1QzLmpzIGIvdGVzdC9zdWl0ZS9jaDE1
+LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BNF9UMy5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMTUv
+MTUuMTAvMTUuMTAuNC9TMTUuMTAuNC4xX0E0X1QzLmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2gxNS8x
+NS4xMC8xNS4xMC40L1MxNS4xMC40LjFfQTRfVDMuanMKQEAgLTYsMTcgKzYsMTcgQEAKICAqCiAg
+KiBAcGF0aCBjaDE1LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BNF9UMy5qcwogICogQGRlc2Ny
+aXB0aW9uIFVzZSB1bmRlZmluZWQgcHJvcGVydGllcyBvZiBvYmplY3QgYXMgZmxhZ3Mgb2YgUmVn
+RXhwCiAgKi8KIAogX19yZSA9IG5ldyBSZWdFeHAoe30ucCwge30ucSk7CiAKIC8vQ0hFQ0sjMQot
+aWYgKF9fcmUuc291cmNlICE9PSAiIikgeworaWYgKF9fcmUuc291cmNlICE9PSAiKD86KSIpIHsK
+ICAgJEVSUk9SKCcjMTogX19yZSA9IG5ldyBSZWdFeHAoe30ucCwge30ucSk7IF9fcmUuc291cmNl
+ID09PSAiIi4gQWN0dWFsOiAnKyAoX19yZS5zb3VyY2UpKTsKIH0KIAogLy9DSEVDSyMyCiBpZiAo
+X19yZS5tdWx0aWxpbmUgIT09IGZhbHNlKSB7CiAgICRFUlJPUignIzI6IF9fcmUgPSBuZXcgUmVn
+RXhwKHt9LnAsIHt9LnEpOyBfX3JlLm11bHRpbGluZSA9PT0gZmFsc2UuIEFjdHVhbDogJyArIChf
+X3JlLm11bHRpbGluZSkpOwogfQogCmRpZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoMTUvMTUuMTAv
+MTUuMTAuNC9TMTUuMTAuNC4xX0E0X1Q1LmpzIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjEwLzE1LjEw
+LjQvUzE1LjEwLjQuMV9BNF9UNS5qcwotLS0gYS90ZXN0L3N1aXRlL2NoMTUvMTUuMTAvMTUuMTAu
+NC9TMTUuMTAuNC4xX0E0X1Q1LmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2gxNS8xNS4xMC8xNS4xMC40
+L1MxNS4xMC40LjFfQTRfVDUuanMKQEAgLTYsMTcgKzYsMTcgQEAKICAqCiAgKiBAcGF0aCBjaDE1
+LzE1LjEwLzE1LjEwLjQvUzE1LjEwLjQuMV9BNF9UNS5qcwogICogQGRlc2NyaXB0aW9uIFJlZ0V4
+cCBpcyBuZXcgUmVnRXhwKCIiLChmdW5jdGlvbigpe30pKCkpCiAgKi8KIAogX19yZSA9IG5ldyBS
+ZWdFeHAoIiIsIChmdW5jdGlvbigpe30pKCkpOwogCiAvL0NIRUNLIzEKLWlmIChfX3JlLnNvdXJj
+ZSAhPT0gIiIpIHsKK2lmIChfX3JlLnNvdXJjZSAhPT0gIig/OikiKSB7CiAgICRFUlJPUignIzE6
+IF9fcmUgPSBuZXcgUmVnRXhwKCIiLCAoZnVuY3Rpb24oKXt9KSgpKTsgX19yZS5zb3VyY2UgPT09
+ICIiLiBBY3R1YWw6ICcrIChfX3JlLnNvdXJjZSkpOwogfQogCiAvL0NIRUNLIzIKIGlmIChfX3Jl
+Lm11bHRpbGluZSAhPT0gZmFsc2UpIHsKICAgJEVSUk9SKCcjMjogX19yZSA9IG5ldyBSZWdFeHAo
+IiIsIChmdW5jdGlvbigpe30pKCkpOyBfX3JlLm11bHRpbGluZSA9PT0gZmFsc2UuIEFjdHVhbDog
+JyArIChfX3JlLm11bHRpbGluZSkpOwogfQogCg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

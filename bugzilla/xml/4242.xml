@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4242</bug_id>
+          
+          <creation_ts>2015-03-30 13:39:00 -0700</creation_ts>
+          <short_desc>Possible bug in IterationStatement grammar</short_desc>
+          <delta_ts>2015-07-10 08:35:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13960</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-03-30 13:39:05 -0700</bug_when>
+    <thetext>I&apos;m usually missing something when I encounter something like this, so bear with me.
+
+Here is a quote from the grammar, but with each production truncated to fit in the textarea I&apos;m working in:
+
+    IterationStatement[Yield, Return] :
+        do   [...]
+        while   [...]
+        for ( [lookahead ∉ {let [}] Expression[?Yield]_opt ;   [...]
+        for ( var VariableDeclarationList[?Yield] ;   [...]
+        for ( LexicalDeclaration   [...]
+        for ( [lookahead ∉ {let [}] LeftHandSideExpression[?Yield] in   [...]
+        for ( var ForBinding[?Yield] in   [...]
+        for ( ForDeclaration[?Yield] in   [...]
+        for ( [lookahead ≠ let] LeftHandSideExpression[?Yield] of   [...]
+        for ( var ForBinding[?Yield] of   [...]
+        for ( ForDeclaration[?Yield] of   [...]
+
+What is the purpose of banning `[` after `(` in productions 3 and 6 but not 9?
+
+The purpose of banning `let` there is clear: it is so that `for(let` unambiguously starts one of the ForBinding/LexicalDeclaration productions, and we don&apos;t need a cover grammar to make the syntax parseable with finite lookahead.
+
+But it seems `[` unambiguously selects one of the non-declaration productions anyway.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13961</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-30 14:16:03 -0700</bug_when>
+    <thetext>This looks correct to me. Let me try to explain.
+
+3 &amp; 6: We want `let [` to be the start of a pattern declaration and not a `let[key]` member lookup. However, we want to support the identifier expression `let` for backwards compat:
+
+var let;
+for (let in {}) {}
+for (let = 0; let &lt; 10; let++) {}
+
+9: for of is new syntax so we can restrict even furtehr</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13962</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-03-31 09:48:10 -0700</bug_when>
+    <thetext>Oh, OK, that makes sense, but there&apos;s still a bug. The part in 5.1.5 that explains what [lookahead ∉ set] means needs to be updated. Right now it says:
+
+&gt; If the phrase “[lookahead ∉ set]” appears in the right-hand side of a
+&gt; production, it indicates that the production may not be used if the
+&gt; immediately following input token is a member of the given set.
+
+Note the singular &quot;immediately following input token&quot;.
+
+This is why I was confused; I was reading the restriction as:
+
+    [lookahead ∉ {`let`, `[`}]
+
+because I didn&apos;t realize that the intended meaning
+
+    [lookahead ∉ {`let [`}]
+
+was a possibility.
+
+----
+
+(more philosophically) The use of ∉ is misleading now that &quot;lookahead&quot; no longer refers to exactly one token in particular. It would be clearer to say &quot;[lookahead does not match x]&quot; and &quot;[lookahead does not match any of {x, y, z}]&quot; but I don&apos;t know of symbols that mean quite those things.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13988</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 10:29:01 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft
+
+I tweaked 5.1.5 to make it explicit that the elements of the set are are one or two element sequences of terminal symbols</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14064</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:33 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

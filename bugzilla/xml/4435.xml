@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4435</bug_id>
+          
+          <creation_ts>2015-08-10 09:24:00 -0700</creation_ts>
+          <short_desc>Ecma Copyright notice missing from HTML draft</short_desc>
+          <delta_ts>2015-08-12 06:49:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 Standard</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Caridy Patiño">caridy</assigned_to>
+          <cc>caridy</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14591</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-08-10 09:24:33 -0700</bug_when>
+    <thetext>The HTML versions at tc39.github.io/ecma402/ is missing the required Ecma copyright notice.
+
+The front material from http://ecma-international.org/ecma-262/6.0 should be copied (with appropriate modifications) in to all publicly available vwersions of that document.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14593</commentid>
+    <comment_count>1</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2015-08-12 06:49:35 -0700</bug_when>
+    <thetext>copyright section added manually as an interim solution until Ecmarkup adds support for a copyright emu tag.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

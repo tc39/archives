@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2194</bug_id>
+          
+          <creation_ts>2013-11-04 08:42:00 -0800</creation_ts>
+          <short_desc>13.2.3  Destructuring Binding Patterns: Conditional parameterised production used without matching parameter</short_desc>
+          <delta_ts>2013-11-08 13:08:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6442</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-04 08:42:04 -0800</bug_when>
+    <thetext>13.2.3  Destructuring Binding Patterns:
+
+&gt; BindingElement[yield] :
+&gt;   BindingPattern[?yield] Initialiser[?in, ?yield]opt
+
+&gt; SingleNameBinding[yield] :
+&gt;   BindingIdentifier[?yield] Initialiser[?in, ?yield]opt
+
+
+&quot;?in&quot; form is used, but there is no ingoing parameter &quot;in&quot;. Change from &quot;[?in, ?yield]&quot; to &quot;[in, ?yield]&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6452</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-04 09:09:46 -0800</bug_when>
+    <thetext>fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6530</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:08:57 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

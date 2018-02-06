@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1590</bug_id>
+          
+          <creation_ts>2013-07-17 13:36:00 -0700</creation_ts>
+          <short_desc>11.2.3, 15.1.2.1.1: Direct Eval detection broken after EvaluateCall/EvaluateMethodCall changes</short_desc>
+          <delta_ts>2013-08-23 08:22:42 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4546</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-17 13:36:08 -0700</bug_when>
+    <thetext>The rev16 changes to EvaluateCall (11.2.3) seem to have broken (backwards compatible) direct eval detection. 
+
+This is visible when using the Withstatement. In short, code like:
+---
+with (obj) { eval(s) }
+---
+
+is per the latest changes equivalent to:
+---
+obj.eval(s)
+---
+
+The first code sample is a (possible) direct eval per 15.1.2.1.1, whereas the latter code sample is never a direct eval call. 
+
+I don&apos;t see how it is possible to perform backwards compatible direct eval detection and support EvaluateMethodCall / [[Invoke]] at the same time. Unless EvaluateMethodCall is restricted to pure property references, that means without automatic property reference conversion per EvaluateCall, step 1.b.ii.
+
+
+Full test case:
+---
+(function(global) {
+  var x = 1;
+  var p = new Proxy({}, {
+    has: (_, pk) =&gt; {
+      print(&quot;has: &quot; + pk);
+      return (pk == &quot;eval&quot;);
+    },
+    get: (_, pk) =&gt; {
+      print(&quot;get: &quot; + pk);
+      return global.eval;
+    },
+    invoke: (_, pk, args) =&gt; {
+      print(&quot;invoke: &quot; + pk);
+    }
+  });
+  with(p) {
+    eval(&quot;eval(&apos;var x = 0&apos;)&quot;);
+  }
+  return x;
+})(this);
+---
+
+Output with rev15:
+---
+has: eval
+has: eval
+get: eval
+has: eval
+has: eval
+get: eval
+has: x
+0
+---
+
+Output with rev16: unspecified</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4550</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-17 16:31:14 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; The rev16 changes to EvaluateCall (11.2.3) seem to have broken (backwards
+&gt; compatible) direct eval detection. 
+&gt; 
+&gt; This is visible when using the Withstatement. In short, code like:
+&gt; ---
+&gt; with (obj) { eval(s) }
+&gt; ---
+&gt; 
+&gt; is per the latest changes equivalent to:
+&gt; ---
+&gt; obj.eval(s)
+&gt; ---
+&gt; 
+
+This equivalence (for actual call purposes) was also the case in ES5, it&apos;s just that the direct eval test needs to be made considering the actual binding model before making that transformation.
+
+&gt; The first code sample is a (possible) direct eval per 15.1.2.1.1, whereas the
+&gt; latter code sample is never a direct eval call. 
+
+If written that way, but we are actually talking about evals that are written like your first example. It wasn&apos;t intended that you could treat this as a simple desugaring.
+
+&gt; 
+&gt; I don&apos;t see how it is possible to perform backwards compatible direct eval
+&gt; detection and support EvaluateMethodCall / [[Invoke]] at the same time. Unless
+&gt; EvaluateMethodCall is restricted to pure property references, that means
+&gt; without automatic property reference conversion per EvaluateCall, step 1.b.ii.
+
+As your test shows, this is primarily an issue in that direct eval determination requires doing a getValue on the function reference which will do a [[Get]] on the with object.  Ordinary [[Invoke]] also does a [[Get]] for that same property.  Prior to the introduction of [[Invoke]] the result of a  single [[Get]] calls could be used both for the the direct eval test and to supply the this value for the call.  The extra [[Get]] call may be observable if the with object is a Proxy or if its &apos;eval&apos; property is an accessor.
+
+I think the most straight forward fix is to add another clause to the definition of direct eval that says that this case is not a direct eval when the with object is a proxy.  In that case you can unobservably inline expand the [[Invoke]] for the potentially direct eval case in a manner that avoids the possibility of the extra [[Get]] tripping over an &apos;eval&apos; accessor.
+
+Messy, but direct eval is inherently a messy hack.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4553</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-07-18 07:14:40 -0700</bug_when>
+    <thetext>Hi Allen,
+
+As a more general point, I would be very careful with introducing spec language that explicitly calls out exceptions for proxies.
+
+This is because proxies are just one kind of exotic object, and any exception made only for proxies does not necessarily cover other exotics.
+
+Hence, rather than adding a clause that says that &quot;this case is not a direct eval when
+the with object is a proxy&quot;, would it not be better to state &quot;this case is not a direct eval when the with object is anything other than a normal ECMAScript object&quot;?
+
+That way you cover host objects too (because in general we cannot know whether the inlining is safe for such objects)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4554</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-18 08:37:56 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Hi Allen,
+&gt; 
+&gt; As a more general point, I would be very careful with introducing spec language
+&gt; that explicitly calls out exceptions for proxies.
+&gt; 
+&gt; This is because proxies are just one kind of exotic object, and any exception
+&gt; made only for proxies does not necessarily cover other exotics.
+&gt; 
+&gt; Hence, rather than adding a clause that says that &quot;this case is not a direct
+&gt; eval when
+&gt; the with object is a proxy&quot;, would it not be better to state &quot;this case is not
+&gt; a direct eval when the with object is anything other than a normal ECMAScript
+&gt; object&quot;?
+&gt; 
+&gt; That way you cover host objects too (because in general we cannot know whether
+&gt; the inlining is safe for such objects)
+
+I known...I did consider saying &quot;exotic object&quot; instead of Proxy but array instances are exotic objects and I can imagine somebody using an array as a with object. It is very unlike that there would be an &apos;eval&apos; property, but not impossible.
+
+Since what I&apos;m trying to enable is the logical inlining of the ordinary [[Invoke]] for this one special case, I guess I could says it isn&apos;t a direct eval when the with object is an exotic object that does not use the ordinary [[Invoke]] internal method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4555</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-18 09:31:50 -0700</bug_when>
+    <thetext>(mid-air collision with Allen, planned to say the same objection w.r.t exotic objects and Arrays/Strings/...)
+
+Nevertheless, with the proposed changes I&apos;m now getting the following output with my test implementation (https://github.com/anba/es6draft). So the [[Invoke]] trap is called on the Proxy and no direct eval call takes place. Does this sound right?
+---
+has: eval
+invoke: eval
+1
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4556</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-18 10:59:30 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Does this sound right?
+&gt; ---
+&gt; has: eval
+&gt; invoke: eval
+&gt; 1
+&gt; ---
+
+yes it does.
+
+BTW, I really like you&apos;re tests with the MOP level trace results. These essentially provide a &quot;fingerprint&quot; as to whether side-effects occur in the correct order.  We should probably push to get some tests like this into Test262.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4559</commentid>
+    <comment_count>6</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-07-19 01:28:59 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Since what I&apos;m trying to enable is the logical inlining of the ordinary
+&gt; [[Invoke]] for this one special case, I guess I could says it isn&apos;t a direct
+&gt; eval when the with object is an exotic object that does not use the ordinary
+&gt; [[Invoke]] internal method.
+
++1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4980</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-19 17:55:32 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5096</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:42 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1015</bug_id>
+          
+          <creation_ts>2012-11-24 17:49:00 -0800</creation_ts>
+          <short_desc>8.*: &quot;internal methods&quot;</short_desc>
+          <delta_ts>2012-12-21 18:08:32 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2767</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-24 17:49:02 -0800</bug_when>
+    <thetext>Change &quot;methods&quot; to &quot;method&quot; in:
+
+  8.3.7 / step 4.d:     &quot;the [[GetP]] internal methods&quot;
+  8.3.8 / step 4.c.i:   &quot;the [[SetP]] internal methods&quot;
+  8.4.2.1 / step 4.c.i: &quot;the [[SetP]] internal methods&quot;
+  8.4.3.3 / step 4.d:   &quot;the [[GetP]] internal methods&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2852</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-26 10:18:10 -0800</bug_when>
+    <thetext>fixed in rev 134 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2428</bug_id>
+          
+          <creation_ts>2014-01-23 01:17:00 -0800</creation_ts>
+          <short_desc>metavariables in upright font</short_desc>
+          <delta_ts>2014-06-02 11:25:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6989</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-23 01:17:51 -0800</bug_when>
+    <thetext>A bunch of metavariables that were italic in rev21 are now in an upright font (in the PDF at least).
+
+E.g.:
+    5.3 / alg 1 / step 1.b.i &apos;contained&apos;
+    6.2.2.4 / alg 2 / step 2 &apos;argument&apos;
+    12.2.2.1 / alg 1 / step 5 &apos;propertyNameValue&apos;
+    12.2.5.2 / alg 2 / step 1 &apos;propertyKey&apos;
+    12.2.5.2 / alg 2 / step 2 &apos;strict&apos;
+    14.5.16 / alg 1 / step 1 &apos;className&apos;
+    14.5.16 / alg 1 / step 2 &apos;value&apos;
+    14.5.16 / alg 1 / step 4 &apos;hasNameProperty&apos;
+    14.5.16 / alg 1 / step 7 &apos;env&apos;
+    14.5.16 / alg 1 / step 8 &apos;status&apos;
+
+This is a brief list because I&apos;m hoping that you can fix *all* cases just by repairing a document style. If that&apos;s not the case, I could work on a fuller list.
+
+(Either way, it&apos;s somewhat annoying to get regressions in old, supposedly stable parts of the spec. Is there some way to prevent it happening again?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7243</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-10 15:37:10 -0800</bug_when>
+    <thetext>In a message today in es-discuss, AWB said &quot;sure, add the complete list&quot;, so here it is (60 corrections on 37 lines):
+
+5.3 / alg 1 / step 1.b.i
+    Let contained be the result of /sym/ Contains /symbol/.
+        italicize &quot;contained&quot;
+
+6.2.2.4 / alg 2 / step 1
+    If argument is an abrupt completion, then return argument.
+        italicize &quot;argument&quot;
+        italicize &quot;argument&quot;
+
+6.2.2.4 / alg 2 / step 2
+    Else if argument is a Completion Record,
+    then let argument be argument.[[value]].
+        italicize &quot;argument&quot;
+        italicize &quot;argument&quot;
+        italicize &quot;argument&quot;
+
+6.2.6.2 / alg 1 / step 7.a
+    Set toBlock[toIndex] to the value of fromBlock[fromIndex].
+        italicize &quot;toBlock&quot;
+        italicize &quot;toIndex&quot;
+        italicize &quot;fromBlock&quot;
+        italicize &quot;fromIndex&quot;
+
+9.2.13 / alg 1 / step 3
+    Assert: Type(newName) is one of Undefined, String, or Symbol.
+        italicize &quot;newName&quot;
+
+11.6 / para 4
+    ... are only required to do bitwise comparison on IdentifierName values).
+        italicize &quot;IdentifierName&quot; ?
+
+12.2.2.1 / alg 1 / step 5
+    Let propertyNameValue be GetValue(propertyNameReference).
+        italicize &quot;propertyNameValue&quot;
+        italicize &quot;propertyNameReference&quot;
+
+12.2.5.2 / alg 2 / step 1
+    Let propertyKey be StringValue of IdentifierName.
+        italicize &quot;propertyKey&quot;
+        italicize &quot;IdentifierName&quot;
+
+12.2.5.2 / alg 2 / step 2
+    If the code matched by the syntactic production that is being evaluated
+    is strict mode code, let strict be *true*, else let strict be *false*.
+        italicize &quot;strict&quot;
+        italicize &quot;strict&quot;
+
+12.2.5.2 / alg 2 / step 3
+    Return the result of MakeSuperReference(propertyKey, strict).
+        italicize &quot;propertyKey&quot;
+        italicize &quot;strict&quot;
+
+14.5.16 / alg 1 / step 1
+    Let className be StringValue of BindingIdentifier.
+        italicize &quot;className&quot;
+        italicize &quot;BindingIdentifier&quot;
+
+14.5.16 / alg 1 / step 2
+    Let value be the result of ClassDefinitionEvaluation of /ClassTail/
+    with argument className
+        italicize &quot;value&quot;
+        italicize &quot;className&quot;
+
+14.5.16 / alg 1 / step 3
+    ReturnIfAbrupt(value).
+        italicize &quot;value&quot;
+
+14.5.16 / alg 1 / step 4
+    Let hasNameProperty be the result of HasOwnProperty(value, &quot;name&quot;).
+        italicize &quot;hasNameProperty&quot;
+        italicize &quot;value&quot;
+
+14.5.16 / alg 1 / step 5
+    ReturnIfAbrupt(hasNameProperty).
+        italicize &quot;hasNameProperty&quot;
+
+14.5.16 / alg 1 / step 6
+    If hasNameProperty is *false*, then
+        italicize &quot;hasNameProperty&quot;
+
+14.5.16 / alg 1 / step 6.a
+    Perform SetFunctionName(value, className).
+        italicize &quot;value&quot;
+        italicize &quot;className&quot;
+
+14.5.16 / alg 1 / step 7
+    Let env be the running execution context&apos;s LexicalEnvironment.
+        italicize &quot;env&quot;
+
+14.5.16 / alg 1 / step 8
+    Let status be the result of performing BindingInitialisation
+    for BindingIdentifier passing value and env as the arguments.
+        italicize &quot;status&quot;
+        italicize &quot;BindingIdentifier&quot;
+        italicize &quot;value&quot;
+        italicize &quot;env&quot;
+
+14.5.16 / alg 1 / step 9
+    ReturnIfAbrupt(status).
+        italicize &quot;status&quot;
+
+14.6.2 / alg 19 / step 1
+    If this /CallExpression/ is nonterminal, then return *true*.
+        italicize &quot;nonterminal&quot;
+
+15.2.1.2 / alg 4 / step 3
+    Return names.
+        italicize &quot;names&quot;
+
+15.2.1.2 / alg 5 / step 3
+    Return names.
+        italicize &quot;names&quot;
+
+15.2.3.2 / Table 34 / [[Kind]]
+    ... the module is declarative, and load.[[Body]] contains a Module parse.
+        italicize &quot;load&quot; ?
+
+15.2.3.2 / Table 34 / [[Dependencies]]
+    ... from declaration in load.[[Body]], ...
+        italicize &quot;load&quot; ?
+
+15.2.6.1 / alg 1 / step 2
+    Assert: load.[[Status]] is &quot;linked&quot;.
+        italicize &quot;load&quot;
+
+15.2.6.1 / alg 1 / step 3
+    Let /module/ be load.[[Module]].
+        italicize &quot;load&quot;
+
+15.2.6.2 / alg 1 / step 7
+    Let status be the result of performing
+    ModuleDeclarationInstantiation(/mod/.[[Body]], /mod/.[[Environment]]).
+        italicize &quot;status&quot;
+
+18.2.6.4 / alg 1 / step 4
+    Return the result of calling Encode(/uriString/, unescapedURISet)
+        italicize &quot;unescapedURISet&quot;
+
+19.1.2.1 / alg 1 / step 9.d.v.1
+    Let propValue be Get(from, nextKey).
+        italicize &quot;propValue&quot;
+        italicize &quot;from&quot;
+        italicize &quot;nextKey&quot;
+
+19.1.2.1 / alg 1 / step 9.d.v.2
+    If propValue is an abrupt completion, then
+        italicize &quot;propValue&quot;
+
+19.1.2.1 / alg 1 / step 9.d.v.2.a
+    If pendingException is *undefined*, then set pendingException to propValue.
+        italicize &quot;pendingException&quot;
+        italicize &quot;pendingException&quot;
+        italicize &quot;propValue&quot;
+
+19.1.2.1 / alg 1 / step 9.d.v.3.b.i
+    If pendingException is *undefined*, then set pendingException to status.
+        italicize &quot;pendingException&quot;
+        italicize &quot;pendingException&quot;
+        italicize &quot;status&quot;
+
+19.1.3.6 / alg 1 / step 19
+    Return the String value that is the result of concatenating
+    the three Strings &quot;[object &quot;, tag, and &quot;]&quot;.
+        italicize &quot;tag&quot;
+
+24.1.1.2 / alg 1 / step 1
+    ReturnIfAbrupt(arrayBuffer).
+        italicize &quot;arrayBuffer&quot;
+
+25.4.4.5 / alg 1 / step 4
+    Let /rejectResult/ be the result of calling the [[Call]] internal method
+    of /promiseCapability/.[[Reject]] with *undefined* as /thisArgument/ and
+    List(r) as /argumentsList/.
+        italicize &quot;r&quot;
+
+26.3.3 / alg 1 / step 1
+    If Type(/value/) is Object and value has a [[LoaderRecord]] internal slot,
+        italicize &quot;value&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8426</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 13:20:42 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8815</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 11:25:35 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

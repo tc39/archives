@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1398</bug_id>
+          
+          <creation_ts>2013-03-26 15:23:00 -0700</creation_ts>
+          <short_desc>15: &quot;the [[Call]] internal method behavior for each built-in function&quot;</short_desc>
+          <delta_ts>2013-07-15 17:03:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3555</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-26 15:23:21 -0700</bug_when>
+    <thetext>15 &quot;Standard Built-in ECMAScript Objects&quot; says:
+    The behavior specified in this clause for each built-in function
+    is the specification of the [[Call]] internal method behavior
+    for that function.
+
+However, the [[Call]] internal method is passed 2 arguments (generally named &apos;thisArgument&apos; and &apos;argumentsList&apos;), which is not what the built-in functions are declared to take. Presumably we have to imagine a bit of pseudocode wrapped around each built-in function that maps
+    &apos;thisArgument&apos;  to  &quot;the *this* value&quot;
+and
+    &apos;argumentsList&apos; to  the function&apos;s declared parameters.
+
+It might be good for the spec to say something about this.
+
+
+Similarly for the algorithms in clause 15 that supply the [[Construct]] behavior of built-in functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3564</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-04 17:21:36 -0700</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3918</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:31 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4052</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-05-16 18:02:30 -0700</bug_when>
+    <thetext>To the quoted sentence, you appended:
+    with [[Call]] thisArgument providing the this value and [[Call]]
+    argumentList providing the named parameters for each built-in function.
+
+Change each &quot;[[Call]]&quot; to &quot;[[Call]]&apos;s&quot;, presumably.
+
+Italicize &quot;thisArgument&quot;.
+
+Change &quot;argumentList&quot; to &quot;argumentsList&quot; (add &apos;s&apos;).
+
+---
+
+I don&apos;t see a similar change re [[Construct]] behaviour.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4235</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-17 18:07:38 -0700</bug_when>
+    <thetext>typos fixed in rev 16 editor&apos;s draft.  Added some words about constructors.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4458</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:55 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

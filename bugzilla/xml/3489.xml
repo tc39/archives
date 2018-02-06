@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3489</bug_id>
+          
+          <creation_ts>2014-12-25 05:32:00 -0800</creation_ts>
+          <short_desc>21.2.5.2.2 Combine Get + ToLength in RegExpBuiltinExec</short_desc>
+          <delta_ts>2015-01-15 16:19:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Chris Toshok">toshok</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11236</commentid>
+    <comment_count>0</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2014-12-25 05:32:36 -0800</bug_when>
+    <thetext>In the algorithm:
+
+  4. Let lastIndex be Get(R,&quot;lastIndex&quot;).
+  5. Let i be ToLength(lastIndex).
+  6. ReturnIfAbrupt(i).
+
+can be shortened to:
+
+  4. Let lastIndex be ToLength(Get(R,&quot;lastIndex&quot;)).
+  5. ReturnIfAbrupt(lastIndex).
+
+with s/i/lastIndex/ for the rest of the algorithm.
+
+The shortened form also effectively covers the Get(R, &quot;lastIndex&quot;) in the ReturnIfAbrupt (whereas the initial form is missing a &quot;ReturnIfAbrupt(lastIndex)&quot; at 4.5ish)
+
+elsewhere (even in the same algorithm) these two steps are combined, e.g.:
+
+  7. Let global be ToBoolean(Get(R, &quot;global&quot;)).
+  8. ReturnIfAbrupt(global).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11257</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-29 14:55:13 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11432</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:03 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

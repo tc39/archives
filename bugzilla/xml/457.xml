@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>457</bug_id>
+          
+          <creation_ts>2012-07-07 20:20:00 -0700</creation_ts>
+          <short_desc>13.5: &quot;FunctionBody&quot;</short_desc>
+          <delta_ts>2013-10-22 14:20:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1139</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-07 20:20:12 -0700</bug_when>
+    <thetext>In 13.5 &quot;Class Definitions&quot;,
+under &quot;Runtime Semantics: ClassDefinitionEvaluation&quot;,
+step 4 says:
+    &quot;If the ClassTail is contained in strict code
+     or if its FunctionBody is strict code, ...&quot;
+
+What FunctionBody? Change to &quot;ClassBody&quot; ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1151</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-08 12:59:09 -0700</bug_when>
+    <thetext>FunctionBody actually need to be the body of the constructor method definition.
+
+However, note that strict is further used in this semantic rule.  The appropriate place would be to pass it as an argument in steps 9 and 14a. However, first we just need to decide whether classes and/or concise methods are always strict or not.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5950</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 14:20:13 -0700</bug_when>
+    <thetext>fixed somewhere along the way</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

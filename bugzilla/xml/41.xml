@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>41</bug_id>
+          
+          <creation_ts>2011-03-02 15:50:00 -0800</creation_ts>
+          <short_desc>Clean-up &apos;simple test harness&apos;</short_desc>
+          <delta_ts>2014-07-17 22:52:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Low</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dan Schaffer">dschaffe</assigned_to>
+          <cc>sam.mikes</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>92</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:50:01 -0800</bug_when>
+    <thetext>sth.js should be scrubbed with JSLint.  We really need to ensure the *official* test harness for Test262 follows best JavaScript practices, and is simple enough weakly conformant implementations can still run it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>93</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:50:35 -0800</bug_when>
+    <thetext>Half a day&apos;s worth of work?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4078</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dan Schaffer">dschaffe</who>
+    <bug_when>2013-05-20 08:00:25 -0700</bug_when>
+    <thetext>I&apos;ll review all of the harness files making them pass jslint.  Brackets has good jslint support.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9251</commentid>
+    <comment_count>3</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 22:52:30 -0700</bug_when>
+    <thetext>I am willing to take this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

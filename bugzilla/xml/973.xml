@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>973</bug_id>
+          
+          <creation_ts>2012-11-19 20:53:00 -0800</creation_ts>
+          <short_desc>13.6: &quot;[[GetProperty]]&quot;</short_desc>
+          <delta_ts>2012-11-23 09:45:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2477</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-19 20:53:44 -0800</bug_when>
+    <thetext>In 13.6 &quot;Creating Function Objects and Constructors&quot;,
+under &quot;Runtime Semantics: FunctionCreate Abstract Operation&quot;,
+step 6 says:
+     Set the [[GetProperty]] internal method of F as described in 15.3.5.4.
+
+But 15.3.5.4 defines a [[Get]] method, not [[GetProperty]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2492</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-21 16:27:22 -0800</bug_when>
+    <thetext>change by internal method refactoring in Rev 12</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2595</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:26 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

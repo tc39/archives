@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2863</bug_id>
+          
+          <creation_ts>2014-05-13 16:38:00 -0700</creation_ts>
+          <short_desc>23.1.1 The Map Constructor, re: calling without new?</short_desc>
+          <delta_ts>2015-07-10 08:34:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8386</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-13 16:38:51 -0700</bug_when>
+    <thetext>In this section, there is the following text: 
+
+  &quot;When Map is called as a function rather than as a constructor, it initializes its this value with the internal state necessary to support the Map.prototype built-in methods.&quot;
+
+
+Is this referring to:
+
+  var m = Map();
+
+Or
+
+  Map.call(this);
+
+Or both?
+
+
+
+Additionally, I cannot find the specification for the consensus that was reached re: calling the new built-in constructors without new: https://github.com/rwaldron/tc39-notes/blob/master/es6/2013-07/july-25.md#consensusresolution-6</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8409</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-13 20:48:43 -0700</bug_when>
+    <thetext>This applies to Set as well</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8412</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 09:09:46 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+
+&gt; 
+&gt; Is this referring to:
+&gt; 
+&gt;   var m = Map();
+&gt; 
+&gt; Or
+&gt; 
+&gt;   Map.call(this);
+&gt; 
+&gt; Or both?
+&gt; 
+
+Both, and perhaps most importantly:
+
+class MyMap extends ap {
+   constructor(...args) {super(...args)}
+}
+
+With the ES6 refactoring of the new operator into separate @@create and constructor call, the primary responsibility of a constructor function is not the creation of new instances but rather the initialization of new instances.
+ 
+&gt; 
+&gt; Additionally, I cannot find the specification for the consensus that was
+&gt; reached re: calling the new built-in constructors without new:
+&gt; https://github.com/rwaldron/tc39-notes/blob/master/es6/2013-07/july-25.md#consensusresolution-6
+
+It&apos;s what&apos;s in the ES6 spec. For Map, it&apos;s lines 2-4 of 23.1.1.1.  The recorded consensus was just ratifying what was already in the spec.
+
+The motivation is that it&apos;s really hard (particularly in pure JS code) to write a constructor function that works correctly as both a factory function (called without new) and as an instance initializer (particularly when super called).  It&apos;s cleaner and simpler to not have the factory behavior for constructor functions and to have them act only as instance initializers. In ES6 the only built-in constructors that work as both factories and initializers are those where this is a legacy compatability requirement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8425</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-14 12:45:49 -0700</bug_when>
+    <thetext>&gt;  For Map, it&apos;s lines 2-4 of 23.1.1.1. 
+
+But aren&apos;t those conditions satisfied? Or am I misunderstanding the outcome of this: 
+
+&quot;When Map is called as a function rather than as a constructor, it initializes its this value with the internal state necessary to support the Map.prototype built-in methods.&quot;
+
+More specifically, does &quot;initializes its this value with the internal state necessary to support the Map.prototype built-in methods&quot; result in the `this` value being an object with a [[MapData]] internal slot that is initially `undefined`?
+
+
+I recall the motivation, as I was in support of this change prior to the f2f and the recorded notes—this was a conversation Erik and I had several months in advance of the meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8435</commentid>
+    <comment_count>4</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-05-14 13:56:18 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; &gt;  For Map, it&apos;s lines 2-4 of 23.1.1.1. 
+&gt; 
+&gt; But aren&apos;t those conditions satisfied? Or am I misunderstanding the outcome of
+&gt; this: 
+&gt; 
+&gt; &quot;When Map is called as a function rather than as a constructor, it initializes
+&gt; its this value with the internal state necessary to support the Map.prototype
+&gt; built-in methods.&quot;
+&gt; 
+&gt; More specifically, does &quot;initializes its this value with the internal state
+&gt; necessary to support the Map.prototype built-in methods&quot; result in the `this`
+&gt; value being an object with a [[MapData]] internal slot that is initially
+&gt; `undefined`?
+
+The way to think about this is that @@create creates a new object instance with the internal slots ([[MapData]]). The constructor then validates that the object has those internal slots.
+
+&gt; 
+&gt; 
+&gt; I recall the motivation, as I was in support of this change prior to the f2f
+&gt; and the recorded notes—this was a conversation Erik and I had several months in
+&gt; advance of the meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8444</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 14:35:11 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; &gt;  For Map, it&apos;s lines 2-4 of 23.1.1.1. 
+&gt; 
+&gt; But aren&apos;t those conditions satisfied? Or am I misunderstanding the outcome of
+&gt; this: 
+&gt; 
+&gt; &quot;When Map is called as a function rather than as a constructor, it initializes
+&gt; its this value with the internal state necessary to support the Map.prototype
+&gt; built-in methods.&quot;
+
+Actually, there is nothing normative about the above paragraph, at all.  It&apos;s just a a very vague description of what the algorithm actually does. 
+
+Such text has been a general problem for the spec. because some people find it useful, but don&apos;t realize that it is generally non-normative. In this case, it might be clearer if it said &quot;it attempts to initialize&quot;.
+
+In general, this is boilerplate that is used for all constructors. If I find the time I&apos;ll think about how I it could be made clearer.
+
+&gt; 
+&gt; More specifically, does &quot;initializes its this value with the internal state
+&gt; necessary to support the Map.prototype built-in methods&quot; result in the `this`
+&gt; value being an object with a [[MapData]] internal slot that is initially
+&gt; `undefined`?
+&gt; 
+If the this object wasn&apos;t instantiated (by @@create) with a [[MapData]] then attempting to initialize it will throw.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8445</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-14 14:44:47 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; (In reply to comment #3)
+&gt; &gt; &gt;  For Map, it&apos;s lines 2-4 of 23.1.1.1. 
+&gt; &gt; 
+&gt; &gt; But aren&apos;t those conditions satisfied? Or am I misunderstanding the outcome of
+&gt; &gt; this: 
+&gt; &gt; 
+&gt; &gt; &quot;When Map is called as a function rather than as a constructor, it initializes
+&gt; &gt; its this value with the internal state necessary to support the Map.prototype
+&gt; &gt; built-in methods.&quot;
+&gt; 
+&gt; Actually, there is nothing normative about the above paragraph, at all.  It&apos;s
+&gt; just a a very vague description of what the algorithm actually does. 
+&gt; 
+&gt; Such text has been a general problem for the spec. because some people find it
+&gt; useful, but don&apos;t realize that it is generally non-normative. In this case, it
+&gt; might be clearer if it said &quot;it attempts to initialize&quot;.
+&gt; 
+&gt; In general, this is boilerplate that is used for all constructors. If I find
+&gt; the time I&apos;ll think about how I it could be made clearer.
+
+Ok, that&apos;s actually really helpful to know. 
+
+&gt; 
+&gt; &gt; 
+&gt; &gt; More specifically, does &quot;initializes its this value with the internal state
+&gt; &gt; necessary to support the Map.prototype built-in methods&quot; result in the `this`
+&gt; &gt; value being an object with a [[MapData]] internal slot that is initially
+&gt; &gt; `undefined`?
+&gt; &gt; 
+&gt; If the this object wasn&apos;t instantiated (by @@create) with a [[MapData]] then
+&gt; attempting to initialize it will throw.
+
+Thank you, this answers my question.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

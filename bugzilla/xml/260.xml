@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>260</bug_id>
+          
+          <creation_ts>2012-01-26 12:26:00 -0800</creation_ts>
+          <short_desc>11.13.1: missing &quot;is&quot;</short_desc>
+          <delta_ts>2012-10-26 15:34:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>627</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-01-26 12:26:31 -0800</bug_when>
+    <thetext>In 11.13.1 &quot;Destructuring Assignment&quot;,
+under &quot;Static Semantics: Early Errors&quot;,
+under the both productions,
+the 4th bullet says:
+    ... or if the resolved binding an immutable binding.
+
+Insert &quot;is&quot; before &quot;an&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>689</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-02-27 16:29:37 -0800</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1027</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-06-16 13:07:50 -0700</bug_when>
+    <thetext>It was corrected in one of the rules, but it&apos;s still there in the last rule in the subsection (under &quot;AssignmentRestElement : ... LeftHandSideExpression&quot;).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2030</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-24 19:42:04 -0700</bug_when>
+    <thetext>the rule is gone in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2084</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:01 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

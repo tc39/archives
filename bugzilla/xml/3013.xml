@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3013</bug_id>
+          
+          <creation_ts>2014-07-20 11:36:00 -0700</creation_ts>
+          <short_desc>[[Module]]  isn&apos;t a Module object, its a ModuleLinkage Record</short_desc>
+          <delta_ts>2014-10-14 15:18:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="johnjbarton">johnjbarton</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9408</commentid>
+    <comment_count>0</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2014-07-20 11:36:44 -0700</bug_when>
+    <thetext>The definition in
+
+15.2.3.2 Load Records and LoadRequest Objects
+
+[[Module]]		The Module object produced by this load, or undefined
+
+compounds the confusion caused by the unfortunately ambiguous naming of [[Module]] and newModule().
+
+As far as I can tell [[Module]] is a ModuleLinkage record, that is metatdata about a module created by 15.2.5.1.1 CreateModuleLinkageRecord. It includes a property `.module` set in 15.2.5.6 LinkDynamicModules.  This property has the properties of a &quot;Module Instance Object&quot; which is not defined in the spec, but seem to be the type that should be returned by `newModule()`.  In other words, &quot;[[Module]].module&quot; isA Module.
+
+Changing the definition above to &quot;The ModuleLinkage record produced by this load or undefined&quot; would help a bit. Changing [[Module]] to [[ModuleLinkage]] would help dramatically. Then we could say &quot;[[ModuleLinkage]].module isA Module&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10324</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-11 17:39:31 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10490</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:18:03 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

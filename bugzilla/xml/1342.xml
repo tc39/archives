@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1342</bug_id>
+          
+          <creation_ts>2013-03-18 12:01:00 -0700</creation_ts>
+          <short_desc>Array.prototype.find( predicate [ , thisArg ] )</short_desc>
+          <delta_ts>2013-05-14 18:13:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3487</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-03-18 12:01:35 -0700</bug_when>
+    <thetext>https://gist.github.com/rwldrn/5079436
+
+15.4.4.x Array.prototype.find ( predicate [ , thisArg ] )
+
+predicate should be a function that accepts three arguments and returns a value that is coercible to the Boolean value true or false. find calls predicate once for each element present in the array, in ascending order, until predicate returns true and immediately returns the current array element. Otherwise, find returns null. predicate is called only for elements of the array which actually exist; it is not called for missing elements of the array.
+
+1. Let O be the result of ToObject passing the this value as the argument.
+2. ReturnIfAbrupt( O ).
+3. Let lenValue be the result of Get( O, &quot;length&quot; ).
+4. Let len be ToUint32( lenValue ).
+5. ReturnIfAbrupt( len ).
+6. If len is 0, return undefined.
+7. If IsCallable( predicate ) is false, throw a TypeError exception.
+8. If thisArg was supplied, let T be thisArg; else let T be undefined
+9. Let k be 0.
+10. Repeat, while k &lt; len
+  a. Let Pk be ToString( k )
+  b. Let kPresent be the result of HasProperty( O, Pk ).
+  c. ReturnIfAbrupt( kPresent )
+  d. If kPresent is true, then
+    i. Let kValue be the result of calling Get( O, Pk ).
+    ii. ReturnIfAbrupt( kValue ).
+    iii. Let result be the result of calling the [[Call]] internal method of predicate with T as thisArgument and a List containing kValue, k, and O as argumentsList.
+    iv. ReturnIfAbrupt( result ).
+    v. If ToBoolean( result ) is true, return kValue.
+  e. Increase k by 1.
+11. Return undefined.
+
+The length property of the find method is 1.
+
+NOTE The find function is intentionally generic; it does not require that its this value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method. Whether the find function can be applied successfully to a host object is implementation-dependent</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3557</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-03-28 09:48:07 -0700</bug_when>
+    <thetext>Are the initial algorithm steps on purpose different from the other Array helper functions? Specifically I refer to step 6-7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3849</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 10:44:54 -0700</bug_when>
+    <thetext>added in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3915</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:29 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

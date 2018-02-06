@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4422</bug_id>
+          
+          <creation_ts>2015-07-11 14:57:00 -0700</creation_ts>
+          <short_desc>Do Symbols have a [[Description]] or [[SymbolData]] internal slot?</short_desc>
+          <delta_ts>2015-07-12 05:46:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>a.d.bergi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14541</commentid>
+    <comment_count>0</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-07-11 14:57:34 -0700</bug_when>
+    <thetext>§6.1.5 &lt;http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-symbol-type&gt; says:
+
+&gt; Each Symbol value immutably holds an associated value called [[Description]]
+&gt; that is either undefined or a String value.
+
+§19.4.4 &lt;http://www.ecma-international.org/ecma-262/6.0/#sec-properties-of-symbol-instances&gt; says:
+
+&gt; Symbol instances have a [[SymbolData]] internal slot.
+
+Now, which one? Or do they have both? Both slots seem to be used throughout the spec.
+
+It looks like the [[SymbolData]] is some kind of self-referential slot that is used only for identifying whether a value is a symbol. Do we really need both of these?
+
+Not sure whether this is a technical issue (only one slot should be used) or an editorial issue (both slots should be mentioned, in notes as well as in the initialisation / creation of symbols).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14542</commentid>
+    <comment_count>1</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-07-12 05:46:32 -0700</bug_when>
+    <thetext>Ooops, I&apos;ve realised my mistake. I confused symbol *values* with `Symbol` wrapper object *instances*, probably because primitive values that &quot;hold&quot; a [[Description]] which looks like a slot but is an &quot;associated value&quot; are strange :-)
+
+Maybe §19.4.4
+
+&gt; The [[SymbolData]] internal slot is the Symbol value represented by this Symbol object.
+
+should be changed to something more obvious like
+
+The [[SymbolData]] internal slot holds the primitive symbol value represented by this Symbol object.
+
+but I guess it&apos;s not really necessary.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

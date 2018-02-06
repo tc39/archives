@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>37</bug_id>
+          
+          <creation_ts>2011-03-02 15:30:00 -0800</creation_ts>
+          <short_desc>Include metadata in test cases stating whether they&apos;ve been reviewed by someone other than the contributor</short_desc>
+          <delta_ts>2012-02-29 09:24:40 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>84</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:30:09 -0800</bug_when>
+    <thetext>We should have metadata in test cases showing whether someone other than the contributor has also reviewed it.  Then maybe the website will flag tests failing against a browser somehow if they haven&apos;t been peer reviewed yet.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>85</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:31:13 -0800</bug_when>
+    <thetext>Conservatively guesstimating a couple of days will will be needed to implement and fully test this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>715</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:24:40 -0800</bug_when>
+    <thetext>On http://wiki.ecmascript.org/doku.php?id=test262:test_case_format, I&apos;ve noted two new testcase metadata fields:
+- @author
+- @reviewers
+
+It&apos;ll be up to reviewers and testcase authors to populate these (optional) attributes.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

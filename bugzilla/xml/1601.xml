@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1601</bug_id>
+          
+          <creation_ts>2013-07-30 09:09:00 -0700</creation_ts>
+          <short_desc>4.2. Language Overview does not mention new built-ins</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>chris.ryan.det</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4573</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-30 09:09:44 -0700</bug_when>
+    <thetext>Third paragraph in 4.2:
+&gt; ECMAScript defines a collection of built-in objects that round out the definition of ECMAScript entities [...]
+
+The following list of built-in objects is incomplete, but enumerating all built-ins seems tedious, maybe the language could be changed to just refer to chapter 15 for a full list of all built-ins.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4977</commentid>
+    <comment_count>1</comment_count>
+    <who name="">chris.ryan.det</who>
+    <bug_when>2013-08-19 06:42:07 -0700</bug_when>
+    <thetext>Also include 4.2.1:
+
+&gt; ECMAScript does not use classes such as those in C++, Smalltalk, or Java. Instead objects may be created in various ways including [...]
+
+Most of the paragraph though seems slightly superfluous and could be made more concise.  Also, if most of that section is going to be kept, make sure that it is made clear how classes in ES6 still differ from implementations in languages such as C++, Smalltalk, or Java.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12277</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-09 18:30:58 -0800</bug_when>
+    <thetext>4.2 was updated in rev32. Some minor 4.2.1 updates relating to class definition in rev33.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12394</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

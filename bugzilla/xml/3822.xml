@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3822</bug_id>
+          
+          <creation_ts>2015-02-11 16:52:00 -0800</creation_ts>
+          <short_desc>chapter 7: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:42 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12313</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:52:16 -0800</bug_when>
+    <thetext>----------------------------------------
+In 7.1.12.1 &quot;ToString Applied to the Number Type&quot;:
+
+{1}
+7.1.12.1 / step 8:
+If -6 &lt; /n/ &lt;= 0, return the String consisting of the code point U+0030
+*(*DIGIT ZERO*)*, followed by a the code point U+002E *(*FULL STOP*)*,
+followed by -/n/ occurrences of the code point U+0030 *(*DIGIT ZERO*)*,
+followed by the code points of the /k/ digits of the decimal representation
+of /s/.
+
+    In &quot;followed by a the code point&quot;, delete &quot;a&quot;.
+    (And maybe de-bold those parens.)
+
+----------------------------------------
+In 7.1.16 &quot;CanonicalNumericIndexString ( argument )&quot;:
+
+{2}
+7.1.16 / para 2:
+A /canonical numeric string/ is any String value for which the
+CanonicalNumericIndexString abstraction operation does not return *undefined*.
+
+    s|abstraction|abstract|
+
+----------------------------------------
+In 7.3.2 &quot;GetV (V, P)&quot;:
+
+{3}
+7.3.2 / preamble:
+... The operation is called with arguments V and /P/ where ...
+
+    Italicize &apos;V&apos;
+
+----------------------------------------
+In 7.3.17 &quot;CreateListFromArrayLike (obj [, elementTypes] )&quot;:
+
+{4}
+7.3.17 / preamble:
+The abstract operation CreateListFromArrayLike is used to create a List value
+whose elements are provided by the indexed properties of an array-like object.
+
+    After &quot;array-like object&quot;, insert &quot;/obj/&quot;.
+
+----------------------------------------
+In 7.3.20 &quot;EnumerableOwnNames (O)&quot;:
+
+{5}
+7.3.20 / step 5.a.i:
+Let /desc/ be the resulting of calling the [[GetOwnProperty]] internal method
+of /O/ with argument /key/.
+
+    s|resulting|result|
+
+----------------------------------------
+In 7.3.21 &quot;GetFunctionRealm ( obj ) Abstract Operation&quot;:
+
+{6}
+7.3.21 / step 4.b:
+If proxyTarget is not null, return GetFunctionRealm(/proxyTarget/).
+
+    Italicize &quot;proxyTarget&quot;
+    Bold &quot;null&quot;
+
+----------------------------------------
+In 7.4.6 &quot;IteratorClose( iterator, completion )&quot;:
+
+{7}
+7.4.6 / step 9:
+If Type(/innerResult/.[[value]]) is not Object, throw a TypeError exception.
+
+    &apos;TypeError&apos; should be bold.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12351</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 19:36:06 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12466</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:42 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

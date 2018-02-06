@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1608</bug_id>
+          
+          <creation_ts>2013-07-30 09:49:00 -0700</creation_ts>
+          <short_desc>Configurable @@create for built-in objects hazards</short_desc>
+          <delta_ts>2014-10-14 15:17:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4580</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-30 09:49:32 -0700</bug_when>
+    <thetext>The @@create property for built-in constructors is currently defined as configurable=true, it may be necessary to review whether this creates any hazards when users redefine the @@create property.
+
+For example 8.2.3.3 needs to be make clear that the term &quot;a newly created TypeError object&quot; does not mean to call the [[Construct]] function of built-in native errors, because 15.11.6.1.2 calls OrdinaryConstruct and OrdinaryConstruct calls @@create. 
+
+9.1.9 ToObject must not call [[Construct]] on the Boolean/Number/String constructor (this is currently only implicitly stated because the result object must have a [[BooleanData]] / [[NumberData]] / [[StringData]] internal data property)
+
+11.1.8 needs to be changed to call RegExpCreate instead of creating a new object `as if by the expression  new RegExp(Pattern, Flags)` (see bug 749).
+
+15.9.2.{1,2,3} step 5 needs to be changed because Date[@@create]] might have been redefined (`if by the expression (new Date()).toString()` !)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4599</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-30 11:55:08 -0700</bug_when>
+    <thetext>There is also an observable change at the user level for certain built-in constructors. For example just calling `TypeError()` or constructing a new object by `new TypeError()` gave the same results in ES5, given that `TypeError` is the original TypeError constructor. In ES6 with a configurable TypeError[@@create] `TypeError()` and `new TypeError()` can give different results.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10358</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 11:44:56 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10443</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:55 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

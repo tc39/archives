@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3747</bug_id>
+          
+          <creation_ts>2015-02-04 13:30:00 -0800</creation_ts>
+          <short_desc>make module records subclassable</short_desc>
+          <delta_ts>2015-02-19 19:11:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12106</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-04 13:30:11 -0800</bug_when>
+    <thetext>Module Records need to be an abstract &quot;base class&quot; data structure, with only the dynamic properties of a module:
+
+    [[Realm]]        Realm Record
+    [[Environment]]  Lexical Environment or undefined
+    [[Namespace]]    Object or undefined
+    [[Evaluated]]    Boolean
+
+(The [[Realm]] property is described in bug 3746.) The spec defines just one &quot;subclass&quot; of Normal Module Records, which extends Module Records with the properties computed from source code:
+
+    [[ECMAScriptCode]]         Parse result
+    [[ImportedModules]]        List of String
+    [[ImportEntries]]          List of ImportEntry Records
+    [[LocalExportEntries]]     List of ExportEntry Records
+    [[StarExportEntries]]      List of ExportEntry Records
+    [[IndirectExportEntries]]  List of ExportEntry Records
+
+The following top level abstract spec operations become overrideable methods on the Module Record class:
+
+* GetExportNames                 ==&gt; Module Record :: GetExportNames
+* ResolveExport                  ==&gt; Module Record :: ResolveExport
+* ModuleDeclarationInstantiation ==&gt; Module Record :: Instantiate
+* ModuleEvaluation               ==&gt; Module Record :: Evaluate
+
+See https://gist.github.com/dherman/cad85565e0eb16d0a22d for details.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12211</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-07 15:36:32 -0800</bug_when>
+    <thetext>I think I going to call &quot;Normal Module Records&quot; &quot;Source Code Module Records&quot; as that is a bit more descriptive concerning what they correspond to.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12212</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-07 17:35:26 -0800</bug_when>
+    <thetext>Putting on this bug since it concerns Normal Module Records methods but it&apos;s really broader then that.
+
+Why do you have both NormalModule.instantiate() and NormalModule.evaluate() calling HostResolveImportedModule to get the imported module records. 
+
+I presume that you assume (actually require) that any given request pair will produce the same module record from both call sites. Why isn&apos;t it better to only resolve them once in instantiate()?
+
+Also (if I&apos;m interpreting things correctly) a consequence of not resolving the [[ImportedModules]] list in or prior to instantiate() is that any module imported solely via something like:
+     import &quot;someModuleNzame&quot;;
+may not get resolved for the first time until evaluate() tries to resolve it because such imports do not generate ImportEntry records. That doesn&apos;t feels right. Shouldn&apos;t the resolvability of all imports  have been determined before evaluation starts?
+
+In my version this resolution took place in ParseModuleAndImports and all the Impurt and Export Entry records got updated to include module record references in additon to their initial string name references.
+
+Another consequences is that I believe it means that the initial resolution of a module may not occur in the same order as references to them occur in the module source code. I&apos;m not sure this makes a difference (because initialization still uses the module list order) but being unsure make me uncomfortable ;-)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12222</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-08 14:04:52 -0800</bug_when>
+    <thetext>Some issues about GetExportedNames
+
+Do you really want to throw a SyntaxError on Cingular star exports?  they seem benign.  For example consider:
+
+&quot;mod.js&quot;:
+    export const x=42;
+    export * from &quot;mod.js&quot;;  //export * from ourselves
+
+The export * doesn&apos;t add anything, but it really doesn;t hurt anything as long as the specification/implementation protect themselves from looping
+
+A agree that we want to get rid of ambiguous export * names. But I believe that you algorithm is not so nice with this case:
+
+&quot;mod2.js&quot;:
+    export * from &quot;mode3.js&quot;;
+    export * from &quot;mode3.js&quot;;  or &quot;../mode3.js&quot;, etc
+
+You algorithm deletes all names exported from a module if more than one export * resolves to it.  It seems to be that the handling of this situation should be either:
+   1) ignore the redundant export *
+   2) throw a syntax error (in the spirit of the previous issue above).
+
+But, it&apos;s not that easy to detect either redundant export *, nor is it clear that they should be an error.  Consider:
+
+&quot;mod3.js&quot;:
+   export * from &quot;mod4.js&quot;;
+   export * from &quot;mod5.js&quot;;
+
+&quot;mod4.js&quot;:
+   export * from &quot;mod5&quot;;
+
+mod5.js&quot;:
+    export const foo=42;
+
+It doesn&apos;t seem reasonable that the author of mod3 should have to know that mod4 is also exporting the mod5 names.
+
+GetExportedNames is only used (at least in the ES6 spec.) to  setup module namespace objects.  And I agree that we don&apos;t want ambiguous names to pass &apos;in&apos; tests like you showed.  It seems that a solution to all of this is for GetExportedNames to only filter duplicate export * names but not to check for ambiguous star * exports. Then GetModuleNamespace could use ResolvedExport to check for any ambiguous star * names and remove those from the names bound by that module namespace.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12829</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-17 12:47:28 -0800</bug_when>
+    <thetext>&gt; GetExportedNames is only used (at least in the ES6 spec.) to  setup module
+&gt; namespace objects.  And I agree that we don&apos;t want ambiguous names to pass
+&gt; &apos;in&apos; tests like you showed.  It seems that a solution to all of this is for
+&gt; GetExportedNames to only filter duplicate export * names but not to check
+&gt; for ambiguous star * exports. Then GetModuleNamespace could use
+&gt; ResolvedExport to check for any ambiguous star * names and remove those from
+&gt; the names bound by that module namespace.
+
+I agree that these overlapping re-exports that agree on provenance are benign, and this plan makes sense to me. Thanks!
+
+If I&apos;m reading right, the latest draft spec is still throwing for these cases and will need to be relaxed to just return an empty list from GetExportedNames when it hits a cycle. I&apos;ll re-review the next draft for bugs, but from what I can tell we&apos;re pretty much down to minor bugs and no serious design issues at this point.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12854</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:30:50 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13093</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:01 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2010</bug_id>
+          
+          <creation_ts>2013-09-30 22:56:00 -0700</creation_ts>
+          <short_desc>22.2.3.32: &quot;the this&quot;</short_desc>
+          <delta_ts>2014-05-06 16:44:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5745</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-09-30 22:56:22 -0700</bug_when>
+    <thetext>In 22.2.3.32 &quot;get %TypedArray%.prototype [ @@toStringTag ]&quot;,
+step 1 says:
+    Let O be the this.
+
+Insert &quot;value&quot; before the period.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5784</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-01 16:47:11 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6161</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:47 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6650</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-10 19:36:59 -0800</bug_when>
+    <thetext>You changed it to:
+    Let O be the this.value.
+
+Change the first period to a space.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7863</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-19 17:55:07 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7972</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 16:24:01 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8185</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:44:35 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2215</bug_id>
+          
+          <creation_ts>2013-11-10 12:48:00 -0800</creation_ts>
+          <short_desc>odd formatting of Notes</short_desc>
+          <delta_ts>2015-02-19 19:11:10 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6630</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-10 12:48:27 -0800</bug_when>
+    <thetext>Usually, the spec formats Notes like paragraphs, with all lines flush-left.
+But in:
+   12.4.4.1  Static Semantics: Early Errors
+   12.13.5.1 Static Semantics: Early Errors
+   13.6.4.1  Static Semantics: Early Errors
+each has a Note where:
+(a) the word &quot;NOTE&quot; is slightly indented; and
+(b) subsequent lines are significantly indented.
+
+(Of course, in 12.4.4.1, the second line is code, so indenting it is fine, but the third line should be flush-left.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6646</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-10 17:15:51 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6986</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-21 13:19:26 -0800</bug_when>
+    <thetext>No, these are all the same in rev22.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7107</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:05:45 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7156</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-01-29 12:57:23 -0800</bug_when>
+    <thetext>No really, these aren&apos;t fixed in rev22.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7614</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-06 21:33:59 -0700</bug_when>
+    <thetext>Still not fixed in rev 23.
+
+Section numbers are now: 12.5.4.1, 12.14.5.1, 13.6.4.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7621</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-07 09:20:04 -0700</bug_when>
+    <thetext>I&apos;m now thinking that I prefer the indented style.  I think I may switch all notes to that style, if I can get the Ecma style police to go along.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7630</commentid>
+    <comment_count>7</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-09 11:59:09 -0700</bug_when>
+    <thetext>In that case, please revisit Bug 1237.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12810</commentid>
+    <comment_count>8</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-17 08:17:41 -0800</bug_when>
+    <thetext>In rev 33, the anomalies are still present in 12.5.4.1 and 13.6.4.1.
+(The latter is just a one-line Note, so it only has anomaly (a).)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12929</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 14:46:21 -0800</bug_when>
+    <thetext>fixed 12.5.4.1 and 13.6.4.1 in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13155</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:10 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

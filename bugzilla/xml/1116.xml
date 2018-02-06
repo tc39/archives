@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1116</bug_id>
+          
+          <creation_ts>2012-12-02 11:28:00 -0800</creation_ts>
+          <short_desc>let syntax and extended grammar restriction</short_desc>
+          <delta_ts>2013-10-30 06:03:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2983</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-12-02 11:28:55 -0800</bug_when>
+    <thetext>Per Nov 29 Resolution:
+
+
+&gt; In non-strict code: let, with single token lookahead (where the single token is either an Identifier, &quot;[&quot;, or &quot;{&quot; ), at the start of a statement is a let declaration. (Accepted breaking change)
+
+
+Extended grammar restriction:
+
+
+(x) = 3;       // allowed
+({ y }) = 3;   // allowed
+
+var (x) = 3;    // disallowed
+var ({y}) = 3;  // disallowed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5989</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 17:45:08 -0700</bug_when>
+    <thetext>in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6024</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:44:36 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6185</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-29 13:38:16 -0700</bug_when>
+    <thetext>In the draft, only part of the `let` syntax restriction is covered:
+
+  ExpressionStatement[yield] :
+    [lookahead ∉ {{, function, class, let [ }] Expression[in, ?yield] ;
+
+
+The missing part is &quot;let {&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6186</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 14:43:21 -0700</bug_when>
+    <thetext>I don&apos;t believe there are any situations where 
+  let {
+
+is a valid head of an expression, so there is no reason to do a lookahead restriction for that.
+
+But then again, I may be sleep walking and  missing something. 
+
+Do you have something in mind?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6192</commentid>
+    <comment_count>5</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-29 19:51:10 -0700</bug_when>
+    <thetext>No, not specifically and you&apos;re right it&apos;s not possible. I was just following up based on the consensus. I wonder why we explicitly included that?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6193</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 20:38:46 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; No, not specifically and you&apos;re right it&apos;s not possible. I was just following
+&gt; up based on the consensus. I wonder why we explicitly included that?
+
+I don&apos;t know.  The notes didn&apos;t make a lot of sense by theselves, but I remembered that
+
+var let = new Array;
+let[n] = ...  //is this a let declaration or an assignment
+
+was the ambiguity that we decided to fix by saying that let [ is always a let declaration.  So is let { but it doesn&apos;t have any ambiguities with an expression statement.
+
+I&apos;m going to close this again, because I don&apos;t think there is anything to fix.  If anymore discovers new issues they can open a new bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6242</commentid>
+    <comment_count>7</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-10-30 06:03:49 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+
+&gt; I&apos;m going to close this again, because I don&apos;t think there is anything to fix. 
+&gt; If anymore discovers new issues they can open a new bug.
+
+Yes, sorry—I should&apos;ve reclosed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

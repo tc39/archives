@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3285</bug_id>
+          
+          <creation_ts>2014-10-15 09:10:00 -0700</creation_ts>
+          <short_desc>typos in 15.2.1.16</short_desc>
+          <delta_ts>2014-12-07 14:35:09 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Caridy Patiño">caridy</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10509</commentid>
+    <comment_count>0</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-15 09:10:58 -0700</bug_when>
+    <thetext>Stati Semantics -&gt; Static Semantics</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10510</commentid>
+    <comment_count>1</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-15 09:23:36 -0700</bug_when>
+    <thetext>modoles -&gt; modules (first paragraph)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10511</commentid>
+    <comment_count>2</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-15 09:37:34 -0700</bug_when>
+    <thetext>Additoinal -&gt; Additional (13.a)
+depenent -&gt; dependent    (13.a)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10533</commentid>
+    <comment_count>3</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2014-10-20 09:50:44 -0700</bug_when>
+    <thetext>elemenbt -&gt; element in 15.2.1.20, bullet 5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10535</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-20 10:07:33 -0700</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10926</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:09 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

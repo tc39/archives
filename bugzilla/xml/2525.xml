@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2525</bug_id>
+          
+          <creation_ts>2014-02-11 14:01:00 -0800</creation_ts>
+          <short_desc>Grammar ambiguity with let, for-of, and array/object literals</short_desc>
+          <delta_ts>2014-04-06 11:30:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Ian">ianhall</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>lukeh</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7246</commentid>
+    <comment_count>0</comment_count>
+    <who name="Ian">ianhall</who>
+    <bug_when>2014-02-11 14:01:58 -0800</bug_when>
+    <thetext>for-of loops introduce an ambiguity in the grammar when using let and an array or object literal.
+
+Consider these two examples:
+
+// Ex. 1 let declared variable &apos;of&apos; iterating an array, or global variable
+// &apos;let&apos; iterating the first element of global variable &apos;of&apos;?
+var of = [ [ 5 ] ];
+
+for (let of of [0]) { /* of == 0 or let == 5? */ }
+
+// Ex. 2 let declared variable &apos;of&apos; iterating a parenthesized array literal, or
+// global variable &apos;let&apos; iterating the result of calling function &apos;of&apos;?
+var of = function () { return [ 5 ]; }
+
+for (let of of ([0])) { /* of == 0 or let == 5? */ }
+
+
+Since this is code that can&apos;t exist in ES5 it seems the issue here is to simply choose one option over the other in the ambiguities.  Luke Hoban suggested that morally the language wants to treat this as though &apos;let&apos; and &apos;of&apos; are maximally interpreted as keywords in this context since there is no back compat requirement.  I.e. both of the both should be let declarations of a variable &apos;of&apos; and the collection should be the array literal [0] in each.
+
+Seems this will require a small spec change along the lines of:
+
+for ([lookahead not in {let}] LeftHandSideExpression  of AssignmentExpression ) Statement 
+
+However this will now disallow &apos;let&apos; as a variable name in the LHSExpression, so further clarification would be required to allow that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7248</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-12 14:02:40 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft.
+
+Added [lookahead not in { let }] prefix for for-of
+but a [lookahead not in { let [ }] prefix for for-in, just like ExpressionStatement.
+
+Hence:
+
+for (let of of [0])...  //ForDeclaration of AssignmentExpression
+for (let in [0])...     //LeftHandSideExpression in Expression
+for (let of in [0])...  //ForDeclaration in Expression
+for (let [of] in [0])...//LeftHandSideExpression in Expression</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7250</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-12 14:06:16 -0800</bug_when>
+    <thetext>*** Bug 2522 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7543</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:03 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

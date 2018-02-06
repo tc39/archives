@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>108</bug_id>
+          
+          <creation_ts>2011-06-09 11:07:00 -0700</creation_ts>
+          <short_desc>Missing coverage? http://code.google.com/p/google-caja/issues/detail?id=1362</short_desc>
+          <delta_ts>2012-02-29 09:08:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>231</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-06-09 11:07:14 -0700</bug_when>
+    <thetext>&lt;Thanks&gt;Mark Miller&lt;/Thanks&gt;
+
+We might be missing coverage for the following test scenario.  Add test case(s)
+assuming this scenario can be mapped to ES5.1 somewhere
+--------------------------------------------------------------------------
+*See
+http://codereview.appspot.com/4547070/diff/6003/src/com/google/caja/ses/es5shim.js?context=10&amp;column_width=80
+for the original*
+
+/**
+
+
+191 * Workaround for http://code.google.com/p/google-caja/issues/detail?id=1362
+
+192 *
+
+193 * &lt;p&gt;This is an unfortunate oversight in the ES5 spec: Even if
+
+194 * Date.prototype is frozen, it is still defined to be a Date, and
+
+195 * so has mutable state in internal properties that can be mutated
+
+196 * by the primordial mutation methods on Date.prototype, such as
+
+197 * {@code Date.prototype.setFullYear}.
+
+198 *
+
+199 * &lt;p&gt;This kludge is safety preserving.
+
+
+
+200 */
+
+201 function test_MUTABLE_DATE_PROTO() {
+
+202 try {
+
+203 Date.prototype.setFullYear(1957);
+
+204 } catch (err) {
+
+205 if (err instanceof TypeError) { return false; }
+
+206 log(&apos;New symptom: Mutating Date.prototype failed with &apos; + err);
+
+207 return true;
+
+208 }
+
+209 var v = Date.prototype.getFullYear();
+
+210 if (v !== v &amp;&amp; typeof v === &apos;number&apos;) {
+
+211 // NaN indicates we&apos;re probably ok.
+
+212 return false;
+
+213 }
+
+214 if (v === 1957) {
+
+215 log(&apos;Date.prototype is a global communication channel. &apos; +
+
+216 &apos;See http://code.google.com/p/google-caja/issues/detail?id=1362&apos;);
+
+217 } else {
+
+218 log(&apos;New symptom: Mutating Date.prototype did not throw&apos;);
+
+219 }
+
+220 return true;
+
+221 }
+
+222 //var TOLERATE_MUTABLE_DATE_PROTO = false;
+
+223 var TOLERATE_MUTABLE_DATE_PROTO = test_MUTABLE_DATE_PROTO();
+
+224</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>554</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-10 10:33:14 -0800</bug_when>
+    <thetext>IETC has some very limited testing for this in the form of Date.prototype.toISOString:
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-16.js(23): * @description Date.prototype.toISOString - when this is a String object that value format is &apos;YYYY-MM-DDTHH:mm:ss.sssZ&apos; Date.prototype.toISOString throw the TypeError
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-16.js(34):            return ex instanceof TypeError;
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-6.js(23): * @description Date.prototype.toISOString - TypeError is thrown when this is any other objects instead of Date object
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-6.js(33):            return ex instanceof TypeError;
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-7.js(23): * @description Date.prototype.toISOString - TypeError is thrown when this is any primitive values
+  E:\262\test262\test\suite\ch15\15.9\15.9.5\15.9.5.43\15.9.5.43-0-7.js(33):            return ex instanceof TypeError;
+
+I think we can do a bit better than this though, and will extend the coverage shortly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>555</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-10 12:11:12 -0800</bug_when>
+    <thetext>*will add test files under TestCases\ch15\15.9\15.9.5\15.9.5.40*</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>710</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:08:35 -0800</bug_when>
+    <thetext>Tests are now live on test262.ecmascript.org.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

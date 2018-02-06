@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>43</bug_id>
+          
+          <creation_ts>2011-03-02 15:57:00 -0800</creation_ts>
+          <short_desc>Test case metadata should indicate whether the test is runnable in Strict Mode</short_desc>
+          <delta_ts>2011-05-02 16:35:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>97</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:57:27 -0800</bug_when>
+    <thetext>We need two things here:
+- metadata showing whether the test should pass in Strict Mode
+- metadata showing whether the test is Strict Mode only</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>98</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:58:20 -0800</bug_when>
+    <thetext>Guesstimating two days will be needed to design a solution, implement it, and properly test it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>201</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-02 16:35:49 -0700</bug_when>
+    <thetext>The test harness now recognizes a &apos;strict&apos; property of test case objects and passes the correct &apos;this&apos; value to the test case function accordingly.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

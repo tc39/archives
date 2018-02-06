@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1444</bug_id>
+          
+          <creation_ts>2013-04-16 08:54:00 -0700</creation_ts>
+          <short_desc>8.3.12 incomplete in the presence of prototype changes and property deletions.</short_desc>
+          <delta_ts>2014-07-18 14:32:51 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gareth Smith">bugzilla</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3645</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gareth Smith">bugzilla</who>
+    <bug_when>2013-04-16 08:54:33 -0700</bug_when>
+    <thetext>Section 8.3.12 defines the behaviour of [[Enumerate]], and describes what should happen if properties are added or removed during enumeration:
+
+&quot;If a property that has not yet been visited during enumeration is deleted, then it will not be visited. If new properties are added to the object being enumerated during enumeration, the newly added properties are not guaranteed to be visited in the active enumeration.&quot;
+
+We are not so clear on what happens if we enter the loop with an
+enumerable property shadowing a non-enumerable one, and then delete the
+enumerable one before it is visited.
+
+Perhaps the &quot;nicest&quot; reading of the existing would be to treat the revealed
+properties the same way we would treat &quot;added&quot; properties. So, in this
+case, the &quot;revealed&quot; property would be checked for enumerability and
+skipped. This doesn&apos;t seem to be the only possible reading of the spec however.  while spidermonkey seems to behave as I had expected, V8 disagrees, and visits the non-enumerable property.
+
+Essentially the same trick can be played by mutating __proto__ during enumeration.
+
+Here is a code snippit which demonstrates this behaviour, assuming that x happens to come before z in the enumeration order:
+
+  var a = {};
+  Object.defineProperty(a, &apos;z&apos;, {value: &apos;secret&apos;, enumerable: false});
+  var b = {x:0, z:&quot;tricky&quot;, __proto__:a};
+  var ret = &quot;We have not visited a.z&quot;;
+  var deleted_z_yet = false;
+  for (var i in b) {
+      if(i==&apos;x&apos;) {
+          delete b.z ;
+          deleted_z_yet = true;
+      }
+      if (i==&apos;z&apos; &amp;&amp; deleted_z_yet) {
+          ret = &quot;we have visited a.z&quot; ;
+      }
+  }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9239</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-17 18:03:10 -0700</bug_when>
+    <thetext>fixed in rev26
+
+replaced in informative algorithm with an ES generator function
+
+also (hopefully) clarified the language WRT this point.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9277</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:32:51 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

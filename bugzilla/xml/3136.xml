@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3136</bug_id>
+          
+          <creation_ts>2014-08-15 07:00:00 -0700</creation_ts>
+          <short_desc>19.1.1.1 Object: Change ObjectCreate to OrdinaryCreateFromConstructor?</short_desc>
+          <delta_ts>2015-01-15 16:19:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9790</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-15 07:00:54 -0700</bug_when>
+    <thetext>19.1.1.1 Object ( [ value ] ):
+
+Step 1 currently calls `ObjectCreate(%ObjectPrototype%)`, maybe it should be changed to `OrdinaryCreateFromConstructor(F, %ObjectPrototype%)` where F is the currently active function. 
+
+
+Also see 19.2.1.1 step 14b, 22.1.1.1 step 5b, 19.5.1.1 step 3a etc. where OrdinaryCreateFromConstructor or similar operations are already used.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9827</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-20 15:49:26 -0700</bug_when>
+    <thetext>I don&apos;t think so. This is a specific definition for Object, called as a function, and isn&apos;t intended to be subclassed. Parameterizing it with via F.prototype may also have legacy compatibility issues.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9834</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-21 04:11:48 -0700</bug_when>
+    <thetext>I don&apos;t understand why 19.2.1.1 Function or 19.5.1.1 Error use OrdinaryCreateFromConstructor (resp. GetPrototypeFromConstructor in 19.2.1.1), instead of simply using the intrinsic prototype object. And why 19.1.1.1 Object is allowed to use the intrinsic prototype object. 
+
+When we look at 19.5.1.1 Error, step 3a calls OrdinaryCreateFromConstructor(func, %ErrorPrototype%, ([[ErrorData]])) where `func` is the currently active function, so `func` is either the intrinsic Error function or a cloned Error function. No other case is possible here. In the case that `func` is the intrinsic Error function, OrdinaryCreateFromConstructor will always use the intrinsic Error prototype object since the &quot;prototype&quot; property on Error is non-writable + non-configurable. If `func` is a cloned Error function, OrdinaryCreateFromConstructor needs to retrieve the value of &quot;prototype&quot; dynamically at runtime. 
+
+So the only benefit (?) of using OrdinaryCreateFromConstructor in 19.5.1.1 Error (instead of using ObjectCreate) is that cloned Error functions can set a different prototype object. 
+
+Changing 19.1.1.1 to use OrdinaryCreateFromConstructor instead of ObjectCreate only has an effect for cloned Object functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9847</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-23 12:47:35 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; I don&apos;t understand why 19.2.1.1 Function or 19.5.1.1 Error use
+&gt; OrdinaryCreateFromConstructor (resp. GetPrototypeFromConstructor in
+&gt; 19.2.1.1), instead of simply using the intrinsic prototype object. And why
+&gt; 19.1.1.1 Object is allowed to use the intrinsic prototype object. 
+&gt; 
+&gt; When we look at 19.5.1.1 Error, step 3a calls
+&gt; OrdinaryCreateFromConstructor(func, %ErrorPrototype%, ([[ErrorData]])) where
+&gt; `func` is the currently active function, so `func` is either the intrinsic
+&gt; Error function or a cloned Error function. No other case is possible here.
+&gt; In the case that `func` is the intrinsic Error function,
+&gt; OrdinaryCreateFromConstructor will always use the intrinsic Error prototype
+&gt; object since the &quot;prototype&quot; property on Error is non-writable +
+&gt; non-configurable. If `func` is a cloned Error function,
+&gt; OrdinaryCreateFromConstructor needs to retrieve the value of &quot;prototype&quot;
+&gt; dynamically at runtime. 
+&gt; 
+&gt; So the only benefit (?) of using OrdinaryCreateFromConstructor in 19.5.1.1
+&gt; Error (instead of using ObjectCreate) is that cloned Error functions can set
+&gt; a different prototype object. 
+
+The concern is about subclassing more than cloning, although there are similarities between those two scenarios.  There is also a need to balance  legacy compatibility against ES6 sublcassing capabilities. 
+
+In the case, of Error, it is reasonable to assume that programmer will define subclasses of Error, via 
+  class MyError extends Error {};
+
+Such a subclass uses the Error constructor, but needs to set the new instance prototype to MyError.prototype.  So we use OrdinaryCreateFromConstructor.  There is a small chance of an incompatibility for legacy code, but the risk seems low compared to the importance of the new functionality. 
+
+&gt; 
+&gt; Changing 19.1.1.1 to use OrdinaryCreateFromConstructor instead of
+&gt; ObjectCreate only has an effect for cloned Object functions.
+
+Object, on the other hand, is not intended to be explicitly subclassed.  You normally say
+  class MyClass {};
+instead of 
+  class MyClass extends Object {};
+
+There is special case semantics for class definitions that makes sure that the Object constructor is not called for Subclasses like MyClass. So, we don&apos;t have to worry (too much) about 19.1.1.1 being super called in a subclass constructor.
+
+On the other hand, 19.1.1.1 was specified prior to ES6 to creates objects with their [[Prototype]] set to the intrinsic Object.prototype.  My guess is that there is a much higher chance that legacy code exists that depends upon that specific behavior. 
+
+So, 19.1.1.1 preserves legacy behavior, while 19.2.1.1 and 19.5.1.1 (and really all legacy constructors except for Object) is taking a risk at relaxing legacy behavior in order to facilitate subclassing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9857</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-24 11:19:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; The concern is about subclassing more than cloning, although there are
+&gt; similarities between those two scenarios.  There is also a need to balance 
+&gt; legacy compatibility against ES6 sublcassing capabilities. 
+&gt; 
+
+I still don&apos;t understand how subclassing comes into play here. :-(
+
+If step 1 of 19.1.1.1 is changed to:
+&gt; 1. If value is null, undefined or not supplied, then
+&gt;  a. Let func be the active function object.
+&gt;  b. Return OrdinaryCreateFromConstructor(func, %ObjectPrototype%).
+
+there will be no difference for the intrinsic Object constructor function when compared to the current step 1 of 19.1.1.1. 
+
+
+I do _not_ suggest to change 19.1.1.1 to:
+&gt; 1. If value is null, undefined or not supplied, then
+&gt;  a. Let func be the this value.
+&gt;  b. Return OrdinaryCreateFromConstructor(func, %ObjectPrototype%).
+
+Such a change will have effects on subclassing and legacy behaviour and therefore should not be applied.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11407</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:11:30 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11435</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:03 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

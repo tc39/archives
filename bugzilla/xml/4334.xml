@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4334</bug_id>
+          
+          <creation_ts>2015-04-24 13:39:00 -0700</creation_ts>
+          <short_desc>Abrupt completion discarded in native collection constructors</short_desc>
+          <delta_ts>2015-05-19 15:59:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14325</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-24 13:39:20 -0700</bug_when>
+    <thetext>The constructors for Map, Set, WeakMap, and WeakSet all accept an optional
+`iterable` parameter. This is used to create an iterator, and each of the
+iterator&apos;s values is inserted into the collection&apos;s internal data structure
+using the appropriate instance method (`add` in the case of Set and WeakSet,
+`set` in the case of Map and WeakMap), aliased as `adder`.
+
+All implementations have a provision for behavior when the `adder` returns an
+abrupt completion: they close the iterator and return the result of that
+operation. For example, from Set [1]:
+
+&gt; 23.2.1.1 Set ( [ iterable ] )
+&gt; ...
+&gt; 6. If iterable is either undefined or null, let iter be undefined.
+&gt; 7. Else,
+&gt;    a. Let adder be Get(set, &quot;add&quot;).
+&gt;    b. ReturnIfAbrupt(adder).
+&gt;    c. If IsCallable(adder) is false, throw a TypeError exception.
+&gt;    d. Let iter be GetIterator(iterable).
+&gt;    e. ReturnIfAbrupt(iter).
+&gt; 8. If iter is undefined, return set.
+&gt; 9. Repeat
+&gt;    ...
+&gt;    f. Let status be Call(adder, set, «nextValue.[[value]]»).
+&gt;    g. If status is an abrupt completion, return IteratorClose(iter, status).
+
+This sequence means if `Set.prototype.add` throws an error, the constructor
+invocation may execute without throwing. In code:
+
+    var s;
+    Set.prototype.add = function() { throw new Error(); };
+    s = new Set([1]);  // No error thrown here
+    s.size === 0;      // true
+
+It seems wise to close the iterator regardless of &quot;status&quot;, but I think that if
+status is an abrupt completion, this should be forwarded.
+
+&gt; 9. Repeat
+&gt;    ...
+&gt;    f. Let status be Call(adder, set, «nextValue.[[value]]»).
+&gt;    g. If status is an abrupt completion, then
+&gt;       i. IteratorClose(iter, status).
+&gt;       ii. return status
+
+This pattern demonstrates the same behavior (an abrupt completion from
+IteratorClose is ignored), but it only does so in cases where an abrupt
+completion is already positioned to be returned.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14326</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-24 14:40:34 -0700</bug_when>
+    <thetext>(In reply to mike from comment #0)
+...
+&gt; 9. Repeat
+&gt;    ...
+&gt;    f. Let status be Call(adder, set, «nextValue.[[value]]»).
+&gt;    g. If status is an abrupt completion, return IteratorClose(iter, status).
+...
+&gt; 
+&gt;     var s;
+&gt;     Set.prototype.add = function() { throw new Error(); };
+&gt;     s = new Set([1]);  // No error thrown here
+&gt;     s.size === 0;      // true
+&gt; 
+&gt; It seems wise to close the iterator regardless of &quot;status&quot;, but I think that
+&gt; if
+&gt; status is an abrupt completion, this should be forwarded.
+
+No, that&apos;s not the iterator protocol WRT &apos;return&apos;.  &apos;Return&apos; is only called if a iterator driven loop terminates early.  It is not called on iterator exhaustion. See http://people.mozilla.org/~jorendorff/es6-draft.html#table-54 and also the for-of evaluation semantics.
+
+If status is an abrupt completion, it will indeed normally the the value that is returned in 9.g, because:
+
+&gt; 
+&gt; &gt; 9. Repeat
+&gt; &gt;    ...
+&gt; &gt;    f. Let status be Call(adder, set, «nextValue.[[value]]»).
+&gt; &gt;    g. If status is an abrupt completion, then
+&gt; &gt;       i. IteratorClose(iter, status).
+&gt; &gt;       ii. return status
+
+return IteratorClose(iter, status)
+
+essentially does the same as your steps g.i-ii above.  See http://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteratorclose 
+
+If iter does not have a &apos;return&apos; method, IteratorClose returns status. It also returns status if the &apos;return&apos; method is called, regardless of whether &apos;return&apos; has a normal or abrupt completion. The only cases where it doesn&apos;t return status is if an internal protocol violation is detected. 
+
+&gt; 
+&gt; This pattern demonstrates the same behavior (an abrupt completion from
+&gt; IteratorClose is ignored), but it only does so in cases where an abrupt
+&gt; completion is already positioned to be returned.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14327</commentid>
+    <comment_count>2</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-24 15:35:39 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; (In reply to mike from comment #0)
+&gt; &gt; &gt; 9. Repeat
+&gt; &gt; &gt;    ...
+&gt; &gt; &gt;    f. Let status be Call(adder, set, «nextValue.[[value]]»).
+&gt; &gt; &gt;    g. If status is an abrupt completion, then
+&gt; &gt; &gt;       i. IteratorClose(iter, status).
+&gt; &gt; &gt;       ii. return status
+&gt; 
+&gt; return IteratorClose(iter, status)
+&gt; 
+&gt; essentially does the same as your steps g.i-ii above.  See
+&gt; http://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteratorclose 
+&gt; 
+&gt; If iter does not have a &apos;return&apos; method, IteratorClose returns status. It
+&gt; also returns status if the &apos;return&apos; method is called, regardless of whether
+&gt; &apos;return&apos; has a normal or abrupt completion. The only cases where it doesn&apos;t
+&gt; return status is if an internal protocol violation is detected. 
+
+It&apos;s not the behavior of the `return` method that I am concerned about. It is
+when the &quot;adder&quot; function (Set.prototype.add in the running example) itself
+throws an error. Under these conditions, the abrupt completion is referenced
+to decide whether IteratorClose should be called. But after that, it is
+discarded--the constructor returns the completion of IteratorClose instead.
+
+This means that it is possible for a normal completion to be returned from the
+constructor even when Call(adder, set, «nextValue.[[value]]») returns an
+abrupt completion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14328</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-24 18:12:45 -0700</bug_when>
+    <thetext>(In reply to mike from comment #2)
+
+&gt; 
+&gt; It&apos;s not the behavior of the `return` method that I am concerned about. It is
+&gt; when the &quot;adder&quot; function (Set.prototype.add in the running example) itself
+&gt; throws an error. Under these conditions, the abrupt completion is referenced
+&gt; to decide whether IteratorClose should be called. But after that, it is
+&gt; discarded--the constructor returns the completion of IteratorClose instead.
+
+Nope, the abnormal completion from the add call (&apos;status&apos;) is passed as the second argument into IteratorClose and that completion record is what is returned usually returned as the conpletion value of IteratorClose and then returned as the completion value of the Set function.
+
+&gt; 
+&gt; This means that it is possible for a normal completion to be returned from
+&gt; the
+&gt; constructor even when Call(adder, set, «nextValue.[[value]]») returns an
+&gt; abrupt completion.
+
+Nope, see http://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteratorclose .
+
+If the value passed ;as the second argument to IteratorClose is an abrupt completion (and it always is) there is no path through IteratorClose that returns a normal completion.
+
+What about the expression of IteratorClose or the Set/etc. algorithms mades this difficult for you to see? What would make it clearer for you? Would it be clearer if step g said:
+  g. If status is an abrupt completion, return Completion(IteratorClose(iter, status)).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14329</commentid>
+    <comment_count>4</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-25 10:27:46 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; Nope, the abnormal completion from the add call (&apos;status&apos;) is passed as the
+&gt; second argument into IteratorClose and that completion record is what is
+&gt; returned usually returned as the conpletion value of IteratorClose and then
+&gt; returned as the completion value of the Set function.
+
+Ah, now I understand.
+
+&gt; What about the expression of IteratorClose or the Set/etc. algorithms mades
+&gt; this difficult for you to see? What would make it clearer for you? Would it
+&gt; be clearer if step g said:
+&gt;   g. If status is an abrupt completion, return
+&gt; Completion(IteratorClose(iter, status)).
+
+Thanks for offering an alternative, but I don&apos;t think that version would
+have helped me in this case. It was/is very clear to me that the completion
+from IteratorClose is being returned in 9.g. The piece I was missing was how
+IteratorClose accepts status and returns it again. I don&apos;t have any
+suggestions on how to make this detail clearer; in this case, the problem
+comes down to a careless reading. I appreciate your patience (as always) and
+apologize for the noise!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

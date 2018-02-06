@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2884</bug_id>
+          
+          <creation_ts>2014-05-22 09:23:00 -0700</creation_ts>
+          <short_desc>for-of and Array.from treat strings as iterable; nothing else does</short_desc>
+          <delta_ts>2014-07-18 14:27:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8576</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-22 09:23:31 -0700</bug_when>
+    <thetext>Features using the `for-of` syntax consistently use ToObject, which means strings are iterable. For example, in &quot;12.2.4.2.4 Runtime Semantics: ComprehensionComponentEvaluation&quot;:
+&gt; 3. Let obj be ToObject(exprValue).
+&gt; 4. ReturnIfAbrupt(obj).
+&gt; 5. Let keys be GetIterator(obj).
+
+Array.from also uses ToObject() on its argument.
+
+But in &quot;12.2.4.1.2 Runtime Semantics: ArrayAccumulation&quot;:
+&gt; 4. If Type(spreadObj) is not Object, then throw a TypeError exception.
+&gt; 5. Let iterator be GetIterator(spreadObj).
+
+Incidentally, step 4 is technically redundant there, as GetIterator(x) step 2 throws a TypeError if x is primitive.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8578</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-22 09:52:48 -0700</bug_when>
+    <thetext>The ES6 spec is missing a high-level prose phrase that can be used in algorithms and means &quot;now use ES6 iteration&quot;.
+
+It could define one; here&apos;s how it might look, using Array.from step 8 as an example, (modified lines marked with !):
+&gt; 8.  If usingIterator is not undefined, then
+&gt;     a.  If IsConstructor(C) is true, then
+&gt;         i.  Let A be the result of calling the [[Construct]] internal method of C with an empty argument list.
+&gt;     b.  Else,
+&gt;         i.  Let A be ArrayCreate(0).
+&gt;     c.  ReturnIfAbrupt(A).
+&gt;     d.  Let k be 0.
+&gt;!    e.  Repeat, for each value nextValue produced by iterating over items
+&gt;         i.  Let Pk be ToString(k).
+&gt;         ii. If mapping is true, then
+&gt;             1.  Let mappedValue be the result of calling the [[Call]]
+&gt;                 internal method of mapfn with T as thisArgument and
+&gt;                 (nextValue, k) as argumentsList.
+&gt;             2.  ReturnIfAbrupt(mappedValue).
+&gt;         iii. Else, let mappedValue be nextValue.
+&gt;         iv. Let defineStatus be CreateDataPropertyOrThrow(A, Pk, mappedValue).
+&gt;         v.  ReturnIfAbrupt(defineStatus).
+&gt;         vi. Increase k by 1.
+&gt;!    f.  Let putStatus be Put(A, &quot;length&quot;, k, true).
+&gt;!    g.  ReturnIfAbrupt(putStatus).
+&gt;!    h.  Return A.
+
+I think this would making mean adding a note in &quot;5.2 Algorithm Conventions&quot; that says something like:
+
+    A step in an algorithm that says &quot;Repeat for each value x produced by
+    iterating through y,&quot; followed by a list of substeps, means the same
+    thing as these steps:
+
+    1.  Let iterator be GetIterator(y).
+    2.  ReturnIfAbrupt(iterator).
+    3.  Let x be NextValue(iterator).
+    4.  ReturnIfAbrupt(x).
+    5.  Repeat, until x is **empty**
+        a.  Perform the substeps listed.
+        b.  Set x to NextValue(iterator).
+        c.  ReturnIfAbrupt(x).
+
+with NextValue appropriately defined elsewhere. ReturnIfAbrupt is already defined as a sort of macro-expansion, so this should work.
+
+I think other specifications (particularly WebIDL) would love to have convenient-but-precise language for this. But quite apart from any external benefit, it would make the ES6 algorithms a lot easier to read.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8581</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 10:42:11 -0700</bug_when>
+    <thetext>In JS code an expression like:
+   &quot;abc&quot;[Symbol.iterator]
+is equivalent to
+   Object(&quot;abc&quot;)[Symbol.iterator]
+
+(see 6.2.3.1)
+
+So, in generally strings should act as Iterables. In looks like I need to carefully review uses of GetIterator and add use ToObject appropriately for the supposedly Iterable values. 
+
+However, TC39 explicitly decided that they didn&apos;t want to ToObject the source value or default values of destructing.  For example:
+
+   {replace, slice} = &quot;&quot;;  //this throws becase RHS is not an object
+
+So, does this rule also apply to the spread operator in array leterals?  Maybe it shouldn&apos;t
+
+ let codepoints = [...someString];
+
+seems like a very nice way to parse a string into its individual code points.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9205</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 11:02:05 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+Strings are treated as iterable by:
+spread, yield *, comprehensions, Set/WeakSet(iterable)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9273</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:27:37 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3979</bug_id>
+          
+          <creation_ts>2015-02-17 13:44:00 -0800</creation_ts>
+          <short_desc>13.4 + 13.6 + 15.2.3: font of brackets/braces in productions</short_desc>
+          <delta_ts>2015-03-04 18:58:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12835</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-17 13:44:11 -0800</bug_when>
+    <thetext>In each of these cases, one or more square brackets and/or curly braces appearing in a production is in serif font, should be in sans-serif. (I&apos;ve marked the offending characters with underscores.)
+
+13.4 / Syntax / prod 1
+ExpressionStatement[Yield] :
+   [lookahead not-in {{, function, class, let [ _}_ _]_ Expression[In, ?Yield] ;
+
+
+13.6 / Syntax / prod 1
+IterationStatement[Yield, Return] :
+   ...
+   for ( [lookahead not-in {let [ _}_ _]_ Expression[?Yield]opt ; ...
+   ...
+   for ([lookahead ≠ let _]_ LeftHandSideExpression[?Yield] of ...
+   ...
+
+
+15.2.3 / Syntax / prod 1
+ExportDeclaration :
+   ...
+   export default [lookahead not-in { function, class } _]_
+      AssignmentExpression _[_ In _]_  ;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12836</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 14:11:19 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13010</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:51 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13175</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-19 22:09:36 -0800</bug_when>
+    <thetext>rev34 still has this one:
+
+13.6 / Syntax / prod 1
+IterationStatement[Yield, Return] :
+    ...
+    for ([lookahead ≠ let _]_ LeftHandSideExpression[?Yield] of ...
+    ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13176</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-19 22:24:28 -0800</bug_when>
+    <thetext>And in this one, you fixed the square bracket but not the curly brace:
+
+13.4 / Syntax / prod 1
+ExpressionStatement[Yield] :
+   [lookahead not-in {{, function, class, let [ _}_ ] Expression[In, ?Yield] ;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13321</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 14:19:53 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13487</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:14 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1574</bug_id>
+          
+          <creation_ts>2013-07-03 14:59:00 -0700</creation_ts>
+          <short_desc>15.10.2 summary of &quot;web reality&quot; regexp syntax extensions</short_desc>
+          <delta_ts>2013-10-29 12:12:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>pruiz9999</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4350</commentid>
+    <comment_count>0</comment_count>
+    <who name="">pruiz9999</who>
+    <bug_when>2013-07-03 14:59:16 -0700</bug_when>
+    <thetext>There has been plenty of discussion of &quot;web reality&quot; syntax extensions to the ES5.1 regexp syntax. Over the past few years the main browsers seem to have mostly converged on how to interpret malformed patterns.
+
+There seem to be 5 &quot;web reality&quot; extensions:
+- Handling of malformed {n,m} quantifiers
+- Look ahead assertions quantifiable
+- Octal escapes and their interaction with Decimal escapes (back references)
+- Malformed class ranges
+- Malformed control escapes (\cA)
+
+Rather than a lengthy prose description, I currently find that the Yarr parser
+https://github.com/WebKit/webkit/blob/master/Source/JavaScriptCore/yarr/YarrParser.h
+captures the &quot;web reality&quot; extensions as implemented by IE, FF, Chrome and Safari, and that in less than 1000 lines of heavily commented code.
+
+In this area, there seems to be only one browser disagreement left:
+- FF and Safari accept the octal escape \0000 as identical to \0
+- Chrome and IE understand \0000 as \000 (i.e. \0) followed by &apos;0&apos;
+The latter implementation seems to make more sense, as it matches with the handling of octal escapes in strings in all 4 browsers. The Yarr parser implements the former.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4385</commentid>
+    <comment_count>1</comment_count>
+    <who name="">pruiz9999</who>
+    <bug_when>2013-07-12 14:28:36 -0700</bug_when>
+    <thetext>The handling of \0000 seems to be a Yarr implementation bug:
+- Yarr limits octals to \0377
+- Pre-yarr Firefox has the same behaviour as IE and Chrome today</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4386</commentid>
+    <comment_count>2</comment_count>
+    <who name="">pruiz9999</who>
+    <bug_when>2013-07-12 14:47:14 -0700</bug_when>
+    <thetext>There is another difference: the handling of \8 and \9 in patterns when there is no eighth or ninth capture:
+- IE and Chrome say \8 equals &apos;8&apos; (identity escape, as in literal strings)
+- Safari and FF say \8 equals &apos;\&apos; + &apos;8&apos; (malformed pattern taken as literal atoms)
+
+In this case it is not a Yarr issue, as pre-yarr FF handles this the same way as current FF. I guess either interpretation could be argued to conform to the principle of least surprise. 
+
+My gut feel is that this pattern is very rarely seen in &quot;web reality&quot;, but I have no data to support this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6181</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 12:12:15 -0700</bug_when>
+    <thetext>Rev20 Annex B now contains the &quot;web reality&quot; spec. prepared by Luke Hoban http://wiki.ecmascript.org/doku.php?id=strawman:match_web_reality_spec 
+
+If you see any issue with it you should report them as separate bugs.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

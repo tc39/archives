@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4296</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>11.3.3 Intl.NumberFormat.prototype.format</short_desc>
+          <delta_ts>2015-04-29 09:53:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14251</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:06 -0700</bug_when>
+    <thetext>11.3.3 Intl.NumberFormat.prototype.format
+
+Step 2: Remove colon
+
+Step 2.a.i: Omit &quot;then&quot;
+
+Step 2.a.iv: Omit &quot;the result of&quot;
+
+Step 2.b: Missing .length (and .name property) for bound function (cf. bug 4288)
+
+Step 2.a: Move to separate section? (cf. bug 4288)
+
+---
+11.3.3.1 NumberFormat Format Functions
+
+A NumberFormat format function is an anonymous function that takes one argument value, and performs the following steps:
+
+1. Let nf be the this value.
+2. Assert: Type(nf) is Object and nf has an [[initializedNumberFormat]] internal slot whose value is true.
+3. If value is not provided, let value be undefined.
+4. Let x be ToNumber(value).
+5. ReturnIfAbrupt(x).
+6. Return FormatNumber(nf, x).
+---
+
+==========
+
+FormatNumber abstract operation
+
+Step 7: Remove colon
+
+==========
+
+ToRawPrecision abstract operation
+
+Step 8.b: Remove colon
+
+==========
+
+ToRawFixed abstract operation
+
+Step 7: Remove colon</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14270</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 19:42:39 -0700</bug_when>
+    <thetext>&gt; Step 2: Remove colon
+&gt; Step 2.a.i: Omit &quot;then&quot;
+
+These are remnants of 1st Edition. Today was the deadline and removing colons and the word &quot;then&quot; in a panic all night is not a good use of anyone&apos;s time.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14271</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 19:48:38 -0700</bug_when>
+    <thetext>
+&gt; Step 2.b: Missing .length (and .name property) for bound function (cf. bug 4288)
+&gt; Step 2.a: Move to separate section? (cf. bug 4288)
+
+&gt; 11.3.3.1 NumberFormat Format Functions
+...
+
+
+Added</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14334</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 09:06:01 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #1)
+&gt; &gt; Step 2: Remove colon
+&gt; &gt; Step 2.a.i: Omit &quot;then&quot;
+&gt; 
+&gt; These are remnants of 1st Edition. Today was the deadline and removing
+&gt; colons and the word &quot;then&quot; in a panic all night is not a good use of
+&gt; anyone&apos;s time.
+
+Sure, I understand that. That&apos;s just minor nit-picking to align the style with ES2015, but it&apos;s totally up to you if you want to mimic Allen&apos;s style from ES2015. You&apos;re the editor of the ECMA-402 spec, so I&apos;m also ok if you prefer a different style or if you say you don&apos;t care about these things. (TBH, actually I don&apos;t even care about most editorial issues. I do report them, but I think technical issues are by far more interesting.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14341</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-29 09:53:28 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #3)
+&gt; (In reply to Rick Waldron from comment #1)
+&gt; &gt; &gt; Step 2: Remove colon
+&gt; &gt; &gt; Step 2.a.i: Omit &quot;then&quot;
+&gt; &gt; 
+&gt; &gt; These are remnants of 1st Edition. Today was the deadline and removing
+&gt; &gt; colons and the word &quot;then&quot; in a panic all night is not a good use of
+&gt; &gt; anyone&apos;s time.
+&gt; 
+&gt; Sure, I understand that. That&apos;s just minor nit-picking to align the style
+&gt; with ES2015, but it&apos;s totally up to you if you want to mimic Allen&apos;s style
+&gt; from ES2015. You&apos;re the editor of the ECMA-402 spec, so I&apos;m also ok if you
+&gt; prefer a different style or if you say you don&apos;t care about these things.
+&gt; (TBH, actually I don&apos;t even care about most editorial issues. I do report
+&gt; them, but I think technical issues are by far more interesting.)
+
+I ended up making every single change that you reported ;)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

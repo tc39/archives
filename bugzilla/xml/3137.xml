@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3137</bug_id>
+          
+          <creation_ts>2014-08-15 07:37:00 -0700</creation_ts>
+          <short_desc>22.1.3.24 Array.prototype.sort: apply ToNumber on the result of compareFn in order to match web reality</short_desc>
+          <delta_ts>2015-02-19 19:11:09 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>3089</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9791</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 07:37:37 -0700</bug_when>
+    <thetext>Array.prototype.sort() is specced to have an implementation-defined behaviour if the provided comparison function does not return a number. Testing current versions of popular web browsers reveals that, in reality, all of them do a `ToNumber()` conversion on the result of `compareFn` (see Comment #1 for the testcase).
+
+Therefore, step 17 of the SortCompare abstract operation (22.1.3.24.1 and 22.2.3.26) should be modified as follows:
+
+17. If the argument comparefn is not undefined, then
+  (steps a, b, c unchanged)
+  d. Let vNum be ToNumber(v).
+  e. ReturnIfAbrupt(vNum).
+  f. If vNum &lt; 0, then return -1.
+  g. If vNum &gt; 0, then return 1.
+  h. Return +0.
+
+Steps f-h are a further refinement (maybe not really needed), ensuring that all results &gt; 0, resp. &lt; 0, are considered equivalent. With the above changes, the SortCompare() operation returns either -1, 1 or +0, or an abrupt completion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9792</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 07:41:49 -0700</bug_when>
+    <thetext>The testcase I used was the following: 
+
+    var a = []
+    for (var i = 0; i &lt; 5; i++) {
+        a[i] = Math.random()
+    }
+
+    function compareFn(a, b) {
+        console.log(&quot;compareFn called with arguments &quot;, a, b)
+        var result = a - b
+        return { valueOf: function() { 
+            console.log(&quot;valueOf called!&quot;); 
+            return result  
+        } }
+    }
+
+    a.sort(compareFn)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9794</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 08:31:40 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #1)
+In order to convince oneself that implementations really do a ToNumber() and not just a ToPrimitive(), further test is needed. In the testcase of Comment #1, try to replace the following line
+
+            return result  
+
+with one of the below:
+
+(1) return &apos; 000&apos; + result + &apos;  &apos;
+
+In that case, ToNumber() produces the value of `result`, and the array is correctly sorted.
+
+(2) return result + &apos; f&apos;
+
+In that case, ToNumber() produces NaN, and the array may not be sorted. Experience shows that implementations indeed call `compareFn` a fixed number of times (4 or 8 times, depending of the implementation, for an array of length 5), and do not change the order of the elements of array.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12557</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 10:27:15 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+Added the ToNumber
+
+didn&apos;t add the normalization to -1, 1. That seems like an &quot;improvement&quot; that isn&apos;t strictly motivated trying to match current implementation behavior.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13145</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:09 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

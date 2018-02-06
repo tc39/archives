@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4009</bug_id>
+          
+          <creation_ts>2015-02-18 20:23:00 -0800</creation_ts>
+          <short_desc>nonterminal name &quot;InputElementDiv&quot;</short_desc>
+          <delta_ts>2015-02-19 09:10:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12958</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 20:23:50 -0800</bug_when>
+    <thetext>In ES5, the nonterminal name &quot;InputElementDiv&quot; made sense, because the thing that made it distinct from the only other lexical goal symbol (InputElementRegExp) was that it derived DivPunctuator.
+
+In ES6, that&apos;s no longer the case, since InputElementTemplateTail also derives DivPunctuator.
+
+There isn&apos;t a clearly good name to replace it with though. If the other InputElement* are named for whether they derive RegExp and/or TemplateTail,
+then this would be &quot;InputElementNeither&quot;, which looks odd.
+
+&quot;InputElementOther&quot;?
+
+&quot;InputElementDefault&quot;?
+
+-----
+
+(A more radical approach would be to rename all the InputElement*, naming each according to how it handles
+(a) solidus
+    (i.e., whether it derives RegularExpressionLiteral or DivPunctuator),
+and
+(b) right brace
+    (i.e., whether it derives TemplateSubstitutionTail or RightBracePunctuator)
+but I&apos;m doubtful that this is a good idea.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12961</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-19 06:57:02 -0800</bug_when>
+    <thetext>Or, to proceed from the latter suggestion, you could define the single nonterminal &quot;InputElement&quot; with two parameters RE and TT:
+
+    InputElement[RE, TT]:
+        WhiteSpace
+        LineTerminator
+        Comment
+        Token
+        [~RE]DivPunctuator
+        [+RE]RegularExpressionLiteral
+        [~TT]RightBracePunctuator
+        [+TT]TemplateSubstitutionTail
+
+This has the advantages of
+(1) compactness and
+(2) highlighting the differences between the variants of InputElement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12966</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 09:10:52 -0800</bug_when>
+    <thetext>I kind of like the parameterized approach, but I don&apos;t want to try to rewrite the accompanying explanatory material now.
+
+So, I&apos;m deferring this one to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>512</bug_id>
+          
+          <creation_ts>2012-07-12 09:50:00 -0700</creation_ts>
+          <short_desc>7.8.4 and dependents: Unify CV and SV</short_desc>
+          <delta_ts>2015-02-11 22:09:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1288</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 09:50:46 -0700</bug_when>
+    <thetext>Section 7.8.4 defines string values (SV) and character values (CV). Presumably these were treated separately in the past because a CV was meant to be exactly one character or code unit (thought to be the same in the past). This wasn&apos;t quite correct because some CVs were actually empty sequences. With the introduction of the two-code-unit sequences necessary for supplementary characters a CV yet more looks like a string.
+
+I recommend getting rid of CVs and explaining string value generation entirely in terms of SVs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11011</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-11 11:08:08 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11150</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:24 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12355</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 22:09:33 -0800</bug_when>
+    <thetext>Verified fixed in rev 32 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

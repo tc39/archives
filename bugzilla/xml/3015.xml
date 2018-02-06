@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3015</bug_id>
+          
+          <creation_ts>2014-07-21 12:31:00 -0700</creation_ts>
+          <short_desc>Default iterator for generators?</short_desc>
+          <delta_ts>2015-10-15 17:06:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9444</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-21 12:31:26 -0700</bug_when>
+    <thetext>Could generators (the function objects themselves) have a default iterator (actually on GeneratorFunctionPrototype), which just invokes the iterator itself?
+
+For example:
+
+
+(function*(){}).__proto__[Symbol.iterator] = function(){ return this.apply(this,arguments); };
+
+
+That would make generators a tad more consistent with other data structures (like arrays, for instance) which have a default iterator.
+
+Now, if you have a `for..of` loop that can either iterate over a generator or an array (or other structures with built-in/default iterators), you don&apos;t need to fork to manually get the iterator for the loop. This is very nice:
+
+
+function drainIterator(o) {
+   for (var v of o) {
+      console.log(v);
+   }
+}
+
+drainIterator( [1,2,3] ); // 1 2 3
+drainIterator( function*(){ yield 1; yield 2; yield 3; } ); // 1 2 3
+
+
+Short of making my own default iterator (like above), which feels &quot;wrong&quot;, I have to fork logic in such a utility:
+
+
+function drainIterator(o) {
+   var it;
+
+   if (typeof o === &quot;function&quot;) it = o();
+   else it = o[Symbol.iterator]();
+
+   for (var v of it) {
+      console.log(v);
+   }
+}
+
+
+Works, but less attractive.
+
+Having the default iterator on the GeneratorFunctionPrototype object, as shown, certainly wouldn&apos;t prevent you from calling the generator to make an iterator for the loop (`for (var v of foo(42)) { .. }`), it would just make the default case optional.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9445</commentid>
+    <comment_count>1</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-21 12:32:40 -0700</bug_when>
+    <thetext>sorry, correction:  &quot;which just invokes the    generator   itself&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14807</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:06:32 -0700</bug_when>
+    <thetext>Proposals should use the proposal process documented here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

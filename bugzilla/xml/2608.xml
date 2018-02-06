@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2608</bug_id>
+          
+          <creation_ts>2014-04-08 12:39:00 -0700</creation_ts>
+          <short_desc>CatchParameter Early Error: VarDeclaredNames</short_desc>
+          <delta_ts>2014-05-06 17:03:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kevin Smith">zenparsing</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7628</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-04-08 12:39:31 -0700</bug_when>
+    <thetext>Per 13.14.1, it is a syntax error if any bindings from CatchParameter also exist in the VarDeclaredNames of the catch block.  This would appear to be a breaking change for the following case:
+
+    try {} catch (x) { var x }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7760</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 16:17:27 -0700</bug_when>
+    <thetext>yes, see discussion in April TC39 meeting notes https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-04/apr-8.md#var-hoisting-and-catch-parameters</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7791</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 12:09:29 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+Annex B variation added</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8200</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 17:03:44 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

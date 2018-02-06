@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>86</bug_id>
+          
+          <creation_ts>2011-04-08 16:19:00 -0700</creation_ts>
+          <short_desc>Certain Sputnik tests run incredibly slowly by design.</short_desc>
+          <delta_ts>2011-07-07 07:49:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Low</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>181</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-04-08 16:19:09 -0700</bug_when>
+    <thetext>There are a number of Sputnik tests (mostly testing S15.1.3.1 and S15.1.3.2) that run quite slowly across all modern web browsers.  This has caused a bit of confusion with some people believing their browser has hung on particularly slow machines (think netbooks here).  Ideally we&apos;d break these up into several test cases where each takes under a second to run on reasonable hardware with the majority of browsers.  Any ways, one such &apos;slow&apos; running test is S15.1.3.1_A1.11_T2.js which is performing string operations in a nested for loop.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3468</bug_id>
+          
+          <creation_ts>2014-12-17 13:01:00 -0800</creation_ts>
+          <short_desc>21.2.5.11 RegExp.prototype [ @@split ]: Inconsistent lastIndex conversion</short_desc>
+          <delta_ts>2014-12-23 20:23:32 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11071</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-17 13:01:29 -0800</bug_when>
+    <thetext>21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+
+Step 23.f.i uses ToLength to convert the &quot;lastIndex&quot; property, other algorithms use ToInteger instead.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11083</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-17 17:48:44 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+ToLength looks like the better choice for almost all of places in these algorithms that retrieve &apos;lastIndex&apos;. So I changed all of them where it seems appropriate.
+
+It might be even better to throw if the &apos;lastIndex&apos; value is outside of toLength range, but I didn&apos;t make that change.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11207</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:32 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

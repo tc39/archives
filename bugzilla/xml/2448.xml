@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2448</bug_id>
+          
+          <creation_ts>2014-01-27 07:35:00 -0800</creation_ts>
+          <short_desc>BE spelling &quot;behaviour&quot;, &quot;initialise&quot;, &quot;normalise&quot;</short_desc>
+          <delta_ts>2014-06-16 14:33:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7017</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-27 07:35:54 -0800</bug_when>
+    <thetext>behavior -&gt; behaviour:
+- 6.1.7.3 Invariants of the Essential Internal Methods, 2nd paragraph
+- 7.5.2 PromiseBuiltinCapability, NOTE
+- 7.5.3 PromiseOf, NOTE
+- 25.4.3.1 Promise, last paragraph
+- 26.3.3.18.5 Loader.prototype.instantiate, 3rd paragraph
+
+initialize -&gt; initialise:
+- 8.2.1 CreateRealm, step 2
+- 19.1.1 The Object Constructor, NOTE
+- 25.4.1.5 NewPromiseCapability, 1st paragraph
+- 26.3.4  Properties of %Loader% Instances, 1st paragraph
+- 26.3.5.1 CreateLoaderIterator, step 1
+- 26.5.1.2 new Proxy, 1st paragraph
+
+normalize -&gt; normalise:
+- 6.1.4 The String Type, 2nd paragraph
+- 11.6.1.1 Early Errors, NOTE
+- 11.8.6.1 TV’s and TRV’s, NOTE
+- 15.2.3.1, Table 33, &quot;meaning&quot; column for [[Modules]]
+- 15.2.3.2, Table 34, &quot;meaning&quot; column for [[Name]] and [[Dependencies]]
+- 15.2.3.2.1 CreateLoad, 1st paragraph
+- 15.2.4.2 RequestLoad, 1st paragraph, 3rd paragraph
+- 15.2.4.7.1 AsyncStartLoadPartwayThrough, 1st paragraph
+- 26.3.3.6 Loader.prototype.get, 1st paragraph
+- 26.3.3.18.2 Loader.prototype.locate, 2nd paragraph</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8404</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-13 18:12:42 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+fixed the &quot;behaviors&quot;
+
+we&apos;ve decided to use ize instead of ise.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8976</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:33:53 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

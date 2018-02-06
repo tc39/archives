@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3005</bug_id>
+          
+          <creation_ts>2014-07-10 13:10:00 -0700</creation_ts>
+          <short_desc>disagreement on whether parameter/let binding conflict should be error</short_desc>
+          <delta_ts>2014-08-07 14:07:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9143</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-10 13:10:50 -0700</bug_when>
+    <thetext>see Bug 2984
+
+Spec currently says
+  function f(x) {
+      let x
+  }
+
+is an early error.  Also same for
+   try {} catch(x) {let x]}
+
+Andreas Rossberg disagrees.  Says shouldn&apos;t be an error because body is a separate scope.
+
+Need to resolve this at a TC39 meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9220</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-07-16 00:04:07 -0700</bug_when>
+    <thetext>See also: https://mail.mozilla.org/pipermail/es-discuss/2014-July/038358.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9221</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-16 14:18:24 -0700</bug_when>
+    <thetext>or see http://esdiscuss.org/topic/uniform-block-scoping</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9717</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 14:07:39 -0700</bug_when>
+    <thetext>July 201`4 UC39 meeting decided to leave as early errors.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

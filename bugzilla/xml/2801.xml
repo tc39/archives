@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2801</bug_id>
+          
+          <creation_ts>2014-05-03 10:05:00 -0700</creation_ts>
+          <short_desc>chapter 13: misc editorial</short_desc>
+          <delta_ts>2014-06-01 10:46:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8101</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:05:31 -0700</bug_when>
+    <thetext>----------------------------------------
+In 13.6.3.1 &quot;Static Semantics: VarDeclaredNames&quot;:
+
+{1}
+13.6.3.1 / group 1 / production:
+IterationStatement : for ( &lt;lookahead-constraint&gt; Expression_opt ; ...
+    Remove the lookahead-constraint.
+
+----------------------------------------
+In 13.6.3.2 &quot;Static Semantics: VarScopedDeclarations&quot;:
+
+{2}
+13.6.3.2 / group 1 / production:
+IterationStatement : for ( &lt;lookahead-constraint&gt; Expression_opt ; ...
+    Remove the lookahead-constraint.
+
+----------------------------------------
+In 13.6.4.4 &quot;Static Semantics: VarScopedDeclarations&quot;:
+
+{3}
+13.6.4.4 / group 2 / step 1:
+Let /declarations/ be the VarScopedDeclarations of /ForBinding/.
+    VarScopedDeclaration isn&apos;t defined on ForBinding.
+
+{4}
+13.6.4.4 / group 5 / step 1:
+Let /declarations/ be the BoundNames of VarScopedDeclarations.
+    Doesn&apos;t make sense.
+
+----------------------------------------
+In 13.6.4.6 &quot;Runtime Semantics: LabelledEvaluation&quot;:
+
+{5}
+13.6.4.6 / group 3 / step 1:
+Let /keyResult/ be the result of performing ForIn/OfExpressionEvaluation(
+BoundNames of /ForDeclaration/,,/Expression/, `enumerate`, /labelSet/).
+    s|,,|, |
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8229</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 16:32:59 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8736</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 10:46:12 -0700</bug_when>
+    <thetext>confirmed fixed, modulo Bug 2943.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

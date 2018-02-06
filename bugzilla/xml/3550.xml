@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3550</bug_id>
+          
+          <creation_ts>2015-01-16 04:41:00 -0800</creation_ts>
+          <short_desc>new Object(value), for value != null, is no longer equivalent to ToObject(value)</short_desc>
+          <delta_ts>2015-07-10 08:35:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11473</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-16 04:41:04 -0800</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #3544 +++
+
+[removing noise of Bug #3544]
+
+19.1.1.1 Object([ value ])
+
+As specced in Rev 31, `new Object(foo)`, for foo != null, is now just equivalent to `new Object()` instead of ToObject(foo).
+
+One should revert to the definition of Rev 30, that is removing the newly added step 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11475</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-16 04:41:45 -0800</bug_when>
+    <thetext>*** Bug 3544 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11493</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-16 08:59:33 -0800</bug_when>
+    <thetext>Better fix: modify step 1 the following way:
+
+1. If NewTarget is neither null nor the active function object, then,
+    a. Return etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11510</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-16 10:33:15 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11773</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-31 06:45:32 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; fixed in rev32 editor&apos;s draft
+
+I assume this was changed in the following way. Correct?
+
+---
+1. If NewTarget is null, let newTarget be the active function object, else let newTarget be NewTarget.
+2. If value is null, undefined or not supplied, return OrdinaryCreateFromConstructor(newTarget, &quot;%ObjectPrototype%&quot; ).
+3. Return ToObject(value).
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11795</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-31 08:43:54 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #4)
+
+Consider:
+
+    class Foo extends Object { }
+    new Foo(3)
+
+With your algorithm you obtain a Number object. I think that the spec intent is to produce an instance of Foo.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11796</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-31 09:02:09 -0800</bug_when>
+    <thetext>(In reply to Claude Pache from comment #5)
+&gt; (In reply to André Bargull from comment #4)
+&gt; 
+&gt; Consider:
+&gt; 
+&gt;     class Foo extends Object { }
+&gt;     new Foo(3)
+&gt; 
+&gt; With your algorithm you obtain a Number object. I think that the spec intent
+&gt; is to produce an instance of Foo.
+
+Ah I see. What about this solution? Step 3 should handle the Object called from sub-class constructor issue.
+
+---
+1. Let activeF be the active function object.
+2. If NewTarget is null, let newTarget be activeF, else let newTarget be NewTarget.
+3. If SameValue(activeF, newTarget) is false, return OrdinaryCreateFromConstructor(newTarget, &quot;%ObjectPrototype%&quot;).
+4. If value is null, undefined or not supplied, return OrdinaryCreateFromConstructor(newTarget, &quot;%ObjectPrototype%&quot;).
+5. Return ToObject(value).
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11815</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-31 14:43:34 -0800</bug_when>
+    <thetext>Here is the algorithm I actually used for Comment 3
+
+1.	If NewTarget is neither undefined nor the active function, then,
+   a.	   Return OrdinaryCreateFromConstructor(NewTarget, &quot;%ObjectPrototype%&quot;).
+2.	If value is null, undefined or not supplied, return ObjectCreate(%ObjectPrototype%).
+3.	Return ToObject(value).
+
+(note the [[call]] state of NewTarget has now been changed from null to undefined)
+
+note that by step 2 we know that NewTarget is either undefined or a Object constructor function, so we can use ObjectCreate instead of OrdinaryCreate...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11853</commentid>
+    <comment_count>8</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-01 04:53:14 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #7)
+&gt; note that by step 2 we know that NewTarget is either undefined or a Object
+&gt; constructor function, so we can use ObjectCreate instead of OrdinaryCreate...
+
+That means I have to re-open bug 3136. Here&apos;s another test case for bug 3136:
+---
+function cloneWithProto(constructor, prototype) {
+  return Object.defineProperty(constructor.toMethod({}), &quot;prototype&quot;, {value: prototype});
+}
+
+for (var constructor of [Object, Array, Date, Error, TypeError, RegExp, String, Boolean, Number]) {
+  var clone = cloneWithProto(constructor, {});
+  var obj = new clone();
+  print(Object.getPrototypeOf(obj) === clone.prototype);
+}
+---
+
+The above program prints &quot;true&quot; for every constructor function except for `Object`. Changing ObjectCreate to ObjectCreateFromConstructor will align `Object`&apos;s behaviour to be in line with the other built-in constructor functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11868</commentid>
+    <comment_count>9</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-02 08:24:14 -0800</bug_when>
+    <thetext>(In reply to Claude Pache from comment #5)
+&gt; (In reply to André Bargull from comment #4)
+&gt; 
+&gt; Consider:
+&gt; 
+&gt;     class Foo extends Object { }
+&gt;     new Foo(3)
+&gt; 
+&gt; With your algorithm you obtain a Number object. I think that the spec intent
+&gt; is to produce an instance of Foo.
+
+I actually think this should create an `[object Number]` exotic object. The prototype chain will still have Foo.prototype on it.
+
+That would be much more consistent with the rest of the semantics.
+
+  class C extends Object {}
+
+is very different from
+
+  class C {}
+
+The former has class side inheritance and the instance object is created by calling [[Construct]] on Object with NewTarget passed along.
+
+A similar case would be if I have a base class that might create a typed array in some cases and a plain array in other cases.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11870</commentid>
+    <comment_count>10</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-02 09:18:48 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #9)
+&gt; (In reply to Claude Pache from comment #5)
+&gt; &gt; (In reply to André Bargull from comment #4)
+&gt; &gt; 
+&gt; &gt; Consider:
+&gt; &gt; 
+&gt; &gt;     class Foo extends Object { }
+&gt; &gt;     new Foo(3)
+&gt; &gt; 
+&gt; &gt; With your algorithm you obtain a Number object. I think that the spec intent
+&gt; &gt; is to produce an instance of Foo.
+&gt; 
+&gt; I actually think this should create an `[object Number]` exotic object. The
+&gt; prototype chain will still have Foo.prototype on it.
+&gt; 
+
+Maybe, but I doubt that anyone would willfully construct a Number object without `Number.prototype` in its prototype chain using that syntax. DDWIDM.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12027</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:39:02 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

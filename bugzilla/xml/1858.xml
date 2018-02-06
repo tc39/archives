@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1858</bug_id>
+          
+          <creation_ts>2013-08-29 06:35:00 -0700</creation_ts>
+          <short_desc>More ToInteger() / ToUint32() -&gt; ToLength() changes</short_desc>
+          <delta_ts>2013-10-29 09:46:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5267</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-29 06:35:54 -0700</bug_when>
+    <thetext>ToInteger() resp. ToUint32() could possibly be replaced with ToLength() at the following positions:
+
+
+9.3.12 CreateListFromArrayLike, step 3.
+
+11.1.4.1, Runtime Semantics: Array Accumulation, &quot;SpreadElement : ...AssignmentExpression&quot;, step 6.
+
+11.2.5.1, Runtime Semantics: ArgumentListEvaluation, &quot;ArgumentList : ...AssignmentExpression&quot;, step 7.
+
+11.2.5.1, Runtime Semantics: ArgumentListEvaluation, &quot;ArgumentList : ArgumentList , ...AssignmentExpression &quot;, step 7.
+
+11.13.3.2, Runtime Semantics: Indexed Destructuring Assignment Evaluation, &quot;AssignmentRestElement : ...DestructuringAssignmentTarget&quot;, step 4.
+
+15.4.2.3 Array.of, step 2.
+
+15.4.2.4 Array.from, step 11.
+
+15.5.3.14 String.prototype.split, step 8 to ensure consistency with 15.10.4.14 RegExp.prototype.split, step 11.
+
+15.13.6.2.2 %TypedArray%.of, step 2.
+
+15.13.6.2.3 %TypedArray%.from, step 12.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5423</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2013-09-25 01:56:03 -0700</bug_when>
+    <thetext>In the case of String.prototype.split, step 8, the default value of 2^32–1 should also be changed into ToLength(+∞), or 2^53-1 (if ToUint32 is replaced by ToLength).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6007</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 11:59:23 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6153</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:39 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

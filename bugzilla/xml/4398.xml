@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4398</bug_id>
+          
+          <creation_ts>2015-06-18 15:47:00 -0700</creation_ts>
+          <short_desc>12.1: upright &quot;Identifier&quot;</short_desc>
+          <delta_ts>2015-07-27 10:18:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14504</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-06-18 15:47:25 -0700</bug_when>
+    <thetext>In 12.1 &quot;Identifiers&quot;,
+in production 2,
+rhs 2 is &quot;Identifier&quot; in an upright font.
+
+Change it to an italic font.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14505</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-06-18 15:51:29 -0700</bug_when>
+    <thetext>Also, in the same production,
+    [Yield] :
+and
+    [~Yield] yield
+are in an italic (or at least slanted) font.
+
+Change them to an upright font.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14508</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-06-18 19:18:16 -0700</bug_when>
+    <thetext>Moreover,
+    [Yield] :
+and
+    [~Yield]
+are in a serif font, should be sans-serif.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14577</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-27 10:18:57 -0700</bug_when>
+    <thetext>corrected in final (June 21, 2015) Ecma distribution update</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

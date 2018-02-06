@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2768</bug_id>
+          
+          <creation_ts>2014-05-01 07:31:00 -0700</creation_ts>
+          <short_desc>13.6  Iteration Statements: lookahead restriction for &quot;for-of&quot; needs to be &quot;let&quot;, not &quot;let [&quot;</short_desc>
+          <delta_ts>2015-02-12 12:17:40 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8060</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 07:31:28 -0700</bug_when>
+    <thetext>13.6  Iteration Statements
+
+Change lookahead restriction for the for-of statement back to &quot;let&quot; to resolve a shift/reduce resp. reduce/reduce conflict.
+
+Simplified grammar to show shift/reduce conflict:
+---
+%start statement
+
+%error-verbose
+
+%token ID
+%token FOR &quot;for&quot;
+%token OF &quot;of&quot;
+%token LET &quot;let&quot;
+
+%%
+
+statement : forOfStatement | &apos;;&apos; ;
+
+forOfStatement : FOR &apos;(&apos; leftHandSideExpression OF assignmentExpression &apos;)&apos; statement
+               | FOR &apos;(&apos; forDeclaration OF assignmentExpression &apos;)&apos; statement
+               ;
+
+forDeclaration : LET bindingIdentifier ;
+bindingIdentifier : ID | OF | LET ;
+
+assignmentExpression : leftHandSideExpression ;
+
+leftHandSideExpression : identifierReference ;
+identifierReference : ID | OF | LET ;
+
+%%
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12153</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-05 15:17:54 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+Also removed look-ahead restriction on for-in which tests suggest is unnecessary.
+
+ for;; still need the let [ look-ahead restriction, just like ExpressionStatement</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12169</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-05 15:47:43 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; fixed in rev33 editor&apos;s draft
+&gt; 
+&gt; Also removed look-ahead restriction on for-in which tests suggest is
+&gt; unnecessary.
+&gt; 
+&gt;  for;; still need the let [ look-ahead restriction, just like
+&gt; ExpressionStatement
+
+Wasn&apos;t the lookahead issue in for-of already resolved in rev25?
+
+And for-in needs restriction on `let [` to ensure `for (let in letters);` still works, right?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12442</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:40 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

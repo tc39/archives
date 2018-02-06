@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1223</bug_id>
+          
+          <creation_ts>2013-01-26 11:43:00 -0800</creation_ts>
+          <short_desc>8.3.19 Ordinary Function Objects only applies to sloppy functions</short_desc>
+          <delta_ts>2015-03-04 18:58:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3154</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-01-26 11:43:34 -0800</bug_when>
+    <thetext>As you and I discussed verbally, strict functions need to such special [[GetP]] and [[GetOwnProperty]] internal methods, since the poisoning by accessors takes care of it in an ordinary way. Likewise, bound functions and builtin functions are ordinarily poisoned. So all this would be simpler if sloppy functions were classified as exotic and strict functions were ordinary.
+
+I love you suggestion that implementations not providing a magic &quot;caller&quot; feature on sloppy functions also don&apos;t need this special [[GetP]] and [[GetOwnProperty]]. We should also exempt implementations that choose to poison &quot;caller&quot; (and &quot;arguments&quot;) on sloppy functions. In both cases, perhaps those sloppy functions are ordinary?
+
+8.3.19.3 and 18.3.19.4 talk about first calling the &quot;default ordinary object&quot; [[GetP]] and [[GetOwnProperty]] methods respectively. But those that call the ordinary one would therefore not be calling the &quot;non-standard legacy feature&quot;. For those sloppy functions that do provide the &quot;non-standard legacy feature&quot;, we can just specify that this non-standard legacy feature&quot; must not reveal non-sloppy functions. Then we don&apos;t need to corrupt the definition of [[GetOwnProperty]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12982</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 12:46:43 -0800</bug_when>
+    <thetext>Mark,
+
+We still have 9.2.1 [[GetOwnProperty]] for ECMAScript functions and built-ins (9.3)
+
+You should check if we have sufficient langauge in 16.1 to allow us to get rid of 9.2.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13172</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-19 22:02:59 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; Mark,
+&gt; 
+&gt; We still have 9.2.1 [[GetOwnProperty]] for ECMAScript functions and
+&gt; built-ins (9.3)
+&gt; 
+&gt; You should check if we have sufficient langauge in 16.1 to allow us to get
+&gt; rid of 9.2.1
+
+It looks to me like we do, which would be great.
+
+But double check me on this. Do you see any loophole? Could there be any observable difference between the implementations that Rev34 would allow, and those it would allow with 9.2.1 simplified?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13338</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 16:57:24 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+eliminated the special [[GetOwnProperty]] as clause 16.1 makes it unnecessary</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13522</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:18 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3411</bug_id>
+          
+          <creation_ts>2014-12-07 12:16:00 -0800</creation_ts>
+          <short_desc>15.2.1.1 Early Errors: Incorrect restriction for ExportedBindings</short_desc>
+          <delta_ts>2014-12-23 20:23:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10819</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-07 12:16:33 -0800</bug_when>
+    <thetext>15.2.1.1 Static Semantics: Early Errors  
+
+&gt; It is a Syntax Error if any element of the ExportedBindings of ModuleItemList
+&gt; do not also occurs in either the VarDeclaredNames of ModuleItemList, the 
+&gt; LexicallyDeclaredNames of ModuleItemList, or the ImportedBindings of ModuleItemList.
+
+
+The restriction does not seem to be correct for:
+---
+export {a as b} from &quot;mod.js&quot;;
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11125</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-20 10:30:45 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+the ImportedBindings check is unnecessary in this rule and actually ImportedBindings is unnecessary because local bindings created by imports are included in LexicallyDeclaratedNames.
+
+export {a as b} from &quot;mod.js&quot; doesn&apos;t actually create any local bindings.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11156</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:26 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

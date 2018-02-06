@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2212</bug_id>
+          
+          <creation_ts>2013-11-10 07:04:00 -0800</creation_ts>
+          <short_desc>Deprecation of arguments.callee makes functions not-quite first class</short_desc>
+          <delta_ts>2015-10-02 14:36:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jay Kuri">bsdmac</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6624</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jay Kuri">bsdmac</who>
+    <bug_when>2013-11-10 07:04:07 -0800</bug_when>
+    <thetext>Hello,
+
+I am filing this bug to draw attention to an unintended consequence of deprecating arguments.callee.  I am hoping that this decision will be reversed OR an alternate method can be devised.
+
+Functions in JavaScript are exceedingly powerful.  Their first-class nature is of paramount importance to the language.  Functions can be passed around with impunity and attributes can be defined upon them as appropriate.  I believe the deprecation of arguments.callee without something to replace it will harm the expressivity and usefulness of the language.
+
+The issue is that in removing arguments.callee, we lose the only method through which we can access a function’s attributes within the scope of that function.  
+
+This means that without arguments.callee ( or something that replaces it), functions will become ‘special cases’ as the only objects in JavaScript which have no way to access their own properties.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6834</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2013-11-17 13:31:24 -0800</bug_when>
+    <thetext>Simply give a name to your function. For example:
+
+foo = function bar(x) { return bar.length  }
+foo() // =&gt; 1
+
+(Note that there is some bug related to this feature in IE≤8.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14740</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:14 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

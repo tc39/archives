@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3123</bug_id>
+          
+          <creation_ts>2014-08-12 12:29:00 -0700</creation_ts>
+          <short_desc>Should typeof be really allowed to produce &quot;function&quot; for an object not implementing [[Call]]?</short_desc>
+          <delta_ts>2014-10-14 15:17:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9766</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-12 12:29:31 -0700</bug_when>
+    <thetext>Section 12.5.6 The typeof Operator
+Table 34 — typeof Operator Results
+
+According to the last row of the table, `typeof` called on a non-standard exotic object that does not implement [[Call]] may result in &quot;function&quot; nonetheless. I&apos;m not able to think of a valid reason for such a behaviour, and it deceives the expectation that `typeof` produces &quot;function&quot; iff the object is callable.
+
+Either such an object should not be permitted to have &quot;function&quot; as `typeof` result, or a NOTE should be added specifying that this is intentional.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9770</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 13:34:24 -0700</bug_when>
+    <thetext>Mark,
+
+Do you agree that it is a bug that we didn&apos;t list &quot;function&quot; is the list of &quot;must nots&quot;?  
+
+Do you recall whether there were some know nonconforming host objects that we were trying to grandfather in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9776</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-08-12 19:17:43 -0700</bug_when>
+    <thetext>Hi Allen, Claude,
+
+I do agree that it is a bug. I do not remember if there was a host object counter-example. But even if there is, it seems we could grandfather it in by simply specifying that it does have a [[Call]] method that always throws.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9777</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-13 02:42:23 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #2)
+&gt; But even if there is, it seems we could grandfather it in
+&gt; by simply specifying that it does have a [[Call]] method that always throws.
+
+There is a subtle difference between objects that have a [[Call]] method that always throws, and objects that don&apos;t have a [[Call]] method. For instance, let `f` be an object, and consider:
+
+    Function.prototype.bind.call(f, null)
+
+That expression will throw an error iff `f` does not have a [[Call]] internal method (to a first approximation at least, for one can find several obscure ways for that expression to fail).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9778</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-08-13 03:26:44 -0700</bug_when>
+    <thetext>Good point. But probably there is no significant legacy constraint on preserving the throwing behavior of  Function.prototype.bind.call(f, null) on these host objects. If the consequence attributing a [[Call]] method to these host objects is that the bind succeeds and the throwing is postponed until the bound method is called, I suspect we could get away with that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10363</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 12:00:22 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft.
+
+Added &quot;function&quot; to the list.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10439</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:54 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2443</bug_id>
+          
+          <creation_ts>2014-01-27 06:59:00 -0800</creation_ts>
+          <short_desc>14.3.1 Early Errors: &quot;eval&quot; and &quot;arguments&quot; restriction for non-simple parameter lists not removed</short_desc>
+          <delta_ts>2015-07-10 08:34:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7012</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-27 06:59:03 -0800</bug_when>
+    <thetext>14.3.1  Static Semantics:  Early Errors:
+
+The early error restriction for non-simple parameter lists should be possibly removed for consistency with &quot;14.1.2 Static Semantics: Early Errors&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7802</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 14:26:28 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8004</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:17:35 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12740</commentid>
+    <comment_count>3</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-02-15 14:43:34 -0800</bug_when>
+    <thetext>Per https://crrev.com/924403002/ it seems like maybe we don&apos;t want this early error to be removed.
+
+It would be nice if the rules about &quot;strict/new feature&quot; vs &quot;not-strict&quot; parameter list static errors were a bit more consistent.
+
+Is it too late to add it back?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12752</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 18:01:40 -0800</bug_when>
+    <thetext>What TC39 wanted to do here is minimize &quot;micro-modes&quot; which are restrictions that only apply to specific new features, particularly in sloppy mode. 
+
+&apos;arguments&apos;, &apos;eval&apos;, and strict reserved word declaration restrictions are now imposed via the early error rules for BindingIdentifier and are only conditional upon strict/sloppy mode (but of course, all class definitions and and modules are always strict mode code). Simple/complex parameter list syntax doesn&apos;t have anything to do with those naming restriction issues anymore. 
+
+Duplicate parameter name are illegal in all strict mode code plus in all &quot;complex&quot; (ie, no new syntax present) parameter lists in sloppy mode.
+
+The only semantics associated with StrictFormalParameters is that duplicate parameter names are also illegal for them in sloppy mode simple parameter lists. 
+
+So, arguably the only &quot;micro mode&quot; is duplicate parameter name restrictions in sloppy mode arrow functions, generators, and object literal concise methods and that doesn&apos;t seem so bad from a complexity perspective.
+
+I&apos;m not sure what your issue is with: 
+ function f(...arguments) {
+   return arguments;
+ }
+
+sloppy mode has always permitted using &apos;arguments&apos; as a parameter name and doing that has always made the arguments object inaccessible. Just like ...arguments does.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12763</commentid>
+    <comment_count>5</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-02-16 06:07:48 -0800</bug_when>
+    <thetext>I don&apos;t have a huge opinion on this, but implementation-wise, it&apos;s simpler for V8 if we can just bundle all of the &quot;strict-ish&quot; static formal parameter errors together. I think it&apos;s also less confusing if you don&apos;t have different subsets of strict errors conditionally applied to sloppy-mode. It would be simpler if non-simple parameter lists suffered all of the same early errors as simple parameter lists in strict code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12764</commentid>
+    <comment_count>6</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-16 08:21:14 -0800</bug_when>
+    <thetext>It would be simpler to only have 2 &quot;modes&quot;. If SimpleParameterList is false then apply the exact same rules as for strict function formal parameters.
+
+Allen, the &quot;micro mode&quot; conversation we had was about making the whole function (inlcuding the body) strict if the parameters were complex. We all agreed that that would not be good.
+
+Still, this is such an edge case that I don&apos;t think end users ever have to care and the code paths in an implementation is manageable so I&apos;ll let this one slide. There are so many quirks already that one more will hardly be noticable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12776</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 12:06:35 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #6)
+&gt; It would be simpler to only have 2 &quot;modes&quot;. If SimpleParameterList is false
+&gt; then apply the exact same rules as for strict function formal parameters.
+&gt; 
+
+Of course, simplicity  is in the eye of the beholder so let me retry the explanation.
+
+Whether &quot;eval&quot; and &quot;arguments&quot; can be used as a BindingIdentifier is solely determined by strict/sloppy mode. There is nothing about it that is specific to parameter lists.
+
+&quot;complex parameter lists&quot; are new to ES6.  They never allow duplicate definition of a BindingIdentifier and never produce a mapped arguments object. Again, this is a characteristic of the complex parameter list feature, and not affected by the mode.
+
+&quot;simple parameter lists&quot; are a legacy feature and have strict mode restrictions (no duplicates, no mapped arguments object) that were defined in ES5. Those strict mode restriction continue to apply to them in ES6 and are solely determined by strict/sloppy mode.
+
+There is an overlap between the strict mode simple parameter list restrictions and the (any mode) complex parameter list restrictions and recognizing this might be used to simplify (or perhaps complexify) an implementation. However, I think the overall story is simpler if we never talk about strict parameter lists as something that can exist in sloppy mode code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12777</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 12:11:04 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+
+&gt; So, arguably the only &quot;micro mode&quot; is duplicate parameter name restrictions
+&gt; in sloppy mode arrow functions, generators, and object literal concise
+&gt; methods and that doesn&apos;t seem so bad from a complexity perspective.
+&gt; 
+
+I slightly misspoke above.  &quot;generators&quot; should not have been mentioned as the restrictions only apply to generator concise method.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

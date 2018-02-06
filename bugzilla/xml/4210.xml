@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4210</bug_id>
+          
+          <creation_ts>2015-03-25 09:41:00 -0700</creation_ts>
+          <short_desc>25.1.1.3 - Incorrect parenthesis placement</short_desc>
+          <delta_ts>2015-04-03 12:35:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13926</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-03-25 09:41:21 -0700</bug_when>
+    <thetext>There is a typo in &quot;25.1.1.3 The IteratorResult Interface&quot;, specifically the requirements for the `done` property:
+
+&gt; If a done property (either own or inherited does not exist), it is
+&gt; consider to have the value false.
+
+In this statement, the closing parenthesis should fall between the words &quot;inherited&quot; and &quot;does&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13977</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 09:11:47 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14058</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:32 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

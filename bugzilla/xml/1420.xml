@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1420</bug_id>
+          
+          <creation_ts>2013-04-11 11:21:00 -0700</creation_ts>
+          <short_desc>10.2.1.1.5: SetMutableBinding allows changing the value of uninitialised bindings</short_desc>
+          <delta_ts>2013-05-14 18:13:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3614</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 11:21:44 -0700</bug_when>
+    <thetext>Per step 3 of SetMutableBinding [10.2.1.1.5], the bound value of a binding can be altered regardless of its initialisation state. That means the following code is valid and does not throw:
+---
+function f() {
+  foo = 3;
+  return;
+  let foo;
+}
+---
+
+Maybe this is just a side-effect of Function Declaration Instantiation [10.5.3] being still incomplete and not yet compliant to ES5 (test2626 test case S10.2.1_A4_T1 currently fails).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3839</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 16:15:47 -0700</bug_when>
+    <thetext>Looks to me like steps 3 and 4 need to be reversed.
+
+Fixed in rev15 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3956</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:53 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

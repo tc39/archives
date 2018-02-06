@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2451</bug_id>
+          
+          <creation_ts>2014-01-27 07:46:00 -0800</creation_ts>
+          <short_desc>26.3.5.*: Typos and format issues</short_desc>
+          <delta_ts>2014-05-22 18:03:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7020</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-27 07:46:10 -0800</bug_when>
+    <thetext>26.3.5.1 CreateLoaderIterator Abstract Operation:
+- step 4: Remove space character in `[[Loader NextIndex]]`
+- step 5: Remove space character in `[[Loader IterationKind]]`
+
+26.3.5.2 The %LoaderteratorPrototype% Object:
+- Heading: &quot;LoaderteratorPrototype&quot; -&gt; &quot;LoaderIteratorPrototype&quot;
+
+26.3.5.2.1 %LoaderIteratorPrototype%.next( ):
+- NOTE: &quot;can not restarted&quot; -&gt; &quot;can not be restarted&quot;
+- NOTE: &quot;in step 7&quot; -&gt; &quot;in step 8&quot;
+
+26.3.5.2.3 %LoaderteratorPrototype% [ @@toStringTag ]:
+- Heading: &quot;LoaderteratorPrototype&quot; -&gt; &quot;LoaderIteratorPrototype&quot;
+
+26.3.5.3 Properties of Loader Iterator Instances:
+- Table 50: &quot;LoaderterationKind&quot; -&gt; &quot;LoaderIterationKind&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8401</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-13 18:06:31 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8605</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 18:03:24 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

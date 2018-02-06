@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2080</bug_id>
+          
+          <creation_ts>2013-10-26 12:30:00 -0700</creation_ts>
+          <short_desc>Should bound functions get a name property ??</short_desc>
+          <delta_ts>2014-07-18 23:45:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>1250</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brandon</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5981</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 12:30:45 -0700</bug_when>
+    <thetext>The wiki proposal doesn&apos;t mention what to do WRT the name property of functions created using bind.
+
+I started down the path to specifying this but had second thoughts as I worked on it.
+
+The main issue is that bind is a dynamic run-time operation and the value of a name property can not be statically determined as it is in most other cases.
+
+Determining the a name is non-trivial computationally (accessing a property of the target, maybe doing a string concatenation, etc. I seems like a bad idea to require that overhead on every bind when in practice the name property will seldom be used for anything other than debugging. 
+
+Maybe an implementation might want to create one if a debugging mode is active but to always do it seems like a waste of runtime cycles.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5982</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brandon Benvie">brandon</who>
+    <bug_when>2013-10-26 12:38:49 -0700</bug_when>
+    <thetext>The implementation of this is easy enough, without excess computation. Since the bound function already has a reference to the target function, it&apos;s easy enough to only resolve the name upon access of the property. Since the &quot;name&quot; property is non-configurable, the only case in which the access is observable is when the target function is a Proxy, which should be extremely rare.
+
+Mozilla&apos;s implementation of function objects already has the various properties of functions hitting resolve hooks on access, so there&apos;s already evidence that lazy generation of function properties is feasible.
+
+In terms of semantics, I think it could go either way. There&apos;s an argument to be made that a bound function is not semantically the same thing as the function it binds, because at the least the |this| binding will not match the target function, and often its parameters will also not match.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5984</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 13:31:44 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; The implementation of this is easy enough, without excess computation. Since
+&gt; the bound function already has a reference to the target function, it&apos;s easy
+&gt; enough to only resolve the name upon access of the property. Since the &quot;name&quot;
+&gt; property is non-configurable, the only case in which the access is observable
+&gt; is when the target function is a Proxy, which should be extremely rare.
+
+I pretty sure that we decided that &quot;name&quot; should be non-writable/configurable, just like the &quot;length&quot; and other similar properties changing to.  That changes the observability.
+
+The spec. can leave it open-ended whether name changes are obserable in the presence of things like Proxies. It has to take a stand one way or the other and follow through on the implications of that choice.
+
+&gt; 
+&gt; Mozilla&apos;s implementation of function objects already has the various properties
+&gt; of functions hitting resolve hooks on access, so there&apos;s already evidence that
+&gt; lazy generation of function properties is feasible.
+&gt; 
+&gt; In terms of semantics, I think it could go either way. There&apos;s an argument to
+&gt; be made that a bound function is not semantically the same thing as the
+&gt; function it binds, because at the least the |this| binding will not match the
+&gt; target function, and often its parameters will also not match.
+
+If we have a name, I suggest we make it something like &quot;bind &lt;target name&gt;&quot; to distinguish bound functions from the original function.   But I think it would be better and simpler if we just don&apos;t have a (auto generated) name property  on bound functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7763</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 16:51:54 -0700</bug_when>
+    <thetext>decisions from April 2014 TC39 meeting</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8630</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-26 10:55:58 -0700</bug_when>
+    <thetext>Just for reference: https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-04/apr-8.md#conclusionresolution-8</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9225</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-16 15:44:24 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9323</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:45:50 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

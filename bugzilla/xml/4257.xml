@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4257</bug_id>
+          
+          <creation_ts>2015-04-05 11:44:00 -0700</creation_ts>
+          <short_desc>Non-normative reference to ISO/IEC C unindented in 4. Overview</short_desc>
+          <delta_ts>2015-10-02 13:14:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>impinball</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14134</commentid>
+    <comment_count>0</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2015-04-05 11:44:14 -0700</bug_when>
+    <thetext>In 4. Overview, the &quot;ISO/IEC 9899:1996, Programming Languages – C.&quot; line should  be indented like the lines that immediately follow from it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14146</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-05 15:54:41 -0700</bug_when>
+    <thetext>this appears to be a bug in the HTML generation process.  The original source document does not indent any of those references.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14486</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-06-08 16:40:13 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

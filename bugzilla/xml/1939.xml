@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1939</bug_id>
+          
+          <creation_ts>2013-09-27 07:59:00 -0700</creation_ts>
+          <short_desc>22.2.3.26: Invalid assertion in step 7</short_desc>
+          <delta_ts>2013-09-27 14:47:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5466</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 07:59:51 -0700</bug_when>
+    <thetext>22.2.3.26  %TypedArray%.prototype.sort ( comparefn )
+
+This assertion is not valid:
+7.  Assert: Both Type(x) and Type(y) is Number.
+
+%TypedArray%.prototype.sort is a generic method, when applying it to an object which is not a %TypedArray%, this assertion does not hold. 
+
+
+Most likely other %TypedArray%.prototype functions also need to get a more formalised specification. The handwaving &quot;may be optimized&quot; opens the door for incompatible behaviour across implementations...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5485</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 11:50:28 -0700</bug_when>
+    <thetext>No, I intentionally specified these  methods as not being generic. That&apos;s why they are distinct functions and not just shared reference to the Array.prototype methods. 
+
+I added clarifying language and algorithms tweaks throughout 22.2.3
+
+fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5488</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 12:01:02 -0700</bug_when>
+    <thetext>Ok, thanks for the clarification!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5578</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:49 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

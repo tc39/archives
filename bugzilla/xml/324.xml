@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>324</bug_id>
+          
+          <creation_ts>2012-03-28 16:56:00 -0700</creation_ts>
+          <short_desc>How should Intl.NumberFormat format negative zero?</short_desc>
+          <delta_ts>2012-10-16 15:13:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roozbeh Pournader">roozbeh</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>844</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roozbeh Pournader">roozbeh</who>
+    <bug_when>2012-03-28 16:56:02 -0700</bug_when>
+    <thetext>It&apos;s not clear from the specification how negative zero (-0.0) should be formatted. Should it use the negativePattern or the positivePattern?
+
+I understand there is a possibility that the spec would need to display zero using a negative pattern (format -0.01 with one significant digit), but what if the input is the IEEE negative zero, which fails the x &lt; 0 test in 12.3.2 step 4(a).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>866</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-04-16 17:28:40 -0700</bug_when>
+    <thetext>IEEE negative zero is an artifact of the representation of numbers in IEEE 754; it&apos;s not relevant to users, and so should be treated in the same way as positive zero. I think the algorithms in the current spec version do that.
+
+The case of a real negative number displayed as -0.0 is more interesting. I doubt that -0.0 makes much sense to users, but don&apos;t have evidence, and at least ICU4J happily produces this string.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

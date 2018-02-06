@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3991</bug_id>
+          
+          <creation_ts>2015-02-17 17:10:00 -0800</creation_ts>
+          <short_desc>getting an ambiguous export on a module namespace exotic object should return undefined</short_desc>
+          <delta_ts>2015-03-16 14:20:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12850</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-17 17:10:49 -0800</bug_when>
+    <thetext>In 9.4.6.8., step 7.b., don&apos;t throw a ReferenceError but return undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12852</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:29:21 -0800</bug_when>
+    <thetext>actually, it should never get either null or ambiguous back from ResolveReport call because the name has already been checked (steps 3&amp;4) gainst the known export names.  those names were determined by GetModuleNamespace and checked  using ResolveExport  
+
+what I&apos;ve have there now is an assertion that the resolve bindeing should never be null or &quot;unambiguous&quot;.
+
+Can you think of a situation with a binding would dynamically go away?  If so, that would seem to be a violation of the requirement that ResolveExport is idempotent and side-effect free.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

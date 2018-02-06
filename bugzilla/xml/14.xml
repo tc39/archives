@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>14</bug_id>
+          
+          <creation_ts>2011-02-10 15:36:00 -0800</creation_ts>
+          <short_desc>S11.1.5_A4.1.js invalid for ES5</short_desc>
+          <delta_ts>2012-01-13 09:51:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>20</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-10 15:36:52 -0800</bug_when>
+    <thetext>According to ES5 11.1.5, the RHS of &quot;var object = {true:1};&quot; snippet parses down to:
+- ObjectLiteral
+  { PropertyNameAndValueList}
+  - PropertyAssignment
+    - PropertyName : AssignmentExpression  //true===PropertyName in this case
+
+- PropertyName
+  IdentifierName
+
+From here, 7.6 indirectly states that an IdentifierName could in fact be a ReservedWord (i.e., &apos;true&apos;).
+
+The only other thing left that seems capable of throwing a TypeError based on the fact that object will have a property named &apos;true&apos; is the call to [[DefineOwnProperty]] (8.12.9).  This section has no conditions on the property name *not* being a reserved word though.
+
+
+Disabling this test as invalid.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>21</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-10 15:41:03 -0800</bug_when>
+    <thetext>S11.1.5_A4.2 has the same issue only with &apos;null&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>599</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-13 09:51:59 -0800</bug_when>
+    <thetext>Fixed this by removing the &apos;negative&apos; metadata in the test cases in re-enabling them.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

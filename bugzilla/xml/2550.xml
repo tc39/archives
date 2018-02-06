@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2550</bug_id>
+          
+          <creation_ts>2014-02-14 13:02:00 -0800</creation_ts>
+          <short_desc>toMethod doesn&apos;t work with callable proxies and bound functions</short_desc>
+          <delta_ts>2014-07-15 18:21:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2475</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7307</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-14 13:02:53 -0800</bug_when>
+    <thetext>F,p.toMethod and the CloneMethod abstract operation currently throw for anything other than built-in functions and ECMAScript methods.  
+
+In particular, they throw for bound functions and callable proxies. I can imagine what I would do for found functions and possibly a special case for cloning a proxy with with same target and handler.  However, it isn&apos;t clear in whether or not the CloneMethod should propagate to the target.
+
+I think just is the tip of a bigger issues with regard to cloning proxies and other exotic objects.  It may be that there needs to be MOP level support for cloning an object, but I don&apos;t want to consider that now or for just this limited use case, particularly if we want to tackle the more general cloning problem post ES6.
+
+For now, I think we should just continue to throw.  If you really need to make a  a bound method or callable proxy work with toMethod you can just wrapper it with an ordinary function.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7377</commentid>
+    <comment_count>1</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-02-20 08:08:24 -0800</bug_when>
+    <thetext>I agree on both points: if ever we want a general cloning abstraction, then we need a MOP-level hook, but for this particular case it feels ad hoc to add a hook and we’re better off throwing an exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9219</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 18:21:53 -0700</bug_when>
+    <thetext>support for cloning bound functions was added in rev25.
+
+We aren&apos;t going to support cloning proxy function in ES6</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

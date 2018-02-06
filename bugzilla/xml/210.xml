@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>210</bug_id>
+          
+          <creation_ts>2011-10-01 14:11:00 -0700</creation_ts>
+          <short_desc>Simplify BNF for BindingProperty</short_desc>
+          <delta_ts>2015-07-10 08:34:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 3: September 23, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>490</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-10-01 14:11:01 -0700</bug_when>
+    <thetext>The draft currently says:
+
+BindingProperty :
+  SingleNameBinding
+  PropertyName : SingleNameBinding
+  PropertyName : BindingPattern Initialiseropt
+
+BindingElement :
+  SingleNameBinding
+  BindingPattern Initialiseropt
+
+Which can be simplified as:
+
+BindingProperty :
+  SingleNameBinding
+  PropertyName : BindingElement
+
+BindingElement :
+  SingleNameBinding
+  BindingPattern Initialiseropt</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>491</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-10-02 14:41:44 -0700</bug_when>
+    <thetext>Probably,
+
+The bigger change is in refactoring the evaluation semantics, but on first glance there doesn&apos;t seem to be anything incompatible between the semantics of BindingProperty and BindingElement that would prevent doing what you suggest.
+
+I&apos;ll look at it more closely at some point soon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>538</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-05 12:11:40 -0800</bug_when>
+    <thetext>fixed in Rev. 5 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4345</bug_id>
+          
+          <creation_ts>2015-04-29 10:15:00 -0700</creation_ts>
+          <short_desc>15.1.7 ScriptEvaluation: Return NormalCompletion(undefined) in step 1</short_desc>
+          <delta_ts>2015-12-15 11:57:44 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14347</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 10:15:24 -0700</bug_when>
+    <thetext>15.1.7 Runtime Semantics: ScriptEvaluation
+
+Step 1 should probably be changed to:
+---
+If ScriptBody is not present, return NormalCompletion(undefined).
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14364</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-29 17:29:01 -0700</bug_when>
+    <thetext>empty is what previous editions returned for empty scripts.  It isn&apos;t clear that there is any reason to change that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14369</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-30 07:58:39 -0700</bug_when>
+    <thetext>Previous editions also returned an empty completion value for:
+---
+; // empty statement
+function f() { } // function declaration
+{ } // block
+---
+
+It doesn&apos;t really matter if empty scripts return NormalCompletion(empty) or NormalCompletion(undefined), since the completion value is not detectable by user code, but giving it the same completion value like empty modules and empty eval-scripts seems reasonable. (eval-scripts -&gt; PerformEval, step 4; modules -&gt; 15.2.1.20, first algorithm)
+
+If you don&apos;t want to make this change now, maybe defer to ES7 ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14418</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-19 10:19:40 -0700</bug_when>
+    <thetext>defer to ES7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14906</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-12-15 11:57:44 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (698819c).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3778</bug_id>
+          
+          <creation_ts>2015-02-05 14:03:00 -0800</creation_ts>
+          <short_desc>25.4.4.1.1 PerformPromiseAll: Change to full completion record access ?</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12148</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-05 14:03:14 -0800</bug_when>
+    <thetext>25.4.4.1.1 PerformPromiseAll( iterator, constructor, resultCapability) Abstract Operation
+
+Step 7.c.ii.3.
+
+&gt; , return NormalCompletion(resolveResult).
+
+
+Implicit access to the [[value]] field of completion records is typically only used for normal completions. For abrupt completions the `.[[value]]` syntax is used instead.
+
+Maybe change to `NormalCompletion(resolveResult.[[value]])` ?
+
+
+Also cc&apos;ed Domenic to check the new semantic for PerformPromiseAll when the call to [[Resolve]] in step 7.c.ii.2 results in an abrupt completion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12149</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-05 14:10:30 -0800</bug_when>
+    <thetext>Test case for the changed semantics:
+---
+function P(executor) {
+  executor(() =&gt; { throw &quot;hi!&quot; }, () =&gt; {});
+}
+console.log(Promise.all.call(P, [])); // Prints &quot;hi!&quot;.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12176</commentid>
+    <comment_count>2</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-05 19:34:26 -0800</bug_when>
+    <thetext>Yes, this does look suspicious, and against the original design of Promise.all. I think that step should just be ReturnIfAbrupt(resolveResult). Allen, any reason for this change, or was it just a refactoring issue?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12179</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-05 20:58:34 -0800</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #2)
+&gt; Yes, this does look suspicious, and against the original design of
+&gt; Promise.all. I think that step should just be ReturnIfAbrupt(resolveResult).
+&gt; Allen, any reason for this change, or was it just a refactoring issue?
+
+What this all trying to do is avoid the IteratorClose call in 25.4.4.1 step 11.a when an exception occurs in 7.c.ii.3 (after the iteral is has been drained).
+
+The normal completion causes steps 11.a and 11.b to be skipped.
+
+And the value return in step 12 is the original resolveResult abrupt completion from 7.c.ii.3 -- effectively the same as the ReturnIfAbrupt that used to there
+
+Admittedly this is playing fast and loose with completion record conventions, but that it almost does what I want...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12180</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-05 21:03:13 -0800</bug_when>
+    <thetext>Oh, I think I see... it&apos;s a normal completion whose .[[value]] is an abrupt completion?!? So comment #1&apos;s test case isn&apos;t quite correct?
+
+Sneaky.
+
+(I still don&apos;t understand why iterator.close() isn&apos;t called at the end of every for-on loop, but instead only for abrupt completions... but that&apos;s my problem.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12181</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-06 02:51:03 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; Admittedly this is playing fast and loose with completion record
+&gt; conventions, but that it almost does what I want...
+
+Just like Domenic said, that&apos;s sneaky! Fortunately completion records don&apos;t allow this construction. ([[value]] is restricted to ECMAScript language values or empty.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12184</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 08:56:48 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+Ok, took away the cleverness (never a good idea in a specification) and made it explicit</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12396</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

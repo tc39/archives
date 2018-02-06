@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4368</bug_id>
+          
+          <creation_ts>2015-05-18 15:35:00 -0700</creation_ts>
+          <short_desc>Minor cleanups for Array.prototype.indexOf</short_desc>
+          <delta_ts>2015-05-21 08:33:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14413</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-18 15:35:38 -0700</bug_when>
+    <thetext>While doing Array.prototype.includes review with implementers, the initial spec (which copied Array.prototype.indexOf) came under fire for a few redundant steps. We should make those fixes to Array.prototype.indexOf as well. Namely:
+
+&gt; 8. If n ≥ len, return −1.
+
+This step is redundant.
+
+&gt; 10.a. Let k be len - abs(n).
+
+This could be more clearly written as len + n, since n &lt; 0 is the precondition in step 10.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14414</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-05-18 15:38:14 -0700</bug_when>
+    <thetext>Also:
+
+&gt; 6. If argument fromIndex was passed let n be ToInteger(fromIndex); else let n be 0.
+
+This could be written more simply (in terms of easier to translate to implementations) as
+
+&gt; 6. Let n be ToInteger(fromIndex). (If fromIndex is undefined, this step produces the value 0).
+
+which is what is done in String.prototype.includes and several other places in the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14435</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-21 08:33:04 -0700</bug_when>
+    <thetext>deferring for ES7 consideration.
+
+Internal spec. consistency is important. 
+
+also, it isn&apos;t obvious to me that &quot;len + n&quot; with a remote guard on the sign of n is clearer than a redundant abs in  &quot;len - abs(n)&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2987</bug_id>
+          
+          <creation_ts>2014-06-15 20:22:00 -0700</creation_ts>
+          <short_desc>Destructuring Pattern as For-In Target:  Early Error?</short_desc>
+          <delta_ts>2015-07-10 08:35:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kevin Smith">zenparsing</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8939</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-06-15 20:22:14 -0700</bug_when>
+    <thetext>Currently, a destructuring pattern can appear to the left of &quot;in&quot; in a for-in statement head:
+
+    for ([a, b] in c);
+
+However, since [[Enumerate]] will always return an iterator over strings, such a binding will always fail. (The destructuring source will always be a string.)
+
+Should a destructuring pattern to the left of &quot;in&quot; result in an early error instead?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8940</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-06-16 02:18:04 -0700</bug_when>
+    <thetext>Proxies are not restricted to this limitation.
+
+for ([a, b] in new Proxy({}, {*enumerate(){ yield [1,2]; }})) {
+  print(`${a}:${b}`); // prints &quot;1:2&quot;
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8943</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-16 07:39:09 -0700</bug_when>
+    <thetext>It used to make sense to allow this since destructuring used to work on non objects.
+
+I agree that this should be a syntax error.
+
+André: We should not optimize for Proxies. In this case it would even be a non behaving Proxy.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8944</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 09:32:04 -0700</bug_when>
+    <thetext>I agree with Kevin and Erik.  This probably should be a syntax error, now that string values can not be destructured.
+
+Note that the description of [[Enumerate]] in 6.1.7.2 says it produces an &quot;iterator object over the string values...&quot; so your proxy does not provide a conforming definition for it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8946</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 12:40:14 -0700</bug_when>
+    <thetext>However, now that I looked at it, it&apos;s going to considerably complicate the BNF and/or early error rules to make this be a static error.
+
+I&apos;m not sure it is really worthy the added spec. complexity.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9853</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-24 09:57:39 -0700</bug_when>
+    <thetext>We&apos;ve reverted to allowing destructuring of string values.  That means somebody might plausibly code: 
+
+  for ([firstChar, ...rest] in c) ...
+
+etc. 
+
+Given this (admittedly minor) utility and the complexity of disallowing it, I&apos;m going to close this as WONTFIX.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

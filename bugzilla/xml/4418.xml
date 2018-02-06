@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4418</bug_id>
+          
+          <creation_ts>2015-07-08 13:45:00 -0700</creation_ts>
+          <short_desc>15.1.1 Early error WRT super in eval code too restrictive</short_desc>
+          <delta_ts>2015-07-08 13:45:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14533</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-08 13:45:44 -0700</bug_when>
+    <thetext>On Jul 8, 2015, at 11:04 AM, Brian Terlson wrote:
+
+Hi Allen,
+ 
+Curious what the rationale behind the early error for super inside eval inside arrow functions was. See here: http://www.ecma-international.org/ecma-262/6.0/index.html#sec-scripts-static-semantics-early-errors. Currently supported in V8 and Chakra, so presumably we’d both have to do work to implement this error. But, why would we?
+
+---
+
+&quot;It is a Syntax Error if StatementList Contains super unless the source code containing super is eval code that is being processed by a direct eval that is contained in function code that is not the function code of an ArrowFunction.&quot;
+
+I think the actual wording is a bit bogus, but let&apos;s see if we can reverse engineer the intent...
+
+The first part, &quot;It is a Syntax Error if StatementList Contains super&quot; is saying that `super` is illegal in the top-level code of actual scripts and  is also illegal in arrow functions (because Contains drills into them) that are contained in such top-level code.  Basically, we want all of the following to be illegal in Scripts:
+
+let x=super.foo();  
+let y = ()=&gt;super.foo();
+let z=()=&gt;()=&gt;super.foo();
+
+That part seems fine.  But it needs to be restricted because Script is used to parse eval code and we want to be able to say things like:
+
+let obj = {
+  foo() {
+    eval(`
+        let x=super.foo();  
+        let y = ()=&gt;super.foo();
+        let z=()=&gt;()=&gt;super.foo();
+    `);
+ };
+
+without generating a early error.  So, I have the clause &quot;...unless the source code containing super is eval code that is being processed by a direct eval that is contained in function code...&quot;
+
+But that, by it self, would allow
+
+let y1= ()=&gt;eval(&quot;super.foo()&quot;);
+
+which should be illegal.  So, I finished the &quot;unless&quot; clause with the restriction &quot;...that is not the function code of an ArrowFunction.&quot;
+
+That correctly handles top-level arrow functions, but it unintentionally also makes things like this illegal:
+
+let obj = {
+  foo() {
+    eval(`
+        let y = ()=&gt;eval(&quot;super.foo()&quot;);
+    `);
+ };
+
+There is the additional problem, that  (because of the instantiation reform changes) this should be illegal:
+
+function f() {
+   eval(&quot;super.foo()&quot;);
+}
+
+But, the above rule for StatementList will not produce an early error for it.  (I think this is something I missed updating when I did the Instantiation reform work in January).
+
+I think, what we really need to say for direct eval is something along the lines of: it is an early error if the StatementList contains  `super`   and replacing the direct eval with a super reference would have produced an early error. (but I think it is more complicated to state than this).  However we state it, it should be part of the eval semantics and not included in 15.1.1.   Then the 15.1.1 rule could be:
+
+It is a Syntax Error if StatementList Contains super unless the source code containing super is eval code that is being processed by a direct eval.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

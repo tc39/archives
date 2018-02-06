@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>285</bug_id>
+          
+          <creation_ts>2012-02-29 07:17:00 -0800</creation_ts>
+          <short_desc>S15.8.2.16_A7 &amp; S15.8.2.18_A7 (sin &amp; tan) overconstrain implementations</short_desc>
+          <delta_ts>2012-03-26 14:04:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>705</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2012-02-29 07:17:48 -0800</bug_when>
+    <thetext>The test S15.8.2.16_A7 checks whether (within a certain tolerance)
+
+sin(6.283185307179586) == -2.4492935982947064e-16
+
+The argument is very close to 2*pi, and sin(2*pi) = 0. Usual algorithms for sine have low precision at this point. Both Firefox and Chrome fail in this test on Linux but succeed on Windows and Mac OS X because the value of the sine function depends on compiler/platform. An arbitrary-precision calculator like bc or Wolfram Alpha returns approximately 4.7692E-16, which would fail the test, too.
+
+Likewise, S15.8.2.18_A7 tests whether (within a certain tolerance)
+
+tan(-1.57079632679489660000) == -16331239353195370.00000000000000000000
+
+The argument is very close to pi/2, around which tangens is an unstable function. On IA32, both the FPU instruction and the library function for tangent use 80-bit precision provided by the FPU, which results in -16331778728383844, which is outside the tolerated range. This can also be observed on 32-bit Firefox on Linux, which suffers from the same problem and can be circumvented when compiling with -ffloat-store. With an arbitrary-precision calculator, the result is approximately -5.19985E16.
+
+The spec (15.8.2.18) allows implementation-dependent approximations of transcendental functions. These tests should therefore not test locally unstable functions against the result of any particular implementation, much less one that is not accurate to begin with. (In effect, test262 _disallows_ a more accurate approximation.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>820</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-26 14:04:04 -0700</bug_when>
+    <thetext>This is a duplicate of https://bugs.ecmascript.org/show_bug.cgi?id=126 which TC-39 made a call to &quot;Won&apos;t Fix&quot;.
+
+If you can give me a looser &quot;prec&quot; value (see bug 126) that causes these tests to pass in your scenarios, I&apos;d be more than happy to make the change though:)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

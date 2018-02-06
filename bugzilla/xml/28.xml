@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>28</bug_id>
+          
+          <creation_ts>2011-02-21 10:51:00 -0800</creation_ts>
+          <short_desc>S15.3.4.3_A6_T1.js is invalid (ES5 to ES5.1 change)</short_desc>
+          <delta_ts>2011-09-24 16:52:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/3990187a1534</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>48</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:51:58 -0800</bug_when>
+    <thetext>The test case consists of the following:
+    try {
+      Function().apply(1,{});
+      $FAIL(&apos;#1: if argArray is neither an array nor an arguments object (see 10.1.8), a TypeError exception is thrown&apos;);
+    } catch (e) {
+      if (!(e instanceof TypeError)) {
+      	$ERROR(&apos;#1.1: if argArray is neither an array nor an arguments object (see 10.1.8), a TypeError exception is thrown&apos;);
+      }
+    }
+
+which expect Function.prototype.apply to fail as &apos;{}&apos; is not an array or arguments object.  The interesting thing here is this test was still valid up  until ES5.1 was released.  You see, ES5 still had a restriction that the second param to apply must have a &apos;length&apos; property.  This restriction was removed in ES5.1 though (see steps 4 and 5 of 15.3.4.3:  ToUin32(undefined) is 0).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>49</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:55:17 -0800</bug_when>
+    <thetext>S15.3.4.3_A6_T4.js has the same issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>466</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:52:50 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/3990187a1534</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

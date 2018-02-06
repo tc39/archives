@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>32</bug_id>
+          
+          <creation_ts>2011-02-26 03:34:00 -0800</creation_ts>
+          <short_desc>Disabling 15.2.3.4-4-1 Object.getOwnPropertyNames returns array of property names (Global)</short_desc>
+          <delta_ts>2011-02-28 14:05:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>63</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-26 03:34:32 -0800</bug_when>
+    <thetext>This tests assumes a finite set of properties of the global objects. This is in contradiction with Section 16:
+&quot;An implementation may provide additional types, values, objects, properties,
+and functions beyond those described in this specification.&quot;
+
+As a matter of fact, web browsers for which the global object is also the &apos;window&apos; object, there are plenty of other global object own properties. This test would be expected to fail in all web browsers.
+
+For the record, in the IE test center (http://samples.msdn.microsoft.com/ietestcenter/), the &apos;100%&apos; next the the JavaScript tests seems to mean that IE9RC passes this test. Is it really the case or is the &apos;100%&apos; an approximation?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>67</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 09:39:34 -0800</bug_when>
+    <thetext>Hi David, I agree that this test case should not fail if extra types, values, etc. have been provided and will remove this assertion shortly.  I would not necessarily expect this test to fail in all web browsers though - if vendor provided types such as &apos;document&apos;/&apos;screen&apos;/etc. are not enumerable the test will pass. 
+
+As for IE Test Center, just double-checked and the test passes on my machine (32-bit Windows 7 RTM, English language OS, IE9 RC1):  &quot;15.2.3.4-4-1 Object.getOwnPropertyNames returns array of property names (Global): pass [Source]&quot;.  I also just verified the following returns a &apos;true&apos; alert outside of IE Test Center&apos;s harness:
+    &lt;html&gt;&lt;body&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+    document.write(&quot;This is my first JavaScript!&quot;);
+    function fnGlobalObject() {return this};
+    
+    function testcase() {
+            var result = Object.getOwnPropertyNames(fnGlobalObject());
+            var expResult = [&quot;NaN&quot;, &quot;Infinity&quot;, &quot;undefined&quot;, &quot;eval&quot;, &quot;parseInt&quot;, &quot;parseFloat&quot;, &quot;isNaN&quot;, &quot;isFinite&quot;, &quot;decodeURI&quot;, &quot;decodeURIComponent&quot;, &quot;encodeURI&quot;, &quot;encodeURIComponent&quot;, &quot;Object&quot;, &quot;Function&quot;, &quot;Array&quot;, &quot;String&quot;, &quot;Boolean&quot;, &quot;Number&quot;, &quot;Date&quot;, &quot;Date&quot;, &quot;RegExp&quot;, &quot;Error&quot;, &quot;EvalError&quot;, &quot;RangeError&quot;, &quot;ReferenceError&quot;, &quot;SyntaxError&quot;, &quot;TypeError&quot;, &quot;URIError&quot;, &quot;Math&quot;, &quot;JSON&quot;];
+    
+            var result1 = {};
+            for (var p in result) {
+                result1[result[p]] = true;
+            }
+    
+            for (var p1 in expResult) {
+                if (!result1[expResult[p]]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    alert(testcase());
+    &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+
+
+Have you tried running this from IE9 RC1, and if so how does your machine setup differ from mine (e.g., I could imagine potential localization problems with this one)?
+
+Thanks again for reporting this!
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>69</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-28 10:21:21 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Hi David, I agree that this test case should not fail if extra types, values,
+&gt; etc. have been provided and will remove this assertion shortly.  I would not
+&gt; necessarily expect this test to fail in all web browsers though - if vendor
+&gt; provided types such as &apos;document&apos;/&apos;screen&apos;/etc. are not enumerable the test
+&gt; will pass.
+Object.getOwnPropertyNames returns an array with ALL own properties, not only enumerable (15.2.3.4 step 4).
+
+
+&gt; As for IE Test Center, just double-checked and the test passes on my machine
+&gt; (32-bit Windows 7 RTM, English language OS, IE9 RC1):  &quot;15.2.3.4-4-1
+&gt; Object.getOwnPropertyNames returns array of property names (Global): pass
+&gt; [Source]&quot;.  I also just verified the following returns a &apos;true&apos; alert outside
+&gt; of IE Test Center&apos;s harness:
+&gt;     &lt;html&gt;&lt;body&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+&gt;     document.write(&quot;This is my first JavaScript!&quot;);
+&gt;     function fnGlobalObject() {return this};
+&gt; 
+&gt;     function testcase() {
+&gt;             var result = Object.getOwnPropertyNames(fnGlobalObject());
+&gt;             var expResult = [&quot;NaN&quot;, &quot;Infinity&quot;, &quot;undefined&quot;, &quot;eval&quot;,
+&gt; &quot;parseInt&quot;, &quot;parseFloat&quot;, &quot;isNaN&quot;, &quot;isFinite&quot;, &quot;decodeURI&quot;,
+&gt; &quot;decodeURIComponent&quot;, &quot;encodeURI&quot;, &quot;encodeURIComponent&quot;, &quot;Object&quot;, &quot;Function&quot;,
+&gt; &quot;Array&quot;, &quot;String&quot;, &quot;Boolean&quot;, &quot;Number&quot;, &quot;Date&quot;, &quot;Date&quot;, &quot;RegExp&quot;, &quot;Error&quot;,
+&gt; &quot;EvalError&quot;, &quot;RangeError&quot;, &quot;ReferenceError&quot;, &quot;SyntaxError&quot;, &quot;TypeError&quot;,
+&gt; &quot;URIError&quot;, &quot;Math&quot;, &quot;JSON&quot;];
+&gt; 
+&gt;             var result1 = {};
+&gt;             for (var p in result) {
+&gt;                 result1[result[p]] = true;
+&gt;             }
+&gt; 
+&gt;             for (var p1 in expResult) {
+&gt;                 if (!result1[expResult[p]]) {
+&gt;                     return false;
+&gt;                 }
+&gt;             }
+&gt;             return true;
+&gt;         }
+&gt;     alert(testcase());
+&gt;     &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+&gt; 
+&gt; 
+&gt; Have you tried running this from IE9 RC1, and if so how does your machine setup
+&gt; differ from mine (e.g., I could imagine potential localization problems with
+&gt; this one)?
+Unfortunately, on my machine I have a double-boot Windows XP/Ubuntu, so I can&apos;t run IE9 for the moment. 
+
+I have found a weird thing. On the harness, the test fails on FF4b12. However, on the web console, your code snippet passes.
+
+I think I have figured why... There is a typo:
+for (var p1 in expResult) {
+    if (!result1[expResult[p]]) {
+        return false;
+    }
+}
+should be:
+for (var p1 in expResult) {
+    if (!result1[expResult[p1]]) {
+        return false;
+    }
+}
+In the &quot;if&quot; test, &quot;p&quot; should be &quot;p1&quot;. Basically, depending on the last value of p, if it is in expResult, test passes and it doesn&apos;t if p isn&apos;t. I think that FF4b12 WebConsole adds things to global object, so it may change the global object properties order.
+
+
+Actually, I think I misunderstood the test. Just to make sure. Is the test testing that expResult is included in Object.getOwnPropertyNames(fnGlobalObject())?
+
+If it&apos;s the case, then, the test is actually fine (without the typo) and there is no need to worry about implementation-specific values. I thought it was checking for equality of the two sets.
+
+
+
+For the record, once again, Object.getOwnPropertyNames() returns an array and since ES5, arrays have amazing methods to deal with them. On the other hand, for..in loops loop through all enumerable properties of the object (on the prototype chain too).
+
+To test array inclusion in our case, I would go for:
+----------------------
+function testcase() {
+    var result = Object.getOwnPropertyNames(fnGlobalObject());
+    var expResult = [...];
+
+    // Make sure that every element in expResult can be found in result
+    return expResult.every(function(e){return result.indexOf(e) !== -1;});
+}
+----------------------</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>72</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 13:21:03 -0800</bug_when>
+    <thetext>&gt; Actually, I think I misunderstood the test. Just to make sure. Is the test
+&gt; testing that expResult is included in
+&gt; Object.getOwnPropertyNames(fnGlobalObject())?
+&gt; If it&apos;s the case, then, the test is actually fine (without the typo) and there
+&gt; is no need to worry about implementation-specific values. I thought it was
+&gt; checking for equality of the two sets.
+Yes, the intent of the test is to ensure expResult is in Object.getOwnPropertyNames(fnGlobalObject()).  Closing this as By Design.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>74</commentid>
+    <comment_count>4</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-28 13:32:44 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; &gt; Actually, I think I misunderstood the test. Just to make sure. Is the test
+&gt; &gt; testing that expResult is included in
+&gt; &gt; Object.getOwnPropertyNames(fnGlobalObject())?
+&gt; &gt; If it&apos;s the case, then, the test is actually fine (without the typo) and there
+&gt; &gt; is no need to worry about implementation-specific values. I thought it was
+&gt; &gt; checking for equality of the two sets.
+&gt; Yes, the intent of the test is to ensure expResult is in
+&gt; Object.getOwnPropertyNames(fnGlobalObject()).  Closing this as By Design.
+
+oh but and what about the typo?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>76</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 14:05:50 -0800</bug_when>
+    <thetext>Typo is fixed in all source control repositories, but not yet live on the website.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

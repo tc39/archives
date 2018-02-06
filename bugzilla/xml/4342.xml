@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4342</bug_id>
+          
+          <creation_ts>2015-04-29 09:55:00 -0700</creation_ts>
+          <short_desc>20.3.4.35 Date.prototype.toDateString, 20.3.4.42 Date.prototype.toTimeString: Handle [[DateValue]] = NaN  ?</short_desc>
+          <delta_ts>2015-05-19 10:21:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14343</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 09:55:51 -0700</bug_when>
+    <thetext>20.3.4.35 Date.prototype.toDateString ( )
+20.3.4.42 Date.prototype.toTimeString ( )
+
+20.3.4.41.1 Runtime Semantics: ToDateString(tv) returns &quot;Invalid Date&quot; for NaN values, but 20.3.4.35 and 20.3.4.42 don&apos;t handle this case.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14366</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-29 18:02:08 -0700</bug_when>
+    <thetext>I think this is one we can let go until ES7.
+
+TC39 explicitly decided to specify &quot;Invalid Date&quot; for toString.  But I don&apos;t recall whether we also explicitly  talked about toDateString and toTimeString.  I suspect we didn&apos;t and that is the reason they weren&apos;t updated.
+
+Because their result is implementation defined, an implementation can do this if it wants to.
+
+Have you test the behavior on the major browsers?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14367</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-30 07:58:12 -0700</bug_when>
+    <thetext>new Date(NaN).toDateString() and new Date(NaN).toTimeString() return &quot;Invalid Date&quot; in:
+- IE11, Win7-de-DE
+- Edge, Win10-en-US-build10074
+- V8 (see below for source info)
+- JavaScriptCode (see below for source info)
+- Nashorn (see below for source info)
+- SpiderMonkey (see below for source info)
+
+
+I&apos;ve also tested 20.3.4.43 Date.prototype.toUTCString ( ):
+new Date(NaN).toUTCString() returns &quot;Invalid Date&quot; in all tested engines, except for Nashorn. Nashorn throws a RangeError.
+
+
+
+V8
+toDateString: https://github.com/v8/v8-git-mirror/blob/cf420ec337e47bed2c754d4ebdc87e8d1bb3cfe5/src/date.js#L304
+
+toTimeString: https://github.com/v8/v8-git-mirror/blob/cf420ec337e47bed2c754d4ebdc87e8d1bb3cfe5/src/date.js#L312
+
+toUTCString: https://github.com/v8/v8-git-mirror/blob/cf420ec337e47bed2c754d4ebdc87e8d1bb3cfe5/src/date.js#L634
+
+Constant &quot;kInvalidDate&quot;: https://github.com/v8/v8-git-mirror/blob/cf420ec337e47bed2c754d4ebdc87e8d1bb3cfe5/src/macros.py#L57
+
+
+
+JavaScriptCode
+toDateString: https://github.com/WebKit/webkit/blob/0f0b75cd1fe1c64499b65e64b4ee15d015b733f4/Source/JavaScriptCore/runtime/DatePrototype.cpp#L549
+
+toTimeString: https://github.com/WebKit/webkit/blob/0f0b75cd1fe1c64499b65e64b4ee15d015b733f4/Source/JavaScriptCore/runtime/DatePrototype.cpp#L555
+
+toUTCString: https://github.com/WebKit/webkit/blob/0f0b75cd1fe1c64499b65e64b4ee15d015b733f4/Source/JavaScriptCore/runtime/DatePrototype.cpp#L509
+
+Format function &quot;formateDateInstance&quot;: https://github.com/WebKit/webkit/blob/0f0b75cd1fe1c64499b65e64b4ee15d015b733f4/Source/JavaScriptCore/runtime/DatePrototype.cpp#L332
+
+
+
+Nashorn
+toDateString: http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l281
+
+toTimeString: http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l292
+
+toUTCString: http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l819
+http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l1015
+
+Format function &quot;toStringImpl&quot;: http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l988
+
+Constant &quot;INVALID_DATE&quot;: http://hg.openjdk.java.net/jdk9/dev/nashorn/file/b275aac76cdd/src/jdk.scripting.nashorn/share/classes/jdk/nashorn/internal/objects/NativeDate.java#l59
+
+
+
+SpiderMonkey
+toDateString: http://hg.mozilla.org/mozilla-central/file/4b9b12c248dc/js/src/jsdate.cpp#l2824
+
+toTimeString: http://hg.mozilla.org/mozilla-central/file/4b9b12c248dc/js/src/jsdate.cpp#l2811
+
+toUTCString: http://hg.mozilla.org/mozilla-central/file/4b9b12c248dc/js/src/jsdate.cpp#l2402
+
+Format function &quot;format_date&quot;: http://hg.mozilla.org/mozilla-central/file/4b9b12c248dc/js/src/jsdate.cpp#l2534
+
+Constant &quot;js_NAN_date_str&quot;: http://hg.mozilla.org/mozilla-central/file/4b9b12c248dc/js/src/jsdate.cpp#l2345</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14419</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-19 10:21:00 -0700</bug_when>
+    <thetext>defer to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

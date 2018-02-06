@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3860</bug_id>
+          
+          <creation_ts>2015-02-13 06:12:00 -0800</creation_ts>
+          <short_desc>Description of &quot;purpose&quot; for `undefined` and `null` values</short_desc>
+          <delta_ts>2015-02-19 09:37:23 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12516</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2015-02-13 06:12:53 -0800</bug_when>
+    <thetext>4.3.10 undefined value
+   primitive value used when a variable has not been assigned a value
+
+..
+
+4.3.12 null value
+   primitive value that represents the intentional absence of any object value
+
+
+---------
+
+This is (I hope) a minor nitpick and one I&apos;ve long wanted to have tweaked. My feedback here comes from teaching JavaScript and running across how these values are actually used in the real world, not only by those new to the language but those who&apos;ve been steeped in habits for years.
+
+I&apos;d make the following observations about those above descriptions:
+
+1. They seem &quot;suggestive&quot; rather than &quot;required&quot;. I&apos;m not sure if that&apos;s what&apos;s called &quot;non-normative&quot; or not, but I think I&apos;ve gathered that is. Anyway, their tone doesn&apos;t seem to make any requirements of implementors, but rather just suggest (more to developers) who they *should* use the values. As such, it seems like a tweak, even at this late stage, might be possible.
+
+2. I don&apos;t think these suggestions represent how most people think about the values, but more importantly they don&apos;t seem to map to how they&apos;re commonly used. I think we could/should tweak them to better fit.
+
+3. Here&apos;s what I&apos;d suggest as a tweaked wording for 4.3.10:
+
+   primitive value used when a variable or property does not currently have another value
+
+Reasoning: of course `undefined` is used for both variables and properties. But more importantly, the current &quot;not been assigned&quot; implies on reading &quot;not been assigned YET&quot;, which is a common misconception. A variable can have been set to a non-`undefined` value previously and now it&apos;s been set back to `undefined`.
+
+4. Here&apos;s what I&apos;d suggest as a tweaked wording for 4.3.12:
+
+   primitive value that represents the intentional absence of any other value
+
+Reasoning: `null` is commonly used to &quot;unset&quot; any manner of values, from booleans to objects and everything in between. It&apos;s not an &quot;object&quot; value, and whereas it may have originally been intended to be the &quot;non-object object value&quot;, that&apos;s not at all how it&apos;s commonly documented, used, or described today. So I just tweaked &quot;object&quot; to &quot;other&quot;, that&apos;s it.
+
+5. One last observation: most developers recommend, and indeed tend to do in their code, that `undefined` and `null` are treated as indistinguishable. The way they are `==` to each other and no other values makes that quite convenient, in that you can say `x == null` and it catches either `null` or `undefined`, and no other values.
+
+------
+
+While I&apos;ve filed both of these suggestions as one issue for simplicity, I&apos;d also encourage to consider these as separate suggestions if need be. That is to say, I&apos;d welcome either of the two changes even if both don&apos;t get changed right now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12518</commentid>
+    <comment_count>1</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2015-02-13 06:30:32 -0800</bug_when>
+    <thetext>One other quick observation I forgot:
+
+6. I&apos;ve heard many times people make the claim that `typeof null == &apos;object&apos;` is somehow intentional, to indicate that `null` is supposed to be an &quot;empty object reference&quot; value, and they further use the current &quot;any object value&quot; wording to support that claim. I believe that&apos;s quite inaccurate, at least as far as JS stands today, as Brendan Eich himself has said that `typeof null == &apos;object&apos;` is just a bug, not an intentional feature or signal of how to use it.
+
+I believe changing &quot;object&quot; to &quot;other&quot; in 4.3.12 would sever ties with such misconstrued reasoning once and for all.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

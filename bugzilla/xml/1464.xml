@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1464</bug_id>
+          
+          <creation_ts>2013-05-02 08:51:00 -0700</creation_ts>
+          <short_desc>13.5 Class Definitions, Static Semantics: remove Identifier name restriction (eval, arguments)</short_desc>
+          <delta_ts>2013-08-23 08:22:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3701</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-05-02 08:51:29 -0700</bug_when>
+    <thetext>Based on the discovery and discussion here: https://github.com/jshint/jshint/pull/1048/files#r4055231
+
+Remove:
+
+- It is a Syntax Error if BoundNames of BindingIdentifier contains either ″eval″ or ″arguments″</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3827</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 12:51:00 -0700</bug_when>
+    <thetext>Do we really want to allow binding of  &quot;eval&quot; and &quot;arguments&quot; using class, let, and const?  We would totally outlaw  all  declarations of those names (like we do in strict mode) except that we have to allow them in non-strict var/function/catch for legacy compatibility. But here we are talking about new declaration forms so there is no legacy to be compatible with. 
+
+Is there an actual record of a discussion on this issue somewhere?  I don&apos;t see it addressed in the jshint class issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3828</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-05-13 12:53:17 -0700</bug_when>
+    <thetext>I dont know why github hides older discussion, but here&apos;s the direct link:
+
+https://github.com/jshint/jshint/pull/1048#discussion_r4055231</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3832</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 13:50:30 -0700</bug_when>
+    <thetext>Thanks, got it.
+
+The explicit restriction for ClassDeclaration is already gone from the draft and the same restrictions apply there as to any other use of BindingIdentifier (which is illegal in strict code)
+
+
+I still think there is an argument for never allowing the &quot;eval&quot; and &quot;arguments&quot; in new declaration form, even for non-strict code.  Do you recall whether we have discussed this at TC39?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3834</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-05-13 14:14:36 -0700</bug_when>
+    <thetext>We haven&apos;t, but I would be in favor of forbidding these identifiers by default. 
+
+I wont be in London, you may speak for me on this issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4963</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-17 04:30:39 -0700</bug_when>
+    <thetext>Also see bug 1729</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4983</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-19 18:02:23 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft.
+
+A class definition is always strict code so it can&apos;t create bindings named &apos;eval&apos; or &apos;arguments&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5081</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:33 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

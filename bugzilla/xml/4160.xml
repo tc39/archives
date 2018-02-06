@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4160</bug_id>
+          
+          <creation_ts>2015-03-13 01:41:00 -0700</creation_ts>
+          <short_desc>Can GeneratorResumeAbrupt throw an exception?</short_desc>
+          <delta_ts>2015-03-17 16:57:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13718</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-03-13 01:41:42 -0700</bug_when>
+    <thetext>25.3.3.4 GeneratorResumeAbrupt(generator, abruptCompletion)
+
+Step 11 says: “Let _result_ be the value returned by the resumed computation.”
+
+If you resume the computation and `abruptCompletion.[[type]]` is `throw`, is it possible that the resumed computation throws an exception? That would mean that GeneratorResumeAbrupt would throw an exception, right? Independently of the answers to these questions, I’d explain the effect of `throw` completions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13720</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-13 09:29:43 -0700</bug_when>
+    <thetext>If fact, getting a throw completion back as result is the most common case.
+
+Assume we have an active generator created like:
+
+function * counter(n) {
+   while (true) yield n++
+}
+let g=counter(0);
+
+And its consumer executes something like:
+
+g.next();  //start the loop
+g.throw(&quot;abort counting&quot;);
+
+From the perspective of g, that will be equivalent to replacing the yield with the above throw.  The exception  will go all the way to the top  counter&apos;s body eventually landing in step 4.1 of GeneratorStart with result being the throw completion record  for &quot;about counting&quot;. Step 4.7.b sends control back to GeneratorResumeAbrupt step 11 with that same throw completion record. That eventually returns to the g.throw call site, with the throw completion so the exception continues to propagate from there.
+
+So, from there perspective of the client, in this case g.throw(...) was essentially equivalent to just saying: throw &quot;abort counting&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13721</commentid>
+    <comment_count>2</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-03-13 09:44:34 -0700</bug_when>
+    <thetext>Ah, good, thanks for confirming my suspicions.
+
+For your example, I see a different control flow:
+
+* Generator.prototype.throw (25.3.1.4)
+* GeneratorResumeAbrupt (25.3.3.4)
+* The state of the generator is &quot;suspendedYield&quot; (step 5ff)
+* The part that I find a bit unclear is step 11 (of GeneratorResumeAbrupt): “Let _result_ be the value returned by the resumed computation.” It sounds like a value being returned is the normal case, but with `throw`, it isn’t. Therefore, I’d mention what happens if the “resumed computation” throws an exception. I’m assuming that that leads to GeneratorResumeAbrupt throwing an exception(?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13722</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-13 10:17:34 -0700</bug_when>
+    <thetext>(In reply to Axel Rauschmayer from comment #2)
+
+&gt; * The part that I find a bit unclear is step 11 (of GeneratorResumeAbrupt):
+&gt; “Let _result_ be the value returned by the resumed computation.” It sounds
+&gt; like a value being returned is the normal case, but with `throw`, it isn’t.
+&gt; Therefore, I’d mention what happens if the “resumed computation” throws an
+&gt; exception. I’m assuming that that leads to GeneratorResumeAbrupt throwing an
+&gt; exception(?)
+
+&quot;value&quot; in this case, is the completion record ([[type]] throw in this case) returned from the inner algorithm of 25.3.3.1.
+
+That completion record is just returned as the completion record for GeneratorResumeAbrupt and execution proceeds as if the throw method had directly thrown the exception.
+
+ Note that in my example the exception represent by that completion record is the one injected via the throw method call.  But if the yield was in the scope of a catch clause, the catch clause or other generator function code might have thrown a different exception.  In that case the GeneratorResumeAbrupt completion record would reflect that other exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13723</commentid>
+    <comment_count>4</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-03-13 10:57:45 -0700</bug_when>
+    <thetext>If it’s a completion then that resolves my confusion. How about s/value/completion/ in the following sentence? “Let _result_ be the value returned by the resumed computation.”
+
+&gt; Note that in my example the exception represent by that completion record is the one injected via the throw method call.  But if the yield was in the scope of a catch clause, the catch clause or other generator function code might have thrown a different exception.  In that case the GeneratorResumeAbrupt completion record would reflect that other exception.
+
+Right. Due to `try-catch` (and `finally`), it wouldn’t even have to be an exception, the returned completion could have been created by a `return` or by a `yield`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13724</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-13 11:45:46 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13816</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:05 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

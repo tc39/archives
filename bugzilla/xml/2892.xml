@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2892</bug_id>
+          
+          <creation_ts>2014-05-27 08:48:00 -0700</creation_ts>
+          <short_desc>Various typos</short_desc>
+          <delta_ts>2014-07-18 23:40:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8637</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-27 08:48:00 -0700</bug_when>
+    <thetext>5.1.5  Grammar Notation
+- lookahead restriction: pharse -&gt; phrase
+- lookahead restriction: by be -&gt; may be
+
+8.2.2  CreateIntrinsics ( realmRec ) Abstract Operation
+- step 14: CreateBuildinFunction -&gt; CreateBuiltinFunction
+
+8.4  Tasks and Task Queues
+- Table 24, [[HostDefined]]: host environment -&gt; host environments
+- Table 24, [[HostDefined]]: Missing full stop
+
+8.5  Initialization
+- step 2: exeution -&gt; execution
+
+8.5.1  InitializeFirstRealm ( realm ) Abstract Operation
+- step 2: exotic object object -&gt; exotic object
+- step 3: Perfrom -&gt; Perform
+
+9.4.1.4 BoundFunctionClone ( function ) Abstract Operation
+- preamble: argujment -&gt; argument
+
+9.4.4  Arguments Exotic Objects:
+- 2nd para: ordanary -&gt; ordinary (2x)
+
+12.2.4.2.4 Runtime Semantics: ComprehensionComponentEvaluation
+- Step 3: &quot;if&quot; -&gt; &quot;If&quot; (To upper case at line beginning)
+
+12.2.7.2 Runtime Semantics: Evaluation
+- NOTE: VariableEnviornment -&gt; VariableEnvironment
+
+14.5.11 Static Semantics:  NonConstructorMethodDefinitions
+- 2nd production, step 1: PrototypeMethodDefinitions -&gt; NonConstructorMethodDefinitions
+
+14.5.16  Runtime Semantics: ClassDefinitionEvaluation
+- step 17.b.i: &quot;for s&quot; -&gt; &quot;for m&quot;
+
+15.1.9  Runtime Semantics: ScriptEvaluationTask ( source )
+- step 2: ealy -&gt; early
+- NOTE: exeuted -&gt; executed
+
+19.1.2.1 Object.assign ( target, ...sources )
+- step 4: vales -&gt; values
+
+19.2.3.2 Function.prototype.bind ( thisArg , ...args )
+- step 9: Remove &quot;the&quot;
+
+21.1.2.4 String.raw ( callSite [, ...substitutions )
+- step 2: numer -&gt; number
+
+24.1.1.2 NeuterArrayBuffer( arrayBuffer )
+- NOTE: disassociated -&gt; disassociates
+
+25.4.1.4 Promise Resolve Functions
+- step 12: EnqueueTas -&gt; EnqueueTask</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8659</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-05-27 13:56:04 -0700</bug_when>
+    <thetext>*** Bug 2912 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8688</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-30 02:10:13 -0700</bug_when>
+    <thetext>Also see bug 2926, bug 2927</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9073</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 11:19:26 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9319</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:40:16 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

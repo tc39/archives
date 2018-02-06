@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1284</bug_id>
+          
+          <creation_ts>2013-03-11 16:27:00 -0700</creation_ts>
+          <short_desc>section number anomalies</short_desc>
+          <delta_ts>2013-05-14 18:14:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3423</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-11 16:27:26 -0700</bug_when>
+    <thetext>7.8.3 &quot;Numeric Literals&quot;
+    is followed by:
+7.8.5 &quot;Regular Expression Literals&quot;
+7.8.6 &quot;Template Literal Lexical Components&quot;
+7.8.4 &quot;String Literals&quot;.
+
+Renumber the latter three?
+
+------------
+
+8.3.15.3 &quot;[[Get]] (P, Receiver)&quot;
+    is followed by:
+8.3.19.4 &quot;[[GetOwnProperty]] (P)&quot;
+
+Change &quot;.19&quot; to &quot;.15&quot;?
+
+------------
+
+8.4.3.5 &quot;[[OwnPropertyKeys]] ( )&quot;
+    is followed by:
+8.4.6.6 &quot;StringCreate Abstract Operation&quot;
+
+Change the first &quot;.6&quot; to &quot;.3&quot;.
+
+------------
+
+9.3.13 &quot;GetPrototypeFromConstructor ...&quot;
+    is followed by
+9.3.13 &quot;OrdinaryCreateFromConstructor ...&quot;
+
+Change the latter&apos;s &quot;.13&quot; to &quot;.14&quot;.
+
+------------
+
+15.5.3.4 String.raw &quot;( callSite, ...substitutions)&quot;
+    is followed by:
+15.5.4.5 &quot;String[ @@create ]()&quot;
+
+Change the latter&apos;s &quot;.4&quot; to &quot;.3&quot;.
+
+------------
+
+15.10.5.1 &quot;RegExp.prototype&quot;
+    is followed by:
+15.9.4.5 &quot;RegExp[ @@create ]()&quot;
+
+Change the &quot;.9.4.5&quot; to &quot;.10.5.2&quot;?
+
+------------
+
+15.10.6.12 &quot;RegExp.prototype.replace (S, replaceValue)&quot;
+    is followed by:
+15.10.4.13 &quot;RegExp.prototype.search (S)&quot;
+15.10.4.14 &quot;RegExp.prototype.split (string, limit)&quot;
+15.10.4.14 &quot;RegExp.prototype.@@isRegExp&quot;
+
+Change each &quot;.4&quot; to &quot;.6&quot;, and the latter &quot;.14&quot; to &quot;.15&quot;.
+
+------------
+
+15.11.2 &quot;The Error Constructor&quot;
+    is followed by:
+15.10.4.1 &quot;new Error(... args)&quot;
+
+Change &quot;.10.4&quot; to &quot;.11.2&quot;.
+
+------------
+
+15.13.6.4.3 &quot;get TypedArray.prototype.buffer&quot;
+    is followed by:
+15.13.6.6.4 &quot;get TypedArray.prototype.byteLength&quot;
+    through
+15.13.6.6.12 &quot;TypedArray.prototype.@@toStringTag&quot;
+
+In each case, change the second &quot;.6&quot; to a &quot;.4&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3815</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 16:53:54 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3995</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:14:15 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

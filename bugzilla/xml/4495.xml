@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4495</bug_id>
+          
+          <creation_ts>2015-08-21 14:11:00 -0700</creation_ts>
+          <short_desc>14.4.4  Contains: Merge steps</short_desc>
+          <delta_ts>2015-11-02 18:13:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14656</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 14:11:53 -0700</bug_when>
+    <thetext>14.4.4 Static Semantics: Contains
+
+
+GeneratorDeclaration and GeneratorExpression can be handled in a single step:
+
+---
+GeneratorDeclaration : function * BindingIdentifier ( FormalParameters ) { GeneratorBody }
+GeneratorDeclaration : function * ( FormalParameters ) { GeneratorBody }
+GeneratorExpression : function * BindingIdentifieropt ( FormalParameters ) { GeneratorBody }
+
+1. Return false.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14887</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-11-02 18:13:43 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (b3d8f5b).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

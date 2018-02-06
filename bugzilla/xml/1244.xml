@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1244</bug_id>
+          
+          <creation_ts>2013-02-05 23:17:00 -0800</creation_ts>
+          <short_desc>6.2.1: Definition of Unicode Locale Extension Sequences incorrect</short_desc>
+          <delta_ts>2015-02-17 20:45:05 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 standard</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3181</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-02-05 23:17:26 -0800</bug_when>
+    <thetext>Section 6.2.1 defines the term “Unicode locale extension sequence” as “any substring of a language tag that starts with a separator &quot;-&quot; and the singleton &quot;u&quot; and includes the maximum sequence of following non-singleton subtags and their preceding &quot;-&quot; separators.”
+
+This definition doesn&apos;t agree with RFC 5646, which makes any subtag sequence starting with the subtag &quot;x&quot; a private use subtag sequence, in which the singleton &quot;u&quot; has no predefined meaning.
+
+The incorrect definition leads to at least one inconsistency within ECMA-402: The BestAvailableLocale operation expects a “structurally valid and canonicalized BCP 47 language tag” in the locale argument, however, the LookupMatcher operation removes all Unicode locale extension sequences from tags it passes to LookupMatcher. If the determination of Unicode locale extension sequences doesn&apos;t take private use sequences into consideration, then the tag &quot;x-u-foo&quot; gets reduced to &quot;x&quot;, which is no longer well-formed.
+
+The definition should be changed to “any substring of a language tag that is not part of a private use subtag sequence, starts with a separator &quot;-&quot; and the singleton &quot;u&quot;, and includes the maximum sequence of following non-singleton subtags and their preceding &quot;-&quot; separators.”</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12249</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 09:20:52 -0800</bug_when>
+    <thetext>Fixed in rev7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12883</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 20:45:05 -0800</bug_when>
+    <thetext>Verified in rev 10 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

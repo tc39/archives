@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>797</bug_id>
+          
+          <creation_ts>2012-10-15 16:30:00 -0700</creation_ts>
+          <short_desc>Add glyph detection</short_desc>
+          <delta_ts>2012-10-23 23:10:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark">mark</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1938</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark">mark</who>
+    <bug_when>2012-10-15 16:30:11 -0700</bug_when>
+    <thetext>[I didn&apos;t see a way to make the Component be v2]
+
+A common requirement is the ability to substitute an image when a character is not available. An example is for the new Turkish Lira, which is not in common fonts yet.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1950</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-16 15:08:58 -0700</bug_when>
+    <thetext>Thanks for the reminder about versions - we got them now!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1989</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-23 23:10:29 -0700</bug_when>
+    <thetext>Font support is beyond the scope of TC 39, and should be proposed to a W3C working group instead. See discussion at
+https://mail.mozilla.org/pipermail/es-discuss/2012-October/thread.html#25937</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3307</bug_id>
+          
+          <creation_ts>2014-11-09 15:10:00 -0800</creation_ts>
+          <short_desc>Not able to use RegExp as a key in dictionary</short_desc>
+          <delta_ts>2015-02-16 18:24:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Suren Nihalani">suren.k.n</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>suren.k.n</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10554</commentid>
+    <comment_count>0</comment_count>
+    <who name="Suren Nihalani">suren.k.n</who>
+    <bug_when>2014-11-09 15:10:54 -0800</bug_when>
+    <thetext>I am not able to do the following:
+
+var regexes = {
+    new RegExp(&quot;@Formula&quot;, &quot;i&quot;): &quot;@Formula&quot;
+}
+
+however I am able to do:
+
+    var regexes = {}
+    regexes[new RegExp(&quot;a&quot;, &quot;i&quot;)] = &quot;b&quot;;
+
+
+    console.log(regexes);
+
+Is this a bug or this is not supposed to work?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10555</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-09 17:06:50 -0800</bug_when>
+    <thetext>(In reply to Suren Nihalani from comment #0)
+&gt; I am not able to do the following:
+&gt; 
+&gt; var regexes = {
+&gt;     new RegExp(&quot;@Formula&quot;, &quot;i&quot;): &quot;@Formula&quot;
+&gt; }
+&gt; 
+you are missing the bracked that must surround a computed property key in an object literal.  It should be:
+
+ var regexes = {
+      [new RegExp(&quot;@Formula&quot;, &quot;i&quot;)] : &quot;@Formula&quot;
+  }
+  
+
+But that would be be a silly thing do do because each time you evaluate 
+  new RegExp(&quot;@Formula&quot;, &quot;i&quot;)
+you are going to get a different object with a different  === identify. So, nobody culd ever access that property.  In a case like the above, what you probably want is something more like: 
+
+ var formulakey = new RegExp(&quot;@Formula&quot;, &quot;i&quot;)];
+ var regexes = {
+      [formulakey] : &quot;@Formula&quot;
+  };
+...
+  regexes[formulakey] = ...
+  
+
+&gt; 
+&gt; Is this a bug or this is not supposed to work?
+
+neither, you seem to misunderstand the syntax and semantics of computed property names.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10556</commentid>
+    <comment_count>2</comment_count>
+    <who name="Suren Nihalani">suren.k.n</who>
+    <bug_when>2014-11-09 17:12:17 -0800</bug_when>
+    <thetext>Got it. Thanks a lot.
+
+I decided to use a dict because I wanted to iterate over key, value pairs in a dict and wanted the collect the values only when the key&apos;s regex was passing on the string I was working with. I didn&apos;t plan to look up the property later, I was going iterate through the map. Hope that helps in understanding the use case.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

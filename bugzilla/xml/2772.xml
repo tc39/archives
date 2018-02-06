@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2772</bug_id>
+          
+          <creation_ts>2014-05-01 07:55:00 -0700</creation_ts>
+          <short_desc>20.1.3.6 Number.prototype.toString: Remove brackets in function definition or add explicit length</short_desc>
+          <delta_ts>2014-06-16 16:22:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8065</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 07:55:01 -0700</bug_when>
+    <thetext>20.1.3.6  Number.prototype.toString ( [ radix ] ).
+
+
+Change the function definition to &quot;Number.prototype.toString(radix)&quot; or explicitly define the function arity to be 1.
+
+Note: The bracket notation was added in ES5, `Number.prototype.toString.length` is 1 in all engines (Nashorn, JSC, IE11, SpiderMonkey, V8).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8534</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-17 09:28:19 -0700</bug_when>
+    <thetext>this is covered by clause 17 which says:
+
+&quot;Every built-in Function object, including constructors, has a length property whose value is an integer. Unless otherwise specified, this value is equal to the largest number of named arguments shown in the subclause headings for the function description, including optional parameters. However, rest parameters shown using the form “...name” are not included in the default argument count.&quot;
+
+I just added the last sentence in rev25
+
+So, the heading of 20.1.3.6 doesn&apos;t need to change.
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8547</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-18 12:19:08 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; this is covered by clause 17 which says:
+&gt; 
+
+Ah yes, I confused it with the length property of user defined ECMAScript function objects. Does this is also mean the explicit length for various Date.prototype.* methods is actually redundant?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9023</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:22:46 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

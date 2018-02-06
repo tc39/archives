@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3000</bug_id>
+          
+          <creation_ts>2014-06-27 14:46:00 -0700</creation_ts>
+          <short_desc>23.1.1.1: order of side effects for Map constructor makes it unimplementable with for-of</short_desc>
+          <delta_ts>2014-07-18 14:14:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9108</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-06-27 14:46:55 -0700</bug_when>
+    <thetext>Discussed toward the end of https://www.w3.org/Bugs/Public/show_bug.cgi?id=26217
+
+One would like to be able to implement the `new Map(iterable)` algorithm via something like this:
+
+    var call = uncurryThis(Function.prototype.call);
+
+    var adder = map[adder];
+    if (typeof adder !== &quot;function&quot;) {
+      throw new TypeError;
+    }
+
+    for (var x of iterable) {
+      var k = iterable[0];
+      var v = iterable[1];
+      call(adder, map, k, v);
+    }
+
+However, the specification requires that the iterator be gotten from the iterable before the `adder` is retrieved from `map`, which does not match this code.
+
+This ordering means implementations cannot self-host using for-of, and must thus engage in some contortions to do the separate iterable-related steps.
+
+It seems like it&apos;d be simple enough to move step 7c,d,e before steps 7a,b and solve this.
+
+I imagine the other collection initializers might suffer from the same issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9109</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-27 15:17:21 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+Also for Set, WeakMap, WeakSet
+
+Let me know if you see any other similar self-hosting issues like this.  Jason already turned up a couple others that have been fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9263</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:14:18 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

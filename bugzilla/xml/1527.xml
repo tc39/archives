@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1527</bug_id>
+          
+          <creation_ts>2013-05-26 03:59:00 -0700</creation_ts>
+          <short_desc>Coverage: Missing tests for Number.prototype.toFixed and toPrecision</short_desc>
+          <delta_ts>2013-06-11 08:31:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=1526</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>andyearnshaw</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4096</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-05-26 03:59:39 -0700</bug_when>
+    <thetext>Bug 1526 mentions problems with the rounding behavior in Number.prototype.toFixed in some implementations. There are no tests for this behavior, which seems a serious gap. The Test402 test suite has a test 11.3.2_TRP, from which a test for toFixed could be derived (note however that toFixed uses exponential format in some case, while Intl.NumberFormat.prototype.format doesn&apos;t).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4097</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-05-26 04:06:07 -0700</bug_when>
+    <thetext>The description should have said toPrecision rather than toFixed. But the same problem exists for toFixed - neither have adequate test coverage.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

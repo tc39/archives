@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2873</bug_id>
+          
+          <creation_ts>2014-05-16 09:31:00 -0700</creation_ts>
+          <short_desc>B.3.2 Web Block Function Decl: Redeclaration checks when parameter environment is present</short_desc>
+          <delta_ts>2014-06-16 16:12:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8522</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-16 09:31:22 -0700</bug_when>
+    <thetext>B.3.2  Web Legacy Compatibility for Block-Level Function Declarations
+
+The redeclaration check in step 2.a does not take parameter environments into account. Maybe it should use `instantiatedVarNames` instead of HasBinding()?
+
+Also: Step reference in B.3.2, step 2a. to 9.2.14 needs to be updated from step 26 to step 29.
+
+
+Parameter environment present:
+---
+function f(a = () =&gt; &quot;default&quot;) {
+  if (true) { function a() { return &quot;web-compat&quot; } }
+  return a();
+}
+f(); // returns &quot;web-compat&quot;
+f(() =&gt; &quot;param&quot;); returns &quot;web-compat&quot;
+---
+
+
+Parameter environment not present:
+---
+function f(a) {
+  if (true) { function a() { return &quot;web-compat&quot; } }
+  return a();
+}
+f(); // throws TypeError
+f(() =&gt; &quot;param&quot;); // returns &quot;param&quot;
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8526</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-16 16:14:29 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft.
+
+used instantiatedVarNames.  Also adjusted the step reference into 9.2.14</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9014</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:12:54 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

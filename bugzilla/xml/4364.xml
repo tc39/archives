@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4364</bug_id>
+          
+          <creation_ts>2015-05-13 20:06:00 -0700</creation_ts>
+          <short_desc>Inconsistent capitalization of &quot;quotation mark&quot; in 24.3.2.2, step 2.a</short_desc>
+          <delta_ts>2015-10-02 13:14:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>impinball</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14402</commentid>
+    <comment_count>0</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2015-05-13 20:06:55 -0700</bug_when>
+    <thetext>It currently starts with &quot;If C is 0x0022 (quOTATion mark) ...&quot;, but it should be &quot;If C is 0x0022 (quotation mark) ...&quot;.
+
+&lt;deviation type=&quot;slight&quot;&gt;
+I do think, in general, the names of various code points are rather inconsistent, in that some are in standard prose (&quot;reverse solidus&quot;), while others are in all caps (&quot;LINE FEED&quot;). The Unicode standard, AFAICT, has all of them labelled in all caps, but some people citing it use exclusively lower case. I know it&apos;s an either-or thing, but it feels a little inconsistent in appearance.
+
+It would be nice for this part to get fixed, but I&apos;m not going to hold my breath on it, since this is in the final draft.
+&lt;/deviation&gt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14403</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-14 09:42:09 -0700</bug_when>
+    <thetext>this is actually an HTML rendering problem.  The text is correctly capitalized in the original Word document and in the PDF renderings.
+
+(the source text is styled &quot;All CAPS&quot;)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14405</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-14 11:20:06 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft
+
+eliminated all &quot;ALL CAPS&quot; style usage to make life easier for the HTML converter.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

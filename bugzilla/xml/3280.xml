@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3280</bug_id>
+          
+          <creation_ts>2014-10-14 09:58:00 -0700</creation_ts>
+          <short_desc>9.1.2 [[SetPrototypeOf]] Contains unreachable steps</short_desc>
+          <delta_ts>2014-10-14 10:39:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sam L&apos;ecuyer">samlecuyer</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10350</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sam L&apos;ecuyer">samlecuyer</who>
+    <bug_when>2014-10-14 09:58:35 -0700</bug_when>
+    <thetext>Substeps of 8 are unreachable in the latest draft, and step 7 is a duplicate of step 2.
+
+Step 2: Let extensible be the value of the [[Extensible]] internal slot of O.
+Step 5: If extensible is false, then return false.
+
+Step 7: Let extensible be the value of the [[Extensible]] internal slot of O.
+Step 8: If extensible is false, then (substeps)
+
+[[Extensible]] is not modified in this algorithm, so if extensible is false, then it shouldn&apos;t be checked again.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10351</commentid>
+    <comment_count>1</comment_count>
+    <who name="Sam L&apos;ecuyer">samlecuyer</who>
+    <bug_when>2014-10-14 10:13:40 -0700</bug_when>
+    <thetext>IMO, steps 7 &amp; 8 should just be removed, since they just duplicate steps 3,4,5 in a different order.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10352</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-14 10:30:21 -0700</bug_when>
+    <thetext>Proxy handlers executed during the prototype chain traversal (step 6.b.ii) can change the [[Extensible]] internal slot, see bug 2489.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10353</commentid>
+    <comment_count>3</comment_count>
+    <who name="Sam L&apos;ecuyer">samlecuyer</who>
+    <bug_when>2014-10-14 10:39:17 -0700</bug_when>
+    <thetext>Thanks, André.  My mistake.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

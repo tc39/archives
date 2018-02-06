@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3965</bug_id>
+          
+          <creation_ts>2015-02-16 19:37:00 -0800</creation_ts>
+          <short_desc>errors in &quot;See also&quot; paragraphs</short_desc>
+          <delta_ts>2015-03-04 18:58:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12802</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-16 19:37:02 -0800</bug_when>
+    <thetext>There are lots of incorrect/missing references in &quot;See also&quot; paragraphs. I&apos;ve attached a (rather long) list of fixes. Of course, I don&apos;t really want you to do all this, I&apos;d rather you found a way to generate them automatically. (Or just get rid of them. Personally, I find them an annoyance, e.g. when I&apos;m searching for a section number and I keep hitting matches in &quot;See also&quot; paragraphs.)
+
+In addition to the following, in almost every &quot;Static Semantics: BoundNames&quot; section, the &quot;See also&quot; has 12.1.2 out of order.
+
+--------------
+
+12.1.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+12.1.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.3.1.3 to 12.3.1.5
+
+12.2.0.3 Static Semantics: IsIdentifierRef
+    change 12.3.1.3 to 12.3.1.4
+
+12.2.0.4 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.3.1.3 to 12.3.1.5
+
+12.2.5.6 Static Semantics: PropName
+    change 14.3.5 to 14.3.6
+
+12.2.9.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.3.1.1 Static Semantics: Contains
+    change 12.2.5.2 to 12.2.5.3
+
+12.3.1.3 Static Semantics: IsDestructuring
+    change 13.6.4.5 to 13.6.4.6
+
+12.3.1.5 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.4.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.5.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.6.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.7.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.8.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.9.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.10.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.11.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.12.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.13.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.14.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+12.15.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+    change 12.3.1.3 to 12.3.1.5
+
+13.0.7 Runtime Semantics: LabelledEvaluation
+    change 13.6.1.5 to 13.6.1.6
+    change 13.6.2.5 to 13.6.2.6
+    change 13.6.3.6 to 13.6.3.7
+
+13.1.5 Static Semantics: LexicallyDeclaredNames
+    change 13.11.2 to 13.11.5
+
+13.2.1.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.2.1, 13.2.3.1, 15.2.3.2
+
+13.2.2.1 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+13.2.3.1 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 12.1.2, 15.2.3.2
+
+13.2.3.3 Static Semantics: HasInitializer
+    delete: 13.2.3.3, 14.1.7
+    insert: 14.1.8
+
+13.2.3.4 Static Semantics: IsSimpleParameterList
+    change 14.1.12 to 14.1.13
+    change 14.2.8 to 14.2.9
+
+13.6.1.6 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.2.5 to 13.6.2.6
+    change 13.6.3.6 to 13.6.3.7
+
+13.6.2.6 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.1.5 to 13.6.1.6
+    change 13.6.3.6 to 13.6.3.7
+
+13.6.3.7 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.1.5 to 13.6.1.6
+    change 13.6.2.5 to 13.6.2.6
+
+13.6.4.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+13.6.4.11 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.1.5 to 13.6.1.6
+    change 13.6.2.5 to 13.6.2.6
+    change 13.6.3.6 to 13.6.3.7
+
+13.11.5 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+13.12.6 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+    change 13.11.2 to 13.11.5
+
+13.12.9 Static Semantics: TopLevelLexicallyScopedDeclarations
+    change 13.1.10 to 13.1.8
+
+13.12.14 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.1.5 to 13.6.1.6
+    change 13.6.2.5 to 13.6.2.6
+    change 13.6.3.6 to 13.6.3.7
+
+14.1.3 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+14.1.4 Static Semantics: Contains
+    change 12.2.5.2 to 12.2.5.3
+
+14.1.6 Static Semantics: ExpectedArgumentCount
+    change 14.3.2 to 14.3.3
+
+14.1.9 Static Semantics: HasName
+    change 14.4.6 to 14.4.7
+
+14.1.13 Static Semantics: IsSimpleParameterList
+    change 14.2.8 to 14.2.9
+
+14.1.15 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+    change 13.11.2 to 13.11.5
+
+14.2.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+14.2.3 Static Semantics: Contains
+    change 12.2.5.2 to 12.2.5.3
+
+14.2.6 Static Semantics: ExpectedArgumentCount
+    change 14.1.5 to 14.1.6
+    change 14.3.2 to 14.3.3
+
+14.2.7 Static Semantics: HasInitializer
+    change 14.1.7 to 14.1.8
+
+14.2.8 Static Semantics: HasName
+    change 14.4.6 to 14.4.7
+
+14.2.9 Static Semantics: IsSimpleParameterList
+    change 14.1.12 to 14.1.13
+
+14.2.10 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+    change 13.11.2 to 13.11.5
+
+14.2.11 Static Semantics: LexicallyScopedDeclarations
+    insert: 15.1.4
+
+14.3.3 Static Semantics: ExpectedArgumentCount
+    change 14.1.5 to 14.1.6
+
+14.4.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+14.4.4 Static Semantics: Contains
+    change 12.2.5.2 to 12.2.5.3
+
+14.4.10 Static Semantics: PropName
+    change 14.3.5 to 14.3.6
+
+14.5.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+14.5.4 Static Semantics: Contains
+    change 12.2.5.2 to 12.2.5.3
+
+14.5.6 Static Semantics: HasName
+    change 14.4.6 to 14.4.7
+
+14.5.12 Static Semantics: PropName
+    change 14.3.5 to 14.3.6
+
+15.1.3 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+    change 13.11.2 to 13.11.5
+
+15.2.1.10 Static Semantics: ModuleRequests
+    change 15.2.3.7 to 15.2.3.9
+
+15.2.1.11 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+    change 13.11.2 to 13.11.5
+
+15.2.2.2 Static Semantics: BoundNames
+    delete: 15.2.3.1
+    insert: 13.2.3.1, 15.2.3.2
+
+15.2.2.3 Static Semantics: ImportEntries
+    change 15.2.1.7 to 15.2.1.8
+
+15.2.2.5 Static Semantics: ModuleRequests
+    change 15.2.3.7 to 15.2.3.9
+
+15.2.3.2 Static Semantics: BoundNames
+    insert: 13.2.3.1
+
+15.2.3.7 Static Semantics: IsConstantDeclaration
+    change 14.1.9 to 14.1.11
+    change 14.4.5 to 14.4.8
+    change 14.5.5 to 14.5.7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12984</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 14:29:10 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13165</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:12 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13214</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-20 13:48:04 -0800</bug_when>
+    <thetext>rev34 still has these errors:
+
+
+12.2.9.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.3.1.3 Static Semantics: IsDestructuring
+    change 13.6.4.5 to 13.6.4.6
+
+12.3.1.5 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.4.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.5.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.6.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.7.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.8.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.9.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.10.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.11.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.12.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.13.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.14.3 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+12.15.2 Static Semantics: IsValidSimpleAssignmentTarget
+    change 12.2.0.3 to 12.2.0.4
+
+13.2.3.4 Static Semantics: IsSimpleParameterList
+    change 14.2.8 to 14.2.9
+
+13.6.1.6 Runtime Semantics: LabelledEvaluation
+    change 13.0.6 to 13.0.7
+    change 13.6.2.5 to 13.6.2.6
+    change 13.6.3.6 to 13.6.3.7
+
+13.11.5 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+13.12.6 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+14.1.12 Static Semantics: IsSimpleParameterList
+    change 14.2.8 to 14.2.9
+
+14.1.14 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+14.2.2 Static Semantics: BoundNames
+    change 14.2.2 to 14.4.2
+
+14.2.6 Static Semantics: ExpectedArgumentCount
+    change 14.1.5 to 14.1.6
+
+14.2.10 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+14.3.3 Static Semantics: ExpectedArgumentCount
+    change 14.1.5 to 14.1.6
+
+14.5.6 Static Semantics: HasName
+    change 14.5.6 to 14.4.7
+
+15.1.3 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+15.2.1.11 Static Semantics: LexicallyDeclaredNames
+    change 13.1.2 to 13.1.5
+
+15.2.2.3 Static Semantics: ImportEntries
+    change 15.2.1.7 to 15.2.1.8</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13326</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 14:55:21 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13553</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:24 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

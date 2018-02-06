@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4378</bug_id>
+          
+          <creation_ts>2015-05-26 10:06:00 -0700</creation_ts>
+          <short_desc>13.7.5.1: suggested restructuring of early errors</short_desc>
+          <delta_ts>2015-10-10 09:03:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14454</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-05-26 10:06:37 -0700</bug_when>
+    <thetext>In 13.7.5.1 &quot;Static Semantics: Early Errors&quot;,
+group 1 would be easier to understand if the rules were written more like this:
+
+ -  If LeftHandSideExpression is either an ObjectLiteral or an ArrayLiteral,
+    then
+     -  If the lexical token sequence matched by LeftHandSideExpression
+        can be parsed with no tokens left over using AssignmentPattern
+        as the goal symbol, then
+            Apply the Early Error rules for AssignmentPattern to the result of
+            that parse.
+     -  Else
+            It is a Syntax Error
+ -  Else
+     -  If IsValidSimpleAssignmentTarget of LeftHandSideExpression is false,
+            it is a Syntax Error.
+
+     -  If the LeftHandSideExpression is
+        CoverParenthesizedExpressionAndArrowParameterList : ( Expression )
+        and [etc].
+        [This rule could be at this level or the outer level, to taste.]
+
+I realize that no set of Early Error rules is currently written this way (though there are hints of it in 14.1.2, 14.2.1, 14.5.1, and 15.2.3.1), but I think the flat-list-of-bullets format is getting in the way of clarity here.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

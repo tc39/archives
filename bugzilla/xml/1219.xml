@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1219</bug_id>
+          
+          <creation_ts>2013-01-26 11:22:00 -0800</creation_ts>
+          <short_desc>8.1.6.2 -- what do internal methods have access to</short_desc>
+          <delta_ts>2013-11-03 16:06:12 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3149</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-01-26 11:22:41 -0800</bug_when>
+    <thetext>says &quot;an internal method always has access to the object upon which it is invoked as a method.&quot;
+
+Excellent specifying what internal methods have access to. Is there are way to leverage this to specify what they do not have access to? Or “not, unless otherwise specified”? That would be awesome.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3283</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 17:56:23 -0800</bug_when>
+    <thetext>The quote line is in the context discussing the signature specification used for internal methods and is really just saying that the self value of an internal method invocation is always an implicit parameter.
+
+I&apos;m not sure what you have in mind saying about things that are not accessible. All specified internal method implementation are in the spec. so they can be examined to see what they do or don&apos;t access. 
+
+Are there some restrictions you want to place upon implementation specific internal methods?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

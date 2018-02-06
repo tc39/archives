@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>563</bug_id>
+          
+          <creation_ts>2012-07-15 17:51:00 -0700</creation_ts>
+          <short_desc>13.5.1: undefined &quot;argumentsList&quot;</short_desc>
+          <delta_ts>2012-10-07 14:46:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1348</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-15 17:51:24 -0700</bug_when>
+    <thetext>In 13.5.1 &quot;[[Call]]&quot;,
+step 12 says:
+    &quot;Let status be the result of performing Function Declaration Instantiation
+     using the function F, argumentsList, and localEnv as described in 10.5.3.&quot;
+but &apos;argumentsList&apos; is not defined.
+
+Presumably it&apos;s what the prose before the algorithm refers to as &quot;a list of arguments&quot;, so you could insert &apos;argumentsList&apos; there.
+
+----
+
+Also, in 13.5.2 &quot;[[Construct]]&quot;, step 5 says:
+    &quot;Let result be the result of calling the [[Call]] internal property of F,
+    providing obj as the this value and providing the argument list passed into
+    [[Construct]] as args.&quot;
+(where &apos;args&apos; is italicized).
+
+Given the above, &apos;args&apos; should be changed to &apos;argumentsList&apos;.
+
+(No other invocation of [[Call]] assumes a name for its argument-list parameter.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1466</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-13 17:20:37 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1729</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:27 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1841</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-04 22:11:13 -0700</bug_when>
+    <thetext>The first point is fixed, but the second isn&apos;t.
+(In rev10, the location is now 13.6.2 / step 5.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1890</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-07 14:46:34 -0700</bug_when>
+    <thetext>On second thought, I&apos;ve shifted the leftover bit of this bug to Bug 757, and re-closed this one.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

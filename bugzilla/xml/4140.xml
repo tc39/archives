@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4140</bug_id>
+          
+          <creation_ts>2015-03-07 18:21:00 -0800</creation_ts>
+          <short_desc>class definitions: computed property name can be &quot;constructor&quot;</short_desc>
+          <delta_ts>2015-07-10 08:35:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+    
+    <cc>leonarnott</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13638</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-07 18:21:23 -0800</bug_when>
+    <thetext>Should this be a runtime error during class definition evaluation?
+
+currently it just over-writes the constructor property.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13654</commentid>
+    <comment_count>1</comment_count>
+    <who name="Leon Arnott">leonarnott</who>
+    <bug_when>2015-03-09 00:30:05 -0700</bug_when>
+    <thetext>One computed name that should definitely be forbidden is `static [&apos;prototype&apos;](){}`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13655</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-09 06:24:02 -0700</bug_when>
+    <thetext>[&apos;constructor&apos;] should be allowed.
+
+As is, we should not special case this one. The prototype property &apos;constructor&apos; is not read only so disallowing it would require that every computed property name would need to be compared with the string &apos;constructor&apos;.
+
+If we made the prototype &apos;constructor&apos; property read only (like the constructor property &apos;prototype&apos;) then we would get the type error for free.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13657</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-09 07:06:42 -0700</bug_when>
+    <thetext>(In reply to Leon Arnott from comment #1)
+&gt; One computed name that should definitely be forbidden is `static
+&gt; [&apos;prototype&apos;](){}`.
+
+That is already the case since the property is non-configurable and non-writable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13666</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-09 10:03:48 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; [&apos;constructor&apos;] should be allowed.
+
+I think either alternative is plausale.
+
+&gt; 
+&gt; As is, we should not special case this one. The prototype property
+&gt; &apos;constructor&apos; is not read only so disallowing it would require that every
+&gt; computed property name would need to be compared with the string
+&gt; &apos;constructor&apos;.
+
+but only as part of ClassDefinitionEvaluation
+
+&gt; 
+&gt; If we made the prototype &apos;constructor&apos; property read only (like the
+&gt; constructor property &apos;prototype&apos;) then we would get the type error for free.
+
+would have to also be non-configurable because [[DefineOwnProperty]] is used to install methods during ClassDefinitionEvaluation</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13670</commentid>
+    <comment_count>5</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-09 10:52:22 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; would have to also be non-configurable because [[DefineOwnProperty]] is used
+&gt; to install methods during ClassDefinitionEvaluation
+
+Yup. read only is not a spec term, it is my way of saying non-configurable, non-writable.
+
+I think it is too late to make the constructor read only and therefore I don&apos;t think we should add this restriction to computed property names in ClassDefinitionEvaluation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13686</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-10 13:48:03 -0700</bug_when>
+    <thetext>ok, won&apos;t change anything
+
+I mainly opened this to see what people thought about it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13690</commentid>
+    <comment_count>7</comment_count>
+    <who name="Leon Arnott">leonarnott</who>
+    <bug_when>2015-03-10 19:20:56 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #3)
+&gt; (In reply to Leon Arnott from comment #1)
+&gt; &gt; One computed name that should definitely be forbidden is `static
+&gt; &gt; [&apos;prototype&apos;](){}`.
+&gt; 
+&gt; That is already the case since the property is non-configurable and
+&gt; non-writable.
+
+Ah, OK. I&apos;d gotten confused because 14.5.1 has an early error for `static prototype`, as a bare name, which, if what you say is true, is technically unnecessary except to catch the bug earlier.
+
+Speaking of which: it&apos;s also an error if more than one `constructor` bare name is present, which was one of my motivations for mentioning this topic. Given that similar limits on duplicate properties were removed for object literals due to computed properties daunting them, maybe that 14.5.1 restriction should be relaxed too? Hmm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13693</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-11 09:06:38 -0700</bug_when>
+    <thetext>(In reply to Leon Arnott from comment #7)
+&gt; 
+&gt; Speaking of which: it&apos;s also an error if more than one `constructor` bare
+&gt; name is present, which was one of my motivations for mentioning this topic.
+&gt; Given that similar limits on duplicate properties were removed for object
+&gt; literals due to computed properties daunting them, maybe that 14.5.1
+&gt; restriction should be relaxed too? Hmm.
+
+this was considered but rejected when the restriction of duplicate properties was relax.
+
+The constructor property is really a special form that is part of a ClassBody.  It does define  just another property.  Rather, it is how the actual body of the constructor is provided.  Clearly only one such such body is possible. 
+
+[&quot;constructor&quot;]() {}
+on the otherhand is is evaluated after the constructor is already created so it has no effect upon the constructor body. It just over-writes the prototype.constructor property value.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

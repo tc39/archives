@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4247</bug_id>
+          
+          <creation_ts>2015-04-03 08:15:00 -0700</creation_ts>
+          <short_desc>Inconsistent `prototype` property descriptors</short_desc>
+          <delta_ts>2015-04-03 12:35:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14036</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-03 08:15:14 -0700</bug_when>
+    <thetext>RC3 defines different property descriptors for the `prototype` property of
+function instances and generator function instances. The text is very explicit
+about this, but I can&apos;t intuit the rationale for such a distinction (nor can I
+find relevant discussion in es-discuss, the TC39 meeting minutes, or this issue
+tracker), so I suspect it may be a typo.
+
+From ES6 19.2.4.3 [1] (function instance `prototype` property):
+
+&gt; This property has the attributes { [[Writable]]: true, [[Enumerable]]: false,
+&gt; [[Configurable]]: false }.
+
+From ES6 25.2.4.2 [2] (generator function instance `prototype` property):
+
+&gt; This property has the attributes { [[Writable]]: false, [[Enumerable]]:
+&gt; false, [[Configurable]]: true }.
+
+[1] https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-instances-prototype
+[2] https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorfunction-instances-prototype</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14037</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 09:11:02 -0700</bug_when>
+    <thetext>looks like a bug in the description 25.2.4.2 because the actual creation of generator functions in 14.4.12 create a writable, non-configurable prototype property.  The same logic is used to do this for both functions and generator functions
+
+fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14060</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:33 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

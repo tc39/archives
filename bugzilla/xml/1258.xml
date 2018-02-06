@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1258</bug_id>
+          
+          <creation_ts>2013-02-27 10:17:00 -0800</creation_ts>
+          <short_desc>BasicFormatMatcher 11.c.vi doesn&apos;t handle optionsProp and formatProp being undefined</short_desc>
+          <delta_ts>2015-02-08 14:07:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 standard</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3241</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-02-27 10:17:24 -0800</bug_when>
+    <thetext>Substeps 11.c.vi.2 and 11.c.vi.3 of the BasicFormatMatcher algorithm determine the indexes of optionsProp and formatProp within the values array. This assumes that both actually have values included in this array, and fails if both are undefined. The steps leading here, however, do not prevent them from both being undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12223</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 14:07:38 -0800</bug_when>
+    <thetext>Fixed in 2013-02-28 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

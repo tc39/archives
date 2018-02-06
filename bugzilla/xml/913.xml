@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>913</bug_id>
+          
+          <creation_ts>2012-11-01 21:41:00 -0700</creation_ts>
+          <short_desc>15.10.5.13: RegExp.prototype.search needs a search algorthm</short_desc>
+          <delta_ts>2014-04-06 11:29:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2398</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-01 21:41:06 -0700</bug_when>
+    <thetext>In 15.5.4.12 &quot;String.prototype.search (regexp)&quot;,
+step 7 says:
+    Search the value string from its beginning for an occurrence of the
+    regular expression pattern rx. ...
+
+This seems vague. Compare to String.prototype.match, which (at a point roughly analogous to search&apos;s step 7) calls RegExpExec, which goes into great detail about how to apply a regexp to a string.
+
+I understand that &apos;search&apos; can&apos;t call RegExpExec, because RegExpExec *doesn&apos;t* ignore the regexp&apos;s &apos;lastIndex&apos; and &apos;global&apos; properties. But it seems like there should be something of comparable detail.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4379</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:55:11 -0700</bug_when>
+    <thetext>String.prototype.search now delegates to RegExp.prototype.search but it has the same vague language that used to be in the String method.  However, there is already a margin TODO comment that says better spec. language is needed. 
+
+Changed the title of this bug so it relates to RegExp search</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7484</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-27 12:55:59 -0700</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7521</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:34 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

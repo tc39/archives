@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2837</bug_id>
+          
+          <creation_ts>2014-05-10 12:55:00 -0700</creation_ts>
+          <short_desc>Ensure promise `then`s are always called with a clean stack</short_desc>
+          <delta_ts>2014-06-16 16:29:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8304</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-05-10 12:55:12 -0700</bug_when>
+    <thetext>Full patch at https://github.com/domenic/promises-unwrapping/commit/1ad35be5edf6b8fb024bbcffadb17eae95f462e8
+
+Rendered diff at https://github.com/domenic/promises-unwrapping/commit/1ad35be5edf6b8fb024bbcffadb17eae95f462e8?short_path=04c6e90#diff-04c6e90faac2675aa89e2176d2eec7d8
+
+Test case showing what this fixes at https://github.com/domenic/promises-unwrapping/commit/1ad35be5edf6b8fb024bbcffadb17eae95f462e8#diff-b0f86cd193c7a7735605976164ea7f83
+
+Essentially this moves some of the steps of Promise Resolve Functions into a new task.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8584</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 12:11:20 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9029</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:29:41 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

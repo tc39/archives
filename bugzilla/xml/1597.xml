@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1597</bug_id>
+          
+          <creation_ts>2013-07-23 15:13:00 -0700</creation_ts>
+          <short_desc>Array Iterator needs to defined [[Call]] behavior</short_desc>
+          <delta_ts>2015-07-10 08:35:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4563</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-07-23 15:13:19 -0700</bug_when>
+    <thetext>One can get access to the constructor for the Array Iterator but the semantics of [[Call]] is not defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4565</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-24 02:15:47 -0700</bug_when>
+    <thetext>Array Iterator is neither a Constructor nor Callable, so I don&apos;t think [[Call]] (or [[Construct]]) needs to be defined at all. There is an empty &quot;ArrayIterator.prototype.constructor&quot; (15.4.5.2.1) entry, which needs to be removed, but that&apos;s it. Unless the current draft is incomplete and Array Iterator is supposed to be callable/constructable, of course. 
+
+The current implementation for Array Iterator in V8 provides access to a constructor, but that is a different issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4994</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-21 14:10:35 -0700</bug_when>
+    <thetext>There is a margin note in the doc file that says we need to decide whether we to expose this &apos;constructor&apos; property and hence whether we want to make ArrayIterator visible.
+
+I may be useful for user who want to create array-like abstrations.  In the spec. we reuse it for typed array iteration.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7823</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-18 13:00:38 -0700</bug_when>
+    <thetext>we ended up not exposing an ArrayIterator constructor (same for other built-in iterators)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4011</bug_id>
+          
+          <creation_ts>2015-02-19 07:44:00 -0800</creation_ts>
+          <short_desc>9.2.8 SupportedLocales: Use GetOption in step 1 ?</short_desc>
+          <delta_ts>2016-02-11 09:49:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12962</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-19 07:44:08 -0800</bug_when>
+    <thetext>9.2.8 SupportedLocales (availableLocales, requestedLocales, options)
+
+The initial steps of SupportedLocales can be simplified to:
+---
+1. If options is not undefined, then
+  a. Let matcher be GetOption(options, &quot;localeMatcher&quot;, &quot;string&quot;, « &quot;lookup&quot;, &quot;best fit&quot; », &quot;best fit&quot;).
+  b. ReturnIfAbrupt(matcher).
+2. Else, let matcher be &quot;best fit&quot;.
+3. If matcher is &quot;best fit&quot;, then
+[...]
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12963</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-19 08:32:23 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #0)
+&gt; 9.2.8 SupportedLocales (availableLocales, requestedLocales, options)
+&gt; 
+&gt; The initial steps of SupportedLocales can be simplified to:
+&gt; ---
+&gt; 1. If options is not undefined, then
+&gt;   a. Let matcher be GetOption(options, &quot;localeMatcher&quot;, &quot;string&quot;, «
+&gt; &quot;lookup&quot;, &quot;best fit&quot; », &quot;best fit&quot;).
+&gt;   b. ReturnIfAbrupt(matcher).
+&gt; 2. Else, let matcher be &quot;best fit&quot;.
+&gt; 3. If matcher is &quot;best fit&quot;, then
+&gt; [...]
+&gt; ---
+
+
+
+Please confirm: 
+
+
+
+1.  If options is not undefined, then
+  a.  Let matcher be GetOption(options, &quot;localeMatcher&quot;, &quot;string&quot;, « &quot;lookup&quot;, &quot;best fit&quot; », &quot;best fit&quot;). 
+  b.  ReturnIfAbrupt(matcher).
+2.  Else, let matcher be &quot;best fit&quot;.
+3.  If matcher is &quot;best fit&quot;,
+  a.  Let MatcherOperation be the abstract operation BestFitSupportedLocales.
+4.  Else
+  a.  Let MatcherOperation be the abstract operation LookupSupportedLocales.
+5.  Let subset be MatcherOperation(availableLocales, requestedLocales).
+6.  For each named own property name P of subset,
+  a.  Let desc be the result of the [[GetOwnProperty]] internal method of subset with the argument P. 
+  b.  Set desc.[[Writable]] to false.
+  c.  Set desc.[[Configurable]] to false.
+  d.  Let status be DefinePropertyOrThrow(subset, P, desc).
+  e.  ReturnIfAbrupt(status).
+7.  Return subset.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12965</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-19 09:09:41 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #1)
+&gt; Please confirm: 
+
+How about:
+---
+1.  If options is not undefined, then
+  a.  Let matcher be GetOption(options, &quot;localeMatcher&quot;, &quot;string&quot;, « &quot;lookup&quot;, &quot;best fit&quot; », &quot;best fit&quot;). 
+  b.  ReturnIfAbrupt(matcher).
+2.  Else, let matcher be &quot;best fit&quot;.
+3.  If matcher is &quot;best fit&quot;,
+  a.  Let MatcherOperation be the abstract operation BestFitSupportedLocales.
+4.  Else
+  a.  Let MatcherOperation be the abstract operation LookupSupportedLocales.
+5.  Let subset be MatcherOperation(availableLocales, requestedLocales).
+6.  Assert: Type(subset) is Object.
+7.  Let keys be subset.[[OwnPropertyKeys]] ().
+8.  ReturnIfAbrupt(keys).
+9.  Repeat for each element P of keys in List order,
+  a.  Let currentDesc be subset.[[GetOwnProperty]](P).
+  b.  ReturnIfAbrupt(currentDesc).
+  c.  If currentDesc is not undefined, then
+      i.  Let desc be PropertyDescriptor { [[Configurable]]: false, [[Writable]]: false }.
+     ii.  Let status be DefinePropertyOrThrow(subset, P, desc).
+    iii.  ReturnIfAbrupt(status).
+10.  Return subset.
+---
+
+
+Motivation for the additional changes:
+- step 6: BestFitSupportedLocales is implementation defined, but we want to restrict the return value to objects.
+- step 8: BestFitSupportedLocales is implementation defined, so calling subset.[[OwnPropertyKeys]]() could result in an abrupt completion.
+- step 9.b: Same reason as for step 8.
+- step 9.c: To mirror the structure of ES6 SetIntegrityLevel.
+- step 9.c.i: This avoids mucking around with the returned descriptor which is normally not done in ES6. 
+
+
+Or alternatively for step 9:
+---
+9.  Repeat for each element P of keys in List order,
+  a.  Let desc be PropertyDescriptor { [[Configurable]]: false, [[Writable]]: false }.
+  b.  Let status be DefinePropertyOrThrow(subset, P, desc).
+  c.  ReturnIfAbrupt(status).
+---
+
+If you also want to handle accessor properties in step 9:
+---
+9.  Repeat for each element P of keys in List order,
+  a.  Let currentDesc be subset.[[GetOwnProperty]](P).
+  b.  ReturnIfAbrupt(currentDesc).
+  c.  If currentDesc is not undefined, then
+    i.  If IsAccessorDescriptor(currentDesc) is true, then
+      1.  Let desc be the PropertyDescriptor{ [[Configurable]]: false }.
+    ii.  Else,
+      1.  Let desc be the PropertyDescriptor { [[Configurable]]: false, [[Writable]]: false }.
+    iii.  Let status be DefinePropertyOrThrow(subset, P, desc).
+    iv.  ReturnIfAbrupt(status).
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12967</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-19 09:15:21 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #1)
+&gt; Please confirm: 
+
+If you don&apos;t want to apply the additional changes, your proposed updates also work for me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12970</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-19 09:57:24 -0800</bug_when>
+    <thetext>Since LookupSupportedLocales and BestFitSupportedLocales, return an Array and List respectively, &quot;subset&quot; needs to become an object. I made some minor changes to your suggestion and rolled in Step 9, Alt 1:
+
+
+1.  If options is not undefined, then
+  a.  Let matcher be GetOption(options, &quot;localeMatcher&quot;, &quot;string&quot;, « &quot;lookup&quot;, &quot;best fit&quot; », &quot;best fit&quot;). 
+  b.  ReturnIfAbrupt(matcher).
+2.  Else, let matcher be &quot;best fit&quot;.
+3.  If matcher is &quot;best fit&quot;,
+  a.  Let MatcherOperation be the abstract operation BestFitSupportedLocales.
+4.  Else
+  a.  Let MatcherOperation be the abstract operation LookupSupportedLocales.
+5.  Let supportedLocales be MatcherOperation(availableLocales, requestedLocales).
+6.  Let subset be ToObject(supportedLocales).
+7.  ReturnIfAbrupt(subset).
+8.  Let keys be subset.[[OwnPropertyKeys]]().
+9.  ReturnIfAbrupt(keys).
+10. Repeat for each element P of keys in List order,
+  a.  Let desc be PropertyDescriptor { [[Configurable]]: false, [[Writable]]: false }. 
+  b.  Let status be DefinePropertyOrThrow(subset, P, desc).
+  c.  ReturnIfAbrupt(status).
+11. Return subset.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14917</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2016-02-11 09:49:16 -0800</bug_when>
+    <thetext>Fixed in ECMA-402, 2nd ed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

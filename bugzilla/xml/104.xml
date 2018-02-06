@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>104</bug_id>
+          
+          <creation_ts>2011-06-09 10:52:00 -0700</creation_ts>
+          <short_desc>Missing coverage?  https://bugzilla.mozilla.org/show_bug.cgi?id=637994</short_desc>
+          <delta_ts>2012-02-29 09:06:46 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>227</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-06-09 10:52:13 -0700</bug_when>
+    <thetext>&lt;Thanks&gt;Mark Miller&lt;/Thanks&gt;
+
+We might be missing coverage for the following test scenario.  Add test case(s) assuming this scenario can be mapped to ES5.1 somewhere
+--------------------------------------------------------------------------
+*See http://codereview.appspot.com/4547070/diff/6003/src/com/google/caja/ses/es5shim.js?context=10&amp;column_width=80 for the original*
+
+310 * Work arond for https://bugzilla.mozilla.org/show_bug.cgi?id=637994
+
+311 *
+
+312 * &lt;p&gt;On Firefoxes at least 4 through 7.0a1, an inherited
+
+313 * non-configurable accessor property appears to be an own property
+
+314 * of all objects which inherit this accessor property.
+
+315 *
+
+316 * &lt;p&gt;Our workaround wraps hasOwnProperty, getOwnPropertyNames, and
+
+317 * getOwnPropertyDescriptor to heuristically decide when an accessor
+
+318 * property looks like it is apparently own because of this bug, and
+
+319 * suppress reporting its existence.
+
+320 *
+
+321 * &lt;p&gt;However, it is not feasible to likewise wrap JSON.stringify,
+
+322 * and this bug will cause JSON.stringify to be misled by inherited
+
+323 * enumerable non-configurable accessor properties. To prevent this,
+
+324 * we wrap defineProperty, freeze, and seal to prevent the creation
+
+325 * of &lt;i&gt;enumerable&lt;/i&gt; non-configurable accessor properties on
+
+326 * those platforms with this bug.
+
+327 *
+
+328 * &lt;p&gt;A little known fast about JavaScript is that
+
+329 * Object.prototype.propertyIsEnumerable actually tests whether a
+
+330 * property is both own and enumerable. Assuming that our wrapping
+
+331 * of defineProperty, freeze, and seal prevents the occurrence of an
+
+332 * enumerable non-configurable accessor property, it should also
+
+333 * prevent the occurrence of this bug for any enumerable property,
+
+334 * and so we do not need to wrap propertyIsEnumerable.
+
+335 *
+
+336 * &lt;p&gt;This kludge seems to be safety preserving, but the issues are
+
+337 * delicate and not well understood.
+
+338 */
+
+339 function test_ACCESSORS_INHERIT_AS_OWN() {
+
+340 var base = {};
+
+341 var derived = Object.create(base);
+
+342 function getter() { return &apos;gotten&apos;; }
+
+343 Object.defineProperty(base, &apos;foo&apos;, {get: getter});
+
+344 if (!derived.hasOwnProperty(&apos;foo&apos;) &amp;&amp;
+
+345 Object.getOwnPropertyDescriptor(derived, &apos;foo&apos;) === undefined &amp;&amp;
+
+346 Object.getOwnPropertyNames(derived).indexOf(&apos;foo&apos;) &lt; 0) {
+
+347 return false;
+
+348 }
+
+349 if (derived.hasOwnProperty(&apos;foo&apos;) &amp;&amp;
+
+350 Object.getOwnPropertyDescriptor(derived, &apos;foo&apos;).get === getter &amp;&amp;
+
+351 Object.getOwnPropertyNames(derived).indexOf(&apos;foo&apos;) &gt;= 0) {
+
+352 log(&apos;Accessor properties inherit as own properties. &apos; +
+
+353 &apos;See https://bugzilla.mozilla.org/show_bug.cgi?id=637994&apos;);
+
+354 } else {
+
+355 log(&apos;New symptom: &apos; +
+
+356 &apos;Accessor properties partially inherit as own properties.&apos;);
+
+357 }
+
+358 Object.defineProperty(base, &apos;bar&apos;, {get: getter, configurable: true});
+
+359 if (!derived.hasOwnProperty(&apos;bar&apos;) &amp;&amp;
+
+360 Object.getOwnPropertyDescriptor(derived, &apos;bar&apos;) === undefined &amp;&amp;
+
+361 Object.getOwnPropertyNames(derived).indexOf(&apos;bar&apos;) &lt; 0) {
+
+362 return true;
+
+363 }
+
+364 log(&apos;New symptom: &apos; +
+
+365 &apos;Accessor properties inherit as own even if configurable.&apos;);
+
+366 return true;
+
+367 }
+
+368 //var TOLERATE_ACCESSORS_INHERIT_AS_OWN = false;
+
+369 var TOLERATE_ACCESSORS_INHERIT_AS_OWN = test_ACCESSORS_INHERIT_AS_OWN();</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>544</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-09 09:39:45 -0800</bug_when>
+    <thetext>I can find very little coverage for Object.hasOwnProperty (none for this scenario) and no targeted coverage for [[GetOwnProperty]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>545</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-09 14:28:33 -0800</bug_when>
+    <thetext>About 50 new tests for 8.12.1 have been written.  These will be distributed to test262 with the next set of test contributions from Microsoft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>709</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:06:46 -0800</bug_when>
+    <thetext>Tests are now live on test262.ecmascript.org.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3738</bug_id>
+          
+          <creation_ts>2015-02-03 13:04:00 -0800</creation_ts>
+          <short_desc>ContainsUndefinedContinueTarget misspelling</short_desc>
+          <delta_ts>2015-02-12 12:17:39 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kevin Smith">zenparsing</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12072</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2015-02-03 13:04:27 -0800</bug_when>
+    <thetext>14.1.2 
+
+misspelled as ContainsUndefinedContineTarget</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12074</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-03 18:16:58 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12076</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-03 18:18:22 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; fixed in rev32 editor&apos;s draft
+
+err, Rev33, that is</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12283</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-10 11:54:18 -0800</bug_when>
+    <thetext>The same misspelling appears in 15.1.1 and 15.2.1.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12430</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:39 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

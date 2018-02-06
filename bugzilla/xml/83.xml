@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>83</bug_id>
+          
+          <creation_ts>2011-03-30 17:04:00 -0700</creation_ts>
+          <short_desc>Constructor specifications often don&apos;t reference Properties of Instances sections</short_desc>
+          <delta_ts>2015-02-12 15:52:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>84</blocked>
+    
+    <blocked>150</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>177</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-30 17:04:05 -0700</bug_when>
+    <thetext>Most constructor specifications in section 15 fail to mention that they create objects in conformance to the requirements specified in the corresponding Properties or Instances section for that constructor.  Sometimes requirements are redundantly specified in both the constructor spec. and in the Properties of Instances section.  This creates a danger of those sections getting out of sync with each other.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12494</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 15:52:30 -0800</bug_when>
+    <thetext>deferred to ES7
+
+some of this has probably been correct in the ES6 spec.  but an overall review would be a good idea</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

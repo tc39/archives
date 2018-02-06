@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>654</bug_id>
+          
+          <creation_ts>2012-09-26 00:15:00 -0700</creation_ts>
+          <short_desc>The meanings of &quot;absent&quot;/&quot;present&quot; are unclear throughout the specification.</short_desc>
+          <delta_ts>2012-09-26 09:49:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sukyoung Ryu">sukyoung.ryu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>sukyoung.ryu</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1609</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sukyoung Ryu">sukyoung.ryu</who>
+    <bug_when>2012-09-26 00:15:17 -0700</bug_when>
+    <thetext>As &quot;8.6.1 Property Attributes&quot; says, a named accessor property may have four attributes: [[Get]], [[Set]], [[Enumerable]], and [[Configurable]].
+
+As &quot;8.10 The Property Descriptor and Property Identifier Specification Types&quot; says, &quot;Values of the Property Descriptor type are records composed of named fields where each field&apos;s name is an attribute name and its value is a corresponding attribute value as specified in 8.6.1.  In addition, any field may be present or absent.&quot;
+
+However, in &quot;8.10.4 FromPropertyDescriptor(Desc)&quot;, the steps 4-a and 4-b do not check whether [[Get]] and [[Set]] are &quot;present&quot; in &quot;Desc&quot; but just access them.  Is it an oversight of the specification or are we missing something here?
+
+We tried the following code:
+
+  var o = { get abc() {} }
+  x = Object.getOwnPropertyDescriptor(o, &quot;abc&quot;)
+  for (y in x) { document.writeln(y); }
+
+where &quot;15.2.3.3 Object.getOwnPropertyDescriptor&quot; calls FromPropertyDescriptor, and an online JavaScript interpreter prints the following:
+
+  get set enumerable configurable
+
+which suggests that [[Set]] is &quot;present&quot; even though we didn&apos;t define a setter.  Calling the setter as follows:
+
+  x.abc(3)
+
+results in the following error:
+
+  TypeError at line NaN: &apos;undefined&apos; is not a function
+
+which suggests that [[Set]] is &quot;present&quot; and its value is &quot;undefined&quot;.
+
+So, they are inconsisent.  When 8.10 says that &quot;any field may be present or absent&quot;, does the word &quot;absent&quot; mean that the field exists but its value is &quot;undefined&quot;?  A similar question is when the step 12 of &quot;8.12.9 [[DefineOwnProperty]](P, Desc, Throw)&quot; says &quot;For each attribute field of Desc that is present, ...&quot; does the word &quot;present&quot; mean that the field exists and its value is not &quot;undefined&quot;? Yet another similar question is the step 2 of &quot;8.10.1 IsAccessorDescriptor(Desc)&quot;: &quot;If both Desc.[[Get]] and Desc.[[Set]] are absent, ...&quot;
+
+Finally, when the step 2 of &quot;8.10.2 IsDataDescriptor(Desc)&quot; says &quot;If both Desc.[[Value]] and Desc.[[Writable]] are absent, then return false.&quot; we might be able to say that Desc.[[Value]] is absent if its value is undefined, but how about Desc.[[Writable]]?  Its type is Boolean and its default value is false.  Does the specification say that Desc.[[Writable]] is absent if its value is false?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1614</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-26 09:49:55 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; As &quot;8.6.1 Property Attributes&quot; says, a named accessor property may have four
+&gt; attributes: [[Get]], [[Set]], [[Enumerable]], and [[Configurable]].
+&gt; 
+&gt; As &quot;8.10 The Property Descriptor and Property Identifier Specification Types&quot;
+&gt; says, &quot;Values of the Property Descriptor type are records composed of named
+&gt; fields where each field&apos;s name is an attribute name and its value is a
+&gt; corresponding attribute value as specified in 8.6.1.  In addition, any field
+&gt; may be present or absent.&quot;
+&gt; 
+&gt; However, in &quot;8.10.4 FromPropertyDescriptor(Desc)&quot;, the steps 4-a and 4-b do not
+&gt; check whether [[Get]] and [[Set]] are &quot;present&quot; in &quot;Desc&quot; but just access them.
+&gt;  Is it an oversight of the specification or are we missing something here?
+
+In 8.10.4 the prose paragraph immediate before step 1 says &quot;...ssumes that Desc is a fully populated Property Desceriptor...&quot;
+
+
+So in step, which is predicated by an IsAccessorDescriptor test we can depend upon the [[Get]] and [[Set]] fields both being present.
+
+&gt; 
+&gt; We tried the following code:
+&gt; 
+&gt;   var o = { get abc() {} }
+&gt;   x = Object.getOwnPropertyDescriptor(o, &quot;abc&quot;)
+&gt;   for (y in x) { document.writeln(y); }
+&gt; 
+&gt; where &quot;15.2.3.3 Object.getOwnPropertyDescriptor&quot; calls FromPropertyDescriptor,
+&gt; and an online JavaScript interpreter prints the following:
+&gt; 
+&gt;   get set enumerable configurable
+&gt; 
+&gt; which suggests that [[Set]] is &quot;present&quot; even though we didn&apos;t define a setter.
+&gt;  Calling the setter as follows:
+&gt; 
+&gt;   x.abc(3)
+&gt; 
+&gt; results in the following error:
+&gt; 
+&gt;   TypeError at line NaN: &apos;undefined&apos; is not a function
+&gt; 
+&gt; which suggests that [[Set]] is &quot;present&quot; and its value is &quot;undefined&quot;.
+
+That is correct.  When creating a new accessor property 8.12.9, step 4.b.i attributes are set to their &quot;default values&quot; if they are absent (ie, not present) from Desc. The default values for [[Get]] and [[Set]] is undefined (Table 7).
+
+&gt; 
+&gt; So, they are inconsisent.  When 8.10 says that &quot;any field may be present or
+&gt; absent&quot;, does the word &quot;absent&quot; mean that the field exists but its value is
+&gt; &quot;undefined&quot;? 
+
+8.10 is talking about Property Descriptor Record, in general.  &quot;Absent&quot; simply means not there.  The semantics of &quot;absent&quot; is contextually dependent upon other factors, particularly within 8.12.9
+
+
+&gt; A similar question is when the step 12 of &quot;8.12.9
+&gt; [[DefineOwnProperty]](P, Desc, Throw)&quot; says &quot;For each attribute field of Desc
+&gt; that is present, ...&quot; does the word &quot;present&quot; mean that the field exists and
+&gt; its value is not &quot;undefined&quot;? Yet another similar question is the step 2 of
+&gt; &quot;8.10.1 IsAccessorDescriptor(Desc)&quot;: &quot;If both Desc.[[Get]] and Desc.[[Set]] are
+&gt; absent, ...&quot;
+
+&quot;Present&quot; means actually there with an explicit value.  &quot;Absent&quot; means not there.
+
+&gt; 
+&gt; Finally, when the step 2 of &quot;8.10.2 IsDataDescriptor(Desc)&quot; says &quot;If both
+&gt; Desc.[[Value]] and Desc.[[Writable]] are absent, then return false.&quot; we might
+&gt; be able to say that Desc.[[Value]] is absent if its value is undefined, but how
+&gt; about Desc.[[Writable]]?  Its type is Boolean and its default value is false. 
+&gt; Does the specification say that Desc.[[Writable]] is absent if its value is
+&gt; false?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

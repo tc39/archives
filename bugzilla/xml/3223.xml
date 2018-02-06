@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3223</bug_id>
+          
+          <creation_ts>2014-09-15 07:59:00 -0700</creation_ts>
+          <short_desc>static get constructor should be valid</short_desc>
+          <delta_ts>2015-07-10 08:34:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10188</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-15 07:59:20 -0700</bug_when>
+    <thetext>The spec says that
+
+*constructor() {}
+get constructor() {}
+set constructor(_) {}
+
+are invalid (due to SpecialMethod) but it allows:
+
+static constructor() {}
+
+Due to the rules of specialMethod
+
+static *constructor() {}
+static get constructor() {}
+static set constructor(_) {}
+
+are all also invalid. For consistency we should allow all forms for static.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 11:42:51 -0700</bug_when>
+    <thetext>I don&apos;t see how the spec. currently says that.
+
+The 14.5.1 early errors only apply the &quot;PropName is &apos;constructor&apos; and SpecialMethod is true&quot; rule to productions:
+   ClassElement : MethodDefinition
+
+it doesn&apos;t apply it for
+   ClassElement : &apos;static&apos; MethodDefinition</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10294</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-10-08 12:05:54 -0700</bug_when>
+    <thetext>You are correct. For some reason I thought it would recurse into the `static MethodDefinition`.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4426</bug_id>
+          
+          <creation_ts>2015-07-17 00:31:00 -0700</creation_ts>
+          <short_desc>Destructuring parameters in strict functions</short_desc>
+          <delta_ts>2015-08-18 10:26:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>brendan</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>caitpotter88</cc>
+    
+    <cc>jmdyck</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>oliver</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14547</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-17 00:31:06 -0700</bug_when>
+    <thetext>The spec is somewhat fuzzy on the rules for the language mode that applies to parameter destructuring. Consider
+
+  &apos;use sloppy&apos;;
+  function f(g = () =&gt; { with (x); }) { &apos;use strict&apos;; }
+
+Is this a syntax error? Reading the spec pedantically, the local strictness directive does only apply to the function body, but it is not clear whether that is really the intention.
+
+If it wasn&apos;t, however, and the parameters are supposed to be in strict mode as well, then that would be tricky to implement a single pass parser, because mode-related errors could not be diagnosed directly. This problem is particularly hard due to arrow functions: in general, the parser would not even know when it starts parsing a subexpression with a potentially different language mode:
+
+  &apos;use sloppy&apos;;
+  let f = (g = () =&gt; { with (x); }) /**/ =&gt; { &apos;use strict&apos; }
+
+Until we reach the comment, the parser does not know that a different mode might apply to the inner arrow. A vast number of expression will be in this situation.
+
+On the web, parsing is the most expensive bottle neck, so the resolution for this bug should be considered very carefully.
+
+Closely related to bug 4243.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14549</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-07-17 01:15:12 -0700</bug_when>
+    <thetext>The spec makes the arrow function a strict mode function. 10.2 and 10.2.1 should (or rather are intended to) be read as follows:
+---
+The |FunctionBody| of the |FunctionDeclaration| &quot;f&quot; contains a Use Strict Directive, therefore the function code of &quot;f&quot; is strict mode code (10.2.1). This includes the |FunctionBody|, but also the |FormalParameters| of &quot;f&quot; per 10.2. As a result of this the |ArrowFunction| is also strict mode code, because it is contained in strict mode code (10.2.1). 
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14550</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-17 01:53:40 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #1)
+&gt; The spec makes the arrow function a strict mode function.
+
+Yes, the &apos;use strict&apos; is indeed redundant in my second example (copy &amp; paste).
+
+&gt; 10.2 and 10.2.1
+&gt; should (or rather are intended to) be read as follows:
+&gt; ---
+&gt; The |FunctionBody| of the |FunctionDeclaration| &quot;f&quot; contains a Use Strict
+&gt; Directive, therefore the function code of &quot;f&quot; is strict mode code (10.2.1).
+&gt; This includes the |FunctionBody|, but also the |FormalParameters| of &quot;f&quot; per
+&gt; 10.2. As a result of this the |ArrowFunction| is also strict mode code,
+&gt; because it is contained in strict mode code (10.2.1). 
+&gt; ---
+
+Well, that&apos;s not quite what it&apos;s currently saying, though. As a I pointed out, we have to be very careful here. Changing this might cause measurable performance regressions, for a lot of code not even using ES6 features (at least in V8 it would be pretty costly). I&apos;m not convinced it&apos;s worth that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14551</commentid>
+    <comment_count>3</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-17 02:31:06 -0700</bug_when>
+    <thetext>(In reply to Andreas Rossberg from comment #2)
+&gt; (In reply to André Bargull from comment #1)
+&gt; &gt; The spec makes the arrow function a strict mode function.
+&gt; 
+&gt; Yes, the &apos;use strict&apos; is indeed redundant in my second example (copy &amp;
+&gt; paste).
+
+Oh, and of course, you probably were referring to the fact that the defaults shouldn&apos;t be arrows either in my examples. For clarity, here are the corrected examples:
+
+  function f(g = function() { with (x); }) { &apos;use strict&apos;; }
+
+  let f = (g = function() { with (x); }) /**/ =&gt; { /* strict*/ }
+
+The abstract issue is that backwards scoping of strictness would essentially require infinite look-ahead.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14552</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-07-17 03:12:32 -0700</bug_when>
+    <thetext>(In reply to Andreas Rossberg from comment #2)
+&gt; Well, that&apos;s not quite what it&apos;s currently saying, though. As a I pointed
+&gt; out, we have to be very careful here. Changing this might cause measurable
+&gt; performance regressions, for a lot of code not even using ES6 features (at
+&gt; least in V8 it would be pretty costly). I&apos;m not convinced it&apos;s worth that.
+
+I don&apos;t understand what exactly you mean by &quot;that&apos;s not quite what it&apos;s currently saying&quot;. I was referring to the first example:
+  &apos;use sloppy&apos;;
+  function f(g = () =&gt; { with (x); }) { &apos;use strict&apos;; }
+
+But the same reasoning applies to the altered example from comment #3:
+  function f(g = function() { with (x); }) { &apos;use strict&apos;; }
+
+The function expression in the default parameter initializer should also be treated as a strict mode function. FWIW I do agree this issue makes implementing strict mode restrictions in a parser more difficult.
+
+Can you point out which of the definitions should be made more clear? Thanks!
+---
+10.2 Types of Source Code
+- Function code is source text that is parsed to supply the value of the [[ECMAScriptCode]] and [[FormalParameters]] internal slots (see 9.2) of an ECMAScript function object. [...]
+
+10.2.1 Strict Mode Code
+- Function code is strict mode code if the associated FunctionDeclaration, FunctionExpression, GeneratorDeclaration, GeneratorExpression, MethodDefinition, or ArrowFunction is contained in strict mode code or if the code that produces the value of the function’s [[ECMAScriptCode]] internal slot begins with a Directive Prologue that contains a Use Strict Directive.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14553</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-17 09:01:02 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #4)
+&gt; ...
+&gt; 
+&gt; Can you point out which of the definitions should be made more clear? Thanks!
+&gt; ---
+&gt; 10.2 Types of Source Code
+&gt; - Function code is source text that is parsed to supply the value of the
+&gt; [[ECMAScriptCode]] and [[FormalParameters]] internal slots (see 9.2) of an
+&gt; ECMAScript function object. [...]
+&gt; 
+
+Right, the use strict direct in a function body is intended to apply to the formal parameter list as well as the function body.  That is what the 10.2 is trying to say. 
+
+This same issue came up in the context of ES5 as strict mode restricts some identifiers from being used as formal parameter names. At that time, TC39 discussed the look-ahead concern and talked about various ways it might be implemented. After those discussions, TC39 confirmed that the use strict directive was still intended to apply to the formal parameters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14557</commentid>
+    <comment_count>6</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-20 08:25:25 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; (In reply to André Bargull from comment #4)
+&gt; &gt; ...
+&gt; &gt; 
+&gt; &gt; Can you point out which of the definitions should be made more clear? Thanks!
+&gt; &gt; ---
+&gt; &gt; 10.2 Types of Source Code
+&gt; &gt; - Function code is source text that is parsed to supply the value of the
+&gt; &gt; [[ECMAScriptCode]] and [[FormalParameters]] internal slots (see 9.2) of an
+&gt; &gt; ECMAScript function object. [...]
+&gt; &gt; 
+&gt; 
+&gt; Right, the use strict direct in a function body is intended to apply to the
+&gt; formal parameter list as well as the function body.  That is what the 10.2
+&gt; is trying to say. 
+
+Okay, I see.
+
+&gt; This same issue came up in the context of ES5 as strict mode restricts some
+&gt; identifiers from being used as formal parameter names. At that time, TC39
+&gt; discussed the look-ahead concern and talked about various ways it might be
+&gt; implemented. After those discussions, TC39 confirmed that the use strict
+&gt; directive was still intended to apply to the formal parameters.
+
+Well, in ES5 the look-ahead problem of course was trivial -- it&apos;s easy enough to remember a list of parameter names and check them later. With ES6, the problem becomes much more general, and cross-cuts basically all the grammar. It&apos;s not just error reporting. In particular, mode-specific hacks like B.3 become even more of a headache than they are already, because the context you have to consider to pick a semantics can extend arbitrarily after the current function.
+
+Anyway, we&apos;ll probably try to implement it, and I&apos;ll report back.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14558</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-20 10:41:42 -0700</bug_when>
+    <thetext>(In reply to Andreas Rossberg from comment #6)
+
+&gt; 
+&gt; ... In particular, mode-specific hacks
+&gt; like B.3 become even more of a headache than they are already, because the
+&gt; context you have to consider to pick a semantics can extend arbitrarily
+&gt; after the current function.
+&gt; 
+&gt; Anyway, we&apos;ll probably try to implement it, and I&apos;ll report back.
+
+Annex B.3.3 exists solely to provide legacy compatibility with the listed set of use case involving Block nested FunctionDeclarations. Because parameter destructurings that might contain such a FunctionDeclaration did not exist prior to ES6, that can be no such legacy code which requires the B.3.3 semantic be applicable to parameters. 
+
+Give that, I that it would be reasonably for  B.3.3 to explicitly state that this legacy semantics is not to be applied to formal parameter lists.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14559</commentid>
+    <comment_count>8</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-07-20 10:58:45 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #7)
+&gt; (In reply to Andreas Rossberg from comment #6)
+&gt; 
+&gt; &gt; 
+&gt; &gt; ... In particular, mode-specific hacks
+&gt; &gt; like B.3 become even more of a headache than they are already, because the
+&gt; &gt; context you have to consider to pick a semantics can extend arbitrarily
+&gt; &gt; after the current function.
+&gt; &gt; 
+&gt; &gt; Anyway, we&apos;ll probably try to implement it, and I&apos;ll report back.
+&gt; 
+&gt; Annex B.3.3 exists solely to provide legacy compatibility with the listed
+&gt; set of use case involving Block nested FunctionDeclarations. Because
+&gt; parameter destructurings that might contain such a FunctionDeclaration did
+&gt; not exist prior to ES6, that can be no such legacy code which requires the
+&gt; B.3.3 semantic be applicable to parameters. 
+&gt; 
+&gt; Give that, I that it would be reasonably for  B.3.3 to explicitly state that
+&gt; this legacy semantics is not to be applied to formal parameter lists.
+
+I&apos;d be fine with that. That was just one example, though. I plan to go through the V8 parser tomorrow to get a better overview of what mode-specific code paths there are, and how difficult it would be to defer them.
+
+A more scalable alternative would be to make all non-simple parameter lists implicitly strict. That would widen the kind of semi-strictness we already enforce for them in terms of variable disjointness.
+
+In either of these options I am yet unsure how well they help for arrow functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14595</commentid>
+    <comment_count>9</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2015-08-18 10:26:31 -0700</bug_when>
+    <thetext>We seemd to agree at the July TC39 meeting to make a non-simple parameter list followed by &quot;use strict&quot;; prologue directive at front of the function&apos;s body be an early error:
+
+- Make it an error to have a &quot;use strict&quot; directive in a function with a non-simple parameter list.
+
+    - Early error
+
+    - No matter what mode you were already in
+
+    - When people want to use local &quot;use strict&quot;, doing it b/c they want to know that this is always strict, no matter where it ends up. 
+
+     - Applies to all kinds of function/generator syntax
+- IsSimpleParameterList http://www.ecma-international.org/ecma-262/6.0/#sec-function-definitions-static-semantics-issimpleparameterlist
+
+from http://oksoclap.com/p/july-29-2015. I think this decision &quot;stuck&quot; but some demurred or voiced the suspicion that it would bounce, down the road.
+
+/be</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1901</bug_id>
+          
+          <creation_ts>2013-09-19 02:32:00 -0700</creation_ts>
+          <short_desc>Unnecessary strictness in IteratorNext, IteratorComplete, IteratorValue</short_desc>
+          <delta_ts>2013-10-24 15:37:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andy Wingo">wingo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5403</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-09-19 02:32:01 -0700</bug_when>
+    <thetext>25.4.3.6 and following sections have assertions that the result from an iterator is an object.
+
+This seems like a useless assertion to me.
+
+We already decided that it&apos;s important for yield* to re-yield the exact same value it received, so identity for results is important.
+
+In that regard, then, I don&apos;t see the point for restricting the type of value being yielded -- as long as you can get its &quot;value&quot; and &quot;done&quot; properties that should be good enough, and there is a built-in ToObject there that&apos;s going to hit anyway later on.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5404</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-19 03:00:16 -0700</bug_when>
+    <thetext>I don&apos;t quite follow why it&apos;s useless to specify that the result of &quot;next()&quot; must be an object. Per the &quot;Iterator&quot; and &quot;ItrResult&quot; interface (25.1.2 and 25.1.3), Iterators are expected to return objects from their &quot;next()&quot; method. To comply to this specification you either need to perform a type-check (as currently done) or perform a ToObject() coercion. In my opinion ToObject() does not make sense, because treating primitive wrappers as ItrResult objects rather hides user errors then helps anyone.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5405</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-09-19 04:39:38 -0700</bug_when>
+    <thetext>The current strategy is useless, because it doesn&apos;t guarantee that the result value has the properties that we want (done and value).  It is meant to be a sanity check but it fails, as returning {} is an option.
+
+To me there are two things that make sense: either
+
+  (1) specify that there will be a [[Get]] on the result value of &quot;done&quot; and &quot;value&quot; at these given points of the algorithm, and that&apos;s it; or
+
+  (2) specify that the result object is expected to be of a certain type.
+
+(2) isn&apos;t very javascripty.  Insisting that the result be an object is somewhere in between, and therefore not useful, because you don&apos;t get the guarantees of (2) and still have to deal with (1).
+
+&gt; hides user errors
+
+There are enough of these already that adding a weak assertion like IsObject doesn&apos;t actually buy you much.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5406</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-19 05:44:54 -0700</bug_when>
+    <thetext>Option (2) is certainly not wanted. And Option (1) is almost used today, because IteratorNext() is always followed by IteratorComplete(), that means [[Get]] for &quot;done&quot; will always be executed. That only leaves the [[Get]] on &quot;value&quot; open which currently is only executed when IteratorComplete() returns false. 
+
+But apart from that issue about how exactly to comply to ItrResult, I think ToObject() should only be used when it makes sense to wrap primitives. And for iterator results, wrapping primitives does not seem useful. Just like for property descriptors (cf. 6.2.5.5 step 2) or everywhere else where type checks are performed (search for &quot;is not Object&quot; in the draft).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5407</commentid>
+    <comment_count>4</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-09-19 07:59:07 -0700</bug_when>
+    <thetext>Allen, I think this situation will be rare in practice.
+
+The low-level iteration protocol has to exist, but it&apos;s more important for it to be lean than user-friendly.
+
+Hand-implementing this protocol is a strange thing for a user to do. ES6 provides lots of in-language support (generators, the generic Array.prototype[@@iterator], Map, Set, etc.) so that you don&apos;t have to.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5408</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-19 11:09:33 -0700</bug_when>
+    <thetext>I don&apos;t think we really have significant issues, here.  These abstract routines are just convenience factoring for uses of interators that occur in the spec.
+
+In particular, the assertions in IterationValue and IterationComplete, for example:
+1.	Assert: Type(iterResult) is Object.
+2.	Return the result of Get(iterResult, &quot;value&quot;).
+
+are there because Get (and downstream, [[Get]]) require iterResult to be an object.  They don&apos;t do an internal ToObject.  The assertion is essentially saying that somebody upstream must have done that.
+
+The type object check in IteratorNext is supplying that upstream guarantee.  In the spec., every use of IterationValue and IterationComplete is passed a value that has been checked for objectness by IteratorNext. If guarantees the required precondition of [[Get]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5427</commentid>
+    <comment_count>6</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2013-09-26 17:32:33 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; In my opinion ToObject() does not make sense, because treating primitive
+&gt; wrappers as ItrResult objects rather hides user errors then helps anyone.
+
+I agree with comment 1, particularly this part of it.  If a generator can yield a boolean/number/string primitive value (but only those -- if ToObject were used it&apos;d throw a TypeError for null/undefined), and primitives are permitted as generator return values, then a ToObject will just box the thing up, and &lt;box&gt;.done will very likely be falsy and *silently* end iteration.  Much better, instead, to simply throw when a primitive is encountered, to report the error earlier.
+
+I think the Type() != Object then throw behavior is correct and desirable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5972</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-24 15:37:21 -0700</bug_when>
+    <thetext>I think things are just fine the way they are..
+
+An object heck has to be done somewhere because we do Get&apos;s on the value.
+
+And as I said in Comment #5 these these abstract operations are just orchestration the use of Iterators by the actual language.  Nobody hand implements these or are constrained by them in their hand use of iterators.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

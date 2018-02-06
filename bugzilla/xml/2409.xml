@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2409</bug_id>
+          
+          <creation_ts>2013-12-27 11:59:00 -0800</creation_ts>
+          <short_desc>White space missing char U+0085 (Next Line)</short_desc>
+          <delta_ts>2014-05-31 00:21:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Bill Ticehurst">billti</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascriptbugs</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6958</commentid>
+    <comment_count>0</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2013-12-27 11:59:18 -0800</bug_when>
+    <thetext>In section &quot;11.2 WhiteSpace&quot;, table 27 lists the ECMAScript whitespace characters, and goes on to state that &quot;ECMAScript implementations must recognize all of the white space characters defined in Unicode 5.1&quot;.
+
+However the table doesn&apos;t account for U+0085 &quot;NEXT LINE (NEL)&quot; which is defined as White_Space in Unicode 5.1 (see http://www.unicode.org/Public/5.1.0/ucd/PropList.txt ), and is not covered by the &quot;Other Category Zs&quot; row in table 27 (as it is in category &quot;Cc&quot;).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7210</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-07 13:11:54 -0800</bug_when>
+    <thetext>fixed in rev23.
+
+Clarified that we are talking about Category Zs and not the Unicode White_Space property.
+
+Added note clarifying that the exclusion of things like NEL is intentional</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7529</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:45 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8717</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-31 00:21:55 -0700</bug_when>
+    <thetext>See also the discussion of U+0085 and its intentional exclusion in bug 409.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

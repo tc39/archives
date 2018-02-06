@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>271</bug_id>
+          
+          <creation_ts>2012-02-22 06:45:00 -0800</creation_ts>
+          <short_desc>test262.py occurs KeyError on deleting commentary key</short_desc>
+          <delta_ts>2012-03-15 08:41:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>joost-wim</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>647</commentid>
+    <comment_count>0</comment_count>
+      <attachid>11</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-02-22 06:45:24 -0800</bug_when>
+    <thetext>Created attachment 11
+patch for test262.py
+
+Sometimes, parseTestRecord result doesn&apos;t have key &apos;commentary&apos;. So `del testRecord[&quot;commentary&quot;]` occurs KeyError.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>756</commentid>
+    <comment_count>1</comment_count>
+    <who name="Joost-Wim Boekesteijn">joost-wim</who>
+    <bug_when>2012-03-13 06:18:24 -0700</bug_when>
+    <thetext>Probably a duplicate of https://bugs.ecmascript.org/show_bug.cgi?id=240</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>759</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-14 14:26:27 -0700</bug_when>
+    <thetext>Yusuke, I&apos;ve fixed https://bugs.ecmascript.org/show_bug.cgi?id=240.  Could you please confirm this addresses your issue as well?
+
+Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>762</commentid>
+    <comment_count>3</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-03-14 21:16:14 -0700</bug_when>
+    <thetext>Thanks Dave!
+I confirmed this issue is addressed!</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>11</attachid>
+            <date>2012-02-22 06:45:00 -0800</date>
+            <delta_ts>2012-02-22 06:45:24 -0800</delta_ts>
+            <desc>patch for test262.py</desc>
+            <filename>test262.py.patch</filename>
+            <type>application/octet-stream</type>
+            <size>664</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rvb2xzL3BhY2thZ2luZy90ZXN0MjYyLnB5IGIvdG9vbHMvcGFja2FnaW5n
+L3Rlc3QyNjIucHkKLS0tIGEvdG9vbHMvcGFja2FnaW5nL3Rlc3QyNjIucHkKKysrIGIvdG9vbHMv
+cGFja2FnaW5nL3Rlc3QyNjIucHkKQEAgLTE3NiwxNyArMTc2LDE3IEBAIGNsYXNzIFRlc3RDYXNl
+KG9iamVjdCk6CiAgICAgc2VsZi5zdHJpY3RfbW9kZSA9IHN0cmljdF9tb2RlCiAgICAgZiA9IG9w
+ZW4oc2VsZi5mdWxsX3BhdGgpCiAgICAgc2VsZi5jb250ZW50cyA9IGYucmVhZCgpCiAgICAgZi5j
+bG9zZSgpCiAgICAgdGVzdFJlY29yZCA9IHBhcnNlVGVzdFJlY29yZChzZWxmLmNvbnRlbnRzLCBu
+YW1lKQogICAgIHNlbGYudGVzdCA9IHRlc3RSZWNvcmRbInRlc3QiXQogICAgIGRlbCB0ZXN0UmVj
+b3JkWyJ0ZXN0Il0KICAgICBkZWwgdGVzdFJlY29yZFsiaGVhZGVyIl0KLSAgICBkZWwgdGVzdFJl
+Y29yZFsiY29tbWVudGFyeSJdCisgICAgdGVzdFJlY29yZC5wb3AoImNvbW1lbnRhcnkiLCBOb25l
+KQogICAgIHNlbGYudGVzdFJlY29yZCA9IHRlc3RSZWNvcmQ7CiAgICAgCiAKICAgZGVmIEdldE5h
+bWUoc2VsZik6CiAgICAgcmV0dXJuIHBhdGguam9pbigqc2VsZi5uYW1lKQogCiAgIGRlZiBHZXRN
+b2RlKHNlbGYpOgogICAgIGlmIHNlbGYuc3RyaWN0X21vZGU6Cg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

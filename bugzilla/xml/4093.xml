@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4093</bug_id>
+          
+          <creation_ts>2015-02-25 22:49:00 -0800</creation_ts>
+          <short_desc>LexicallyDeclaredNames of BlockStatement should be empty</short_desc>
+          <delta_ts>2015-02-25 22:54:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Bei Zhang">ikarienator</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13379</commentid>
+    <comment_count>0</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-25 22:49:03 -0800</bug_when>
+    <thetext>LexicallyDeclaredNames of BlockStatement is not undefined. Applying &quot; chain productions &quot; rule in 5.2, it derives from the LexicallyDeclaredNames of the StatementList.
+
+Considering an example:
+
+function x() {
+  let a;
+  {
+    let a;
+  }
+}
+
+
+The LexicallyDeclaredNames of the BlockStatement is { &quot;a&quot; } and therefore there is a duplicated name &quot;a&quot; in the LexicallyDeclaredNames of the FunctionBody. In other words, block scoping does not exists.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13380</commentid>
+    <comment_count>1</comment_count>
+    <who name="Bei Zhang">ikarienator</who>
+    <bug_when>2015-02-25 22:54:04 -0800</bug_when>
+    <thetext>Re-read 13.1.5 Static Semantics: LexicallyDeclaredNames and LexicallyDeclaredNames is cleared at each statement except LabelledStatement. Thus solves the issue.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

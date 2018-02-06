@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2634</bug_id>
+          
+          <creation_ts>2014-04-10 23:40:00 -0700</creation_ts>
+          <short_desc>Algorithm indentation bugs (steps ending with &quot;then&quot; but with no nested list of substeps)</short_desc>
+          <delta_ts>2014-07-18 23:37:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7664</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-10 23:40:15 -0700</bug_when>
+    <thetext>These are all &quot;If ..., then&quot; steps with no consequent:
+
+* in 7.3.16 step 5
+  (the bug Michael Dyck found)
+* in 9.2.13 step 12.a
+* in 12.14.5.3, last algorithm, step 5.c
+* in 21.1.3.18 step 4
+  Note that in this case, steps 4-6 can just be deleted; they&apos;re
+  redundant with step 7.
+* in B.3.2 step 2.b.iv
+  (new code in rev 23)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7669</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-11 09:37:47 -0700</bug_when>
+    <thetext>9.2.13 should be 9.2.14
+
+fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7980</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 18:48:32 -0700</bug_when>
+    <thetext>B.3.2 step 2.b.iv is still broken in rev24.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8163</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 15:18:40 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8165</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-06 15:25:51 -0700</bug_when>
+    <thetext>Reopening due to leftover noted in comment 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8686</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-30 00:22:42 -0700</bug_when>
+    <thetext>In rev25, the case noted in comment 2 is now at
+    B.3.2 / step 2.a.ii.4.4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9217</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 17:39:07 -0700</bug_when>
+    <thetext>the line in B.3.2 (now B.3.3) has been eliminated in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9317</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:37:24 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

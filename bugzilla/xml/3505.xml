@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3505</bug_id>
+          
+          <creation_ts>2015-01-01 19:58:00 -0800</creation_ts>
+          <short_desc>Should `regexp.compile(regexp, flags)` also no longer throws just like the RexExp constructor did in rev29 for consistency?</short_desc>
+          <delta_ts>2015-02-11 10:51:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="ziyunfei">446240525</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11291</commentid>
+    <comment_count>0</comment_count>
+    <who name="ziyunfei">446240525</who>
+    <bug_when>2015-01-01 19:58:31 -0800</bug_when>
+    <thetext></thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12310</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 10:51:51 -0800</bug_when>
+    <thetext>No, compile exists only as a method legacy that no body should ever use in new code.
+
+Generalizing it to work better with RegExp subclasses is not needed and might encourage its continued use.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

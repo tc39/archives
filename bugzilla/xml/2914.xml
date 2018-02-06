@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2914</bug_id>
+          
+          <creation_ts>2014-05-28 12:00:00 -0700</creation_ts>
+          <short_desc>Object.getOwnPropertyDescriptor/FromPropertyDescriptor returns object with undefined slots</short_desc>
+          <delta_ts>2014-07-12 09:25:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Chris Toshok">toshok</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8663</commentid>
+    <comment_count>0</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2014-05-28 12:00:45 -0700</bug_when>
+    <thetext>My current implementation of the ES6 method FromPropertyDescriptor causes this test to print &quot;undefined&quot;
+
+  var a = {};
+  Object.defineProperty (a, &quot;c&quot;, { value: 10 });
+  var desc = Object.getOwnPropertyDescriptor(a, &quot;c&quot;);
+  console.log (desc.writable);
+
+This appears to be in line with the spec, specifically 6.2.4.4 step 6a.
+
+Both v8 and spidermonkey (in FF nightly) print &quot;false&quot;
+
+ES5&apos;s text is similar (8.10.4 step 3b):
+
+b. Call the [[DefineOwnProperty]] internal method of obj with arguments &quot;writable&quot;, Property Descriptor 
+{[[Value]]: Desc.[[Writable]], [[Writable]]: true, [[Enumerable]]: true, [[Configurable]]: true}, and false. 
+
+It&apos;s missing the &quot;does the descriptor have a [[Writable]] field&quot; check, but it copies over whatever the value is, so I would expect this should copy over undefined.
+
+Maybe the &quot;Desc.[[Writable]]&quot; load coerces the value to a boolean in both v8 and SM?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8664</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-28 13:12:32 -0700</bug_when>
+    <thetext>`Object.defineProperty()` calls 9.1.6.3 ValidateAndApplyPropertyDescriptor(O, P, extensible, Desc, current), and in 9.1.6.3, step 2.c.i is of interest:
+&gt;  If the value of an attribute field of Desc is absent, the attribute of
+&gt;  the newly created property is set to its default value.
+
+So `Object.defineProperty(a, &quot;c&quot;, { value: 10 })` is exactly equivalent to `Object.defineProperty(a, &quot;c&quot;, { value: 10, writable: false, enumerable: false, configurable: false })` in that context. See 6.1.7.1 Property Attributes, Table 4 &quot;Default Attribute Values&quot; for the defaults.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

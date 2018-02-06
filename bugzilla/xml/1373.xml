@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1373</bug_id>
+          
+          <creation_ts>2013-03-21 09:54:00 -0700</creation_ts>
+          <short_desc>15.5.4.11: &quot;regexp&quot; + &quot;capture&quot; + &quot;replString&quot; not defined</short_desc>
+          <delta_ts>2013-05-14 18:13:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3523</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-21 09:54:45 -0700</bug_when>
+    <thetext>In 15.5.4.11 &quot;String.prototype.replace (searchValue, replaceValue)&quot;,
+step 4.b says:
+    Return the result of Invoke(regexp, &quot;replace&quot;, args).
+but &apos;regexp&apos; is not defined.
+
+Change it to &apos;searchValue&apos; ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3524</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-21 10:36:31 -0700</bug_when>
+    <thetext>And step 10.b says:
+    Let replStr be the result of the abstract operation
+    GetReplaceSubstitution(matched, string, pos, capture).
+but &apos;capture&apos; is not defined.
+
+Change to &apos;captures&apos;.
+
+(Alternatively, in step 10.a, you could change &apos;captures&apos; to &apos;capture&apos;, since that would match the name of the corresponding parameter of GetReplaceSubstitution. However, that parameter should probably be changed to &apos;captures&apos; too, to match usage elsewhere, and just because the plural makes more sense.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3525</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-21 10:45:44 -0700</bug_when>
+    <thetext>And step 12 refers to &apos;replString&apos;, which is not defined.
+
+Change to just &apos;replStr&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3743</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-12 13:40:55 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3922</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:34 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

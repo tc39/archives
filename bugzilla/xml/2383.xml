@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2383</bug_id>
+          
+          <creation_ts>2013-12-11 18:40:00 -0800</creation_ts>
+          <short_desc>Respecification for Array.prototype.toLocaleString</short_desc>
+          <delta_ts>2014-12-01 21:40:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6929</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-11 18:40:12 -0800</bug_when>
+    <thetext>Array.prototype.toLocaleString needs to be respecified to
+- pass locales and options arguments on to the array&apos;s elements, and
+- to use a localized list separator.
+
+See
+https://mail.mozilla.org/pipermail/es-discuss/2013-December/thread.html#35248</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9114</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-01 10:33:27 -0700</bug_when>
+    <thetext>Starting in the ES6 spec. Rev26, Array.prototype.toLocaleString says that if Ecma-402 is implemented, the definition from 402 must be used. so we need to provide one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9115</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-01 10:37:36 -0700</bug_when>
+    <thetext>Also, as pointed out by https://mail.mozilla.org/pipermail/es-discuss/2013-December/035252.html  
+
+The 402 version of Array.prototype.toLocaleString should validate the optional parameters before calling toLocaleString on any of the array elements.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9823</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-20 12:39:07 -0700</bug_when>
+    <thetext>I&apos;ve copied the existing specification text from Ecma-262 6ed. Rev 26 to Ecma-402 2ed. Rev 2
+
+Next step is to update according to the notes in this thread.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9824</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-20 12:58:51 -0700</bug_when>
+    <thetext>(In reply to Norbert from comment #0)
+&gt; Array.prototype.toLocaleString needs to be respecified to
+&gt; - pass locales and options arguments on to the array&apos;s elements, and
+
+I understand this to mean that each element has `toLocaleString(locales, options)`   called (after validation). However: I don&apos;t see a definition for `String.prototype.toLocaleString`, which means it would call `O.p.toLocaleString` which does nothing with `locales` (or any argument). 
+
+Hopefully I&apos;ve just missed something obvious.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9825</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-20 15:10:42 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #4)
+&gt; (In reply to Norbert from comment #0)
+&gt; &gt; Array.prototype.toLocaleString needs to be respecified to
+&gt; &gt; - pass locales and options arguments on to the array&apos;s elements, and
+&gt; 
+&gt; I understand this to mean that each element has `toLocaleString(locales,
+&gt; options)`   called (after validation). However: I don&apos;t see a definition for
+&gt; `String.prototype.toLocaleString`, which means it would call
+&gt; `O.p.toLocaleString` which does nothing with `locales` (or any argument). 
+&gt; 
+&gt; Hopefully I&apos;ve just missed something obvious.
+
+that&apos;s ok.  Presumably, there isn&apos;t anything locale specific that is appropriate to do for generic string value.  So, O.p.toString will just delegate toLocaleString back to toString, producing the original string value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9831</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-20 17:34:53 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; (In reply to Rick Waldron from comment #4)
+&gt; &gt; (In reply to Norbert from comment #0)
+&gt; &gt; &gt; Array.prototype.toLocaleString needs to be respecified to
+&gt; &gt; &gt; - pass locales and options arguments on to the array&apos;s elements, and
+&gt; &gt; 
+&gt; &gt; I understand this to mean that each element has `toLocaleString(locales,
+&gt; &gt; options)`   called (after validation). However: I don&apos;t see a definition for
+&gt; &gt; `String.prototype.toLocaleString`, which means it would call
+&gt; &gt; `O.p.toLocaleString` which does nothing with `locales` (or any argument). 
+&gt; &gt; 
+&gt; &gt; Hopefully I&apos;ve just missed something obvious.
+&gt; 
+&gt; that&apos;s ok.  Presumably, there isn&apos;t anything locale specific that is
+&gt; appropriate to do for generic string value.  So, O.p.toString will just
+&gt; delegate toLocaleString back to toString, producing the original string
+&gt; value.
+
+Ok, that makes perfect sense.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10702</commentid>
+    <comment_count>7</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 21:40:00 -0800</bug_when>
+    <thetext>Many objects will not do anything locale specific, so that toLocaleString returns the same string as toString. That&apos;s OK.
+
+One open issue is whether toLocaleString on Array and Object should check the validity of the locales argument in the same way as the implementations on Date and Number, so that, for example, [].toLocaleString(&quot;i&quot;) throws an exception. It might be odd if the method let this invalid argument pass for an empty array, or for an array holding only locale-unaware objects, but then started throwing after a Date or Number object is added.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

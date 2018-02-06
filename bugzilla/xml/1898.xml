@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1898</bug_id>
+          
+          <creation_ts>2013-09-13 10:20:00 -0700</creation_ts>
+          <short_desc>Provide separation of global this and global object</short_desc>
+          <delta_ts>2015-12-04 15:54:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Anne van Kesteren">annevk</reporter>
+          <assigned_to name="Domenic Denicola">d</assigned_to>
+          <cc>bzbarsky</cc>
+    
+    <cc>d</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>ian</cc>
+    
+    <cc>m.goleb</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>till</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5394</commentid>
+    <comment_count>0</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2013-09-13 10:20:35 -0700</bug_when>
+    <thetext>Currently HTML overrides ES to say that this is WindowProxy whereas the global object is Window. If this is made configurable for realms we&apos;d have one less issue there.
+
+Related to bug 78 per Brendan.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8113</commentid>
+    <comment_count>1</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 10:39:08 -0700</bug_when>
+    <thetext>The latest draft adds the ability to pass a proxy target and handler into the Realm constructor. If that is done, a proxy is created as the global object instead of a normal object. Is that enough to cover the requirements here, or is a WindowProxy sufficiently different from an ES Proxy that more is needed?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8150</commentid>
+    <comment_count>2</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2014-05-06 05:09:53 -0700</bug_when>
+    <thetext>Ian or Boris may be able to answer that question.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8151</commentid>
+    <comment_count>3</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2014-05-06 05:14:15 -0700</bug_when>
+    <thetext>Figuring out the answer to the question in comment 1 does seem important before we declare all this stable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8670</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-05-29 14:35:53 -0700</bug_when>
+    <thetext>OK I educated myself. Here&apos;s the gist of it: a single frame can navigate from one page to another, and those pages can call each others&apos; global functions, even if some of the pages are not the active page in the frame. All of those pages actually have the *same* (===) global `this` object, which acts like a proxy to whatever the current active page in the frame is. But unbound variables are always interpreted relative to the page they came from. So calling a function on an inactive page can get divergent behavior between the global `this` and global variables. Here&apos;s an example:
+
+https://gist.github.com/dherman/82ca22b2ecc506d01182
+
+The current realm API is almost sufficient to reflect all this, except that it doesn&apos;t let you specify a distinct `this` object. I think the fix here is, basically as Anne says, to allow you to independently specify a second object that acts as the global `this`. Currently the Realm constructor takes unnamed optional arguments for creating a global proxy, and we now need an optional `this` object (which should default to whatever the global object is), so I think we probably need to go back to named arguments, something like:
+
+new Realm({
+  target: globalProxyTarget,
+  handler: globalProxyHandler,
+  this: globalThis
+})
+
+AFAICT the only implication this degree of flexibility has for engine implementations is that global `this` (which is trivially statically recognizable) gets pointed to a different object, so I don&apos;t think it should cause any implementation difficulties.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8687</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-30 00:37:22 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; OK I educated myself. Here&apos;s the gist of it: a single frame can navigate from
+&gt; one page to another, and those pages can call each others&apos; global functions,
+&gt; even if some of the pages are not the active page in the frame. All of those
+&gt; pages actually have the *same* (===) global `this` object, which acts like a
+&gt; proxy to whatever the current active page in the frame is. But unbound
+&gt; variables are always interpreted relative to the page they came from. So
+&gt; calling a function on an inactive page can get divergent behavior between the
+&gt; global `this` and global variables. Here&apos;s an example:
+
+To clarify, are you saying that:
+
+var activePageObj = new this.Object;//creates a new object
+                                    // in the Realm of active page
+
+var currentFrameObj = new Object; //create a new object
+                                  // in the Realm of the current frame
+
+
+In other words, all global identifier bindings (including the default globals) are resolved using the Realm of the referencing code and that those bindings are not necessarily the same as the properties of the global this that is visible to that code.
+
+Another example:
+
+if (&apos;foo&apos; in this ===undefined) this.foo = &quot;defined&quot;;
+console.log(foo===undefined);  //may be either true or false depending upon
+                               //the relationship of globalThis and global env
+
+&gt; 
+&gt; 
+&gt; new Realm({
+&gt;   target: globalProxyTarget,
+&gt;   handler: globalProxyHandler,
+&gt;   this: globalThis
+&gt; })
+&gt; 
+&gt; AFAICT the only implication this degree of flexibility has for engine
+&gt; implementations is that global `this` (which is trivially statically
+&gt; recognizable) gets pointed to a different object, so I don&apos;t think it should
+&gt; cause any implementation difficulties.
+&gt; 
+&gt; Dave
+
+Note that RealmRecord (the spec. abstraction that backs Realm objects) http://people.mozilla.org/~jorendorff/es6-draft.html#table-20 already capture both a [[globalThis]] references and a [[globalEnv]] reference where [[globalEnv]] is  GlobalEnvironmentReport that is used to capture and resolve global declarations from within the  Realm. 
+
+However, [[globalEnv]] is currently always initialized (http://people.mozilla.org/~jorendorff/es6-draft.html#sec-setrealmglobalobj) to use the value of [[globalThis]] as the object component of the [[globalEnv]].  It sounds like that may need  to  changed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12553</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 10:09:46 -0800</bug_when>
+    <thetext>deferred to ES7
+
+The whole window/windowProxy thing...</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

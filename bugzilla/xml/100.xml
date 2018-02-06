@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>100</bug_id>
+          
+          <creation_ts>2011-05-12 15:53:00 -0700</creation_ts>
+          <short_desc>Description of [[Configurable]] in Table 5 needs to change</short_desc>
+          <delta_ts>2012-11-23 09:45:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>211</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-12 15:53:46 -0700</bug_when>
+    <thetext>The [[Configurable]] row of Table 5 states:
+    If false, attempts to delete the property, change the property to be an accessor property, or change its attributes (other than [[Value]]) will fail.
+
+This isn&apos;t entirely true.  Consider the following snippet:
+    Object.defineProperty([], &quot;length&quot;, {writable:false});
+
+to make a long story rather short, this ends up following 8.12.9 and is not Rejected by the algorithm.  Either Table 5 is incorrect or there&apos;s a step missing around sub-step 10.a.i (only reference to Writable in the algorithm) of 8.12.9.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>382</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-25 16:27:12 -0700</bug_when>
+    <thetext>these tables in section 8 (or their description columns) perhaps should be label as nonn-normative</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2550</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 13:01:10 -0800</bug_when>
+    <thetext>corrected in rev 12 draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2622</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:34 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

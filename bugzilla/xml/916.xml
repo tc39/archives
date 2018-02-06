@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>916</bug_id>
+          
+          <creation_ts>2012-11-02 11:14:00 -0700</creation_ts>
+          <short_desc>15.16.1.1 SetInitialisation 10.c ToObject() bogus, 10.e references v</short_desc>
+          <delta_ts>2012-11-23 09:45:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Joshua Bell">inexorabletash</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2401</commentid>
+    <comment_count>0</comment_count>
+    <who name="Joshua Bell">inexorabletash</who>
+    <bug_when>2012-11-02 11:14:54 -0700</bug_when>
+    <thetext>In 15.16.1.1 SetInitialisation, two copy/paste-isms from MapInitialization:
+
+10. Repeat
+a. Let next be the result of performing Invoke with arguments &quot;next&quot;, itr, and an empty arguments
+List.
+b. If IteratorComplete(next) is true, then return NormalCompletion(obj).
+c. Let next be ToObject(next).
+d. ReturnIfAbrupt(next).
+e. Let status be the result of calling the [[Call]] internal method of adder with obj as thisArgument and a List whose sole element is v as argumentsList.
+f. ReturnIfAbrupt(status).
+
+10.c does a ToObject() conversion of |next|. This would make sense for Map where the iteration is expecting elements of the form [key, value], but for set the result yielded by the iterator should be used directly. As written, Set([1]).has(1) would return false. Steps c and d should be deleted.
+
+10.e references |v|, which is not previously mentioned. This should be |next| instead.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2548</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 12:54:42 -0800</bug_when>
+    <thetext>corrected in rev 12 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2679</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:50 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1184</bug_id>
+          
+          <creation_ts>2012-12-24 08:41:00 -0800</creation_ts>
+          <short_desc>Array.prototype.join does not specify how to handle cycles</short_desc>
+          <delta_ts>2012-12-31 06:59:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>other</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brandon Benvie">brandon</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3104</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brandon Benvie">brandon</who>
+    <bug_when>2012-12-24 08:41:26 -0800</bug_when>
+    <thetext>Given the following:
+
+    var x = [1,2,3];
+    x.push(x);
+    x+&quot;&quot;;
+
+What should happen? The behavior demonstrated by V8, Spidermonkey, and Chakra is to return the empty string for cycles, thus returning the result &apos;1,2,3,&apos;. This behavior is unspecified and an equally valid result would be to throw a recursion error.
+
+For comparison, JSON.stringify explicitly specifies how to handle cycles (throw an error).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

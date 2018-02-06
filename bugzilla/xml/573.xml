@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>573</bug_id>
+          
+          <creation_ts>2012-07-17 12:55:00 -0700</creation_ts>
+          <short_desc>Locale sensitive case conversion</short_desc>
+          <delta_ts>2015-02-08 13:57:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1362</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-17 12:55:51 -0700</bug_when>
+    <thetext>The internationalization API should provide support for locale sensitive case conversion. The existing ES5 methods String.prototype.toLocaleLowerCase and String.prototype.toLocaleUpperCase should be re-specified based on the new API.
+
+One issue is that the specifications of the two ES5 methods seem to allow only for the locale sensitive mappings in the Unicode character database, while in reality some languages have additional locale specific variants (e.g., Canadian French é -&gt; E).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1896</commentid>
+    <comment_count>1</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 13:52:08 -0700</bug_when>
+    <thetext>Item 3 (string transformations) on our meeting agenda.
+
+Takeaway:
+
+Normalization implemented in core language. Upper/lower casing done in core with additional language tag, case folding not important.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12219</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 13:57:28 -0800</bug_when>
+    <thetext>The 2013-02-28 draft has respecifications for String.prototype.toLocaleLowerCase and String.prototype.toLocaleUpperCase.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

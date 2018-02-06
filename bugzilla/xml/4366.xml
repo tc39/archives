@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4366</bug_id>
+          
+          <creation_ts>2015-05-18 04:14:00 -0700</creation_ts>
+          <short_desc>4.3.19 String object coercion</short_desc>
+          <delta_ts>2015-05-21 08:51:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=4367</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Miguel Macías">mimaen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14411</commentid>
+    <comment_count>0</comment_count>
+    <who name="Miguel Macías">mimaen</who>
+    <bug_when>2015-05-18 04:14:03 -0700</bug_when>
+    <thetext>&quot;A String object can be coerced to a String value by calling the String constructor as a function (21.1.1.1)&quot;
+
+Maybe it could be similar to the Boolean object definition:
+
+&quot;A String object can be coerced to a String value&quot;
+
+Or maybe it could be more precise:
+
+&quot;A String object can be coerced to a String value by calling the valueOf method&quot;
+
+Similar problem at 4.3.22 (Number Object) definition.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

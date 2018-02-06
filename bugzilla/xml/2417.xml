@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2417</bug_id>
+          
+          <creation_ts>2014-01-21 02:43:00 -0800</creation_ts>
+          <short_desc>26.3.1.1 refers to non-existing slot [[RealmRecord]]</short_desc>
+          <delta_ts>2014-04-06 11:29:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Till Schneidereit">till</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6974</commentid>
+    <comment_count>0</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-01-21 02:43:42 -0800</bug_when>
+    <thetext></thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6975</commentid>
+    <comment_count>1</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-01-21 02:45:10 -0800</bug_when>
+    <thetext>Hit submit too soon, sorry.
+
+Steps 8.a and 8.b refer to [[RealmRecord]], which is called [[Realm]] everywhere else.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7317</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-15 13:36:33 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+The Realm object internal slot that refers to its RealmRecord is not called [[RealmRecord]]
+
+The LoaderRecord slot that refers to the RealmRecord associated with the loader is called [[Realm]]
+
+The latter can&apos;t be [[RealmRecord]] because that name is used as a nominal type brand on Realm objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7512</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:23 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

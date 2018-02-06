@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2368</bug_id>
+          
+          <creation_ts>2013-12-08 20:36:00 -0800</creation_ts>
+          <short_desc>21.2.3.3.2: Pattern interpretation doesn&apos;t account for code unit patterns</short_desc>
+          <delta_ts>2015-02-11 22:11:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6905</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 20:36:39 -0800</bug_when>
+    <thetext>Step 8 if RegExpInitialise starts with &quot;Parse P interpreted as UTF-16 encoded Unicode code points using the grammars in 21.2.1.&quot; This fails to mention that, as explained in 21.2.2, patterns can be interpreted as either code unit or code point (&quot;BMP&quot; or &quot;Unicode&quot; - see bug 2367) patterns. It should mention this distinction as well as the necessary conversion to a List of SourceCharacter values, different for code unit and code point patterns.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7338</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 09:55:52 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft.
+
+Made things a bit more explicit WRT to these points.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7508</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:18 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8719</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-31 00:49:27 -0700</bug_when>
+    <thetext>Looking at the rev 25 draft, I like the clean separation of code paths for BMP and Unicode. However, some of the details still need improvements:
+
+- In step 9.a, P is not interpreted as a list of UTF-16 encoded code points, but as a list of UTF-16 code units individually interpreted as source characters.
+
+- In step 10.b, the description of the list is hard to parse. How about &quot;... List whose elements are the code points resulting from interpreting P as a sequence of UTF-16 encoded Unicode code points.&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9748</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-09 13:01:58 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9866</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:18 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10699</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 20:58:21 -0800</bug_when>
+    <thetext>Small grammatical error resulting from the edits in step 10.b: &quot;code points of resulting&quot;. Remove &quot;of&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10810</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-06 15:32:23 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10821</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:34:57 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12356</commentid>
+    <comment_count>9</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 22:11:51 -0800</bug_when>
+    <thetext>Verified in rev 32 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

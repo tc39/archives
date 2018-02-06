@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4347</bug_id>
+          
+          <creation_ts>2015-04-29 10:20:00 -0700</creation_ts>
+          <short_desc>17 ECMAScript Standard Built-in Objects: .length for functions without subclause headings?</short_desc>
+          <delta_ts>2015-10-02 13:14:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14349</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 10:20:53 -0700</bug_when>
+    <thetext>17 ECMAScript Standard Built-in Objects
+---
+Every built-in Function object, including constructors, has a length property whose value is an integer.
+Unless otherwise specified, this value is equal to the largest number of named arguments shown in the
+subclause headings for the function description, including optional parameters. However, rest parameters
+shown using the form “...name” are not included in the default argument count.
+---
+
+
+For example 25.4.1.3.1 Promise Reject Functions and 25.4.1.3.2 Promise Resolve Functions don&apos;t have a subclause heading displaying the number of arguments.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14362</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-29 17:18:02 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft
+
+added an explicit length definition in 25.4.1.3.1, 25.4.1.3.2, 25.4.1.5.1, 25.4.4.1.2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14374</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-02 02:31:14 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; fixed in rev39 publication draft
+&gt; 
+&gt; added an explicit length definition in 25.4.1.3.1, 25.4.1.3.2, 25.4.1.5.1,
+&gt; 25.4.4.1.2
+
+
+Missing? 26.2.2.1.1 Proxy Revocation Functions</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

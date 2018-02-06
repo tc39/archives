@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4490</bug_id>
+          
+          <creation_ts>2015-08-21 14:11:00 -0700</creation_ts>
+          <short_desc>14.2.*: Operations defined for wrong grammar productions</short_desc>
+          <delta_ts>2015-10-26 12:11:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14651</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 14:11:14 -0700</bug_when>
+    <thetext>14.2.4 Static Semantics: ContainsExpression
+14.2.5 Static Semantics: ExpectedArgumentCount
+14.2.6 Static Semantics: HasInitializer
+14.2.8 Static Semantics: IsSimpleParameterList
+14.2.14 Runtime Semantics: IteratorBindingInitialization
+
+
+All these operations are called during 9.2.12 FunctionDeclarationInstantiation, that means they actually use ArrowFormalParameters (or BindingIdentifier) instead of ArrowParameters (cf. 14.2.16, step 3).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14868</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-26 12:11:17 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft (622b6c8).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

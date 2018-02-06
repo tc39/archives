@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4087</bug_id>
+          
+          <creation_ts>2015-02-25 15:17:00 -0800</creation_ts>
+          <short_desc>duplicate bindings allowed in CatchParameter</short_desc>
+          <delta_ts>2015-03-04 18:58:17 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Ficarra">bugs.ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13357</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Ficarra">bugs.ecmascript</who>
+    <bug_when>2015-02-25 15:17:11 -0800</bug_when>
+    <thetext>There are no early errors that prevent a CatchParameter from having duplicate bindings. Is this a mistake?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13359</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Ficarra">bugs.ecmascript</who>
+    <bug_when>2015-02-25 15:23:59 -0800</bug_when>
+    <thetext>It seems that all other usages of BindingPattern disallow duplicates in the position it is used. Is there any reason these restrictions aren&apos;t consolidated to BindingPattern itself?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13390</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 09:50:19 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft.
+
+added the early error for catch production.
+
+It&apos;s simply a factoring choice. Everywhere else BindingPattern is used it is in a list where the entire list has to be checked for duplicates.  In all those cases, a rule at the BindingPattern level would be redundant</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13511</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:17 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

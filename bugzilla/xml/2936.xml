@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2936</bug_id>
+          
+          <creation_ts>2014-05-30 19:11:00 -0700</creation_ts>
+          <short_desc>Spurious PDF table of content entries</short_desc>
+          <delta_ts>2014-07-21 12:01:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8702</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-30 19:11:39 -0700</bug_when>
+    <thetext>The PDF table of contents (accessible, for example, as a left-hand sidebar in Preview on Mac) of the PDF version of rev 25 draft contains numerous spurious entries:
+
+Between 7.4.2 and 7.4.3, five times 1.1.1.
+
+Between 9.2.1 and 9.2.2, sixteen times 1.1.1.
+
+Between 9.2.8 and 9.2.9, four times 1.1.1.
+
+Between 9.2.11 and 9.2.12, five times 1.1.1.
+
+Between 9.4.3.3 and 9.4.3.4, 1.1.1.1.
+
+Between 9.4.5.5 and 9.4.5.6, 1.1.1.1.
+
+As first item under 9.4.6, 1.1.1.1.
+
+Between 11.6 and 11.7, 1.1.
+
+Between 19.2.3 and 19.2.4, but at the top level, F[@@hasInstance](v).
+
+... and probably more.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8907</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-12 12:50:32 -0700</bug_when>
+    <thetext>Do you see any of these in the &quot;clean&quot; version that doesn&apos;t have any change markup.
+
+These spurious entries seem to be caused by unaccepted deletes that exist in the version with markup.  The only why I&apos;ve found to get rid of them is to &quot;accept all changes&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9438</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 23:19:50 -0700</bug_when>
+    <thetext>In rev 25, I see these entries in the &quot;no change markup&quot; version. The versions with change markup look far worse...
+
+In rev 26, I don&apos;t see these entries anymore.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9440</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-21 08:34:44 -0700</bug_when>
+    <thetext>I did an accept-all-changes for rev26-nomoark rather than just using the no-markup option on the PDF generator.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1862</bug_id>
+          
+          <creation_ts>2013-08-30 03:23:00 -0700</creation_ts>
+          <short_desc>11.1.4.2, Runtime Semantics: QualifierEvaluation: additional &quot;an&quot;</short_desc>
+          <delta_ts>2013-09-27 14:47:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5271</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-30 03:23:02 -0700</bug_when>
+    <thetext>11.1.4.2, Runtime Semantics: QualifierEvaluation.
+
+ComprehensionFor : for (ForBinding of AssignmentExpression )
+
+Remove first &quot;an&quot; in step 9.i.ii</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5277</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-30 04:43:03 -0700</bug_when>
+    <thetext>Also in:
+
+12.6.3.2 Runtime Semantics
+Runtime Semantics: Labelled Evaluation
+
+12.6.4.2 Runtime Semantics
+Runtime Semantics: Binding Instantiation
+
+12.14.2 Runtime Semantics
+Runtime Semantics: Catch Clause Evaluation</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5331</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-09 11:12:13 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft
+
+12.1.4.2, 13.6.3.2, 13.6.4.2, 13.14.2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5529</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:17 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

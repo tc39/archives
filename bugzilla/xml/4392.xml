@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4392</bug_id>
+          
+          <creation_ts>2015-06-12 01:52:00 -0700</creation_ts>
+          <short_desc>Invalid test? S15.9.5.9_A3_T2</short_desc>
+          <delta_ts>2015-06-12 01:52:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="barki">mustbarki</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14490</commentid>
+    <comment_count>0</comment_count>
+    <who name="barki">mustbarki</who>
+    <bug_when>2015-06-12 01:52:09 -0700</bug_when>
+    <thetext>DESCRIPTION
+*Please insert your description here!*
+
+------------------
+TEST:            TestCases/ch15/15.9/15.9.5/15.9.5.9/S15.9.5.9_A3_T2.js
+SOURCE:          http://hg.ecmascript.org/tests/test262/file/tip/test/suite/ch15/15.9/15.9.5/15.9.5.9/S15.9.5.9_A3_T2.js
+TEST SUITE DATE: 2014-09-18
+PLATFORM:        Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.39 Safari/537.36
+ERROR:           Error: Unexpected exception, &quot;Uncaught Test262 Error: #1: The Date.prototype.getTime.length property has the attributes DontDelete&quot; was thrown.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

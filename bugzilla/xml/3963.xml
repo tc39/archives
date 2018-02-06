@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3963</bug_id>
+          
+          <creation_ts>2015-02-16 16:41:00 -0800</creation_ts>
+          <short_desc>8.1.2.4, 9.2.11, 14.1.*, 14.2.*, 14.4.*: Remove NeedsSuperBinding</short_desc>
+          <delta_ts>2015-02-19 19:11:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>efaustbmo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12792</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-16 16:41:05 -0800</bug_when>
+    <thetext>14.1.17 Static Semantics: NeedsSuperBinding
+14.1.22 Runtime Semantics: InstantiateFunctionObject
+14.1.23 Runtime Semantics: Evaluation
+14.2.12 Static Semantics: NeedsSuperBinding
+14.4.11 Static Semantics: NeedsSuperBinding
+14.4.13 Runtime Semantics: InstantiateFunctionObject
+14.4.15 Runtime Semantics: Evaluation
+19.2.1.1.1 RuntimeSemantics: CreateDynamicFunction(constructor, newTarget, kind, args)
+
+NeedsSuperBinding can be removed now that SuperProperty is no longer valid in Function{Expression,Declaration} and Generator{Expression,Declaration}.
+
+
+And:
+8.1.2.4 NewFunctionEnvironment ( F, newTarget ) Abstract Operation
+Step 8.b can be removed, `home` is never undefined.
+
+And:
+9.2.11 MakeMethod ( F, homeObject) Abstract Operation
+The assertion in step 2 can be changed to:
+&gt; Assert: Type(homeObject) is or Object.
+
+
+This also means [[NeedsSuper]] could be removed, because
+[[NeedsSuper]] &lt;=&gt; ([[HomeObject]] /= undefined) holds.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12845</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 16:07:48 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12942</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:32:53 -0800</bug_when>
+    <thetext>*** Bug 4006 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13161</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:11 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>
