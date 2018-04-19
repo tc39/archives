@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<a href="{{ site.baseurl }}{% link bugzilla.html %}">&laquo; Bugzilla Issues Index</a>
+<h1>#{{ page.bug.bug_id }} &mdash; {{ page.bug.short_desc }}</h1>
+<ul>
+  {% for item in page.bug %}
+  {% if item[0] == "long_desc" or item[0] == "attachment" %}{% continue %}{% endif %}
+  <li>{{ item[0] }}:
+    {% if item[1].uid %}<abbr title="{{ item[1].uid }}">{{ item[1].name }}</abbr>{% else %}{{ item[1] | xml_escape }}{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+{% for desc in page.bug.long_desc %}
+<hr />
+<ul>
+  {% for item in desc %}
+  {% if item[0] == "thetext" %}{% continue %}{% endif %}
+  <li>{{ item[0] }}:
+    {% if item[1].uid %}<abbr title="{{ item[1].uid }}">{{ item[1].name }}</abbr>{% else %}{{ item[1] }}{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+<p>{{ desc.thetext | xml_escape | newline_to_br }}</p>
+{% endfor %}

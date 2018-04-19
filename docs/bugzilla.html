@@ -1,0 +1,31 @@
+---
+title: TC39 Bugzilla Archive
+permalink: /bugzilla/
+layout: default
+---
+<h1>{{ page.title }}</h1>
+{% assign items = site.bugzilla | sort: 'bug.bug_id' %}
+<table style="overflow: visible">
+<thead><tr>
+  <th>#</th>
+  <th>Title</th>
+  <th>Product</th>
+  <th>Component</th>
+  <th>Opened</th>
+  <th>Updated</th>
+  <th>Status</th>
+</tr></thead>
+<tbody>
+{% for item in items %}
+<tr>
+  <th><a href="{{site.baseurl}}{{item.url}}">{{ item.bug.bug_id }}</a></th>
+  <td>{{ item.bug.short_desc | xml_escape }}</td>
+  <td>{{ item.bug.product }}</td>
+  <td>{{ item.bug.component }}</td>
+  <td>{{ item.bug.creation_ts }}</td>
+  <td>{{ item.bug.delta_ts }}</td>
+  <td>{{ item.bug.bug_status }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
