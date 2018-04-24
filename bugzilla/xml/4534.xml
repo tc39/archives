@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4534</bug_id>
+          
+          <creation_ts>2015-09-17 15:30:00 -0700</creation_ts>
+          <short_desc>Is SetFunctionName() a static or a dynamic feature?</short_desc>
+          <delta_ts>2015-09-18 07:53:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14696</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-09-17 15:30:36 -0700</bug_when>
+    <thetext>http://www.ecma-international.org/ecma-262/6.0/#sec-assignment-operators-runtime-semantics-evaluation
+
+Is SetFunctionName() a static or a dynamic feature?
+
+* If it is a static feature: why the dynamic check `HasOwnProperty(rval, &quot;name&quot;)`?
+* If it is a dynamic feature: why a static check that only allows anonymous function expressions (vs. allowing arbitrary expressions and checking dynamically whether they evaluate to a function without a name)?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14703</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-09-18 07:53:11 -0700</bug_when>
+    <thetext>It is a mostly static feature, the dynamic HasOwnProperty check is only needed for classes with static methods whose property name is computed. In all other cases the HasOwnProperty call can be omitted.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

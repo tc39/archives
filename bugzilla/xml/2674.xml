@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2674</bug_id>
+          
+          <creation_ts>2014-04-17 06:43:00 -0700</creation_ts>
+          <short_desc>B.3.2  Web Legacy Block Function Declarations: Typos</short_desc>
+          <delta_ts>2014-04-29 22:43:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7773</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-17 06:43:19 -0700</bug_when>
+    <thetext>B.3.2  Web Legacy Compatibility for Block-Level Function Declarations
+
+- 2nd paragraph, provded -&gt; provided
+- 3rd paragraph, &quot;each non-strict mode functions&quot; -&gt; &quot;each non-strict mode function&quot;
+- step 2, BindingIdentyifier -&gt; BindingIdentifier
+- step 3.a.ii, FunctionDeclarations -&gt; FunctionDeclaration
+- step 3.b, FuncitonDeclaration -&gt; FunctionDeclaration
+- step 3.b.i, Enviornment -&gt; Environment
+- step 3.b.ii, Enviornment -&gt; Environment
+- step 3.b.iii, methjod -&gt; method
+- step 3.b.iv, &quot;.the&quot; -&gt; &quot;the&quot;
+- step 3.b.v, aruments -&gt; arguments</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7779</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 07:49:22 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8024</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:43:41 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

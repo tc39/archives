@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>425</bug_id>
+          
+          <creation_ts>2012-07-02 15:10:00 -0700</creation_ts>
+          <short_desc>15.1.2.1: &quot;Initialise the execution content&quot;</short_desc>
+          <delta_ts>2014-05-15 11:17:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1068</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-02 15:10:22 -0700</bug_when>
+    <thetext>In 15.1.2.1 &quot;eval(x)&quot;,
+step 4.a says:
+    &quot;Initialise the execution context as if it was a global execution context
+    using the eval code as C as described in 10.4.1.1.&quot;
+
+This sentence uses obsolete terms and references.
+
+I&apos;m guessing it should be replaced by explicit setting of the ThisBinding, LexicalEnvironment, and VariableEnvironment (similar to step 5).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8503</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-15 11:17:11 -0700</bug_when>
+    <thetext>It looks like this was resolved in rev11.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

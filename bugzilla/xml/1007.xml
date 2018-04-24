@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1007</bug_id>
+          
+          <creation_ts>2012-11-24 12:30:00 -0800</creation_ts>
+          <short_desc>8.1.6.2: &quot;Value Type Domain&quot;</short_desc>
+          <delta_ts>2012-12-21 18:08:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2759</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-24 12:30:58 -0800</bug_when>
+    <thetext>In 8.1.6.2 &quot;Object Internal Methods and Internal Data Properties&quot;,
+in Table 9, the header for column 2 is &quot;Value Type Domain&quot;.
+
+For consistency with Table 8, change this to &quot;Signature&quot;.
+
+---
+
+Also, the other section 8.1.6.2 has a sentence:
+    The “Value Type Domain” columns of the following tables ...
+but there are no following tables, let alone ones with a &quot;Value Type Domain&quot; column. (The only other occurrence of the phrase is in the Scrapyard.)
+
+Delete that whole paragraph?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2917</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-30 15:13:09 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

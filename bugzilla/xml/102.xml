@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>102</bug_id>
+          
+          <creation_ts>2011-05-20 10:35:00 -0700</creation_ts>
+          <short_desc>Coverage: 15.3.5.4: missing a check for &apos;P is &quot;arguments&quot;&apos; under Strict Mode (after step 3)</short_desc>
+          <delta_ts>2012-02-29 09:06:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>216</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-20 10:35:30 -0700</bug_when>
+    <thetext>Noticed that 15.3.5.4 disallows:
+   &quot;use strict&quot;;
+   function f() {}
+   f.caller;
+
+but allows:
+   &quot;use strict&quot;;
+   function f() {}
+   f.arguments;
+
+15.3.5 states:
+    Function instances that correspond to strict mode functions (13.2) and function instances created using the Function.prototype.bind method (15.3.4.5) have properties named caller and arguments that throw a TypeError exception.
+
+
+From this, it seems like maybe it was also intended to ban accessing the arguments property in the manner described above from Strict Mode?  If not, could the language in 15.3.5 be clarified to state that TypeError exceptions are not thrown for arguments property reads?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-13 16:19:21 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; Noticed that 15.3.5.4 disallows:
+&gt;    &quot;use strict&quot;;
+&gt;    function f() {}
+&gt;    f.caller;
+
+No, this isn&apos;t what 15.3.5.4 is about.  It disallows this:
+
+function f() {&quot;use strict&quot;; return g();}
+function g() {/* not strict */ return g.caller;
+         //except for 15.3.5.4 would return f
+&gt; 
+&gt; but allows:
+&gt;    &quot;use strict&quot;;
+&gt;    function f() {}
+&gt;    f.arguments;
+
+will throw because of 13.2 step c
+
+&gt; 
+&gt; 15.3.5 states:
+&gt;     Function instances that correspond to strict mode functions (13.2) and
+&gt; function instances created using the Function.prototype.bind method (15.3.4.5)
+&gt; have properties named caller and arguments that throw a TypeError exception.
+
+no this refers to 13.2 step 19, not 15.3.5.4
+Note that g in my example above is not a strict function
+&gt; 
+&gt; 
+&gt; From this, it seems like maybe it was also intended to ban accessing the
+&gt; arguments property in the manner described above from Strict Mode?  If not,
+&gt; could the language in 15.3.5 be clarified to state that TypeError exceptions
+&gt; are not thrown for arguments property reads?
+
+spec. seems correct to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>291</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-13 16:22:07 -0700</bug_when>
+    <thetext>not a bug</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>292</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-13 16:22:42 -0700</bug_when>
+    <thetext>not a bug</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>304</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-15 15:07:25 -0700</bug_when>
+    <thetext>Reassigning to myself as I think we&apos;re missing coverage for the scenario Allen describes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>540</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-05 14:16:02 -0800</bug_when>
+    <thetext>Indeed, we were completely missing coverage for this scenario.  I&apos;ll try to add some tests for this by the time Microsoft releases it&apos;s next set of test contributions to test262.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>708</commentid>
+    <comment_count>6</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:06:15 -0800</bug_when>
+    <thetext>Tests are now live on test262.ecmascript.org.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

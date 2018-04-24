@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2506</bug_id>
+          
+          <creation_ts>2014-02-07 04:20:00 -0800</creation_ts>
+          <short_desc>12.1.5, 14.2: Tweak grammar to allow CoverInitialisedName and duplicate PropertyNames in ArrowParameters?</short_desc>
+          <delta_ts>2014-04-06 11:30:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7200</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-07 04:20:34 -0800</bug_when>
+    <thetext>As far as I can see, the following examples are not allowed due to the early errors semantics in 12.1.5.1:
+---
+// Duplicate property name &quot;x&quot; in object literal in strict mode
+&quot;use strict&quot;; ({x: a, x: b}) =&gt; {}
+
+// Missing &apos;:&apos; after property name &quot;x&quot; in object literal
+({x = 0}) =&gt; {}
+({x = 0}, {y = 0}) =&gt; {}
+---
+
+Whereas this code is allowed, because the object parameter is first parsed as an destructuring assignment pattern:
+---
+&quot;use strict&quot;; ({x: a, x: b} = {}) =&gt; {}
+
+({x = 0} = {}) =&gt; {}
+({x = 0} = {}, {y = 0} = {}) =&gt; {}
+---
+
+It may make sense to change the grammar to allow the first examples, but I&apos;m not really sure right now how much effort this requires...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7208</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-07 10:44:18 -0800</bug_when>
+    <thetext>Fixed in rev23 editor&apos;s draft.
+
+Added clarifying text in 12.1.5.1:
+
+In addition to describing an actual object initializer the ObjectLiteral productions are also used as a cover grammar for ObjectAssignmentPattern (12.13.5). and may be recognized as part of a CoverParenthesisedExpressionAndArrowParameterList. When ObjectLiteral appears in a context where ObjectAssignmentPattern is required the following Early Error rules are not applied. In addition, they are not applied when initially parsing a CoverParenthesisedExpressionAndArrowParameterList.
+
+Does that work?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7209</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-07 11:10:52 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Does that work?
+
+Yes, I think so. It&apos;s now more clear that the early error restrictions apply if and only if the production is used to describe an object initialiser.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7541</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:01 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

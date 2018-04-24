@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>635</bug_id>
+          
+          <creation_ts>2012-08-30 02:01:00 -0700</creation_ts>
+          <short_desc>11.1: &quot;[Lexical goal InputElementRegExp]&quot; circularity</short_desc>
+          <delta_ts>2015-02-19 19:11:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1541</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-30 02:01:48 -0700</bug_when>
+    <thetext>In 11.1 &quot;Primary Expressions&quot;,
+under &quot;Syntax&quot;,
+in the production for PrimaryExpression,
+one of the many alternatives is:
+    [Lexical goal InputElementRegExp] RegularExpressionLiteral
+
+According to 5.1.6, this means that the RegularExpressionLiteral token must be lexically recognized using the goal symbol InputElementRegExp. Everywhere else in the production, the absence of such a phrase indicates that the default lexical goal symbol (i.e., InputElementDiv) is used.
+
+But this is circular. In order to know which lexical goal symbol to use to get the next token, you need to already know whether the next token is a RegularExpressionLiteral.
+
+Formerly, the choice of lexical goal symbol was determined by &quot;syntactic grammar context&quot; (specifically, whether it permitted a leading division or division-assignment operator). So, in the context of &quot;ready to parse a PrimaryExpression&quot;, the division operators would not be permitted, and so the next token would be obtained via the InputElementRegExp goal symbol. Note that this goal symbol would be chosen based solely on the (left-)context, with no knowledge of any input to the right of the current position. I don&apos;t think there&apos;s any reason to depart from that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1542</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 12:52:22 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft.
+
+moved lexical goal annotation to 
+   MemberExpression : PrimaryExpression
+
+Also tweaked use of lexical goal annotation for in specification of TemplateStrings.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1551</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-30 13:30:04 -0700</bug_when>
+    <thetext>On a related note, section 7 says:
+    &quot;The InputElementDiv goal symbol is the default goal symbol and is used
+    in those syntactic grammar contexts where a leading division (/) or
+    division-assignment (/=) operator is permitted.&quot;
+But this is not entirely true any more. It is used in *some* of those contexts, but not all, since now InputElementQuasiTail must be used in some of those contexts.
+
+For instance, consider the context after having processed this much input:
+    x = `foo${ a 
+Certainly, division and division-assignment operators are permitted in that context (e.g.
+    x = `foo${ a / 2 }`
+is a valid continuation of the given prefix), but InputElementDiv should not be used, because if the continuation happens to be:
+    x = `foo${ a }`
+InputElementDiv would recognize the &apos;}&apos; as RightBracePunctuator, which is not syntactically valid. Instead, InputElementQuasiTail should be used.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1553</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-30 13:30:48 -0700</bug_when>
+    <thetext>To address the above points, I think you should:
+(a) drop the &quot;[Lexical goal]&quot; notation, and
+(b) change the paragraph in section 7 to (something like):
+    
+    If the context allows RegularExpressionLiteral, use InputElementRegExp.
+
+    If the context allows QuasiMiddle or QuasiTail, use InputElementQuasiTail.
+
+    Otherwise, use InputElementDiv.
+
+(And you can note that the first two possibilities are [or should be] mutually exclusive.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1557</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-30 13:39:38 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; moved lexical goal annotation to 
+&gt;    MemberExpression : PrimaryExpression
+
+This doesn&apos;t eliminate the circularity, merely relocates it. (In order to know which lexical goal symbol to use to get the next token, you&apos;d have to already know whether the following input is a PrimaryExpression [vs a FunctionExpression or MemberExpression].)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1559</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 14:55:51 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; (In reply to comment #1)
+&gt; &gt; moved lexical goal annotation to 
+&gt; &gt;    MemberExpression : PrimaryExpression
+&gt; 
+&gt; This doesn&apos;t eliminate the circularity, merely relocates it. (In order to know
+&gt; which lexical goal symbol to use to get the next token, you&apos;d have to already
+&gt; know whether the following input is a PrimaryExpression [vs a
+&gt; FunctionExpression or MemberExpression].)
+
+I don&apos;t think there is actually a circularity problem.  It&apos;s probably because we have different understandings of the meaning of alternative lexical goal symbols. Let look at your example:
+   x = `foo${ a / 2 }`
+If the current context is
+   x = `foo${ a 
+then we must be deep into the expression grammar (we&apos;ve just recognized &quot;a&quot; as a PrimaryExpression) and we used InputElementDiv to tokenize the next character which would have been / recognized as a DevPunctuator.  The expression parse would continue as expected popping back to MultiplicativeExpression.  But lets say that instead the next token was RightBracePunctuator.  That token doesn&apos;t appear in the expression grammar at this position, so we have a complete Expression and the parse would pop all the way back out of Expression to the production:
+TemplateLiteral : TemplateHead Expression [Lexical goal InputElementTemplateTail] TemplateSpans
+
+(note the StringTemplate grammar has changed in various ways since the last release draft)
+
+This production says that to proceed past the Expression we need to look at the next token using the InputElementTemplateTail lexical goal symbol. So we retokenize starting at the current accepted input point (even though we had already tokenized using InputElementDiv).  This time we get the TemplateTail }` as the next token and that will successfully match within TemplateSpans.
+
+Do you seen any issues with this interpretation.  What would need to be said in 5.1.6 to make this interpretation clearer?
+
+I like the [Lexical goal] annotation because it explicitly identifies the contexts where alternative lexical goals must be used.  Previous, that was left to the reader to figure out for them selves.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1573</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-08-30 17:17:29 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; 
+&gt; I don&apos;t think there is actually a circularity problem.
+&gt; ...
+&gt; But lets say that instead the next token was RightBracePunctuator.
+&gt; That token doesn&apos;t appear in the expression grammar at this position,
+&gt; so we have a complete Expression
+
+If the lookahead token isn&apos;t valid in the current context, a conventional parser would report a syntax error.
+
+&gt; and the parse would pop all the way back out of Expression to the
+&gt; production:
+&gt; TemplateLiteral : TemplateHead Expression [Lexical goal
+&gt; InputElementTemplateTail] TemplateSpans
+
+(Your wording (&quot;pop back out to a production&quot;) suggests that you&apos;re imagining an LL(k) or recursive-descent parser, which isn&apos;t appropriate to the ECMAScript grammar.)
+
+&gt; This production says that to proceed past the Expression we need to look at
+&gt; the next token using the InputElementTemplateTail lexical goal symbol. So we
+&gt; retokenize starting at the current accepted input point (even though we had
+&gt; already tokenized using InputElementDiv).
+
+Ah, well, retokenizing is certainly an odd thing to expect of a parser/lexer. And unnecessary, since you could have done the correct tokenization in the first place (i.e., using InputElementTemplateTail).
+
+&gt; This time we get the TemplateTail }` as the next token and that will
+&gt; successfully match within TemplateSpans.
+&gt; 
+&gt; Do you seen any issues with this interpretation.
+
+In addition to the ones given above, there&apos;s the fact that the model of parsing/lexing that you have in mind is different from what&apos;s described in previous drafts/editions.
+
+Moreover, you didn&apos;t actually address my claim of circularity. (My example wasn&apos;t there to show circularity, but to show the no-longer-correctness of a statement in clause 7.) Circularity arises when different right-hand-sides of a production begin with different (explicit or implicit)&quot;lexical goals&quot; (as happens for PrimaryExpression): the correct choice of lexical goal symbol depends on what&apos;s next, but you can&apos;t know what&apos;s next until you tokenize it. Here, you can&apos;t &quot;pop back to a production&quot; where there&apos;s only one &quot;next&quot; lexical goal.
+
+(At this point, you might suggest trying them both and going with whatever&apos;s valid. But that&apos;s another complication, and another step away from a conventional parsng model.)
+
+And it&apos;s all unnecessary, when you could simply adopt my suggestion in comment #3.
+
+&gt; What would need to be said in 5.1.6 to make this interpretation clearer?
+
+Well, you&apos;d probably have to describe your parser/lexer model in more detail. Of course, I&apos;m not suggesting you do so, I&apos;m suggesting that you not use that model.
+
+&gt; I like the [Lexical goal] annotation because it explicitly identifies the
+&gt; contexts where alternative lexical goals must be used.
+
+I can understand the attraction, but I think it&apos;s misguided. You appear to be equating &quot;a syntactic context&quot; with &quot;a point in a production&quot;, but in general, a syntactic context corresponds to many points in many productions. (Think of a state in the LR automaton.)
+
+&gt; Previous, that was left to the reader to figure out for them selves.
+
+I think it would suffice to add Notes in a couple Syntax sections. E.g., in 11.1, remind the reader that in any context where RegularExpressionLiteral is allowed (and thus, where PrimaryExpression is allowed, etc), the next token must be found using InputElementRegExp as the lexical goal symbol.
+
+In summary, I believe that the introduction of &quot;[Lexical goal]&quot; notations unnecesarily complicates the parsing model needed to support/use them, and thus actually makes it harder for the reader to figure out.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1731</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:27 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12891</commentid>
+    <comment_count>8</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-17 22:01:51 -0800</bug_when>
+    <thetext>(Maybe it was fixed in rev10, but it isn&apos;t fixed in rev33.)
+
+(A)
+In 12.3 &quot;Left-Hand-Side Expressions&quot;, the production for MemberExpression
+has a lexical goal of InputElementRegExp at the start of its first RHS,
+and (implicitly, according to 5.1.5) a lexical goal of InputElementDiv at the start of all its other RHSs. Clearly, this is a conflict as to which lexical goal to use in this context (the start of a MemberExpression).
+
+And in 14.4 &quot;Generator Function Definitions&quot;, consider the production for YieldExpression. After a &apos;yield&apos; keyword, what lexical goal should be used to get the next token? RHS #2 says InputElementRegExp, RHS #1 says nothing, so presumably the default InputElementDiv should be used. Again, a conflict.
+
+(Please note that I&apos;m not saying there&apos;s something ambiguous or unparsable about the grammar itself. I&apos;m just saying that the &quot;Lexical goal&quot; annotations don&apos;t make sense.)
+
+
+(B)
+In 11 &quot;ECMAScript Language: Lexical Grammar&quot;, this sentence still appears:
+    The InputElementDiv goal symbol is the default goal symbol and is used
+    in those syntactic grammar contexts where a leading division (/) or
+    division-assignment (/=) operator is permitted.
+
+This sentence is not true: there are contexts permitting division and
+division-assignment in which InputElementDiv should not be used and
+InputElementTemplateTail *must* be used.
+
+
+My proposed solution to both of the above is still comment #3 (changing &quot;Quasi&quot; to &quot;Template&quot;, of course).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12915</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 10:31:53 -0800</bug_when>
+    <thetext>sold, go rid of [lexical goal] annotation and updated clause 11 language as suggest.
+
+fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12917</commentid>
+    <comment_count>10</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 11:47:40 -0800</bug_when>
+    <thetext>Thanks!
+
+But mulling over the YieldExpression example, I think I&apos;ve found a deeper problem, which I&apos;ll raise separately.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13126</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:06 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

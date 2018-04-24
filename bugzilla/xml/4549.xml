@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4549</bug_id>
+          
+          <creation_ts>2015-12-09 08:54:00 -0800</creation_ts>
+          <short_desc>Special [[GetOwnPropertyName]] method for functions?</short_desc>
+          <delta_ts>2015-12-15 12:13:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>a.d.bergi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14904</commentid>
+    <comment_count>0</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-12-09 08:54:34 -0800</bug_when>
+    <thetext>[§9.2 ECMAScript Function Objects](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects) contains the sentence (in the last paragraph):
+
+| ECMAScript function objects whose code is not strict mode code have the
+| [[GetOwnProperty]] internal method defined here.
+
+and also [§9.4.1 Bound Function Exotic Objects](http://www.ecma-international.org/ecma-262/6.0/#sec-bound-function-exotic-objects) says
+
+| Unlike ECMAScript function objects, bound function objects do not use
+| an alternative definition of the [[GetOwnProperty]] internal methods.
+
+Wait what? I could not find any [[GetOwnProperty]] method for functions in the spec, so at least the &quot;defined here part&quot; is wrong :-) I see that we have customisations of the ordinary object one for proxies, arguments objects, namespaces, integer-indexed objects and strings, but I can&apos;t even imagine why we would have a custom one for functions.
+
+(not sure whether this is an editorial or technical issue)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14905</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-12-09 10:18:57 -0800</bug_when>
+    <thetext>This is a leftover from ES5. 9.2 is already updated (bug 4458, https://github.com/tc39/ecma262/commit/f469b0cb6162cf06524a09ef7e768a5ecd2e5db4), but apparently I&apos;ve missed the note in 9.4.1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14907</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-12-15 12:13:26 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (5fd2e72).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

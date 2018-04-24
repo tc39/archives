@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3753</bug_id>
+          
+          <creation_ts>2015-02-05 10:35:00 -0800</creation_ts>
+          <short_desc>6.1.7.2: the object that an internal method is called upon</short_desc>
+          <delta_ts>2015-02-19 19:10:56 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12121</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-05 10:35:05 -0800</bug_when>
+    <thetext>In 6.1.7.2 &quot;Object Internal Methods and Internal Slots&quot;,
+it seems to me that there&apos;s a need for a paragraph something like this:
+
+    When an internal method is invoked, the algorithm is provided with an
+    object referred to as &quot;the object that the internal method is called upon&quot;
+    or also &quot;the target of the invocation&quot;. When a specification uses wording
+    such as &quot;invoke object X&apos;s [[Foo]] internal method&quot;, it means to invoke that
+    method, providing X as the object that the internal method is called upon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12183</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-06 08:05:34 -0800</bug_when>
+    <thetext>(Personally, I prefer &quot;the target of the invocation&quot;. It&apos;s shorter, more concrete, more searchable, and doesn&apos;t end in a preposition.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12491</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 15:30:04 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+was</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13056</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:56 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

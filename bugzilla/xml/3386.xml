@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3386</bug_id>
+          
+          <creation_ts>2014-11-15 18:18:00 -0800</creation_ts>
+          <short_desc>Clarify parsing of function bodies when rest parameter is used</short_desc>
+          <delta_ts>2014-12-03 12:16:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Caitlin Potter [:caitp]">caitpotter88</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10639</commentid>
+    <comment_count>0</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2014-11-15 18:18:45 -0800</bug_when>
+    <thetext>The implementation of rest parameters in SpiderMonkey explicitly forbids a reference to the &quot;arguments&quot; binding within the body of a function literal with a rest parameter. As such,  the script `function fn(a, b, ...rest) { arguments; }` yields a SyntaxError.
+
+I am not seeing where this is supported by the specification, as I mention in https://bugzilla.mozilla.org/show_bug.cgi?id=574132.
+
+I would like the appropriate behaviour to be clarified so that the SpiderMonkey implementation can be made spec-compliant (either by fixing the spec, or fixing SM), and so that a spec-correct version can be implemented in V8.
+
+I am not positive if treating this as a static error is necessarily the best approach to take, but if that is the intent then it should be spelled out explicitly.
+
+This is not strictly a technical issue, but an inconsistency between implementation reality and the text of the draft, which may require new language for incorporating the behaviour of the implementation, or otherwise strengthening the position of the current draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10640</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-16 09:37:36 -0800</bug_when>
+    <thetext>(In reply to Caitlin Potter (:caitp) from comment #0)
+&gt; The implementation of rest parameters in SpiderMonkey explicitly forbids a
+&gt; reference to the &quot;arguments&quot; binding within the body of a function literal
+&gt; with a rest parameter. As such,  the script `function fn(a, b, ...rest) {
+&gt; arguments; }` yields a SyntaxError.
+
+That&apos;s not correct according the current ES6 drafts.  See http://people.mozilla.org/~jorendorff/es6-draft.html#sec-functiondeclarationinstantiation which defines exactly when a &apos;arguments&apos; binding is created.
+
+&gt; 
+&gt; I am not seeing where this is supported by the specification, as I mention
+&gt; in https://bugzilla.mozilla.org/show_bug.cgi?id=574132.
+&gt; 
+&gt; I would like the appropriate behaviour to be clarified so that the
+&gt; SpiderMonkey implementation can be made spec-compliant (either by fixing the
+&gt; spec, or fixing SM), and so that a spec-correct version can be implemented
+&gt; in V8.
+&gt; 
+Do you see anything unclear about the specification text referenced above? I believe it accurately reflects TC39&apos;s intended semantics.
+
+&gt; I am not positive if treating this as a static error is necessarily the best
+&gt; approach to take, but if that is the intent then it should be spelled out
+&gt; explicitly.
+
+It&apos;s not supposed to be an error. 
+&gt; 
+&gt; This is not strictly a technical issue, but an inconsistency between
+&gt; implementation reality and the text of the draft, which may require new
+&gt; language for incorporating the behaviour of the implementation, or otherwise
+&gt; strengthening the position of the current draft.
+
+The spec has evolves over various drafts and early implementations need to follow the revisions and be prepared to update them has the spec. evolved.  Function declaration instantiation, in particular, has changed several times but is now quite stable.  All implementations should review their conformance to the current specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10642</commentid>
+    <comment_count>2</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2014-11-16 10:46:28 -0800</bug_when>
+    <thetext>Thanks for the clarification of intent. I was thinking it might not hurt to add another &quot;**NOTE: Rest parameters do not preclude Arguments objects&quot; somewhere in this case, just to help explicitly state this.
+
+I appreciate that this should not be a static error, because it seems easier to implement this way.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

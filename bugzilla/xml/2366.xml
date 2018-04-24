@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2366</bug_id>
+          
+          <creation_ts>2013-12-08 19:39:00 -0800</creation_ts>
+          <short_desc>Extend　Array sort</short_desc>
+          <delta_ts>2015-10-15 17:10:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>oao.hikaru.oao</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6903</commentid>
+    <comment_count>0</comment_count>
+    <who name="">oao.hikaru.oao</who>
+    <bug_when>2013-12-08 19:39:01 -0800</bug_when>
+    <thetext>I think it will be more useful if we become able to choose stability of the sort method.
+
+Array.prototype.sort(comparefn[, isstable])</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14809</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:10:52 -0700</bug_when>
+    <thetext>Proposals should use the proposal process documented here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

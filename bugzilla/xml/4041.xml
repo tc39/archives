@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4041</bug_id>
+          
+          <creation_ts>2015-02-20 13:36:00 -0800</creation_ts>
+          <short_desc>15.1 super and new.target should not be allowed in direct evals</short_desc>
+          <delta_ts>2015-07-10 08:35:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>dslomov</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13212</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-20 13:36:06 -0800</bug_when>
+    <thetext>15.1 explicitly allows for  &apos;super&apos; and &apos;new.taget&apos; to appear within direct eval&apos;ed scripts within function bodies.
+
+This is probably a bad idea that either is going to add complexity to implementations or perhaps limit optimization opportunities. 
+
+I think we should remove the &quot;unless...&quot; clause&apos;s in the 3rd and 4th bullets of 15.1.
+
+(BTW, if somebody really needs to eval some code that needs to use super or &apos;new.target&apos; there are workarounds such as:
+
+let nt = ()=&gt;new.target;
+let superMethodCall = (m,...args)=&gt;super[m](...args);
+
+instead of:
+eval(&quot;if (!new.target) super.foo();&quot;);
+
+says:
+eval(&quot;if (!nt()) superMethodCall(&apos;foo&apos;);&quot;);</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13217</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-02-21 01:27:37 -0800</bug_when>
+    <thetext>What optimization opportunities should we be worried about here? Keep in mind that the presence of direct eval already inhibits virtually every optimization we&apos;ve got. Methods that do not call direct eval will be unaffected either way, right?
+
+As for direct eval implementation complexity, &apos;new.target&apos; and &apos;super&apos; don&apos;t seem any worse than &apos;this&apos; and &apos;arguments&apos;, and given that we have to implement them all in arrow functions anyway, it probably won&apos;t be much harder to add direct eval support.
+
+Admittedly, for any given weird corner case, throwing a SyntaxError is even easier.
+
+----
+
+I&apos;d consider dropping [[NeedsSuper]] and NeedsSuperBinding altogether and calling MakeMethod on every method. The fact that this can be skipped for methods that don&apos;t use &apos;super&apos; is worth a NOTE, but not normative text, in my view.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13255</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-23 08:12:52 -0800</bug_when>
+    <thetext>One of the problems (when implementing new.target) is that we need to statically know whether the function will need access to the NewTarget. We could treat the presence of direct eval the same way we would do new.target though.
+
+As an end user I think we should allow super and new.target in direct evals.
+
+----
+
+I agree with Jason, I don&apos;t think the spec needs to mention [[NeedsSuper]]. An implementation can skip adding the [[HomeObject]] as long as it isn&apos;t observable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13328</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 15:32:40 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+got rid of NeedsSuperBinding and make all MakeMethod calls unconditional
+
+keeping the 15.1 early errors</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13494</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:14 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

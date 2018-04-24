@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1938</bug_id>
+          
+          <creation_ts>2013-09-27 07:48:00 -0700</creation_ts>
+          <short_desc>23.4.3.5: Add type check for input argument in WeakSet.prototype.has</short_desc>
+          <delta_ts>2013-10-29 09:45:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5465</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 07:48:31 -0700</bug_when>
+    <thetext>23.4.3.5  WeakSet.prototype.has ( value )
+
+Add after step 4:
+
+5. If Type(value) is not Object, then throw a TypeError exception.
+
+
+Also see &quot;23.3.3.5  WeakMap.prototype.has ( key )&quot; which already does this input validation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5486</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 11:58:57 -0700</bug_when>
+    <thetext>I believe that there was a desire that non-object keys simply produce false.  This algorithm does that but in rev19 I made it an explicit step of the algorithm.
+
+I also changed WeakMap to have the same behavior.
+
+MarkM should be able to verify the requirement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5490</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 12:07:34 -0700</bug_when>
+    <thetext>Hmm, I&apos;d assume that this implication holds:
+  weakmap.has(0) = false → weakmap.get(0) = undefined</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5491</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 12:10:14 -0700</bug_when>
+    <thetext>I meant that implication should hold if `has()` returns false instead of throwing an exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5501</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 12:38:58 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; I meant that implication should hold if `has()` returns false instead of
+&gt; throwing an exception.
+
+That sounds right for Maps.  But because Sets don&apos;t have a get so it isn&apos;t necessary for them.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5503</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 12:49:05 -0700</bug_when>
+    <thetext>Ok, instead of `get()` use `delete()` which is present for both, Maps and Sets:
+  weakmap.has(0) = false → weakmap.delete(0) = false</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5609</commentid>
+    <comment_count>6</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-09-27 17:45:07 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; I believe that there was a desire that non-object keys simply produce false. 
+&gt; This algorithm does that but in rev19 I made it an explicit step of the
+&gt; algorithm.
+&gt; 
+&gt; I also changed WeakMap to have the same behavior.
+&gt; 
+&gt; MarkM should be able to verify the requirement.
+
+WeakSet.prototype.has looks correct, but WeakMap.prototype.has contains
+
+6. If Type(key) is not Object, then throw a TypeError exception.
+
+whereas it should be &quot;then return false&quot;.
+
+Likewise for WeakMap.prototype.delete and WeakMap.prototype.get.
+
+6. If Type(key) is not Object, then throw a TypeError exception.
+
+.delete should return false in this case, just as for an absent key. .get should return false for this case, just as for an absent key.
+
+Obviously, the throw a TypeError in .set is correct.
+
+Back to WeakSet:
+
+.delete&apos;s &quot;If Type(value) is not Object, then throw a TypeError exception.&quot; should return false, just as for an absent value.
+
+.has is correct.
+
+The throw in .add is correct.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5901</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-14 15:14:50 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+
+&gt; 
+&gt; Likewise for WeakMap.prototype.delete and WeakMap.prototype.get.
+&gt; 
+&gt; 6. If Type(key) is not Object, then throw a TypeError exception.
+&gt; 
+&gt; .... .get
+&gt; should return false for this case, just as for an absent key.
+&gt; 
+You presumably meant undefined for the get case</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5902</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-14 15:16:08 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+as per Mark&apos;s suggestions</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6038</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:00 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

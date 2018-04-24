@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3208</bug_id>
+          
+          <creation_ts>2014-09-02 14:57:00 -0700</creation_ts>
+          <short_desc>String.prototype.substr/slice language mistreats -0 as start</short_desc>
+          <delta_ts>2014-10-14 15:17:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10117</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-02 14:57:21 -0700</bug_when>
+    <thetext>Minor language nitpick in step 8:
+
+8. If intStart is negative, then let intStart be max(size + intStart,0).
+
+where |intStart| is |ToInteger(start)|, that being the zeroth argument passed to the method.  Thus it&apos;s possible to get -0 here, so &quot;negative&quot; isn&apos;t the right description to use.  &quot;less than zero&quot; would seem to do the trick.
+
+(ES5 had &quot;If Result(2) is positive or zero, use Result(2); else use max(Result(4)+Result(2),0).&quot; so you definitely don&apos;t want -0 =&gt; size, but rather -0 =&gt; 0.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10121</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-02 18:14:54 -0700</bug_when>
+    <thetext>Same issue with String.prototype.slice, except there wrt both start *and* end arguments.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10160</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-05 16:23:03 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+also fixed a number of additional occurrences</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10395</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:46 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

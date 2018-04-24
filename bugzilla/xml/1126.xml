@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1126</bug_id>
+          
+          <creation_ts>2012-12-11 17:37:00 -0800</creation_ts>
+          <short_desc>Missing @onlyStrict annotation in 11.13.1-4-27-s</short_desc>
+          <delta_ts>2013-05-08 08:45:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3006</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-11 17:37:40 -0800</bug_when>
+    <thetext>11.13.1-4-27-s requires strict mode support, but the @onlyStrict annotation is missing in the preamble.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3715</commentid>
+    <comment_count>1</comment_count>
+      <attachid>33</attachid>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-08 08:45:07 -0700</bug_when>
+    <thetext>Created attachment 33
+add missing annotation</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>33</attachid>
+            <date>2013-05-08 08:45:00 -0700</date>
+            <delta_ts>2013-05-08 08:45:07 -0700</delta_ts>
+            <desc>add missing annotation</desc>
+            <filename>bug367.patch</filename>
+            <type>text/plain</type>
+            <size>844</size>
+            <attacher name="Trevor Baker">trbaker</attacher>
+            
+              <data encoding="base64">IyBIRyBjaGFuZ2VzZXQgcGF0Y2gKIyBVc2VyIFRyZXZvciBCYWtlciA8dHJiYWtlckBhZG9iZS5j
+b20+CiMgRGF0ZSAxMzY4MDI3NzQxIDE0NDAwCiMgTm9kZSBJRCAyOTY1ZWU2NThmODFmNmIyZDA3
+NTlhMGFhMzczYmViOWU0MTZkYzQyCiMgUGFyZW50ICA1NDM4NzU5NTMxZDI5OGMzZGJmODNjNjg5
+MzE5NzBmMzYzOTk5MDkzCkJ1ZyAxMTI2IC0gTWlzc2luZyBAb25seVN0cmljdCBhbm5vdGF0aW9u
+IGluIDExLjEzLjEtNC0yNy1zCi1hZGQgbWlzc2luZyBhbm5vdGF0aW9uCi12ZXJpZmllZCB0ZXN0
+IG9ubHkgcnVucyBpbiBzdHJpY3QgbW9kZSBub3cgYW5kIHBhc3NlZCB3aXRoIHNwaWRlcm1vbmtl
+eSwganNjIGFuZCB2OCBvbiBvc3gKCmRpZmYgLXIgNTQzODc1OTUzMWQyIC1yIDI5NjVlZTY1OGY4
+MSB0ZXN0L3N1aXRlL2NoMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTQtMjctcy5qcwotLS0gYS90
+ZXN0L3N1aXRlL2NoMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTQtMjctcy5qcwlUdWUgTWF5IDA3
+IDE1OjMxOjQxIDIwMTMgLTA0MDAKKysrIGIvdGVzdC9zdWl0ZS9jaDExLzExLjEzLzExLjEzLjEv
+MTEuMTMuMS00LTI3LXMuanMJV2VkIE1heSAwOCAxMTo0MjoyMSAyMDEzIC0wNDAwCkBAIC02LDYg
+KzYsNyBAQAogLyoqDQogICogQHBhdGggY2gxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtNC0yNy1z
+LmpzDQogICogQGRlc2NyaXB0aW9uIHNpbXBsZSBhc3NpZ25tZW50IHRocm93cyBUeXBlRXJyb3Ig
+aWYgTGVmdEhhbmRTaWRlIGlzIGEgcmVhZG9ubHkgcHJvcGVydHkgaW4gc3RyaWN0IG1vZGUgKEds
+b2JhbC51bmRlZmluZWQpDQorICogQG9ubHlTdHJpY3QNCiAgKi8NCiANCiANCg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

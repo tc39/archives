@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2484</bug_id>
+          
+          <creation_ts>2014-01-29 11:10:00 -0800</creation_ts>
+          <short_desc>9.2.4  [[Call]]: Use callee&apos;s realm for ToObject() operation</short_desc>
+          <delta_ts>2014-04-06 11:29:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7154</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-29 11:10:06 -0800</bug_when>
+    <thetext>9.2.4  [[Call]] (thisArgument, argumentsList), step 9.b.iii:
+
+&gt; Else if Type(thisArgument) is not Object, set the thisValue to ToObject(thisArg ument).
+
+At this point in the algorithm the `calleeContext` execution context is not yet activated, so it&apos;s not the top element of the execution context stack. That also means the ToObject() operation does not create a primitive wrapper from the callee&apos;s realm, but instead from the caller&apos;s realm. That seems to be wrong, the primitive wrapper should be an object of the callee&apos;s realm.
+
+
+test case:
+---
+let foreign = new Realm();
+foreign.eval(&quot;function returnThis() { return this }&quot;);
+foreign.global.returnThis.call(1).constructor === foreign.global.Number;
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7164</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-30 02:19:21 -0800</bug_when>
+    <thetext>And related: The realm for the ReferenceError thrown from NewFunctionEnvironment, step 5b, when [[Call]] calls NewFunctionEnvironment in step 9c.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7300</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-13 18:18:40 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+wrapper objects now come from callee Realm.
+
+I think its appropriate for the ReferenceError object to come from the caller Realm. The exception was triggered by a caller action  (making the call) and is being immediately thrown back to the caller.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7528</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:43 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

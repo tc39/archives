@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4307</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>9.2.5 ResolveLocale</short_desc>
+          <delta_ts>2015-04-29 09:05:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14262</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:28 -0700</bug_when>
+    <thetext>9.2.5 ResolveLocale (availableLocales, requestedLocales, options, relevantExtensionKeys,
+localeData)
+
+
+Step 6.c: Unsafe use of %StringProto_split%, user code may have added a custom `String.prototype[Symbol.split]` function.
+
+I don&apos;t know an elegant way to resolve this, the ugly workaround is:
+
+&gt; Let strExtension be StringCreate(extension, null).
+&gt; Perform CreateDataProperty(strExtension, %StringProto_toString%).
+&gt; Let extensionSubtags be Call(%StringProto_split%, strExtension, «&quot;-&quot;»).
+
+
+Step 6.d: Unnecessary ToObject call, invalid CreateArrayFromList call.
+Step 6.d: Change &quot;).&quot; to normal instead bold font.
+
+Step 11: Unnecessary ToObject call
+Step 11: Typo &quot;ArrayCreateFromList&quot; -&gt; &quot;CreateArrayFromList&quot;
+
+Step 12: Unnecessary ReturnIfAbrupt, CreateArrayFromList is not fallible.
+
+Step 13: Change &quot;).&quot;  to normal instead bold font.
+
+Steps 13-14: Merge steps
+&gt; Let len be ToLength(Get(rExtensionKeys, &quot;length&quot;)).
+
+
+Step 15.j.i: Typo &quot;%StringProto_indexOf%&quot; -&gt; &quot;%ArrayProto_indexOf%&quot; (`extensionSubtags` is an Array object).
+
+Step 15.j.ii.1: This Get() call only needs to happen if `keyPos + 1 &lt; extensionSubtagsLength`, otherwise an index greater than the array length is accessed which is observable if accessor properties on Array.prototype or anywhere along the prototype chain are present.
+
+Step 15.j.ii.2: Change `extensionSubtagsKeyPos` to italic font.
+
+Step 15.j.ii.3.b: Unsafe use of %StringProto_includes%, user code may have added `String.prototype[Symbol.match]`.
+
+Step 15.j.ii.4: Unsafe use of %StringProto_includes%, user code may have added `String.prototype[Symbol.match]`.
+Step 15.j.ii.4: Duplicate comma
+
+Step 15.k.iii: Unsafe use of %StringProto_includes%, user code may have added `String.prototype[Symbol.match]`.
+
+Step 16: Invalid use of CreateArrayFromList
+&gt; 16. If the number of elements in supportedExtension is greater than 2, then</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14276</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 20:16:35 -0700</bug_when>
+    <thetext>This requires a lot of changes to this operation that I&apos;m not comfortable making this late in process. All the &quot;unsafe&quot; markings don&apos;t make sense considering they are defined as the &quot;initial value&quot;—it&apos;s just a specification mechanism, so it doesn&apos;t matter if user code changes anything. This practice is something that Allen and I discussed at length before I started incorporating it into the document. I&apos;m going to fix the typos and smaller technical corrections, but I&apos;m not going to rewrite all the uses of intrinsics.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14277</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 20:30:49 -0700</bug_when>
+    <thetext>&gt;Step 6.d: Unnecessary ToObject call, invalid CreateArrayFromList call.
+&gt;Step 6.d: Change &quot;).&quot; to normal instead bold font.
+&gt;Step 11: Unnecessary ToObject call
+&gt;Step 11: Typo &quot;ArrayCreateFromList&quot; -&gt; &quot;CreateArrayFromList&quot;
+&gt;Step 12: Unnecessary ReturnIfAbrupt, CreateArrayFromList is not fallible.
+&gt;Step 13: Change &quot;).&quot;  to normal instead bold font.
+&gt; Steps 13-14: Merge steps
+&gt; Let len be ToLength(Get(rExtensionKeys, &quot;length&quot;)).
+&gt; Step 15.j.i: Typo &quot;%StringProto_indexOf%&quot; -&gt; &quot;%ArrayProto_indexOf%&quot; 
+&gt; (`extensionSubtags` is an Array object).
+
+&gt;Step 15.j.ii.1: This Get() call only needs to happen if `keyPos + 1 &lt; extensionSubtagsLength`, otherwise an index greater than the array length is accessed which is observable if accessor properties on Array.prototype or anywhere along the prototype chain are present.
+
+&gt; Step 16: Invalid use of CreateArrayFromList
+&gt; 16. If the number of elements in supportedExtension is greater than 2, then
+
+Fixed.
+
+
+
+ArrayProto_indexOf added to well known intrinsics extensions table.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14333</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 09:05:55 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #1)
+&gt; This requires a lot of changes to this operation that I&apos;m not comfortable
+&gt; making this late in process. All the &quot;unsafe&quot; markings don&apos;t make sense
+&gt; considering they are defined as the &quot;initial value&quot;—it&apos;s just a
+&gt; specification mechanism, so it doesn&apos;t matter if user code changes anything.
+&gt; This practice is something that Allen and I discussed at length before I
+&gt; started incorporating it into the document. I&apos;m going to fix the typos and
+&gt; smaller technical corrections, but I&apos;m not going to rewrite all the uses of
+&gt; intrinsics.
+
+9.2.5 ResolveLocale calls %StringProto_split% with Type(extension) = String.
+
+ES2015, rev38, 21.1.3.17 String.prototype.split, step 3:
+---
+3. If separator is not undefined, then
+  a. Let splitter be GetMethod(separator, @@split).
+  b. ReturnIfAbrupt(splitter).
+  c. If splitter is not undefined , then
+    i. Return Call(splitter, separator, «‍O, limit»).
+---
+
+So the String.prototype.split `separator` parameter is a string value. If a user has added `String.prototype[Symbol.split] = () =&gt; []`, step 3.a returns that arrow function and step 3.a.i is executed. That means the `extensionSubtags` variable in ResolveLocale is always an empty array - independent of its input parameters. 
+
+
+And I was wrong about %StringProto_includes%: %StringProto_includes% is safe to use, I didn&apos;t check that IsRegExp returns false for non-object types.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

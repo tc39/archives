@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2811</bug_id>
+          
+          <creation_ts>2014-05-03 12:43:00 -0700</creation_ts>
+          <short_desc>Grammar issues in Figure 2 of 25.2</short_desc>
+          <delta_ts>2014-07-18 14:25:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Oliver Hunt">oliver</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8111</commentid>
+    <comment_count>0</comment_count>
+    <who name="Oliver Hunt">oliver</who>
+    <bug_when>2014-05-03 12:43:43 -0700</bug_when>
+    <thetext>There are a few grammatical and spelling issues with Figure 2:
+
+* The bottom left note - &apos;The &quot;GeneratorFunction&quot; and &quot;Generator&quot; do not need global names...&apos;
+  Typo: &apos;declaered&apos; instead of &apos;declared&apos;
+* Middle note - &apos;(Generator) is neither callable or constructable...&apos; 
+  &apos;or&apos; should be &apos;nor&apos;
+* Bottom right note: - &apos;Each Generator function...&apos;
+  Second paragraph reads &apos;But the prototype be used to add additional behaviour...&apos;
+  should have &apos;to&apos; after &apos;prototype&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8123</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 11:18:43 -0700</bug_when>
+    <thetext>(Changing this bug&apos;s &apos;Product&apos; from &apos;ECMA-262&apos; to &apos;Draft for 6th Edition&apos;, since the Description refers to things that appear only in the 6th edition draft.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9260</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 12:15:14 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9271</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:25:05 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

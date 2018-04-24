@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>99</bug_id>
+          
+          <creation_ts>2011-04-29 11:39:00 -0700</creation_ts>
+          <short_desc>Modules: ImportSpecifierSet error?</short_desc>
+          <delta_ts>2015-07-10 08:34:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc>http://wiki.ecmascript.org/doku.php?id=harmony:modules</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>197</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-04-29 11:39:12 -0700</bug_when>
+    <thetext>Given:
+
+ImportSpecifierSet ::= ...
+                    ...
+                    | &quot;{&quot; (ImportSpecifier (&quot;,&quot; ImportSpecifier)*)? &quot;,&quot;? &quot;}&quot;
+
+this leads you to be able to write
+
+import modexp.{}
+
+What is the point in allowing an empty set? Shouldn&apos;t the grammar be?
+
+ImportSpecifierSet ::= ...
+                    ...
+                    | &quot;{&quot; ImportSpecifier (&quot;,&quot; ImportSpecifier)* &quot;,&quot;? &quot;}&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5886</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 12:20:02 -0700</bug_when>
+    <thetext>no longer applicable to ES6 module features</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

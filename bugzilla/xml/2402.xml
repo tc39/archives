@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2402</bug_id>
+          
+          <creation_ts>2013-12-13 11:36:00 -0800</creation_ts>
+          <short_desc>Function.prototype.bind/call/apply: optional thisArg</short_desc>
+          <delta_ts>2014-06-16 14:14:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>dmitry.soshnikov</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6950</commentid>
+    <comment_count>0</comment_count>
+    <who name="">dmitry.soshnikov</who>
+    <bug_when>2013-12-13 11:36:12 -0800</bug_when>
+    <thetext>Current ES6 draft:
+
+19.2.3.2 Function.prototype.bind (thisArg [, arg1 [, arg2, …]]),
+
+&quot;The bind method takes one or more arguments, thisArg and (optionally) arg1, arg2, ...&quot;
+
+19.2.3.3 Function.prototype.call (thisArg [ , arg1 [ , arg2, … ] ] )
+
+&quot;When the call method is called on an object func with argument thisArg and optional arguments arg1, arg2...&quot;
+
+Both sentences and function signatures define thisArg as &quot;required&quot;, however technically (to support `undefined` this value), thisArg is optional too, and it&apos;s possible to do: (function() {}).bind().
+
+Probably instead of &quot;takes&quot; should be written &quot;expects&quot;. And the signature can be edited to: Function.prototype.bind ([thisArg [, arg1 [, arg2, …]]])
+
+P.S.:
+
+In addition, this probably relates to 19.2.3.1 Function.prototype.apply (thisArg, argArray), which signature can be described with all optional parameters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8116</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 11:05:33 -0700</bug_when>
+    <thetext>(Changing this bug&apos;s &apos;Product&apos; from &apos;ECMA-262&apos; to &apos;Draft for 6th Edition&apos;, since the Description refers to &quot;Current ES6 draft&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8430</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 13:40:39 -0700</bug_when>
+    <thetext>Strictly speaking, all arguments to all functions are optional and default to undefined.  This is explained in clause 17.
+
+I did tweak the prologue language a bit for bind and call.
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8961</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:14:54 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>441</bug_id>
+          
+          <creation_ts>2012-07-04 09:33:00 -0700</creation_ts>
+          <short_desc>Adding the &quot;delay&quot; keyword</short_desc>
+          <delta_ts>2015-10-02 14:36:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Patrik Stutz">patrik.stutz</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1095</commentid>
+    <comment_count>0</comment_count>
+    <who name="Patrik Stutz">patrik.stutz</who>
+    <bug_when>2012-07-04 09:33:13 -0700</bug_when>
+    <thetext>Hi guys!
+
+Today, a really cool idea for a new keyword in JavaScript came to my mind. It&apos;s called &apos;delay&apos;.
+
+What does the delay keyword ?
+
+The delay keyword does nothing more than stop the execution of the current stack and immediately continues to the next task in the queue. But that&apos;s not all! Instead of discarding the stack, it adds it to the end of the queue. After all tasks before it are done, the stack continues to execute.
+
+What is it good for?
+
+delay could help make blocking code non-blocking while it still looks like synchronous code. A short example:
+
+setTimeout(function(){
+
+    console.log(&quot;two&quot;);
+
+},0);
+
+console.log(&quot;one&quot;);
+
+delay; //since there is currently another task in the queue, do this task first before continuing
+
+console.log(&quot;three&quot;);
+
+
+//Outputs: one, two, three
+
+This simple keyword would allow us to create a synchronous-looking code wich is asynchronous behind the scenes. Using node.js modules, for example, would no longer be impossible to use in the browser without trickery.
+
+There would be so many possibilites with such a keyword!
+
+What do YOU JAVASCRIPT DEVELOPERS think about it? What do you think can I do to bring this into the new ECMAscript Specification?
+
+Please disuss as much as you want! :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1096</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-04 09:44:19 -0700</bug_when>
+    <thetext>If you want to trigger discussion of this idea you should make a post. to es-discuss@mozilla.org
+
+If you aren&apos;t already a member of that discussion list you can enroll at https://mail.mozilla.org/listinfo/es-discuss/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1097</commentid>
+    <comment_count>2</comment_count>
+    <who name="Patrik Stutz">patrik.stutz</who>
+    <bug_when>2012-07-04 09:56:17 -0700</bug_when>
+    <thetext>I&apos;ve already done that, thanks. I hope it will succeed :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2083</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 11:13:35 -0700</bug_when>
+    <thetext>moved to Harmony product because this isn&apos;t a approved feature for ES6</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14748</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:16 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

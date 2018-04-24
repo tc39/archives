@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3279</bug_id>
+          
+          <creation_ts>2014-10-14 06:03:00 -0700</creation_ts>
+          <short_desc>8.1.1.4.14, 8.1.1.4.15, 8.1.1.4.16: Change HasBinding to HasOwnProperty</short_desc>
+          <delta_ts>2015-02-19 19:11:07 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10349</commentid>
+    <comment_count>0</comment_count>
+      <attachid>71</attachid>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-14 06:03:55 -0700</bug_when>
+    <thetext>Created attachment 71
+GlobalDeclarationInstantiation tests
+
+8.1.1.4.14 CanDeclareGlobalVar (N)
+8.1.1.4.15 CanDeclareGlobalFunction (N)
+8.1.1.4.16 CreateGlobalVarBinding (N, D)
+
+The HasBinding(N) calls should probably be changed to use HasOwnProperty(globalObject, N) instead. Strictly speaking this is a change from ES5, but all implementations tested (*) don&apos;t actually follow the ES5 definitions for global declaration instantiation, so I&apos;d say this is a safe change. Well, with the exception of JavaScriptCore which does follow the rules for &quot;var&quot; declarations, but not the rules for &quot;function&quot;. More details below. 
+
+(*) IE11, SpiderMonkey (latest), V8 (bleeding-edge latest), JavaScriptCore (latest), Nashorn (latest)
+
+
+Results when executing the attached test case.
+
+Expected results (with HasBinding):
+---
+Start tests...
+... done!
+---
+
+Expected results (with HasOwnProperty):
+---
+Start tests...
+testNonConfigDataProtoVar - assertion failed: got 0, expected -1
+testConfigAccProtoVar - assertion failed: got undefined, expected set &apos;configAccProtoVar&apos; to: 0
+testConfigAccProtoVar - assertion failed: got undefined, expected get &apos;configAccProtoVar&apos;
+... done!
+---
+
+IE11:
+---
+Start tests...
+testNonConfigDataFun - assertion failed: got false, expected true
+testNonConfigDataFun - assertion failed: got function nonConfigDataFun(){}, expected -1
+testNonConfigDataProtoVar - assertion failed: got 0, expected -1
+unexpected set &apos;configAccFun&apos; to: function configAccFun(){}
+unexpected set &apos;configAccFun&apos; to: function configAccFun(){}
+unexpected get &apos;configAccFun&apos;
+testConfigAccFun - assertion failed: got undefined, expected function
+testConfigAccProtoVar - assertion failed: got undefined, expected set &apos;configAccProtoVar&apos; to: 0
+testConfigAccProtoVar - assertion failed: got undefined, expected get &apos;configAccProtoVar&apos;
+... done!
+---
+
+SpiderMonkey:
+---
+Start tests...
+testNonConfigDataProtoVar - assertion failed: got 0, expected -1
+testConfigAccProtoVar - assertion failed: got undefined, expected set &apos;configAccProtoVar&apos; to: 0
+testConfigAccProtoVar - assertion failed: got undefined, expected get &apos;configAccProtoVar&apos;
+... done!
+---
+
+V8:
+---
+Start tests...
+testNonConfigDataProtoVar - assertion failed: got 0, expected -1
+testConfigAccProtoVar - assertion failed: got undefined, expected set &apos;configAccProtoVar&apos; to: 0
+testConfigAccProtoVar - assertion failed: got undefined, expected get &apos;configAccProtoVar&apos;
+... done!
+---
+
+JSC:
+---
+Start tests...
+testNonConfigDataFun - assertion failed: got false, expected true
+testNonConfigDataProtoFun - assertion failed: got number, expected function
+unexpected set &apos;configAccFun&apos; to: function configAccFun() {}
+unexpected get &apos;configAccFun&apos;
+testConfigAccFun - assertion failed: got undefined, expected function
+unexpected set &apos;configAccProtoFun&apos; to: function configAccProtoFun() {}
+unexpected get &apos;configAccProtoFun&apos;
+testConfigAccProtoFun - assertion failed: got undefined, expected function
+... done!
+---
+
+Nashorn:
+---
+Start tests...
+testNonConfigDataProtoVar - assertion failed: got 0, expected -1
+unexpected set &apos;configAccFun&apos; to: function configAccFun(){}
+unexpected get &apos;configAccFun&apos;
+unexpected get &apos;configAccFun&apos;
+testConfigAccFun - assertion failed: got undefined, expected function
+testConfigAccProtoVar - assertion failed: got undefined, expected set &apos;configAccProtoVar&apos; to: 0
+testConfigAccProtoVar - assertion failed: got undefined, expected get &apos;configAccProtoVar&apos;
+... done!
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12565</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 12:10:00 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13136</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:07 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>71</attachid>
+            <date>2014-10-14 06:03:00 -0700</date>
+            <delta_ts>2014-10-14 06:03:55 -0700</delta_ts>
+            <desc>GlobalDeclarationInstantiation tests</desc>
+            <filename>globaldecl.js</filename>
+            <type>application/x-javascript</type>
+            <size>4929</size>
+            <attacher name="André Bargull">andrebargull</attacher>
+            
+              <data encoding="base64">KGZ1bmN0aW9uIFRlc3RHbG9iYWxJbnN0YW50YXRpb24oKSB7DQp2YXIgaW5kaXJlY3RFdmFsID0g
+ZXZhbDsNCnZhciBnbG9iYWwgPSBpbmRpcmVjdEV2YWwoInRoaXMiKTsNCg0KLy8gV2UgYXNzdW1l
+IE9iamVjdC5wcm90b3R5cGUgaXMgcGFydCBvZiB0aGUgcHJvdG90eXBlIGNoYWluIG9mIHRoZSBn
+bG9iYWwgb2JqZWN0DQppZiAoIU9iamVjdC5wcm90b3R5cGUuaXNQcm90b3R5cGVPZihnbG9iYWwp
+KSB7DQogIHRocm93IG5ldyBFcnJvcigidW5zdXBwb3J0ZWQgcGxhdGZvcm0iKTsNCn0NCg0KZnVu
+Y3Rpb24gbG9nKCkgew0KICBpZiAodHlwZW9mIGNvbnNvbGUgIT09ICJ1bmRlZmluZWQiKSB7DQog
+ICAgY29uc29sZS5sb2cuYXBwbHkoY29uc29sZSwgYXJndW1lbnRzKTsNCiAgfSBlbHNlIHsNCiAg
+ICBwcmludC5hcHBseShudWxsLCBhcmd1bWVudHMpOw0KICB9DQp9DQoNCmZ1bmN0aW9uIHRlc3RD
+YXNlKHRlc3QpIHsNCiAgdmFyIHRlc3ROYW1lID0gdGVzdC5uYW1lICE9PSB2b2lkIDAgPyB0ZXN0
+Lm5hbWUgOiB0ZXN0LnRvU3RyaW5nKCkubWF0Y2goL15ccypmdW5jdGlvblxzKihcUyopXHMqXCgv
+KVsxXTsNCiAgcmV0dXJuIHsNCiAgICBhc3NlcnQ6IGZ1bmN0aW9uKGFjdHVhbCwgZXhwZWN0ZWQp
+IHsNCiAgICAgIGlmIChhY3R1YWwgIT09IGV4cGVjdGVkKSB7DQogICAgICAgICAgbG9nKHRlc3RO
+YW1lICsgIiAtIGFzc2VydGlvbiBmYWlsZWQ6IGdvdCAiICsgYWN0dWFsICsgIiwgZXhwZWN0ZWQg
+IiArIGV4cGVjdGVkKTsNCiAgICAgIH0NCiAgICB9LA0KICAgIGxvZ2dpbmdBY2Nlc3NvcjogZnVu
+Y3Rpb24obmFtZSwgYXJyYXkpIHsNCiAgICAgIGZ1bmN0aW9uIGdldEFjY2Vzc29yKCkgew0KICAg
+ICAgICBhcnJheS5wdXNoKCJnZXQgJyIgKyBuYW1lICsgIiciKTsNCiAgICAgIH0NCiAgICAgIGZ1
+bmN0aW9uIHNldEFjY2Vzc29yKHZhbHVlKSB7DQogICAgICAgIGFycmF5LnB1c2goInNldCAnIiAr
+IG5hbWUgKyAiJyB0bzogIiArIHZhbHVlKTsNCiAgICAgIH0NCiAgICAgIHJldHVybiB7Y29uZmln
+dXJhYmxlOiB0cnVlLCBnZXQ6IGdldEFjY2Vzc29yLCBzZXQ6IHNldEFjY2Vzc29yfTsNCiAgICB9
+LA0KICAgIHBvaXNvbmVkQWNjZXNzb3I6IGZ1bmN0aW9uKG5hbWUpIHsNCiAgICAgIGZ1bmN0aW9u
+IGdldEFjY2Vzc29yKCkgew0KICAgICAgICBsb2coInVuZXhwZWN0ZWQgZ2V0ICciICsgbmFtZSAr
+ICInIik7DQogICAgICB9DQogICAgICBmdW5jdGlvbiBzZXRBY2Nlc3Nvcih2YWx1ZSkgew0KICAg
+ICAgICBsb2coInVuZXhwZWN0ZWQgc2V0ICciICsgbmFtZSArICInIHRvOiAiICsgdmFsdWUpOw0K
+ICAgICAgfQ0KICAgICAgcmV0dXJuIHtjb25maWd1cmFibGU6IHRydWUsIGdldDogZ2V0QWNjZXNz
+b3IsIHNldDogc2V0QWNjZXNzb3J9Ow0KICAgIH0sDQogIH07DQp9DQoNCi8vIFRlc3QgMWE6IG5v
+bi1jb25maWd1cmFibGUgZGF0YSBwcm9wZXJ0eSBvbiBnbG9iYWwsIHRyeSB2YXIgZGVjbGFyYXRp
+b24NCmZ1bmN0aW9uIHRlc3ROb25Db25maWdEYXRhVmFyKCkgew0KICB2YXIgdGVzdCA9IHRlc3RD
+YXNlKGFyZ3VtZW50cy5jYWxsZWUpOw0KICBPYmplY3QuZGVmaW5lUHJvcGVydHkoZ2xvYmFsLCAi
+bm9uQ29uZmlnRGF0YVZhciIsIHtjb25maWd1cmFibGU6IGZhbHNlLCB2YWx1ZTogLTF9KTsNCiAg
+aW5kaXJlY3RFdmFsKCJ2YXIgbm9uQ29uZmlnRGF0YVZhciA9IDAiKTsNCiAgdGVzdC5hc3NlcnQo
+aW5kaXJlY3RFdmFsKCJub25Db25maWdEYXRhVmFyIiksIC0xKTsNCn0NCg0KLy8gVGVzdCAxYjog
+bm9uLWNvbmZpZ3VyYWJsZSBkYXRhIHByb3BlcnR5IG9uIGdsb2JhbCwgdHJ5IGZ1bmN0aW9uIGRl
+Y2xhcmF0aW9uDQpmdW5jdGlvbiB0ZXN0Tm9uQ29uZmlnRGF0YUZ1bigpIHsNCiAgdmFyIHRlc3Qg
+PSB0ZXN0Q2FzZShhcmd1bWVudHMuY2FsbGVlKTsNCiAgT2JqZWN0LmRlZmluZVByb3BlcnR5KGds
+b2JhbCwgIm5vbkNvbmZpZ0RhdGFGdW4iLCB7Y29uZmlndXJhYmxlOiBmYWxzZSwgdmFsdWU6IC0x
+fSk7DQogIHZhciBjYXVnaHQ7DQogIHRyeSB7IGluZGlyZWN0RXZhbCgiZnVuY3Rpb24gbm9uQ29u
+ZmlnRGF0YUZ1bigpe30iKTsgfSBjYXRjaChlKSB7IGNhdWdodCA9IGU7IH0NCiAgdGVzdC5hc3Nl
+cnQoY2F1Z2h0IGluc3RhbmNlb2YgVHlwZUVycm9yLCB0cnVlKTsNCiAgdGVzdC5hc3NlcnQoaW5k
+aXJlY3RFdmFsKCJub25Db25maWdEYXRhRnVuIiksIC0xKTsNCn0NCg0KLy8gVGVzdCAyYTogbm9u
+LWNvbmZpZ3VyYWJsZSBkYXRhIHByb3BlcnR5IG9uIHByb3RvdHlwZSwgdHJ5IHZhciBkZWNsYXJh
+dGlvbg0KZnVuY3Rpb24gdGVzdE5vbkNvbmZpZ0RhdGFQcm90b1ZhcigpIHsNCiAgdmFyIHRlc3Qg
+PSB0ZXN0Q2FzZShhcmd1bWVudHMuY2FsbGVlKTsNCiAgT2JqZWN0LmRlZmluZVByb3BlcnR5KE9i
+amVjdC5wcm90b3R5cGUsICJub25Db25maWdEYXRhUHJvdG9WYXIiLCB7Y29uZmlndXJhYmxlOiBm
+YWxzZSwgdmFsdWU6IC0xfSk7DQogIGluZGlyZWN0RXZhbCgidmFyIG5vbkNvbmZpZ0RhdGFQcm90
+b1ZhciA9IDAiKTsNCiAgdGVzdC5hc3NlcnQoaW5kaXJlY3RFdmFsKCJub25Db25maWdEYXRhUHJv
+dG9WYXIiKSwgLTEpOw0KfQ0KDQovLyBUZXN0IDJiOiBub24tY29uZmlndXJhYmxlIGRhdGEgcHJv
+cGVydHkgb24gcHJvdG90eXBlLCB0cnkgZnVuY3Rpb24gZGVjbGFyYXRpb24NCmZ1bmN0aW9uIHRl
+c3ROb25Db25maWdEYXRhUHJvdG9GdW4oKSB7DQogIHZhciB0ZXN0ID0gdGVzdENhc2UoYXJndW1l
+bnRzLmNhbGxlZSk7DQogIE9iamVjdC5kZWZpbmVQcm9wZXJ0eShPYmplY3QucHJvdG90eXBlLCAi
+bm9uQ29uZmlnRGF0YVByb3RvRnVuIiwge2NvbmZpZ3VyYWJsZTogZmFsc2UsIHZhbHVlOiAtMX0p
+Ow0KICBpbmRpcmVjdEV2YWwoImZ1bmN0aW9uIG5vbkNvbmZpZ0RhdGFQcm90b0Z1bigpe30iKTsN
+CiAgdGVzdC5hc3NlcnQodHlwZW9mIGluZGlyZWN0RXZhbCgibm9uQ29uZmlnRGF0YVByb3RvRnVu
+IiksICJmdW5jdGlvbiIpOw0KfQ0KDQovLyBUZXN0IDNhOiBjb25maWd1cmFibGUgYWNjZXNzb3Ig
+cHJvcGVydHkgb24gZ2xvYmFsLCB0cnkgdmFyIGRlY2xhcmF0aW9uDQpmdW5jdGlvbiB0ZXN0Q29u
+ZmlnQWNjVmFyKCkgew0KICB2YXIgdGVzdCA9IHRlc3RDYXNlKGFyZ3VtZW50cy5jYWxsZWUpOw0K
+ICB2YXIgYXJyYXkgPSBbXTsNCiAgT2JqZWN0LmRlZmluZVByb3BlcnR5KGdsb2JhbCwgImNvbmZp
+Z0FjY1ZhciIsIHRlc3QubG9nZ2luZ0FjY2Vzc29yKCJjb25maWdBY2NWYXIiLCBhcnJheSkpOw0K
+ICBpbmRpcmVjdEV2YWwoInZhciBjb25maWdBY2NWYXIgPSAwIik7DQogIGluZGlyZWN0RXZhbCgi
+Y29uZmlnQWNjVmFyIik7DQogIHRlc3QuYXNzZXJ0KGFycmF5WzBdLCAic2V0ICdjb25maWdBY2NW
+YXInIHRvOiAwIik7DQogIHRlc3QuYXNzZXJ0KGFycmF5WzFdLCAiZ2V0ICdjb25maWdBY2NWYXIn
+Iik7DQp9DQoNCi8vIFRlc3QgM2I6IG5vbi1jb25maWd1cmFibGUgZGF0YSBwcm9wZXJ0eSBvbiBn
+bG9iYWwsIHRyeSBmdW5jdGlvbiBkZWNsYXJhdGlvbg0KZnVuY3Rpb24gdGVzdENvbmZpZ0FjY0Z1
+bigpIHsNCiAgdmFyIHRlc3QgPSB0ZXN0Q2FzZShhcmd1bWVudHMuY2FsbGVlKTsNCiAgT2JqZWN0
+LmRlZmluZVByb3BlcnR5KGdsb2JhbCwgImNvbmZpZ0FjY0Z1biIsIHRlc3QucG9pc29uZWRBY2Nl
+c3NvcigiY29uZmlnQWNjRnVuIikpOw0KICBpbmRpcmVjdEV2YWwoImZ1bmN0aW9uIGNvbmZpZ0Fj
+Y0Z1bigpe30iKTsNCiAgdGVzdC5hc3NlcnQodHlwZW9mIGluZGlyZWN0RXZhbCgiY29uZmlnQWNj
+RnVuIiksICJmdW5jdGlvbiIpOw0KfQ0KDQovLyBUZXN0IDRhOiBub24tY29uZmlndXJhYmxlIGRh
+dGEgcHJvcGVydHkgb24gcHJvdG90eXBlLCB0cnkgdmFyIGRlY2xhcmF0aW9uDQpmdW5jdGlvbiB0
+ZXN0Q29uZmlnQWNjUHJvdG9WYXIoKSB7DQogIHZhciB0ZXN0ID0gdGVzdENhc2UoYXJndW1lbnRz
+LmNhbGxlZSk7DQogIHZhciBhcnJheSA9IFtdOw0KICBPYmplY3QuZGVmaW5lUHJvcGVydHkoT2Jq
+ZWN0LnByb3RvdHlwZSwgImNvbmZpZ0FjY1Byb3RvVmFyIiwgdGVzdC5sb2dnaW5nQWNjZXNzb3Io
+ImNvbmZpZ0FjY1Byb3RvVmFyIiwgYXJyYXkpKTsNCiAgaW5kaXJlY3RFdmFsKCJ2YXIgY29uZmln
+QWNjUHJvdG9WYXIgPSAwIik7DQogIGluZGlyZWN0RXZhbCgiY29uZmlnQWNjUHJvdG9WYXIiKTsN
+CiAgdGVzdC5hc3NlcnQoYXJyYXlbMF0sICJzZXQgJ2NvbmZpZ0FjY1Byb3RvVmFyJyB0bzogMCIp
+Ow0KICB0ZXN0LmFzc2VydChhcnJheVsxXSwgImdldCAnY29uZmlnQWNjUHJvdG9WYXInIik7DQp9
+DQoNCi8vIFRlc3QgNGI6IG5vbi1jb25maWd1cmFibGUgZGF0YSBwcm9wZXJ0eSBvbiBwcm90b3R5
+cGUsIHRyeSBmdW5jdGlvbiBkZWNsYXJhdGlvbg0KZnVuY3Rpb24gdGVzdENvbmZpZ0FjY1Byb3Rv
+RnVuKCkgew0KICB2YXIgdGVzdCA9IHRlc3RDYXNlKGFyZ3VtZW50cy5jYWxsZWUpOw0KICBPYmpl
+Y3QuZGVmaW5lUHJvcGVydHkoT2JqZWN0LnByb3RvdHlwZSwgImNvbmZpZ0FjY1Byb3RvRnVuIiwg
+dGVzdC5wb2lzb25lZEFjY2Vzc29yKCJjb25maWdBY2NQcm90b0Z1biIpKTsNCiAgaW5kaXJlY3RF
+dmFsKCJmdW5jdGlvbiBjb25maWdBY2NQcm90b0Z1bigpe30iKTsNCiAgdGVzdC5hc3NlcnQodHlw
+ZW9mIGluZGlyZWN0RXZhbCgiY29uZmlnQWNjUHJvdG9GdW4iKSwgImZ1bmN0aW9uIik7DQp9DQoN
+CmxvZygiU3RhcnQgdGVzdHMuLi4iKTsNCnRlc3ROb25Db25maWdEYXRhVmFyKCk7DQp0ZXN0Tm9u
+Q29uZmlnRGF0YUZ1bigpOw0KdGVzdE5vbkNvbmZpZ0RhdGFQcm90b1ZhcigpOw0KdGVzdE5vbkNv
+bmZpZ0RhdGFQcm90b0Z1bigpOw0KdGVzdENvbmZpZ0FjY1ZhcigpOw0KdGVzdENvbmZpZ0FjY0Z1
+bigpOw0KdGVzdENvbmZpZ0FjY1Byb3RvVmFyKCk7DQp0ZXN0Q29uZmlnQWNjUHJvdG9GdW4oKTsN
+CmxvZygiLi4uIGRvbmUhIik7DQoNCn0pKCk7
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

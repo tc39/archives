@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>237</bug_id>
+          
+          <creation_ts>2011-12-19 15:50:00 -0800</creation_ts>
+          <short_desc>list/List editorial consistency</short_desc>
+          <delta_ts>2011-12-19 15:50:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>other</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kang-Hao (Kenny) Lu">kennyluck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>524</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kang-Hao (Kenny) Lu">kennyluck</who>
+    <bug_when>2011-12-19 15:50:00 -0800</bug_when>
+    <thetext>The spec sometimes uses &quot;internal list&quot; and sometimes uses &quot;internal List&quot;. Are they different in any significant way? A measurable consequence of this is that &quot;list&quot;s don&apos;t get cross-linked to the Link, a specification type, in the annotated spec on GitHub. Both of them even occur in the same section. [1]
+
+Or are they different? If that&apos;s the case, I guess the definition of &quot;List&quot; is sort of unclear though I am sure.
+
+Why does the spec have &quot;List&quot; at the first place? It seems to be too frequently used. If the idea is to tag certain internal variables as related to argument list then I guess it would be better if it&apos;s not used in unrelated context.
+
+[1] http://es5.github.com/#x15.2.3.7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

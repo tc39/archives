@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1085</bug_id>
+          
+          <creation_ts>2012-11-28 03:06:00 -0800</creation_ts>
+          <short_desc>Typo Call</short_desc>
+          <delta_ts>2013-07-15 17:03:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Herbert Vojčík">herby</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2892</commentid>
+    <comment_count>0</comment_count>
+    <who name="Herbert Vojčík">herby</who>
+    <bug_when>2012-11-28 03:06:43 -0800</bug_when>
+    <thetext>In 8.4.6, there is a line that reads:
+
+```
+[[Calll]] and [[Construct]]
+```</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2948</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-01 10:17:49 -0800</bug_when>
+    <thetext>It&apos;s an anchor for a TODO margin note</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4045</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-05-16 15:36:17 -0700</bug_when>
+    <thetext>The fact that it&apos;s an anchor for a margin note is irrelevant, I think.
+The point of this bug seems to be that &quot;Calll&quot; is a typo for &quot;Call&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4371</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:18:28 -0700</bug_when>
+    <thetext>fixed in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4453</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:52 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

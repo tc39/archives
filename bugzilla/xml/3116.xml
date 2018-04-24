@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3116</bug_id>
+          
+          <creation_ts>2014-08-11 14:26:00 -0700</creation_ts>
+          <short_desc>Loader Object and Loader Record should be unified</short_desc>
+          <delta_ts>2015-03-16 14:30:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9753</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-08-11 14:26:41 -0700</bug_when>
+    <thetext>Currently Loader Records and Loader Objects are one-to-one.
+
+15.2.3.1 &quot;Loader Records and Loader Objects&quot; should just be &quot;Loader Objects&quot; and the fields of the Loader Record should be internal slots of the Loader Object.
+
+15.2.3.1.1 &quot;CreateLoaderRecord&quot; should be inlined into its sole call site in 26.3.1.1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9761</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-12 08:32:39 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #0)
+&gt; Currently Loader Records and Loader Objects are one-to-one.
+&gt; 
+&gt; 15.2.3.1 &quot;Loader Records and Loader Objects&quot; should just be &quot;Loader Objects&quot;
+&gt; and the fields of the Loader Record should be internal slots of the Loader
+&gt; Object.
+&gt; 
+&gt; 15.2.3.1.1 &quot;CreateLoaderRecord&quot; should be inlined into its sole call site in
+&gt; 26.3.1.1.
+ 
+I&apos;ve found it conceptually clearer and notationally simpler to handle complex internal state in this manner.  It decouples the internal semantics from its ES reflection in terms of objects and reduces possibility of object semantics unintentionally leaking into the internal semantics.   
+
+It&apos;s really just architectural layering.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13754</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:30:58 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>150</bug_id>
+          
+          <creation_ts>2011-07-20 16:36:00 -0700</creation_ts>
+          <short_desc>Some constructor spec. fails to mention required internal methods</short_desc>
+          <delta_ts>2012-11-23 09:45:54 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>83</dependson>
+    
+    <dependson>84</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>347</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 16:36:35 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #84 +++
+
+The spec. for the array constructors (15.4.3.1, 15.4.2.2) sets all the internal properties of new array instances but don&apos;t mention that they have a special [[DefineOwnProperty]] internal method. Section 15.4.5 mentions it but as covered in bug 83 the constructors don&apos;t explicitly reference that section</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2551</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 13:07:12 -0800</bug_when>
+    <thetext>arrays now uniformly created using ArrayCreate abstract operations.
+
+Rev 12</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2696</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:54 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

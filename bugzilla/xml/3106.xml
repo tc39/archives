@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3106</bug_id>
+          
+          <creation_ts>2014-08-04 15:41:00 -0700</creation_ts>
+          <short_desc>import into namespace syntax</short_desc>
+          <delta_ts>2015-07-10 08:35:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9664</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-08-04 15:41:24 -0700</bug_when>
+    <thetext>The syntax for importing into a namespace is changing from
+
+    module fs from &quot;fs&quot;;
+
+to
+
+    import * as fs from &quot;fs&quot;;
+
+It should also be possible to combine `* as fs` with the comma syntax, e.g.:
+
+    import * as fs, { readFile, unlink } from &quot;fs&quot;;
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9665</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-04 15:51:41 -0700</bug_when>
+    <thetext>And default import too I assume?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10161</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-06 12:59:55 -0700</bug_when>
+    <thetext>I&apos;ve added the: import * as fs from &quot;fs&quot;;
+syntax in the Rev28 draft.
+
+WRT to Erik&apos;s point, I dislike what we get if we try to combine this with the default import syntax. I wonder if we really need it.  Assuming that a binding for &quot;default&quot; is included in module namespace objects (is it?) somebody could just say:
+
+import * as fs from &quot;fs&quot;;
+const defaultFS = fs.default;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10183</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-10 17:56:44 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+The revised grammar is:
+
+ImportDeclaration :
+  &apos;import&apos;  ImportClause FromClause &apos;;&apos;
+  &apos;import&apos;  ModuleSpecifier &apos;;&apos;
+
+
+ImportClause :
+  ImportedDefaultBinding 
+  NameSpaceImport 
+  NamedImports 
+  ImportedDefaultBinding &apos;,&apos; NameSpaceImport
+  ImportedDefaultBinding &apos;,&apos; NamedImports 
+  NameSpaceImport &apos;,&apos; NamedImports 
+
+ImportedDefaultBinding :	
+  ImportedBinding
+
+NameSpaceImport :	
+  &apos;*&apos; &apos;as&apos;  ImportedBinding</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10256</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-10-01 06:32:37 -0700</bug_when>
+    <thetext>Argh, I was wrong in the bug description about which cases of mixing to allow. The comma syntax distinguishes two positions: the left allows you to talk about the default export, and the right allows you to talk about the named exports. So you should be able to say
+
+    import $ from &quot;jquery&quot;;
+    import * as jQuery from &quot;jquery&quot;;
+    import { ajax } from &quot;jquery&quot;;
+    import $, * as jQuery from &quot;jquery&quot;;
+    import $, { ajax } from &quot;jquery&quot;;
+
+But we shouldn&apos;t allow the case I mentioned in the description, because that mixes up what the two sides of the comma mean. And it&apos;s a sufficiently rare case that it doesn&apos;t need single-line syntax.
+
+Luckily this only means there&apos;s one bogus case in the grammar: we need to drop the
+
+    NameSpaceImports &apos;,&apos; NamedImports
+
+production from the ImportClause non-terminal. Sorry for the mistake in the bug description.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10257</commentid>
+    <comment_count>5</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-10-01 07:22:18 -0700</bug_when>
+    <thetext>We should either support all possible combination or no combinations.
+
+Picking a subset is only going to lead to confusion.
+
+I believe (based on years of using ES modules as they have evolved) that any combination of these are sufficiently rare that we do not need to support it in ES6.
+
+If it turns out that there is a need we can easily extend the grammar in future spec versions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10458</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:57 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

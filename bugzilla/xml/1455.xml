@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1455</bug_id>
+          
+          <creation_ts>2013-04-28 02:41:00 -0700</creation_ts>
+          <short_desc>Need test of adding array index properties to the global object</short_desc>
+          <delta_ts>2013-05-20 08:01:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>1453</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3685</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-28 02:41:29 -0700</bug_when>
+    <thetext>We need to have one or more tests that confirm that it is possible to add array index keyed properties (for example, &quot;1&quot;, &quot;65536&quot;, &quot;0&quot;, etc.) to the global object.
+
+This is needed because WebIDL is trying to forbid this, yet there is nothing in the ES spec. that says that is allowable.
+
+We should probably also check and make sure that non-array index number strings can also be used as properties on the global object.  For example, &quot;1.0&quot;, &quot;-3&quot;, &quot;3.33e10&quot;, etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3692</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-30 13:02:11 -0700</bug_when>
+    <thetext>Actually,  WebIDL (actually HTML) says that its global object actually has a &quot;length&quot; properties and if it is non-0 some actual array-index properties.
+
+The test should probably be that if &quot;length&quot; doesn&apos;t exist then it can be declared as a global var and also that array index properties can be added.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3996</bug_id>
+          
+          <creation_ts>2015-02-17 20:42:00 -0800</creation_ts>
+          <short_desc>PDF version missing table of contents and clickable cross-references</short_desc>
+          <delta_ts>2016-02-15 16:31:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12882</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 20:42:33 -0800</bug_when>
+    <thetext>The PDF version of the spec is missing two very handy features: The PDF table of contents and clickable cross-references. The PDF table of contents can be shown, for example, in the side bar of the Preview application on Mac. Clickable cross-references let you jump, e.g., from section 10.2.3 to 9.1 by clicking the cross-reference &quot;9.1&quot;. Both features are present in the PDF version of the first edition.
+
+I suspect both features are missing because the Mac version of Word is crippled and doesn&apos;t support them. PDF versions of ECMAScript standards should therefore be generated on Windows.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12896</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 06:54:13 -0800</bug_when>
+    <thetext>I have no idea why that&apos;s not present, I saved the document the same as usual. I&apos;ll make another &quot;revision&quot; and make sure the TOC is present.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12897</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 07:20:33 -0800</bug_when>
+    <thetext>I think Norbert is correct, you need to generate the PDFs using the Windows version of Word</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12909</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 08:41:55 -0800</bug_when>
+    <thetext>Then I&apos;ll have to find someone willing to generate that version.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12912</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 09:01:45 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #3)
+&gt; Then I&apos;ll have to find someone willing to generate that version.
+
+I can do it for you.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14929</commentid>
+    <comment_count>5</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:31:14 -0800</bug_when>
+    <thetext>ecmarkup does that now!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

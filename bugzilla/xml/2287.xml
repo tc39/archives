@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2287</bug_id>
+          
+          <creation_ts>2013-11-14 17:38:00 -0800</creation_ts>
+          <short_desc>Simplify ImportClause</short_desc>
+          <delta_ts>2015-07-10 08:35:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+    
+    <cc>zenparsing</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6783</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2013-11-14 17:38:29 -0800</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-imports
+
+Currently says
+
+ImportClause :
+  ImportedBinding
+  ImportedBinding , NamedImports
+  NamedImports
+
+I don&apos;t think it is worth allowing both default and named imports in the same ImportClause. The following simplification seems to be simpler to reason about.
+
+ImportClause :
+  ImportedBinding
+  NamedImports
+
+If we are going to allow both we need to support different ordering too.
+
+ImportClause :
+  ImportedBinding
+  ImportedBinding , NamedImports
+  NamedImports
+  NamedImports , ImportedBinding</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7170</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-02-02 13:12:13 -0800</bug_when>
+    <thetext>Dave, after talking through the issues I&apos;m convinced that what we want is:
+
+ImportClause :
+  ImportedBinding
+  ImportedBinding , NamedImports
+  NamedImports
+  NamedImports , ImportedBinding
+
+Can you confirm?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8492</commentid>
+    <comment_count>2</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-05-15 04:52:34 -0700</bug_when>
+    <thetext>What is the status on this issue?  
+
+My instinct agrees with Erik here.  Allowing a mixture of default import and named imports in the same production is messy, and we don&apos;t have any evidence that such mess is necessary. An optimization like this can always be added in a future version if experience warrants it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10170</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2014-09-09 10:18:32 -0700</bug_when>
+    <thetext>The ability to do both in one line is necessary. Keeping the order fixed is clearer, will lead to a simpler grammar and a more consistent programming style, and there&apos;s far more precedent for comma-separated sequences being ordered (sequence expressions, function arguments, etc).
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10174</commentid>
+    <comment_count>4</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-09-09 11:52:53 -0700</bug_when>
+    <thetext>Strictly speaking you already can &quot;do both in one line&quot; with just NamedImports:
+
+    import { a, b, c, default as x } from &quot;somewhere&quot;;
+
+To my eyes, this is much nicer than:
+
+    import x, { a, b, c} from &quot;somewhere&quot;;
+
+which really just obfuscates the whole design.  It smells bad.
+
+My opinion, take it for what it&apos;s worth.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

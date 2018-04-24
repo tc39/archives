@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3220</bug_id>
+          
+          <creation_ts>2014-09-11 09:37:00 -0700</creation_ts>
+          <short_desc>Set/Map/WeakSet/WeakMap needs to call IteratorClose</short_desc>
+          <delta_ts>2015-07-10 08:34:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10184</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-11 09:37:27 -0700</bug_when>
+    <thetext>Set/Map/WeakSet/WeakMap needs to call IteratorClose in case of an abrupt completion:
+
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-set-iterable
+
+12. Repeat
+  a. Let next be the result of IteratorStep(iter).
+  b. ReturnIfAbrupt(next).
+  c. If next is false, then return set.
+  d. Let nextValue be IteratorValue(next).
+  e. ReturnIfAbrupt(nextValue).
+  f. Let status be the result of calling the [[Call]] internal method of adder with set as thisArgument and a List whose sole element is nextValue as argumentsList.
+  g. ReturnIfAbrupt(status).
+
+Change to something like:
+
+12. Repeat
+  a. Let next be the result of IteratorStep(iter).
+  b. If next is an abrupt completion, then return IteratorClose(iter, next).
+  c. If next is false, then return set.
+  d. Let nextValue be IteratorValue(next).
+  e. If nextValue is an abrupt completion, then return IteratorClose(iter, nextValue).
+  f. Let status be the result of calling the [[Call]] internal method of adder with set as thisArgument and a List whose sole element is nextValue as argumentsList.
+  g. If status is an abrupt completion, then return IteratorClose(iter, status).
+
+The change is more or less to replace `ReturnIfAbrupt(x)` with `If x is an abrupt completion, then return IteratorClose(iter, x)`</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11548</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-18 14:38:47 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11549</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-18 16:20:39 -0800</bug_when>
+    <thetext>Also fixed Array.from, %TypedArray%.from, Promise.all, and Promise.race</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12028</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:39:03 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

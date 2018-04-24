@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2695</bug_id>
+          
+          <creation_ts>2014-04-19 16:21:00 -0700</creation_ts>
+          <short_desc>chapter 12: misc editorial</short_desc>
+          <delta_ts>2014-06-01 15:57:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2834</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7842</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:21:26 -0700</bug_when>
+    <thetext>----------------------------------------
+In 12.1 &quot;Identifiers&quot;:
+
+{1}
+12.1 / Syntax / prod 3 / rhs 1:
+LabelIdentifier : Identifier
+    Italicize &apos;Identifier&apos;
+
+----------------------------------------
+In 12.1.1 &quot;Static Semantics: Early Errors&quot;:
+
+{2}
+12.1.1 / group 1 / item 1:
+It is a Syntax Error if StringValue of /Identifier/ /does/ /not/ /statically/ /resolve/ /to/ /a/ /declarative/ /environment/ /record/ /binding/.
+    De-italicize &quot;does not statically ...&quot;
+
+{3}
+12.1.1 / group 5 / item 3:
+It is a Syntax Error StringValue of /IdentifierName/ is the same ...
+    After &quot;Error&quot;, insert &quot;if&quot;.
+
+----------------------------------------
+In 12.1.3 &quot;Static Semantics: BoundNames&quot;:
+
+{4}
+12.1.3 / alg 1 / step 1:
+Return new List containing the StringValue of /IdentifierName/.
+    After &quot;Return&quot;, insert &quot;a&quot;
+
+----------------------------------------
+In 12.1.4 &quot;Static Semantics: StringValue&quot;:
+
+{5}
+12.1.4 / header:
+Static Semantics: StringValue
+    &quot;StringValue&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 12.2 &quot;Primary Expression&quot;:
+
+{6}
+12.2 / Supplemental Syntax:
+    The production for ParenthesizedExpression is its defining occurrence,
+    so should be formatted like other defining productions, i.e.:
+    flush-left, preceding gap, RHS on the next line with an indent.
+
+----------------------------------------
+In 12.2.0.1 &quot;Static Semantics: CoveredParenthesizedExpression&quot;:
+
+{7}
+12.2.0.1 / group 1 / production:
+CoverParenthesizedExpressionAndArrowParameterList[...] : ( Expression[...] )
+    When an algorithm is associated with a production alternative,
+    the alternative is typically shown without any &quot;[ ]&quot; grammar annotations
+
+----------------------------------------
+In 12.2.2.1 &quot;Runtime Semantics: Evaluation&quot;:
+
+{8}
+12.2.2.1 / group 1:
+    There&apos;s a production but no algorithm.
+
+----------------------------------------
+In 12.2.4.1.2 &quot;Runtime Semantics: ArrayAccumulation&quot;:
+
+{9,10}
+12.2.4.1.2 / group 5 / step 7.h:
+Let nextIndex = nextIndex +1.
+    Italicize both occurrences of &apos;nextIndex&apos;
+    Add a space after the plus?
+
+----------------------------------------
+In 12.2.5.6 &quot;Static Semantics: PropName&quot;:
+
+{11}
+12.2.5.6 / header:
+12.2.5.6 Static Semantics: PropName
+    &quot;12.2.5.6&quot; is serif, should be sans-serif.
+    &quot;PropName&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 12.2.5.9 &quot;Runtime Semantics: PropertyDefinitionEvaluation&quot;:
+
+{13}
+12.2.5.9 / group 1 / step 3:
+Let /propDef/ be the result of performing PropertyDefinitionEvaluation of /PropertyDefinition/ with argument /object/.
+    s|propDef|status|
+
+{14}
+12.2.5.9 / group 1 / step 4:
+ReturnIfAbrupt(/propDef/).
+    s|propDef|status|
+
+{15,16}
+12.2.5.9 / group 1 / steps 5 + 6:
+If /propDef/ is `empty`, then return /propDef/.
+Let /status/ be DefinePropertyOrThrow(/object/, /propDef/.[[key]], ...)
+    Delete the steps?
+
+{17}
+12.2.5.9 / group 2 / step 2:
+Let /exprValue/ be the result of evaluating /IdentifierReference/.
+    There are no rules to evaluate an IdentifierReference.
+
+----------------------------------------
+In 12.2.9 &quot;Template Literals&quot;:
+
+{18}
+12.2.9 / Syntax / prod 1 / rhs 2:
+TemplateHead Expression[...] [...] TemplateSpans 
+    Italicize &apos;Expression&apos;
+
+{19}
+12.2.9 / Syntax / prod 3 / rhs 1:
+TemplateMiddle Expression[...]
+    Italicize &apos;Expression&apos;
+
+----------------------------------------
+In 12.2.9.2.4 &quot;Runtime Semantics: Evaluation&quot;:
+
+{20,21}
+12.2.9.2.4 / note 1:
+NOTE Tthe string conversion semantics applied to the /Expression/ value
+are like Stirng.prototype.concat rather than the + operator.
+    s|Tthe|The|
+    s|Stirng|String|
+
+{22,23}
+12.2.9.2.4 / note 2:
+NOTE Tthe string conversion semantics applied to the /Expression/ value
+are like Stirng.prototype.concat rather than the + operator.
+    s|Tthe|The|
+    s|Stirng|String|
+
+{24}
+12.2.9.2.4 / note 3:
+NOTE The string conversion semantics applied to the /Expression/ value
+are like Stirng.prototype.concat rather than the + operator.
+    s|Stirng|String|
+
+----------------------------------------
+In 12.3.1.1 &quot;Static Semantics: Contains&quot;:
+
+{26}
+12.3.1.1 / group 1 / production:
+MemberExpression : MemberExpression . IdentifierName
+    Terminal dot should be in monospace bold.
+
+{27}
+12.3.1.1 / group 2 / production:
+MemberExpression : super . IdentifierName
+    Terminal dot should be in monospace bold.
+
+{28}
+12.3.1.1 / group 3 / production:
+CallExpression : CallExpression . IdentifierName
+    Terminal dot should be in monospace bold.
+
+----------------------------------------
+In 12.3.4.1 &quot;Runtime Semantics: Evaluation&quot;:
+
+{29}
+12.3.4.1 / group 1 / step 2.a:
+check if direct eval
+    ???
+
+{30}
+12.3.4.1 / group 2 / step 2:
+Let /thisCall/ be this /CallExpressio/
+    s|Expressio|Expression|
+
+----------------------------------------
+In 12.3.4.2 &quot;Runtime Semantics: EvaluateCall&quot;:
+
+{31}
+12.3.4.2 / step 7.{b,c}:
+b. Else, the base of ref is an Environment Record
+c. Let /thisValue/ be the result of calling the WithBaseObject concrete method
+   of GetBase(/ref/).
+      Step 7.c should presumably be step 7.b.i
+
+----------------------------------------
+In 12.3.6.1 &quot;Runtime Semantics: ArgumentListEvaluation&quot;:
+
+{32}
+12.3.6.1 / group 5 / step 1:
+Let /precedingArgs/ be be the result of evaluating /ArgumentList/.
+    Delete extra &quot;be&quot;
+
+----------------------------------------
+In 12.3.7.1 &quot;Runtime Semantics: Evaluation&quot;:
+
+{33}
+12.3.7.1 / group 1 / step 1:
+Let /tagRef/ be evaluating /MemberExpression/.
+    After &quot;be&quot;, insert &quot;the result of&quot;
+
+----------------------------------------
+In 12.14.4 &quot;Runtime Semantics: Evaluation&quot;:
+
+{34}
+12.14.4 / alg 1 / step 1.a:
+Let lref be the result of evaluating /LeftHandSideExpression/.
+    Italicize &apos;lref&apos;
+
+{35}
+12.14.4 / alg 1 / step 1.b:
+ReturnIfAbrupt(lref).
+    Italicize &apos;lref&apos;
+
+{36}
+12.14.4 / alg 1 / step 1.c:
+Let rref be the result of evaluating /AssignmentExpression/.
+    Italicize &apos;rref&apos;
+
+{37,38}
+12.14.4 / alg 1 / step 1.d:
+Let rval be GetValue(rref).
+    Italicize &apos;rval&apos;
+    Italicize &apos;rref&apos;
+
+{39,40}
+12.14.4 / alg 1 / step 1.e.i:
+Let hasNameProperty be HasOwnProperty(rval, &quot;name&quot;).
+    Italicize &apos;hasNameProperty&apos;
+    Italicize &apos;rval&apos;
+
+{41}
+12.14.4 / alg 1 / step 1.e.ii:
+ReturnIfAbrupt(hasNameProperty).
+    Italicize &apos;hasNameProperty&apos;
+
+{42}
+12.14.4 / alg 1 / step 1.e.iii:
+If hasNameProperty is *false*, then
+    Italicize &apos;hasNameProperty&apos;
+
+{43,44}
+12.14.4 / alg 1 / step 1.e.iii.1:
+SetFunctionName(rval, GetReferenceName(lref)).
+    Italicize &apos;rval&apos;
+    Italicize &apos;lref&apos;
+
+{45,46,47}
+12.14.4 / alg 1 / step 1.f:
+Let status be PutValue(lref, rval).
+    Italicize &apos;status&apos;
+    Italicize &apos;lref&apos;
+    Italicize &apos;rval&apos;
+
+{48}
+12.14.4 / alg 1 / step 1.g:
+ReturnIfAbrupt(status).
+    Italicize &apos;status&apos;
+
+{49}
+12.14.4 / alg 1 / step 1.h:
+Return rval.
+    Italicize &apos;rval&apos;
+
+{50}
+12.14.4 / alg 1 / step 2:
+Let AssignmentPattern be the parse of the source code corresponding to ...
+    Italicize &apos;AssignmentPattern&apos;
+
+{51}
+12.14.4 / alg 1 / step 3:
+Let rref be the result of evaluating /AssignmentExpression/.
+    Italicize &apos;rref&apos;
+
+{52,53}
+12.14.4 / alg 1 / step 4:
+Let rval be GetValue(rref).
+    Italicize &apos;rval&apos;
+    Italicize &apos;rref&apos;
+
+{54}
+12.14.4 / alg 1 / step 5:
+ReturnIfAbrupt(rval).
+    Italicize &apos;rval&apos;
+
+{55}
+12.14.4 / alg 1 / step 6:
+If Type(rval) is not Object, then throw a *TypeError* exception.
+    Italicize &apos;rval&apos;
+
+{56,57}
+12.14.4 / alg 1 / step 7:
+Let status be the result of performing DestructuringAssignmentEvaluation of
+AssignmentPattern using rval as the argument.
+    Italicize &apos;status&apos;
+    Italicize &apos;AssignmentPattern&apos;
+    Italicize &apos;rval&apos;
+
+{58}
+12.14.4 / alg 1 / step 8:
+ReturnIfAbrupt(status).
+    Italicize &apos;status&apos;
+
+{59}
+12.14.4 / alg 1 / step 9:
+Return rval.
+    Italicize &apos;rval&apos;
+
+----------------------------------------
+In 12.14.5.1 &quot;Static Semantics: Early Errors&quot;:
+
+{60}
+12.14.5.1 / note:
+... even if multiple levels of nested parenthesizes surround /Expression/.
+    s|parenthesizes|parentheses|
+
+----------------------------------------
+In 12.14.5.2 &quot;Runtime Semantics: DestructuringAssignmentEvaluation&quot;:
+
+{61}
+12.14.5.2 / group 9 / production:
+AssignmentProperty : PropertyName : AssignmentElement
+    Terminal colon (i.e., the second colon) should be in monospace bold.
+
+----------------------------------------
+In 12.14.5.3 &quot;Runtime Semantics: IteratorDestructuringAssignmentEvaluation&quot;:
+
+{62}
+12.14.5.3 / group 7 / step 6.b:
+Let v be GetValue(/defaultValue/)
+    Italicize &apos;v&apos;
+
+{63}
+12.14.5.3 / group 7 / step 7:
+If ... is an /ObjectLiteral/ /or/ /an/ /ArrayLiteral/ then
+    De-italicize &quot;or an&quot;
+
+{64}
+12.14.5.3 / group 7 / step 7.a:
+... the source code corresponding to DestructuringAssignmentTarget ...
+    Italicize &apos;DestructuringAssignmentTarget&apos;
+
+----------------------------------------
+In 12.14.5.4 &quot;Runtime Semantics: KeyedDestructuringAssignmentEvaluation&quot;:
+
+{65}
+12.14.5.4 / group 1 / step 4:
+If ... is an /ObjectLiteral/ /or/ /an/ /ArrayLiteral/ then
+    De-italicize &quot;or an&quot;
+
+----------------------------------------
+In 12.15 &quot;Comma Operator ( , )&quot;:
+
+{66}
+12.15 / Syntax / prod 1 / lhs:
+Expression[In, Yield] :
+    Italicize &apos;Expression&apos;
+
+{67}
+12.15 / Syntax / prod 1 / rhs 1:
+AssignmentExpression[?In, ?Yield]
+    Italicize &apos;AssignmentExpression&apos;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7887</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-22 18:43:54 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8087</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-01 10:27:10 -0700</bug_when>
+    <thetext>Rev 24 hasn&apos;t fixed these items:
+
+----------------------------------------
+In 12.2.0.1 &quot;Static Semantics: CoveredParenthesizedExpression&quot;:
+
+{7}
+12.2.0.1 / group 1 / production:
+CoverParenthesizedExpressionAndArrowParameterList[...] : ( Expression[...] )
+    When an algorithm is associated with a production alternative,
+    the alternative is typically shown without any &quot;[ ]&quot; grammar annotations
+
+----------------------------------------
+In 12.2.5.9 &quot;Runtime Semantics: PropertyDefinitionEvaluation&quot;:
+
+{17}
+12.2.5.9 / group 2 / step 2:
+Let /exprValue/ be the result of evaluating /IdentifierReference/.
+    There are no rules to evaluate an IdentifierReference.
+
+----------------------------------------
+In 12.3.4.1 &quot;Runtime Semantics: Evaluation&quot;:
+
+{29}
+12.3.4.1 / group 1 / step 2.a:
+check if direct eval
+    ???
+
+XXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8287</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 16:03:53 -0700</bug_when>
+    <thetext>In 12.2.0.1 the grammar parameter are shown because they need to be used in the secondary parse that is performed.. 
+
+fixed in rev25 editor&apos;s draft
+
+added bug 2834 to track the 12.3.4.1 to-do item.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8762</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 15:57:16 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

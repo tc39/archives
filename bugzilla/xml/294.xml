@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>294</bug_id>
+          
+          <creation_ts>2012-03-06 19:51:00 -0800</creation_ts>
+          <short_desc>ch15/15.3/15.3.5/15.3.5.4/15.3.5.4_2-95gs depends on implementation-defined behavior</short_desc>
+          <delta_ts>2015-10-02 14:33:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>andrebargull</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>727</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-03-06 19:51:15 -0800</bug_when>
+    <thetext>ch15/15.3/15.3.5/15.3.5.4/15.3.5.4_2-95gs expects TypeError thrown.
+description is below
+
+@description Strict mode - checking access to strict function caller from non-strict, constructor-based function (FunctionDeclaration includes strict directive prologue)
+
+According to ECMA262 5.1 section 15.3.2.1-9
+    If body is strict mode code (see 10.1.1) then let strict be true, else let strict be false
+
+and 15.3.2.1-11
+  Return a new Function object created as specified in 13.2 passing P as the FormalParameterListopt and body as the FunctionBody. Pass in the Global Environment as the Scope parameter and strict as the Strict flag.
+
+So, created function from `Function(&quot;return gNonStrict.caller;&quot;)` is always non-strict function even if global code is strict code.
+
+And according to the section 13.2 Creating Function Objects, step 19
+
+  If Strict is true, then
+    Let thrower be the [[ThrowTypeError]] function Object (13.2.3).
+    Call the [[DefineOwnProperty]] internal method of F with arguments &quot;caller&quot;, PropertyDescriptor {[[Get]]: thrower, [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false}, and false.
+    Call the [[DefineOwnProperty]] internal method of F with arguments &quot;arguments&quot;, PropertyDescriptor {[[Get]]: thrower, [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false}, and false.
+
+So if function is non-strict code, function.caller can be undefined. (Function.caller is non-standard https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/Caller)
+
+Then, 15.3.5.4, [[Get]] step 2
+  If P is &quot;caller&quot; and v is a strict mode Function object, throw a TypeError exception.
+
+It is implementation dependent that v is function object, so this test depends implementation-dependent.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>732</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-08 08:54:40 -0800</bug_when>
+    <thetext>Allen, the following code snippet is expected to throw a TypeError by the test:
+  var gNonStrict = Function(&quot;return gNonStrict.caller;&quot;);
+
+  function f() {
+      &quot;use strict&quot;;
+      return gNonStrict();
+  }
+  f();
+
+
+The relevant ES5 algorithm is:
+1. Let v be the result of calling the default [[Get]] internal method (8.12.3) on F passing P as the property name argument.
+2. If P is &quot;caller&quot; and v is a strict mode Function object, throw a TypeError exception.
+3. Return v.
+
+
+My take is:
+- function &apos;f&apos; is clearly a strict mode function
+- gNonStrict is not a strict mode function
+- as far as 15.3.5.4 is concerned: P===&quot;caller&quot; &amp;&amp; F===&quot;gNonStrict&quot; =&gt; v===f
+- v is indeed a strict mode Function Object.  I.e., it being accessed from non-strict code doesn&apos;t change the fact that &apos;f&apos; is strict =&gt; TypeError is thrown</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>733</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-03-08 11:11:07 -0800</bug_when>
+    <thetext>Most of the tests in ch15/15.3/15.3.5/15.3.5.4 rely on implementations providing the non-standard &quot;caller&quot; property for non-strict functions. This is wrong to begin with. Therefore the tests need to be updated to cope with implementations which don&apos;t provide &quot;caller&quot; at all, similar to the suggested fix in bug 288.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>734</commentid>
+    <comment_count>3</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-03-08 15:30:58 -0800</bug_when>
+    <thetext>&gt; - gNonStrict is not a strict mode function
+&gt; - as far as 15.3.5.4 is concerned: P===&quot;caller&quot; &amp;&amp; F===&quot;gNonStrict&quot; =&gt; v===f
+&gt; - v is indeed a strict mode Function Object.  I.e., it being accessed from
+
+The key point is that, because function.caller property of non-strict function is implementation-dependent behavior, v is allowed to be undefined by spec. v !== f.
+
+&gt; Therefore the tests need to be updated to cope with implementations which don&apos;t provide &quot;caller&quot; at all, similar to the suggested fix in bug 288.
+Agreed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>735</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-03-08 15:47:47 -0800</bug_when>
+    <thetext>I&apos;ve just sent a mail to es5-discuss concerning 15.3.5.4, maybe the whole issue will get a wider attention there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>736</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-08 20:58:27 -0800</bug_when>
+    <thetext>I&apos;m dyslexic today.  Do you agree the following generic change would alleviate the &quot;Function.caller&apos;s not implemented&quot; issue for the test cases expected to throw type errors:
+  var gNonStrict = Function(&quot;return gNonStrict.caller || gNonStrict.caller.shouldThrowTypeError;&quot;);
+
+  function f() {
+      &quot;use strict&quot;;
+      return gNonStrict();
+  }
+  f();
+
+Even with this change I think it belongs in the best practices directory (at best;) ).  Thanks for spotting this!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>737</commentid>
+    <comment_count>6</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-03-08 23:08:07 -0800</bug_when>
+    <thetext>&gt; Do you agree the following generic change would alleviate
+&gt; the &quot;Function.caller&apos;s not implemented&quot; issue for the test cases expected to
+&gt; throw type errors:
+
+I agree to this change, `Function(&quot;return gNonStrict.caller || gNonStrict.caller.shouldThrowTypeError;&quot;)` :-)
+Thanks for your work and test262!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>739</commentid>
+    <comment_count>7</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-09 14:00:37 -0800</bug_when>
+    <thetext>The change &apos;||
+gNonStrict.caller.shouldThrowTypeError;&quot;);&apos; change has been checked-in.  Still think that minimally the following might not be strictly required by ES5.1:
+15.3.5.4_2-10gs	Strict mode - checking access to strict function caller from non-strict function (New&apos;ed Function constructor includes strict directive prologue)	
+15.3.5.4_2-16gs	Strict mode - checking access to strict function caller from non-strict function (New&apos;ed object from FunctionDeclaration includes strict directive prologue)	
+15.3.5.4_2-18gs	Strict mode - checking access to strict function caller from non-strict function (New&apos;ed object from FunctionExpression includes strict directive prologue)	
+15.3.5.4_2-20gs	Strict mode - checking access to strict function caller from non-strict function (New&apos;ed object from Anonymous FunctionExpression includes strict directive prologue)	
+15.3.5.4_2-2gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration includes strict directive prologue)	
+15.3.5.4_2-30gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration defined within a FunctionDeclaration with a strict directive prologue)	
+15.3.5.4_2-31gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression defined within a FunctionDeclaration with a strict directive prologue)	
+15.3.5.4_2-32gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression defined within a FunctionDeclaration with a strict directive prologue)	
+15.3.5.4_2-33gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration defined within a FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-34gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression defined within a FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-35gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression defined within a FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-36gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration defined within an Anonymous FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-37gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression defined within an Anonymous FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-38gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression defined within an Anonymous FunctionExpression with a strict directive prologue)	
+15.3.5.4_2-39gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration with a strict directive prologue defined within a FunctionDeclaration)	
+15.3.5.4_2-40gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression with a strict directive prologue defined within a FunctionDeclaration)	
+15.3.5.4_2-41gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression with a strict directive prologue defined within a FunctionDeclaration)	
+15.3.5.4_2-42gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration with a strict directive prologue defined within a FunctionExpression)	
+15.3.5.4_2-43gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression with a strict directive prologue defined within a FunctionExpression)	
+15.3.5.4_2-44gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression with a strict directive prologue defined within a FunctionExpression)	
+15.3.5.4_2-45gs	Strict mode - checking access to strict function caller from non-strict function (FunctionDeclaration with a strict directive prologue defined within an Anonymous FunctionExpression)	
+15.3.5.4_2-46gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression with a strict directive prologue defined within an Anonymous FunctionExpression)	
+15.3.5.4_2-47gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression with a strict directive prologue defined within an Anonymous FunctionExpression)	
+15.3.5.4_2-4gs	Strict mode - checking access to strict function caller from non-strict function (FunctionExpression includes strict directive prologue)	
+15.3.5.4_2-53gs	Strict mode - checking access to strict function caller from non-strict function (Injected getter includes strict directive prologue)	
+15.3.5.4_2-55gs	Strict mode - checking access to strict function caller from non-strict function (Injected setter includes strict directive prologue)	
+15.3.5.4_2-56gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by non-strict function declaration)	
+15.3.5.4_2-57gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by non-strict eval)	
+15.3.5.4_2-58gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by non-strict Function constructor)	
+15.3.5.4_2-59gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by non-strict new&apos;ed Function constructor)	
+15.3.5.4_2-60gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.apply())	
+15.3.5.4_2-61gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.apply(null))	
+15.3.5.4_2-62gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.apply(undefined))	
+15.3.5.4_2-63gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.apply(someObject))	
+15.3.5.4_2-64gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.apply(globalObject))	
+15.3.5.4_2-65gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.call())	
+15.3.5.4_2-66gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.call(null))	
+15.3.5.4_2-67gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.call(undefined))	
+15.3.5.4_2-68gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.call(someObject))	
+15.3.5.4_2-69gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.call(globalObject))	
+15.3.5.4_2-6gs	Strict mode - checking access to strict function caller from non-strict function (Anonymous FunctionExpression includes strict directive prologue)	
+15.3.5.4_2-8gs	Strict mode - checking access to strict function caller from non-strict function (Function constructor includes strict directive prologue)	
+15.3.5.4_2-94gs	Strict mode - checking access to strict function caller from non-strict function expression (FunctionDeclaration includes strict directive prologue)	
+15.3.5.4_2-95gs	Strict mode - checking access to strict function caller from non-strict, constructor-based function (FunctionDeclaration includes strict directive prologue)	
+15.3.5.4_2-96gs	Strict mode - checking access to strict function caller from non-strict property (FunctionDeclaration includes strict directive prologue)	
+//--Maybe&apos;s
+15.3.5.4_2-49gs	Strict mode - checking access to strict function caller from non-strict function (Literal getter includes strict directive prologue)	
+15.3.5.4_2-51gs	Strict mode - checking access to strict function caller from non-strict function (Literal setter includes strict directive prologue)	
+15.3.5.4_2-89gs	Strict mode - checking access to strict function caller from non-strict function (non-strict function declaration called by strict Function.prototype.bind()())	
+15.3.5.4_2-70gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.bind()())	
+15.3.5.4_2-71gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.bind(null)())	
+15.3.5.4_2-72gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.bind(undefined)())	
+15.3.5.4_2-73gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.bind(someObject)())	
+15.3.5.4_2-74gs	Strict mode - checking access to strict function caller from non-strict function (strict function declaration called by Function.prototype.bind(globalObject)())	
+15.3.5.4_2-90gs	Strict mode - checking access to strict function caller from non-strict function (non-strict function declaration called by strict Function.prototype.bind(null)())	
+15.3.5.4_2-91gs	Strict mode - checking access to strict function caller from non-strict function (non-strict function declaration called by strict Function.prototype.bind(undefined)())	
+15.3.5.4_2-92gs	Strict mode - checking access to strict function caller from non-strict function (non-strict function declaration called by strict Function.prototype.bind(someObject)())	
+15.3.5.4_2-93gs	Strict mode - checking access to strict function caller from non-strict function (non-strict function declaration called by strict Function.prototype.bind(globalObject)())	
+15.3.5.4_2-97gs	Strict mode - checking access to strict function caller from bound non-strict function (FunctionDeclaration includes strict directive prologue)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>747</commentid>
+    <comment_count>8</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-03-11 11:38:44 -0700</bug_when>
+    <thetext>15.3.5.4_2-96gs and 15.3.5.4_2-97gs need to be fixed as well</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>761</commentid>
+    <comment_count>9</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-14 15:45:34 -0700</bug_when>
+    <thetext>Good spot on 5.3.5.4_2-9(6|7)gs.js.  These had eluded my RegExp Fu.
+
+André, do you happen to know what was the final call on this category of tests from TC39?  Standard, best practice, or invalid?  Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>763</commentid>
+    <comment_count>10</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-03-15 04:21:13 -0700</bug_when>
+    <thetext>On es5-discuss, everybody agreed that 15.3.5.4 itself is buggy since it redefines [[Get]] instead of [[GetOwnProperty]] and does not account for implementations without &quot;caller&quot; support (at least not in a reasonable way). But strictly speaking, no final decision was made concerning test262, mainly because the discussion was later focused on how to implement &quot;caller&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>764</commentid>
+    <comment_count>11</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-15 08:57:54 -0700</bug_when>
+    <thetext>Thanks for the update André.  At this point I&apos;ve verified all files still containing &quot;.caller;&quot; (i.e., &quot;return gNonStrict.caller;&quot;) under ch15/15.3/15.3.5/15.3.5.4 fall into one of the following categories:
+* they&apos;re subject to global strict mode and a TypeError is expected
+* they&apos;re not subject to global strict mode and no TypeError is expected
+
+Reassigning this as an ECMA-262 bug to get clear guidance whether any other test changes are still required due to the ES5.1 bugs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11035</commentid>
+    <comment_count>12</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-12-13 22:25:41 -0800</bug_when>
+    <thetext>See https://bugs.ecmascript.org/show_bug.cgi?id=3113</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14737</commentid>
+    <comment_count>13</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:05 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

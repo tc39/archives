@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3779</bug_id>
+          
+          <creation_ts>2015-02-05 14:24:00 -0800</creation_ts>
+          <short_desc>B.3.1 __proto__ : Directly set [[Prototype]] instead calling [[SetPrototypeOf]] ?</short_desc>
+          <delta_ts>2015-02-12 12:17:39 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12150</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-05 14:24:45 -0800</bug_when>
+    <thetext>B.3.1 __proto__ Property Names in Object Initializers
+
+PropertyDefinition : PropertyName : AssignmentExpression
+
+Step 6.a.i
+
+If `propValue` is a Proxy its [[GetPrototypeOf]] method will be called when the default ordinary [[SetPrototypeOf]] is invoked. And that means user code may get executed. 
+
+
+I wonder if it makes sense to change this step to make a direct assignment to [[Prototype]]. The proto cycle chain check from [[SetPrototypeOf]] is not needed at this point and less intervening user code is always preferable ;-)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12178</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-05 20:37:54 -0800</bug_when>
+    <thetext>see Bug 2437 
+
+Evaluation routines at this level shouldn&apos;t be bypassing the MOP.
+
+On the other hand, 9.1.2 probably shouldn&apos;t bother to call non-ordinary [[GetPrototypeOf]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12197</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 13:24:35 -0800</bug_when>
+    <thetext>Fixed in rev33 editor&apos;s draft
+
+I changed ordinary [[SetPrototypeOf]] so it so longer calls [[GetPrototypeOf]] to  on the new __proto__ value.
+
+See Bug 2437 
+
+That eliminates the user code concern.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12437</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:39 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

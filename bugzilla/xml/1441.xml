@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1441</bug_id>
+          
+          <creation_ts>2013-04-15 09:09:00 -0700</creation_ts>
+          <short_desc>Non-strict &quot;delete obj.p&quot; should return false if obj.p isn&apos;t configurable</short_desc>
+          <delta_ts>2013-05-14 18:13:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3641</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-04-15 09:09:40 -0700</bug_when>
+    <thetext>In 11.4.1 &quot;The delete Operator&quot;,
+under &quot;Runtime Semantics: Evaluation&quot;,
+step 5.b-e are like this:
+
+&gt; b. Let deleteStatus be the result of calling the [[Delete]] internal method
+&gt;    on ToObject(GetBase(ref)), providing GetReferencedName(ref) as the argument.
+&gt;
+&gt; c. ReturnIfAbrupt(deleteStatus).
+&gt;
+&gt; d. If deleteStatus is false and IsStrictReference(ref) is true, then
+&gt;    throw a TypeError exception.
+&gt;
+&gt; e. Return true.
+
+I think the last step should be &quot;Return deleteStatus.&quot; so that deleting a nonconfigurable property in non-strict code returns false:
+
+  js&gt; var obj = Object.create({}, {p: {value: 3}});
+  js&gt; delete obj.p;
+  false</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3659</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-19 14:16:26 -0700</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3931</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:38 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

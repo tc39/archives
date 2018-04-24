@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4302</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>10.1.2 Intl.Collator</short_desc>
+          <delta_ts>2015-04-16 20:03:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14257</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:19 -0700</bug_when>
+    <thetext>10.1.2 Intl.Collator([ locales [, options]])
+
+Preamble: Missing parameter names
+
+&gt; When the Intl.Collator function is called with optional arguments locales and options, the following steps are taken:
+
+
+Step 1: Missing full stop
+
+Step 4: Change `collator`, `locales` and `options` to italic font.
+
+Steps 3-6: Merge steps
+&gt; Return InitializeCollator(collator, locales, options).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

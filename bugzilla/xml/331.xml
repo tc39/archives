@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>331</bug_id>
+          
+          <creation_ts>2012-04-05 09:03:00 -0700</creation_ts>
+          <short_desc>Date object should have 100% defined method to parse date-time strings</short_desc>
+          <delta_ts>2015-10-02 14:36:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>strawmen</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>vic99999</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>john.david.dalton</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>858</commentid>
+    <comment_count>0</comment_count>
+    <who name="">vic99999</who>
+    <bug_when>2012-04-05 09:03:55 -0700</bug_when>
+    <thetext>It will be good to have something like Date.fromISOString to parse ISO 8601 subset, and to get NaN for ALL not valid (for this format) strings.
+
+Date.parse is very not crossbrowser and can&apos;t be used.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>859</commentid>
+    <comment_count>1</comment_count>
+    <who name="John-David Dalton">john.david.dalton</who>
+    <bug_when>2012-04-09 07:09:06 -0700</bug_when>
+    <thetext>For more details see https://github.com/kriskowal/es5-shim/pull/110 and its referenced links.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5996</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 18:15:51 -0700</bug_when>
+    <thetext>Won&apos;t happen for ES6
+
+Reassigned as a future Harmony issue</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14747</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:16 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

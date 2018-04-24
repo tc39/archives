@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2697</bug_id>
+          
+          <creation_ts>2014-04-19 16:23:00 -0700</creation_ts>
+          <short_desc>chapter 14: misc editorial</short_desc>
+          <delta_ts>2014-06-01 17:57:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7844</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:23:33 -0700</bug_when>
+    <thetext>----------------------------------------
+In 14.1.9 &quot;Static Semantics: IsAnonymousFunctionDefinition ( production) ...&quot;:
+
+{1}
+14.1.9:
+    Rename parameter &apos;production&apos; to &apos;assignmentExpr&apos;
+
+{2}
+14.1.9 / para 1:
+The argument /production/ is is the result of parsing an /AssignmentExpression/.
+    Delete extra &quot;is&quot;
+
+----------------------------------------
+In 14.1.16 &quot;Static Semantics: ReferencesSuper&quot;:
+
+{3}
+14.1.16 / header:
+Static Semantics: ReferencesSuper
+    &quot;ReferencesSuper&quot; is serif italic, should be sans-serif upright.
+
+{4}
+14.1.16 / group 4 / production:
+FormalParameters : FormalParametersList
+    s|ParametersList|ParameterList|
+
+{5}
+14.1.16 / group 4 / step 1:
+Return /FormalParametersList/ Contains super.
+    s|ParametersList|ParameterList|
+
+----------------------------------------
+In 14.1.19 &quot;Runtime Semantics: EvaluateBody&quot;:
+
+{6}
+14.1.19 / step 3:
+If /result/.[[type]] is return then return NormalCompletion(/result/.[[value]])
+    Put the first &apos;return&apos; in sans-serif.
+
+----------------------------------------
+In 14.1.22 &quot;Runtime Semantics: Evaluation&quot;:
+
+{7}
+14.1.22 / group 1 / step 1:
+Return NormalCompletion(empty)
+    Put &apos;empty&apos; in sans-serif.
+
+{8}
+14.1.22 / group 3 / step 2:
+Let /runningContext/ be running execution context&apos;s Lexical Environment.
+    After &quot;be&quot;, insert &quot;the&quot;
+
+----------------------------------------
+In 14.2 &quot;Arrow Function Definitions&quot;:
+
+{9}
+14.2 / Syntax / prod 1:
+ArrowFunction[...] :
+ArrowParameters[...] =&gt; ConciseBody[...]
+    Italicize &apos;ArrowFunction&apos;, &apos;ArrowParameters&apos;, &apos;ConciseBody&apos;.
+
+{10}
+14.2 / Syntax / prod 2:
+ArrowParameters[...] :
+BindingIdentifier[...]
+    Italicize &apos;ArrowParameters&apos;, &apos;BindingIdentifier&apos;.
+
+----------------------------------------
+In 14.2.2 &quot;Static Semantics: BoundNames&quot;:
+
+{11}
+14.2.2 / group 1 / production:
+ArrowParameters : CoverParenthesizedExpressionAndArrowParameterList
+    &apos;ArrowParameters&apos; and &apos;CoverParenthesizedExpressionAndArrowParameterList&apos;
+    are in sans-serif italic, should be in serif italic.
+
+----------------------------------------
+In 14.2.5 &quot;Static Semantics: CoveredFormalsList&quot;:
+
+{12,13}
+14.2.5 / group 1 / production:
+ArrowParameters : BindingIdentifier
+    &apos;ArrowFunction&apos; and &apos;BindingIdentifier&apos; is in sans-serif italic,
+    should be in serif italic.
+
+----------------------------------------
+In 14.2.12 &quot;Static Semantics: ReferencesSuper&quot;:
+
+{14}
+14.2.12 / step 1:
+Return false.
+    &quot;false&quot; is in monospace, should be in serif bold.
+
+----------------------------------------
+In 14.3.5 &quot;Static Semantics: PropName&quot;:
+
+{15}
+14.3.5 / header:
+Static Semantics: PropName
+    &quot;PropName&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 14.3.6 &quot;Static Semantics: ReferencesSuper&quot;:
+
+{16}
+14.3.6 / header:
+Static Semantics: ReferencesSuper
+    &quot;ReferenceSuper&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 14.3.7 &quot;Static Semantics: SpecialMethod&quot;:
+
+{17}
+14.3.7 / header:
+Static Semantics: SpecialMethod
+    &quot;SpecialMethod&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 14.4.4 &quot;Static Semantics: Contains&quot;:
+
+{18}
+14.4.4 / group 1 / production:
+... : function * BindingIdentifier ( FormalParameters ) { FunctionBody }
+    Terminal &apos;}&apos; is in serif italic, should be in upright monospace bold.
+
+----------------------------------------
+In 14.4.10 &quot;Static Semantics: PropName&quot;:
+
+{19}
+14.4.10 / header:
+Static Semantics: PropName
+    &quot;PropName&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 14.4.11 &quot;Static Semantics: ReferencesSuper&quot;:
+
+{20}
+14.4.11 / header:
+Static Semantics: ReferencesSuper
+    &quot;ReferencesSuper&quot; is serif italic, should be sans-serif upright.
+
+{21}
+14.4.11 / para 1:
+See also: 14.1.16, ,14.2.12 14.3.6.
+    Move odd comma from before &quot;14.2.12&quot; to after it.
+
+----------------------------------------
+In 14.4.16 &quot;Runtime Semantics: Evaluation&quot;:
+
+{22}
+14.4.16 / group 1 / step 1:
+Return NormalCompletion(empty)
+    Put &apos;empty&apos; in sans-serif.
+
+{23}
+14.4.16 / group 3 / step 3:
+Let /runningContext/ be running execution context&apos;s Lexical Environment.
+    After &quot;be&quot;, insert &quot;the&quot;
+
+{24}
+14.4.16 / group 6 / step 7.a:
+If /received/.[[type]] is normal, then
+    Put &apos;normal&apos; in sans-serif.
+
+{25}
+14.4.16 / group 6 / step 7.b.i:
+Assert: /received/.[[type]] is throw.
+    Put &apos;throw&apos; in sans-serif.
+
+----------------------------------------
+In 14.5.1 &quot;Static Semantics: Early Errors&quot;:
+
+{26}
+14.5.1 / group 2 / item 1:
+It is a Syntax Error if PrototypePropertyNameList of /ClassElementList/
+/contains/ /any/ /duplicate/ /entries/, /unless/ /the/ /following/
+/condition/ /is/ /true/ /for/ /each/ /duplicate/ /entry/: ...
+    De-italicize &quot;contains any ... duplicate entry&quot;.
+
+{27}
+14.5.1 / group 2 / item 2:
+It is a Syntax Error if StaticPropertyNameList of /ClassElementList/
+/contains/ /any/ /duplicate/ /entries/, /unless/ /the/ /following/
+/condition/ /is/ /true/ /for/ /each/ /duplicate/ /entry/: ...
+    De-italicize &quot;contains any ... duplicate entry&quot;.
+
+{28}
+14.5.1 / group 3 / item 1:
+It is a Syntax Error if PropName of /MethodDefinition/ /is/ &quot;constructor&quot;
+/and/ /SpecialMethod/ /of/ /MethodDefinition/ /is/ */true/*.
+    De-italicize &quot;is&quot;, &quot;and SpecialMethod of&quot;, &quot;is true&quot;
+
+{29}
+14.5.1 / group 4 / item 1:
+It is a Syntax Error if PropName of /MethodDefinition/ /is/ &quot;prototype&quot;.
+    De-italicize &quot;is&quot;
+
+----------------------------------------
+In 14.5.4 &quot;Static Semantics: Contains&quot;:
+
+{30}
+14.5.4 / step 2:
+If /symbol/ is ClassHeritage, then
+    Italicize &quot;ClassHeritage&quot;
+
+----------------------------------------
+In 14.5.13 &quot;Static Semantics: PropName&quot;:
+
+{31}
+14.5.13 / header:
+Static Semantics: PropName
+    &quot;PropName&quot; is serif italic, should be sans-serif upright.
+
+----------------------------------------
+In 14.5.17 &quot;Runtime Semantics: ClassDefinitionEvaluation&quot;:
+
+{32}
+14.5.17 / step 7:
+If /constructor/ is empty, then
+    Put &apos;empty&apos; in sans-serif.
+
+----------------------------------------
+In 14.6.2.2 &quot;Expression Rules&quot;
+
+{33,34}
+14.6.2.2 / group 2 / production:
+Expression:
+AssignmentExpression
+    Italicize &apos;Expression&apos;
+    Italicize &apos;AssignmentExpression&apos;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8298</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 10:17:21 -0700</bug_when>
+    <thetext>{1}, the argument isn&apos;t always an AssignmentExpression.  Adjusted the comment accordingly.
+
+otherwise, all fixed in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8308</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-10 21:15:15 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; {1}, the argument isn&apos;t always an AssignmentExpression.  Adjusted the comment
+&gt; accordingly.
+
+Ah, I should have looked rather than trust the preamble!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8774</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 17:57:15 -0700</bug_when>
+    <thetext>confirmed fixed except for:
+part of {28}, re-raised as Bug 2949,
+and {33}, re-raised as Bug 2950.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

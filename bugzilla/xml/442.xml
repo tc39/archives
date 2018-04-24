@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>442</bug_id>
+          
+          <creation_ts>2012-07-04 10:14:00 -0700</creation_ts>
+          <short_desc>Suggest sync&apos;ing with CLDR on date element names</short_desc>
+          <delta_ts>2012-10-16 15:13:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="John Emmons">emmo</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1098</commentid>
+    <comment_count>0</comment_count>
+    <who name="John Emmons">emmo</who>
+    <bug_when>2012-07-04 10:14:38 -0700</bug_when>
+    <thetext>Since the spec states that CLDR data is the recommended source for implementation, I would proposed that the allowed values in Table 3, Section 12.1.1.1 be modified to be identical with the names in CLDR, so that there is no confusion, and that if CLDR were to add additional lengths over time, we could do so with no confusion for implementers.  Also, examples from English would be helpful here.  I would propose changing as follows:
+( conforming to the upcoming CLDR 22 release )
+
+Weekday - ( wide (Sunday) - abbreviated (Sun) - Short (Su) - Narrow (S) )
+Era - wide - abbreviated - narrow
+Month - &quot;2-digit&quot;, &quot;numeric&quot;, &quot;wide&quot;, &quot;abbreviated&quot;, &quot;narrow&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1269</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-10 21:54:20 -0700</bug_when>
+    <thetext>The recommendation to use CLDR is in a non-normative note, and we know that there will be at least one implementation that won&apos;t be based on CLDR, so we can&apos;t assume that all implementations will support all CLDR features, or will use the same strings.
+
+The proposal to change the values in table 3 should be brought up on es-discuss@.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1309</commentid>
+    <comment_count>2</comment_count>
+    <who name="John Emmons">emmo</who>
+    <bug_when>2012-07-13 19:52:11 -0700</bug_when>
+    <thetext>Understood - and so I&apos;m not asking you to support everything that CLDR does.  It just seems that in this case it would be much better to make it painfully obvious to those using CLDR as the basis for implementation exactly which forms they should be pulling from the CLDR.
+
+So in this case, it&apos;s pretty simple, as follows:
+
+Right now in the spec, for weekday, era, and month, you have:
+&quot;narrow&quot;, &quot;short&quot;, and &quot;long&quot;.
+
+By simply changing the words to:
+&quot;narrow&quot;, &quot;abbreviated&quot;, and &quot;wide&quot; respectively, we&apos;ve made it clear the correlation between ECMAScript and CLDR, and there is a lot smaller chance for confusion, especially in the case of weekdays, which now have 4 widths in CLDR instead of 3 ( narrow, short, abbreviated, and wide ).
+
+As it stands now, an implementer using CLDR as the basis for the implementation wouldn&apos;t know whether he should use (narrow,short,wide) or (narrow,abbreviated,wide) to match up with ECMAScript&apos;s (narrow,short,long) for weekdays.
+
+A simple wording change could avoid a lot of confusion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1399</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-02 20:04:40 -0700</bug_when>
+    <thetext>We discussed this at the July 2012 TC 39 meeting, and concluded that the names used in the API should not be changed to accommodate implementation concerns. Instead, I extended the non-normative note recommending CLDR to also recommend using CLDR “abbreviated” strings for DateTimeFormat “short” strings, and CLDR “wide” strings for DateTimeFormat “long” strings.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

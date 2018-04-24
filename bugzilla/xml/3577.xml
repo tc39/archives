@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3577</bug_id>
+          
+          <creation_ts>2015-01-20 04:35:00 -0800</creation_ts>
+          <short_desc>7.3.19 SpeciesConstructor, 9.4.2.3 ArraySpeciesCreate: inconsistency in the handling of originalObj.constructor === null</short_desc>
+          <delta_ts>2015-02-12 12:17:39 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11559</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-20 04:35:43 -0800</bug_when>
+    <thetext>7.3.19 SpeciesConstructor
+Returns the default constructor in the following cases:
+(a) originalObj.constructor is undefined,
+(c) originalObj.constructor[@@species] is undefined or null.
+
+9.4.2.3 ArraySpeciesCreate
+Uses the default constructor in the following cases:
+(a) originalObj.constructor is undefined or null,
+(b) originalObj.constructor is a constructor from a different realm,
+(c) originalObj.constructor[@@species] is undefined or null.
+
+There is an inconsistency between the two abstract operations in item (a) above.
+
+According to Bug 3524, the editor didn&apos;t want to add `null` in the case of SpeciesConstructor. In that case, we should consider removing `null` in the case of ArraySpeciesCreate.
+
+Proposed patch: In the algorithm of ArraySpeciesCreate:
+* Add step 4.d.iii: If C is null, let C be undefined.
+* Change step 5: If C is undefined, return ArrayCreate(length).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11562</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-20 10:07:25 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11974</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:55 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12087</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-03 23:19:58 -0800</bug_when>
+    <thetext>Only partially fixed: Now, in 9.4.2.3 ArraySpeciesCreate, when originalObj.constructor[@@species] is null, a TypeError will be thrown (contrarily to 7.3.19 SpeciesConstructor). [I guess I should&apos;ve made explicit the implicit &quot;and&quot; between the two bullets at the end of Comment 0.]
+
+* In 9.4.2.3 ArraySpeciesCreate, add step 4.d.iii: If C is null, let C be undefined.
+
+(Alternatively, see Bug 3725 for the opposite change in 7.3.19 SpeciesConstructor.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12291</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-10 13:22:54 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12434</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:39 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

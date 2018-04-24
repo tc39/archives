@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1729</bug_id>
+          
+          <creation_ts>2013-08-06 10:44:00 -0700</creation_ts>
+          <short_desc>let/const/class/function* naming rules</short_desc>
+          <delta_ts>2013-08-23 08:22:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4773</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-08-06 10:44:53 -0700</bug_when>
+    <thetext>Per agenda item: https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-07/july-25.md#56-can-letconstclassfunction-in-non-strict-code-bind-eval-and-arguments
+
+Resolution: https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-07/july-25.md#consensusresolution
+
+
+General Rule
+
+- Non-strict code operates in consistently non-strict manner (This covers the let/const/function* cases)
+- Exception:
+  - Only allow duplicate parameter names in simple parameter lists
+  - Simple parameter lists are defined by those that do not include rest or defaults or destructuring.
+
+Consensus: 
+
+The name of the ClassDeclaration/ClassExpression follows the strict rules for its name. So it cannot be named &quot;eval&quot; or &quot;arguments&quot;. Just like for strict function names.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4943</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 13:31:42 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5061</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:22 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

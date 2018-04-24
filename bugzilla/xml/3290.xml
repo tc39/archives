@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3290</bug_id>
+          
+          <creation_ts>2014-10-19 10:37:00 -0700</creation_ts>
+          <short_desc>Modules editorial fixes</short_desc>
+          <delta_ts>2015-03-16 14:23:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10521</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-10-19 10:37:20 -0700</bug_when>
+    <thetext>8.6.1 Many difference unnormalized names -&gt; Many different unnormalized names
+
+Table 39 Export Entry Record Fields
+is exported by ththis module -&gt; is exported by this module
+
+15.2.1.16 Stati[c] Semantics: ParseModuleAndImports
+for modoles that are directly -&gt; for modules that are directly
+
+15.2.1.18 10. Return startResolution -&gt; Return starResolution
+
+15.2.1.20 4. Append to modules [then -&gt; the new] elements of newModuleSet (module set may include modules already in realm.modules)
+
+15.2.1.20 5. For each Module Record m that is an elemen[ot-&gt;t] of newModuleSet
+
+15.2.1.20 5. a) Let satatus -&gt; Let status
+
+15.2.1.20 6. ready for to be evaluated -&gt; ready to be evaluated
+
+15.2.1.20 7. Append to realm.[[modules]] [then -&gt; the new] elements of newModuleSet
+
+15.2.1.21 Runtime Semantics: ModuleDeclarationInstantiation
+realm is the Ream Record -&gt; realm is the Realm Record
+
+15.2.1.22 Runtime Semantics: ModuleEvaluation
+Using &quot;m&quot; instead of &quot;module&quot; which is the argument name.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11283</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-31 10:19:27 -0800</bug_when>
+    <thetext>Re: 15.2.1.20 4. and 7. (actually now 2 and 5) you say &quot;(module set may include modules already in realm.modules)&quot;.  How did you arrive at that conclusion? By my analysis, newModuleSet has no duplicates and initially only contains module records that are not already in realm.[[modules]].
+
+Everything else fixed in rev 31 editor&apos;s draft (mostly fied in rev29)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

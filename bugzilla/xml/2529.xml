@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2529</bug_id>
+          
+          <creation_ts>2014-02-12 16:39:00 -0800</creation_ts>
+          <short_desc>chapter 8: misc editorial</short_desc>
+          <delta_ts>2014-06-01 23:09:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7263</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:39:50 -0800</bug_when>
+    <thetext>----------------------------------------
+In 8.1.1.4.8 &quot;HasThisBinding ()&quot;:
+
+HasSuperBinding ()
+    This should be a new section, not a part of 8.1.1.4.8.
+
+----------------------------------------
+In 8.2.1 &quot;CreateRealm ( )&quot;:
+
+8.2.1 / step 3:
+Set /realmRec/.[[intrinsics]] be /intrinsics/.
+    s|be|to|
+
+8.2.1 / step 6:
+Set /realmRec/.[[globalThis]] be /newGlobal/.
+    s|be|to|
+
+8.2.1 / step 7:
+Let /newGlobalEnv/ be NewGlobalEnvironment(/newGlobal/, /intrinsics/).
+    NewGlobalEnvironment is not defined.
+
+8.2.1 / step 8:
+Set /realmRec/.[[globalEnv]] be /newGlobalEnv/.
+    s|be|to|
+
+----------------------------------------
+In 8.3.1 &quot;ResolveBinding(name)&quot;:
+
+8.3.1 / header:
+    Append &quot;Abstract Operation&quot; to header
+
+8.3.1 / step 3:
+Return the result of calling GetIdentifierReference abstract operation ...
+    After &quot;calling&quot;, insert &quot;the&quot;.
+
+----------------------------------------
+In 8.3.2 &quot;GetThisEnvironment&quot;:
+In 8.3.3 &quot;ResolveThisBinding&quot;:
+In 8.3.4 &quot;GetGlobalObject&quot;:
+
+    Add &quot;()&quot; to the section title, so it&apos;s clearer that the operation doesn&apos;t
+    have any parameters.
+
+----------------------------------------
+In 8.4 &quot;Tasks and Task Queues&quot;:
+
+8.4 / para 4:
+... and starts execution of associated Task abstraction operation.
+    s|of|of the|
+    s|abstraction|abstract|
+
+----------------------------------------
+In 8.4.1 &quot;EnqueueTask ( queueName, task, arguments) Abstract Operation&quot;:
+
+8.4.1 / step 3:
+Assert: /arguments/ is a List whose size is the same as ...
+    I think this is the only point where the spec says that a List has a &apos;size&apos;.
+    Change &quot;whose size is&quot; to &quot;whose number of elements is&quot; ?
+
+8.4.1 / step 5:
+Let /callerReam/ be /callerContext/&apos;s Realm.
+    s|callerReam|callerRealm|
+
+----------------------------------------
+In 8.4.2 &quot;NextTask ( result ) Algorithm Step&quot;:
+
+8.4.2 / header
+    Rather than saying &apos;NextTask&apos; is an &quot;Algorithm Step&quot;,
+    why not define it as an abstract operation?
+
+8.4.2 / para 2
+Is used in Task abstract operation in place of:
+    s|Is|is|
+    s|operation|operations|
+
+8.4.2 / para 3:
+Task abstraction operations must not contain a Return step ...
+    s|abstraction|abstract|
+
+8.4.2 / step 4:
+Let /nextQueue/ be a non-emptry Task Queue ...
+    s|non-emptry|non-empty|
+
+8.4.2 / step 6:
+Let /newContext/ be a new exeution context.
+    s|exeution|execution|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8338</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 11:51:01 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+re: section heading for NextTask.  This is most like 6.2.2.4 ReturnIfAbrupt, so used the same formatting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8788</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 23:09:19 -0700</bug_when>
+    <thetext>&gt; fixed in rev25 editor&apos;s draft
+
+confirmed fixed except for what I re-raised as Bug 2955
+
+&gt; re: section heading for NextTask.  This is most like 6.2.2.4 ReturnIfAbrupt, so
+&gt; used the same formatting.
+
+Except that it *doesn&apos;t* use the same formatting. ReturnIfAbrupt&apos;s header doesn&apos;t mention its parameter, and invocations of ReturnIfAbrupt parenthesize the argument.
+
+header:       6.2.2.4 ReturnIfAbrupt       8.4.2 NextTask result
+
+invocation:   ReturnIfAbrupt(argument)     NextTask status</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

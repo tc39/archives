@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4277</bug_id>
+          
+          <creation_ts>2015-04-15 14:39:00 -0700</creation_ts>
+          <short_desc>14.2.16: Misleading non-normative note</short_desc>
+          <delta_ts>2015-04-15 14:50:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14185</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-15 14:39:21 -0700</bug_when>
+    <thetext>The non-normative note for 14.2.16 (&quot;Runtime Semantics: Evaluation&quot;) states:
+
+&gt; An ArrowFunction does not define local bindings for arguments, super, this, or
+&gt; new.target.
+
+While it is true that ArrowFunctions do not *intrinsically* define local bindings for `arguments`, this is not true for arrow functions where `arguments` appears as a formal parameter. 9.2.12 &quot;FunctionDeclarationInstantiation(func, argumentsList)&quot; defines the behavior of arguments objects and named parameters in this context:
+
+https://people.mozilla.org/%7Ejorendorff/es6-draft.html#sec-functiondeclarationinstantiation
+
+For example:
+
+    var f = (arguments) =&gt; arguments;
+
+While this distinction might amount to nitpicking as it concerns the first sentence in the note, the sentence immediately following is much more clearly incorrect:
+
+&gt; Any reference to arguments, super, or this within an ArrowFunction must
+&gt; resolve to a binding in a lexically enclosing environment.
+
+...in these cases, `arguments` resolves to a binding within the ArrowFunction&apos;s lexical environment (as created via FunctionDeclarationInstantiation).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14187</commentid>
+    <comment_count>1</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-15 14:50:44 -0700</bug_when>
+    <thetext>Maybe a more compelling example (to the extent that this bug can be called &quot;compelling&quot;):
+
+    function f() {
+      return (arguments) =&gt; arguments;
+    }</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

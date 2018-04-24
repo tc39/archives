@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4152</bug_id>
+          
+          <creation_ts>2015-03-10 06:29:00 -0700</creation_ts>
+          <short_desc>ArrowParameters not strict</short_desc>
+          <delta_ts>2015-07-10 08:34:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+    
+    <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13676</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-10 06:29:24 -0700</bug_when>
+    <thetext>The ArrowFormalParameters are strict but the single binding identifier is not. This means that:
+
+  static =&gt; 1;
+
+is valid but:
+
+  (static) =&gt; 1;
+
+is not.
+
+That is kind of weird.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13682</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-10 13:23:16 -0700</bug_when>
+    <thetext>How do you figure?
+
+The only static semantic rule for StrictFormalParameters is in 14.1.2 and says that there can&apos;t be any duplicate parameter names.
+
+I suppose StrictFormalParameters is a misleading name as it really has nothing to do with strict mode.  The strict mode of an arrow function is determined in the usual way (either contained in strict code or its body has a &quot;use strict&quot; directive.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13683</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-03-10 13:28:38 -0700</bug_when>
+    <thetext>This always gets me.
+
+The name always gets me thinking that the strict mode rules for FormalParameters should be applied.
+
+A different name might help but I can&apos;t think of anything... Maybe NoDuplicatesFormalParameters to be explicit?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13687</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-10 13:50:39 -0700</bug_when>
+    <thetext>SlightlyStrictFormalParameters  ??</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13689</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-10 15:30:30 -0700</bug_when>
+    <thetext>DistinctFormalParameters ?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

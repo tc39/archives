@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2494</bug_id>
+          
+          <creation_ts>2014-02-03 06:48:00 -0800</creation_ts>
+          <short_desc>Add hooks for CSP</short_desc>
+          <delta_ts>2015-03-15 13:04:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Anne van Kesteren">annevk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bruant.d</cc>
+    
+    <cc>d</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>getify</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>mkwst</cc>
+    
+    <cc>till</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7173</commentid>
+    <comment_count>0</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2014-02-03 06:48:41 -0800</bug_when>
+    <thetext>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html#script-src modifies the way eval() and new Function() work. That should not be done in that way but rather there should be some way for the host environment to influence execution of those features.
+
+I guess if we really rely on that being a DOMException whose name is &quot;SecurityError&quot; it would be best if the host environment could define the exception object to be thrown.
+
+(This setup seems rather wonky, I wonder if this was ever passed by TC39 for review before it get widely deployed...)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7177</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mike West">mkwst</who>
+    <bug_when>2014-02-03 17:10:53 -0800</bug_when>
+    <thetext>What about the setup is wonky? What can we do to unwonk it?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7189</commentid>
+    <comment_count>2</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2014-02-05 05:14:06 -0800</bug_when>
+    <thetext>Having ES features throw non-ES exception objects. I&apos;m waiting for Allen to weigh in as what would be the best way forward here given the status quo.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7190</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mike West">mkwst</who>
+    <bug_when>2014-02-05 05:27:31 -0800</bug_when>
+    <thetext>Status quo (CSP 1.0) says &quot;must throw a security exception&quot;, which I suppose isn&apos;t much better.
+
+Would changing the spec to EvalError (which I believe is defined, but unused in ES6) be better? If not, what would you prefer?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7193</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-05 08:45:51 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Status quo (CSP 1.0) says &quot;must throw a security exception&quot;, which I suppose
+&gt; isn&apos;t much better.
+&gt; 
+&gt; Would changing the spec to EvalError (which I believe is defined, but unused in
+&gt; ES6) be better? If not, what would you prefer?
+
+Which exception is thrown is probably the least of my concerns but EvalError seems like a good choice.  It is no longer used by the ES spec. but this usage is similar to what it was originally intended for.
+
+Regarding the ES specification, the hooks necessary to implement CSP seem trivial.
+
+Now for bigger issues:
+
+1) Is there really any point is trying to restrict the use of eval and the function constructor? Assume the a bad guy understands compilers. If his script has access to some JS source code that it might want to eval (or Function construct) he could provide his own eval/Function.  All it takes is the inclusion in his script of a JS parser/interpreter, implemented in JS (consider http://sns.cs.princeton.edu/2012/04/javascript-in-javascript-js-js-sandboxing-third-party-scripts/ but with the sandboxing removed).  I believe that using this technique it is possible to recreate a fully functional eval/Function so what has the restriction accomplished?
+
+2) In ES6 there are going to be a number of new ways to evaluate source code. You will need to take those into account in your spec.  
+
+3)ES6 is providing new mechanisms (Loaders and Realms) with hooks for controlling capabilities such as eval and directly supporting sandboxing including iframes. It would seem that evolution of CSP needs to take these emerging capabilities into account and also should provide feedback into the ES6 design. (for a start see http://wiki.ecmascript.org/doku.php?id=harmony:module_loaders and https://github.com/ModuleLoader/es6-module-loader )</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7196</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mike West">mkwst</who>
+    <bug_when>2014-02-06 04:03:10 -0800</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Which exception is thrown is probably the least of my concerns but EvalError
+&gt; seems like a good choice.  It is no longer used by the ES spec. but this usage
+&gt; is similar to what it was originally intended for.
+
+Great. https://github.com/w3c/webappsec/commit/d310910445161163ccc4d5b612c04962ec8412ab
+
+&gt; Regarding the ES specification, the hooks necessary to implement CSP seem
+&gt; trivial.
+
+Also great! I&apos;m happy to poke at the CSP spec in whatever way would make that simplest for you folks.
+
+&gt; 1) Is there really any point is trying to restrict the use of eval and the
+&gt; function constructor? ... I believe that using this technique it is
+&gt; possible to recreate a fully functional eval/Function so what has the
+&gt; restriction accomplished?
+
+You&apos;re entirely correct.
+
+That said, one goal of CSP is to _mitigate_ the risk of cross-site scripting and other content injection attacks. It&apos;s certainly going to be much more difficult for an attacker to inject a JavaScript compiler than it would be for her to exploit an author&apos;s unconsidered use of `eval()` (or similar) with data that the attacker might be able to control. Giving authors the ability to turn off the potentially problematic bits of JavaScript that do the magic of converting text to execution is valuable, though I&apos;d agree that it&apos;s nowhere near a 100% promise that no attacker-provided text can be evaluated.
+
+&gt; 2) In ES6 there are going to be a number of new ways to evaluate source code.
+&gt; You will need to take those into account in your spec.
+
+Can you point me at some of them? Or, better, can we work out a way that CSP can hook into those methods in a generic way so that the CSP spec can avoid leaving obvious holes with new revisions of the ES spec?
+ 
+&gt; 3)ES6 is providing new mechanisms (Loaders and Realms) with hooks for
+&gt; controlling capabilities such as eval and directly supporting sandboxing
+&gt; including iframes. It would seem that evolution of CSP needs to take these
+&gt; emerging capabilities into account and also should provide feedback into the
+&gt; ES6 design. (for a start see
+&gt; http://wiki.ecmascript.org/doku.php?id=harmony:module_loaders and
+&gt; https://github.com/ModuleLoader/es6-module-loader )
+
+I spoke with Alex Russell briefly (though I can&apos;t seem to CC him here...) about some of these types of concerns a week or two ago, and I agree that it would be a good idea to review these features to see how they interact with CSP. I haven&apos;t found time to read the linked documents yet, but they&apos;re on my list. :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13738</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 13:04:30 -0700</bug_when>
+    <thetext>Resolving this for ES6, as I believe there is sufficient language in the ES6 spec. to handle the current CSP use cases WRT the eval features that a present in ES6.  If you disagree you can open an ES7 bug.
+
+The contemplate new eval-like features didn&apos;t make it into ES6.  But you should continue to track ES7 work and in particular, the ongoing work to define the browser module loader and loader API</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

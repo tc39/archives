@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2858</bug_id>
+          
+          <creation_ts>2014-05-13 15:32:00 -0700</creation_ts>
+          <short_desc>Define DecimalDigit as one of 0, NonDecimalDigit</short_desc>
+          <delta_ts>2014-06-02 14:51:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8375</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-05-13 15:32:20 -0700</bug_when>
+    <thetext>I couldn&apos;t find any precedent to support this in the spec, so it could possibly be dismissed outright. The following defines DecimalDigit in terms of 0 and the nonterminal symbol NonZeroDigit, whose terminals make up the remaining 1-9 digits. Unless I&apos;m mistaken, then DecimalIntegerLiteral can be refactored to just DecimalDigits.
+
+
+  DecimalIntegerLiteral ::
+    DecimalDigits
+
+  DecimalDigits ::
+    DecimalDigit
+    DecimalDigits DecimalDigit
+
+  DecimalDigit :: one of
+    0
+    NonZeroDigit
+
+  NonZeroDigit :: one of
+    1 2 3 4 5 6 7 8 9
+
+
+Which is a refactoring of: 
+
+
+  DecimalIntegerLiteral ::
+    0
+    NonZeroDigit DecimalDigits[opt]
+
+  DecimalDigits ::
+    DecimalDigit
+    DecimalDigits DecimalDigit
+
+  DecimalDigit :: one of
+    0 1 2 3 4 5 6 7 8 9
+
+  NonZeroDigit :: one of
+    1 2 3 4 5 6 7 8 9</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8411</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-13 22:02:43 -0700</bug_when>
+    <thetext>Your proposed syntax would accept e.g. &quot;03&quot;, which the existing syntax does not accept (presumably because it looks like a LegacyOctalIntegerLiteral).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8849</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-06-02 14:51:07 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Your proposed syntax would accept e.g. &quot;03&quot;, which the existing syntax does not
+&gt; accept (presumably because it looks like a LegacyOctalIntegerLiteral).
+
+Heh, just a tiny oversight :)
+
+Thanks, closing this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4437</bug_id>
+          
+          <creation_ts>2015-08-18 08:25:00 -0700</creation_ts>
+          <short_desc>26.3: Modules name space objects  should imnplement @@toPrimitive</short_desc>
+          <delta_ts>2015-08-18 11:16:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>dehrenberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14594</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-08-18 08:25:35 -0700</bug_when>
+    <thetext>Current Module name space objects implement only  @@toStringTag and @@iterator as own properties.  It should also implement @@toPrimitive as a method that unconditionally throws a TypeError exception.  Without it, the following can occur:
+
+//&quot;Mod1&quot;
+export function toString() {
+   //arbitrary code with side effects
+   console.log(&quot;called export toString function&quot;);
+   return &quot;Module&quot;
+}
+
+
+//-----------------
+// mail module
+import * as m1 from &quot;Mod1&quot;;
+
+console.log(m1 == &quot;Module);  //produces side efects before producing true
+
+
+Note that any operator that applies ToPrimitive to m1 will call the exported toString function (or an exported valueOf)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14596</commentid>
+    <comment_count>1</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-08-18 11:11:54 -0700</bug_when>
+    <thetext>I&apos;m wondering about the motivation for this bug. Why is it more important that `m1 == &quot;Module&quot;` have no side effect, than that `m1 + &quot;&quot;` have no side effect? Does the @@toPrimitive definition need to be a primordial, or is it sufficient that a user could define it and it would work? Is it bad that the user could override @@toPrimitive and cause == to have ia side effect on modules?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14597</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-18 11:16:23 -0700</bug_when>
+    <thetext>(In reply to Daniel Ehrenberg from comment #1)
+&gt; Does the @@toPrimitive definition need to be a primordial, or is it
+&gt; sufficient that a user could define it and it would work? Is it bad that the
+&gt; user could override @@toPrimitive and cause == to have ia side effect on
+&gt; modules?
+
+Users cannot add or redefine properties on module namespace objects (9.4.6.6, 9.4.6.9, 9.4.6.10).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

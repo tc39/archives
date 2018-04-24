@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3700</bug_id>
+          
+          <creation_ts>2015-01-31 05:52:00 -0800</creation_ts>
+          <short_desc>Various &quot;then&quot; clean-ups</short_desc>
+          <delta_ts>2015-02-02 18:38:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11772</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-31 05:52:14 -0800</bug_when>
+    <thetext>Q: I&apos;m not sure whether or not &quot;then&quot; should be removed in the entries marked with (*). 
+
+And the entries marked with (**) definitely need to be changed.
+
+9.1.6.3 ValidateAndApplyPropertyDescriptor (O, P, extensible, Desc, current)
+- step 1: Remove &quot;then&quot;, add comma (*)
+- step 5: Add comma before &quot;then&quot;
+- step 6: Remove &quot;then&quot;
+
+9.2.1 [[GetOwnProperty]] (P)
+- step 2.a: Move comma before &quot;then&quot;
+
+9.2.2 [[Call]] ( thisArgument, argumentsList)
+- step 9: Remove &quot;then&quot;, add comma
+
+9.2.11 SetFunctionName (F, name, prefix) Abstract Operation
+- step 3: Remove &quot;then&quot;, add comma (*)
+
+9.4.4.1 [[GetOwnProperty]] (P)
+- step 3: Remove &quot;then&quot;, add comma
+
+9.4.5.2 [[HasProperty]](P)
+- step 3.c.iii: Remove &quot;then&quot;, add comma
+
+9.4.5.3 [[DefineOwnProperty]] ( P, Desc)
+- step 3.c.i: Remove &quot;then&quot;, add comma
+
+9.4.5.9 IntegerIndexedElementGet ( O, index ) Abstract Operation
+- step 5: Remove &quot;then&quot;, add comma
+
+9.4.5.10 IntegerIndexedElementSet ( O, index, value ) Abstract Operation
+- step 7: Remove &quot;then&quot;, add comma
+
+12.3.4.3 Runtime Semantics: EvaluateDirectCall( func, thisValue, arguments, tailPosition )
+- step 8: Remove &quot;then&quot;, add comma (*)
+
+12.5.4.2 Runtime Semantics: Evaluation
+- step 4: Remove comma after &quot;then&quot;
+
+12.14.4 Runtime Semantics: Evaluation
+- step 1: Add comma before &quot;then&quot;
+
+12.14.5.3 Runtime Semantics: IteratorDestructuringAssignmentEvaluation
+  AssignmentElement[Yield] : DestructuringAssignmentTarget Initializeropt
+- step 1: Add comma before &quot;then&quot;
+- step 8: Add comma before &quot;then&quot;
+  AssignmentRestElement[Yield] : ... DestructuringAssignmentTarget
+- step 1: Add comma before &quot;then&quot;
+- step 6: Add comma before &quot;then&quot;
+
+12.14.5.4 Runtime Semantics: KeyedDestructuringAssignmentEvaluation
+AssignmentElement[Yield] : DestructuringAssignmentTarget  Initializeropt
+- step 1: Add comma before &quot;then&quot;
+- step 6: Add comma before &quot;then&quot;
+
+13.2.3.6 Runtime Semantics: IteratorBindingInitialization
+  SingleNameBinding : BindingIdentifier Initializer
+- step 8: Change &quot;then&quot; to &quot;return&quot; (**)
+
+13.2.3.7 Runtime Semantics: KeyedBindingInitialization
+  SingleNameBinding : BindingIdentifier Initializeropt
+- step 6: Change &quot;then&quot; to &quot;return&quot; (**)
+
+14.5.3 Static Semantics: ConstructorMethod
+  ClassElementList : ClassElement
+- step 1: Remove &quot;then&quot;, add comma
+  ClassElementList : ClassElementList ClassElement
+- step 3: Remove &quot;then&quot;, add comma
+
+14.5.10 Static Semantics: NonConstructorMethodDefinitions
+  ClassElementList : ClassElement
+- step 1: Remove &quot;then&quot;, add comma
+  ClassElementList : ClassElementList ClassElement
+- step 2: Remove &quot;then&quot;, add comma
+
+15.1.8 Runtime Semantics: GlobalDeclarationInstantiation (script, env)
+- step 12.a: Add comma before &quot;then&quot;
+
+15.2.1.11 Static Semantics: LexicallyDeclaredNames
+ModuleItem : ExportDeclaration
+- step 1: Remove &quot;then&quot;, add comma
+
+15.2.1.13 Static Semantics: VarDeclaredNames
+  ModuleItem : ExportDeclaration
+- step 1: Remove &quot;then&quot;, add comma
+
+15.2.1.14 Static Semantics: VarScopedDeclarations
+  ModuleItem : ExportDeclaration
+- step 1: Remove &quot;then&quot;, add comma
+
+15.2.1.21 Runtime Semantics: ModuleDeclarationInstantiation( module, realm, moduleSet )
+- step 7.a.iv: Add comma before &quot;then&quot;
+
+18.2.1.1 Runtime Semantics: PerformEval( x, evalRealm, strictCaller, direct)
+- step 1: Remove &quot;then&quot;, add comma (*)
+
+18.2.1.2 Runtime Semantics: EvalDeclarationInstantiation( body, varEnv, lexEnv, strict)
+- step 11.a: Add comma before &quot;then&quot;
+
+19.2.1.1.1 RuntimeSemantics: CreateDynamicFunction(constructor, newTarget, kind, args)
+- step 14: Remove &quot;then&quot;, add comma
+
+20.3.2.1 Date ( year, month [, date [ , hours [ , minutes [ , seconds [ , ms ] ] ] ] ] )
+- steps 3.e, 3.g, 3.i, 3.k, 3.m: Remove &quot;then&quot;, add comma
+
+20.3.3.4 Date.UTC ( year, month [ , date [ , hours [ , minutes [ , seconds [ , ms ] ] ] ] ] )
+- steps 5, 7, 9, 11, 13: Remove &quot;then&quot;, add comma
+
+21.1.3.11 String.prototype.match ( regexp )
+- step 4: Remove full stop after comma
+
+21.1.3.14 String.prototype.replace (searchValue, replaceValue )
+- step 4: Remove full stop after comma
+
+21.1.3.15 String.prototype.search ( regexp )
+- step 4: Remove full stop after comma
+- step 5: Remove comma after &quot;then&quot;
+
+21.1.3.16 String.prototype.slice ( start, end )
+- step 6: Remove &quot;then&quot;, add comma
+
+21.1.3.17 String.prototype.split ( separator, limit )
+- step 3.a: Remove comma after &quot;then&quot;
+
+21.1.3.17.1 Runtime Semantics: SplitMatch Abstract Operation
+- step 4: Remove &quot;then&quot;, add comma
+
+21.2.2.5.1 Runtime Semantics: RepeatMatcher Abstract Operation
+- step 2.2: Remove &quot;then&quot;, add comma
+
+21.2.2.9 AtomEscape
+- step 5: Remove &quot;then&quot;, add comma
+
+21.2.2.15.1 Runtime Semantics: CharacterRange Abstract Operation
+- step 1: Remove &quot;then&quot;, add comma
+- step 6: Remove &quot;then&quot;, add comma
+
+21.2.2.19 ClassEscape
+  ClassEscape :: DecimalEscape
+- step 2: Remove &quot;then&quot;, add comma
+
+21.2.3.2.2 Runtime Semantics: RegExpInitialize Abstract Operation
+- step 8: Remove &quot;then&quot;, add comma
+
+21.2.5.2.2 Runtime Semantics: RegExpBuiltinExec ( R, S ) Abstract Operation
+- step 13: Remove &quot;then&quot;, add comma
+
+21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+- step 9: Remove &quot;then&quot;, add comma
+
+23.1.1.1 Map ( [ iterable ] )
+- step 1: Remove &quot;then&quot;, add comma
+
+23.1.3.10 get Map.prototype.size
+- step 6.a: Add comma before &quot;then&quot;
+
+23.2.3.9 get Set.prototype.size
+- step 6.a: Add comma before &quot;then&quot;
+
+23.2.5.2.1 %SetIteratorPrototype%.next ( )
+- step 10.d.i: Move comma before &quot;then&quot;
+
+24.3.2 JSON.stringify ( value [ , replacer [ , space ] ] )
+- step 4.b.v.6: Move comma before &quot;then&quot;
+- step 4.b.v.7: Move comma before &quot;then&quot;
+- steps 5, 5.a, 5.b: Move comma before &quot;then&quot;
+- step 6: Add &quot;, then&quot;
+- step 7: Add &quot;, then&quot;
+
+24.3.2.1 Runtime Semantics: Str Abstract Operation
+- steps 5, 5.a, 5.b, 5.c: Move comma before &quot;then&quot;
+- steps 6, 7, 8: Remove &quot;then&quot;, add comma
+- step 10: Add &quot;, then&quot;
+- step 10.a: Remove &quot;then&quot;, add comma
+- step 11: Remove comma before &quot;and&quot;
+
+24.3.2.3 Runtime Semantics: JO Abstract Operation
+- step 1: Remove &quot;then&quot;, add comma
+
+24.3.2.4 Runtime Semantics: JA Abstract Operation
+- step 1: Remove &quot;then&quot;, add comma
+
+B.2.1.1 escape (string)
+- step 6.c: Add &quot;then&quot;
+
+B.2.4.2 Date.prototype.setYear (year)
+- step 5.c: Remove &quot;then&quot;, add comma</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11854</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-01 14:39:31 -0800</bug_when>
+    <thetext>fixed inrev32 editor&apos;s draft
+
+* I dokn&apos;t think we need to use the same then treatment in asserts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11914</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:47 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1396</bug_id>
+          
+          <creation_ts>2013-03-24 13:18:00 -0700</creation_ts>
+          <short_desc>15.13.7.4: abstract operations refer to &quot;this&quot;</short_desc>
+          <delta_ts>2013-07-15 17:03:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3553</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-24 13:18:05 -0700</bug_when>
+    <thetext>In 15.13.7.4 &quot;Properties of the DataView Prototype Object&quot;,
+the algorithms for GetValue() and SetValue() both reference &apos;this&apos;,
+which I believe is something that no other abstract operation does.
+
+Presumably the intent is that it means the same thing as &apos;this&apos; does
+in the calling algorithm, but that seems needlessly magical.
+
+Instead, introduce an explicit &apos;dataview&apos; parameter to both operations.
+
+
+(And while you&apos;re at it, perhaps rename:
+    GetValue   as  GetValueFromDataView
+    SetValue   as  SetValueInDataView
+See Bug 746.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4279</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-23 13:05:32 -0700</bug_when>
+    <thetext>fixed in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4436</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:43 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

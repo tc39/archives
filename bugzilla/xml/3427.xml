@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3427</bug_id>
+          
+          <creation_ts>2014-12-08 15:19:00 -0800</creation_ts>
+          <short_desc>Infeasible semantic rules of ES5</short_desc>
+          <delta_ts>2015-10-03 18:57:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Daejun Park">daejunpark</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10969</commentid>
+    <comment_count>0</comment_count>
+      <attachid>75</attachid>
+    <who name="Daejun Park">daejunpark</who>
+    <bug_when>2014-12-08 15:19:03 -0800</bug_when>
+    <thetext>Created attachment 75
+Quick explanation why each semantic rules are infeasible
+
+I think that the following semantic rules are not feasible to reach.
+
+- 8.7.2 PutValue (V, W) - [[Put]], Step 4.a
+- 8.7.2 PutValue (V, W) - [[Put]], Step 4.b
+- 10.2.1.1.4 GetBindingValue(N,S) - Step 3.a
+- 10.2.1.1.5 DeleteBinding (N) - Step 2
+- 10.2.1.2.4 GetBindingValue(N,S) - Step 4.a
+- 10.6 Arguments Object - [[DefineOwnProperty]], Step 4.a, else-branch
+
+I attached quick explanations why they are infeasible for each cases.
+
+
+I found these infeasible semantic rules when systematically measuring test coverage of test262. I found several missing semantic rules that are not covered by test262, and attempted to manually write test programs for each cases, but failed to find tests for the above cases. For the other cases, I succeeded in finding tests, which already reported in Bug 3426:
+https://bugs.ecmascript.org/show_bug.cgi?id=3426
+
+For more details, please refer to the following page:
+https://github.com/kframework/javascript-semantics/blob/master/test262-coverage/README.md
+
+
+Thanks,
+Daejun</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12796</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 18:08:49 -0800</bug_when>
+    <thetext>thanks, nice  analysis.
+
+I checked these against the ES6 spec. Mostly they have already been taken care of via refactoring that has taken place since ES5.1.
+
+Also, the existence of proxies means that object environment records are less predicable.
+
+But I did change the hasBinding test in declarative binding record DeleteBinding into an assertion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14768</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 18:57:28 -0700</bug_when>
+    <thetext>Seems fixed.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>75</attachid>
+            <date>2014-12-08 15:19:00 -0800</date>
+            <delta_ts>2014-12-08 15:19:03 -0800</delta_ts>
+            <desc>Quick explanation why each semantic rules are infeasible</desc>
+            <filename>file_3427.txt</filename>
+            <type>text/plain</type>
+            <size>8473</size>
+            <attacher name="Daejun Park">daejunpark</attacher>
+            
+              <data encoding="base64">UXVpY2sgZXhwbGFuYXRpb24gd2h5IGVhY2ggc2VtYW50aWMgcnVsZXMgYXJlIGluZmVhc2libGU6
+DQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCjguNy4yIFB1dFZhbHVlIChWLCBXKSwgW1tQdXRd
+XSwgU3RlcCA0LmENCg0KNC4gSWYgSXNEYXRhRGVzY3JpcHRvcihvd25EZXNjKSBpcyB0cnVlLCB0
+aGVuDQogICAgYS4gSWYgVGhyb3cgaXMgdHJ1ZSwgdGhlbiB0aHJvdyBhIFR5cGVFcnJvciBleGNl
+cHRpb24uDQogICAgYi4gLi4uDQoNCkluZmVhc2libGUuDQoNClNpbmNlICdiYXNlJyBpcyBhIHBy
+aW1pdGl2ZSB2YWx1ZSwgJ08nIGlzIGEgbmV3bHkgY3JlYXRlZCBvYmplY3Qgd2hvIGhhcyBubw0K
+aXRzIG93biBwcm9wZXJ0aWVzLCB0aHVzICdJc0RhdGFEZXNjcmlwdG9yKG93bkRlc2MpJyBjYW5u
+b3QgYmUgdHJ1ZS4NCkFsdGhvdWdoLCBpZiAnYmFzZScgaXMgYSBzdHJpbmcgdmFsdWUsIHRoZW4g
+J08nIGhhcyBpdHMgb3duIHByb3BlcnR5IG9mDQonbGVuZ3RoJywgYnV0IGluIHRoaXMgY2FzZSwg
+W1tDYW5QdXRdXShPLCdsZW5ndGgnKSBpcyBmYWxzZSBzaW5jZSAnbGVuZ3RoJyBpcw0Kbm90IHdy
+aXRhYmxlLCBhbmQgc3RvcHBlZCBhdCBTdGVwIDIuDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0N
+Cg0KOC43LjIgUHV0VmFsdWUgKFYsIFcpLCBbW1B1dF1dLCBTdGVwIDQuYg0KDQo0LiBJZiBJc0Rh
+dGFEZXNjcmlwdG9yKG93bkRlc2MpIGlzIHRydWUsIHRoZW4NCiAgICBhLiAuLi4NCiAgICBiLiBF
+bHNlIHJldHVybi4NCg0KSW5mZWFzaWJsZS4NCg0KU2FtZSByZWFzb24gd2l0aCBTdGVwIDQuYSwg
+aW4gdGhlIGFib3ZlLg0KDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCjEwLjIuMS4xLjQgR2V0
+QmluZGluZ1ZhbHVlKE4sUyksIFN0ZXAgMy5hDQoNCjMuIElmIHRoZSBiaW5kaW5nIGZvciBOIGlu
+IGVudlJlYyBpcyBhbiB1bmluaXRpYWxpc2VkIGltbXV0YWJsZSBiaW5kaW5nLCB0aGVuDQogICAg
+YS4gSWYgUyBpcyBmYWxzZSwgcmV0dXJuIHRoZSB2YWx1ZSB1bmRlZmluZWQsIG90aGVyd2lzZSB0
+aHJvdyBhIFJlZmVyZW5jZUVycm9yIGV4Y2VwdGlvbi4NCg0KSW5mZWFzaWJsZS4NCg0KVGhlcmUg
+YXJlIG9ubHkgdHdvIHdheXMgdG8gY3JlYXRlIGFuIGltbXV0YWJsZSBiaW5kaW5nOg0KICAxLiAn
+YXJndW1lbnRzJyBpcyBhbiBpbW11dGFibGUgYmluZGluZyBpbiBhIHN0cmljdCBtb2RlIGZ1bmN0
+aW9uLg0KICAyLiBuYW1lIG9mIGEgcmVjdXJzaXZlIGZ1bmN0aW9uIGV4cHJlc3Npb24gKGl0IHNo
+b3VsZCBiZSBhIGZ1bmN0aW9uDQogICAgICdleHByZXNzaW9uJywgbm90IGEgZnVuY3Rpb24gJ2Rl
+Y2xhcmF0aW9uJykgaXMgYW4gaW1tdXRhYmxlIGJpbmRpbmcgb2YgdGhlDQogICAgIGZ1bmN0aW9u
+IGJvZHkncyBlbnZpcm9ubWVudC4NCg0KSW4gYm90aCBjYXNlcywgdGhleSBhcmUgaW5pdGlhbGl6
+ZWQgaW1tZWRpdGVseSBhZnRlciBjcmVhdGVkLCB0aHVzIHRoZXJlDQpjYW5ub3QgZXhpc3QgYW4g
+dW5pbml0aWFsaXplZCBpbW11dGFibGUgYmluZGluZyBhdCBhbGwuDQoNCg0KLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0NCg0KMTAuMi4xLjEuNSBEZWxldGVCaW5kaW5nIChOKSwgU3RlcCAyDQoNCjIuIElm
+IGVudlJlYyBkb2VzIG5vdCBoYXZlIGEgYmluZGluZyBmb3IgdGhlIG5hbWUgdGhhdCBpcyB0aGUg
+dmFsdWUgb2YgTiwgcmV0dXJuIHRydWUuDQoNCkluZmVhc2libGUuDQoocHJvdmlkZWQgdGhhdCB3
+ZSBoYXZlIG9ubHkgdGhlIHN0YW5kYXJkIGJ1aWx0LWluIG9iamVjdHMsIGJ1dCBubyBob3N0IG9i
+amVjdA0Kd2hpY2ggaXMgaW1wbGVtZW50YXRpb24tZGVwZW5kZW50LikNCg0KRGV0ZWxlQmluZGlu
+ZyBpcyBvbmx5IGNhbGxlZCBieSAiMTEuNC4xIFRoZSBkZWxldGUgT3BlcmF0b3IiIHdoZW4gaXRz
+IGFyZ3VtZW50DQppcyBldmFsdWF0ZWQgdG8gYSByZWZlcmVuY2Ugd2hvc2UgYmFzZSBpcyBhbiBl
+bnZpcm9ubWVudCByZWNvcmQuDQoNClRoZXJlIGFyZSBvbmx5IHRocmVlIGNhc2VzIHdoZXJlIGEg
+cmVmZXJlbmNlIGlzIGdlbmVyYXRlZDoNCi0gMTEuMS4yIElkZW50aWZpZXIgUmVmZXJlbmNlDQog
+ICAgSW4gdGhpcyBjYXNlLCBhIHJlZmVyZW5jZSBpcyBnZW5lcmF0ZWQgYnkgR2V0SWRlbnRpZmll
+clJlZmVyZW5jZS4NCi0gMTEuMi4xIFByb3BlcnR5IEFjY2Vzc29ycw0KICAgIEluIHRoaXMgY2Fz
+ZSwgZm9yIGEgZ2l2ZW4gcHJvcGVydHkgYWNjZXNzb3IgZXhwcmVzc2lvbiwgJ2UueCcsIGl0IGZp
+cnN0DQogICAgY2FsY3VsYXRlcyB2YWx1ZSBvZiAnZScsIGxldCBzYXkgJ3YnLCBhbmQgcmV0dXJu
+cyBhIHJlZmVyZW5jZSB3aG9zZSBiYXNlDQogICAgaXMgJ3YnLg0KLSAxMS4yLjMgRnVuY3Rpb24g
+Q2FsbHMNCiAgICBJbiB0aGlzIGNhc2UsIGlmIHdlIG9ubHkgY29uc2lkZXIgdGhlIHN0YW5kYXJk
+IGJ1aWx0LWluIG9iamVjdHMsIGJ1dCBub3QNCiAgICBhbnkgaG9zdCBvYmplY3RzLCB0aGVuIG5v
+IHJlZmVyZW5jZSBpcyBnZW5lcmF0ZWQgaW4gYSBmdW5jdGlvbiBjYWxsLg0KDQpOb3cgd2UgY2Fu
+IGhhdmUgdGhlIGZvbGxvd2luZyBjYXNlIGFuYWx5c2lzOg0KLSBJbiB0aGUgZmlyc3QgY2FzZSwg
+R2V0SWRlbnRpZmllclJlZmVyZW5jZSByZXR1cm5zIGEgdmFsaWQgcmVmZXJlbmNlIG9ubHkgaWYN
+CiAgICBbW0hhc0JpbmRpbmddXSBpcyB0cnVlLCAoaS5lLiwgdGhlIGVudmlyb25tZW50IHJlY29y
+ZCBoYXMgYSBiaW5kaW5nKSwNCiAgICBvdGhlcndpc2UgaXQgcmV0dXJucyBhbiBpbnZhbGlkIHJl
+ZmVyZW5jZSB3aG9zZSBiYXNlIGlzIHVuZGVmaW5lZCwgaW4NCiAgICB3aGljaCBjYXNlIERlbGV0
+ZUJpbmRpbmcgaXMgbm90IGNhbGxlZC4NCiAgICBUaHVzLCBpZiBEZWxldGVCaW5kaW5nIGlzIGNh
+bGxlZCwgU3RlcCAyIGNhbm5vdCBiZSBzYXRpc2ZpZWQuDQotIEluIHRoZSBzZWNvbmQgY2FzZSwg
+J3YnIGlzIG5vdCBhbiBlbnZpcm9ubWVudCByZWNvcmQsIGJlY2F1c2UgYW4gZW52aXJvbm1lbnQN
+CiAgICByZWNvcmQgaXMgbm90IG9mIHR5cGUgb2YgYSB2YWx1ZSwNCiAgICB0aHVzIERlbGV0ZUJp
+bmRpbmcgaXMgbm90IGNhbGxlZCBhdCBhbGwgaW4gdGhpcyBjYXNlLg0KLSBJbiB0aGUgdGhpcmQg
+Y2FzZSwgZ2l2ZW4gdGhlIHByZS1jb25kaXRpb24sIGl0IGNhbm5vdCBnZW5lcmF0ZSBhIHJlZmVy
+ZW5jZS4NCg0KVGhlcmVmb3JlLCBpbiBhbnkgY2FzZSwgaXQgY2Fubm90IHNhdGlzZnkgdGhpcyBz
+dGVwLCB0aGF0IGlzLCAnZW52UmVjJyBhbHdheXMNCmhhcyBhIGJpbmRpbmcgZm9yICdOJy4NCg0K
+DQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQoxMC4yLjEuMi40IEdldEJpbmRpbmdWYWx1ZShOLFMp
+LCBTdGVwIDQuYQ0KDQo0LiBJZiB2YWx1ZSBpcyBmYWxzZSwgdGhlbg0KICAgIGEuIElmIFMgaXMg
+ZmFsc2UsIHJldHVybiB0aGUgdmFsdWUgdW5kZWZpbmVkLCBvdGhlcndpc2UgdGhyb3cgYSBSZWZl
+cmVuY2VFcnJvciBleGNlcHRpb24uDQoNCkluZmVhc2libGUuDQoocHJvdmlkZWQgdGhhdCB3ZSBo
+YXZlIG9ubHkgdGhlIHN0YW5kYXJkIGJ1aWx0LWluIG9iamVjdHMsIGJ1dCBubyBob3N0IG9iamVj
+dA0Kd2hpY2ggaXMgaW1wbGVtZW50YXRpb24tZGVwZW5kZW50LikNCg0KR2V0QmluZGluZ1ZhbHVl
+IGlzIG9ubHkgdXNlZCBieSBHZXRWYWx1ZSB3aGVuIGl0cyBhcmd1bWVudCBpcyBhIHJlZmVyZW5j
+ZQ0Kd2hvc2UgYmFzZSBpcyBhbiBlbnZpcm9ubWVudCByZWNvcmQsDQp3aGlsZSB0aGVyZSBhcmUg
+b25seSB0aHJlZSBjYXNlcyB3aGVyZSBhIHJlZmVyZW5jZSBpcyBnZW5lcmF0ZWQ6DQotIDExLjEu
+MiBJZGVudGlmaWVyIFJlZmVyZW5jZQ0KICAgIEluIHRoaXMgY2FzZSwgYSByZWZlcmVuY2UgaXMg
+Z2VuZXJhdGVkIGJ5IEdldElkZW50aWZpZXJSZWZlcmVuY2UuDQotIDExLjIuMSBQcm9wZXJ0eSBB
+Y2Nlc3NvcnMNCiAgICBJbiB0aGlzIGNhc2UsIGZvciBhIGdpdmVuIHByb3BlcnR5IGFjY2Vzc29y
+IGV4cHJlc3Npb24sICdlLngnLCBpdCBmaXJzdA0KICAgIGNhbGN1bGF0ZXMgdmFsdWUgb2YgJ2Un
+LCBsZXQgc2F5ICd2JywgYW5kIHJldHVybnMgYSByZWZlcmVuY2Ugd2hvc2UgYmFzZQ0KICAgIGlz
+ICd2Jy4NCi0gMTEuMi4zIEZ1bmN0aW9uIENhbGxzDQogICAgSW4gdGhpcyBjYXNlLCBpZiB3ZSBv
+bmx5IGNvbnNpZGVyIHRoZSBzdGFuZGFyZCBidWlsdC1pbiBvYmplY3RzLCBidXQgbm90DQogICAg
+YW55IGhvc3Qgb2JqZWN0cywgdGhlbiBubyByZWZlcmVuY2UgaXMgZ2VuZXJhdGVkIGluIGEgZnVu
+Y3Rpb24gY2FsbC4NCg0KTm93IHdlIGNhbiBoYXZlIHRoZSBmb2xsb3dpbmcgY2FzZSBhbmFseXNp
+czoNCi0gSW4gdGhlIGZpcnN0IGNhc2UsIEdldElkZW50aWZpZXJSZWZlcmVuY2UgcmV0dXJucyBh
+IHZhbGlkIHJlZmVyZW5jZSBvbmx5IGlmDQogICAgW1tIYXNCaW5kaW5nXV0gKGluIHRoaXMgb2Jq
+ZWN0IGVudmlyb25tZW50IHJlY29yZCwgaXQgaXMgaW1wbGVtZW50ZWQgYnkNCiAgICBbW0hhc1By
+b3BlcnR5XV0pIGlzIHRydWUsDQogICAgb3RoZXJ3aXNlIGl0IHJldHVybnMgYW4gaW52YWxpZCBy
+ZWZlcmVuY2Ugd2hvc2UgYmFzZSBpcyB1bmRlZmluZWQsIGluDQogICAgd2hpY2ggY2FzZSBHZXRC
+aW5kaW5nVmFsdWUgaXMgbm90IGNhbGxlZC4NCiAgICBUaHVzLCBpZiBHZXRCaW5kaW5nVmFsdWUg
+aXMgY2FsbGVkLCAndmFsdWUnIG9mIFN0ZXAgNCBpcyBhbHdheXMgdHJ1ZS4NCi0gSW4gdGhlIHNl
+Y29uZCBjYXNlLCAndicgaXMgbm90IGFuIGVudmlyb25tZW50IHJlY29yZCwgYmVjYXVzZSBhbiBl
+bnZpcm9ubWVudA0KICAgIHJlY29yZCBpcyBub3Qgb2YgdHlwZSBvZiBhIHZhbHVlLA0KICAgIHRo
+dXMgR2V0QmluZGluZ1ZhbHVlIGlzIG5vdCBjYWxsZWQgYXQgYWxsIGluIHRoaXMgY2FzZS4NCi0g
+SW4gdGhlIHRoaXJkIGNhc2UsIGdpdmVuIHRoZSBwcmUtY29uZGl0aW9uLCBpdCBjYW5ub3QgZ2Vu
+ZXJhdGUgYSByZWZlcmVuY2UuDQoNClRoZXJlZm9yZSwgaW4gYW55IGNhc2UsIGl0IGNhbm5vdCBy
+ZWFjaCB0aGlzIHN0ZXAuDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KMTAuNiBBcmd1bWVu
+dHMgT2JqZWN0LCBbW0RlZmluZU93blByb3BlcnR5XV0sIFN0ZXAgNC5hLCBlbHNlLWJyYW5jaA0K
+DQpUaGUgW1tEZWZpbmVPd25Qcm9wZXJ0eV1dIGludGVybmFsIG1ldGhvZCBvZiBhbiBhcmd1bWVu
+dHMgb2JqZWN0IGZvciBhIG5vbi1zdHJpY3QgbW9kZSBmdW5jdGlvbiB3aXRoIGZvcm1hbCBwYXJh
+bWV0ZXJzDQp3aGVuIGNhbGxlZCB3aXRoIGEgcHJvcGVydHkgbmFtZSBQLCBQcm9wZXJ0eSBEZXNj
+cmlwdG9yIERlc2MsIGFuZCBCb29sZWFuIGZsYWcgVGhyb3cgcGVyZm9ybXMgdGhlIGZvbGxvd2lu
+ZyBzdGVwczoNCg0KMy4gTGV0IGFsbG93ZWQgYmUgdGhlIHJlc3VsdCBvZiBjYWxsaW5nIHRoZSBk
+ZWZhdWx0IFtbRGVmaW5lT3duUHJvcGVydHldXSBpbnRlcm5hbCBtZXRob2QgKDguMTIuOSkgb24g
+dGhlIGFyZ3VtZW50cyBvYmplY3QgcGFzc2luZyBQLCBEZXNjLCBhbmQgZmFsc2UgYXMgdGhlIGFy
+Z3VtZW50cy4NCjQuIElmIGFsbG93ZWQgaXMgZmFsc2UsIHRoZW4NCiAgICBhLiBJZiBUaHJvdyBp
+cyB0cnVlIHRoZW4gLi4uLCBvdGhlcndpc2UgcmV0dXJuIGZhbHNlLg0KDQpXaGVuIHRoZSBvcmln
+aW5hbCBbW0RlZmluZU93blByb3BlcnR5XV0gaXMgZmFsc2UgYW5kICdUaHJvdycgaXMgZmFsc2Us
+IHRoZW4gcmV0dXJuIGZhbHNlIChpLmUuLCBkbyBub3RoaW5nKS4NCg0KSW5mZWFzaWJsZS4NCg0K
+W1tEZWZpbmVPd25Qcm9wZXJ0eV1dLCBnaXZlbiBhbiBvYmplY3QgTywgYSBwcm9wZXJ0eSBQLCBh
+bmQgYSBkZXNjcmlwdG9yIERlc2MsIHJldHVybnMgZmFsc2Ugd2hlbjoNCi0gUCBpcyBub3QgTydz
+IG93biBwcm9wZXJ0eSBhbmQgTyBpcyBub3QgZXh0ZW5zaWJsZS4gKFN0ZXAgMykNCi0gT3IsIFAg
+aXMgTydzIG93biBwcm9wZXJ0eSAobGV0IHNheSBDdXJyZW50KSBhbmQ6DQogIC0gQ3VycmVudCBp
+cyBub3QgY29uZmlndXJhYmxlIGFuZDoNCiAgICAtIERlc2MgaXMgY29uZmlndXJhYmxlLiAoU3Rl
+cCA3LmEpDQogICAgLSBPciwgKEN1cnJlbnQncyBbW0VudW1lcmFibGVdXSA9Lz0gRGVzYydzIFtb
+RW51bWVyYWJsZV1dLiAoU3RlcCA3LmIpDQogICAgLSBPciwgQ3VycmVudCdzIGRlc2NyaXB0b3Ig
+dHlwZSBpcyBkaWZmZXJlbnQgZnJvbSBEZXNjJ3MuIChTdGVwIDkuYSkNCiAgICAtIE9yLCBib3Ro
+IEN1cnJlbnQgYW5kIERlc2MgYXJlIG9mIGRhdGEgZGVzY3JpcHRvciBhbmQ6DQogICAgICAtIEN1
+cnJlbnQgaXMgbm90IHdyaXRhYmxlLCBidXQgRGVzYyBpcyB3cml0YWJsZS4gKFN0ZXAgMTAuYS5p
+KQ0KICAgICAgLSBPciwgQ3VycmVudCBpcyBub3Qgd3JpdGFibGUgYW5kIEN1cnJlbnQncyBbW1Zh
+bHVlXV0gPS89IERlc2MncyBbW1ZhbHVlXV0uIChTdGVwIDEwLmEuaWkuMSkNCiAgICAtIE9yLCBi
+b3RoIEN1cnJlbnQgYW5kIERlc2MgYXJlIG9mIGFjY2Vzc29yIGRlc2NyaXB0b3IgYW5kOg0KICAg
+ICAgLSBDdXJyZW50J3MgW1tTZXRdXSA9Lz0gRGVzYydzIFtbU2V0XV0uIChTdGVwIDExLmEuaSkN
+CiAgICAgIC0gT3IsIEN1cnJlbnQncyBbW0dldF1dID0vPSBEZXNjJ3MgW1tHZXRdXS4gKFN0ZXAg
+MTEuYS5paSkNCg0KQ2xhaW06IEFsbCBbW0RlZmluZU93blByb3BlcnR5XV0gY2FsbHMsIHdpdGgg
+J1Rocm93JyBiZWluZyBmYWxzZSwgZG8gbm90IHJldHVybiBmYWxzZS4NClByb29mOg0KLSBJbiA4
+LjEwLjQgRnJvbVByb3BlcnR5RGVzY3JpcHRvciwNCiAgICAgMTAuNiBBcmd1bWVudHMgT2JqZWN0
+LA0KICAgICAxMS4xLjUgT2JqZWN0IEluaXRpYWxpc2VyLA0KICAgICAxMy4yLjMgVGhlIFtbVGhy
+b3dUeXBlRXJyb3JdXSBGdW5jdGlvbiBPYmplY3QsDQogICAgIDE1LjIuMy40IE9iamVjdC5nZXRP
+d25Qcm9wZXJ0eU5hbWVzLA0KICAgICAxNS4yLjMuMTQgT2JqZWN0LmtleXMsDQogICAgIDE1LjMu
+NC41IEZ1bmN0aW9uLnByb3RvdHlwZS5iaW5kLA0KICAgICAxNS40LjQuNCBBcnJheS5wcm90b3R5
+cGUuY29uY2F0LA0KICAgICAxNS40LjQuMTAgQXJyYXkucHJvdG90eXBlLnNsaWNlLA0KICAgICAx
+NS40LjQuMTIgQXJyYXkucHJvdG90eXBlLnNwbGljZSwNCiAgICAgMTUuNC40LjE5IEFycmF5LnBy
+b3RvdHlwZS5tYXAsDQogICAgIDE1LjQuNC4yMCBBcnJheS5wcm90b3R5cGUuZmlsdGVyLA0KICAg
+ICAxNS41LjQuMTAgU3RyaW5nLnByb3RvdHlwZS5tYXRjaCwNCiAgICAgMTUuNS40LjE0IFN0cmlu
+Zy5wcm90b3R5cGUuc3BsaXQsDQogICAgIDE1LjEwLjYuMiBSZWdFeHAucHJvdG90eXBlLmV4ZWMs
+DQogICAgIDE1LjEyLjIgcGFyc2UsDQogICAgIDE1LjEyLjMgc3RyaW5naWZ5LA0KICBBbGwgW1tE
+ZWZpbmVPd25Qcm9wZXJ0eV1dIHJldHVybiB0cnVlLCBzaW5jZSB0aGUgdGFyZ2V0IG9iamVjdCBp
+cyBhIG5ldw0KICBvYmplY3QgdGhhdCBpcyBleHRlbnNpYmxlLCBhbmQgZXZlcnkgZXhpc3Rpbmcg
+cHJvcGVydHkgaXMgY29uZmlndXJhYmxlLCBpZg0KICBhbnkuDQoNCi0gSW4gOC4xMi41IFtbUHV0
+XV0sDQogIC0gSW4gU3RlcCAzLmIsIGl0IHJldHVybnMgdHJ1ZSwgc2luY2UgJ293bkRlc2MnIGlz
+IGFuIG93biBkYXRhIGRlc2NyaXB0b3INCiAgICBhbmQgd3JpdGFibGUgKGJlY2F1c2UgW1tDYW5Q
+dXRdXSByZXR1cm5zIHRydWUpLCBhbmQgJ3ZhbHVlRGVzYycgaGFzIG9ubHkNCiAgICAnW1tWYWx1
+ZV1dJy4NCiAgLSBJbiBTdGVwIDYuYiwgaXQgcmV0dXJucyB0cnVlLCBzaW5jZSAnZGVzYycgaXMg
+YW4gaW5oZXJpdGVkIGRhdGEgZGVzY3JpcHRvcg0KICAgIGFuZCAnTycgaXMgZXh0ZW5zaWJsZSAo
+YmVjYXVzZSBbW0NhblB1dF1dIHJldHVybnMgdHJ1ZSkuDQoNCi0gSW4gMTAuMi4xLjIuMiBDcmVh
+dGVNdXRhYmxlQmluZGluZywNCiAgICAgMTAuNSBEZWNsYXJhdGlvbiBCaW5kaW5nIEluc3RhbnRp
+YXRpb24sDQogICAgIDE1LjIuMy42IE9iamVjdC5kZWZpbmVQcm9wZXJ0eSwNCiAgICAgMTUuMi4z
+LjcgT2JqZWN0LmRlZmluZVByb3BlcnRpZXMsDQogICAgIDE1LjIuMy44IE9iamVjdC5zZWFsLA0K
+ICAgICAxNS4yLjMuOSBPYmplY3QuZnJlZXplLA0KICAnVGhyb3cnIGlzIHRydWUuDQoNCi0gSW4g
+MTUuNC41LjEgW1tEZWZpbmVPd25Qcm9wZXJ0eV1dLA0KICBUaGlzIGlzIG9ubHkgZm9yIEFycmF5
+IG9iamVjdHMgbm90IGZvciBBcmd1bWVudHMgb2JqZWN0cy4NCg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

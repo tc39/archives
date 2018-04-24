@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3113</bug_id>
+          
+          <creation_ts>2014-08-08 06:29:00 -0700</creation_ts>
+          <short_desc>Add `Function.prototype.arguments` and `Function.prototype.caller`</short_desc>
+          <delta_ts>2015-07-10 08:35:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Highest</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>jwalden+beo</cc>
+    
+    <cc>princexcess69</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9729</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-08 06:29:48 -0700</bug_when>
+    <thetext>http://javascript.spec.whatwg.org/#function.prototype.arguments
+http://javascript.spec.whatwg.org/#function.prototype.caller
+
+These are required for Web compatibility. Adding them to the ES6 spec (and properly defining their semantics) would improve interoperability, as at the moment all engines implement them slightly differently.
+
+Some tests: http://mathias.html5.org/tests/javascript/function/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9744</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-08-09 10:13:05 -0700</bug_when>
+    <thetext>The whatwg spec is wrong. It describes the behavior of sloppy function own properties but not the behavior of the Function.prototype properties, as it claims.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9745</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-09 12:30:44 -0700</bug_when>
+    <thetext>properties with these names are explicitly poisoned for built-in functions and for ECMAScript functions defined in strict mode.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9751</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-10 05:11:28 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #1)
+&gt; The whatwg spec is wrong. It describes the behavior of sloppy function own
+&gt; properties but not the behavior of the Function.prototype properties, as it
+&gt; claims.
+
+Right; apologies for my confusion. Forget about the WHATWG spec. Let’s continue discussing the `Function.prototype` properties.
+
+(In reply to Allen Wirfs-Brock from comment #2)
+&gt; properties with these names are explicitly poisoned for built-in functions
+&gt; and for ECMAScript functions defined in strict mode.
+
+Are you saying this is in the ES6 draft already? Where? I searched for `Function.prototype.caller` and `Function.prototype.arguments` but couldn’t find anything.
+
+    &gt; Function.prototype.caller
+    null
+    &gt; Function.prototype.arguments
+    null
+
+Re-opening</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9994</commentid>
+    <comment_count>4</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-26 13:13:06 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #3)
+&gt; Are you saying this is in the ES6 draft already? Where? I searched for
+&gt; `Function.prototype.caller` and `Function.prototype.arguments` but couldn’t
+&gt; find anything.
+
+It is here: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-createintrinsics
+step 12: Perform AddRestrictedFunctionProperties(funcProto, realmRec).
+
+
+Note that this is a change from ES5, which is what current browsers implement: the equivalent of AddRestrictedFunctionProperties() is applied to every strict-mode function (see [2], step 19), but not to `Function.prototype`; whereas ES6 apply it to `Function.prototype` only and rely on prototypal inheritance.
+
+[2] ES5.1, section 13.2: http://www.ecma-international.org/ecma-262/5.1/#sec-13.2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9995</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-26 14:08:18 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #4)
+&gt; ...
+&gt; It is here:
+&gt; http://people.mozilla.org/~jorendorff/es6-draft.html#sec-createintrinsics
+&gt; step 12: Perform AddRestrictedFunctionProperties(funcProto, realmRec).
+&gt; 
+&gt; 
+&gt; Note that this is a change from ES5, which is what current browsers
+&gt; implement: the equivalent of AddRestrictedFunctionProperties() is applied to
+&gt; every strict-mode function (see [2], step 19), but not to
+&gt; `Function.prototype`; whereas ES6 apply it to `Function.prototype` only and
+&gt; rely on prototypal inheritance.
+&gt; 
+ and upon the restriction in http://people.mozilla.org/~jorendorff/es6-draft.html#sec-forbidden-extensions</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10003</commentid>
+    <comment_count>6</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-08-28 16:28:53 -0700</bug_when>
+    <thetext>SpiderMonkey just got rid of .arguments and .caller on *all* functions (including strict mode functions), in favor of single accessors on Function.prototype.  Those accessors, when invoked upon strict mode functions, and (for .caller) upon functions where the result would be a strict mode function, have almost identical behavior to the ES5 semantics.  The only difference is in this case:
+
+[jwalden@find-waldo-now src]$ dbg/js/src/js # with patch
+js&gt; function f() {}
+js&gt; &quot;use strict&quot;; f.caller = 5
+5
+
+where according to ES5 semantics the result should actually be:
+
+[jwalden@find-waldo-now src]$ dbg/js/src/js # without patch
+js&gt; function f() {}
+js&gt; &quot;use strict&quot;; f.caller = 5
+typein:2:14 TypeError: setting a property that has only a getter
+
+It remains to be seen whether anyone depends upon the ES5 semantics.  I heavily doubt anyone does.
+
+If this succeeds in a release (it&apos;s too new to be in anything but nightlies), I see no reason why the spec couldn&apos;t be modified to make arguments/caller into accessors on Function.prototype.  Pace comment 0, I don&apos;t think it&apos;s desirable or necessary to specify their behavior on all inputs.  But it wouldn&apos;t be that bad to say they have algorithms that tail-call into implementation-defined behavior, once the spec-required must-throw-a-TypeError cases are handled.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10004</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-08-28 16:48:33 -0700</bug_when>
+    <thetext>(In reply to Jeff Walden (remove +beo to mail) from comment #6)
+&gt; SpiderMonkey just got rid of .arguments and .caller on *all* functions
+&gt; (including strict mode functions), in favor of single accessors on
+&gt; Function.prototype.  Those accessors, when invoked upon strict mode
+&gt; functions, and (for .caller) upon functions where the result would be a
+&gt; strict mode function, have almost identical behavior to the ES5 semantics. 
+&gt; The only difference is in this case:
+&gt; 
+&gt; [jwalden@find-waldo-now src]$ dbg/js/src/js # with patch
+&gt; js&gt; function f() {}
+&gt; js&gt; &quot;use strict&quot;; f.caller = 5
+&gt; 5
+&gt; 
+&gt; where according to ES5 semantics the result should actually be:
+&gt; 
+&gt; [jwalden@find-waldo-now src]$ dbg/js/src/js # without patch
+&gt; js&gt; function f() {}
+&gt; js&gt; &quot;use strict&quot;; f.caller = 5
+&gt; typein:2:14 TypeError: setting a property that has only a getter
+&gt; 
+&gt; It remains to be seen whether anyone depends upon the ES5 semantics.  I
+&gt; heavily doubt anyone does.
+
+Ironically, SES currently does, and is broken by this change. See https://code.google.com/p/google-caja/issues/detail?id=1935
+But don&apos;t worry about that. I support this change and will fix SES to work with it.
+
+Thanks for trying this out!
+
+
+
+&gt; 
+&gt; If this succeeds in a release (it&apos;s too new to be in anything but
+&gt; nightlies), I see no reason why the spec couldn&apos;t be modified to make
+&gt; arguments/caller into accessors on Function.prototype.  Pace comment 0, I
+&gt; don&apos;t think it&apos;s desirable or necessary to specify their behavior on all
+&gt; inputs.  But it wouldn&apos;t be that bad to say they have algorithms that
+&gt; tail-call into implementation-defined behavior, once the spec-required
+&gt; must-throw-a-TypeError cases are handled.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10122</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-02 21:19:42 -0700</bug_when>
+    <thetext>The Rev27 section 16.1 restrictions on no-own &apos;caller&apos; and &apos;arguments&apos; only seem to restrict strict function per se, without explicitly restricting built-ins. The good news re the Nightly implementation is that at least the builtins I examined do not implement their own &apos;caller&apos;:
+
+&gt; var gopd = Object.getOwnPropertyDescriptor;
+&gt; gopd(Object, &apos;caller&apos;) === void 0
+true
+
+&gt; Object.hasOwnProperty(&apos;caller&apos;)
+false
+
+Several bits of bad news re the Nightly implementation:
+
+The various occurrences of ThrowTypeError are not ===:
+
+&gt; var tte = gopd(Function.prototype, &apos;caller&apos;).get;
+&gt; var tte2 = gopd(Function.prototype, &apos;arguments&apos;).get;
+&gt; tte === tte2
+false
+
+ThrowTypeError doesn&apos;t always throw. Sometimes it returns null instead:
+
+&gt; Object.caller;
+null
+
+&gt; tte.call(Object);
+null
+
+
+The spec is too weak for security, and the Nightly implementation seems to deviate from the spec in ways I can&apos;t predict and thus don&apos;t understand the implications of. Because a mistake here is a potentially fatal security hole -- which is why we worked so hard on getting the ES5 poisoning right -- I&apos;m escalating this to &quot;Highest&quot;/&quot;blocker&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10123</commentid>
+    <comment_count>9</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-02 21:20:49 -0700</bug_when>
+    <thetext>Those tests were on Nightly 35.0a1 (2014-09-02)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10124</commentid>
+    <comment_count>10</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-03 07:00:05 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #8)
+&gt; Several bits of bad news re the Nightly implementation:
+&gt; 
+&gt; The various occurrences of ThrowTypeError are not ===:
+&gt; 
+&gt; &gt; var tte = gopd(Function.prototype, &apos;caller&apos;).get;
+&gt; &gt; var tte2 = gopd(Function.prototype, &apos;arguments&apos;).get;
+&gt; &gt; tte === tte2
+&gt; false
+
+I have no idea how this could be expected to work.  These accessors exist once, only, on Function.prototype.  But they have to behave like the old things on any non-strict, non-builtin function.  That means .caller returns a caller function, .arguments returns an arguments object.  Those return values aren&apos;t the same, so how could the two accessor functions be identical?
+
+&gt; ThrowTypeError doesn&apos;t always throw. Sometimes it returns null instead:
+&gt; 
+&gt; &gt; Object.caller;
+&gt; null
+&gt; 
+&gt; &gt; tte.call(Object);
+&gt; null
+
+I deliberately didn&apos;t at this time make the accessors throw a TypeError when called on builtin functions.  I wanted to perform the minimal experiment of having .caller and .arguments exist only on Function.prototype.  I didn&apos;t want to expand the experiment to require that these properties throw when accessed on builtin functions.  That would have introduced noise into the results: if something broke, was it due to accessors only on Function.prototype, or was it due to throwing on builtins?  The kind of code that breaks for the first is quite different from the kind that breaks on the second.
+
+It&apos;s easy at this point to change the behavior for builtins.  I&apos;ll try to go back and do that later today.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10125</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-03 08:11:47 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #8)
+&gt; The Rev27 section 16.1 restrictions on no-own &apos;caller&apos; and &apos;arguments&apos; only
+&gt; seem to restrict strict function per se, without explicitly restricting
+&gt; built-ins.
+
+Not correct, last sentence of first bullet in Rev27 16.1:
+
+&quot;&gt;&gt;...Built-in functions&lt;&lt;, Strict mode functions created using the Function or Generator constructors and functions created using the bind and toMethod methods also must not (be, added in rev28) created with such own properties.&quot;
+
+&gt; ...
+&gt; 
+&gt; The spec is too weak for security, 
+
+In what way, specifically?  It&apos;s saying what we agreed to at recent TC39 meetings.
+
+
+&gt;and the Nightly implementation seems to
+&gt; deviate from the spec in ways I can&apos;t predict and thus don&apos;t understand the
+&gt; implications of. Because a mistake here is a potentially fatal security hole
+&gt; -- which is why we worked so hard on getting the ES5 poisoning right -- I&apos;m
+&gt; escalating this to &quot;Highest&quot;/&quot;blocker&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10126</commentid>
+    <comment_count>12</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-03 08:29:54 -0700</bug_when>
+    <thetext>(In reply to Jeff Walden (remove +beo to mail) from comment #10)
+...
+&gt; &gt; &gt; var tte = gopd(Function.prototype, &apos;caller&apos;).get;
+&gt; &gt; &gt; var tte2 = gopd(Function.prototype, &apos;arguments&apos;).get;
+&gt; &gt; &gt; tte === tte2
+&gt; &gt; false
+&gt; 
+&gt; I have no idea how this could be expected to work.  These accessors exist
+&gt; once, only, on Function.prototype.  But they have to behave like the old
+&gt; things on any non-strict, non-builtin function.  That means .caller returns
+&gt; a caller function, .arguments returns an arguments object.  Those return
+&gt; values aren&apos;t the same, so how could the two accessor functions be identical?
+
+The intent is that the legacy extension  caller/arguments properties must be implemented as own property (either an access or via [[Get]] hacks) of each non-strict function.
+
+The values of F.p.caller and F.p.arguments are supposed to be the same (per realm) intrinsic function that unconditionally throws a TypeError exception</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10127</commentid>
+    <comment_count>13</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 09:13:43 -0700</bug_when>
+    <thetext>(In reply to Jeff Walden (remove +beo to mail) from comment #10)
+&gt; (In reply to Mark Miller from comment #8)
+&gt; &gt; Several bits of bad news re the Nightly implementation:
+&gt; &gt; 
+&gt; &gt; The various occurrences of ThrowTypeError are not ===:
+&gt; &gt; 
+&gt; &gt; &gt; var tte = gopd(Function.prototype, &apos;caller&apos;).get;
+&gt; &gt; &gt; var tte2 = gopd(Function.prototype, &apos;arguments&apos;).get;
+&gt; &gt; &gt; tte === tte2
+&gt; &gt; false
+&gt; 
+&gt; I have no idea how this could be expected to work.  These accessors exist
+&gt; once, only, on Function.prototype.  But they have to behave like the old
+&gt; things on any non-strict, non-builtin function.
+
+Outside the spec, let&apos;s call these &quot;sloppy functions&quot;. As Allen points out, each sloppy function that wishes to implement the legacy magic should have an own .caller and .arguments property. The .caller and .arguments inherited from Function.prototype must be only as specified -- accessors whose getter and setter are the unique per-realm ThrowTypeError, where this function&apos;s [[Call]] behavior is only to throw a TypeError of that realm.
+
+Further, for safety (as was discussed at the TC39 meeting but may not have been recorded): The magic legacy own .caller and .arguments properties of sloppy functions should remain pseudo-data properties, so that their magic behavior is not reifiable as first class getter functions. The hard safety constraint is, if such a magic getter is visible, it *must not* act magically if applied to a non-sloppy function. By making these pseudo-data properties, we mostly[*] don&apos;t need to worry about this possibility.
+
+In writing this, I wrote &quot;mostly&quot; just now because a possible problematic case occurred to me:
+
+function fStrict() {&quot;use strict&quot;; ...}
+function gSloppy() {...}
+
+fStrict.__proto__ = gSloppy;
+... fStrict.caller ...
+
+Now that all non-sloppy functions other than Function.prototype no longer have their own .caller and .arguments, no matter whether gSloppy.caller is an own accessor or an own pseudo-data property, without additional mechanism, fStrict above would inherit gSloppy&apos;s .caller. However, safety demands that gSloppy&apos;s .caller&apos;s magic, as applied to fStrict, not act magically. Ideally, it would still throw a TypeError. This probably requires additional spec and implementation mechanism.
+
+In light of these edge cases, I worry that it may be too high risk to try to reform the ES5 poisoning at this late date, since we cannot afford a mistake in this area. Perhaps we should keep the ES5 poison in ES6 and reform it afterwards, once we can take the time to get it right?
+
+
+
+
+&gt;  That means .caller returns
+&gt; a caller function, .arguments returns an arguments object.  Those return
+&gt; values aren&apos;t the same, so how could the two accessor functions be identical?
+&gt; 
+&gt; &gt; ThrowTypeError doesn&apos;t always throw. Sometimes it returns null instead:
+&gt; &gt; 
+&gt; &gt; &gt; Object.caller;
+&gt; &gt; null
+&gt; &gt; 
+&gt; &gt; &gt; tte.call(Object);
+&gt; &gt; null
+&gt; 
+&gt; I deliberately didn&apos;t at this time make the accessors throw a TypeError when
+&gt; called on builtin functions.  I wanted to perform the minimal experiment of
+&gt; having .caller and .arguments exist only on Function.prototype.  I didn&apos;t
+&gt; want to expand the experiment to require that these properties throw when
+&gt; accessed on builtin functions.  That would have introduced noise into the
+&gt; results: if something broke, was it due to accessors only on
+&gt; Function.prototype, or was it due to throwing on builtins?  The kind of code
+&gt; that breaks for the first is quite different from the kind that breaks on
+&gt; the second.
+&gt; 
+&gt; It&apos;s easy at this point to change the behavior for builtins.  I&apos;ll try to go
+&gt; back and do that later today.
+
+Yes, that is extremely important. Thanks!
+
+FWIW, the right way to have taken the intermediate experimental step you explain above is not to complexify the behavior of Function.prototype.caller and Function.prototype.arguments themselves. Safety of the new design demands that these be dirt simple and obviously safe. They should just unconditionally throw TypeError irrespective of the this-arg they are applied to. The right way to have done this intermediate experiment would have been to give each builtin (other than Function.prototype itself) its own configurable/deletable own .caller and .arguments properties that overrode the inherited behavior -- unless and until deleted.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10128</commentid>
+    <comment_count>14</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 09:20:49 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #11)
+&gt; (In reply to Mark Miller from comment #8)
+&gt; &gt; The Rev27 section 16.1 restrictions on no-own &apos;caller&apos; and &apos;arguments&apos; only
+&gt; &gt; seem to restrict strict function per se, without explicitly restricting
+&gt; &gt; built-ins.
+&gt; 
+&gt; Not correct, last sentence of first bullet in Rev27 16.1:
+&gt; 
+&gt; &quot;&gt;&gt;...Built-in functions&lt;&lt;, Strict mode functions created using the Function
+&gt; or Generator constructors and functions created using the bind and toMethod
+&gt; methods also must not (be, added in rev28) created with such own properties.&quot;
+
+Oops. My mistake. Somehow I missed the &quot;Built-in functions&quot; part of that sentence.
+
+
+
+&gt; &gt; ...
+&gt; &gt; 
+&gt; &gt; The spec is too weak for security, 
+&gt; 
+&gt; In what way, specifically?  It&apos;s saying what we agreed to at recent TC39
+&gt; meetings.
+
+When I wrote this, I was concerned about the allegedly missing &quot;Built-in functions&quot; which you correctly point out was not missing.
+
+However, there remain the issues I just raised in comment 13: Since the magic is still allowed to exist for own .caller and .arguments of sloppy functions, we must ensure the magic stays quarantined there. At TC39 we thought that it would be adequate for them to remain pseudo-data properties, so that their magic getters would not be reified. However, the fStrict and gSloppy scenario of comment 13 should that even this restriction is not adequate to ensure that the magic not be applied to non-sloppy functions.
+
+
+&gt; 
+&gt; 
+&gt; &gt;and the Nightly implementation seems to
+&gt; &gt; deviate from the spec in ways I can&apos;t predict and thus don&apos;t understand the
+&gt; &gt; implications of. Because a mistake here is a potentially fatal security hole
+&gt; &gt; -- which is why we worked so hard on getting the ES5 poisoning right -- I&apos;m
+&gt; &gt; escalating this to &quot;Highest&quot;/&quot;blocker&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10129</commentid>
+    <comment_count>15</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 09:28:11 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #12)
+&gt; (In reply to Jeff Walden (remove +beo to mail) from comment #10)
+&gt; ...
+&gt; &gt; &gt; &gt; var tte = gopd(Function.prototype, &apos;caller&apos;).get;
+&gt; &gt; &gt; &gt; var tte2 = gopd(Function.prototype, &apos;arguments&apos;).get;
+&gt; &gt; &gt; &gt; tte === tte2
+&gt; &gt; &gt; false
+&gt; &gt; 
+&gt; &gt; I have no idea how this could be expected to work.  These accessors exist
+&gt; &gt; once, only, on Function.prototype.  But they have to behave like the old
+&gt; &gt; things on any non-strict, non-builtin function.  That means .caller returns
+&gt; &gt; a caller function, .arguments returns an arguments object.  Those return
+&gt; &gt; values aren&apos;t the same, so how could the two accessor functions be identical?
+&gt; 
+&gt; The intent is that the legacy extension  caller/arguments properties must be
+&gt; implemented as own property (either an access or via [[Get]] hacks) of each
+&gt; non-strict function.
+
+Yes, but only of sloppy functions. Built-ins and bounds are non-strict but must not get any magic.
+
+And the magic must stay quarantined to these sloppy functions somehow. Having these be explicit accessors a) makes this more difficult, and b) is a change from the current pseudo-data legacy.
+
+As the fStrict / gSloppy scenario of comment 13 demonstrates, just making these be pseudo-data own properties is no longer adequate to quarantine the magic.
+
+&gt; 
+&gt; The values of F.p.caller and F.p.arguments are supposed to be the same (per
+&gt; realm) intrinsic function that unconditionally throws a TypeError exception
+
+Yes. And only that. These must do no more than the spec specifies -- always throw. Keep these simple enough to be obviously safe!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10130</commentid>
+    <comment_count>16</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-03 10:52:38 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #12)
+&gt; The intent is that the legacy extension  caller/arguments properties must be
+&gt; implemented as own property (either an access or via [[Get]] hacks) of each
+&gt; non-strict function.
+
+Our experiment isn&apos;t concerned about spec intent at all.  (At the time we did it, I don&apos;t believe there was any draft.)  It&apos;s trying to get rid of all magical-appearance behavior anywhere for .caller and .arguments on any function, and to demonstrate this is feasible.  That&apos;s strict mode functions, non-strict functions (or sloppy if you want, I don&apos;t care), builtins, arrow functions, functions with rest arguments, bound functions, *everything*.
+
+&gt; The values of F.p.caller and F.p.arguments are supposed to be the same (per
+&gt; realm) intrinsic function that unconditionally throws a TypeError exception
+
+Again, this was not a goal of our experiment.  Burdening non-strict functions with anti-poison pills is, IMO, as hostile to implementation as poison pills on strict mode/builtin/bound functions is.  Worse, even, as such functions are presently the common case.
+
+(In reply to Mark Miller from comment #13)
+&gt; Further, for safety (as was discussed at the TC39 meeting but may not have
+&gt; been recorded): The magic legacy own .caller and .arguments properties of
+&gt; sloppy functions should remain pseudo-data properties, so that their magic
+&gt; behavior is not reifiable as first class getter functions. The hard safety
+&gt; constraint is, if such a magic getter is visible, it *must not* act
+&gt; magically if applied to a non-sloppy function. By making these pseudo-data
+&gt; properties, we mostly[*] don&apos;t need to worry about this possibility.
+
+The SpiderMonkey team generally considers anything exceeding the scope of data properties or accessor properties, in ES5 terms, to be incredibly unsafe.  We have such a concept (more than one, depending how you count) in SpiderMonkey now.  We&apos;re working to get rid of it because we are not smart enough to reason about it -- its implementation, its security properties, its correctness considered in concert with all ES6&apos;s flexibility, particularly proxies.  The ES5 concepts we can handle.  We don&apos;t want to add something more, and have to provide our own fallible reasoning as to how it fits into every aspect of the ES5/6 MOP.  I&apos;m strongly opposed to any behavior, magical or otherwise, that can&apos;t be exposed as a data property or an accessor property.
+
+I think your &quot;mostly&quot; case is a contribution to the argument that magic properties are a bad idea.  :-)
+
+&gt; FWIW, the right way to have taken the intermediate experimental step you
+&gt; explain above is not to complexify the behavior of Function.prototype.caller
+&gt; and Function.prototype.arguments themselves.
+
+Your proposed step is a good deal more complex than the one we took, for what it&apos;s worth.
+
+&gt; Safety of the new design demands that these be dirt simple and obviously
+&gt; safe.
+
+I disagree.  The requirement that such accessors throw in an enumerated list of cases is pretty easy to specify.  Behavior in other cases can easily be specified as implementation-defined behavior.
+
+In a build with the make-builtins-throw change applied, these are the cases that throw for arguments accessors:
+
+* if the function is builtin
+* if the function has strict mode code
+* if the function is a bound function
+* if the function has a rest argument
+
+And these are the cases that throw for caller accessors:
+
+* if the function is builtin
+* if the function has strict mode code
+* if the function is a bound function
+
+It&apos;s true caller needs a little more to say that if the retrieved caller function would be strict mode code, a TypeError should be thrown.  But that doesn&apos;t particularly change the safety/complexity of the restrictions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10131</commentid>
+    <comment_count>17</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 12:01:57 -0700</bug_when>
+    <thetext>(In reply to Jeff Walden (remove +beo to mail) from comment #16)
+&gt; (In reply to Allen Wirfs-Brock from comment #12)
+&gt; &gt; The intent is that the legacy extension  caller/arguments properties must be
+&gt; &gt; implemented as own property (either an access or via [[Get]] hacks) of each
+&gt; &gt; non-strict function.
+&gt; 
+&gt; Our experiment isn&apos;t concerned about spec intent at all.
+
+My mistake. I had not realized this. Given that this happened after the last TC39 mtg, I assumed this was more than just a coincidence ;).
+
+
+&gt;  (At the time we
+&gt; did it, I don&apos;t believe there was any draft.)  It&apos;s trying to get rid of all
+&gt; magical-appearance behavior anywhere for .caller and .arguments on any
+&gt; function, and to demonstrate this is feasible.
+
+The best solution all around would be to kill the magic legacy .caller and .arguments behavior completely. I doubt this is what you mean, but since it would be so wonderful, I thought I&apos;d check first before assuming away this happy possibility. Is it?
+
+If not, and we still retain this unsafe magical behavior, then the question is how to quarantine the magic, so that it doesn&apos;t prevent safety within contexts that prohibit sloppy code. Agreed?
+
+
+&gt; That&apos;s strict mode
+&gt; functions, non-strict functions (or sloppy if you want, I don&apos;t care),
+
+Just to be clear, the reason I care is built-in functions are neither strict nor sloppy. Since they are not strict, IMO we sow confusion by saying that builtins are &quot;not strict and not non-strict&quot;. To the non-pedant, if builtins are &quot;not non-strict&quot;, then surely they must be strict, right? I think our terminology on this is screwed up. I doubt we can agree on &quot;sloppy&quot; as an official spec term, but we need something clearer than &quot;non-strict&quot;.
+
+
+&gt; builtins, arrow functions, functions with rest arguments, bound functions,
+&gt; *everything*.
+&gt; 
+&gt; &gt; The values of F.p.caller and F.p.arguments are supposed to be the same (per
+&gt; &gt; realm) intrinsic function that unconditionally throws a TypeError exception
+&gt; 
+&gt; Again, this was not a goal of our experiment.  Burdening non-strict
+&gt; functions with anti-poison pills is, IMO, as hostile to implementation as
+&gt; poison pills on strict mode/builtin/bound functions is.  Worse, even, as
+&gt; such functions are presently the common case.
+
+It&apos;s no worse than the ES5 situation, which is where we are unless we can agree on something that&apos;s clearly safer.
+
+In any case, the point of the change that TC39 discussed was to unburden non-sloppy functions from requiring the poison pills. Making sloppy functions cheaper would also be good, all else being equal. Perhaps this can still be an outcome of this design direction -- I am actually hopeful it can. But this level of research this late in the ES6 standardization cycle is scary. At this point, this discussion makes me feel more strongly that ES6 should stick with ES5 poisoning, and this poisoning reform research should be postponed to ES7.
+
+That said, if we do want to sacrifice the schedule to get this into ES6, let&apos;s arrange some f2f meetings to hash through the various issues at low latency. I do think something like you propose can be made to work.
+
+
+&gt; (In reply to Mark Miller from comment #13)
+&gt; &gt; Further, for safety (as was discussed at the TC39 meeting but may not have
+&gt; &gt; been recorded): The magic legacy own .caller and .arguments properties of
+&gt; &gt; sloppy functions should remain pseudo-data properties, so that their magic
+&gt; &gt; behavior is not reifiable as first class getter functions. The hard safety
+&gt; &gt; constraint is, if such a magic getter is visible, it *must not* act
+&gt; &gt; magically if applied to a non-sloppy function. By making these pseudo-data
+&gt; &gt; properties, we mostly[*] don&apos;t need to worry about this possibility.
+&gt; 
+&gt; The SpiderMonkey team generally considers anything exceeding the scope of
+&gt; data properties or accessor properties, in ES5 terms, to be incredibly
+&gt; unsafe.  We have such a concept (more than one, depending how you count) in
+&gt; SpiderMonkey now.  We&apos;re working to get rid of it because we are not smart
+&gt; enough to reason about it -- its implementation, its security properties,
+&gt; its correctness considered in concert with all ES6&apos;s flexibility,
+&gt; particularly proxies.  The ES5 concepts we can handle.  We don&apos;t want to add
+&gt; something more, and have to provide our own fallible reasoning as to how it
+&gt; fits into every aspect of the ES5/6 MOP.  I&apos;m strongly opposed to any
+&gt; behavior, magical or otherwise, that can&apos;t be exposed as a data property or
+&gt; an accessor property.
+&gt; 
+&gt; I think your &quot;mostly&quot; case is a contribution to the argument that magic
+&gt; properties are a bad idea.  :-)
+
+I do not know how to reason about the legacy sloppy .caller and .arguments behaviors. Again, if we can actually get rid of that magic, I would be overjoyed; but surprised. Can we?
+
+
+
+&gt; &gt; FWIW, the right way to have taken the intermediate experimental step you
+&gt; &gt; explain above is not to complexify the behavior of Function.prototype.caller
+&gt; &gt; and Function.prototype.arguments themselves.
+&gt; 
+&gt; Your proposed step is a good deal more complex than the one we took, for
+&gt; what it&apos;s worth.
+
+I can&apos;t tell whether the step you took safely quarantines the legacy sloppy .caller and .arguments behaviors. If it does not, then it is either too complex, or is simply fatally unsafe. Can you convince me that you have safely quarantined these?
+
+Given two designs that we can be confident safely quarantine these behaviors, I agree that the less magical one, whichever that is, is almost certainly better.
+
+
+More later...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10132</commentid>
+    <comment_count>18</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 12:04:07 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #15)
+&gt; &gt; The values of F.p.caller and F.p.arguments are supposed to be the same (per
+&gt; &gt; realm) intrinsic function that unconditionally throws a TypeError exception
+&gt; 
+&gt; Yes. And only that. These must do no more than the spec specifies -- always
+&gt; throw. Keep these simple enough to be obviously safe!
+
+Let me try to convince you that Jeff&apos;s approach is &quot;obviously safe&quot;.
+
+- Each of the two properties has a single implementation, a getter function.
+
+- The code of those getters says that if |this| is a strict function, we throw.
+
+This completes the proof. The safety rules are explicitly spelled out in a single place, as close as possible to the location of the danger---literally in the same algorithm, just before the part where dangerous information would be exposed.
+
+That &quot;as close as possible&quot; bit is what gets me. The other approaches end up spreading the enforcement of the safety rules through multiple parts of the spec and multiple parts of our codebase. Jeff&apos;s approach is the obviously safe one.
+
+As a bonus, we get to make Function objects ordinary, which to me makes them a lot easier to reason about.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10133</commentid>
+    <comment_count>19</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 12:08:28 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #18)
+&gt; (In reply to Mark Miller from comment #15)
+&gt; &gt; &gt; The values of F.p.caller and F.p.arguments are supposed to be the same (per
+&gt; &gt; &gt; realm) intrinsic function that unconditionally throws a TypeError exception
+&gt; &gt; 
+&gt; &gt; Yes. And only that. These must do no more than the spec specifies -- always
+&gt; &gt; throw. Keep these simple enough to be obviously safe!
+&gt; 
+&gt; Let me try to convince you that Jeff&apos;s approach is &quot;obviously safe&quot;.
+&gt; 
+&gt; - Each of the two properties has a single implementation, a getter function.
+&gt; 
+&gt; - The code of those getters says that if |this| is a strict function, we
+&gt; throw.
+
+Since you make a claim of obviousness, I feel unembarrassed to make a pedantic reply:
+
+What about builtins (and bound, etc)? Without these, your allegedly obviously safe rule is actually obviously unsafe.
+
+
+
+
+&gt; 
+&gt; This completes the proof. The safety rules are explicitly spelled out in a
+&gt; single place, as close as possible to the location of the danger---literally
+&gt; in the same algorithm, just before the part where dangerous information
+&gt; would be exposed.
+&gt; 
+&gt; That &quot;as close as possible&quot; bit is what gets me. The other approaches end up
+&gt; spreading the enforcement of the safety rules through multiple parts of the
+&gt; spec and multiple parts of our codebase. Jeff&apos;s approach is the obviously
+&gt; safe one.
+&gt; 
+&gt; As a bonus, we get to make Function objects ordinary, which to me makes them
+&gt; a lot easier to reason about.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10134</commentid>
+    <comment_count>20</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 12:14:16 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #18)
+&gt; - The code of those getters says that if |this| is a strict function, we
+&gt; throw.
+
+P.S. This of course is not the actual complete suite of safety rules, but that doesn&apos;t affect the line of reasoning I&apos;m trying to convey here, to wit: The best way to specify a set of safety rules is to write them all down in a single place. The best way to enforce them is by checking immediately before the dangerous operation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10135</commentid>
+    <comment_count>21</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 12:16:40 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #19)
+&gt; Since you make a claim of obviousness, I feel unembarrassed to make a
+&gt; pedantic reply:
+
+Oh, for shame. :-)
+
+I hope comment 20 is an adequate reply! Otherwise we should chat.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10136</commentid>
+    <comment_count>22</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 12:19:27 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #20)
+&gt; (In reply to Jason Orendorff from comment #18)
+&gt; &gt; - The code of those getters says that if |this| is a strict function, we
+&gt; &gt; throw.
+&gt; 
+&gt; P.S. This of course is not the actual complete suite of safety rules, but
+&gt; that doesn&apos;t affect the line of reasoning I&apos;m trying to convey here, to wit:
+&gt; The best way to specify a set of safety rules is to write them all down in a
+&gt; single place. The best way to enforce them is by checking immediately before
+&gt; the dangerous operation.
+
+You may be right. Please make an &quot;obviously safe&quot; argument that is complete enough that I can try to attack it.
+
+&gt; I hope comment 20 is an adequate reply! Otherwise we should chat.
+
+We should chat.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10137</commentid>
+    <comment_count>23</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 12:25:59 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #22)
+&gt; &gt; I hope comment 20 is an adequate reply! Otherwise we should chat.
+&gt; 
+&gt; We should chat.
+
+OK, cool -- please join the #jslang channel on irc.mozilla.org and say my name -- I&apos;m jorendorff there (and on Freenode, in case that&apos;s more convenient). Other options would be fine too, I&apos;m easy.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10139</commentid>
+    <comment_count>24</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 13:24:49 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #22)
+&gt; You may be right. Please make an &quot;obviously safe&quot; argument that is complete
+&gt; enough that I can try to attack it.
+
+(bashfully) Well, I may not understand all the rules! But here is a first cut at a concrete specification of .caller:
+
+
+### get Function.prototype.caller
+
+Function.prototype.caller is an accessor property whose set accessor function is undefined. Its get accessor function performs the following steps:
+
+1. Let F be the this value.
+
+2. If F is not a non-strict mode ECMAScript function, throw a TypeError exception.
+
+3. Let C be an implementation-defined value that is either a Function Object or null.
+
+4. If C is not a non-strict mode ECMAScript function, return null.
+
+5. Return C.
+
+
+Now, I may not have correctly specified the safety rules in steps 2 and 4, but surely you grant that it&apos;s possible to do so? And that done, &quot;obviously&quot; the rules would then be correctly enforced, right?
+
+I further claim that this style of specification (whitelisting the kind of legacy code that we have to avoid breaking) makes gaps less likely.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10140</commentid>
+    <comment_count>25</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-03 13:44:36 -0700</bug_when>
+    <thetext>For completeness, here are some NOTEs I would add:
+
+NOTE    This is a legacy feature. Implementations have long provided a .caller property on function objects that provides (very) rudimentary access to the call stack. As a tool for examining the state of a running program, it is less than ideal: it does not handle stacks containing recursion; it does not properly identify scripts or eval code, as those are not functions; it skips built-in functions; it was never fully specified. Furthermore, exposing this capability in the first place is a security concern for some systems, as the .caller property can be used by untrusted code to obtain a reference to a function that might otherwise be impossible to reach. For this reason, the mechanism is explicitly specified *not* to work except for non-strict mode functions. Secure systems can force the untrusted code they run into strict mode by prepending a Use Strict Directive before running it.
+
+NOTE 2    In implementations that predate this standard, .caller is commonly implemented as a special own data property on all Function objects. Deleting `Function.prototype.caller` is useless as a security measure in such implementations.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10141</commentid>
+    <comment_count>26</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-03 13:52:46 -0700</bug_when>
+    <thetext>Mark, 
+
+Rather than continuing to invent asymptotically better roadblocks to keep implementers from implementing the legacy &apos;caller&apos; and &apos;argument&apos; properties, why don&apos;t we just get even more specific in 16.1 about what they are forbidden to do.  After all, totally forbidding &apos;caller&apos; still wouldn&apos;t stop an implementation from  implementing &apos;callerEx&apos; that had the same undesirable behavior.
+
+I think you probably need to take the first draft at articulating what you want said, but I imagine it could be along the lines of something like:
+
+An implementation must not provide any extensions that, depending solely based upon access to a function, reveals the identity of any strict or built-in function that, has previously  called the accessible function.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10144</commentid>
+    <comment_count>27</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 15:42:22 -0700</bug_when>
+    <thetext>(In reply to Jason Orendorff from comment #24)
+&gt; (In reply to Mark Miller from comment #22)
+&gt; &gt; You may be right. Please make an &quot;obviously safe&quot; argument that is complete
+&gt; &gt; enough that I can try to attack it.
+&gt; 
+&gt; (bashfully) Well, I may not understand all the rules! But here is a first
+&gt; cut at a concrete specification of .caller:
+&gt; 
+&gt; 
+&gt; ### get Function.prototype.caller
+&gt; 
+&gt; Function.prototype.caller is an accessor property whose set accessor
+&gt; function is undefined. Its get accessor function performs the following
+&gt; steps:
+&gt; 
+&gt; 1. Let F be the this value.
+&gt; 
+&gt; 2. If F is not a non-strict mode ECMAScript function, throw a TypeError
+&gt; exception.
+&gt; 
+&gt; 3. Let C be an implementation-defined value that is either a Function Object
+&gt; or null.
+&gt; 
+&gt; 4. If C is not a non-strict mode ECMAScript function, return null.
+&gt; 
+&gt; 5. Return C.
+&gt; 
+&gt; 
+&gt; Now, I may not have correctly specified the safety rules in steps 2 and 4,
+&gt; but surely you grant that it&apos;s possible to do so? And that done, &quot;obviously&quot;
+&gt; the rules would then be correctly enforced, right?
+&gt; 
+&gt; I further claim that this style of specification (whitelisting the kind of
+&gt; legacy code that we have to avoid breaking) makes gaps less likely.
+
+
+Hi Jason, this is excellent. It is clear enough that I&apos;ve been able to think about attacking it, and I can tell I&apos;m failing to attack it. This is precisely what I was looking for. The NOTEs are good too, especially NOTE 2.
+
+Of course, we need a similar treatment of Function.prototype.arguments. 
+
+We should wonder if there are any changes we should make to arguments.callee and arguments.caller. It seems a bit weird that these remain own-poisoned, but I don&apos;t immediately see an alternative. Assuming these are not changed, we should still wonder if there is some interaction between these and arguments.calle* that potentially creates a problem. But I don&apos;t see one.
+
+I feel much more relaxed about all this. Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10145</commentid>
+    <comment_count>28</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 15:45:58 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #26)
+&gt; Mark, 
+&gt; 
+&gt; Rather than continuing to invent asymptotically better roadblocks to keep
+&gt; implementers from implementing the legacy &apos;caller&apos; and &apos;argument&apos;
+&gt; properties, why don&apos;t we just get even more specific in 16.1 about what they
+&gt; are forbidden to do.  After all, totally forbidding &apos;caller&apos; still wouldn&apos;t
+&gt; stop an implementation from  implementing &apos;callerEx&apos; that had the same
+&gt; undesirable behavior.
+&gt; 
+&gt; I think you probably need to take the first draft at articulating what you
+&gt; want said, 
+
+I agree. I will think about how to approach this. When would you need it by for it to be a candidate for inclusion in ES6?
+
+
+&gt; but I imagine it could be along the lines of something like:
+&gt; 
+&gt; An implementation must not provide any extensions that, depending solely
+&gt; based upon access to a function, reveals the identity of any strict or
+&gt; built-in function that, has previously  called the accessible function.
+
+I see various problems with this phrasing, but no matter. I take your point, and this suggestion is enough to seed the effort. Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10146</commentid>
+    <comment_count>29</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-03 16:02:13 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #28)
+&gt; (In reply to Allen Wirfs-Brock from comment #26)
+&gt; &gt; Mark, 
+&gt; &gt; 
+&gt; &gt; Rather than continuing to invent asymptotically better roadblocks to keep
+&gt; &gt; implementers from implementing the legacy &apos;caller&apos; and &apos;argument&apos;
+&gt; &gt; properties, why don&apos;t we just get even more specific in 16.1 about what they
+&gt; &gt; are forbidden to do.  After all, totally forbidding &apos;caller&apos; still wouldn&apos;t
+&gt; &gt; stop an implementation from  implementing &apos;callerEx&apos; that had the same
+&gt; &gt; undesirable behavior.
+&gt; &gt; 
+&gt; &gt; I think you probably need to take the first draft at articulating what you
+&gt; &gt; want said, 
+&gt; 
+&gt; I agree. I will think about how to approach this. When would you need it by
+&gt; for it to be a candidate for inclusion in ES6?
+&gt; 
+
+How about by the end of September.  Of course, sooner is always better.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10147</commentid>
+    <comment_count>30</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-09-03 16:21:06 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #29)
+&gt; (In reply to Mark Miller from comment #28)
+&gt; &gt; (In reply to Allen Wirfs-Brock from comment #26)
+&gt; &gt; &gt; Mark, 
+&gt; &gt; &gt; 
+&gt; &gt; &gt; Rather than continuing to invent asymptotically better roadblocks to keep
+&gt; &gt; &gt; implementers from implementing the legacy &apos;caller&apos; and &apos;argument&apos;
+&gt; &gt; &gt; properties, why don&apos;t we just get even more specific in 16.1 about what they
+&gt; &gt; &gt; are forbidden to do.  After all, totally forbidding &apos;caller&apos; still wouldn&apos;t
+&gt; &gt; &gt; stop an implementation from  implementing &apos;callerEx&apos; that had the same
+&gt; &gt; &gt; undesirable behavior.
+&gt; &gt; &gt; 
+&gt; &gt; &gt; I think you probably need to take the first draft at articulating what you
+&gt; &gt; &gt; want said, 
+&gt; &gt; 
+&gt; &gt; I agree. I will think about how to approach this. When would you need it by
+&gt; &gt; for it to be a candidate for inclusion in ES6?
+&gt; &gt; 
+&gt; 
+&gt; How about by the end of September.  Of course, sooner is always better.
+
+Yeah, I was afraid of that but not surprised. I&apos;m sure I couldn&apos;t get that done by then. I&apos;ll take it as an ES7 suggestion.
+
+In any case, the more I think about it, the more I like Jason&apos;s formulation of the new .caller rules. I am hopeful that we can get this solid by ES6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10148</commentid>
+    <comment_count>31</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-03 16:23:27 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #27)
+&gt; We should wonder if there are any changes we should make to arguments.callee
+&gt; and arguments.caller. It seems a bit weird that these remain own-poisoned,
+&gt; but I don&apos;t immediately see an alternative. Assuming these are not changed,
+&gt; we should still wonder if there is some interaction between these and
+&gt; arguments.calle* that potentially creates a problem. But I don&apos;t see one.
+
+FWIW, V8 uses own getter/setter for arguments.calle* for strict functions and own data property for non strict functions.
+
+function strictF() {
+  &apos;use strict&apos;;
+  console.log(Object.getOwnPropertyDescriptor(arguments, &apos;callee&apos;))
+}
+strictF()  // {get: function, set: function, enumerable: false, configurable: false}
+
+function sloppyF() {
+  console.log(Object.getOwnPropertyDescriptor(arguments, &apos;callee&apos;))
+}
+sloppyF()  // {value: function, writable: true, enumerable: false, configurable: true}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10149</commentid>
+    <comment_count>32</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-03 16:26:09 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #30)
+&gt; (In reply to Allen Wirfs-Brock from comment #29)
+&gt; &gt; 
+&gt; &gt; How about by the end of September.  Of course, sooner is always better.
+&gt; 
+&gt; Yeah, I was afraid of that but not surprised. I&apos;m sure I couldn&apos;t get that
+&gt; done by then. I&apos;ll take it as an ES7 suggestion.
+
+If necessary, I can probably give you more time.  Maybe even until mid-November.  It&apos;s shouldn&apos;t be a lot to integrate</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12980</commentid>
+    <comment_count>33</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 12:15:51 -0800</bug_when>
+    <thetext>There has been language in clause 16.1 (forbidden extensions) for quite awhile that address this issue. In Rev34 I&apos;ve augment that language a bit. 
+
+Mark, you should review that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13174</commentid>
+    <comment_count>34</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-19 22:07:41 -0800</bug_when>
+    <thetext>I do not see a flaw with the current language. Looks great.
+
+Is there anything in particular you remain worried about, that you&apos;d like me to examine in greater depth?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13337</commentid>
+    <comment_count>35</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 16:35:34 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2799</bug_id>
+          
+          <creation_ts>2014-05-03 10:03:00 -0700</creation_ts>
+          <short_desc>11.8.6.1: typos</short_desc>
+          <delta_ts>2014-07-26 00:34:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8099</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:03:34 -0700</bug_when>
+    <thetext>In 11.8.6.1 &quot;Static Semantics: TV&apos;s and TRV&apos;s&quot;:
+
+11.8.6.1 / ul 1 / item 38:
+The TRV of
+  Hex4Digits : HexDigit HexDigit HexDigit HexDigit
+is the sequence consisting of the TRV of the first /HexDigit/
+followed by the TRV of the second /HexDigit/
+followed by TRV of the third /HexDigit/
+followed by the TRV of the fourth /Hex4Digits/.
+
+    s|by TRV|by the TRV|
+
+    s|Hex4Digits|HexDigit|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8231</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 16:41:40 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8682</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-29 15:45:34 -0700</bug_when>
+    <thetext>Not quite fixed in rev25.
+
+You changed the final
+    Hex4Digits
+to:
+    HexDigits
+but you need to change it to just:
+    HexDigit</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9086</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 16:59:48 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9268</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:20:43 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9573</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-26 00:34:58 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

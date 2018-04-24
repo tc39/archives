@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>772</bug_id>
+          
+          <creation_ts>2012-10-09 14:29:00 -0700</creation_ts>
+          <short_desc>Introduce additional date/time formats to the spec for DateTimeFormat object</short_desc>
+          <delta_ts>2012-10-16 15:10:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1907</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:29:48 -0700</bug_when>
+    <thetext>We currently require only 7 date/time patterns in the spec. We should extend that list to make expectations more stable.
+
+Decision is to wait and see what the user feedback is.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

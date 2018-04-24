@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4431</bug_id>
+          
+          <creation_ts>2015-07-29 10:04:00 -0700</creation_ts>
+          <short_desc>ç in Section 12.3.1.5</short_desc>
+          <delta_ts>2015-12-16 21:00:31 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>html rendering issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Alan Schmitt">alan.schmitt</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>a.d.bergi</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14587</commentid>
+    <comment_count>0</comment_count>
+    <who name="Alan Schmitt">alan.schmitt</who>
+    <bug_when>2015-07-29 10:04:39 -0700</bug_when>
+    <thetext>Section 12.3.1.5 (http://www.ecma-international.org/ecma-262/6.0/#sec-static-semantics-static-semantics-isvalidsimpleassignmenttarget) contains a “ç” in the grammar description. The PDF version is correct and states “CallExpression” there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14908</commentid>
+    <comment_count>1</comment_count>
+    <who name="">a.d.bergi</who>
+    <bug_when>2015-12-16 21:00:31 -0800</bug_when>
+    <thetext>Heh, just wanted to report the same thing :-) Refraining from creating a duplicate one now.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

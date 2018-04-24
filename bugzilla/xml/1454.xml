@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1454</bug_id>
+          
+          <creation_ts>2013-04-26 13:48:00 -0700</creation_ts>
+          <short_desc>Invalid test? S15.4.4.4_A3_T1</short_desc>
+          <delta_ts>2013-06-07 06:50:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>brbaker</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3673</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2013-04-26 13:48:14 -0700</bug_when>
+    <thetext>DESCRIPTION
+
+The third test is erroneous.
+  Array.prototype[1] = 1;
+  var x = [0];
+  x.length = 2;
+  var arr = x.concat();
+
+After this prep code, arr is an array that has a &apos;0&apos; own property and length 2, so &quot;arr.hasOwnProperty(&apos;1&apos;)&quot; should evaluates to false according to spec.
+So the test (arr.hasOwnProperty(&apos;1&apos;) !== true) erroneously evaluates to true (because false !== true &lt;=&gt; true)
+
+To fix the test, turn &quot;!== true&quot; to &quot;!== false&quot;
+
+------------------
+TEST:            TestCases/ch15/15.4/15.4.4/15.4.4.4/S15.4.4.4_A3_T1.js
+SOURCE:          http://hg.ecmascript.org/tests/test262/file/tip/test/suite/ch15/15.4/15.4.4/15.4.4.4/S15.4.4.4_A3_T1.js
+TEST SUITE DATE: 2013-03-24
+PLATFORM:        Mozilla/5.0 (X11; Linux x86_64; rv:23.0) Gecko/20130426 Firefox/23.0
+ERROR:           Error: Unexpected exception, &quot;uncaught exception: Test262 Error: #3: Array.prototype[1] = 1; x = [0]; x.length = 2; var arr = x.concat(); arr.hasOwnProperty(&apos;1&apos;) === true. Actual: false&quot; was thrown.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3687</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-29 07:24:57 -0700</bug_when>
+    <thetext>(ES5.1) 15.4.4.4, step 5.b.iii.2 uses [[HasProperty]] which includes prototype chain look-up. That means the property created in `Array.prototype[1] = 1` will be used as a new, own property for the resulting array. 
+
+So the test is _not_ invalid.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4157</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-07 06:50:43 -0700</bug_when>
+    <thetext>Testcase is valid as André points out. 
+
+Step 5.b.iii.2 becomes active for this test as step 5.b evaluates true since the &apos;item&apos; that is being inspected is an Array. (9.9 ToObject() on an Array will return the Array object without conversion)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

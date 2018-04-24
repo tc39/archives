@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1892</bug_id>
+          
+          <creation_ts>2013-09-03 18:14:00 -0700</creation_ts>
+          <short_desc>Time zone Link names are not all defined in &quot;backward&quot; file</short_desc>
+          <delta_ts>2015-02-09 08:33:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>scolebourne</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5307</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-09-03 18:14:57 -0700</bug_when>
+    <thetext>The February 2013 draft, section 6.4.2, says &quot;If ianaTimeZone is a Link name, then let ianaTimeZone be the corresponding Zone name as specified in the “backward” file of the IANA Time Zone Database.&quot;
+
+Not all Link names in the IANA Time Zone Database are defined in the &quot;backward&quot; file - there are more in several other files. The intent here is to treat all Zone names as canonical names and all Link names as aliases, irrespective of where they are defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5384</commentid>
+    <comment_count>1</comment_count>
+    <who name="">scolebourne</who>
+    <bug_when>2013-09-12 06:58:57 -0700</bug_when>
+    <thetext>There are two possible forms of canonicalization, and the ECMA group should be careful which one to choose.
+
+The IANA database contains a number of source data files, such as europe, northamerica and backward. The backward file consists of Link entries that map an old ID to a new ID. The file is distinct in that it can be used to identify IDs that have replacements. This usage is not entirely formalized within the TZDB community, but it pretty effective in practice. For example, Asia/Calcutta is in backward pointing at the modern preferred spelling of Asia/Kolkata. Canonicalizing these &quot;backward&quot; IDs to more modern alternatives is non-controversial, as they can be simply treated as deprecated IDs.
+
+The second type of Link occurs in the &quot;main&quot; files (not &quot;backward&quot;). Those links exist to indicate that two locations have a shared history of time (since 1970 and possibly before then). These links can cross politically sensitive boundaries. For example, the time-zone IDs for all the Yugoslavian countries all share the same history since 1970. As such, they consist of Link entries to a single Europe/Belgrade definition that defines the underlying data. Were ECMA to canonicalize IDs here there could well be political complaints. ie. converting Europe/Zagreb to Europe/Belgrade could prove to be highly unpopular and contentious, even though both have the same time-zone history.
+
+Thus, two forms of canonicalization. The &apos;safe&apos; one, simply canonicalizing old IDs. And the &apos;contentious&apos; one, canonicalizing all Link entries even when across recently wartorn boundaries.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

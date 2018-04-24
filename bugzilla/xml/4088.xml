@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4088</bug_id>
+          
+          <creation_ts>2015-02-25 21:11:00 -0800</creation_ts>
+          <short_desc>11.6.2 - 11.8.2: 2-colon nonterminals unreachable from lexical goal symbols</short_desc>
+          <delta_ts>2016-05-15 19:29:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13373</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-25 21:11:10 -0800</bug_when>
+    <thetext>Consider the nonterminals:
+    ReservedWord
+    Keyword
+    FutureReservedWord
+    NullLiteral
+    BooleanLiteral
+Although each is defined by a production with 2 colons, they&apos;re actually &apos;unreachable&apos; from any of the lexical goal symbols. So, theoretically, the lexical parser would never yield (e.g.) a BooleanLiteral, it would yield a CommonToken that is an IdentifierName that matched the source characters &apos;t&apos;, &apos;r&apos;, &apos;u&apos;, and &apos;e&apos;, say. (It would then be up to the syntactic parser to recognize that as a BooleanLiteral. Again, theoretically.)
+
+Which is fine with me, I just think it would make a bit more sense if those 5 nonterminals were defined by 1-colon productions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13388</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 09:23:45 -0800</bug_when>
+    <thetext>true, we already did something like this for Identifier.
+
+However, I think putting : definitions in clause 11 would be equally confusing. And restructuring these into clause 12 is  a bigger change then I am comfortable doing at this stage of the release process.
+
+Deferring to ES7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14934</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2016-05-15 19:29:40 -0700</bug_when>
+    <thetext>(This relates to Bug 281.)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

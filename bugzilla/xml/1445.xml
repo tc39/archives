@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1445</bug_id>
+          
+          <creation_ts>2013-04-16 10:10:00 -0700</creation_ts>
+          <short_desc>Coverage: 12.6.4 Non-enumerable property shadows enumerable one.</short_desc>
+          <delta_ts>2014-09-20 12:52:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gareth Smith">bugzilla</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>princexcess69</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3646</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gareth Smith">bugzilla</who>
+    <bug_when>2013-04-16 10:10:51 -0700</bug_when>
+    <thetext>There seem to be no tests which cover the bug reported here in V8 and WebKit:
+
+http://code.google.com/p/v8/issues/detail?id=705
+https://bugs.webkit.org/show_bug.cgi?id=38970
+
+The issue is that if a non-enumerable property shadows an enumerable property, for-in should not enumerate it.
+
+Would the following do?
+
+function testcase() {
+    var proto = {prop:&quot;inheritedValue&quot;};
+
+    var ConstructFun = function () { };
+    ConstructFun.prototype = proto;
+
+    var child = new ConstructFun();
+    Object.defineProperty(child, &quot;prop&quot;, {
+        value: &quot;overriddenValue&quot;,
+        enumerable: false,
+        configurable: true,
+        writable: true
+    });
+
+    var numVisibleProperties = 0;
+    for (var k in child) {
+        numVisibleProperties++;
+    }
+
+    return numVisibleProperties === 0;
+}
+
+runTestCase(testcase);</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3668</commentid>
+    <comment_count>1</comment_count>
+    <who name="Gareth Smith">bugzilla</who>
+    <bug_when>2013-04-26 01:31:59 -0700</bug_when>
+    <thetext>As discussed on-list[1], here is a better version of this test:
+
+function testcase() {
+    var proto = {prop:&quot;inheritedValue&quot;};
+
+    var ConstructFun = function () { };
+    ConstructFun.prototype = proto;
+
+    var child = new ConstructFun();
+    Object.defineProperty(child, &quot;prop&quot;, {
+        value: &quot;overriddenValue&quot;,
+        enumerable: false,
+        configurable: true,
+        writable: true
+    });
+
+    for (var k in child) {
+        if(k===&quot;prop&quot;) {
+            return false; // prop is shadowed by a non-enumerable property.
+        }
+    }
+    return true; // We didn&apos;t see the non-enumerable &apos;prop&apos;.
+}
+
+
+
+
+[1] https://mail.mozilla.org/pipermail/test262-discuss/2013-April/000180.html</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

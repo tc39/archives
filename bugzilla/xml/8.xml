@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>8</bug_id>
+          
+          <creation_ts>2011-02-08 14:19:00 -0800</creation_ts>
+          <short_desc>&quot;do{;}while(false)false&quot; prohibited in spec but allowed in consensus reality</short_desc>
+          <delta_ts>2015-03-02 13:42:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>http://code.google.com/p/es-lab/issues/detail?id=14</see_also>
+    
+    <see_also>http://code.google.com/p/google-caja/issues/detail?id=1316</see_also>
+    
+    <see_also>http://code.google.com/p/v8/issues/detail?id=1127</see_also>
+    
+    <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=7</see_also>
+    
+    <see_also>https://bugzilla.mozilla.org/show_bug.cgi?id=238945</see_also>
+    
+    <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=4099</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>157</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark S. Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>princexcess69</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-02-08 14:19:19 -0800</bug_when>
+    <thetext>See thread beginning at https://mail.mozilla.org/pipermail/es-discuss/2011-February/012751.html especially https://mail.mozilla.org/pipermail/es-discuss/2011-February/012758.html
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=238945
+https://bugs.ecmascript.org/show_bug.cgi?id=7
+http://code.google.com/p/v8/issues/detail?id=1127
+
+If it is too late to add an errata to the ES5.1 spec to make it meet reality, we need to at least record this on the ecmascript wiki. And we should fix it in the next spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

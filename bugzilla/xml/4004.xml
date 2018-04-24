@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4004</bug_id>
+          
+          <creation_ts>2015-02-18 15:07:00 -0800</creation_ts>
+          <short_desc>22.2.3.22.1 %TypedArray%.prototype.set: Remove length integer validation and use ToLength ?</short_desc>
+          <delta_ts>2015-02-19 19:10:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12932</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:07:30 -0800</bug_when>
+    <thetext>22.2.3.22.1 %TypedArray%.prototype.set
+
+Steps 18-22
+
+Maybe change to:
+---
+Let srcLength be ToLength(Get(src, &quot;length&quot;)).
+ReturnIfAbrupt(srcLength).
+---
+
+for consistency with other %TypedArray% methods which access &quot;length&quot; on an input value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12947</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 16:09:40 -0800</bug_when>
+    <thetext>ToLength would loose the &lt;0 exception in step 22.
+
+However, it does appear that the numerLength != srcLength isn&apos;t wanted, so I fixed that</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12949</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 16:23:00 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; ToLength would loose the &lt;0 exception in step 22.
+
+Why is it important to handle negative length values in this method? For example when you call `new Int8Array({length: -10})` the negative length is simply clamped to zero.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12952</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 16:34:58 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; (In reply to Allen Wirfs-Brock from comment #1)
+&gt; &gt; ToLength would loose the &lt;0 exception in step 22.
+&gt; 
+&gt; Why is it important to handle negative length values in this method? For
+&gt; example when you call `new Int8Array({length: -10})` the negative length is
+&gt; simply clamped to zero.
+
+Here&apos;s what I get in FF:
+
+ new Int8Array({length: -10});
+/*
+Exception: size and count too large
+@Scratchpad/1:1:2
+*/
+
+which suggests it is doing a ToUint32 conversion on length
+
+If it really is interop crazy land out there WRT these things, maybe we can consistently use the ToLength conversion</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12960</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-19 03:49:00 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; If it really is interop crazy land out there WRT these things, maybe we can
+&gt; consistently use the ToLength conversion
+
+JavaScriptCore and SpiderMonkey use ToUint32:
+https://github.com/WebKit/webkit/blob/d8a2db3a06fee9ea133698eaad030f3a9d7b2cb2/Source/JavaScriptCore/runtime/JSGenericTypedArrayViewPrototypeInlines.h#L59
+https://dxr.mozilla.org/mozilla-central/source/js/src/vm/TypedArrayCommon.h#695-697
+
+V8 uses... err nothing?
+https://github.com/v8/v8-git-mirror/blob/64a2717529e2197f3a789adabf86ca36f5eb764c/src/typedarray.js#L275-L288
+https://github.com/v8/v8-git-mirror/blob/64a2717529e2197f3a789adabf86ca36f5eb764c/src/typedarray.js#L190-L201
+
+From the v8 shell:
+d8&gt; new Int8Array(10).set({length: {valueOf: function(){ print(&quot;aah&quot;); return 5; }}})
+aah
+aah
+aah
+aah
+aah
+aah
+aah</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12977</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 11:47:27 -0800</bug_when>
+    <thetext>in rev34 editor&apos;s draft
+
+switched to ToLength.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13002</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:51 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

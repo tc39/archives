@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3833</bug_id>
+          
+          <creation_ts>2015-02-11 17:01:00 -0800</creation_ts>
+          <short_desc>chapter 21: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:44 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12325</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 17:01:22 -0800</bug_when>
+    <thetext>----------------------------------------
+In 21.1.2.1 &quot;String.fromCharCode ( ...codeUnits )&quot;:
+
+{1}
+21.1.2.1 / step 1:
+Let /codeUnits/ is be a List containing the arguments passed to this function.
+
+    Delete &quot;is&quot;
+
+----------------------------------------
+In 21.1.2.2 &quot;String.fromCodePoint ( ...codePoints )&quot;:
+
+{2}
+21.1.2.2 / step 2:
+Let /length/ be number of elements in /codePoints/.
+
+    Insert &quot;the&quot; before &quot;number&quot;
+
+----------------------------------------
+In 21.1.2.4 &quot;String.raw ( template , ...substitutions )&quot;:
+
+{3}
+21.1.2.4 / step 13.g:
+If /nextIndex&lt;/ /numberOfSubstitutions/, let /next/ be ...
+
+    Insert space before less-than sign.
+
+{4}
+21.1.2.4 / step 13.h:
+Else, let /next/ is the empty String.
+
+    s|is|be|
+
+----------------------------------------
+In 21.1.3.6 &quot;String.prototype.endsWith ( searchString [ , endPosition] )&quot;:
+
+{5}
+21.1.3.6 / step 16:
+If the /searchLength/ sequence of elements of /S/ starting at /start/ ...
+
+    The phrase &quot;the /searchLength/ sequence of elements&quot; doesn&apos;t make sense.
+    Change to &quot;the sequence of /searchLength/ elements&quot;.
+
+----------------------------------------
+In 21.1.3.12 &quot;String.prototype.normalize ( [ form ] )&quot;:
+
+{6}
+21.1.3.12 / step 8:
+Let /ns/ be the String value is the result of normalizing /S/ ...
+
+    After &quot;value&quot;, insert &quot;that&quot;
+
+----------------------------------------
+In 21.1.3.14 &quot;String.prototype.replace (searchValue, replaceValue )&quot;:
+
+{7}
+21.1.3.14 / step 8:
+If /functionReplace/ is *false*, then
+
+    s|functionReplace|functionalReplace}
+
+----------------------------------------
+In 21.1.3.14.1 &quot;Runtime Semantics: GetReplaceSubstitution Abstract Operation&quot;:
+
+{8}
+21.1.3.14.1 / step 8:
+Assert:Type( /replacement/) is String
+
+    After colon, insert a space.
+
+----------------------------------------
+In 21.1.3.18 &quot;String.prototype.startsWith ( searchString [, position ] )&quot;:
+
+{9}
+21.1.3.18 / step 15:
+If the /searchLength/ sequence of elements of /S/ starting at /start/ ...
+
+    The phrase &quot;the /searchLength/ sequence of elements&quot; doesn&apos;t make sense.
+    Change to &quot;the sequence of &lt;var&gt;searchLength&lt;/var&gt; elements&quot;.
+
+----------------------------------------
+In 21.2.2.8.1 &quot;Runtime Semantics: CharacterSetMatcher Abstract Operation&quot;:
+
+{10}
+21.2.2.8.1 / step 1:
+Return an internal Matcher closure that takes two arguments, a State /x/ and a
+Continuation /c/, and performs the following steps steps when evaluated:
+
+    Delete extra &quot;steps&quot;
+
+----------------------------------------
+In 21.2.3.1 &quot;RegExp ( pattern, flags )&quot;:
+
+{11}
+21.2.3.1 / step 6.a:
+Let /P/ be be Get(/pattern/, &quot;source&quot;).
+
+    Delete extra &quot;be&quot;
+
+----------------------------------------
+In 21.2.4.2 &quot;get RegExp [ @@species ]&quot;:
+
+{12}
+21.2.4.2 / step 1:
+Return *this*.
+
+    s|*this*|the *this* value|
+
+----------------------------------------
+In 21.2.5.2.1 &quot;Runtime Semantics: RegExpExec ( R, S ) Abstract Operation&quot;:
+
+{13}
+21.2.5.2.1 / step 5.d:
+Return(/result/).
+
+    Insert space after &quot;Return&quot;.
+    Delete parentheses.
+
+----------------------------------------
+In 21.2.5.6 &quot;RegExp.prototype [ @@match ] ( string )&quot;:
+
+{14}
+21.2.5.6 / step 7:
+If /global/ is false, then
+
+    Put &quot;false&quot; in bold.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12340</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:02:30 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12480</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:44 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

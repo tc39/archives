@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3244</bug_id>
+          
+          <creation_ts>2014-09-19 09:26:00 -0700</creation_ts>
+          <short_desc>13.6.4.9  ForIn/OfBodyEvaluation: Skip IteratorClose in for-in statement loop?</short_desc>
+          <delta_ts>2014-09-21 14:44:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10211</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-09-19 09:26:59 -0700</bug_when>
+    <thetext>13.6.4.9 Runtime Semantics: ForIn/OfBodyEvaluation
+
+for-in loop iteration currently also calls IteratorClose, is this intentional?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10232</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-21 12:17:37 -0700</bug_when>
+    <thetext>Yes.  Is there any reason it shouldn&apos;t?  The [[Enumerate]] internal method returns an iterator that could have a &apos;close&apos; method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10235</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-09-21 13:37:50 -0700</bug_when>
+    <thetext>I didn&apos;t see any mentions of for-in loops in discussions about the &apos;return&apos; method proposal on es-discuss or in the tc39-notes, so I figured it makes sense to ask about this. But maybe I&apos;ve just overlooked something.
+
+Resolving as &apos;Invalid&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10237</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-21 14:44:26 -0700</bug_when>
+    <thetext>It&apos;s really more about the fact that an iterator is used, rather than the syntax of the loop.
+
+The basic idea, is that if an iterator-based loop exits before exhausting  the iterator it should invoke &apos;return&apos; (if it exists) on the iterator to allow the iterator to do any cleanup it needs.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1566</bug_id>
+          
+          <creation_ts>2013-06-24 06:10:00 -0700</creation_ts>
+          <short_desc>ArrayBuffer.prototype.slice should return zero-length ArrayBuffer if final &lt; first</short_desc>
+          <delta_ts>2013-07-15 17:04:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dmitry Lomov">dslomov</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4307</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dmitry Lomov">dslomov</who>
+    <bug_when>2013-06-24 06:10:01 -0700</bug_when>
+    <thetext>To wit:
+In Firefox and Chrome,
+   new ArrayBuffer(10).slice(2,1).byteLength
+is 0.
+
+The current spec in 15.13.5.5.3 prescribes, in step 11 &quot;Let newLen be final-first&quot;, and then in step 15 call constructor on newLen, which throws for negative length.
+
+However primo, current implementations return 0-length ArrayBuffer in that case, and secundo, the behavior of slice should be consistent with TypedArray.prototype.subarray spec,  which prescribes returns 0-length TypedArray.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4312</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-24 15:49:03 -0700</bug_when>
+    <thetext>fixed in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4521</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:04:31 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

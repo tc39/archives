@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>146</bug_id>
+          
+          <creation_ts>2011-07-20 15:19:00 -0700</creation_ts>
+          <short_desc>Array generic array methods should not ToUint32 covert the length of non-generic arrays</short_desc>
+          <delta_ts>2013-08-23 08:23:42 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>131</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="1"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>338</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 15:19:14 -0700</bug_when>
+    <thetext>see https://mail.mozilla.org/pipermail/es-discuss/2011-July/016042.html 
+
+If the final length is a value &gt;= 2^32 then attempting to set it on an array object will throw a RangeError.  However note, that this special behavior is only for array objects.  If push is used generically with non-array objects then &quot;n&quot; can reach a greater value and the final length will be set appropriately.  Where a wrap could occur would be if the push or another similar array method was subsequently applied to such a non object with a huge length property value.   These  methods generally apply ToUnit32 to the length value when they initially retrieve it. So operations upon a non-array object with a huge length will start at some warped position. 
+
+This is the same in both ES3 and ES5.  I&apos;d argue that the initial ToUint32 in these algorithms is really a bug that wasn&apos;t caught long ago.  For real arrays its is unnecessary as the special internal method treatment guarantee&apos;s it is already a uint32 and is unnecessary.  For non-arrays there are the array methods don&apos;t generally  clamp either indices or length values to 32-bits on stores.  So the initial to uint32 at the beginning of these algorithms is unnecessary for real arrays and is potentially corrupting for non arrays.   It probably really should be doing a ToInteger (or perhaps the non-existent ToUInteger) to guarantee it is working with an integer length. 
+
+This problem occurs in most of the array methods.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4911</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-15 15:47:48 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5196</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:42 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

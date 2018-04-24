@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4019</bug_id>
+          
+          <creation_ts>2015-02-20 04:14:00 -0800</creation_ts>
+          <short_desc>WeakMap/Set.get/has should throw TypeError</short_desc>
+          <delta_ts>2015-07-10 08:35:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>gilles.lepretre</cc>
+    
+    <cc>julien.sanchez</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13180</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-02-20 04:14:13 -0800</bug_when>
+    <thetext>The .get and .has methods on weak collections return undefined when a key is not an object. That is inconsistent with .set, which throws.
+
+I&apos;m not sure if this is a recent change (the V8 implementation always throws, and I assume we were following the spec draft at the time). Either way, it doesn&apos;t make sense to consider non-objects valid keys in some operations but not others.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13182</commentid>
+    <comment_count>1</comment_count>
+    <who name="Gilles Lepretre">gilles.lepretre</who>
+    <bug_when>2015-02-20 05:51:36 -0800</bug_when>
+    <thetext>Related Mozilla issue (Resolved fixed): https://bugzilla.mozilla.org/show_bug.cgi?id=1127827
+
+Related Chromium issue: https://code.google.com/p/chromium/issues/detail?id=460083</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13183</commentid>
+    <comment_count>2</comment_count>
+    <who name="Julien Sanchez">julien.sanchez</who>
+    <bug_when>2015-02-20 06:18:53 -0800</bug_when>
+    <thetext>For reference, the behavior about handling of non-object values in WeakMap has been updated in rev20 draft, Oct. 28, 2013:
+
+https://bugs.ecmascript.org/show_bug.cgi?id=1938
+
+http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts#october_28_2013_draft_rev_20</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13184</commentid>
+    <comment_count>3</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-02-20 06:36:15 -0800</bug_when>
+    <thetext>Thanks for the reference, I obviously missed that change. Sorry or being late on this.
+
+I agree with the implication requested in comment #2 on that bug. However, Mark&apos;s suggestion &quot;fixed&quot; it the wrong way. Having all methods throw consistently on non-object keys would achieve the same implication, and in addition, provide a consistent behaviour for invalid keys.
+
+That is, in addition to Andre&apos;s implication, the following equivalences should also hold:
+
+  m.set(k,v) throws  &lt;=&gt;  m.get(k) throws  &lt;=&gt;  m.has(k) throws  &lt;=&gt;  m.delete(k) throws
+
+and similarly for sets.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13330</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-24 16:05:56 -0800</bug_when>
+    <thetext>Hi Andreas, we seem to disagree about which inconsistency is greater. The way I see it, WeakMap.set must satisfy only a subset of Map.set&apos;s contract, by rejecting all non-object keys. But, given that it does so, then the mapping cannot contain any non-object keys.
+
+WeakMap.has, .get, and .delete can then fulfill the full Map.has, .get, and .delete contract, as they would on a map whose mapping did not contain any non-object keys -- whether or not they could.
+
+Put another way, .set has the specialized job of admission control. .has, .get, and .delete need only deal with what was admitted.
+
+----
+
+We can also look at it from the side of multiplying special cases in the clients of these abstractions. A client of a mapping abstraction that might be given a Map or a WeakMap, and that does a .set, must be prepared for .set(primValue) to throw, or must avoid that case. Likewise, it must not use any of the Map api that is absent from WeakMap. But a client who is only given a mapping that is populated by others, and only does a .get, .has, and .delete on it should not need to care about the difference, since both mapping abstractions can satisfy the same contract for these.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13413</commentid>
+    <comment_count>5</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-02-27 06:12:11 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #4)
+&gt; Hi Andreas, we seem to disagree about which inconsistency is greater. The
+&gt; way I see it, WeakMap.set must satisfy only a subset of Map.set&apos;s contract,
+&gt; by rejecting all non-object keys. But, given that it does so, then the
+&gt; mapping cannot contain any non-object keys.
+&gt; 
+&gt; WeakMap.has, .get, and .delete can then fulfill the full Map.has, .get, and
+&gt; .delete contract, as they would on a map whose mapping did not contain any
+&gt; non-object keys -- whether or not they could.
+&gt; 
+&gt; Put another way, .set has the specialized job of admission control. .has,
+&gt; .get, and .delete need only deal with what was admitted.
+&gt; 
+&gt; ----
+&gt; 
+&gt; We can also look at it from the side of multiplying special cases in the
+&gt; clients of these abstractions. A client of a mapping abstraction that might
+&gt; be given a Map or a WeakMap, and that does a .set, must be prepared for
+&gt; .set(primValue) to throw, or must avoid that case. Likewise, it must not use
+&gt; any of the Map api that is absent from WeakMap. But a client who is only
+&gt; given a mapping that is populated by others, and only does a .get, .has, and
+&gt; .delete on it should not need to care about the difference, since both
+&gt; mapping abstractions can satisfy the same contract for these.
+
+I see. This is presuming that weak collections are a useful drop-in replacement for a general ones. Not sure they ever are, though. Their contracts are far more restrictive, and consequently, they&apos;re _not_ in a semantic subclass relation. I&apos;m not convinced it&apos;s particularly useful to maintain that illusion for a tiny subset of their interface.
+
+A context that would work correctly with both weak and non-weak collections but falls over with the semantics I&apos;m proposing would have rather rare properties: (1) it doesn&apos;t iterate the collection, (2) it wants to check the collection for keys that are not objects, but (3) it is guaranteed to never store non-objects.
+
+Weighing this against an internally consistent treatment of key types in weak collections, I find the latter more relevant.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13414</commentid>
+    <comment_count>6</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-27 07:54:29 -0800</bug_when>
+    <thetext>Another vote in support for type checking in get/has.
+
+Lets do an analogy. If I implement a StringMap where the keys have to be strings, I could let `get` take any type and always return undefined if not a string. But I find it more useful to throw in that case to show that the caller passed in something non meaningful.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13415</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-27 08:28:43 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #6)
+&gt; Another vote in support for type checking in get/has.
+&gt; 
+&gt; Lets do an analogy. If I implement a StringMap where the keys have to be
+&gt; strings, I could let `get` take any type and always return undefined if not
+&gt; a string. But I find it more useful to throw in that case to show that the
+&gt; caller passed in something non meaningful.
+
+Interesting. When I first started reading your analogy, I expected exactly the opposite conclusion.
+
+Perhaps &quot;delete&quot; is confusing the picture. If we omit it from the discussion for a moment, then my answer to Andreas&apos;
+
+&gt; A context that would work correctly with both weak and non-weak collections 
+&gt; but falls over with the semantics I&apos;m proposing would have rather rare 
+&gt; properties: 
+&gt; (1) it doesn&apos;t iterate the collection, 
+&gt; (2) it wants to check the collection for keys that are not objects, but 
+&gt; (3) it is guaranteed to never store non-objects.
+
+Is that it is frequent to separate updating contexts from pure querying contexts. A pure querying context is guaranteed never to store non-objects because it never stores anything. That is up to the producer of the mappings it consumes. To a consumer, it hardly matters whether the producer did not store an X vs could not store an X. Precedent:
+
+&gt; &quot;abc&quot;.indexOf({})
+-1
+
+Would you rather have that throw?
+
+
+Had we specified that deleting a key that doesn&apos;t exist throws, then &quot;delete&quot; would not be such an oddball. OTOH, if we consider consuming consumers (e.g. linear consumers) in addition to side-effect-free consumers, then considering &quot;delete&quot; to be part of the more lenient consuming type makes some sense.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13416</commentid>
+    <comment_count>8</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-27 08:59:33 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #7)
+&gt; &gt; &quot;abc&quot;.indexOf({})
+&gt; -1
+&gt; 
+&gt; Would you rather have that throw?
+
+If there was a do-over? Yes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13417</commentid>
+    <comment_count>9</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-02-27 09:22:59 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #7)
+&gt; (In reply to Erik Arvidsson from comment #6)
+&gt; &gt; Another vote in support for type checking in get/has.
+&gt; &gt; 
+&gt; &gt; Lets do an analogy. If I implement a StringMap where the keys have to be
+&gt; &gt; strings, I could let `get` take any type and always return undefined if not
+&gt; &gt; a string. But I find it more useful to throw in that case to show that the
+&gt; &gt; caller passed in something non meaningful.
+&gt; 
+&gt; Interesting. When I first started reading your analogy, I expected exactly
+&gt; the opposite conclusion.
+&gt; 
+&gt; Perhaps &quot;delete&quot; is confusing the picture. If we omit it from the discussion
+&gt; for a moment, then my answer to Andreas&apos;
+&gt; 
+&gt; &gt; A context that would work correctly with both weak and non-weak collections 
+&gt; &gt; but falls over with the semantics I&apos;m proposing would have rather rare 
+&gt; &gt; properties: 
+&gt; &gt; (1) it doesn&apos;t iterate the collection, 
+&gt; &gt; (2) it wants to check the collection for keys that are not objects, but 
+&gt; &gt; (3) it is guaranteed to never store non-objects.
+&gt; 
+&gt; Is that it is frequent to separate updating contexts from pure querying
+&gt; contexts. A pure querying context is guaranteed never to store non-objects
+&gt; because it never stores anything. That is up to the producer of the mappings
+&gt; it consumes.
+
+Yes, but that is ignoring the other two conditions. It would have to be a pure consumer that does not iterate. And one that somehow expects to be able to ask for non-object keys in a context where there can&apos;t possibly be any. I&apos;m too uncreative to imagine a scenario for that.
+
+&gt; To a consumer, it hardly matters whether the producer did not
+&gt; store an X vs could not store an X. Precedent:
+&gt; 
+&gt; &gt; &quot;abc&quot;.indexOf({})
+&gt; -1
+&gt; 
+&gt; Would you rather have that throw?
+
+Most definitely. The likelihood of this not being the symptom of a bug seems close to 0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13423</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-27 13:18:37 -0800</bug_when>
+    <thetext>so, we either need to resolve this as &quot;works as intended&quot; or decided to make a change.
+
+My default response is likely to be the former as Mark is the champion of this feature and the spec. reflects his position and also the result of past discussions on this matter. 
+
+However, I will point out that throwing an exception is behavior that could be relaxed in the future if it proves to be a bad choice, while there isn&apos;t really any backwards compatible way to reverse the decision if we keep  the no exception alternative.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13426</commentid>
+    <comment_count>11</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-27 14:09:38 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #10)
+&gt; so, we either need to resolve this as &quot;works as intended&quot; or decided to make
+&gt; a change.
+&gt; 
+&gt; My default response is likely to be the former as Mark is the champion of
+&gt; this feature and the spec. reflects his position and also the result of past
+&gt; discussions on this matter. 
+&gt; 
+&gt; However, I will point out that throwing an exception is behavior that could
+&gt; be relaxed in the future if it proves to be a bad choice, while there isn&apos;t
+&gt; really any backwards compatible way to reverse the decision if we keep  the
+&gt; no exception alternative.
+
+a) I agree with that last point. When it is not clear what the right decision is, if there&apos;s a way to safely and compatibly postpone the decision, I&apos;ve generally been in favor of that.
+
+b) I also agree that it is not clear in this case what the right decision is. My intuition remains that the current behavior is better. But my rationale for that is not strong enough to be confident I can&apos;t be convinced otherwise.
+
+c) I do understand that, in terms of committee dynamics, consenting to this change now makes it unlikely that I&apos;ll get it the &quot;right&quot; way in the future. Today, if we don&apos;t get consensus to change, then the &quot;right&quot; status quo wins. If we make it throw in ES6, then if we don&apos;t get consensus to change later, the &quot;wrong&quot; status quo wins. However, given #a and #b, I think I need to concede to this change.
+
+
+One more time though, here&apos;s a further explanation of my intuition here:
+
+In a statically typed world, it makes sense to see abstractions as partial functions of the set of all possible inputs -- the type system prevents most inputs from even being tried at runtime. In a dynamic system, for many purposes we still think of abstractions as partial, but the situation is more mixed. If we consider throw to be among the responses, then abstractions are total -- they may be given any first class value at runtime. In response to, let&apos;s say, a boolean query, if the answer to the question being asked is true, I expect the query to respond &quot;true&quot;. If the answer to the question being asked false, I expect the query to respond &quot;false&quot;. If the response is throw, I expect this indicates that the query is ill formed or meaningless, or at least something for which neither &quot;true&quot; nor &quot;false&quot; is a logically sound response to the query&apos;s meaning.
+
+map.has(88)
+
+asks whether the map has 88 as a key. If it does not, it should tell me that. Throwing is basically saying: &quot;I refuse to tell you whether I have 88 as a key, even though I know, because I don&apos;t think you should have asked.&quot;
+
+Good API design for a dynamic language is different than good API for a dynamic language.
+
+Have I convinced anyone?
+
+
+Allen, independent of the historical, scheduling, and committee issues, as a dynamic language design person, I am curious what you think. Care to weigh in?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13427</commentid>
+    <comment_count>12</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2015-02-27 14:12:17 -0800</bug_when>
+    <thetext>&gt; Good API design for a dynamic language is different than good API for a 
+&gt; dynamic language.
+
+Oops. Not what I meant ;).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13428</commentid>
+    <comment_count>13</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-27 14:41:37 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #11)
+
+&gt; 
+&gt; 
+&gt; Allen, independent of the historical, scheduling, and committee issues, as a
+&gt; dynamic language design person, I am curious what you think. Care to weigh
+&gt; in?
+
+I&apos;m fine with the current behavior.  My preference is to allow programs to continue making forward progress until it reaches a point where that is impossible. If, upon the basis of  map.has returning false, a program tries to do something that is impossible to do such as set a non-object key in a WeakMap, then the point of the set is probably where the exception should occur.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13732</commentid>
+    <comment_count>14</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 11:47:29 -0700</bug_when>
+    <thetext>I plan closing this as WONTFIX (really &quot;Works as intended&quot;) unless somebody intends to bring this up at the March TC39 meeting as a ES6 approval blocker.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

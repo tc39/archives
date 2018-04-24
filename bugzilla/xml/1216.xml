@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1216</bug_id>
+          
+          <creation_ts>2013-01-26 11:15:00 -0800</creation_ts>
+          <short_desc>Description of [[Writable]] wrong</short_desc>
+          <delta_ts>2013-03-08 14:44:17 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3146</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-01-26 11:15:41 -0800</bug_when>
+    <thetext>8.1.6.1 Table 5 says that [[Writable]]
+
+&quot;If false, attempts by ECMAScript code to change the property’s [[Value]] attribute using [[SetP]] or [[DefineOwnProperty]] will not succeed.&quot;
+
+The &quot;or [[DefineOwnProperty]]&quot; should be deleted.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3284</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 17:59:56 -0800</bug_when>
+    <thetext>Why??  Object.defineProperty(o,p, {value: &quot;foo&quot;})
+fales if property p is non-writable and and the current value is not &quot;foo&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3287</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-03-05 19:40:42 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Why??  Object.defineProperty(o,p, {value: &quot;foo&quot;})
+&gt; [fails] if property p is non-writable and and the current value is not &quot;foo&quot;.
+
+Even if o[p] is configurable? I don&apos;t think so.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3288</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-06 08:15:28 -0800</bug_when>
+    <thetext>You&apos;re correct, I double checked against the ES5.1 spec.
+
+That&apos;s actually a little scary because I not sure that the state of [[Writable]] is explicitly considered every place (primarily in ch. 15) where [[DefineOwnProoperty]] is used instead of [[Put]] to set a value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3289</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-06 10:00:22 -0800</bug_when>
+    <thetext>
+corrected in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3340</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:17 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

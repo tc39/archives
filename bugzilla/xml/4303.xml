@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4303</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>10.1.1 InitializeCollator</short_desc>
+          <delta_ts>2015-04-16 20:07:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14258</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:21 -0700</bug_when>
+    <thetext>10.1.1 InitializeCollator (collator, locales, options)
+
+Preamble: Incorrect use of %Collator%, remove %
+&gt; It initializes collator as a Collator object.
+
+
+Step 3: Missing ReturnIfAbrupt after CanonicalizeLocaleList.
+
+Step 6: Missing ReturnIfAbrupt after GetOption.
+
+Step 8.a: Replace semicolon with full stop.
+
+Step 11: Missing ReturnIfAbrupt after GetOption.
+
+Step 13.e: Missing ReturnIfAbrupt after GetOption.
+
+Step 13.f.i: Missing ReturnIfAbrupt after ToString.
+
+Steps 18-19: Unnecessary steps `rExtensionKeys` is already an Array object (cf. 10.2.3 Internal Properties)
+
+Steps 20-21: Merge Get + ToLength
+
+Step 22.a: Change `Pk` to italic font.
+
+Step 22.d.iii: Omit &quot;then&quot;
+
+Step 22.e.iii: Omit &quot;then&quot;
+
+Step 23: Missing ReturnIfAbrupt after GetOption.
+Step 23: Duplicate comma
+
+Step 24.a: Omit &quot;then&quot;
+
+Step 26: Missing ReturnIfAbrupt after GetOption.
+
+And: Missing `Return collator` after step 29.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

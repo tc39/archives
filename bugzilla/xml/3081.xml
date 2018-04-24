@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3081</bug_id>
+          
+          <creation_ts>2014-07-26 13:34:00 -0700</creation_ts>
+          <short_desc>22.1.3.1 + 22.1.3.*: change &quot;and&quot; to comma</short_desc>
+          <delta_ts>2014-07-27 21:30:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>3051</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9598</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-26 13:34:05 -0700</bug_when>
+    <thetext>22.1.3.1  / step 4.c.ii
+22.1.3.7  / step 9.c.ii
+22.1.3.15 / step 9.c.ii
+22.1.3.22 / step 14.c.ii
+22.1.3.25 / step 13.c.ii
+each say:
+    If SameValue(thisRealm and GetFunctionRealm(C)) is true, then
+
+In each case, change &quot; and&quot; to a comma.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9601</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-26 15:54:29 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9631</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-27 21:30:19 -0700</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 3051 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3362</bug_id>
+          
+          <creation_ts>2014-11-13 08:49:00 -0800</creation_ts>
+          <short_desc>14.1.*, 14.3.8: Too many arguments in call to MakeMethod and typos</short_desc>
+          <delta_ts>2014-12-07 14:35:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10611</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-13 08:49:10 -0800</bug_when>
+    <thetext>14.1.22 Runtime Semantics: InstantiateFunctionObject
+
+FunctionDeclaration : function BindingIdentifier ( FormalParameters ) { FunctionBody }
+
+- step 4.a: Remove &quot;name&quot; argument
+
+FunctionDeclaration : function ( FormalParameters ) { FunctionBody }
+
+- step 3.a: Remove first `undefined` argument
+- step 5: Remove second left paren in call to SetFunctionName
+
+
+14.1.23 Runtime Semantics: Evaluation
+
+FunctionDeclaration : function BindingIdentifier ( FormalParameters ) { FunctionBody }
+
+- Remove &quot;BindingIdentifier&quot; in second production
+
+FunctionExpression : function ( FormalParameters ) { FunctionBody } 
+
+- step 4.a: Remove first `undefined` argument
+
+FunctionExpression : function BindingIdentifier ( FormalParameters ) { FunctionBody }
+
+- step 8.a: Remove &quot;name&quot; argument
+
+
+14.3.8  Runtime Semantics: DefineMethod
+
+MethodDefinition : PropertyName ( StrictFormalParameters ) { FunctionBody }
+
+- step 6.a.: Remove &quot;propKey&quot; argument
+
+
+14.3.9  Runtime Semantics: PropertyDefinitionEvaluation
+
+MethodDefinition : get PropertyName ( ) { FunctionBody } 
+
+- step 7.a.: Remove &quot;propKey&quot; argument
+
+MethodDefinition : set PropertyName ( PropertySetParameterList ) { FunctionBody}
+
+- step 6.a.: Remove &quot;propKey&quot; argument
+
+
+14.4.12 Runtime Semantics: InstantiateFunctionObject
+
+GeneratorDeclaration : function * BindingIdentifier ( FormalParameters ) { GeneratorBody }
+
+- step 4.a: Remove &quot;name&quot; argument
+
+GeneratorDeclaration : function * ( FormalParameters ) { GeneratorBody }
+
+- step 3.a. Remove first `undefined` argument
+
+
+14.4.13 Runtime Semantics: PropertyDefinitionEvaluation
+
+GeneratorMethod : * PropertyName ( StrictFormalParameters ) { GeneratorBody }
+
+- step 6.a. Remove &quot;propKey&quot; argument
+
+
+14.4.14 Runtime Semantics: Evaluation
+
+GeneratorExpression : function * ( FormalParameters ) { GeneratorBody }
+
+- step 4.a: Remove first `undefined` argument
+
+
+GeneratorExpression : function * BindingIdentifier ( FormalParameters ) { GeneratorBody }
+
+- step 8.a: Remove &quot;name&quot; argument</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10749</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-05 08:33:03 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10901</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:06 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

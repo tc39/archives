@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>33</bug_id>
+          
+          <creation_ts>2011-02-26 03:45:00 -0800</creation_ts>
+          <short_desc>Disabling 15.2.3.5-4-14 Object.create - argument &apos;Properties&apos; is an Error object (15.2.3.7 step 2)</short_desc>
+          <delta_ts>2011-05-25 14:08:47 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>64</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-26 03:45:38 -0800</bug_when>
+    <thetext>This test assumes that, at a maximum, Error objects have a set of own properties included in [&apos;description&apos;, &apos;message&apos;, &apos;name&apos;]. This is in contradiction with Section 16:
+&quot;An implementation may provide additional types, values, objects, properties,
+and functions beyond those described in this specification.&quot;
+
+If an implementation decides to add an own property to all Error instances and that this property isn&apos;t a non-null object, the implementation will fail the test while it is allowed to add the property.
+
+For this reason, I&apos;d recommand to disable the test.
+
+For the record, there is no mention of Error properties (own or inherited) which would be named &apos;description&apos; or &apos;name&apos;. Is there a reason why these properties have been redefined in the test?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>65</commentid>
+    <comment_count>1</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-26 04:28:53 -0800</bug_when>
+    <thetext>Same for Test 15.2.3.5-4-37 for which Error instances could have other implementation-defined own non-object properties.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>66</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 09:08:43 -0800</bug_when>
+    <thetext>The test case reads as:
+        var props = new Error(&quot;test&quot;);
+        var result = false;
+        props.description = { value: 11 };
+        props.message = { value: 11 };
+        props.name = { value: 11 };
+
+
+        Object.defineProperty(props, &quot;prop&quot;, {
+            get: function () {
+                result = this instanceof Error;
+                return {};
+            },
+            enumerable: true
+        });
+        var newObj = Object.create({}, props);
+        return result &amp;&amp; newObj.hasOwnProperty(&quot;prop&quot;);
+
+
+What if lines 3-5 were replaced by the more generic:
+        var tempNames = Object.getOwnPropertyNames(props);
+        for (var name in tempNames) {
+            name = tempNames[name];
+            props[name] = {value:11};
+        }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>68</commentid>
+    <comment_count>3</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-28 09:39:47 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; What if lines 3-5 were replaced by the more generic:
+&gt;         var tempNames = Object.getOwnPropertyNames(props);
+&gt;         for (var name in tempNames) {
+&gt;             name = tempNames[name];
+&gt;             props[name] = {value:11};
+&gt;         }
+Very interesting suggestion. I think it works.
+Since we&apos;re dealing with an array, I would go more for something like:
+
+(Object.getOwnPropertyNames(props)).forEach(function(name){props[name] = {value:11, configurable:true}});
+
+A precondition to test for .forEach availability would need to be added.
+I have added the &quot;configurable:true&quot; in case an implementation would already define a &apos;prop&apos; property in Error. If it was the case, without the configurable true, we would make it not configurable and the Object.defineProperty would fail.
+
+
+However, if an implementation was defining a non-configurable &apos;prop&apos; property on Error objects, then... mmm... we&apos;re screwed aren&apos;t we?
+
+So our solution is a good fix for now, but to be fully rigourous, we&apos;d need a way to generate a property name which isn&apos;t already on an object.
+
+Is there already such a function in the TestHarness?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>70</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 10:58:27 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; (In reply to comment #2)
+&gt; &gt; What if lines 3-5 were replaced by the more generic:
+&gt; &gt;         var tempNames = Object.getOwnPropertyNames(props);
+&gt; &gt;         for (var name in tempNames) {
+&gt; &gt;             name = tempNames[name];
+&gt; &gt;             props[name] = {value:11};
+&gt; &gt;         }
+&gt; Very interesting suggestion. I think it works.
+&gt; Since we&apos;re dealing with an array, I would go more for something like:
+&gt; (Object.getOwnPropertyNames(props)).forEach(function(name){props[name] =
+&gt; {value:11, configurable:true}});
+&gt; A precondition to test for .forEach availability would need to be added.
+&gt; I have added the &quot;configurable:true&quot; in case an implementation would already
+&gt; define a &apos;prop&apos; property in Error. If it was the case, without the configurable
+&gt; true, we would make it not configurable and the Object.defineProperty would
+&gt; fail.
+Done.  The change will take place with the next IE Test Center-based updated to Test262.
+
+&gt; However, if an implementation was defining a non-configurable &apos;prop&apos; property
+&gt; on Error objects, then... mmm... we&apos;re screwed aren&apos;t we?
+I was thinking the same thing.  An alternative would be to bail (successfully) if we find such a case.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>71</commentid>
+    <comment_count>5</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-28 11:31:11 -0800</bug_when>
+    <thetext>I think I have a function that can help us out:
+-----------------------------------
+function unusedPropertyName(o){
+    var ownPropNames = Object.getOwnPropertyNames(o)
+
+    var unusedName = ownPropNames.reduce(
+                               function(prev, curr, i){
+                                  var A = &apos;a&apos;, B = &apos;b&apos;;
+                                  var l = curr[i];
+                                  l = (l=== undefined || l !== A) ? A : B;
+                                  
+                                  return prev + l;
+                               }, &apos;&apos;);
+
+    return unusedName;
+}
+-----------------------------------
+We have an object. We get all its own property names. Based on that array, we create a string which, at index i has a letter that is different from the i-th letter of the i-th property name (it&apos;s kind of Kantor&apos;s diagonal method inspired).
+At the end, we have a name which is different from all the property names currently on the object.
+
+At some point, I was worried that the string could be too big (if there are too many properties), but I haven&apos;t seen any limitation on the spec about string length.
+
+Array extras are just awesome. Love them :-) (first time I use .reduce for something useful)
+
+Maybe that this function or some equivalent could be used in order to deal with implementation-independency issues of native objects properties ?
+
+In our particular case, &apos;prop&apos; could be replaced by a variable initialized with
+unusedPropertyName(props) ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>79</commentid>
+    <comment_count>6</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-01 05:14:20 -0800</bug_when>
+    <thetext>Last night, I came up with another idea for the function.
+One of the &quot;issue&quot; with the previous one is that if there are a lot of properties, the resulting string is going to be long and since it&apos;s concatenating strings, it&apos;s not very garbage-collector friendly (at least on Firefox, I don&apos;t know how other ES engines handle string garbage collection).
+
+Here is the other idea:
+-----------------------------------
+function unusedPropertyName(o){
+    var ownPropNames = Object.getOwnPropertyNames(o)
+    // Get the length of the longest property name
+    var maxLen = ownPropNames.reduce(function(p, c){
+                                         return c.length&gt;p? c.length : p;
+                                     }, 1);
+
+    // Return a string with a length which is maxLen+1
+    return Array(maxLen+1).map(function(){return &apos;a&apos;;}).join(&apos;&apos;);
+}
+-----------------------------------
+
+Obviously, some combination of both approaches could be use.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>168</commentid>
+    <comment_count>7</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-22 13:32:52 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; return Array(maxLen+1).map(function(){return &apos;a&apos;;}).join(&apos;&apos;);
+This doesn&apos;t work.
+
+However, this does:
+  return Array(maxLen+1+1).join(&apos;a&apos;);
+(the additional &quot;+1&quot; is because join adds the array.length -1 separator)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

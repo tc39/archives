@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>297</bug_id>
+          
+          <creation_ts>2012-03-09 07:06:00 -0800</creation_ts>
+          <short_desc>Undecidable tokenization in modules&apos; grammar</short_desc>
+          <delta_ts>2013-10-10 12:35:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter name="Xavier Cambar">xcambar</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>samth</cc>
+    
+    <cc>xcambar</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>738</commentid>
+    <comment_count>0</comment_count>
+    <who name="Xavier Cambar">xcambar</who>
+    <bug_when>2012-03-09 07:06:26 -0800</bug_when>
+    <thetext>Consider the following expression:
+
+export x, y, z;
+
+According to the grammar defined in the harmony:modules wiki page, this expression can have two tokenized forms:
+
+ExportDeclaration
+  -&gt; ExportSpecifierSet
+    -&gt; Id
+    -&gt; Id
+    -&gt; Id
+
+ExportDeclaration
+  -&gt; ExportSpecifierSet
+    -&gt; Id
+  -&gt; ExportSpecifierSet
+    -&gt; Id
+  -&gt; ExportSpecifierSet
+    -&gt; Id
+
+A parser has no way of choosing one form or the other unless maybe by using operator precedence, which is not defined in the grammar.
+
+I&apos;ve posted a possible revised grammar here: https://gist.github.com/1990115, replacing
+
+ExportSpecifierSet ::=  &quot;{&quot; ExportSpecifier (&quot;,&quot; ExportSpecifier)* &quot;}&quot;
+                    |   Id (&quot;,&quot; Id)*
+                    |   &quot;*&quot; (&quot;from&quot; Path)?
+
+with
+
+ExportSpecifierSet ::=  &quot;{&quot; ExportSpecifier (&quot;,&quot; ExportSpecifier)* &quot;}&quot;
+                    |   Id 
+                    |   &quot;*&quot; (&quot;from&quot; Path)?
+
+
+Regards.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5887</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 12:35:14 -0700</bug_when>
+    <thetext>no longer applicable to current ES6 module grammar</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

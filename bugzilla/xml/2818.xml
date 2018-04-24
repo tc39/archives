@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2818</bug_id>
+          
+          <creation_ts>2014-05-04 12:18:00 -0700</creation_ts>
+          <short_desc>Inconsistencies in handling of Realm intrinsics</short_desc>
+          <delta_ts>2015-03-16 14:38:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Till Schneidereit">till</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8135</commentid>
+    <comment_count>0</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 12:18:08 -0700</bug_when>
+    <thetext>26.2.1.1, step 29a and 26.2.3.7.3, steps 9a-d both specify how the default property values of the global object are initialized. They should either use the same steps, or call an abstract operation performing these steps to avoid duplication.
+
+Importantly, the first of these two states that the [[RealmRecord]]&apos;s `intrinsics` record should be used as the source of the values, whereas the second doesn&apos;t specify a source at all.
+
+Additionally, 26.2.3.4 also handles the intrinsics, and also doesn&apos;t refer to the [[RealmRecord]]&apos;s `intrinsics` record. (At least not directly, step 6b probably boils down to that, but isn&apos;t entirely clear.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13763</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:38:10 -0700</bug_when>
+    <thetext>concerns reified Realm objects which were dropped from ES6</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

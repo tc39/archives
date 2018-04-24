@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2677</bug_id>
+          
+          <creation_ts>2014-04-17 06:59:00 -0700</creation_ts>
+          <short_desc>19.2.1.1 Function, 25.2.1.1 GeneratorFunction: Invalid assertion in step 18/17</short_desc>
+          <delta_ts>2014-05-06 16:42:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7776</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-17 06:59:17 -0700</bug_when>
+    <thetext>19.2.1.1 Function ( p1, p2, … , pn, body ), step 18
+25.2.1.1 GeneratorFunction (p1, p2, … , pn, body), step 17
+
+The assertion in step 18/17 is not valid.
+
+
+js&gt; f = Function[Symbol.create]()
+function F() { /* source not available */ }
+js&gt; Object.preventExtensions(f)
+function F() { /* source not available */ }
+js&gt; Function.call(f, &quot;&quot;)
+java.lang.AssertionError
+        at com.github.anba.es6draft.runtime.objects.FunctionConstructor.call(FunctionConstructor.java:127)
+        at com.github.anba.es6draft.runtime.objects.FunctionConstructor.call(FunctionConstructor.java:1)
+        at com.github.anba.es6draft.runtime.types.builtins.BuiltinFunction.tailCall(BuiltinFunction.java:150)
+        at com.github.anba.es6draft.runtime.internal.TailCallInvocation.apply(TailCallInvocation.java:57)
+        at com.github.anba.es6draft.runtime.internal.TailCallInvocation.tailCallTrampoline(TailCallInvocation.java:107)
+        at com.github.anba.es6draft.runtime.types.builtins.NativeTailCallFunction.call(NativeTailCallFunction.java:64)
+...
+
+
+js&gt; g = (function*(){}).constructor[Symbol.create]()
+function F() { /* source not available */ }
+js&gt; Object.preventExtensions(g)
+function F() { /* source not available */ }
+js&gt; (function*(){}).constructor.call(g, &quot;&quot;)
+java.lang.AssertionError
+...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7788</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 09:13:18 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8183</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:42:19 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

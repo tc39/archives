@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>44</bug_id>
+          
+          <creation_ts>2011-03-02 16:47:00 -0800</creation_ts>
+          <short_desc>Link test results to Hg test files on website results page</short_desc>
+          <delta_ts>2012-02-22 12:01:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>99</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 16:47:04 -0800</bug_when>
+    <thetext>&lt;Thanks&gt;David Bruant&lt;/Thanks&gt;
+
+&gt; - test262.ecmascript.org
+&gt; -- In the Results page, it would be useful to have a link to the test 
+&gt; file in the http://hg.ecmascript.org/tests/test262/ website (may help 
+&gt; to spot differences between the run test suite and the latest )
+I love the idea.  It&apos;s just a bit non-trivial to implement until we get tests from all external contributions living happily in the same predictable directory.  For example, instead of having &quot;test/suite/ietestcenter/chapter07/*&quot; and &quot;test/suite/sputnik_converted/07_Lexical_Conventions/7.6_Identifiers/*&quot;, we&apos;d simply have &quot;test/suite/ch07/*&quot;.  Any ways, once this directory cleanup occurs I think we should go ahead and do this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>124</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:45:24 -0800</bug_when>
+    <thetext>Test estimate seems a bit too high.  This should take less time to complete once Sputnik et al. test cases are living in the same directory.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>650</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-22 12:01:47 -0800</bug_when>
+    <thetext>This is checked into Hg now for failing tests on the &apos;Run&apos; tab, and you can view the changes at http://hg.ecmascript.org/tests/test262/raw-file/9808d959879a/website/default.html until the live test262 website gets updated with this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

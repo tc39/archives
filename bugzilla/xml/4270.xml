@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4270</bug_id>
+          
+          <creation_ts>2015-04-12 10:00:00 -0700</creation_ts>
+          <short_desc>Spec treatment/relationship of &quot;Strict Equality&quot; and &quot;SameValue&quot;</short_desc>
+          <delta_ts>2015-04-16 14:01:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 37: April 3, 2015 Release Candidate 4</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14163</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2015-04-12 10:00:34 -0700</bug_when>
+    <thetext>The note on 7.2.13 says:
+
+&quot;This algorithm differs from the SameValue Algorithm (7.2.9) in its treatment of signed zeroes and NaNs.&quot;
+
+The symmetric note however is *not* present in 7.2.9.
+
+------
+
+Suggestion (1): For helpful clarity, add this note to 7.2.9:
+
+&quot;This algorithm differs from the Strict Equality Comparison Algorithm (7.2.13) in its treatment of signed zeroes and NaNs.&quot;
+
+-------
+
+Also to aid in clarity, one can observe the implication of these notes, which is that one could simply reference the other, after first expressing the two exceptions (NaN and -0).
+
+For example, Strict Equality Comparison Algorithm could be significantly simplified like this:
+
+
+The comparison x === y, where x and y are values, produces true or false. Such a comparison is performed as follows:
+
+1. If Type(x) is Number, then
+   If x is NaN, return false.
+   If y is NaN, return false.
+   If x is +0 and y is −0, return true.
+   If x is −0 and y is +0, return true.
+2. If SameValue(x, y) is true, then return true.
+3. Return false.
+
+
+The advantage here is not just a simpler spec, but it reinforces the implication of those notes discussed earlier. It makes it clear the relationship between the two algorithms. A rewritten section as I suggest wouldn&apos;t need a note, because it&apos;s now obvious.
+
+However, the suggested 7.2.9 note above would still be a benefit to cross-reference clarity.
+
+Of course, you could do the reverse symmetrical, and simplify SameValue as invoking === after tackling the exceptions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14177</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-13 15:40:01 -0700</bug_when>
+    <thetext>fixed in rev38 editor&apos;s draft
+
+added the note to 7.2.9
+
+any algorithm restructuring will have to wait until ES7.  File free to file that part of this item as a new ticket against ES7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14246</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-16 14:01:25 -0700</bug_when>
+    <thetext>in rev38</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

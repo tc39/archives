@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>314</bug_id>
+          
+          <creation_ts>2012-03-16 14:44:00 -0700</creation_ts>
+          <short_desc>Community Feedback on Harmony numerics</short_desc>
+          <delta_ts>2015-10-02 14:36:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=309</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roger Andrews">roger.andrews</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jens</cc>
+    
+    <cc>lukeh</cc>
+    
+    <cc>roger.andrews</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>774</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-16 14:44:19 -0700</bug_when>
+    <thetext>This item is for tracking community feedback and feature requests relating to
+the Harmony numerics, primarily Number with some crossover into Math issues (but not new Math functions -- see bug 309 for new functions)
+
+Anybody with such feedback should record it as a comment on this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>800</commentid>
+    <comment_count>1</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-18 06:15:49 -0700</bug_when>
+    <thetext>Re: more constants on Number, especially EPSILON
+
+Several additional constants are useful when dealing with IEEE binary64 floating-point numbers like JavaScript&apos;s Number.  Most of them are special powers-of-two.
+
+Recall that binary64 numbers have:
+  1  sign bit
+  53 significand bits (including 1 unstored &quot;hidden&quot; bit which is assumed &apos;1&apos;)
+  11 exponent bits (held biased)
+and special values in the exponent field encode NaNs, Infinities, Zeroes.
+Also a special value in the exponent field allows &quot;subnormal&quot; numbers with reduced precision in the significand and the &quot;hidden&quot; bit is made &apos;0&apos;, allowing graceful underflow.
+
+
+Summary Proposals:
+
+Number.EPSILON == 2^-52
+The difference between 1 and the smallest value &gt;1 that is representable as 
+a floating-point number.
+(See below for terminology.)
+
+Number.MAX_INTEGER == 2^53 - 1
+The maximum integer value that can be stored in a number without losing 
+precision.
+(Technically 2^53 can be stored, but that&apos;s an anomaly, see below.)
+
+Number.MIN_NORMAL == 2^-1022
+The minimum positive value that can be stored as an IEEE &quot;normal&quot; number.
+(The existing Number.MIN_VALUE is a &quot;subnormal&quot;.)
+
+Number.MAX_POWTWO == 2^1023
+The maximum power-of-two that can be stored in a number.
+
+
+Note there is some confusion in the definition of &quot;machine epsilon&quot; and &quot;unit roundoff&quot; - the definition of EPSILON above is the one we want and the one used in the C library.  More detail later.
+
+Note that it is conventional to have (2^n)-1 as the maximum for a n-bit integer.  Binary64 numbers have 53 bits of precision, so MAX_INTEGER = 2^53-1 = 9007199254740991.  Brendan Eich agrees.
+
+
+Justifications:
+
+EPSILON (defined as 2^-52) is the least-significant bit of the significand
+of a binary64 floating-point number.  Loosely speaking, all the exact value&apos;s bits below EPSILON are rounded in the significand to form the EPSILON bit.
+
+This makes it easy to find the next larger or smaller representable number, and is generally useful.  One specific use is when comparing for approximate equality (despite rounding errors) by ignoring low order significand bits.
+
+MAX_INTEGER is useful when working with integers e.g. prime numbers, factorials, fibonacci numbers - just as MAX_VALUE is useful for full numbers.  If an integer calculation step goes over MAX_INTEGER then the final result is not exact (ignoring power-of-two factors).
+
+MIN_NORMAL is the smallest floating-point number that retains full precision.  If a calculation step goes below this number then the final result is known not to be fully significant but has underflowed (gracefully).  (If a calculation step overflows then we know about it like a punch in the face because the final result is Infinity.)  Numeric functions like ulp, nextUp, nextDown need to handle numbers below MIN_NORMAL carefully.
+
+Also, MIN_NORMAL is useful for long-range downward scaling.  MIN_VALUE could be used for a slightly longer range, but denormalised numbers can be slower than &quot;normals&quot; on some (many?) systems.  See the scaling example below.
+
+MAX_POWTWO is the most significant bit possible in a Number.  This is useful for long-range upward scaling.  It is also useful when taking the ulp of a very large number which cannot be calculated with the usual trick due to overflow (admittedly very few people will get excited by this).
+
+
+Here&apos;s an example of scaling using MAX_POWTWO and MIN_NORMAL (many speedups are possible, this simply illustrates the technique):
+
+  // multiply x by 2^n, first taking care for large |n|
+  if (isFinite( n )) {
+    while (n &gt; 1023  &amp;&amp;  1/x != 0) {
+      x *= MAX_POWTWO;
+      n -= 1023;
+    }
+    while (n &lt; -1022  &amp;&amp;  x != 0) {
+      x *= MIN_NORMAL;
+      n += 1022;
+    }
+  }
+  result = x * Math.pow( 2, n );
+
+
+If these four constants are not present you can roll your own:
+  EPSILON     = 1 / 0x10000000000000;
+  MAX_INTEGER = 0x1FFFFFFFFFFFFF;
+  MIN_NORMAL  = Number.MIN_VALUE * 0x10000000000000;
+  MAX_POWTWO  = 2 / MIN_NORMAL;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>802</commentid>
+    <comment_count>2</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-20 02:23:12 -0700</bug_when>
+    <thetext>Re: string representation of -0
+
+The usefulness of -0 is well-accepted, for those applications which require symmetry about an axis.  (-0 selects the side of a Branch Cut in the Complex plane, and preserves symmetry generally.)  Rightfully -0==0 for those applications which don&apos;t care.
+
+JavaScript&apos;s arithmetic and mathematical functions handle -0 perfectly.
+For example:
+    1/-0  -&gt; -Infinity
+    Math.sin(-0)  -&gt; -0
+
+However the string representation of -0 is broken due to the definition of the &apos;ToString&apos; internal function and the string representation methods Number.prototype.toString, Number.prototype.toPrecision, etc, etc.  Thus ES5 does not conform to IEEE754.  See section 9.8.1 of the ES5 Standard: &quot;ToString Applied to the Number Type&quot;.
+
+One major consequence of &apos;ToString&apos; behaviour is that -0 is not preserved in a JSON string, even though the JSON syntax allows it.  Thus simply by transferring data in JSON (without any funny business) one risks a numerical error:
+    JSON.stringify( {x: -0} )  -&gt; &apos;{&quot;x&quot;:0}&apos;     naughty!
+    JSON.parse( &apos;{&quot;x&quot;:0}&apos; )    -&gt; {x: 0}
+
+Another consequence is in the numerical conversion of a single-element Array (bizarrely):
+    +[-0]  -&gt; 0
+but
+    +[-N]  -&gt; -N   for all N except 0
+Of course
+    +(-0)  -&gt; -0
+
+The String constructor uses &apos;ToString&apos;, thus:
+    String(-0)  -&gt; &quot;0&quot;
+
+The definitions of the Number.prototype.toString family imply in ES5 that they do not honour -0.  Why?  Implementations have conformed.
+Picking &apos;toFixed&apos; as one example, thus we have the strangeness:
+    (-0).toFixed(0)  -&gt; &quot;0&quot;
+but
+    (-Number.MIN_VALUE).toFixed(0)  -&gt; &quot;-0&quot;
+
+
+For the set of Number and a suitable codomain in String,
+note the broken symmetry:
+  &apos;ToString&apos; is surjective but not injective;
+  &apos;ToNumber&apos; is both surjective and injective.
+&apos;ToString&apos; and &apos;ToNumber&apos; are not inverses:
+    ToNumber(&quot;-0&quot;)  -&gt; -0
+but
+    ToString(-0)  -&gt; &quot;0&quot;
+
+
+Would it hurt to do the string conversion of -0 right?
+When JavaScript&apos;s arithmetic and Math handling of -0 is perfect, why go off the rails when it comes to string conversion?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>803</commentid>
+    <comment_count>3</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-21 05:15:16 -0700</bug_when>
+    <thetext>Re: hexadecimal exponential literals
+
+The proposal is to allow literals in the hexadecimal exponential form, just like decimal literals, and following the C99 standard.
+
+In ES5, hexadecimal literals (e.g. 0x123ABC) can only express moderately small integers, whereas decimal literals can express any Number (e.g. 123.456e78).  Why do hex literals discriminate against big numbers and fractions?
+
+Allowing hexadecimal exponential literals would extend the JavaScript syntax slightly and unambiguously (it would be handled as a lexeme).
+
+
+C99 introduced hexadecimal floating-point literals, see:
+http://publib.boulder.ibm.com/infocenter/zos/v1r12/topic/com.ibm.zos.r12.cbclx01/lit_fltpt.htm#lit_fltpt__hex_float_constants
+
+of the general form:
+   [sign]  &quot;0x&quot;  [hexdigits]  [&quot;.&quot; hexdigits]  [&quot;p&quot; [sign] decdigits]
+(with the proviso that at least one significant hexdigit must appear).
+
+The letter &apos;p&apos; means &quot;times 2 to the power of&quot;; and the exponent digits are 
+decimal.  Case is ignored.  The leading sign is not actually part of the literal, but is a unary operator.
+
+(In C the exponent field must appear in order to disambiguate a trailing 
+&apos;f&apos; = float flag, but this would not be necessary in JavaScript.)
+
+
+Advantages of hexadecimal exponential form:
+
+1)  It brings hexadecimal literals into line with decimal literals.
+
+2)  It allows hexadecimal literals to encompass all the *finite* Numbers, just as decimal literals can.  (Hexadecimal 0x1p1024 overflows to Infinity, just like decimal 1e310.)
+
+3)  It enables numeric literals in a well-understood programmer-friendly form (i.e. hexadecimal).  And it supports those of us who think of numbers in their sign-significand-exponent form.
+
+4)  Various useful constants are easily expressed in hexadecimal exponential form.  For example:
+        EPSILON = 0x1p-52
+        MAX_POWTWO = 0x1p1023
+instead of the messy:
+        EPSILON = 1 / 0x10000000000000
+        MAX_POWTWO = 1 / (Number.MIN_VALUE * 0x8000000000000)
+or the confusing decimal:
+        EPSILON = 2.220446049250313e-16
+        MAX_POWTWO = 8.98846567431158e+307
+
+
+Note that this is not about allowing programmers to create arbitrary bit patterns in a Number; it is simply about beefing up hexadecimal literals to the same grade as decimal literals.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>806</commentid>
+    <comment_count>4</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-23 04:55:43 -0700</bug_when>
+    <thetext>Re: new toEngineering format
+
+The proposal is for a new numeric format:
+    Number.prototype.toEngineering( numdigits )
+
+This is similar to the normalised &apos;toExponential&apos;, but the exponent is a multiple of 3 and there are 1, 2, or 3 digits before the decimal point.
+The &apos;numdigits&apos; parameter indicates the number of digits after the decimal point.
+
+The format makes it visually and orally easy to relate a string representation of a number to SI scaling prefixes (&quot;mega&quot;, &quot;giga&quot;, &quot;nano&quot;, etc).
+See http://en.wikipedia.org/wiki/Scientific_notation#Engineering_notation .
+
+
+Many newer pocket calculators provide this format and it seems to be gaining 
+ground in formatters generally.  It is useful in engineering, say if one is 
+working with nanoseconds, milliwatts, megaohms, picofarads, etc.
+
+The objective is to catch up with the trends in data formatting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>807</commentid>
+    <comment_count>5</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-23 05:07:20 -0700</bug_when>
+    <thetext>Re: new toHexExponential format
+
+The proposal is for a new numeric format:
+    Number.prototype.toHexExponential( numdigits )
+
+The &apos;numdigits&apos; parameter indicates the number of digits after the radix point.
+
+This is similar to &apos;toExponential&apos; but is in the normalised hexadecimal form instead of decimal.  See comment 3 above.
+E.g.  1.4A2p+4
+The letter &apos;p&apos; corresponds to decimal&apos;s &apos;e&apos;, and means &quot;times 2 to the power of&quot;.
+The *binary* exponent is represented in signed *decimal*.
+The hex representation should probably be in lowercase to match that of &apos;toString(16)&apos;.
+
+See http://en.wikipedia.org/wiki/Hexadecimal#Hexadecimal_exponential_notation .
+
+
+GNU&apos;s printf provides this format with its %a and %A conversions.  The format represents a binary64 value in a common programmer-friendly hexadecimal form.  Note the natural match with binary64&apos;s sign-significand-exponent parts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>808</commentid>
+    <comment_count>6</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-23 05:47:44 -0700</bug_when>
+    <thetext>Re: new Number.parseInt, and Number.parse (ala Date.parse)
+
+If &apos;isNaN&apos; and &apos;isFinite&apos; are being carried over from the global namespace into &apos;Number&apos;, then we could take the opportunity likewise to carry &apos;parseFloat&apos; and &apos;parseInt&apos; for completeness:
+     isNaN       -&gt; Number.isNaN
+     isFinite    -&gt; Number.isFinite
+     parseInt    -&gt; Number.parseInt
+     parseFloat  -&gt; Number.parse
+
+The new Number.parse should be improved to handle fractions in any base [2-36] and the hexadecimal exponential format (see comment 5 above).
+Thus Number.parse would match Date.parse in parsing any string that its formatters can produce:
+     Number.parse( string, [base] )
+
+The new Number.parse should ignore a leading &quot;0x&quot; before a hexadecimal string&apos;s digits, just like &apos;parseInt&apos; does now.  E.g. &quot;-0x123.B4p+12&quot;.
+
+The new Number.parse should accept &quot;Inf&quot; as a synonym for Infinity (I believe this is recommended by IEEE 754-2008).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>810</commentid>
+    <comment_count>7</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-23 06:03:08 -0700</bug_when>
+    <thetext>Re: hexadecimal fractions/exponentials in &apos;ToNumber&apos; converter
+
+To round out the hexadecimal facilities described in several comments above:
+the &apos;ToNumber&apos; internal function could also handle hexadecimal fractions and exponentials.  Currently &apos;ToNumber&apos; only handles integers:
+      Number(&quot;0x12&quot;)    -&gt; 18
+but   Number(&quot;0x12.3&quot;)  -&gt; NaN     // should be 18.1875</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>824</commentid>
+    <comment_count>8</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-03-28 08:07:28 -0700</bug_when>
+    <thetext>I&apos;ve uploaded a new draft of proposed ES6 library extensions spec (http://wiki.ecmascript.org/doku.php?do=show&amp;id=harmony%3Amore_math_functions).  This so far addresses the following asks from this thread:
+- Adds Number.EPSILON and Number.MAX_INTEGER
+- Adds Number.parseInt and Number.parseFloat
+
+Other topics raised here will be discussed at TC39 f2f this week.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>846</commentid>
+    <comment_count>9</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 17:04:07 -0700</bug_when>
+    <thetext>Re: breaking Numbers into sign-significand-exponent values
+
+Numerically, floating-point numbers are formed of a sign (s), significand (m), exponent (e), and radix (b):
+     (-1)^s * m * b^e
+where 1 &lt;= m &lt; b for a finite non-zero value.
+
+Often we want to access the s-m-e values directly: for argument reduction, or comparing for approximate equality by ignoring low order rounding error, etc.
+In ES5 this is painful.
+
+As an example of argument reduction, say we have an algorithm that works well in the interval [0.5,1.5], then we apply this algorithm on m/2 and fix up for the exponent e+1 to obtain best precision.
+
+Note that it is the _values_ of s-m-e that interest us, not the binary bits of whatever representation they have.
+
+Here is a table of the values of s-m-e for the five FP classes:
+  FP Class     s      m        e
+  normal:      0, 1   [ 1 , 2 )   [ −1022 , 1023 ]
+  subnormal:   0, 1   [ 1 , 2 )   [ −1074 , −1023 ]
+  zero:        0, 1   +0       −Inf
+  infinity:    0, 1   +Inf     +Inf
+  NaN:         0     NaN      NaN
+
+The ancient C functions frexp(3) &amp; ldexp(3) are great for getting &amp; setting s-m-e (see also modf(3)).
+
+C&apos;s frexp/ldexp were created before 1980 -- before IEEE754.  So they are not quite the same as IEEE&apos;s logB/scaleB and split/join-type functions.
+frexp delivers a signed significand in the interval [0.5,1) not [1,2) union 0.
+ldexp is almost perfect as scaleB, if you already know e.
+
+
+To get &amp; set the s-m-e of a number we would like methods something like:
+   Number.prototype.getSign()   ~.getSignif()   ~.getExponent()
+   Number.prototype.setSign(s)  ~.setSignif(m)  ~.setExponent(e)
+or read-write properties on Number something like:
+   sign  signif   exponent
+
+On setSign(s)      s must be 0 (falsy) or 1 (truthy)
+On setExponent(e)  e must be an integer
+
+This is similar to the Date getters &amp; setters, which set part of a Date without affecting its other parts.  (Date being a composite of y-m-d-hh-mm-ss-fff, just as Number is a composite of s-m-e.)
+
+
+Then logB(x)    is  x.getExponent()                     or  x.exponent
+and scaleB(x,n) is  x.setExponent( x.getExponent()+n )  or  x.exponent+=n</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>848</commentid>
+    <comment_count>10</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-29 03:43:00 -0700</bug_when>
+    <thetext>(In reply to comment #9)
+&gt; Re: breaking Numbers into sign-significand-exponent values
+
+If the access to the sign-significand-exponent (s-m-e) of a number is not provided then we can do it ourselves, but it is lengthy, slow, and expensive.  We have to estimate the exponent and carefully fix up deviant cases.  Whereas the implementation environment has easy access to these desirable values.
+
+Here for example are logB/scaleB implemented in JavaScript with the constants MAX_POWTWO and MIN_NORMAL.
+
+++++code follows++++
+
+IEEE.logB = function (x)
+{
+  x = +x;         // guard against non-numerics
+
+  var m, e;
+  var abs = (x &gt;= 0)? x : -x;             // don&apos;t care about -0!
+
+  // calculate the approx exponent;
+  // then fix the exponent estimate by computing the significand
+  // (also works for pow() overflow/underflow!)
+
+  e = Math.floor( Math.log( abs ) / Math.LN2 );
+
+  m = abs / Math.pow( 2, e );           // don&apos;t care about NaNs!
+  if (m &gt;= 2)  e += 1;
+  if (m &lt;  1)  e -= 1;
+
+  return e;
+};
+
+IEEE.scaleB = function (x,n)
+{
+  x = +x,  n = +n;     // guard against non-numerics
+
+  // handle NaN, infinities, zeroes
+
+  if (isNaN( x/x ))  return x;
+
+  // multiply x by 2^n, first taking care for large |n|
+
+  if (isFinite( n )) {
+    while (n &gt; 1023  &amp;&amp;  1/x != 0) {
+      x *= MAX_POWTWO;
+      n -= 1023;
+    }
+    while (n &lt; -1022  &amp;&amp;  x != 0) {
+      x *= MIN_NORMAL;
+      n += 1022;
+    }
+  }
+  return x * Math.pow( 2, n );
+};</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14744</commentid>
+    <comment_count>11</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:15 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

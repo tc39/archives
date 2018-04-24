@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3826</bug_id>
+          
+          <creation_ts>2015-02-11 16:55:00 -0800</creation_ts>
+          <short_desc>chapter 12: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:42 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12318</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:55:56 -0800</bug_when>
+    <thetext>----------------------------------------
+In 12.1.1 &quot;Static Semantics: Early Errors&quot;:
+
+{1}
+12.1.1 / group 3 / bullet 1:
+It is a Syntax Error if this production has a _[Yield] parameter and
+StringValue of /Identifier/ is&quot;yield&quot;.
+
+    After the second &quot;is&quot;, insert space.
+
+----------------------------------------
+In 12.2.3.1 &quot;Runtime Semantics: Evaluation&quot;:
+
+{2}
+12.2.3.1 / group 4 / step 1:
+Return the StringValue of /StringLiteral/ as defined in .
+
+    Insert section number
+
+----------------------------------------
+In 12.2.8.2.2 &quot;Runtime Semantics: GetTemplateObject ( templateLiteral )&quot;:
+
+{3}
+12.2.8.2.2 / step 11.b:
+Let /cookedValue/ be the string value List /cookedStrings/[/index/].
+
+    Delete &quot;List&quot;
+
+----------------------------------------
+In 12.3 &quot;Left-Hand-Side Expressions&quot;:
+
+{4}
+12.3 / Syntax / prods 3 + 6:
+/NewExpression/ : /MemberExpression/ new /NewExpression/
+
+    The production for &apos;NewExpression&apos; appears twice
+
+----------------------------------------
+In 12.3.3.1.1 &quot;Runtime Semantics: EvaluateNew(...)&quot;:
+
+{5}
+12.3.3.1.1 / preamble:
+The abstract operation EvaluateNew with arguments /production/ and /arguments/
+performs the following steps:
+
+    s|production|thisCall, constructProduction|
+
+----------------------------------------
+In 12.14.5.1 &quot;Static Semantics: Early Errors&quot;:
+
+{6}
+12.14.5.1 / group 1 / bullet 1:
+It is a Syntax Error if IsValidSimpleAssignment of /IdentifierReference/ is
+*false*.
+
+    s|IsValidSimpleAssignment|IsValidSimpleAssignmentTarget|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12347</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:51:57 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12467</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:42 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

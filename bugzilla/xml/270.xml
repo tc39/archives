@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>270</bug_id>
+          
+          <creation_ts>2012-02-22 06:31:00 -0800</creation_ts>
+          <short_desc>15.4.4.4-5-c-i-1.js newArr[0] is Number Object (new Number(101))</short_desc>
+          <delta_ts>2012-02-29 09:11:20 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>barraclough</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>646</commentid>
+    <comment_count>0</comment_count>
+      <attachid>10</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-02-22 06:31:39 -0800</bug_when>
+    <thetext>Created attachment 10
+patch for this test case
+
+In ECMA262 5.1 section 15.4.4.4
+
+1. Let O be the result of calling ToObject passing the this value as the argument.
+
+and
+
+4. Let items be an internal List whose first element is O...
+
+Then, in this test case, I think that first E at 5-a is number object `new Number(101)` and typeof newArr[0] is &apos;object&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>656</commentid>
+    <comment_count>1</comment_count>
+    <who name="">barraclough</who>
+    <bug_when>2012-02-24 00:41:17 -0800</bug_when>
+    <thetext>Agreed, the first E in 5.a should be O, the result of a ToObject conversion.
+
+Fixing this test would require two changes:
+    var instanceOfVerify = typeof newArr[0]===&quot;number&quot;;
+should read:
+    var instanceOfVerify = typeof newArr[0]===&quot;object&quot;;
+and:
+    verifyValue = newArr[0] === 101;
+should read:
+    verifyValue = newArr[0] == 101;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>658</commentid>
+    <comment_count>2</comment_count>
+    <who name="">barraclough</who>
+    <bug_when>2012-02-24 00:41:34 -0800</bug_when>
+    <thetext>*** Bug 275 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>691</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-27 16:32:29 -0800</bug_when>
+    <thetext>Thanks guys.  Agree with the description below, and I&apos;ll work to get this fixed in the live website soon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>714</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-29 09:11:20 -0800</bug_when>
+    <thetext>Test changes are now live on test262.ecmascript.org.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>10</attachid>
+            <date>2012-02-22 06:31:00 -0800</date>
+            <delta_ts>2012-02-22 06:31:39 -0800</delta_ts>
+            <desc>patch for this test case</desc>
+            <filename>diff.patch</filename>
+            <type>application/octet-stream</type>
+            <size>1027</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2gxNS8xNS40LzE1LjQuNC8xNS40LjQuNC8xNS40LjQu
+NC01LWMtaS0xLmpzIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC40LzE1LjQu
+NC40LTUtYy1pLTEuanMKLS0tIGEvdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC40
+LzE1LjQuNC40LTUtYy1pLTEuanMKKysrIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1
+LjQuNC40LzE1LjQuNC40LTUtYy1pLTEuanMKQEAgLTMxLDIwICszMSwyMCBAQCBmdW5jdGlvbiB0
+ZXN0Y2FzZSgpIHsKICAgICAgICAgICAgICAgICB3cml0YWJsZTogZmFsc2UsDQogICAgICAgICAg
+ICAgICAgIGNvbmZpZ3VyYWJsZTogdHJ1ZQ0KICAgICAgICAgICAgIH0pOw0KIA0KICAgICAgICAg
+ICAgIHZhciBuZXdBcnIgPSBBcnJheS5wcm90b3R5cGUuY29uY2F0LmNhbGwoMTAxKTsNCiANCiAg
+ICAgICAgICAgICB2YXIgaGFzUHJvcGVydHkgPSBuZXdBcnIuaGFzT3duUHJvcGVydHkoIjAiKTsN
+CiANCi0JICAgIHZhciBpbnN0YW5jZU9mVmVyaWZ5ID0gdHlwZW9mIG5ld0FyclswXT09PSJudW1i
+ZXIiOw0KKwkgICAgdmFyIGluc3RhbmNlT2ZWZXJpZnkgPSBuZXdBcnJbMF0gaW5zdGFuY2VvZiBO
+dW1iZXI7DQogICAgICAgICAgICAgDQogICAgICAgICAgICAgdmFyIHZlcmlmeVZhbHVlID0gZmFs
+c2U7DQotICAgICAgICAgICAgdmVyaWZ5VmFsdWUgPSBuZXdBcnJbMF0gPT09IDEwMTsNCisgICAg
+ICAgICAgICB2ZXJpZnlWYWx1ZSA9IE51bWJlcihuZXdBcnJbMF0pID09PSAxMDE7DQogDQogICAg
+ICAgICAgICAgdmFyIHZlcmlmeUVudW1lcmFibGUgPSBmYWxzZTsNCiAgICAgICAgICAgICBmb3Ig
+KHZhciBwIGluIG5ld0Fycikgew0KICAgICAgICAgICAgICAgICBpZiAocCA9PT0gIjAiICYmIG5l
+d0Fyci5oYXNPd25Qcm9wZXJ0eSgiMCIpKSB7DQogICAgICAgICAgICAgICAgICAgICB2ZXJpZnlF
+bnVtZXJhYmxlID0gdHJ1ZTsNCiAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgIH0NCiAN
+Cg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

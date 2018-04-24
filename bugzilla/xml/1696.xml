@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1696</bug_id>
+          
+          <creation_ts>2013-08-01 13:49:00 -0700</creation_ts>
+          <short_desc>15.5.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:23:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4688</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-01 13:49:41 -0700</bug_when>
+    <thetext>15.5.2.4 / step 8
+    Let literalSegments be ToUint(len).
+
+&apos;ToUint&apos; is not defined. Change to &apos;ToUint32&apos;?
+(= bug 492)
+
+---
+
+15.5.3.11 / step 8.a
+    Let replValue be the result of calling the [[Call]] internal methods ...
+
+s|methods|method|
+
+---
+
+15.5.3.11 / step 11
+    ... the String formed by concatenating ..., replString, and ...
+
+&apos;replString&apos; is not defined. s|replString|replStr|
+
+---
+
+15.5.3.14 / step 14.a
+15.5.3.14 / step 15.c
+15.5.3.14 / step 17.c.ii.2
+15.5.3.14 / step 19
+    Let status be the result of [[DefineOwnProperty]] internal method of A ...
+
+After &quot;result of&quot;, insert &quot;calling the&quot;.
+
+---
+
+15.5.3.14 / step 17.a
+    Let e be the result of SplitMatch(S, q, R).
+15.5.3.14 / Runtime Semantics: SplitMatch Abstract Operation / para 1
+    The abstract operation SplitMatch takes three parameters ...
+
+&apos;SplitMatch&apos; is italicized. Change it to upright.
+
+---
+
+15.5.3.22 / step 10
+15.5.3.23 / step 10
+    Let searchLength be the number of elements in searchString.
+
+15.5.3.22 / step 12
+15.5.3.23 / step 13
+    ...  the full element sequence of searchString, ...
+
+s|searchString|searchStr|</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4691</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-01 17:12:40 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5204</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:46 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

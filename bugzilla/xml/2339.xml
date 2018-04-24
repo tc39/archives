@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2339</bug_id>
+          
+          <creation_ts>2013-12-02 07:37:00 -0800</creation_ts>
+          <short_desc>Function.getArgs</short_desc>
+          <delta_ts>2015-10-15 17:11:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>hacksmw</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6868</commentid>
+    <comment_count>0</comment_count>
+    <who name="">hacksmw</who>
+    <bug_when>2013-12-02 07:37:41 -0800</bug_when>
+    <thetext>Hello.
+
+ES6&apos;s rest and default parameter is perfect for arguments. 
+It seems that arguments is not necessary anymore.
+
+However ES would not enforce arity because of traditional reasons.
+and does not support function overloading.
+
+&apos;arguments&apos; can solve this problem.
+I think traditional vararg-style arguments is not too bad.
+
+Thus I propose a tiny API, Function.getArgs(), which returns current function&apos;s arguments array instead of new syntax which can make ES more complex.
+
+The following is an implementation and usage of Function.getArgs() by JavaScript. It should be implemented by native code.
+
+Function.getArgs = Function.getArgs || function getArgs(){
+ if(typeof getArgs.caller != &quot;function&quot;) throw new Error();
+ return Array.prototype.slice.call(getArgs.caller.arguments, 0);
+};
+
+function foo(){
+ var args = Function.getArgs();
+ console.log(args.toString());
+}
+
+foo(123,456);
+
+Thanks.
+
+(Sorry for bad English.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13736</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 12:12:00 -0700</bug_when>
+    <thetext>see https://github.com/allenwb/ESideas/blob/master/ES7MetaProps.md</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14810</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:11:16 -0700</bug_when>
+    <thetext>Proposals should use the proposal process documented here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

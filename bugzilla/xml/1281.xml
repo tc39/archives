@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1281</bug_id>
+          
+          <creation_ts>2013-03-09 15:26:00 -0800</creation_ts>
+          <short_desc>CheckObjectCoercible(this value)</short_desc>
+          <delta_ts>2013-08-21 14:13:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3411</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-03-09 15:26:23 -0800</bug_when>
+    <thetext>Does it make sense for this to simply be:
+
+CheckObjectCoercible(this)
+
+The semantics remain intact, while being consistent with other abstract operation calls</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4338</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-30 13:37:26 -0700</bug_when>
+    <thetext>not really.  We try to never use just &quot;this&quot; as a meta-variable name in the algorithms, while &quot;this value&quot; has a specific meaning.  I&apos;d have to add a step like:
+  Let O be the this value.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

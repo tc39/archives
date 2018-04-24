@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4059</bug_id>
+          
+          <creation_ts>2015-02-21 08:34:00 -0800</creation_ts>
+          <short_desc>14.4 Generator Function Definitions: Remove [Yield] parameter from GeneratorBody</short_desc>
+          <delta_ts>2015-03-04 18:58:12 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13233</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-21 08:34:41 -0800</bug_when>
+    <thetext>14.4 Generator Function Definitions
+
+[Yield] is always present for generators, so the grammar can be simplified to:
+
+GeneratorMethod[Yield] :
+  * PropertyName[?Yield] (StrictFormalParameters[Yield,GeneratorParameter] ) { GeneratorBody }
+
+GeneratorDeclaration[Yield, Default] :
+  function * BindingIdentifier[?Yield] ( FormalParameters[Yield,GeneratorParameter] ) { GeneratorBody }
+  [+Default] function * ( FormalParameters[Yield,GeneratorParameter] ) { GeneratorBody }
+
+GeneratorExpression :
+  function * BindingIdentifier[Yield]opt ( FormalParameters[Yield,GeneratorParameter] ) { GeneratorBody }
+
+GeneratorBody :
+  FunctionBody[Yield]
+
+
+So basically changing `GeneratorBody[Yield]` to just `GeneratorBody` and `FunctionBody[?Yield]` to `FunctionBody`.
+
+
+And change 19.2.1.1.1 RuntimeSemantics: CreateDynamicFunction(constructor, newTarget, kind, args) step 3.a to:
+&gt; Let goal be the grammar symbol GeneratorBody.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13368</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 16:55:47 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13472</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:12 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

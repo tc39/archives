@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1592</bug_id>
+          
+          <creation_ts>2013-07-17 19:26:00 -0700</creation_ts>
+          <short_desc>section number anomalies</short_desc>
+          <delta_ts>2013-08-23 08:23:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4551</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-17 19:26:48 -0700</bug_when>
+    <thetext>[Version should be Rev 16 but that option doesn&apos;t exist yet.]
+
+-----
+
+There are two sections labelled 8.5.2:
+    8.5.2 [[SetInheritance]] (V)
+    8.5.2 [[IsExtensible]] ( )
+
+-----
+
+The following level-4 section headers are odd
+because the implied level-3 parent does not exist.
+(For example, section 12.1.1.1 is a subsection of 12.1 &quot;Block&quot;;
+there is no section 12.1.1.)
+
+    12.1.1.1
+    12.1.1.2
+    12.3.1.1
+    12.4.1.1
+    12.5.1.1
+    12.7.1.1
+    12.7.1.2
+    12.8.1.1
+    12.8.1.2
+    12.9.1.1
+    12.10.1.1
+    12.11.1.1
+    12.11.1.2
+    12.12.1.1
+    12.12.1.2
+    12.14.1.1
+    12.14.1.2
+    13.1.1.1
+    13.1.1.2
+    13.2.1.1
+    13.2.1.2
+    13.3.1.1
+    13.3.1.2
+    13.4.1.1
+    13.4.1.2
+    13.5.1.1
+    13.5.1.2
+
+-----
+
+Section 15.7.2 &quot;Properties of the Number Constructor&quot;
+contains subsections labelled:
+    15.7.3.7
+    15.7.3.8
+    15.7.3.9
+    15.7.3.10
+    15.7.3.11
+    15.7.3.12
+    15.7.3.13
+    15.7.3.14
+In each case, change the &quot;3&quot; to a &quot;2&quot;.
+
+(Also, 15.7.2.7 will need to be renumbered or moved.)
+
+-----
+
+Section 15.7.3 &quot;Properties of the Number Prototype Object&quot;
+contains a subsection labelled:
+    15.7.4.8 Number.prototype.clz ()
+Change the &quot;4&quot; to &quot;3&quot;.
+
+-----
+
+Annex E contains two sections:
+    16.2 In the 6th Edition
+    16.3 In the 5th Edition
+These should presuably be labelled &quot;E.1&quot; and &quot;E.2&quot; (if anything).
+
+-----</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4829</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-07 17:48:47 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5143</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:10 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

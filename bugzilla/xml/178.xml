@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>178</bug_id>
+          
+          <creation_ts>2011-07-27 10:43:00 -0700</creation_ts>
+          <short_desc>Must settle scoping details for block-scoped bindings</short_desc>
+          <delta_ts>2011-11-07 13:27:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://wiki.ecmascript.org/doku.php?id=harmony:block_scoped_bindings</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark S. Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="5"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>392</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-07-27 10:43:10 -0700</bug_when>
+    <thetext>As I recall, there were three possibilities recently raised verbally that are candidates for consensus. The first, which I believe corresponds to the current proposal on the wiki, has the following characteristics:
+
+&quot;letrec&quot; semantics with dynamic dead zone
+
+1) Function declarations bring their variable into scope throughout their containing block.
+2) The initialized function variable is initialized hoisted to the beginning of that block.
+3) Const, and let declarations all bring their variable into scope throughout their containing block.
+4) Const and let variables are initialized at the point of their declaration.
+5) Once initialized, const and let variables are live.
+6) An attempt to read a const or let variable before it&apos;s live should throw a ReferenceError (or TypeError?).
+7) An attempt to assign to a let variable before it&apos;s live should throw a ReferenceError (or TypeError?).
+8) Any attempt to assign to a const variable should be an early error (SyntaxError?).
+
+&quot;letrec&quot; semantics with static and dynamic dead zone
+
+9) Like &apos;&quot;letrec&quot; semantics with dynamic dead zone&apos; except that, if a const or let variable is used in its block textually &quot;before&quot; its declaration, that&apos;s an early error. &quot;before&quot; means, in earlier statements and declarations, and in the right hand side of the variable&apos;s own declaration.
+
+&quot;let*&quot; semantics with dynamic dead zone
+
+3) Const and let declarations bring their variable in scope starting from their point of declaration through the end of their containing block, but not including the right side of that declaration.
+1,2,4-8) All the rest are like letrec.
+
+
+I favor &apos;&quot;letrec&quot; semantics with dynamic dead zone&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>393</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2011-07-27 14:01:14 -0700</bug_when>
+    <thetext>The main arguments I see for the dynamic dead zone semantics (which essentially views a block as one big recursive binding) are:
+
+1.) let* (or &quot;C&quot;) semantics for `let&apos; and `const&apos; is inconsistent with the existing lifting semantics for `function&apos;, whose scope stretches over the whole block.
+
+2.) letrec with static dead zone does not detect the general case, while also ruling out some perfectly useful programs (e.g., recursive or mutually recursive object definitions via let or const).
+
+3.) Binding semantics should be consistent between local blocks and module/global scope. Since modules are recursive, this pretty much mandates letrec semantics with no static restriction.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>398</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-28 09:04:38 -0700</bug_when>
+    <thetext>0)formal parameters are treated as if they were let declarations that bring their binding in scope prior to step 1. formal parameters (including parameters bound within destructuring patterns) are bound in left to right order.  If a formal parameter has an initializer, the parameter is only considered initialized after the evaluation of the initializer.  (ie, it is an early error for an initializer to reference the parameter it is initializing or any parameter that is defined to the right of the initializer.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>399</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-28 09:13:10 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; The main arguments I see for the dynamic dead zone semantics (which essentially
+&gt; views a block as one big recursive binding) are:
+&gt; 
+&gt; 1.) let* (or &quot;C&quot;) semantics for `let&apos; and `const&apos; is inconsistent with the
+&gt; existing lifting semantics for `function&apos;, whose scope stretches over the whole
+&gt; block.
+&gt; 
+&gt; 2.) letrec with static dead zone does not detect the general case, while also
+&gt; ruling out some perfectly useful programs (e.g., recursive or mutually
+&gt; recursive object definitions via let or const).
+
+but dynamic deadzones don&apos;t help with mutually recursive objects either:
+
+const obj1 = {other: obj2};  //dynamic error on reference to obj2
+const obj2 = {other: obj1};
+
+the error in the definition of obj1 might as well be static
+
+It is only uplevel references from within inner functions that benefit need to use a dynamic deadzone
+
+
+&gt; 
+&gt; 3.) Binding semantics should be consistent between local blocks and
+&gt; module/global scope. Since modules are recursive, this pretty much mandates
+&gt; letrec semantics with no static restriction.
+
+Can you give an example with static would be a problem for the top level WRT modules?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>400</commentid>
+    <comment_count>4</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2011-07-28 14:29:07 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; (In reply to comment #1)
+&gt; &gt; The main arguments I see for the dynamic dead zone semantics (which essentially
+&gt; &gt; views a block as one big recursive binding) are:
+&gt; &gt; 
+&gt; &gt; 1.) let* (or &quot;C&quot;) semantics for `let&apos; and `const&apos; is inconsistent with the
+&gt; &gt; existing lifting semantics for `function&apos;, whose scope stretches over the whole
+&gt; &gt; block.
+&gt; &gt; 
+&gt; &gt; 2.) letrec with static dead zone does not detect the general case, while also
+&gt; &gt; ruling out some perfectly useful programs (e.g., recursive or mutually
+&gt; &gt; recursive object definitions via let or const).
+&gt; 
+&gt; but dynamic deadzones don&apos;t help with mutually recursive objects either:
+&gt; 
+&gt; const obj1 = {other: obj2};  //dynamic error on reference to obj2
+&gt; const obj2 = {other: obj1};
+&gt; 
+&gt; the error in the definition of obj1 might as well be static
+&gt; 
+&gt; It is only uplevel references from within inner functions that benefit need to
+&gt; use a dynamic deadzone
+
+Yes. The example I had in mind is one where the recursion goes through methods:
+
+const x = {f() { ...y...}};
+const y = {g() { ...x...}};
+
+Now, I think what you had in mind is to make a distinction between references in the same scope, and references in a nested (function) scope. But that seems like even more complication for minor benefit.
+
+&gt; &gt; 3.) Binding semantics should be consistent between local blocks and
+&gt; &gt; module/global scope. Since modules are recursive, this pretty much mandates
+&gt; &gt; letrec semantics with no static restriction.
+&gt; 
+&gt; Can you give an example with static would be a problem for the top level WRT
+&gt; modules?
+
+When you have recursive modules, all module bodies together basically form one big letrec. So treating their bindings as sequential isn&apos;t very meaningful. A per-module static dead zone wouldn&apos;t be unsound, but it would be an even less reliable analysis than in function scope.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>505</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-11-07 13:27:21 -0800</bug_when>
+    <thetext>These issues were resolved in at TC39 meetings and the resolutions are reflected in the revisions 4 spec. draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

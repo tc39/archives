@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3194</bug_id>
+          
+          <creation_ts>2014-08-30 06:27:00 -0700</creation_ts>
+          <short_desc>22.1.3.24 Array.prototype.sort: Typo &quot;comparision&quot;, missing &quot;not&quot;, &quot;HasOwnProerty&quot;</short_desc>
+          <delta_ts>2014-10-14 15:17:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10055</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-30 06:27:51 -0700</bug_when>
+    <thetext>22.1.3.24 Array.prototype.sort (comparefn).
+
+- 3rd paragraph: Change &quot;comparision&quot; -&gt; &quot;comparison&quot;.
+- 3rd paragraph: Add &quot;not&quot; in &quot;does act&quot; -&gt; &quot;does not act as a consistent&quot;.
+- Sort steps: Change &quot;[[HasOwnProerty]]&quot; -&gt; &quot;[[HasOwnProperty]]&quot;
+- Sort steps: Remove &quot;a&quot; in &quot;a previous calls&quot;
+- Note 2: Change &quot;comparision&quot; -&gt; &quot;comparison&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10069</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-30 08:39:01 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10379</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:43 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

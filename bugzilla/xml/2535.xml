@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2535</bug_id>
+          
+          <creation_ts>2014-02-12 16:43:00 -0800</creation_ts>
+          <short_desc>chapter 14: misc editorial</short_desc>
+          <delta_ts>2014-06-01 18:40:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7269</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-12 16:43:53 -0800</bug_when>
+    <thetext>----------------------------------------
+In 14.1 &quot;Function Definitions&quot;:
+
+14.1 / Syntax / prod 6 (FormalsList) / rhs 1:
+FormalParameter[?Yield]
+    Insert &quot;?GeneratorParameter&quot;, as in rhs 2.
+    (Why would the first FormalParameter in a FormalsList
+    be different from the others?)
+
+----------------------------------------
+In 14.1.12 &quot;Static Semantics: ReferencesSuper&quot;:
+
+14.1.12 / group 4 / production + step 1:
+FormalParameters : FormalParametersList
+  1. Return FormalParametersList Contains super.
+
+    s|Parameters|Parameter|
+
+----------------------------------------
+In 14.2.4 &quot;Static Semantics: CoveredFormalsList&quot;:
+
+14.2.4 / group 2 / production / rhs 3+4:
+( ... IdentifierName )
+( Expression , ... IdentifierName )
+    s|IdentifierName|BindingIdentifier|
+
+----------------------------------------
+In 14.2.8 &quot;Runtime Semantics: IteratorBindingInitialisation&quot;:
+
+14.2.8 / group 2 / step 2:
+Return the result of performing IteratorBindingInitialisation of /formals/
+with arguments /value/ and /environment/.
+    s|value|iterator|
+
+----------------------------------------
+In 14.2.10 &quot;Runtime Semantics: Evaluation&quot;:
+
+14.2.10 / group 1 / step 4:
+... performing the FunctionCreate abstract operation with arguments Arrow, ...
+    Change &quot;Arrow&quot; to sans-serif.
+
+----------------------------------------
+In 14.3.8 &quot;Runtime Semantics: DefineMethod&quot;:
+
+14.3.8 / step 5:
+... performing the FunctionCreate abstract operation with arguments Method, ...
+    Put &quot;Method&quot; in sans-serif.
+
+----------------------------------------
+In 14.3.9 &quot;Runtime Semantics: PropertyDefinitionEvaluation&quot;:
+
+14.3.9 / group 3 / step 6:
+... performing the FunctionCreate abstract operation with arguments Method, ...
+    Put &quot;Method&quot; in sans-serif.
+
+14.3.9 / group 4 / step 5:
+... performing the FunctionCreate abstract operation with arguments Method, ...
+    Put &quot;Method&quot; in sans-serif.
+
+----------------------------------------
+In 14.4.11 &quot;Runtime Semantics: EvaluateBody&quot;:
+
+14.4.11 / group 2 / step 1:
+Let /G/ be the result of ObjectCreate(*%*GeneratorPrototype*%*, ... ).
+    De-bold percents.
+
+----------------------------------------
+In 14.4.13 &quot;Runtime Semantics: PropertyDefinitionEvaluation&quot;:
+
+14.4.13 / group 1 / step 6:
+... the GeneratorFunctionCreate abstract operation with arguments Method, ...
+    Put &quot;Method&quot; in sans-serif.
+
+----------------------------------------
+In 14.5.4 &quot;Static Semantics: Contains&quot;:
+
+14.5.4 / group 1 / step 4:
+Return the result of Contains for /ClassHeritage/ with argument /symbol/.
+    &apos;Contains&apos; is normally invoked via an infix notation.
+    Change to:
+        ... the result of /ClassHeritage/ Contains /symbol/
+
+----------------------------------------
+In 14.5.9 &quot;Static Semantics: PrototypeMethodDefinitions&quot;:
+In 14.5.13 &quot;Static Semantics: StaticMethodDefinitions&quot;:
+
+    As defined, each of these returns a List of ClassElements, but section
+    14.5.15 assumes that they each return a list of MethodDefinitions.
+    On the appropriate step, change /ClassElement/ to:
+        the /MethodDefinition/ of /ClassElement/
+
+----------------------------------------
+In 14.6.1 &quot;Static Semantics: InTailPosition(nonterminal) Abstract Operation&quot;:
+
+    For a semantic rule that returns a boolean, the name usually begins with
+    &quot;Is&quot; or &quot;Has&quot;. Rename to &quot;IsInTailPosition&quot; ?
+
+    This algorithm has no preamble.
+
+14.6.1 / step 1:
+Assert: /nonterminal/ is a parsed grammar production.
+    The phrase &quot;parsed grammar production&quot; is odd.
+    Instead, &quot;parse node&quot; (as in Table 26) would be more normal.
+    (And &quot;parse-tree node&quot; probably even more so.)
+
+    Likewise, change /nonterminal/ to /node/ throughout the algorithm.
+
+----------------------------------------
+In 14.6.2 &quot;Static Semantics: HasProductionInTailPosition&quot;:
+
+    A better name might be &quot;HasCallInTailPosition&quot;.
+
+    This is the only place in the spec where a semantic routine has its &quot;header&quot;
+    in one section and then has its production/algorithm groups set out in
+    subsections. It&apos;s just odd.
+
+    Rename parameter /nonterminal/ to /node/ (or maybe /expr/ or /callExpr/).
+
+----------------------------------------
+In 14.6.2.1 &quot;Statement Rules&quot;:
+
+14.6.2.1 / group 5 / production 4:
+    The production-recap for LabelledStatement
+    does not match its defining production in 13.12 / Syntax.
+
+14.6.2.1 / group 13 (the last one) / step 1:
+Return HasProductionInTailPosition of /Finally/ with argument /nonterminal/.
+    s|Finally|Block|
+
+----------------------------------------
+In 14.6.2.2 &quot;Expression Rules&quot;:
+
+14.6.2.2 / group 7 / step 1:
+If this /MemberExpression/ is /nonTerminal/, then return *true*.
+    De-capitalize the &quot;T&quot; in &quot;nonTerminal&quot;.
+
+14.6.2.2 / group 8 / step 1:
+If this /NewExpression/ is /nonterminal/, then return *true*.
+    I&apos;m doubtful that this condition could ever be satisfied, because
+    I don&apos;t see anywhere that HasProductionInTailPosition is invoked
+    with a NewExpression as the argument.
+
+----------------------------------------
+In 14.6.3 &quot;Runtime Semantics: PrepareForTailCall&quot;:
+
+    Add &quot;()&quot; to the section title, so it&apos;s clearer that the operation doesn&apos;t
+    have any parameters.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7965</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 13:54:38 -0700</bug_when>
+    <thetext>Some of these were fixed in rev23, but most remain in rev24.
+
+14.2.8 has moved to 14.2.15,
+14.2.10 to 14.2.17.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8299</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 10:54:58 -0700</bug_when>
+    <thetext>Regarding the organization of the tail call rules:  Yes this is a different style of organization, but it seems to work well for tail calls which is a pretty self contained  part of the the overall specification.  So, I&apos;m not going to change it. 
+
+Some reviewers would  prefer that everything was reorganized more like the tail call section, but thats also not going to happen.  At least not in this edition.
+
+I thought about renaming HasPropductionInTailPosiition, but decided against it. It isn&apos;t looking for any call, it is looking for the specific a&quot;production&quot; that is passed in as the argument.
+
+Also, while &quot;production&quot; isn&apos;t quite right technically (we&apos;re really talking about parse nodes) the ES6 spec. has, so far, gotten away with fuzzing the distinction between grammar productions and the parse trees produced by parsing using those productions. I think we can continue to be fuzzy in that regard here.
+
+Otherwise, all fixed in rev25 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8309</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-10 21:36:07 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Regarding the organization of the tail call rules:  Yes this is a different
+&gt; style of organization, but it seems to work well for tail calls which is a
+&gt; pretty self contained  part of the the overall specification.  So, I&apos;m not
+&gt; going to change it. 
+&gt; 
+&gt; Some reviewers would  prefer that everything was reorganized more like the
+&gt; tail call section, but thats also not going to happen.  At least not in this
+&gt; edition.
+
+Actually, I don&apos;t mind that all the HasProductionInTailPosition rules are grouped together, or that most other operations have their rules spread throughout the spec. Either/both is fine with me. I&apos;m just pointing out that, normally, a set of rules appears in a section whose header gives the name of the semantic operation being defined, followed by its parameters. Here, you have to go up another level to get that info. 
+
+
+
+&gt; Also, while &quot;production&quot; isn&apos;t quite right technically (we&apos;re really talking
+&gt; about parse nodes) the ES6 spec. has, so far, gotten away with fuzzing the
+&gt; distinction between grammar productions and the parse trees produced by
+&gt; parsing using those productions.
+
+Yes, I&apos;ve been meaning to raise a bug on that point. (But I figured I might as well wait until the technical changes were more or less done.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8776</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 18:40:55 -0700</bug_when>
+    <thetext>confirmed fixed except for what I re-raised as Bug 2951, and the stuff about &quot;parsed grammar production&quot; and &quot;nonterminal&quot; that I intend to raise more generally at some point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

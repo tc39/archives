@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2563</bug_id>
+          
+          <creation_ts>2014-02-24 06:59:00 -0800</creation_ts>
+          <short_desc>13.6.4.4 Runtime Semantics: BindingInstantiation; IsConstantDeclaration condition question</short_desc>
+          <delta_ts>2014-04-06 11:31:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7399</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-02-24 06:59:49 -0800</bug_when>
+    <thetext>See: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-runtime-semantics-bindinginstantiation
+
+In this algorithm, the conditional binding operation checks if IsConstantDeclaration is false:
+
+  If IsConstantDeclaration of LetOrConst is false, then
+    Call environment’s CreateMutableBinding concrete method with argument name.
+    Assert: The above call to CreateMutableBinding will never return an abrupt completion.
+  Else,
+    Call environment’s CreateImmutableBinding concrete method with argument name.
+
+
+The rest of the spec checks if IsConstantDeclaration is true: 
+
+
+9.2.14 Function Declaration Instantiation
+
+  If IsConstantDeclaration of d is true, then
+    Call env’s CreateImmutableBinding concrete method passing dn as the argument.
+  Else,
+    Let status be the result of calling env’s CreateMutableBinding concrete method passing dn and false as the arguments.
+    Assert: status is never an abrupt completion.
+
+15.1.8 Runtime Semantics: GlobalDeclarationInstantiation
+
+  If IsConstantDeclaration of d is true, then
+    Let status be the result of calling env’s CreateImmutableBinding concrete method passing dn as the argument.
+  Else,
+    Let status be the result of calling env’s CreateMutableBinding concrete method passing dn and false as the arguments.
+
+
+
+
+I suggest re-ordering the first to be consistent with the other algorithms</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7443</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-18 14:37:23 -0700</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7606</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:31:30 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

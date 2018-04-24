@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3426</bug_id>
+          
+          <creation_ts>2014-12-08 14:50:00 -0800</creation_ts>
+          <short_desc>Missing tests regarding to ES5</short_desc>
+          <delta_ts>2014-12-08 14:50:27 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Daejun Park">daejunpark</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10964</commentid>
+    <comment_count>0</comment_count>
+      <attachid>74</attachid>
+    <who name="Daejun Park">daejunpark</who>
+    <bug_when>2014-12-08 14:50:27 -0800</bug_when>
+    <thetext>Created attachment 74
+Additional tests for missing semantic rules
+
+The following semantic rules are not tested by test262:
+
+- 8.7.1 GetValue (V) - [[Get]], Step 6
+- 8.7.2 PutValue (V, W) - [[Put]], Step 2.a
+- 8.7.2 PutValue (V, W) - [[Put]], Step 2.b
+- 8.7.2 PutValue (V, W) - [[Put]], Step 6.a &amp; 6.b
+- 8.7.2 PutValue (V, W) - [[Put]], Step 7.a
+- 8.12.4 [[CanPut]] (P) - Step 8.a
+- 10.2.1.1.3 SetMutableBinding (N,V,S) - Step 4
+- 10.2.1.1.5 DeleteBinding (N) - Step 4 &amp; 5
+- 10.5 Declaration Binding Instantiation - Step 5.e.iii.1
+- 10.5 Declaration Binding Instantiation - Step 5.e.iv, 1st condition is true
+- 10.5 Declaration Binding Instantiation - Step 5.e.iv, 2nd condition is true
+
+I manually wrote test programs for each cases, attached below, and running these tests against major browsers (Chrome, Firefox, Safari) revealed a couple of known and unknown bugs.
+
+Known bugs:
+https://code.google.com/p/v8/issues/detail?id=2243 (recently fixed)
+=&gt; 10.2.1.1.3 SetMutableBinding (N,V,S) - Step 4
+https://bugzilla.mozilla.org/show_bug.cgi?id=779682 (not fixed yet)
+=&gt; 8.7.2 PutValue (V, W) - [[Put]], Step 7.a
+
+Unknown bugs:
+https://bugs.webkit.org/show_bug.cgi?id=138859 (confirmed)
+=&gt; 10.5 Declaration Binding Instantiation - Step 5.e.iv, 1st condition is true
+=&gt; 10.5 Declaration Binding Instantiation - Step 5.e.iv, 2nd condition is true
+https://bugs.webkit.org/show_bug.cgi?id=138858
+=&gt; 10.2.1.1.3 SetMutableBinding (N,V,S) - Step 4
+
+
+The uncovered semantic rules were found by systematically measuring test coverage of test262 using a formal JS semantics that I recently developed. The semantics is suitable for test coverage measurement, since it is executable and closely resembles ES5 document. I think that the semantics is helpful to solve the test262&apos;s test coverage problem, reported several times:
+https://bugzilla.mozilla.org/show_bug.cgi?id=641214
+https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-23.md#somehow-we-started-talking-about-test262
+
+Note that, however, I measured only the statement coverage, not the branch coverage nor the condition coverage. Also, I measured only for the language core (i.e., Chapter 8-14), not for the standard built-in objects (i.e., Chapter 15). Thus, there may exist more missing cases. More comprehensive test coverage measurement is a future work.
+
+For more details, please refer to the following page:
+https://github.com/kframework/javascript-semantics/tree/master/test262-coverage
+
+Thanks,
+Daejun</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>74</attachid>
+            <date>2014-12-08 14:50:00 -0800</date>
+            <delta_ts>2014-12-08 14:50:27 -0800</delta_ts>
+            <desc>Additional tests for missing semantic rules</desc>
+            <filename>missing.tgz</filename>
+            <type>application/x-gzip</type>
+            <size>3659</size>
+            <attacher name="Daejun Park">daejunpark</attacher>
+            
+              <data encoding="base64">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
+lv8DXqaTNAB4AAA=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3445</bug_id>
+          
+          <creation_ts>2014-12-17 10:59:00 -0800</creation_ts>
+          <short_desc>Editorial issues rev29</short_desc>
+          <delta_ts>2014-12-23 20:23:31 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11047</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-17 10:59:01 -0800</bug_when>
+    <thetext>6.2.1, 2nd para
+- &quot;An new empty&quot; -&gt; &quot;A new empty&quot;
+
+7.2.2, IsArray
+- Intro: &quot;the following&quot; -&gt; &quot;the following steps&quot;
+- step 3b: &quot;O&quot; -&gt; &quot;arg&quot;
+- Also: Maybe rename parameter from &quot;arg&quot; to &quot;argument&quot; for consistency?
+
+7.2.8, IsRegExp
+- Remove &quot;Abstract Operation&quot; in header
+- Also: Maybe rename parameter from &quot;O&quot; to &quot;argument&quot; for consistency? Typically &quot;O&quot; is used when the parameter type is always Object
+
+7.3.2, GetV
+- Intro: &quot;is a not an&quot; -&gt; &quot;is not an&quot;
+- Intro: &quot;appripiate&quot; -&gt; &quot;appropriate&quot;
+- Intro: &quot;vlaue&quot; -&gt; &quot;value&quot;
+- step 2: &quot;type&quot; -&gt; &quot;Type&quot;
+- step 2: &quot;obj&quot; -&gt; &quot;V&quot;
+
+7.3.11, Call
+- Intro: &quot;the the&quot; -&gt; &quot;the&quot;
+- Intro: &quot;to function&quot; -&gt; &quot;to the function&quot;
+- step 3: Duplicate full stops
+
+7.3.21, SpeciesConstructor
+- Intro: &quot;use use&quot; -&gt; &quot;use&quot;
+- step 5: wrong font type for closing parenthesis
+
+7.4.1, CheckIterable
+- step 2: &quot;type&quot; -&gt; &quot;Type&quot;
+
+8.1.1, Table 16
+- CreateImmutableBinding, Purpose: &quot;regard less&quot; -&gt; &quot;regardless&quot;
+- CreateImmutableBinding, Purpose: Explicitly state that S is an optional parameter
+
+8.1.1.4.14, HasRestrictedGlobalProperty
+- NOTE: &quot;declarated&quot; -&gt; &quot;declared&quot;
+
+8.1.1.5.5, CreateImportBinding
+- Intro: &quot;Accessees&quot; -&gt; &quot;Accesses&quot;
+
+8.2, Table 22
+- [[templateMap]], Meaning: &quot;Template String template objects&quot; -&gt; &quot;TemplateLiteral template objects&quot; or simply &quot;Template objects&quot; ?
+- [[templateMap]], Meaning: &quot;cannonicalized&quot; -&gt; &quot;canonicalized&quot;
+- [[templateMap]], Meaning: &quot;sperately&quot; -&gt; &quot;separately&quot;
+- [[templateMap]], Meaning: &quot;Each [[strings]]&quot; -&gt; &quot;Each [[strings]] field&quot;
+- [[templateMap]], Meaning: &quot;templateLiteral&quot; -&gt; &quot;TemplateLiteral&quot;
+
+8.2.1, CreateRealm
+- step 5: remove second &quot;]]&quot;
+
+8.6.1, HostNormalizeModuleName
+- Header: &quot;refererId&quot; -&gt; &quot;referrerId&quot; (and everywhere else where &quot;referer&quot; instead of &quot;referrer&quot; is used)
+  http://en.wikipedia.org/wiki/HTTP_referer#Origin_of_the_term_referer
+- Intro: &quot;identifer&quot; -&gt; &quot;identifier&quot;
+- Intro: &quot;of of&quot; -&gt; &quot;of&quot;
+
+
+9.1.9  [[Set]]
+- step 9: left over &quot;]&quot;
+- step 9: left over &quot;as thisArgument&quot;
+
+9.4.2.1 [[DefineOwnProperty]] 
+- Intro: &quot;Array an&quot; -&gt; &quot;an Array&quot;
+
+9.4.2.2 ArrayCreate
+- NOTE: &quot;assigned the value&quot; -&gt; &quot;assigned to the value&quot;
+
+9.4.2.3 ArraySpeciesCreate
+- step 1: &quot;a integer&quot; -&gt; &quot;an integer&quot;
+- step 6.c.iii.1: &quot;%Array&quot; -&gt; &quot;%Array%&quot;
+- NOTE: &quot;compatability&quot; -&gt; &quot;compatibility&quot;
+
+12.1.1  Static Semantics: Early Errors
+- 3rd group: &quot;Identifie&quot; -&gt; &quot;Identifier&quot;
+
+12.2.8.2.2, GetTemplateObject
+- Header: Missing parameters in header
+- step 16: &quot;siteObj&quot; -&gt; &quot;template&quot;
+
+14.2.1 Early Errors.
+- NOTE: &quot;can not&quot; -&gt; &quot;cannot&quot;
+
+14.3.1 Early Errors.
+- left over item
+
+14.5  Class Definitions, Syntax
+- wrong font size for [~|+GeneratorParameter] in ClassTail production
+
+15.2.1.12, Static and Runtme Semantics: Module Records 
+- Header: &quot;Runtme&quot; -&gt; &quot;Runtime&quot;
+- Table 37, [[ModuleId]], Meaning: &quot;unique&quot; -&gt; &quot;uniquely&quot;
+
+15.2.1.13 ParseModuleAndImports 
+- step 17.c: &quot;ImportedModules&quot; -&gt; &quot;importedModules&quot;
+- NOTE: &quot;identifer&quot; -&gt; &quot;identifier&quot;
+
+
+15.2.1.15 ResolveExport
+- step 1: &quot;.[ModuleId]]&quot; -&gt; &quot;[[ModuleId]]&quot;
+- step 10: &quot;startResolution&quot; -&gt; &quot;starResolution&quot;
+- NOTE: &quot;[[moduleId]]&quot; -&gt; &quot;[[module]]&quot;
+
+
+15.2.3.10 Runtime Semantics: Evaluation  
+- step 4: &quot;Initializer&quot; -&gt; &quot;AssignmentExpression&quot;
+
+
+17:
+- &quot;18 through 26 are&quot; -&gt; &quot;18 through 26 is&quot;
+
+19.1.2.1 Object.assign ( target, ...sources )
+- step 5.c.iii: &quot;desc&quot; -&gt; &quot;propValue&quot;
+
+20.3.3  Properties of the Date Constructor,
+- CreateAction, step 1: &quot;F&quot; -&gt; &quot;constructor&quot;
+
+21.1.2.4 String.raw ( template , ...substitutions  )
+- NOTE: &quot;Tagged Template String&quot; -&gt; &quot;Tagged Template&quot;
+
+21.2.3.1 RegExp ( pattern, flags ) 
+- step 8.c: &quot;if is undefined&quot; -&gt; &quot;if flags is undefined&quot;
+- step 9: &quot;if If&quot; -&gt; &quot;if&quot;
+
+21.2.5.3 get RegExp.prototype.flags
+- Header: Remove parentheses
+
+21.2.5.6 RegExp.prototype [ @@match ] ( string )  
+- NOTE: &quot;is does not&quot; -&gt; &quot;does not&quot;
+- NOTE: &quot;should is not&quot; -&gt; &quot;is not&quot;
+- NOTE: &quot;as regular expression&quot; -&gt; &quot;as a regular expression&quot;
+
+21.2.5.11 RegExp.prototype [ @@split ] ( string, limit )
+- Para below NOTE: &quot;.split&quot; -&gt; &quot;[Symbol.split]&quot; (two times)
+
+22.1.3.25 Array.prototype.splice (start, deleteCount , ...items  )
+- step 11.c: Change to step 12
+
+22.2.1.1 %TypedArray% ( length )  
+- header: &quot;only when&quot; -&gt; change back to &quot;if and only if the&quot; ?
+
+22.2.2.1 %TypedArray%.from ( source [ , mapfn [ , thisArg ] ] )
+- step 6: &quot;items&quot; -&gt; &quot;source&quot;
+
+22.2.3.24 %TypedArray%.prototype.slice ( start, end )  
+- step 17: `&quot;constructor&quot;` -&gt; &quot;defaultConstructor&quot;
+
+24.3.2  JSON.stringify ( value [ , replacer [ , space ] ] )
+- NOTE 3: &quot;QUATION&quot; -&gt; QUOTATION&quot;
+
+26.1.5  Reflect.enumerate ( target )
+- steps 2-3: Merge steps
+
+A.2  Expressions
+- BindingIdentifier: &quot;Identifie&quot; -&gt; &quot;Identifier&quot;
+
+E.1:
+- 3rd item: &quot;not produce, an early&quot; -&gt; remove comma</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11077</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-17 16:09:39 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11203</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:31 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

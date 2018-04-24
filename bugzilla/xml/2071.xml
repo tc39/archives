@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2071</bug_id>
+          
+          <creation_ts>2013-10-09 00:18:00 -0700</creation_ts>
+          <short_desc>Refer to the latest available Unicode version rather than using a fixed version number</short_desc>
+          <delta_ts>2016-01-19 14:53:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>ecmascriptbugs</cc>
+    
+    <cc>lukeh</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5879</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-10-09 00:18:56 -0700</bug_when>
+    <thetext>From http://javascript.spec.whatwg.org/#unicode-database-version:
+
+For optimal interoperability, JavaScript implementations should use the latest available Unicode database to determine which ECMAScript characters are allowed in Identifiers and IdentifierNames, and which ECMAScript characters are whitespace characters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5880</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-10-09 13:51:08 -0700</bug_when>
+    <thetext>The current draft doesn&apos;t specify a fixed Unicode version; it specifies a minimum version &quot;or successor&quot;. Specifying a minimum version means:
+- that implementations must support at least that version in order to be conformant,
+- that the conformance test suite can fail implementations that don&apos;t support at least that version,
+- that applications that use only the characters of the minimum version in identifiers are guaranteed to run on all implementations of a given ECMAScript edition, which a few years after publication of that edition means all implementations that applications need to run on.
+
+If on the other hand the spec required the latest Unicode version, then
+- implementations would become non-conformant each time a new version of Unicode introduces new identifier characters, some implementations for a short time, some for a long time;
+- the conformance test suite would have to be revised each time a new version of Unicode introduces new identifier character, and would then fail for implementations that previously were conformant;
+- application developers would have to track which implementations support which Unicode versions, and serve different source code using different identifiers to different implementations.
+
+I have a hard time imagining that any developer would actually serve different source code using different identifiers to different implementations - using the latest Unicode characters in identifiers just isn&apos;t important enough. So I think they&apos;re better served by the guarantee and stability provided by the current spec. Developers developing for a single ECMAScript implementation (e.g., Node or Windows 8 UI) can still take advantage of a newer Unicode version that their target environment supports.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5881</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-09 15:47:44 -0700</bug_when>
+    <thetext>Norbert nicely described why we require a minimum version rather than the current version. 
+
+In addition, at the Sept 2013 TC19 meeting the consensus was that the ES5 recommendation about using Unicode 3.0 identifier characters to maximize interoperability was unnecessary (even if updated to a newer version) and should be deleted. https://github.com/rwaldron/tc39-notes/blob/master/es6/2013-09/sept-17.md#57-note-in-116-wrt-unicode-versions-update-to-unicode-51 
+
+The min. Unicode 5.1.0 requirement will remain, and the interoperability recommendation is gone.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5883</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-10-10 00:14:36 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; The current draft doesn&apos;t specify a fixed Unicode version; it specifies a
+&gt; minimum version &quot;or successor&quot;.
+
+That’s fine!
+
+&gt; If on the other hand the spec required the latest Unicode version, then […]
+
+Note that I used the verb “should”, intended to be interpreted as per RFC 2119. I didn’t suggest requiring the latest Unicode version, but rather recommending it, i.e. whenever a new Unicode version is released it would make sense to update the engine’s data tables — and the spec could encourage this IMHO. That’s what this issue is about (sorry for being unclear).
+
+(In reply to comment #2)
+&gt; The min. Unicode 5.1.0 requirement will remain, and the interoperability
+&gt; recommendation is gone.
+
+That’s good news. 
+
+The meeting notes don’t say anything about why Unicode v5.1.0 was chosen instead of a more recent version, though. Any idea?
+
+To clarify, I’d like to see the spec recommend a minimum Unicode version (preferably one that is more recent than v5.1.0) while also recommending engines to update their data tables to newer Unicode versions as they are released (without it being a strict requirement).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6877</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-06 19:15:38 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; The meeting notes don’t say anything about why Unicode v5.1.0 was chosen
+&gt; instead of a more recent version, though. Any idea?
+
+Why I chose Unicode 5.1:
+http://norbertlindenberg.com/2012/05/ecmascript-supplementary-characters/index.html#Unicode
+
+As we get closer to finalizing the spec, it may be worthwhile asking Microsoft
+- whether Explorer versions implementing ES 6 will rely on Windows or .NET for Unicode character properties or use their own tables for that information,
+- whether Explorer versions implementing ES 6 will run on Windows 7.
+It may be possible to increase the minimum Unicode version based on the answers.
+
+&gt; To clarify, I’d like to see the spec recommend a minimum Unicode version
+&gt; (preferably one that is more recent than v5.1.0) while also recommending
+&gt; engines to update their data tables to newer Unicode versions as they are
+&gt; released (without it being a strict requirement).
+
+That might be a helpful recommendation for new implementations, similar to the recommendations we already provide to use the IANA time zone database and, for ECMA-402, CLDR.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6878</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-12-07 04:44:37 -0800</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; As we get closer to finalizing the spec, it may be worthwhile asking Microsoft
+&gt; - whether Explorer versions implementing ES 6 will rely on Windows or .NET for
+&gt; Unicode character properties or use their own tables for that information,
+&gt; - whether Explorer versions implementing ES 6 will run on Windows 7.
+&gt; It may be possible to increase the minimum Unicode version based on the
+&gt; answers.
+
+CCing Luke Hoban from Microsoft, who can hopefully answer that question.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6967</commentid>
+    <comment_count>6</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-01-13 16:17:37 -0800</bug_when>
+    <thetext>Just found this thread and wanted to add some information. Windows 7 does indeed only support Unicode 5.1 (which may be the motivation for the current minimum required version). It’s safest to assume IE could continue depending on OS APIs for Unicode support, so the Unicode 5.1 minimum seems like the best choice.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9224</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-16 14:58:55 -0700</bug_when>
+    <thetext>It sounds to me like for this edition we should just stick with 5.1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14912</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2016-01-19 14:53:14 -0800</bug_when>
+    <thetext>See also: https://github.com/tc39/ecma262/pull/300</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

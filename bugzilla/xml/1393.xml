@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1393</bug_id>
+          
+          <creation_ts>2013-03-22 22:37:00 -0700</creation_ts>
+          <short_desc>8.1.6.4, 10.3, 8.4.4.9: intrinsics + &apos;current Code Realm&apos;</short_desc>
+          <delta_ts>2013-05-14 18:13:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3549</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-03-22 22:37:29 -0700</bug_when>
+    <thetext>In 8.1.6.4 &quot;Well-Known Symbols and Intrinsics&quot;,
+the paragraph before Table 11 says:
+    Within this specification a reference such as %name% means the
+    intrinsic object, associated with the current Code Realm,
+    corresponding to the name. Determine of the current Code Realmand
+    its intransics is described in 10.3.
+
+First:
+   &quot;Determine&quot;  -&gt; &quot;Determination&quot;
+   &quot;Realmand&quot;   -&gt; &quot;Realm and&quot;
+   &quot;intransics&quot; -&gt; &quot;intrinsics (repeating Bug 1277 and Bug 1282)
+
+More significantly, 10.3 does not define &quot;current Code Realm&quot;.
+As far as I can tell, it isn&apos;t defined anywhere in the spec.
+My guess is, it&apos;s just the &apos;Realm&apos; component of the &apos;running execution context&apos;
+defined in 10.4.
+
+But if that&apos;s correct, then I&apos;m puzzled by the algorithm in
+8.4.4.9 &quot;[[Get]] (P, Receiver)&quot;, where steps 2.abc say:
+    a. Let ctx be the running execution context.
+    b. Let ctxRealm be ctx’s Realm component.
+    c. Return ctxRealm.[[intrinsics]].% ObjProto_toString %.
+If I&apos;m right, you could boil that down to just:
+    a. Return %ObjProto_toString%.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3568</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-04 17:44:20 -0700</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3899</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:20 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

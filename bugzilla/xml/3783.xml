@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3783</bug_id>
+          
+          <creation_ts>2015-02-05 16:16:00 -0800</creation_ts>
+          <short_desc>two mechanisms for heterogeneous aggregation</short_desc>
+          <delta_ts>2015-02-13 15:22:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12173</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-05 16:16:47 -0800</bug_when>
+    <thetext>The spec has two different mechanisms for defining heterogeneous aggregations:
+
+-- a Record, with named fields
+      (e.g., a Completion is a Record whose fields are named
+      &quot;[[type]]&quot;, &quot;[[value]]&quot;, and &quot;[[target]]&quot;)
+
+-- a something (that isn&apos;t a Record), with named components.
+      (e.g., a Reference consists of three components, named
+      &quot;base&quot;, &quot;referenced name&quot;, and &quot;strict reference&quot;)
+
+Presumably there&apos;s no particular advantage to using two, so it would be somewhat simpler to use just one.
+
+Might as well go with Record, since that at least has a name and some support notation defined. (On the other hand, the square brackets in every field&apos;s name seem unnecessary.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12195</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 11:25:54 -0800</bug_when>
+    <thetext>that&apos;s the general direction I&apos;m moving things, but generally I&apos;ve only been making the changes when I  have to do something significant related to one of the non-Record based abstractions.
+
+I&apos;m probably not going to get them all cleaned up in ES6.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12605</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 15:22:53 -0800</bug_when>
+    <thetext>moved to 7th edition</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>524</bug_id>
+          
+          <creation_ts>2012-07-12 16:08:00 -0700</creation_ts>
+          <short_desc>6: Should use Unicode code point rather than Unicode character</short_desc>
+          <delta_ts>2014-07-27 21:31:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1303</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 16:08:02 -0700</bug_when>
+    <thetext>Section 6, Source Text, and the rest of the specification should use the term &quot;Unicode code point&quot; rather than &quot;Unicode character&quot; or &quot;Unicode scalar value&quot; when referring to the general content of source text or text interpreted from UTF-16 code unit sequences.
+
+For &quot;character&quot;, people have different ideas what the term means, and redefining it, as ES5 did, would just add to the confusion.
+
+&quot;Unicode character&quot; is not defined in the Unicode standard, as far as I can tell, but seems to be used in the sense of &quot;code point assigned to abstract character&quot; or possibly &quot;designated code point&quot;. With either definition, it would exclude code points reserved for future assignment, such as characters that were added in Unicode 6.1 if your implementation was based on Unicode 5.1. Such a restriction would be a constant source of interoperability problems.
+
+&quot;Unicode scalar value&quot; is defined in the Unicode standard as &quot;Any Unicode code point except high-surrogate and low-surrogate code points.&quot; We cannot exclude surrogate code points from source code, as this would break compatibility with existing code.
+
+&quot;Unicode code point&quot; and &quot;UTF-16 code unit&quot; are the terms we have to use most of the time.
+
+The term &quot;Unicode character&quot; can be used when only assigned characters are meant, e.g., when referring to individual characters such as &quot;comma&quot; or &quot;reverse solidus&quot;, or to the characters that can be used in identifiers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5907</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-18 15:08:31 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6104</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:49 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9633</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 21:31:03 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3759</bug_id>
+          
+          <creation_ts>2015-02-05 13:21:00 -0800</creation_ts>
+          <short_desc>8.1.1.2.4 InitializeBinding: Unreachable method ?</short_desc>
+          <delta_ts>2015-02-19 19:11:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12129</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-05 13:21:50 -0800</bug_when>
+    <thetext>8.1.1.2.4 InitializeBinding (N,V)
+
+InitializeBinding for object environment records seems to be unreachable. 
+Also applies to steps 4-6 of 8.1.1.4.4 InitializeBinding.
+
+
+(I still need to look at this more closely, but I think my assumption is correct. It kind of depends how the remaining EvalDeclaration bugs were resolved. Filing now so I don&apos;t forget about this later.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12781</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 13:40:12 -0800</bug_when>
+    <thetext>It&apos;s reachable from CreateGlobalVarBinding and</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12783</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-16 13:48:47 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; It&apos;s reachable from CreateGlobalVarBinding and
+
+But CreateGlobalVarBinding step 3.c should probably be removed because it&apos;s a no-op (CreateMutableBinding in step 3.a already initializes the object env binding to undefined).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12785</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-16 13:57:37 -0800</bug_when>
+    <thetext>(No-op is not quite correct when Realm.[[globalThis]] is a Proxy, because in that case the Put call in InitializeBinding -&gt; SetMutableBinding is observable)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12786</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 14:03:07 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; (In reply to Allen Wirfs-Brock from comment #1)
+&gt; &gt; It&apos;s reachable from CreateGlobalVarBinding and
+&gt; 
+&gt; But CreateGlobalVarBinding step 3.c should probably be removed because it&apos;s
+&gt; a no-op (CreateMutableBinding in step 3.a already initializes the object env
+&gt; binding to undefined).
+
+It set the value of the property to undefined, but it doesn&apos;t record that the binding has been initialized. 
+
+The abstract definitions of CreateMutableBinding and CreateImmutableBinding in table 15 says they create uninitialized bindings. I want of their usages in algorithm to conform to that. 
+
+The note that I just added to 8.1.1.1.4. points out that the Creates are always immediately followed by the an InitializeBinding so implementation don&apos;t actually have to track the initialization state.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12788</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-16 14:10:50 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; (In reply to André Bargull from comment #2)
+&gt; &gt; (In reply to Allen Wirfs-Brock from comment #1)
+&gt; &gt; &gt; It&apos;s reachable from CreateGlobalVarBinding and
+&gt; &gt; 
+&gt; &gt; But CreateGlobalVarBinding step 3.c should probably be removed because it&apos;s
+&gt; &gt; a no-op (CreateMutableBinding in step 3.a already initializes the object env
+&gt; &gt; binding to undefined).
+&gt; 
+&gt; It set the value of the property to undefined, but it doesn&apos;t record that
+&gt; the binding has been initialized. 
+&gt; 
+&gt; The abstract definitions of CreateMutableBinding and CreateImmutableBinding
+&gt; in table 15 says they create uninitialized bindings. I want of their usages
+&gt; in algorithm to conform to that. 
+&gt; 
+&gt; The note that I just added to 8.1.1.1.4. points out that the Creates are
+&gt; always immediately followed by the an InitializeBinding so implementation
+&gt; don&apos;t actually have to track the initialization state.
+
+Does it make sense to remove 8.1.1.2.4 InitializeBinding step 4?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12791</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 16:33:43 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #5)
+&gt; (In reply to Allen Wirfs-Brock from comment #4)
+
+&gt; &gt; 
+&gt; &gt; The note that I just added to 8.1.1.1.4. points out that the Creates are
+&gt; &gt; always immediately followed by the an InitializeBinding so implementation
+&gt; &gt; don&apos;t actually have to track the initialization state.
+&gt; 
+&gt; Does it make sense to remove 8.1.1.2.4 InitializeBinding step 4?
+
+Actually, what might make more sense would be to put in an explicit Put() call into 8.1.1.4.18 so that a proxy like mentioned in comment #3 traces the expected traps.
+
+BTW, if you haven&apos;t seen it, you should check out https://bugs.ecmascript.org/show_bug.cgi?id=78</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12940</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:27:39 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+added the Put in 8.1.1.4.18</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13086</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:00 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

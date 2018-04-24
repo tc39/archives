@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4321</bug_id>
+          
+          <creation_ts>2015-04-17 13:55:00 -0700</creation_ts>
+          <short_desc>Annex A, DateTimeFormat bad x-ref to BestFitFormatMatcher</short_desc>
+          <delta_ts>2016-02-15 16:30:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14289</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-17 13:55:19 -0700</bug_when>
+    <thetext>In the &quot;absolutely final&quot; 2.0 draft, there is a dangling section reference to BestFitFormatMatcher.  It probably needs to be a reference to 12.1.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14293</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-17 15:49:35 -0700</bug_when>
+    <thetext>Maybe it&apos;s word for Mac, but I can&apos;t get this to work correctly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14928</commentid>
+    <comment_count>2</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:30:33 -0800</bug_when>
+    <thetext>fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

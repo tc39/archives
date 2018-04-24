@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4288</bug_id>
+          
+          <creation_ts>2015-04-16 10:38:00 -0700</creation_ts>
+          <short_desc>12.3.3 Intl.DateTimeFormat.prototype.format: Missing ReturnIfAbrupt; .length not set for bound function</short_desc>
+          <delta_ts>2015-04-16 20:44:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14200</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 10:38:39 -0700</bug_when>
+    <thetext>12.3.3 Intl.DateTimeFormat.prototype.format
+
+[First algorithm]
+
+Step 1: Missing ReturnIfAbrupt after `this DateTimeFormat object`.
+
+Step 2: Remove colon after &quot;then&quot;
+
+Step 2.a: Creating a separate section for the function is more ECMAScript2015-y (spec wise).
+
+&gt; Let F be a new built-in function object as defined in 12.3.3.1.
+
+And the new 12.3.3.1 section would be:
+---
+12.3.3.1 DateTime Format Functions
+
+A DateTime format function is an anonymous function that optionally takes an argument date. It performs the following steps:
+
+1. Let dtf be the this value.
+2. Assert: Type(dtf) is Object and dtf has an [[initializedDateTimeFormat]] internal slot whose value is true.
+3. If date is not provided or is undefined, then
+  a. Let x be %Date_now%().
+4. Else
+  b. Let x be ToNumber(date).
+  c. ReturnIfAbrupt(x).
+5. Return FormatDateTime(dtf, x).
+---
+
+Step 2.a.iii: Remove &quot;the result of&quot;
+
+Step 2.b: The bound function should have at least a .length property, maybe even a .name property.
+
+Step 3: Duplicate full stop
+
+
+[Second algorithm]
+
+Step 1: Omit &quot;then&quot;
+Step 3: Inline ECMAScript syntax not explained in &quot;5 Notational Conventions&quot;.
+Step 3: Change `).` to normal instead of bold font
+Step 5: Change `).` to normal instead of bold font
+Step 9.a: Remove colon after &quot;then&quot;
+Step 9.a.iv: Omit &quot;then&quot;
+Step 9.a.v: Omit &quot;the&quot;
+Step 9.a.vi.2: Omit &quot;the&quot;
+Step 9.a.vi.3: Omit &quot;the&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14216</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 12:30:33 -0700</bug_when>
+    <thetext>&gt; [First algorithm]
+
+&gt; Step 1: Missing ReturnIfAbrupt after `this DateTimeFormat object`.
+
+Fixed.
+
+&gt; Step 2: Remove colon after &quot;then&quot;
+
+Fixed.
+
+&gt; Step 2.a: Creating a separate section for the function is more ECMAScript2015-y (spec wise).
+
+&gt; Let F be a new built-in function object as defined in 12.3.3.1.
+
+And the new 12.3.3.1 section would be:
+---
+12.3.3.1 DateTime Format Functions
+
+A DateTime format function is an anonymous function that optionally takes an argument date. It performs the following steps:
+
+1. Let dtf be the this value.
+2. Assert: Type(dtf) is Object and dtf has an [[initializedDateTimeFormat]] internal slot whose value is true.
+3. If date is not provided or is undefined, then
+  a. Let x be %Date_now%().
+4. Else
+  b. Let x be ToNumber(date).
+  c. ReturnIfAbrupt(x).
+5. Return FormatDateTime(dtf, x).
+---
+
+
+Added. 
+
+
+
+&gt; Step 2.a.iii: Remove &quot;the result of&quot;
+&gt; Step 2.b: The bound function should have at least a .length property, maybe even a .name property.
+
+length property added
+
+
+&gt; Step 3: Duplicate full stop
+
+Fixed.
+
+
+[Second algorithm]
+
+&gt; Step 1: Omit &quot;then&quot;
+
+Fixed.
+
+&gt; Step 3: Inline ECMAScript syntax not explained in &quot;5 Notational Conventions&quot;.
+
+Yes, it&apos;s part of https://people.mozilla.org/~jorendorff/es6-draft.html#sec-list-and-record-specification-type
+
+
+&gt; Step 3: Change `).` to normal instead of bold font
+&gt; Step 5: Change `).` to normal instead of bold font
+&gt; Step 9.a: Remove colon after &quot;then&quot;
+&gt; Step 9.a.iv: Omit &quot;then&quot;
+&gt; Step 9.a.v: Omit &quot;the&quot;
+&gt; Step 9.a.vi.2: Omit &quot;the&quot;
+&gt; Step 9.a.vi.3: Omit &quot;the&quot;
+
+Fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

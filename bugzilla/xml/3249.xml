@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3249</bug_id>
+          
+          <creation_ts>2014-09-27 07:31:00 -0700</creation_ts>
+          <short_desc>Superfluous HasLengthProperty call in Function.prototype.bind</short_desc>
+          <delta_ts>2014-10-08 08:51:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>446240525</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10246</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-27 07:31:31 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function.prototype.bind
+
+&gt; 5. Let targetHasLength be HasOwnProperty(Target, &quot;length&quot;).
+&gt; 6. ReturnIfAbrupt(targetHasLength).
+&gt; 7. If targetHasLength is true, then
+&gt;     a. Let targetLen be Get(Target, &quot;length&quot;).
+&gt;     b. ReturnIfAbrupt(targetLen).
+&gt;     c. If Type(targetLen) is not Number, then let L be 0.
+&gt;     d. Else,
+&gt;         i. Let L be the larger of 0 and the result of targetLen minus
+&gt;             the number of elements of A.
+&gt; 8. Else let L be 0.
+
+It seems like we might as well strike steps 5, 6, and 8 and just do steps 7.a-d.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10247</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-09-27 07:36:20 -0700</bug_when>
+    <thetext>Also, Step 7.d.i refers to &quot;the number of elements of A&quot;, but A isn&apos;t defined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10250</commentid>
+    <comment_count>2</comment_count>
+    <who name="ziyunfei">446240525</who>
+    <bug_when>2014-09-30 03:02:45 -0700</bug_when>
+    <thetext>I don&apos;t think these steps are superfluous:
+
+js&gt; function f(a){}
+js&gt; f.length
+1
+js&gt; f.bind().length
+1
+js&gt; Object.defineProperty(Function.prototype, &quot;length&quot;, {value: 100})
+js&gt; delete f.length
+true
+js&gt; f.length
+100
+js&gt; f.bind().length
+0 // If steps 5, 6, and 8 are struck, this will be 100</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10274</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 08:51:50 -0700</bug_when>
+    <thetext>(In reply to ziyunfei from comment #2)
+&gt; I don&apos;t think these steps are superfluous:
+&gt; 
+&gt;
+
+yes the &quot;own&quot; check is significant because length properties are configurable (ie, deletable)and functions can inherit from other functions (eg, vis class declarations).
+
+fixed reference to A
+
+but won&apos;t eliminate the HasLengthPrperty check</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

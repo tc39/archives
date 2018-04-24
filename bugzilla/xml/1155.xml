@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1155</bug_id>
+          
+          <creation_ts>2012-12-19 09:50:00 -0800</creation_ts>
+          <short_desc>15.16.2.1: Note describes wrong iterator contract</short_desc>
+          <delta_ts>2013-10-07 13:15:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3048</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-19 09:50:41 -0800</bug_when>
+    <thetext>The iterable argument for 15.16.2.1 should not produce two-element array-like objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4111</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-31 02:22:44 -0700</bug_when>
+    <thetext>Note deleted in rev15, close issue?
+
+(Similar notes are still present for Map/WeakMap, does this relate to their &apos;more complex&apos; API contract for iterable input objects?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5863</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-07 13:15:24 -0700</bug_when>
+    <thetext>Marking as Fixed -&gt; The notes for Map/Set/WeakMap/WeakSet constructors look all ok now.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

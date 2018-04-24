@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4002</bug_id>
+          
+          <creation_ts>2015-02-18 12:26:00 -0800</creation_ts>
+          <short_desc>a parsing context with no always-correct lexical goal symbol for getting the next token</short_desc>
+          <delta_ts>2015-02-19 19:10:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12920</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 12:26:25 -0800</bug_when>
+    <thetext>This bug is not against rev33 as published, but as modified according to
+Bug 635 comment 9. (I could wait for rev34, but I don&apos;t think I should.)
+Specifically, &quot;[Lexical goal]&quot; annotations have been removed from the grammar, and clause 11 has been modified to say something like:
+
+    If the context allows RegularExpressionLiteral,
+        use InputElementRegExp.
+    If the context allows TemplateMiddle or TemplateTail,
+        use InputElementTemplateTail.
+    Otherwise, use InputElementDiv.
+
+In Bug 635 comment 3, I added:
+    (And you can note that the first two possibilities are [or should be]
+    mutually exclusive.)
+
+In this bug, I show that they *aren&apos;t* mutually exclusive.
+
+Consider these two GeneratorDeclarations:
+
+    function * gen() { `pre${yield /.*/}post`; }
+    function * gen() { `pre${yield     }post`; }
+
+(I don&apos;t know why anyone would write that, but I believe they&apos;re both syntactically valid.)
+
+And now consider the state that a parser is in having consumed just
+
+    function * gen() { `pre${yield
+
+As shown above, the set of valid next-tokens include both RegularExpressionLiteral and TemplateTail. Thus, the contexts in which lexical goal symbols InputElementRegExp and InputElementTemplateTail are appropriate are *not* mutually exclusive.
+
+In fact, there&apos;s no goal symbol of the lexical grammar that derives both RegularExpressionLiteral and TemplateTail. So, given this left-context, there is no always-correct choice for the lexical goal symbol to use to get the next token.
+
+(A real-world parser would maybe sniff the next character [after skipping WhiteSpace etc] and then make the necessary choice of lexical goal symbol. But that seems like a kludgey kind of thing for the spec to say.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12931</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 14:54:34 -0800</bug_when>
+    <thetext>I guess I need to add
+
+InputElementRegExpOrTemplateTail ::
+  WhiteSpace
+  LineTerminator
+  Comment
+  Token
+  DivPunctuator
+  TemplateSubstitutionTail
+
+and probably a note with the yield grammar</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12933</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:09:35 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+
+I meant:
+
+&gt; 
+&gt; InputElementRegExpOrTemplateTail ::
+&gt;   WhiteSpace
+&gt;   LineTerminator
+&gt;   Comment
+&gt;   Token
+    RegularExpressionLiteral    
+&gt;   TemplateSubstitutionTail</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12938</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:16:14 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12943</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 15:33:13 -0800</bug_when>
+    <thetext>Hm, yeah, I think that might work.
+
+So then the rule could be:
+
+    If the context allows both RegularExpressionLiteral and TemplateTail,
+        use InputElementRegExpOrTemplateTail
+
+    If the context allows RegularExpressionLiteral but not TemplateTail,
+        use InputElementRegExp.
+
+    If the context allows TemplateTail but not RegularExpressionLiteral,
+        use InputElementTemplateTail.
+
+    Otherwise, use InputElementDiv.
+
+(I&apos;m assuming you can leave out mention of TemplateMiddle because the contexts in which it&apos;s allowed are the same as for TemplateTail.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12957</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 19:58:54 -0800</bug_when>
+    <thetext>&gt;     Otherwise, use InputElementDiv.
+
+Or, for more parallelism,
+      If the context allows neither TemplateTail nor RegularExpressionLiteral,
+          use InputElementDiv.
+
+
+Or use a table like this:
+                                                 TemplateTail
+                                   ... is allowed           ... is not allowed
+RegularExpressionLiteral
+          ... is allowed  InputElementRegExpOrTemplateTail  InputElementRegExp
+
+      ... is not allowed  InputElementTemplateTail          InputElementDiv</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13067</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:57 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

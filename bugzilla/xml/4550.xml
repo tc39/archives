@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4550</bug_id>
+          
+          <creation_ts>2016-01-11 15:45:00 -0800</creation_ts>
+          <short_desc>Standard lacks normative reference to Unicode Standards</short_desc>
+          <delta_ts>2016-01-11 15:45:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14911</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2016-01-11 15:45:51 -0800</bug_when>
+    <thetext>The references to The Unicode Standard, Unicode Standard Annex #15, and Unicode Standard Annex #31 got moved from the Normative References section to the Bibliography section shortly before publication of the EcmaScript 2015 standard. I think this was a mistake, as there are numerous normative uses of concepts, properties, or algorithms defined in these Unicode documents (some of which do not exist in the parallel ISO 10646 standard) throughout the EcmaScript 2015 standard:
+– 2 Conformance: references The Unicode Standard directly
+– 5.1.5 Grammar Notation: references Unicode code points
+– 6.1.4 The String Type: references UTF-16
+– 10.1 Source Text: references The Unicode Standard; references Unicode code points
+– 11.1 Unicode Format-Control Characters: references Unicode general categories
+– 11.2 White Space: references Unicode general categories
+– 11.6 Names and Keywords: references Unicode Standard Annex #31; uses Unicode properties “ID_Start” and “ID_Continue”
+– 11.8.6.1 Static Semantics: TV and TRV: references Unicode code points
+– 21.1.3.10 String.prototype.localeCompare: references The Unicode Standard; references canonical equivalence
+– 21.1.3.22 String.prototype.toLowerCase: uses mappings provided by the Unicode Character Database
+– 21.2.2 Pattern Semantics: references Unicode code points
+– 21.1.3.12 String.prototype.normalize: references Unicode Standard Annex #15
+I won&apos;t list all the references to Unicode character names.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

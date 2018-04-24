@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1529</bug_id>
+          
+          <creation_ts>2013-05-30 12:24:00 -0700</creation_ts>
+          <short_desc>15.4.4.8 Array.prototype.reverse does not throw a type error</short_desc>
+          <delta_ts>2013-06-17 13:23:07 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Prashanth Srinivasan">prsriniv</reporter>
+          <assigned_to name="Prashanth Srinivasan">prsriniv</assigned_to>
+          <cc>pruiz9999</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4103</commentid>
+    <comment_count>0</comment_count>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-05-30 12:24:51 -0700</bug_when>
+    <thetext>The ES5.1 spec for 15.4.4.8 has &apos;true&apos; as the last argument to the Get/Put/Delete operations in its algorithm, i.e. throw a type error if the element attributes forbid a value change or deletion. test262 does not test for this and of the main browsers Chrome gets this wrong: it correctly blocks the forbidden updates, but silently ignores this instead of throwing an error, and hence also continues reversing instead of aborting.
+
+https://mail.mozilla.org/pipermail/test262-discuss/2013-April/000161.html
+From Paul Ruizendaal&apos;s email to the discuss thread.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4136</commentid>
+    <comment_count>1</comment_count>
+      <attachid>53</attachid>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-06-04 14:11:39 -0700</bug_when>
+    <thetext>Created attachment 53
+Test cases that check true is passed to attributes if not throw a TypeError</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4182</commentid>
+    <comment_count>2</comment_count>
+      <attachid>64</attachid>
+    <who name="Prashanth Srinivasan">prsriniv</who>
+    <bug_when>2013-06-12 12:16:51 -0700</bug_when>
+    <thetext>Created attachment 64
+Test cases that check true is passed to element attributes if not throw a TypeError
+
+As noted in bug description, these 2 test cases fail on v8 debug and release version as it blocks the forbidden updates, but does not throw an error.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4195</commentid>
+    <comment_count>3</comment_count>
+    <who name="">pruiz9999</who>
+    <bug_when>2013-06-17 13:23:07 -0700</bug_when>
+    <thetext>[1] The spec algorithm says that reversing progresses until it hits an error: it is not atomic, and an exception halfway through results in a half reversed array (cq. array-like object). Hence, just testing the elements beforehand for blocking attributes and throwing an early error is a no-go optimization.
+
+The proposed tests use a 2 element array to reverse. Using a 4 element array and testing for &quot;semi-reversedness&quot;  is a better test choice I think.
+
+[2] Array.prototype.reverse also works on array-like objects. This is not verified.
+
+[3] In real world implementations there is probably a &quot;slow path&quot; implementation that implements the spec algorithm literally and an optimized path for dense arrays. It might be useful to add a test with a dense 50 (or so) element array, just to test something that is likely on a fast path. The counter argument would be that test262 is about spec coverage, not code coverage.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="1"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>53</attachid>
+            <date>2013-06-04 14:11:00 -0700</date>
+            <delta_ts>2013-06-12 12:16:51 -0700</delta_ts>
+            <desc>Test cases that check true is passed to attributes if not throw a TypeError</desc>
+            <filename>bug_1529.patch</filename>
+            <type>text/plain</type>
+            <size>1528</size>
+            <attacher name="Prashanth Srinivasan">prsriniv</attacher>
+            
+              <data encoding="base64">ZGlmZiAtciBlNjJlMWIzNWYwZDkgdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC44
+L1MxNS40LjQuOF9BNS44LmpzCi0tLSAvZGV2L251bGwJVGh1IEphbiAwMSAwMDowMDowMCAxOTcw
+ICswMDAwCisrKyBiL3Rlc3Qvc3VpdGUvY2gxNS8xNS40LzE1LjQuNC8xNS40LjQuOC9TMTUuNC40
+LjhfQTUuOC5qcwlUdWUgSnVuIDA0IDE3OjA5OjA3IDIwMTMgLTA0MDAKQEAgLTAsMCArMSw0NiBA
+QAorLy8gQ29weXJpZ2h0IChjKSAyMDEzIEFkb2JlIFN5c3RlbXMgSW5jb3JwZXJhdGVkLiAgQWxs
+IHJpZ2h0cyByZXNlcnZlZC4KKy8vIEFkb2JlIFN5c3RlbXMgSW5jb3JwZXJhdGVkIG1ha2VzIHRo
+aXMgY29kZSBhdmFpbGFibGUgdW5kZXIgdGhlIHRlcm1zCisvLyBhbmQgY29uZGl0aW9ucyBzZXQg
+Zm9ydGggb24KKy8vIGh0dHA6Ly9oZy5lY21hc2NyaXB0Lm9yZy90ZXN0cy90ZXN0MjYyL3Jhdy1m
+aWxlL3RpcC9MSUNFTlNFICh0aGUKKy8vICJVc2UgVGVybXMiKS4gIEFueSByZWRpc3RyaWJ1dGlv
+biBvZiB0aGlzIGNvZGUgbXVzdCByZXRhaW4gdGhlIGFib3ZlCisvLyBjb3B5cmlnaHQgYW5kIHRo
+aXMgbm90aWNlIGFuZCBvdGhlcndpc2UgY29tcGx5IHdpdGggdGhlIFVzZSBUZXJtcy4KKy8qKgor
+ICogVGVzdHMgZm9yIEFycmF5LnByb3RvdHlwZS5yZXZlcnNlKCkgZm9yIGVsZW1lbnQgYXR0cmli
+dXRlcyB0aGF0IGZvcmJpZCB2YWx1ZSBjaGFuZ2UKKyAqCisgKiBAcGF0aCBjaDE1LzE1LjQvMTUu
+NC40LzE1LjQuNC44L1MxNS40LjQuOF9BNS44LmpzCisgKiBAZGVzY3JpcHRpb24gQXJyYXkudG9T
+dHJpbmcoKQorICovCisKKy8vQ0hFQ0sjMQorZnVuY3Rpb24gQXJyYXlSZXZlcnNlKCkgeworICB2
+YXIgYSA9IFtdOworICBPYmplY3QuZGVmaW5lUHJvcGVydHkoYSwgJzAnLCB7dmFsdWU6Nywgd3Jp
+dGFibGU6ZmFsc2V9KTsKKyAgYVsxXSA9IDM7CisgIHRyeSB7CisgICAgYS5yZXZlcnNlKCk7Cisg
+ICAgcmV0dXJuIGZhbHNlOworICB9IGNhdGNoKGUpIHsKKyAgICBpZiggZS5uYW1lIT09J1R5cGVF
+cnJvcicgKSB7CisgICAgJEVSUk9SKCcjMSBBcnJheS5wcm90b3R5cGUucmV2ZXJzZSA9PT0gVHlw
+ZUVycm9yLiBBY3R1YWwgJyArIChlLm5hbWUpKTsKKyAgICByZXR1cm4gZmFsc2U7CisgICAgfQor
+ICAgIHJldHVybiB0cnVlOworICB9Cit9CisKKy8vQ0hFQ0sjMgorZnVuY3Rpb24gQXJyYXlSZXZl
+cnNlMSgpIHsKKyAgdmFyIGEgPSBbXTsKKyAgT2JqZWN0LmRlZmluZVByb3BlcnR5KGEsICcwJywg
+e3ZhbHVlOjcsIGNvbmZpZ3VyYWJsZTpmYWxzZX0pOworICBhLmxlbmd0aCA9IDI7CisgIHRyeSB7
+CisgICAgYS5yZXZlcnNlKCk7CisgICAgcmV0dXJuIGZhbHNlOworICB9IGNhdGNoKGUpIHsKKyAg
+ICBpZiggZS5uYW1lIT09J1R5cGVFcnJvcicgKSB7CisgICAgJEVSUk9SKCcjMiBBcnJheS5wcm90
+b3R5cGUucmV2ZXJzZSA9PT0gVHlwZUVycm9yLiBBY3R1YWwgJyArIChlLm5hbWUpKTsKKyAgICBy
+ZXR1cm4gZmFsc2U7CisgICAgfQorICAgIHJldHVybiB0cnVlOworICB9Cit9Cg==
+</data>
+
+          </attachment>
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>64</attachid>
+            <date>2013-06-12 12:16:00 -0700</date>
+            <delta_ts>2013-06-12 12:16:51 -0700</delta_ts>
+            <desc>Test cases that check true is passed to element attributes if not throw a TypeError</desc>
+            <filename>bug_1529.patch</filename>
+            <type>text/plain</type>
+            <size>4776</size>
+            <attacher name="Prashanth Srinivasan">prsriniv</attacher>
+            
+              <data encoding="base64">ZGlmZiAtciBlZTQyOWMxYmU2ZjYgdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC44
+LzE1LjQuNC44LTEuanMKLS0tIC9kZXYvbnVsbAlUaHUgSmFuIDAxIDAwOjAwOjAwIDE5NzAgKzAw
+MDAKKysrIGIvdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC44LzE1LjQuNC44LTEu
+anMJV2VkIEp1biAxMiAxNToxMjoxNSAyMDEzIC0wNDAwCkBAIC0wLDAgKzEsNDggQEAKKy8vIENv
+cHlyaWdodCAoYykgMjAxMywgQWRvYmUgU3lzdGVtcyBJbmNvcnBvcmF0ZWQKKy8vIEFsbCByaWdo
+dHMgcmVzZXJ2ZWQuCisvLworLy8gUmVkaXN0cmlidXRpb24gYW5kIHVzZSBpbiBzb3VyY2UgYW5k
+IGJpbmFyeSBmb3Jtcywgd2l0aCBvciB3aXRob3V0CisvLyBtb2RpZmljYXRpb24sIGFyZSBwZXJt
+aXR0ZWQgIHByb3ZpZGVkIHRoYXQgdGhlIGZvbGxvd2luZyBjb25kaXRpb25zIGFyZSBtZXQ6Cisv
+LworLy8gMS4gUmVkaXN0cmlidXRpb25zIG9mIHNvdXJjZSBjb2RlIG11c3QgcmV0YWluIHRoZSBh
+Ym92ZSBjb3B5cmlnaHQgbm90aWNlLAorLy8gdGhpcyBsaXN0IG9mIGNvbmRpdGlvbnMgYW5kIHRo
+ZSBmb2xsb3dpbmcgZGlzY2xhaW1lci4KKy8vIDIuIFJlZGlzdHJpYnV0aW9ucyBpbiBiaW5hcnkg
+Zm9ybSBtdXN0IHJlcHJvZHVjZSB0aGUgYWJvdmUgY29weXJpZ2h0IG5vdGljZSwKKy8vIHRoaXMg
+bGlzdCBvZiBjb25kaXRpb25zIGFuZCB0aGUgZm9sbG93aW5nIGRpc2NsYWltZXIgaW4gdGhlIGRv
+Y3VtZW50YXRpb24KKy8vIGFuZC9vciBvdGhlciBtYXRlcmlhbHMgIHByb3ZpZGVkIHdpdGggdGhl
+IGRpc3RyaWJ1dGlvbi4KKy8vIDMuIE5laXRoZXIgdGhlIG5hbWUgb2YgdGhlIEFkb2JlIFN5c3Rl
+bXMgSW5jb3Jwb3JhdGVkIG5vciB0aGUgbmFtZXMgb2YgaXRzCisvLyBjb250cmlidXRvcnMgbWF5
+IGJlIHVzZWQgdG8gZW5kb3JzZSBvciBwcm9tb3RlIHByb2R1Y3RzIGRlcml2ZWQgZnJvbSB0aGlz
+CisvLyBzb2Z0d2FyZSB3aXRob3V0IHNwZWNpZmljIHByaW9yIHdyaXR0ZW4gcGVybWlzc2lvbi4K
+Ky8vCisvLyBUSElTIFNPRlRXQVJFIElTIFBST1ZJREVEIEJZIFRIRSBDT1BZUklHSFQgSE9MREVS
+UyBBTkQgQ09OVFJJQlVUT1JTICJBUyBJUyIKKy8vIEFORCBBTlkgRVhQUkVTUyBPUiBJTVBMSUVE
+IFdBUlJBTlRJRVMsIElOQ0xVRElORywgQlVUIE5PVCBMSU1JVEVEIFRPLCBUSEUKKy8vIElNUExJ
+RUQgV0FSUkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFkgQU5EIEZJVE5FU1MgRk9SIEEgUEFSVElD
+VUxBUiBQVVJQT1NFCisvLyBBUkUgRElTQ0xBSU1FRC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIENP
+UFlSSUdIVCBIT0xERVIgT1IgQ09OVFJJQlVUT1JTIEJFCisvLyBMSUFCTEUgRk9SIEFOWSBESVJF
+Q1QsIElORElSRUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBFWEVNUExBUlksIE9SCisvLyBDT05T
+RVFVRU5USUFMIERBTUFHRVMgKElOQ0xVRElORywgQlVUIE5PVCBMSU1JVEVEIFRPLCBQUk9DVVJF
+TUVOVCBPRgorLy8gU1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsIERB
+VEEsIE9SIFBST0ZJVFM7IE9SIEJVU0lORVNTCisvLyBJTlRFUlJVUFRJT04pIEhPV0VWRVIgQ0FV
+U0VEIEFORCBPTiBBTlkgVEhFT1JZIE9GIExJQUJJTElUWSwgV0hFVEhFUiBJTgorLy8gQ09OVFJB
+Q1QsIFNUUklDVCBMSUFCSUxJVFksIE9SIFRPUlQgKElOQ0xVRElORyBORUdMSUdFTkNFIE9SIE9U
+SEVSV0lTRSkKKy8vIEFSSVNJTkcgSU4gQU5ZIFdBWSBPVVQgT0YgVEhFIFVTRSBPRiBUSElTIFNP
+RlRXQVJFLCBFVkVOIElGIEFEVklTRUQgT0YgVEhFCisvLyBQT1NTSUJJTElUWSBPRiBTVUNIIERB
+TUFHRS4KKy8qKgorICogVGVzdHMgZm9yIEFycmF5LnByb3RvdHlwZS5yZXZlcnNlKCkgZm9yIGVs
+ZW1lbnQgYXR0cmlidXRlcyB0aGF0IGZvcmJpZCB2YWx1ZSBjaGFuZ2UKKyAqCisgKiBAcGF0aCBj
+aDE1LzE1LjQvMTUuNC40LzE1LjQuNC44LzE1LjQuNC44LTEuanMKKyAqIEBkZXNjcmlwdGlvbiBB
+cnJheS5wcm90b3R5cGUucmV2ZXJzZSgpIHdpdGggZWxlbWVudCBhdHRyaWJ1dGUgd2hpY2ggaXMg
+bm90IGNoYW5nZWFibGUKKyAqLworCitmdW5jdGlvbiB0ZXN0Y2FzZSgpIHsKKyAgdmFyIGEgPSBb
+XTsKKyAgT2JqZWN0LmRlZmluZVByb3BlcnR5KGEsICcwJywge3ZhbHVlOjcsIHdyaXRhYmxlOmZh
+bHNlfSk7CisgIGFbMV0gPSAzOworICB0cnkgeworICAgIGEucmV2ZXJzZSgpOworICAgIHJldHVy
+biBmYWxzZTsKKyAgfSBjYXRjaChlKSB7CisgICAgaWYoIGUubmFtZSE9PSdUeXBlRXJyb3InICkg
+eworICAgIHJldHVybiBmYWxzZTsKKyAgICB9CisgICAgcmV0dXJuIHRydWU7CisgIH0KK30KK3J1
+blRlc3RDYXNlKHRlc3RjYXNlKQpcIE5vIG5ld2xpbmUgYXQgZW5kIG9mIGZpbGUKZGlmZiAtciBl
+ZTQyOWMxYmU2ZjYgdGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC44LzE1LjQuNC44
+LTIuanMKLS0tIC9kZXYvbnVsbAlUaHUgSmFuIDAxIDAwOjAwOjAwIDE5NzAgKzAwMDAKKysrIGIv
+dGVzdC9zdWl0ZS9jaDE1LzE1LjQvMTUuNC40LzE1LjQuNC44LzE1LjQuNC44LTIuanMJV2VkIEp1
+biAxMiAxNToxMjoxNSAyMDEzIC0wNDAwCkBAIC0wLDAgKzEsNDcgQEAKKy8vIENvcHlyaWdodCAo
+YykgMjAxMywgQWRvYmUgU3lzdGVtcyBJbmNvcnBvcmF0ZWQKKy8vIEFsbCByaWdodHMgcmVzZXJ2
+ZWQuCisvLworLy8gUmVkaXN0cmlidXRpb24gYW5kIHVzZSBpbiBzb3VyY2UgYW5kIGJpbmFyeSBm
+b3Jtcywgd2l0aCBvciB3aXRob3V0CisvLyBtb2RpZmljYXRpb24sIGFyZSBwZXJtaXR0ZWQgIHBy
+b3ZpZGVkIHRoYXQgdGhlIGZvbGxvd2luZyBjb25kaXRpb25zIGFyZSBtZXQ6CisvLworLy8gMS4g
+UmVkaXN0cmlidXRpb25zIG9mIHNvdXJjZSBjb2RlIG11c3QgcmV0YWluIHRoZSBhYm92ZSBjb3B5
+cmlnaHQgbm90aWNlLAorLy8gdGhpcyBsaXN0IG9mIGNvbmRpdGlvbnMgYW5kIHRoZSBmb2xsb3dp
+bmcgZGlzY2xhaW1lci4KKy8vIDIuIFJlZGlzdHJpYnV0aW9ucyBpbiBiaW5hcnkgZm9ybSBtdXN0
+IHJlcHJvZHVjZSB0aGUgYWJvdmUgY29weXJpZ2h0IG5vdGljZSwKKy8vIHRoaXMgbGlzdCBvZiBj
+b25kaXRpb25zIGFuZCB0aGUgZm9sbG93aW5nIGRpc2NsYWltZXIgaW4gdGhlIGRvY3VtZW50YXRp
+b24KKy8vIGFuZC9vciBvdGhlciBtYXRlcmlhbHMgIHByb3ZpZGVkIHdpdGggdGhlIGRpc3RyaWJ1
+dGlvbi4KKy8vIDMuIE5laXRoZXIgdGhlIG5hbWUgb2YgdGhlIEFkb2JlIFN5c3RlbXMgSW5jb3Jw
+b3JhdGVkIG5vciB0aGUgbmFtZXMgb2YgaXRzCisvLyBjb250cmlidXRvcnMgbWF5IGJlIHVzZWQg
+dG8gZW5kb3JzZSBvciBwcm9tb3RlIHByb2R1Y3RzIGRlcml2ZWQgZnJvbSB0aGlzCisvLyBzb2Z0
+d2FyZSB3aXRob3V0IHNwZWNpZmljIHByaW9yIHdyaXR0ZW4gcGVybWlzc2lvbi4KKy8vCisvLyBU
+SElTIFNPRlRXQVJFIElTIFBST1ZJREVEIEJZIFRIRSBDT1BZUklHSFQgSE9MREVSUyBBTkQgQ09O
+VFJJQlVUT1JTICJBUyBJUyIKKy8vIEFORCBBTlkgRVhQUkVTUyBPUiBJTVBMSUVEIFdBUlJBTlRJ
+RVMsIElOQ0xVRElORywgQlVUIE5PVCBMSU1JVEVEIFRPLCBUSEUKKy8vIElNUExJRUQgV0FSUkFO
+VElFUyBPRiBNRVJDSEFOVEFCSUxJVFkgQU5EIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQ
+T1NFCisvLyBBUkUgRElTQ0xBSU1FRC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIENPUFlSSUdIVCBI
+T0xERVIgT1IgQ09OVFJJQlVUT1JTIEJFCisvLyBMSUFCTEUgRk9SIEFOWSBESVJFQ1QsIElORElS
+RUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBFWEVNUExBUlksIE9SCisvLyBDT05TRVFVRU5USUFM
+IERBTUFHRVMgKElOQ0xVRElORywgQlVUIE5PVCBMSU1JVEVEIFRPLCBQUk9DVVJFTUVOVCBPRgor
+Ly8gU1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsIERBVEEsIE9SIFBS
+T0ZJVFM7IE9SIEJVU0lORVNTCisvLyBJTlRFUlJVUFRJT04pIEhPV0VWRVIgQ0FVU0VEIEFORCBP
+TiBBTlkgVEhFT1JZIE9GIExJQUJJTElUWSwgV0hFVEhFUiBJTgorLy8gQ09OVFJBQ1QsIFNUUklD
+VCBMSUFCSUxJVFksIE9SIFRPUlQgKElOQ0xVRElORyBORUdMSUdFTkNFIE9SIE9USEVSV0lTRSkK
+Ky8vIEFSSVNJTkcgSU4gQU5ZIFdBWSBPVVQgT0YgVEhFIFVTRSBPRiBUSElTIFNPRlRXQVJFLCBF
+VkVOIElGIEFEVklTRUQgT0YgVEhFCisvLyBQT1NTSUJJTElUWSBPRiBTVUNIIERBTUFHRS4KKy8q
+KgorICogVGVzdHMgZm9yIEFycmF5LnByb3RvdHlwZS5yZXZlcnNlKCkgZm9yIGVsZW1lbnQgYXR0
+cmlidXRlcyB0aGF0IGZvcmJpZCB2YWx1ZSBjaGFuZ2UKKyAqCisgKiBAcGF0aCBjaDE1LzE1LjQv
+MTUuNC40LzE1LjQuNC44LzE1LjQuNC44LTIuanMKKyAqIEBkZXNjcmlwdGlvbiBBcnJheS5wcm90
+b3R5cGUucmV2ZXJzZSgpIHdpdGggZWxlbWVudCBhdHRyaWJ1dGUgd2hpY2ggaXMgbm90IGNoYW5n
+ZWFibGUKKyAqLworZnVuY3Rpb24gdGVzdGNhc2UoKSB7CisgIHZhciBhID0gW107CisgIE9iamVj
+dC5kZWZpbmVQcm9wZXJ0eShhLCAnMCcsIHt2YWx1ZTo3LCBjb25maWd1cmFibGU6ZmFsc2V9KTsK
+KyAgYS5sZW5ndGggPSAyOworICB0cnkgeworICAgIGEucmV2ZXJzZSgpOworICAgIHJldHVybiBm
+YWxzZTsKKyAgfSBjYXRjaChlKSB7CisgICAgaWYoIGUubmFtZSE9PSdUeXBlRXJyb3InICkgewor
+ICAgIHJldHVybiBmYWxzZTsKKyAgICB9CisgICAgcmV0dXJuIHRydWU7CisgIH0KK30KK3J1blRl
+c3RDYXNlKHRlc3RjYXNlKQpcIE5vIG5ld2xpbmUgYXQgZW5kIG9mIGZpbGUK
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

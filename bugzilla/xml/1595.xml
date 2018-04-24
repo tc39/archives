@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1595</bug_id>
+          
+          <creation_ts>2013-07-21 20:54:00 -0700</creation_ts>
+          <short_desc>cross-references to non-existent sections</short_desc>
+          <delta_ts>2014-10-14 15:17:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4561</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-21 20:54:18 -0700</bug_when>
+    <thetext>[This bug&apos;s Version should be Rev 16.]
+
+The spec has many cross-references to non-existent sections...
+
+In 8.1.5:
+    ... of the ToInt32 and ToUint32 operators in 9.5 and 9.6,  respectively.
+
+In 8.1.6.1 / Table 6 // [[Get]] and [[Set]] rows:
+    The  function&apos;s [[Call]] internal method (8.6.2) is called ...
+
+In 8.1.6.2 / para 5:
+    ... returns a Completion Record as described in 8.8.
+
+In 8.1.6.3 / bullet-list #2 / item 2:
+    ... then the SameValue (according to 9.12) must be returned ...
+
+In 8.2.5.4:
+    ... returned from [[GetOwnProperty]] (see 8.12.1).
+
+In 8.3.7.3 / step 4:
+    ... when compared using the SameValue algorithm (9.12).
+
+In 8.3.16.10 / step 4:
+    ... to the definition specified in 8.3.15.2.
+
+In 9.1.1 / Note
+    ... only Date objects (see 15.9.6) over-ride the default ...
+
+In 9.1.8 / Table 18 / &apos;Number&apos; row:
+    See 9.8.1.
+
+In 10.6 / algorithm 6 / step 4.a:
+    the default ordinary object [[Get]] internal method (8.12.3) ...
+
+In 10.6 / algorithm 7 / step 1:
+    ... the [[GetOwnProperty]] internal method (8.12.1) ...
+
+In 11.1.5 / Runtime Semantics: Property Definition Evaluation / alg 2 / step 2:
+    the result of performing Identifier Resolution as specified in 10.3.1 ...
+
+In 11.2.4 / Runtime Semantics: Evaluation / alg 4 / step 4:
+    If this CallExpression is in a tail position (13.7), ...
+
+In 11.2.5:
+    ... produces a List of values (see 8.7).
+
+In 11.2.6.1 / Runtime Semantics: Evaluation / alg 1 / step 2:
+    If this MemberExpression is in a tail position (13.7) ...
+
+In 11.2.6.1 / Runtime Semantics: Evaluation / alg 2 / step 2:
+    If this CallExpression is in a tail position (13.7) ...
+
+In 11.8.1 / Runtime Semantics: Evaluation / alg 1 / step 6:
+    ... Abstract Relational Comparison lval &lt; rval. (see 11.8.5)
+
+In 11.9.1 / Runtime Semantics: The Strict Equality Comparison / Note
+    ... differs from the SameValue Algorithm (9.12) ...
+
+In 11.13.3.2 / ... Destructuring Assignment Evaluation / alg 3 / step 6:
+    ... the result of performing Identifier Resolution(10.3.1) ...
+
+In 15 / alg 1 / step 1:
+    ... the AddRestrictedFunctionProperties (13.6.3) abstract operation ...
+
+In 15.1.4.15:
+    See 15.11.6.6.
+
+In 15.4.5.2.2 / step 3:
+    ... Array Iterator Instance (15.4.5.1.2), ...
+
+In 15.7.3.7:
+     If precision is undefined, call ToString (9.8.1) instead.
+
+In 15.10.5.11 / step 9.a:
+     ... the abstract operation RegExpExec (see 15.10.6.2) ...
+
+In 15.10.5.12 / box:
+     ... GetReplaceSubstitution operation in 15.5.4.11
+
+In 15.10.6.1:
+    It is  coerced to an integer when used (see 15.10.6.2).
+
+In 15.11.5:
+    ... share the same structure, as described in 15.11.7.
+
+In 15.11.5.2:
+    ... 15.7.4.2, 15.7.4.5, 15.7.4.6, 15.7.4.7, and 15.9.5.43.
+
+In 15.11.5.3:
+    See 8.9.1, 8.9.2, ...
+
+In 15.11.5.4:
+    ... 12.10.1, 12.14.1, ...
+
+In 15.11.5.5:
+    See 8.6.2, 8.9.2, 8.10.5, 8.12.5,  8.12.7, 8.12.8, 8.12.9, 9.9, 9.10, ...
+    ... 11.8.6, 11.8.7,  ...
+    ... 13.2.3, ...
+    ... 15.3.3.5.2, 15.3.3.5.3, ...
+    ... 15.3.4.3, 15.3.4.4, ...
+    ... 15.5.4.2, 15.5.4.3, 15.6.4.2, 15.6.4.3, ...
+    ... 15.7.4.2, 15.7.4.4, ...
+    ... 15.9.5.44, ...
+    ... 15.11.4.4, ...
+
+In 15.11.6.2.1:
+    ... a NativeError prototype object (15.11.7.4).
+
+In 15.11.6.4.1:
+    ... the NativeError constructor function itself (15.11.7).
+
+In 15.13.6.3.6 / step 1:
+    If it does, the definition in 15.13.6.6.8 applies.
+
+In 15.13.6.3.7 / step 1:
+    If it does not, the definition in 15.13.6.6.7 applies.
+
+In 15.14.5.2.2 / step 3:
+    ... a Map Iterator Instance (15.14.7.1.2), ...
+
+In 15.16.5.2.2 / alg 1 / step 3:
+    ... a Set Iterator Instance (15.16.7.1.2), ...
+
+In C / item 4:
+    ... a ReferenceError exception is thrown (8.9.2).
+
+In C / item 17:
+     the Identifier of the Catch production is eval or arguments (12.14.1)
+
+In C / item 20:
+    ... correspond to strict mode functions (8.3.15.6, ..., 15.3.3.5.3).
+
+In D / In Edition 6:
+    15.9.5.2: Previous editions did not specify the value ...
+
+In D / In Edition 5.1:
+    15.5.4.9: Normative requirement concerning canonically ...
+    15.5.4.14: In split algorithm step 11.a and 13.a, ...
+    15.5.5.2: In first paragraph, removed the implication ...
+    15.10.6.2: Step 9.e was deleted because ...
+    15.11.4.4: Steps 6-10 modified/added to correctly deal with ...
+    Annex C: An item was added corresponding to 7.6.12 ...
+  [or do these refer to 5.1 section numbering?]
+
+In E / In the 6th Edition:
+    15.10.7 In Edition 6, source, global, ignoreCase, ...
+
+In E / In the 5th Edition:
+    15.5.5.2: In Edition 5, the individual characters ...
+    15.10.6.4: In Edition 3, the result of RegExp.prototype.toString ...
+    ..., 15.11.4.3: In Edition 5, if an initial value for ...
+    15.11.4.4: In Edition 3, the result of Error.prototype.toString ...
+  [or do these refer to 5.0 section numbering?]
+
+In F:
+    BoundNames: ... 12.2.4, ...
+    HasInitialiser: ... 12.2.4, ...
+    PropName: ... 11.1.5.1, ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10157</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-05 15:41:02 -0700</bug_when>
+    <thetext>verified and a few remaining fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10464</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:59 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

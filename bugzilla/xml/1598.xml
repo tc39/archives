@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1598</bug_id>
+          
+          <creation_ts>2013-07-23 20:13:00 -0700</creation_ts>
+          <short_desc>production mis-matches</short_desc>
+          <delta_ts>2013-09-27 14:48:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4564</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-23 20:13:34 -0700</bug_when>
+    <thetext>[The Version of this bug should be Rev 16.]
+
+In a few cases (I believe this bug lists all of them),
+a production appearing in a Static Semantics section
+does not match the production as defined in a Syntax section.
+
+--------------------
+
+13.1 / Syntax
+says:
+    FunctionBody : FunctionStatementList
+
+which is not matched by:
+
+13.1.1.1 / Static Semantics: VarDeclaredNames / rule 2
+    FunctionBody : [empty]
+
+13.1.1.1 / Static Semantics: VarDeclaredNames / rule 3
+    FunctionBody : StatementList
+
+13.1.1.2 / Runtime Semantics: EvaluateBody / rule 1
+    FunctionBody : FunctionStatementList_opt
+
+In the first two, just change &apos;FunctionBody&apos; to &apos;FunctionStatementList&apos;.
+
+For the third, delete the &quot;opt&quot;.
+Also. in the associated algorithm, step 2 says:
+    If FunctionStatementList is not present, then return
+    NormalCompletion(undefined).
+but FunctionStatementList isn&apos;t optional, so can&apos;t be absent.
+Change the condition to something like:
+    If the FunctionStatementList derives [empty], ...
+
+(Mind you, I&apos;m not sure why FunctionStatementList exists.
+The spec used to say
+    FunctionBody : StatementList_opt
+and I can&apos;t see any reason why that wouldn&apos;t still work.)
+
+--------------------
+
+13.3 / Syntax
+says:
+    MethodDefinition :
+        PropertyName ( StrictFormalParameters ) { FunctionBody }
+
+which is not matched by:
+
+13.3.1.1 / Static Semantics: PropName / rule 1
+    MethodDefinition :
+        PropertyName ( FormalParameters ) { FunctionBody }
+
+13.3.1.1 / Static Semantics: ReferencesSuper / rule 1
+    MethodDefinition :
+        PropertyName ( FormalParameters ) { FunctionBody }
+
+Change &quot;FormalParameters&quot; to &quot;StrictFormalParameters&quot; in those
+two productions, and also in the algorithm that accompanies
+the second.
+
+--------------------
+
+13.4 / Syntax
+says:
+    GeneratorMethod :
+        * PropertyName ( StrictFormalParameters ) { FunctionBody }
+
+which is not matched by:
+
+13.4.1.1 / Static Semantics: PropName / rule 1
+    GeneratorMethod :
+        * PropertyName ( FormalParameters ) { FunctionBody }
+
+13.4.1.1 / Static Semantics: ReferencesSuper / rule 1
+    GeneratorMethod :
+        * PropertyName ( FormalParameters ) { FunctionBody }
+
+As in the above group.
+
+--------------------</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5433</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-26 18:46:38 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5595</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:48:00 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4375</bug_id>
+          
+          <creation_ts>2015-05-21 14:16:00 -0700</creation_ts>
+          <short_desc>Treating !IsValidSimpleAssignmentTarget target as early ReferenceError for assignments/incops inconsistent with implementations</short_desc>
+          <delta_ts>2015-05-26 08:38:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jeff Walden (remove +beo to mail)">jwalden+beo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14445</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2015-05-21 14:16:04 -0700</bug_when>
+    <thetext>function f() { &apos;use strict&apos;; eval = 5; }
+function g() { &apos;use strict&apos;; eval++; }
+
+In all the implementations I can test, these are early SyntaxErrors.  But the spec says that nodes that are not IsValidSimpleAssignmentTarget should be early ReferenceErrors.
+
+I saw bug 3992 attempted to make this (or at least deliberately preserved it) for ES5 compatibility wrt things like
+
+function h() { [3] = 5; }
+
+which is kinda sorta fine, I guess.  But with this wrinkle pointed out -- that this one case of not-a-valid-simple-assignment-target is uniformly implemented with other semantics in engines -- I&apos;m not convinced uniform ReferenceError behavior is good.
+
+Frankly, I suspect you can get away with making all these early SyntaxErrors, and I would try that first.  But if not, you&apos;ll have to suss out arguments/eval for special behavior here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14448</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-25 10:29:12 -0700</bug_when>
+    <thetext>deferred for Es7 consideration
+
+I like them to all become syntax errors.  There has been some discussion of this in the past but it has been held back by uncertainty about possible breakage. 
+
+(Seems unlikely, but somebody evaling code might be checking for  the ReferenceError)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14449</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-25 11:28:10 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; I like them to all become syntax errors.  There has been some discussion of
+&gt; this in the past but it has been held back by uncertainty about possible
+&gt; breakage. 
+&gt; 
+&gt; (Seems unlikely, but somebody evaling code might be checking for  the
+&gt; ReferenceError)
+
+I think there&apos;s a misunderstanding here. The example code in comment #0 throws a SyntaxError in ES5, but ES6 changed it to a ReferenceError. That means to avoid a possible breakage, ES6 needs to restore the SyntaxError for assignments to &quot;eval&quot; and &quot;arguments&quot; in strict mode code.
+
+Here are the early error rules from ES5 and ES6 for the postfix increment operator, ES5 11.3.1 specifies to throw a SyntaxError, whereas ES6 12.4.1 specifies to throw a ReferenceError. Similar issues are present for the prefix increment operator and the assignment operator.
+
+ES5:
+---
+11.3.1 Postfix Increment Operator
+
+2. Throw a SyntaxError exception if the following conditions are all true:
+  - Type(lhs) is Reference is true
+  - IsStrictReference(lhs) is true
+  - Type(GetBase(lhs)) is Environment Record
+  - GetReferencedName(lhs) is either &quot;eval&quot; or &quot; arguments&quot;
+---
+
+ES6:
+---
+12.4 Postfix Expressions
+12.4.1 Static Semantics: Early Errors
+  - It is an early Reference Error if IsValidSimpleAssignmentTarget of LeftHandSideExpression is false.
+
+
+12.1 Identifiers
+12.1.3 Static Semantics: IsValidSimpleAssignmentTarget
+IdentifierReference : Identifier
+  1. If this IdentifierReference is contained in strict mode code and StringValue of Identifier is &quot;eval&quot; or &quot;arguments&quot; , return false.
+  2. Return true.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14450</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-26 08:38:12 -0700</bug_when>
+    <thetext>The following test262 test files explicitly check for SyntaxError when assigning to eval/arguments.
+---
+test/language/arguments-object/10.5-1-s.js
+test/language/arguments-object/10.5-1gs.js
+test/language/arguments-object/10.5-7-b-1-s.js
+test/language/directive-prologue/14.1-4gs.js
+test/language/directive-prologue/14.1-5gs.js
+test/language/expressions/assignment/11.13.1-4-30-s.js
+test/language/expressions/assignment/11.13.1-4-31-s.js
+test/language/expressions/compound-assignment/11.13.2-6-1-s.js
+test/language/expressions/compound-assignment/11.13.2-6-1gs.js
+test/language/expressions/compound-assignment/11.13.2-6-2-s.js
+test/language/expressions/compound-assignment/11.13.2-6-3-s.js
+test/language/expressions/compound-assignment/11.13.2-6-4-s.js
+test/language/expressions/compound-assignment/11.13.2-6-5-s.js
+test/language/expressions/compound-assignment/11.13.2-6-6-s.js
+test/language/expressions/compound-assignment/11.13.2-6-7-s.js
+test/language/expressions/compound-assignment/11.13.2-6-8-s.js
+test/language/expressions/compound-assignment/11.13.2-6-9-s.js
+test/language/expressions/compound-assignment/11.13.2-6-10-s.js
+test/language/expressions/compound-assignment/11.13.2-6-11-s.js
+test/language/expressions/compound-assignment/11.13.2-6-12-s.js
+test/language/expressions/compound-assignment/11.13.2-6-13-s.js
+test/language/expressions/compound-assignment/11.13.2-6-14-s.js
+test/language/expressions/compound-assignment/11.13.2-6-15-s.js
+test/language/expressions/compound-assignment/11.13.2-6-16-s.js
+test/language/expressions/compound-assignment/11.13.2-6-17-s.js
+test/language/expressions/compound-assignment/11.13.2-6-18-s.js
+test/language/expressions/compound-assignment/11.13.2-6-19-s.js
+test/language/expressions/compound-assignment/11.13.2-6-20-s.js
+test/language/expressions/compound-assignment/11.13.2-6-21-s.js
+test/language/expressions/compound-assignment/11.13.2-6-22-s.js
+test/language/expressions/postfix-decrement/11.3.2-2-1-s.js
+test/language/expressions/postfix-decrement/11.3.2-2-2-s.js
+test/language/expressions/postfix-increment/11.3.1-2-1-s.js
+test/language/expressions/postfix-increment/11.3.1-2-1gs.js
+test/language/expressions/postfix-increment/11.3.1-2-2-s.js
+test/language/expressions/prefix-decrement/11.4.5-2-1-s.js
+test/language/expressions/prefix-decrement/11.4.5-2-2-s.js
+test/language/expressions/prefix-decrement/11.4.5-2-2gs.js
+test/language/expressions/prefix-increment/11.4.4-2-1-s.js
+test/language/expressions/prefix-increment/11.4.4-2-2-s.js
+test/language/statements/function/13.0-7-s.js
+test/language/statements/function/13.0-8-s.js
+test/language/statements/function/13.0-9-s.js
+test/language/statements/function/13.0-10-s.js
+test/language/statements/function/13.0-11-s.js
+test/language/statements/function/13.0-13-s.js
+test/language/statements/function/13.0-14-s.js
+test/language/statements/function/13.0-15-s.js
+test/language/statements/function/13.0-16-s.js
+test/language/statements/function/13.0_4-5gs.js
+test/language/statements/variable/12.2.1-2-s.js
+test/language/statements/variable/12.2.1-4-s.js
+test/language/statements/variable/12.2.1-8-s.js
+test/language/statements/variable/12.2.1-13-s.js
+test/language/statements/variable/12.2.1-15-s.js
+test/language/statements/variable/12.2.1-19-s.js
+---</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

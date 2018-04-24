@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3305</bug_id>
+          
+          <creation_ts>2014-11-04 04:28:00 -0800</creation_ts>
+          <short_desc>Unclear semantics of call site object caching (12.2.8.2.2)</short_desc>
+          <delta_ts>2015-07-10 08:35:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+    
+    <cc>dslomov</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10549</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-11-04 04:28:09 -0800</bug_when>
+    <thetext>Section 12.2.8.2.2 makes the identity of call site objects dependent on the equivalence of &quot;source code&quot;, but it is not clear what this equivalence is. Is this a structural equivalence or an identity relation?
+
+In particular, with
+
+  let sites = [];
+  function g(o) { sites.push(o) }
+  function f() {
+    eval(&quot;g`bla`&quot;);
+  }
+  f();
+  f();
+  eval(&quot;g`bla`&quot;);
+
+would the two template literals share the same call site object? The two calls to f? That is which ones of the three objects in sites are supposed to be the same?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10550</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-11-04 06:37:16 -0800</bug_when>
+    <thetext>https://mail.mozilla.org/pipermail/es-discuss/2014-July/038343.html
+
+&gt; Allen wrote:
+
+BTW, eval brings up an interesting question:
+
+let t = &quot;tag`hello, ${world}.`&quot;;
+eval(t);
+eval(t);
+
+or
+new Function(t)();
+new Function(t)();
+
+Do each of these pairs compile into different call sites or are they the same call site? I&apos;m inclined to say different.  That each parse of an input string whither via eval, the function constructor, or module/script loading represent a logically distinct input into the ES environment.
+
+&lt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10681</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-24 16:00:32 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft as per Nov 2014 TC29 meeting decisions.
+
+templates are canonicalized by their raw string element sequence.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10904</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:06 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

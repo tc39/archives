@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1</bug_id>
+          
+          <creation_ts>2011-02-04 12:09:00 -0800</creation_ts>
+          <short_desc>This is a test...</short_desc>
+          <delta_ts>2013-05-21 22:11:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>TC39 Infrastructure</product>
+          <component>bugzilla</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Windows</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>reema.maitra</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-04 12:09:08 -0800</bug_when>
+    <thetext>Just making sure this site works:)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2011-02-04 16:57:43 -0800</bug_when>
+    <thetext>Testing 1 2 3.
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2011-02-04 16:58:43 -0800</bug_when>
+    <thetext>Testing again (sorry).
+
+Dave</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2719</bug_id>
+          
+          <creation_ts>2014-04-24 05:27:00 -0700</creation_ts>
+          <short_desc>7.5.3  PromiseOf: Apply same optimization as in Promise.resolve?</short_desc>
+          <delta_ts>2015-01-13 16:34:08 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7895</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-24 05:27:09 -0700</bug_when>
+    <thetext>7.5.3  PromiseOf (value) Abstaction Operation.
+
+The NOTE describes PromiseOf to be functionally equivalent to Promise.resolve, but Promise.resolve does the same Promise constructor optimization which is not performed in PromiseOf. 
+Does this optimization also need to be applied to PromiseOf? Or does the note need to be updated?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8587</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 12:29:02 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+non of the internal uses of PromiseOf should be passing a Promise as the argument to PromiseOf.  Added an assert concerning this to PromiseOf</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8588</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-22 12:45:06 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; non of the internal uses of PromiseOf should be passing a Promise as the
+&gt; argument to PromiseOf.  Added an assert concerning this to PromiseOf
+
+What about 26.3.3.11 Reflect.Loader.prototype.module? The input argument &quot;source&quot; is directly passed to PromiseOf.
+
+Test case: https://github.com/anba/es6draft/blob/master/src/test/scripts/suite/regress/bug2719.js</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8589</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 15:14:12 -0700</bug_when>
+    <thetext>maybe, but I don&apos;t consider any of the module loader stuff to be final enough to really draw any conclusions from it.  If it really can be a promise and that&apos;s the only case where that occurs. I may do a IsPromise check in Module.
+
+I&apos;ll eave this bug open as a reminder to come back and check it after some module progress.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11346</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 16:34:08 -0800</bug_when>
+    <thetext>PromiseOf is long gone.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

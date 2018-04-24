@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1232</bug_id>
+          
+          <creation_ts>2013-01-26 16:51:00 -0800</creation_ts>
+          <short_desc>15.15.5.2 WeakMap.prototype.clear is a significant extension without consensus</short_desc>
+          <delta_ts>2014-12-07 14:35:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3163</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2013-01-26 16:51:32 -0800</bug_when>
+    <thetext>Should go through TC39 strawman process and review before becoming normative.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10684</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-11-26 02:55:26 -0800</bug_when>
+    <thetext>From the November 19 2014 Meeting Notes:
+
+&quot;MM: In the absense of clear, we have a security property: the mapping from weakmap/key pair value can only be observed or affected by someone who has both the weakmap and the key. With clear(), someone with _only_ the WeakMap would&apos;ve been able to affect the WeakMap-and-key-to-value mapping.&quot;
+
+If that privacy/security property of Weak{Map, Set} is indeed a desirable feature, it should be specified as a *required* feature. Concretely:
+
+(1) In the intro of Section 23.3 WeakMap [1], it should be added somewhere that no mechanism is provided that would either access or change a key/value pair of a WeakMap without providing both the key and the WeakMap. Ditto for WeakSet. In other words, it should be said that the privacy feature is *intended*.
+
+(2) In Section 16.1 Forbidden Extensions [2], it should be added that conforming implementations must not provide such a mechanism. That would effectively outlaw the `.clear()` method (method that all major implementations currently provide).
+
+[1]: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-weakmap-objects
+[2]: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-forbidden-extensions</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10685</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-11-26 07:20:58 -0800</bug_when>
+    <thetext>Hi Claude, I agree. Those would both be valuable changes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10687</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-26 14:44:01 -0800</bug_when>
+    <thetext>Weakmap clear removed in rev29
+
+I&apos;m not particularly convinced that it needs to be forbidden in the manner suggested.  Anyone who wants to enforce this property can do so simply by never exposing the actual weakmap to anyone other than trusted parties.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10688</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-11-26 16:02:06 -0800</bug_when>
+    <thetext>That would be expensive -- requiring wrapping the actual weakmap in a wrapper, and then creating an emulated WeakMap.prototype that contains only the allowed methods, which, when given an emulated WeakMap instance, accesses its encapsulated WeakMap using ... a WeakMap. At the very least, it would be ironic ;).
+
+(function() {
+  &quot;use strict&quot;;
+
+  const UnsafeWeakMap = WeakMap;
+
+  const hidden = new UnsafeWeakMap();
+
+  WeakMap = class {
+    constructor() {
+      hidden.set(this, new UnsafeWeakMap();
+    }
+    get(key) {
+      return hidden.get(this).get(key);
+    }
+    // etc...
+  };
+})();
+
+Every safe WeakMap operation becomes two builtin WeakMap operations.
+
+Do you see a cheaper way to implement your suggestion?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10689</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-26 17:20:31 -0800</bug_when>
+    <thetext>(In reply to Mark Miller from comment #4)
+&gt; &gt; ...
+&gt; Every safe WeakMap operation becomes two builtin WeakMap operations.
+&gt; 
+&gt; Do you see a cheaper way to implement your suggestion?
+
+that&apos;s just a single layer of encapsulation. That the sort of behavioral delegation that is done all the time with object based abstractions.  
+
+In reality, the &quot;wrapper&quot; probably some domain module object that exposes some other interface rather than the basic map interface.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10691</commentid>
+    <comment_count>6</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-11-26 21:13:26 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; (In reply to Mark Miller from comment #4)
+&gt; &gt; &gt; ...
+&gt; &gt; Every safe WeakMap operation becomes two builtin WeakMap operations.
+&gt; &gt; 
+&gt; &gt; Do you see a cheaper way to implement your suggestion?
+&gt; 
+&gt; that&apos;s just a single layer of encapsulation. That the sort of behavioral
+&gt; delegation that is done all the time with object based abstractions.  
+&gt; 
+&gt; In reality, the &quot;wrapper&quot; probably some domain module object that exposes
+&gt; some other interface rather than the basic map interface.
+
+That may be some reality, but it does not address your own 
+
+&gt; I&apos;m not particularly convinced that it needs to be forbidden 
+&gt; in the manner suggested.  Anyone who wants to enforce this 
+&gt; property can do so simply by never exposing the actual 
+&gt; weakmap to anyone other than trusted parties.
+
+which requires monkey patching to replace a hypothetical builtin weakmap with a safe one. That&apos;s the scenario that concerns me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10692</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-11-26 21:14:00 -0800</bug_when>
+    <thetext>hypothetical builtin one with a .clear, that is.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10811</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-06 15:33:54 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft
+
+&apos;clear&apos; method removed for WeakMap and WeakSet as per discussion at November 2014 TC39 meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10867</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:02 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2019</bug_id>
+          
+          <creation_ts>2013-10-01 02:32:00 -0700</creation_ts>
+          <short_desc>19.1.2.1: Symbol type not handled in Object constructor</short_desc>
+          <delta_ts>2013-10-29 09:45:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5754</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-01 02:32:45 -0700</bug_when>
+    <thetext>Same as bug 1546.
+
+19.1.2.1 new Object ( [ value ] )
+
+Symbol primitive type not handled in step 1.
+
+Maybe just update 19.1.2.1 to call OrdinaryConstruct() to use the proper realm, currently `var foreignObject = otherRealm.Object; new foreignObject()` creates an object of the current execution context&apos;s realm instead of otherRealm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5811</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-02 16:17:31 -0700</bug_when>
+    <thetext>Why do you say that about the real of the new object?
+
+All object creations done by a built-in function are supposed to be in the same realm as the built-in unless the spec. explicitly says otherwise.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5813</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-02 16:19:12 -0700</bug_when>
+    <thetext>fixed in Rev20 editor&apos;s draft
+
+new Object(aSymbol) now does ToObject(aSymbol)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5830</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-03 01:03:09 -0700</bug_when>
+    <thetext>This is my current understanding:
+- ToObject() creates an object based on the current realm
+- The current realm is determined by the top frame element of the ExecutionContext stack
+- [[Call]] for ordinary functions push a new frame on the ExecutionContext stack
+- So does [[Call]] for built-in functions (already spec&apos;ed or TBD?)
+- [[Construct]] does not push a new element on the execution stack
+- But [[Construct]] may call [[Call]] which will create a new ExecutionContext
+- [[Construct]] for &quot;19.1 Object&quot; is not updated to the new scheme where [[Construct]] just calls OrdinaryConstruct()
+
+=&gt; That means `new foreignObject()` does not push a new frame on the ExecutionContext stack, so the new object will be of the current execution context&apos;s realm instead of otherRealm.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5838</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-03 20:09:19 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; This is my current understanding:
+&gt; - ToObject() creates an object based on the current realm
+&gt; - The current realm is determined by the top frame element of the
+&gt; ExecutionContext stack
+&gt; - [[Call]] for ordinary functions push a new frame on the ExecutionContext
+&gt; stack
+&gt; - So does [[Call]] for built-in functions (already spec&apos;ed or TBD?)
+
+This is my intent, although I think there is some additional spec. work that is need to make this clear.
+
+&gt; - [[Construct]] does not push a new element on the execution stack
+&gt; - But [[Construct]] may call [[Call]] which will create a new ExecutionContext
+&gt; - [[Construct]] for &quot;19.1 Object&quot; is not updated to the new scheme where
+&gt; [[Construct]] just calls OrdinaryConstruct()
+
+Ah, I see.  Yes, that still needs to be cleaned up. 
+
+&gt; 
+&gt; =&gt; That means `new foreignObject()` does not push a new frame on the
+&gt; ExecutionContext stack, so the new object will be of the current execution
+&gt; context&apos;s realm instead of otherRealm.
+
+yes, it shouldn&apos;t do that.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6074</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:28 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

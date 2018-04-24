@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2795</bug_id>
+          
+          <creation_ts>2014-05-02 15:18:00 -0700</creation_ts>
+          <short_desc>15.2.4.2.2 GetOrCreateLoad a.i and a.iv not used</short_desc>
+          <delta_ts>2015-03-16 14:38:51 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8095</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-05-02 15:18:20 -0700</bug_when>
+    <thetext>GetOrCreateLoad allows linkSets to contain linked load records. During linking, as each load record is linked, they are cleared from the linkSets (including unlinked LinkSets). This clearing operation would never apply to these already-linked loads so it looks as if linked dependencies in the linkSet may never be cleared possibly resulting in unlinkable linkSets.
+
+It could be much more useful, less wasteful, and avoid this possible bug to let linkSets only contain unlinked load records.
+
+When running ProcessLoadDependencies at the start of a load, dependency Load records with status=&quot;linked&quot; could not get added to the linkSet, but rather just added to the dependency list.
+
+Having linkSets as only unlinked load records simplifies the lookups necessary in the linking process as well.
+
+I&apos;ve done some tests with setting LinkSets to only contain unlinked load records, and everything seems to work out fine. I would need to do further tests to be sure this suggestion is conclusive though.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9067</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-22 19:24:01 -0700</bug_when>
+    <thetext>The implementation does follow exactly this description, linkSets are filtered to not contain linked load records due to 15.2.4.6.1 (5).
+
+Renaming this issue, to reflect the fact that 15.2.4.2.2 GetOrCreateLoad 5a i and 5a iv are never used anywhere since AddDependencyLoad (the only caller of RequestLoad) doesn&apos;t make use of this information.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13765</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:38:51 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

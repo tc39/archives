@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1433</bug_id>
+          
+          <creation_ts>2013-04-11 13:37:00 -0700</creation_ts>
+          <short_desc>15.5.4.11: String.prototype.replace calls function even if no match was found</short_desc>
+          <delta_ts>2013-05-14 18:13:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3629</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-04-11 13:37:35 -0700</bug_when>
+    <thetext>Change algorithm to stop after step 8 if no match was found to ensure compatibility with ES5. 
+
+Also remove assertion in step 5 to handle case when RegExp.prototype.@@isRegExp has been removed.
+
+
+And two additional typos in Table 33:
+&quot;emptry&quot; -&gt; &quot;empty&quot; (twice!) and &quot;stringLenth&quot; -&gt; &quot;stringLength&quot;
+
+
+And for the implementation-defined notes, see bug 1133. Test262 already tests for a certain implementation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3664</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-04-19 15:53:52 -0700</bug_when>
+    <thetext>fixed in rev 15 editor&apos;s draft.
+
+Regarding the implementation-defined behavior.  Is there any variation among existing major implementations?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3709</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-06 14:38:47 -0700</bug_when>
+    <thetext>Simply returning after step 8 may not be the right solution due to side effects:
+&quot;a&quot;.replace(&quot;b&quot;, {toString: function(){throw 0}})
+&quot;a&quot;.replace(/b/, {toString: function(){throw 0}})
+
+All major browsers throw an exception for the second call (search value is RegExp). For the search value is String case, JSC and V8 behave differently compared to the others, i.e. they do not throw an exception.
+
+---
+
+Concerning the implementation-defined behaviour question:
+
+
+Based on the source code at [1,2,3], SpiderMonkey, V8 and JSC all seem to share the same behaviour. Opera seems to be compliant as well, checking the actual source code may be beneficial, though. IE10 has an extension where $0 (and $00) refer to the entire matched pattern, e.g. &quot;ab&quot;.replace(/(a)b/, &quot;$1_$01_$0_$00&quot;) === &quot;a_a_ab_ab&quot;. 
+
+For the case where the referenced capture does not exist, the behaviour seems to be the same across all major browsers (also see referenced source code from SM/V8/JSC): 
+
+&quot;ab&quot;.replace(&quot;a&quot;, &quot;$2&quot;) === &quot;$2b&quot;
+&quot;ab&quot;.replace(/(a)/, &quot;$2&quot;) === &quot;$2b&quot;
+&quot;a&quot;.replace(/((((((((((a))))))))))/, &quot;$9_$09_$10_$11&quot;) === &quot;a_a_a_a1&quot;
+
+Maybe it was allowed to be implementation defined for older SpiderMonkey versions [4], but since [5] SpiderMonkey works like the others. Based on [6], Netscape Navigator also had some quirks, but that isn&apos;t important anymore, is it?
+
+
+[1] http://hg.mozilla.org/mozilla-central/file/b842d26dd5f0/js/src/jsstr.cpp#l1934
+[2] http://code.google.com/p/v8/source/browse/branches/bleeding_edge/src/string.js?r=14560#328
+[3] https://trac.webkit.org/browser/trunk/Source/JavaScriptCore/runtime/StringPrototype.cpp?rev=149637#L163
+[4] http://bonsai.mozilla.org/cvsblame.cgi?file=mozilla/js/src/jsstr.c&amp;rev=3.19&amp;root=/cvsroot#975
+[5] https://bugzilla.mozilla.org/show_bug.cgi?id=104375
+[6] https://bugzilla.mozilla.org/show_bug.cgi?id=104375#c5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3909</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 18:13:26 -0700</bug_when>
+    <thetext>resolved in rev 15, May 14, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

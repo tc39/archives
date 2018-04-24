@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2266</bug_id>
+          
+          <creation_ts>2013-11-13 08:34:00 -0800</creation_ts>
+          <short_desc>Grammar needs a single root, not Script or Module</short_desc>
+          <delta_ts>2014-02-17 18:10:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="johnjbarton">johnjbarton</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6701</commentid>
+    <comment_count>0</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2013-11-13 08:34:25 -0800</bug_when>
+    <thetext>Based on experience with traceur and what I can tell from the current draft grammar, the parser must chose whether to parse JS source as a Module or a Script before accessing the first token. This is not practical for development tools, eg parsers for editors and linters. 
+
+As a purely empirical guess, it seems to me that &apos;export&apos; should be a legal token and that the difference between module and script currently expressed in the grammar should instead be environmental.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6773</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-14 11:45:27 -0800</bug_when>
+    <thetext>This would be significant design change.  You need to take it up with the module champions or try to get some significant discussion on it on es-discuss.
+
+It is understood that parsers including editor&apos;s and linters need to know what goal symbol to use.  Plus even if a module body parses as a script, different semantics apply.
+
+One possibility that has been kicked around is a new file extension convention for for ES modules. Perhaps &apos;&apos;jsm&apos;.  That would solve the problem for most file based tools.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7362</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 18:10:30 -0800</bug_when>
+    <thetext>We&apos;re locked in to have both module and script roots for the grammar.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2698</bug_id>
+          
+          <creation_ts>2014-04-19 16:24:00 -0700</creation_ts>
+          <short_desc>chapter 15: misc editorial</short_desc>
+          <delta_ts>2014-06-01 17:26:42 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7845</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:24:10 -0700</bug_when>
+    <thetext>----------------------------------------
+In 15.2.0.15 &quot;Runtime Semantics: ModuleDeclarationInstantiation&quot;:
+
+15.2.0.15 / header:
+Runtime Semantics: ModuleDeclarationInstantiation
+    Append &quot;( code, env )&quot;
+
+----------------------------------------
+In 15.2.6.2 &quot;EnsureEvaluated(mod, seen, loader) Abstract Operation&quot;:
+
+15.2.6.2 / step 3:
+Create the module environment for /mod/
+    What does this mean?
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8297</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 09:19:23 -0700</bug_when>
+    <thetext>fixed first item,
+
+second item is clearly marked as a todo, there are still many of these relating to modules so finishing the module spec. is really a technical issue rather than a editorial issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8307</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-10 21:09:12 -0700</bug_when>
+    <thetext>&gt; 
+&gt; second item is clearly marked as a todo,
+
+Not in the PDF version.
+
+&gt; there are still many of these relating to modules so finishing the
+&gt; module spec. is really a technical issue rather than a editorial issue.
+
+Yup, but putting &quot;TODO&quot; so it appears in the PDF is editorial.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8771</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 17:26:42 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

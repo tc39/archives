@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>492</bug_id>
+          
+          <creation_ts>2012-07-09 15:20:00 -0700</creation_ts>
+          <short_desc>15.5.3.4: &quot;ToUint&quot;</short_desc>
+          <delta_ts>2013-10-22 13:48:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>0</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1251</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-09 15:20:07 -0700</bug_when>
+    <thetext>In 15.5.3.4 &quot;String.raw ( callSite, ...substitutions)&quot;,
+step 8 says:
+    &quot;Let literalSegments be ToUint(len).&quot;
+but ToUint does not exist.
+
+Change to &quot;ToUint16&quot; or &quot;ToUint32&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1259</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-09 15:55:34 -0700</bug_when>
+    <thetext>added a TODO for for ToUint
+
+If we go forward with eliminating use of ToUint32 for array indices we will probably  need ToUint</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1757</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:37 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1842</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-04 22:21:37 -0700</bug_when>
+    <thetext>Nope, not fixed.
+(The reference to &quot;ToUint&quot; is still there, and hasn&apos;t been defined.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5219</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-24 01:39:34 -0700</bug_when>
+    <thetext>Fixed in rev17, replaced with call to ToLength</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

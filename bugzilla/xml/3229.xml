@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3229</bug_id>
+          
+          <creation_ts>2014-09-18 10:10:00 -0700</creation_ts>
+          <short_desc>Have common code for Array#forEach and TypedArray#forEach</short_desc>
+          <delta_ts>2015-01-15 16:19:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Tom Schuster">evilpies</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10196</commentid>
+    <comment_count>0</comment_count>
+    <who name="Tom Schuster">evilpies</who>
+    <bug_when>2014-09-18 10:10:55 -0700</bug_when>
+    <thetext>I think that 22.2.3.12 specifies enough requirements in prose that having common code that can be shared with Array.prototype.forEach would be useful.
+
+Here an example:
+
+%TypedArray%.prototype.forEach
+
+1. Let O be the this value.
+2. If Type(O) is not Object, throw a TypeError exception.
+3. If O does not have a [[TypedArrayName]] internal slot, then throw a TypeError exception.
+4. Let buffer be the value of O’s [[ViewedArrayBuffer]] internal slot.
+5. If buffer is undefined, then throw a TypeError exception.
+6. If IsDetachededBuffer(buffer) is true, throw a TypeError exception.
+7. Let length be the value of O’s [[ArrayLength]] internal slot.
+8. Return the result of GenericForEach(O, length, callbackfn, thisArg)
+
+Step 1 to 7 are actually shared with %TypedArray%.protoype.filter
+
+Array.prototype.forEach
+
+1. Let O be the result of calling ToObject passing the this value as the argument.
+2. ReturnIfAbrupt(O).
+3. Let lenValue be Get(O, &quot;length&quot;).
+4. Let len be ToLength(lenValue).
+5. ReturnIfAbrupt(len).
+5. Return the result of GenericForEach(0, length, callbackfn, thisArg)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11284</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-31 12:30:32 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft
+
+sorta...  Added a common validation abstract operation that is used by most of the typed array methods.  (It can&apos;t be used everywhere because of legacy issues).  Also implified the the &quot;not generic&quot; boiler plate by referencing that abstract operation 
+
+Not going to further breakout common Array/TypedArray algorithms in this edition.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11445</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:04 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

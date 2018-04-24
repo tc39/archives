@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3844</bug_id>
+          
+          <creation_ts>2015-02-12 08:20:00 -0800</creation_ts>
+          <short_desc>super in eval</short_desc>
+          <delta_ts>2015-07-10 08:34:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12372</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-12 08:20:02 -0800</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-scripts-static-semantics-early-errors
+
+It is a Syntax Error if StatementList Contains super unless the source code containing super is eval code that is being processed by a direct eval that is contained in function code.
+
+That means that:
+
+function f() {
+  eval(&apos;super.x&apos;);
+}
+
+which is of course not what we we want.
+
+We need to replace function code with something more elaborate. Something that encapsulates, methods, accessors, constuctors and nested arrow functions within those.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12375</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 09:15:27 -0800</bug_when>
+    <thetext>I&apos;m semi-inclined to eliminate this as an early error.  Evals by their very nature aren&apos;t really &quot;early&quot; and any use of super that isn&apos;t in a context where we allow super is going to throw when used.
+
+We&apos;d have to invent new ways to describe where super is or isn&apos;t allowed just for this case.  It seems to me that for direct eval, the runtime error is good enough.
+
+What do you think?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12377</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-12 09:40:12 -0800</bug_when>
+    <thetext>Fair enough.
+
+If that is the case should we even check that the &quot;eval code that is being processed by a direct eval that is contained in function code&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12536</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 09:02:41 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; Fair enough.
+&gt; 
+&gt; If that is the case should we even check that the &quot;eval code that is being
+&gt; processed by a direct eval that is contained in function code&quot;?
+
+we still need the function code check because a top level script execution context doesn&apos;t have all of the execution context state needed to check for a runtime super is valid 
+
+fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

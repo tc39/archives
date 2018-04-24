@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3693</bug_id>
+          
+          <creation_ts>2015-01-30 15:53:00 -0800</creation_ts>
+          <short_desc>26.1.2 Reflect.construct: Add PrepareForTailCall ?</short_desc>
+          <delta_ts>2015-02-12 12:17:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11761</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-30 15:53:18 -0800</bug_when>
+    <thetext>26.1.2 Reflect.construct ( target, argumentsList [, newTarget] )
+
+Add PrepareForTailCall before invoking Construct in step 6 ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11762</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-30 16:05:46 -0800</bug_when>
+    <thetext>I;m not sure whether the bug is that I&apos;m not doing a PrepareForTailCall in Reflect.construct or that the real problem is that I am doing that in Reflect.apply.
+
+In general I haven&apos;t been making an effort to prepare for tail calls in built-ins. They might be (probably are) implemented in a language that doesn&apos;t support property tail calls. 
+
+Function.prototype.call/apply are the only other built-ins that use PrepareForTailCall and they are arguably a very special case. Perhaps Reflect.apply/construct also fall into that special category.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12309</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 10:43:05 -0800</bug_when>
+    <thetext>[[Construct]] can&apos;t be tailed call because the ECMAScript function implementations of it have post body return dependencies upon the current execution context.
+
+Added &apos;new&apos; and &apos;super()&apos; to productions that cannot be property tail calls. 
+
+fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12384</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:34 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

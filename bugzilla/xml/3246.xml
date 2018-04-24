@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3246</bug_id>
+          
+          <creation_ts>2014-09-22 08:45:00 -0700</creation_ts>
+          <short_desc>super.x = value should throw if super.x is not a setter</short_desc>
+          <delta_ts>2015-07-10 08:34:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dslomov</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10239</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-22 08:45:13 -0700</bug_when>
+    <thetext>super.x = value should throw if super.x is not a setter
+
+If it doesn&apos;t we get into the strange case where we end up changing a data property on the prototype chain which might be shadowed by an instance property.
+
+class A {}
+A.prototype.x = 5; // data property on a prototype
+
+class B extends A {
+  m() {
+    print(super.x);  // 5
+    super.x = 10;  // data properties are not inherited, 
+                   // hence x is installed on a receiver
+    print(super.x); // 5
+    print(this.x);  // 10
+  }
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10240</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-22 10:58:01 -0700</bug_when>
+    <thetext>I&apos;m not looking at the spec. right now but this doesn&apos;t sound correct.  The [[Put]] receiver parameter should cause a data property to be set on the this object</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10241</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-22 11:21:15 -0700</bug_when>
+    <thetext>I think you are right.
+
+https://people.mozilla.org/~jorendorff/es6-draft.html#sec-putvalue
+
+https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ordinary-object-internal-methods-and-internal-slots-set-p-v-receiver
+
+super.x = 5 ends up calling [[HomeObject]].__proto__.[[Set]](&apos;x&apos;, 5, this) which ends up setting &apos;x&apos; on this (the receiver)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10242</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dmitry Lomov">dslomov</who>
+    <bug_when>2014-09-22 17:58:36 -0700</bug_when>
+    <thetext>Wait I do not understand.
+
+What this bug says is that precisely this semantics (super.x = 5 causing data property to be set on the receiver) is confusing and wrong. Yes according to the spec &apos;super.x = 5&apos;  ends up like &apos;this.x = 5&apos;, and this causes weird results here:
+
+class A {}
+A.prototype.x = 5; // data property on a prototype
+
+class B extends A {
+  m() {
+    print(super.x);  // 5
+    super.x = 10;  // data properties are not inherited, 
+                   // hence x is installed on a receiver
+    print(super.x); // 5
+    print(this.x);  // 10
+  }
+}
+
+you assign to super.x, but when you read from super.x, you get a different value - confusing. 
+
+It gets worse: 
+class B {
+   method() { super.x = 10; }
+   get x() { return 15; }
+}
+
+let b = new B();
+b.x; // 15;
+b.x = 5; // strict mode exception
+b.method(); 
+b.x; // 10;
+b.x = 5; // ok
+b.x; // 5
+
+Suddenly you can override a getter unintentionally.
+
+My suggestion would be to disallow &apos;super.x = ..&apos; and &apos;super.x&apos; if x is not an accessor property.
+
+Or maybe I am missing something here?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

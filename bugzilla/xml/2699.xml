@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2699</bug_id>
+          
+          <creation_ts>2014-04-19 16:24:00 -0700</creation_ts>
+          <short_desc>chapter 18: misc editorial</short_desc>
+          <delta_ts>2014-06-01 16:43:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7846</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:24:48 -0700</bug_when>
+    <thetext>----------------------------------------
+In 18.2.1 &quot;eval (x)&quot;:
+
+{1}
+18.2.1 / step 2:
+... interpreted as UTF-16 encoded Unicode text as described in 10.1.1, ...
+    Insert &quot;clause&quot; before &quot;10.1.1&quot;,
+    for consistency with similar wording elsewhere.
+
+----------------------------------------
+In 18.2.6.3 &quot;decodeURIComponent (encodedURIComponent)&quot;:
+
+{2}
+18.2.6.3 / step 1:
+Let componentString be ToString(encodedURIComponent).
+    Italicize &apos;componentString&apos;, &apos;encodedURIComponent&apos;.
+
+{3}
+18.2.6.3 / step 2:
+ReturnIfAbrupt(componentString).
+    Italicize &apos;componentString&apos;
+
+{4}
+18.2.6.3 / step 3:
+Let reservedURIComponentSet be the empty String.
+    Italicize &apos;reservedURIComponentSet&apos;
+
+{5}
+18.2.6.3 / step 4:
+Return the result of calling Decode(componentString, reservedURIComponentSet)
+    Italicize &apos;componentString&apos;, &apos;reservedURIComponentSet&apos;
+
+----------------------------------------
+In 18.2.6.5 &quot;encodeURIComponent (uriComponent)&quot;:
+
+{6}
+18.2.6.5 / step 1:
+Let componentString be ToString(uriComponent).
+    Italicize &apos;componentString&apos;, &apos;uriComponent&apos;.
+
+{7}
+18.2.6.5 / step 2:
+ReturnIfAbrupt(componentString).
+    Italicize &apos;componentString&apos;
+
+{8}
+18.2.6.5 / step 3:
+Let unescapedURIComponentSet be a String containing one instance
+of each character valid in uriUnescaped.
+    Italicize &apos;unescapedURIComponentSet&apos;, &quot;uriUnescaped&quot;
+
+{9}
+18.2.6.5 / step 4:
+Return the result of calling Encode(componentString, unescapedURIComponentSet)
+    Italicize &apos;componentString&apos;, &apos;unescapedURIComponentSet&apos;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8296</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-10 09:12:26 -0700</bug_when>
+    <thetext>
+{1}
+Generally clause is only used before single component numbers such as &quot;clause 5&quot;.   Removed all changed all occurrences of &quot;clause 10.1.1&quot; to just &quot;10.1.1&quot;
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8768</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 16:43:03 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

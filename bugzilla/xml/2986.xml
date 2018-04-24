@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2986</bug_id>
+          
+          <creation_ts>2014-06-13 17:16:00 -0700</creation_ts>
+          <short_desc>Default default to object with exports</short_desc>
+          <delta_ts>2015-07-10 08:34:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jan Krems">jan.krems</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8937</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jan Krems">jan.krems</who>
+    <bug_when>2014-06-13 17:16:00 -0700</bug_when>
+    <thetext>Now that the module-style imports are gone/will be gone, it would be great to still have a clean way of handling many imports. The suggested solution using System.get is a very obvious hack. How about the following rule: If a module doesn&apos;t have a default export, the default exports defaults to an object with all exports.
+
+E.g. if I have a module &quot;fs&quot; that exports many functions but doesn&apos;t have a default exports, it should be legal to do either:
+
+```
+import FS from &apos;fs&apos;;
+```
+
+Or:
+
+```
+import { readFile, createWriteStream } from &apos;fs&apos;;
+```
+
+Modules that only export one thing could still use an explicit default export while those with many exports don&apos;t have to go for the more verbose:
+
+```
+export function readFile() {}
+export function createWriteStream() {}
+
+export default { readFile, createWriteStream };
+```</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8942</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-16 07:36:38 -0700</bug_when>
+    <thetext>That is a refactor hazard.
+
+If the module suddenly adds a default export then you get no compile error but things fail at runtime (if you are unlucky it will only fail when your customer wants to pay you).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

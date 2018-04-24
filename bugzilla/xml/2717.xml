@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2717</bug_id>
+          
+          <creation_ts>2014-04-23 11:31:00 -0700</creation_ts>
+          <short_desc>Identifier names: clarify that `ID_Start` / `Other_ID_Start` are included</short_desc>
+          <delta_ts>2014-07-19 17:35:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascriptbugs</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7889</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-04-23 11:31:33 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-identifier-names refers to the `ID_Start` and `ID_Continue` Unicode properties.
+
+You may want to clarify (in a non-normative note, perhaps) that in this case, `ID_Start` includes `Other_ID_Start`, and `ID_Continue` includes `Other_ID_Continue` as per http://unicode.org/reports/tr31/#Backward_Compatibility.
+
+Note that the “backwards compatibility” reasoning in TR31 doesn’t apply in this case, as none of these stability extensions were supported in identifiers in earlier ECMAScript versions. So, alternatively, the decision could be made that `Other_ID_Start`, and `ID_Continue` should not be considered for ECMAScript identifiers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9215</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 17:11:40 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+by explicitly include &quot;Other_ID_Start&quot; and &quot;Other_ID_Continue&quot; which seems like the best forward looking approach to backwards compatibility.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9340</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 17:35:38 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

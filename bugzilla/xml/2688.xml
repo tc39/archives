@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2688</bug_id>
+          
+          <creation_ts>2014-04-19 16:13:00 -0700</creation_ts>
+          <short_desc>chapter 5: misc editorial</short_desc>
+          <delta_ts>2014-06-12 20:07:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7835</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:13:25 -0700</bug_when>
+    <thetext>----------------------------------------
+In 5.1.4 &quot;The Syntactic Grammar&quot;:
+
+{1}
+5.1.4 / para 5:
+... For example, this technique is used in with object literals and ...
+    Delete either &quot;in&quot; or &quot;with&quot;.
+
+----------------------------------------
+In 5.1.5 &quot;Grammar Notation&quot;:
+
+{2}
+5.1.5 / productions 5,6,7:
+    The examples involving productions for IterationStatement
+    are okay as examples, but note that in the *actual* production
+    for IterationStatement, LexicalDeclaration isn&apos;t followed
+    by a semicolon, because it ends with a semicolon.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7862</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-19 17:52:19 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7945</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-28 17:08:27 -0700</bug_when>
+    <thetext>Re {2}:
+Rev24 doesn&apos;t entirely fix it.
+There&apos;s a spurious semicolon in each of:
+    prod 6 / rhs 2
+    prod 7 / rhs 3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8155</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 15:08:48 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8164</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-06 15:22:11 -0700</bug_when>
+    <thetext>Reopening bug due to leftovers noted in comment 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8285</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 15:36:29 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8669</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-29 12:42:57 -0700</bug_when>
+    <thetext>rev25 removed the spurious semicolon in
+    prod 6 / rhs 2,
+but not the one in
+    prod 7 / rhs 3.
+
+Moreover, there are now missing semicolons in:
+  prod 6 / rhs 1
+  prod 7 / rhs 1
+  prod 7 / rhs 2
+
+See also Bug 2917.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8914</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-12 15:17:19 -0700</bug_when>
+    <thetext>in rev25</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8936</commentid>
+    <comment_count>8</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-12 20:07:45 -0700</bug_when>
+    <thetext>&quot;in rev25&quot;?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

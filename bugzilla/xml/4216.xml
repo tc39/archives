@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4216</bug_id>
+          
+          <creation_ts>2015-03-26 16:06:00 -0700</creation_ts>
+          <short_desc>Ch. 20: Various editorial issues</short_desc>
+          <delta_ts>2015-04-03 12:35:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13933</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-26 16:06:41 -0700</bug_when>
+    <thetext>20.1.3.3 Number.prototype.toFixed ( fractionDigits )
+  Note (before algorithm): Change &quot;toFixed&quot; to fixed width font
+
+
+20.2 The Math Object
+  1st para: Missing space after first sentence:  &quot;object.Math&quot;
+
+
+20.2.2.3 Math.acosh( x )
+20.2.2.5 Math.asinh( x )
+20.2.2.7 Math.atanh( x )
+20.2.2.9 Math.cbrt ( x )
+20.2.2.13 Math.cosh ( x )
+20.2.2.15 Math.expm1 ( x )
+20.2.2.18 Math.hypot ( value1 , value2 , …values )
+20.2.2.21 Math.log1p ( x )
+20.2.2.22 Math.log10 ( x )
+20.2.2.23 Math.log2 ( x )
+20.2.2.29 Math.sign(x)
+20.2.2.31 Math.sinh( x )
+20.2.2.34 Math.tanh ( x )
+20.2.2.35 Math.trunc ( x )
+  Algorithm font is &quot;Arial&quot; instead of &quot;Times New Roman&quot;
+
+
+20.3.3.1 Date.now ( )
+  1st para: &quot;return&quot; -&gt; &quot;returns&quot;
+
+
+20.3.4.40 Date.prototype.toLocaleTimeString ( [ reserved1 [ , reserved2 ] ] )
+  1st para: &quot;toLocaleString&quot; -&gt; &quot;toLocaleTimeString&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13974</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-31 15:27:32 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14099</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:39 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

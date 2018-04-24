@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2890</bug_id>
+          
+          <creation_ts>2014-05-27 07:17:00 -0700</creation_ts>
+          <short_desc>Occasional zero-based section numbering (12.2.0, 13.0, 13.6.0, 15.2.0)</short_desc>
+          <delta_ts>2015-02-24 16:05:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bugs.ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8634</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-05-27 07:17:20 -0700</bug_when>
+    <thetext>In Rev 25, the following Sections are numbered 0.
+
+12.2.0 Semantics (in 12.2 Primary Expression)
+13.0 Statement Semantics
+13.6.0 Semantics (in: 13.6 Iteration Statements)
+15.2.0 Module Static Semantics</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8635</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-05-27 07:39:54 -0700</bug_when>
+    <thetext>This is a duplicate of Bug 2138, which is marked as Invalid. Still, it is odd, and one could simply start regularly at 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12275</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-09 18:15:59 -0800</bug_when>
+    <thetext>I no, and I still don&apos;t intend to change it.
+
+I use that convention when initial subsection relates to the enclosing section in a manner that is different from the other subsections that immediately follow.
+
+For example, 12.2.0 are semantics that relate to all of the rules in the 12.2 grammar productions while the rest of the 12.2.x subsections each group semantics that apply to one of the productions of that grammar.
+
+The most conventional thing would be to promote 12.2.0.1-12.2.0.4 a level, but that would but individual semantic rules at the same level as the rule groupings that follow.
+
+It&apos;s not something that I intend to further tweak for this edition.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

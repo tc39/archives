@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2686</bug_id>
+          
+          <creation_ts>2014-04-19 03:11:00 -0700</creation_ts>
+          <short_desc>26.2  Realm Objects: various typos</short_desc>
+          <delta_ts>2014-06-16 14:55:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7833</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-19 03:11:49 -0700</bug_when>
+    <thetext>26.2  Realm Objects:
+
+26.2.1 The Reflect.Realm Constructor
+- &quot;The initialize value&quot; -&gt; &quot;The initial value&quot;
+- &quot;intrinsic object Reflect.Realm&quot; -&gt; missing comma or full stop
+
+26.2.1.1 Reflect.Realm ( [ options [ , initializer ] ] )
+- step 21, rentretly -&gt; reentrantly
+
+26.2.3.2 Reflect. Realm.prototype.eval ( source )
+- arguent -&gt; argument
+
+26.2.3.4 get Reflect.Realm.prototype.intrinsics
+- step 6.3, &quot;.Perfrom&quot; -&gt; &quot;Perform&quot;
+
+26.2.3.5 get Reflect.Realm.prototype.stdlib
+- step 6, double comma
+- step 6.1, double full stops
+- step 6.2, propties -&gt; properties
+- step 6.2, &quot;the value the&quot; -&gt; &quot;the value&quot;
+- step 6.3, DefinePropertyOrTrhow -&gt; DefinePropertyOrThrow
+- step 6.4, missing full stop
+- NOTE, &quot;objects return&quot; -&gt; &quot;object returned&quot;
+- NOTE, Realms’s -&gt; Realm&apos;s
+- NOTE, &quot;to with&quot; -&gt; 
+
+26.2.3.7 Realm Subclass Extension Properties
+- subclass -&gt; subclasses
+
+26.2.3.7.1 Reflect.Realm.prototype.directEval ( source )
+- Reflect.Realm.prototype.eval -&gt; Reflect.Realm.prototype.directEval
+- arguent -&gt; argument
+
+26.2.3.7.2 Reflect.Realm.prototype.indirectEval ( source )
+- Reflect.Realm.prototype.eval -&gt; Reflect.Realm.prototype.indirectEval 
+- arguent -&gt; argument
+
+26.2.3.7.3 Reflect.Realm.prototype.initGlobal ( )
+- Reflect.Realm.prototype.eval -&gt; Reflect.Realm.prototype.initGlobal 
+- arguent -&gt; no arguments used in this method
+
+26.2.3.7.4 Reflect.Realm.prototype.indirectEval ( source )
+- indirectEval -&gt; nonEval or directEvalFallback or ...
+- arguent -&gt; argument</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8335</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 10:31:49 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8983</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:55:53 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

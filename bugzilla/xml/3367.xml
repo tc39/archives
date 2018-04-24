@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3367</bug_id>
+          
+          <creation_ts>2014-11-13 08:50:00 -0800</creation_ts>
+          <short_desc>15.2.1.* Module Semantics: Typos</short_desc>
+          <delta_ts>2014-12-07 14:35:07 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10616</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-13 08:50:22 -0800</bug_when>
+    <thetext>15.2.1.15 Static and Runtme Semantics: Module Records  
+
+- preamble: &quot;declarativeinformation&quot; -&gt; &quot;declarative information&quot;
+- preamble: &quot;In additional it includes&quot; -&gt; &quot;Additionally it includes&quot;
+- Table 37, [[LocalExportEntries]]: &quot;List of ImportEntry&quot; -&gt; &quot;List of ExportEntry&quot;
+- Table 37, [[IndirectExportEntries]]: &quot;List of ImportEntry&quot; -&gt; &quot;List of ExportEntry&quot;
+- Table 37, [[StarExportEntries]]: &quot;List of ImportEntry&quot; -&gt; &quot;List of ExportEntry&quot;
+- NOTE after Table 38: Remove &quot;the various&quot;
+- Table 38, [[ImportName]]: &quot;underwhich&quot; -&gt; &quot;under which&quot;
+- Table 39, [[ExportName]]: &quot;underwhich&quot; -&gt; &quot;under which&quot;
+- Table 39, [[ImportName]]: &quot;ththis&quot; -&gt; &quot;this&quot;
+- Table 39, [[ExportName]]: &quot;underwhich&quot; -&gt; &quot;under which&quot;
+- NOTE after Table 39: Remove &quot;the various&quot;
+
+
+15.2.1.15.2  ModuleAt( list, name)
+
+- preamble: &quot;retrives&quot; -&gt; &quot;retrieves&quot;
+
+
+15.2.1.16 Stati Semantics: ParseModuleAndImports ( realm, moduleName. visited )
+
+- title: &quot;Stati&quot; -&gt; &quot;Static&quot;
+- title: &quot;moduleName.&quot; -&gt; &quot;moduleName,&quot;
+- preamble: &quot;modoles&quot; -&gt; &quot;modules&quot;
+- step 10: HostGetSource does not accept a realm parameter
+- step 13.a: &quot;Additoinal&quot; -&gt; &quot;Additional&quot;
+- step 13.a: &quot;depenent&quot; -&gt; &quot;dependent&quot;
+- step 17.c: &quot;ImportedModules&quot; -&gt; &quot;importedModules&quot;
+- step 21: &quot;importEnties&quot; -&gt; &quot;importEntries&quot;
+- step 22: &quot;indirectExportsEntries&quot; -&gt; &quot;indirectExportEntries&quot;
+- NOTE: &quot;ParseAndLink&quot; is not defined
+
+
+15.2.1.16.1  NormalizeModuleName( realm, unnormalizedName )
+
+- step 4: Change right paren to right curly
+
+
+15.2.1.17 Static Semantics: GetExportedNames(modules, moduleName, circularitySet) 
+
+- step 1: &quot;.[name]]&quot; -&gt; &quot;[[Name]]&quot;
+- step 8.b: Change right curly to right paren
+
+
+15.2.1.18 Static Semantics:  ResolveExport( modules, moduleName, exportName, circularitySet)  
+
+- step 1: &quot;.[Name]]&quot; -&gt; &quot;[[Name]]&quot;
+- step 3: &quot;circulairtySet&quot; -&gt; &quot;circularitySet&quot;
+- step 6.a.i: Change right curly to right paren
+- step 7c: &quot;can not&quot; -&gt; &quot;cannot&quot;
+- step 9.a: Change right curly to right paren
+
+
+15.2.1.19 Runtime Semantics: ModuleEvaluationJob ( moduleName ) 
+
+- step 6.d: LinkModules does not expect parameter `moduleName`
+
+
+15.2.1.20 Runtime Semantics: LinkModules( realm, newModuleSet) 
+
+- step 1-2: undeclared variable &quot;moduleName&quot;
+- step 4: &quot;then&quot; -&gt; &quot;the&quot;
+- step 5: &quot;elemenbt&quot; -&gt; &quot;element&quot;
+- step 5.a: &quot;satatus&quot; -&gt; &quot;status&quot;
+- step 7: &quot;then&quot; -&gt; &quot;the&quot;
+
+
+15.2.1.21 Runtime Semantics: ModuleDeclarationInstantiation( module, realm, moduleSet )
+
+- step 3.a: Change right curly to right paren
+- step 8.a.v.1: Change ; to full stop
+- step 8.a.v.2: &quot;ModuleNameSpaceCreate&quot; -&gt; &quot;ModuleNamespaceCreate&quot;
+
+
+15.2.1.22 Runtime Semantics: ModuleEvaluation(module, realm) 
+
+- title: &quot;module&quot; -&gt; &quot;m&quot; to match algorithm (or rename &quot;m&quot; -&gt; &quot;module&quot; in algo)
+- step 3.a: ... -&gt; &quot;Let requires be ModuleAt(realm.[[modules]], name).&quot;
+
+
+15.2.3  Exports 
+
+ExportClause[NoReference] :
+
+- Remove &quot;[NoReference]&quot;
+
+
+15.2.3.1 Static Semantics:  Early Errors
+
+- &quot;if n is&quot; -&gt; &quot;if the StringValue of n is&quot;
+- NOTE: &quot;ReferencedNames&quot; -&gt; &quot;ReferencedBindings&quot;
+
+
+15.2.3.5 Static Semantics: ExportEntriesForModule
+
+- ExportSpecifier : IdentifierName as  IdentifierName
+
+- step 5: &quot;sourceName&quot; -&gt; &quot;importName&quot;
+- step 5: &quot;null&quot; -&gt; &quot;localName&quot;
+
+
+15.2.3.8 Static Semantics: ModuleRequests 
+
+- ExportDeclaration :  export  ExportClause  FromClause ; 
+
+Maybe also add `ExportDeclaration : export * FromClause` for clarity? This is implicit due to the chaining rule, but making this explicit helps the reader to understand this part.
+
+
+15.2.3.9  Static Semantics:  ReferencedBindings
+
+- ExportSpecifier :  IdentifierName  as  IdentifierName
+
+ Step 6-8 left over from previous revision.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10744</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-04 16:45:32 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10905</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:07 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

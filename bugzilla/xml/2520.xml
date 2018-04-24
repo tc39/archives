@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2520</bug_id>
+          
+          <creation_ts>2014-02-10 02:50:00 -0800</creation_ts>
+          <short_desc>11.6: Various typos</short_desc>
+          <delta_ts>2014-06-16 14:23:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7240</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-10 02:50:33 -0800</bug_when>
+    <thetext>11.6  Names and Keywords, 2nd paragraph:
+- &quot;constributes&quot; -&gt; &quot;contributes&quot;
+
+
+11.6.1.1 Static Semantics: Early Errors
+Identifier :: IdentifierName but not ReservedWord:
+- &quot;an Syntax Error&quot; -&gt; &quot;a Syntax Error&quot;
+- &quot;can not&quot; -&gt; &quot;cannot&quot; (for consistency with other uses in draft)
+
+IdentifierStart :: \ UnicodeEscapeSequence:
+- &quot;an Sytax Error&quot; -&gt; &quot;a Syntax Error&quot;
+
+IdentifierPart :: \ UnicodeEscapeSequence
+- &quot;an Sytax Error&quot; -&gt; &quot;a Syntax Error&quot;
+- &quot;encoding either &lt;ZWNJ&gt; or &lt;ZAJ&gt;&quot; -&gt; &quot;encoding of either &lt;ZWNJ&gt; or &lt;ZAJ&gt;&quot;
+- &quot;An UnicodeEscape&quot; -&gt; &quot;A UnicodeEscape&quot;
+- &quot;can not&quot; -&gt; &quot;cannot&quot;
+- &quot;Identifier&quot; -&gt; &quot;IdentifierName&quot; (2nd NOTE in 11.6.1.1)
+
+
+11.6.2  Reserved Words
+- &quot;Code point in a ReservedWord&quot; -&gt; &quot;Code points in a ReservedWord&quot;
+- &quot;can not&quot; -&gt; &quot;cannot&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8358</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 17:33:58 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8968</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 14:23:59 -0700</bug_when>
+    <thetext>fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

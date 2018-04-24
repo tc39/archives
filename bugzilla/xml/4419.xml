@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4419</bug_id>
+          
+          <creation_ts>2015-07-08 14:28:00 -0700</creation_ts>
+          <short_desc>14.1.18 Wrong scoping of non-strict direct evals in ComputedPropertyNames in parameters</short_desc>
+          <delta_ts>2015-11-02 14:56:44 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bakkot</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>bugs.ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14534</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-08 14:28:39 -0700</bug_when>
+    <thetext>On Jul 8, 2015, at 12:25 PM, Kevin Gibbons wrote:
+
+In the final ECMAScript 2015 spec, each function for which ContainsExpression of that function&apos;s [[FormalParameters]] internal slot is true has a scope object for its parameters. Additionally, these functions have a separate scope object under this one for each parameter that has an initializer. See 14.1.18 for the production &quot;FormalParameter : BindingElement&quot;. The last sentence of this section states
+
+The new Environment Record created in step 6 is only used if the BindElement’s Initializer contains a direct eval.
+
+This is shown to be incorrect (aside from the &quot;BindElement&quot; typo) with the following program.
+
+var x = &quot;outer&quot;;
+function f({ [eval(&apos;var x=&quot;inner&quot;; &quot;a&quot;;&apos;)]: y } = null) {
+  console.log(x);
+}
+f({a: &quot;z&quot;});
+
+Because the presence of an initializer causes a new scope to be created, in which the entire BindingElement is evaluated, this should print &quot;outer&quot;. Therefore, the scope is used any time there is a direct eval in BindingElement.
+
+The intent, per the last sentence of 14.1.18 and bug 3383, is that direct evals in the parameter list cannot introduce new variables in the function&apos;s parameters scope mentioned earlier. However, non-strict direct evals can also occur in computed property names in parameters which do not have initializers
+
+var x = &quot;outer&quot;;
+function f({ [eval(&quot;var x=&apos;inner&apos;; &apos;a&apos;;&quot;)]: y }) {
+  console.log(x);
+}
+f({a: &quot;z&quot;});
+
+Because the separate scope is not created if no initializer is present, this should print &quot;inner&quot;.
+
+Introducing an initializer, even an initializer which is just a simple value, causes a separate scope to be created. This is non-intuitive, and appears to be unintentional.
+
+There are multiple ways that this behavior can be fixed
+
+Create a new scope for each parameter, unconditionally
+Create a new scope for parameters for which ContainsExpression is true, instead of just those that have an initializer
+Define code in computed property names as strict code
+
+The erroneous sentence at the end of section 14.1.18 may be fixed by replacing it with &quot;The new Environment Record created in step 6 is only used if the BindElement contains a direct eval.&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14535</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-08 14:31:23 -0700</bug_when>
+    <thetext>This is an oversight, I forget about the possibility of computer property name expressions in a parameter position.
+
+The appropriate fix is: Create a new scope for parameters for which ContainsExpression is true, instead of just those that have an initializer
+
+this reflects what we originally intended.
+
+Finally the sentence at the end should be converted to a NOTE in addition to the suggested change</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14879</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-11-02 14:56:44 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

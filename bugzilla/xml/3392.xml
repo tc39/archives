@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3392</bug_id>
+          
+          <creation_ts>2014-11-19 15:51:00 -0800</creation_ts>
+          <short_desc>toMethod should create a function without a prototype property</short_desc>
+          <delta_ts>2015-07-10 08:34:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>dslomov</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10664</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-11-19 15:51:48 -0800</bug_when>
+    <thetext>Since methods do not have a prototype property, Function.prototype.toMethod should also create a function without a prototype property.
+
+function f() {}
+assert(f.hasOwnProperty(&apos;prototype&apos;));
+var g = f.toMethod({});
+assert(!g.hasOwnProperty(&apos;prototype&apos;));
+
+It is not clear to me if the spec is handling this or not?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10665</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-11-20 03:52:42 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #0)
+&gt; It is not clear to me if the spec is handling this or not?
+
+Steps 4-6 in 9.2.12 CloneMethod cover this case. Only internal methods and internal slots are copied over, including non-standard internal slots (bug 2012). &quot;copied over&quot; is possibly the wrong choice of words, because the internal slot values are not copied as in &quot;a new copy of the value is created&quot;, but instead the value of each internal slot is set to the value of the corresponding internal slot of the original object.
+
+The note after 9.2.12 explains this, too (The part about &quot;restricted function properties&quot; still needs to be removed - bug 3345). Unfortunately that note is on the next page in the pdf version, so it&apos;s easy to miss.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10704</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-03 12:06:55 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #1)
+&gt; (In reply to Erik Arvidsson from comment #0)
+&gt; &gt; It is not clear to me if the spec is handling this or not?
+&gt; 
+&gt; Steps 4-6 in 9.2.12 CloneMethod cover this case. Only internal methods and
+&gt; internal slots are copied over, including non-standard internal slots (bug
+&gt; 2012). &quot;copied over&quot; is possibly the wrong choice of words, because the
+&gt; internal slot values are not copied as in &quot;a new copy of the value is
+&gt; created&quot;, but instead the value of each internal slot is set to the value of
+&gt; the corresponding internal slot of the original object.
+&gt; 
+&gt; The note after 9.2.12 explains this, too (The part about &quot;restricted
+&gt; function properties&quot; still needs to be removed - bug 3345). Unfortunately
+&gt; that note is on the next page in the pdf version, so it&apos;s easy to miss.
+
+However, this means that if the function has a [[Construct]] internal method it will now use Object.prototype as the prototype for new instances.
+
+I guess the moral of the story is that you really need to code something like:
+var g = Object.mixin(f.toMethod(obj), f); 
+
+Except we don&apos;t have Object.mixin any more!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12097</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-04 10:02:47 -0800</bug_when>
+    <thetext>moved to deferred features because toMethod has been deferred</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

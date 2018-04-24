@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4300</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>10.3.3 Intl.Collator.prototype.compare</short_desc>
+          <delta_ts>2015-04-16 20:02:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14255</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:15 -0700</bug_when>
+    <thetext>10.3.3 Intl.Collator.prototype.compare
+
+Step 2: Delete colon
+
+Change 2.a.i: Omit &quot;then&quot;
+
+Change 2.a.ii: Omit &quot;then&quot;
+
+Change 2.a.iii: Missing ReturnIfAbrupt after ToString
+
+Change 2.a.iv: Missing ReturnIfAbrupt after ToString
+
+Change 2.a.v: Omit &quot;the result of&quot;.
+
+
+Step 2.b: Missing .length (and .name property) for bound function (cf. bug 4288)
+
+Step 2.a: Move to separate section? (cf. bug 4288)
+
+---
+10.3.3.1 Collator Compare Functions
+
+A Collator compare function is an anonymous function that takes two arguments, x and y, and performs the following steps:
+
+1. Let collator be the this value.
+2. Assert: Type(collator) is Object and collator has an [[initializedCollator]] internal slot whose value is true.
+3. If x is not provided, let x be undefined.
+4. If y is not provided, let y be undefined.
+5. Let X be ToString(x).
+6. ReturnIfAbrupt(X).
+7. Let Y be ToString(y).
+8. ReturnIfAbrupt(Y).
+9. Return CompareStrings(collator, X, Y).
+---</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>22</bug_id>
+          
+          <creation_ts>2011-02-18 14:03:00 -0800</creation_ts>
+          <short_desc>S15.10.6_A2 asserting incorrect behavior</short_desc>
+          <delta_ts>2011-09-25 11:55:40 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/c6c9f7f6bc10</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>40</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2011-02-18 14:03:13 -0800</bug_when>
+    <thetext>S15.10.6_A2     Checking performs with toString function
+function testcase() {
+   RegExp.prototype.toString = Object.prototype.toString;
+   if (RegExp.prototype.toString() !== &quot;[object Object]&quot;) {
+       $ERROR(&quot;#1: RegExp.prototype.toString =
+Object.prototype.toString; RegExp.prototype.toString() === \&quot;[object
+\&quot; + \&quot;Object\&quot; + \&quot;]\&quot;. Actual: &quot; + RegExp.prototype.toString());
+   }
+}
+
+SpiderMonkey fails the test because it returns the correct answer, which is &quot;[object RegExp]&quot;. (The [[Class]] of RegExp.prototype is &quot;RegExp&quot; according to ES5 section 15.10.6.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>45</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:31:23 -0800</bug_when>
+    <thetext>Agree and I&apos;ll be disabling it shortly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>479</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-25 11:55:40 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/c6c9f7f6bc10</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

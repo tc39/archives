@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4352</bug_id>
+          
+          <creation_ts>2015-05-01 14:33:00 -0700</creation_ts>
+          <short_desc>Annex E: Changed evaluation order in for-in statement</short_desc>
+          <delta_ts>2015-10-02 13:14:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14371</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-01 14:33:20 -0700</bug_when>
+    <thetext>Annex E does not cover the changed lhs evaluation order in for-in statements.
+
+ES5: Prints &quot;in loop&quot;
+ES6: Does not print &quot;in loop&quot;
+
+---
+var o = {a: 0};
+var p = {
+  get q() {
+   delete o.a;
+   return {};
+  }
+};
+for (p.q.v in o) {
+  print(&quot;in loop&quot;);
+}
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14428</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-20 09:43:34 -0700</bug_when>
+    <thetext>I think this is a legacy compatibility bug that needs to be corrected and for consistency for-of also needs to work that same way.
+
+This basically means that in 13.7.5.13 that steps 5.c-g need to move to the top of the loop.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14447</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-25 10:18:52 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14453</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-26 09:54:46 -0700</bug_when>
+    <thetext>Was the implicit try-finally scope also changed to the rev29 bounds? Errors in rev38, 13.7.5.13 ForIn/OfBodyEvaluation steps 5.a-b don&apos;t call IteratorClose; in rev29 an error in those steps did call IteratorClose. 
+
+Simple example for the rev38 behaviour:
+
+js&gt; function* g(){try { yield } finally { print(&quot;finally!&quot;) }}
+js&gt; for (null[0] of g());
+uncaught exception: TypeError: cannot convert &quot;null&quot; or &quot;undefined&quot; to object
+        at  (typein:2)
+js&gt; for ({set prop(_){throw null}}.prop of g());
+finally!
+uncaught exception: null
+        at set prop (typein:3)
+        at  (typein:3)
+
+
+In rev29, the first for-of loop also calls IteratorClose before re-throwing the TypeError.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14455</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-26 11:12:44 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #3)
+&gt; Was the implicit try-finally scope also changed to the rev29 bounds? Errors
+&gt; in rev38, 13.7.5.13 ForIn/OfBodyEvaluation steps 5.a-b don&apos;t call
+&gt; IteratorClose; in rev29 an error in those steps did call IteratorClose. 
+&gt; 
+Yes</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

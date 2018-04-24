@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2610</bug_id>
+          
+          <creation_ts>2014-04-09 14:14:00 -0700</creation_ts>
+          <short_desc>HTML comments syntax must be documented</short_desc>
+          <delta_ts>2014-12-31 12:51:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>oliver</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7632</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-04-09 14:14:30 -0700</bug_when>
+    <thetext>Details are here: http://javascript.spec.whatwg.org/#comment-syntax
+
+This needs to be rewritten in proper spec text.
+
+(IMHO it should not be in Annex B only, since all existing engines seem to implement this and it would be nice to match reality.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7635</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-09 15:18:10 -0700</bug_when>
+    <thetext>The supported syntax differs in some cases, for example `Function(&quot;1/*\n*/--&gt;&quot;)` works in SpiderMonkey, but does not in V8/JSC. Maybe there are more differences, perhaps someone should inspect the actual implementations...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7755</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 15:13:36 -0700</bug_when>
+    <thetext>Right, we need a complete specification expressed in terms to changes to the lexical comment grammar in section 11.4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11044</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-16 12:45:53 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11221</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:34 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11286</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-31 12:50:17 -0800</bug_when>
+    <thetext>*** Bug 1471 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11288</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-31 12:51:51 -0800</bug_when>
+    <thetext>*** Bug 2791 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

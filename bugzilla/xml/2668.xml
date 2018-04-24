@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2668</bug_id>
+          
+          <creation_ts>2014-04-17 06:15:00 -0700</creation_ts>
+          <short_desc>Double full stops in algorithm descriptions and steps</short_desc>
+          <delta_ts>2014-05-06 16:45:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7767</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-17 06:15:08 -0700</bug_when>
+    <thetext>- 7.1.6 ToUint32: (Unsigned 32 Bit Integer), step 1
+- 7.1.8 ToUint16: (Unsigned 16 Bit Integer), step 1
+- 7.1.9 ToInt8: (Signed 8 Bit Integer), step 1
+- 7.1.10 ToUint8: (Unsigned 8 Bit Integer), step 1
+- 7.1.11 ToUint8Clamp: (Unsigned 8 Bit Integer, Clamped), step 11
+- 7.2.8 IsInteger preamble
+- 7.4.1  GetIterator ( obj, method ), step 1.c
+- 9.2.4 [[Call]] ( thisArgument, argumentsList), step 10.b.ii.1
+- 9.2.14  Function Declaration Instantiation, NOTE
+- 11.2  White Space, paragraph below Table 30
+- 12.2.6.3 Static Semantics:  Contains, &quot;PropertyDefinition : MethodDefinition&quot;, step 2
+- 15.2.0.10 Static Semantics:  LexicallyDeclaredNames, &quot;ModuleItem : ExportDeclaration&quot;, step 2
+- 15.2.1.13 Static Semantics:  VarDeclaredNames, See also links
+- 21.2.2.8.2 Runtime Semantics: Canonicalize Abstract Operation, step 3.c
+- 21.2.3.3.2 Runtime Semantics: RegExpInitialize Abstract Operation, step 13
+- 21.2.5.2.1 Runtime Semantics: RegExpExec Abstract Operation, step 4
+- 21.2.5.2.1 Runtime Semantics: RegExpExec Abstract Operation, step 17.b
+- 25.1.2  The Iterator  Interface, NOTE
+- 25.4.6  Properties of Promise Instances, Table 50, entry for [[PromiseRejectReactions]]
+- 26.2.3.5 get Reflect.Realm.prototype.stdlib, step 6.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7784</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 08:19:33 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8186</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:45:43 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

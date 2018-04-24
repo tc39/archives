@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1243</bug_id>
+          
+          <creation_ts>2013-02-05 10:14:00 -0800</creation_ts>
+          <short_desc>[11.4.1] Change Early Errors for &apos;delete&apos; operator to match web reality</short_desc>
+          <delta_ts>2013-03-08 14:44:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3177</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-05 10:14:30 -0800</bug_when>
+    <thetext>Current browser engines do neither follow the ES5.1 nor the ES6 rules w.r.t. early errors for the delete operator. Instead they use a tighter restriction which basically prohibits any identifier (only in strict mode, of course).
+
+That means the early error restriction should read:
+---
+It is a Syntax Error if the UnaryExpression is contained in strict code and the  UnaryExpression derives an Identifier.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3178</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-05 11:57:29 -0800</bug_when>
+    <thetext>In general, I&apos;m not sure why &quot;web reality&quot; has any relevance in a case like this where the feature was defined by the standard before there were any implementations. Just because everybody implements a specified feature incorrectly doesn&apos;t mean the spec. is incorrect. 
+
+However, in this specific case the normative ES5.1 spec. and web reality (as reported in this bug) seem to be aligned. 
+
+The normative clause in ES5.1 is 11.4.1 step 5.a  (plus early error rules in clause 16).  Only expressions that consist of a simple identifier reference (after eliminating unnecessary parentheses) will evaluate to a Reference value whose base is an environment record. So, in strict mode, all delete operators that reference a simple identifier are required to be reported as early errors. 
+
+In the rev 13 ES6 draft, the phrase &quot;that statically resolves to a environment record&quot; in the 11.4.1 early errors is redundant and I&apos;ll eliminate it. 
+
+Note also that the early errors in 11.4 concerning delete are being merged into 11.4.1.  Those rules are necessary to ensure that:
+
+delete ((((x))))
+
+produces an early error when the rules is expressed in terms of grammar rules rather than Reference value resolution.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3179</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-05 11:58:07 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3180</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-05 13:00:00 -0800</bug_when>
+    <thetext>Or it takes step 4 (in draft rev. 13) if it&apos;s an unresolvable reference... (I started to add some more bikeshedding about 11.4.1 and ch. 16, but it wasn&apos;t really worth it; the term &quot;statically resolves to a environment record&quot; goes away, that&apos;s what&apos;s important.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3395</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:33 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

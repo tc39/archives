@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4275</bug_id>
+          
+          <creation_ts>2015-04-13 10:45:00 -0700</creation_ts>
+          <short_desc>Be specific about which &quot;version&quot; of an algorithm is being referenced</short_desc>
+          <delta_ts>2015-05-07 09:40:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 37: April 3, 2015 Release Candidate 4</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Caitlin Potter [:caitp]">caitpotter88</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14168</commentid>
+    <comment_count>0</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-04-13 10:45:05 -0700</bug_when>
+    <thetext>It would be really nice if each reference to an algorithm (specifically, runtime semantics) in the spec was specific about which version of the algorithm is being referenced. This would allow generated renderings of the draft on electronic mediums to link to the specific algorithm.
+
+For example, 14.1.18 and 14.2.14 both list sets of steps for different variations of the same algorithm. References to the IteratorBindingInitialization algorithm should be specific about which one is meant. This would make it much easier to read and jump between different sections when necessary.
+
+(From https://github.com/jorendorff/es-spec-html/issues/90#issuecomment-92440636)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14169</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-13 11:08:33 -0700</bug_when>
+    <thetext>(In reply to Caitlin Potter [:caitp] from comment #0)
+&gt; It would be really nice if each reference to an algorithm (specifically,
+&gt; runtime semantics) in the spec was specific about which version of the
+&gt; algorithm is being referenced. This would allow generated renderings of the
+&gt; draft on electronic mediums to link to the specific algorithm.
+&gt; 
+&gt; For example, 14.1.18 and 14.2.14 both list sets of steps for different
+&gt; variations of the same algorithm. References to the
+&gt; IteratorBindingInitialization algorithm should be specific about which one
+&gt; is meant. This would make it much easier to read and jump between different
+&gt; sections when necessary.
+&gt; 
+&gt; (From
+&gt; https://github.com/jorendorff/es-spec-html/issues/90#issuecomment-92440636)
+
+That really doesn&apos;t make a lot of sense, at least for the general case. Algorithms with multiple definitions of this sort are intentionally designed to be polymorphically selected based upon the specific entity (usually the grammar rule corresponding to a parse node).  Essentially they are doing OO-style dispatch.
+
+Typicality we only use this technique where we have to select from among several possible implementations of the named algorithm.  In other words, we do this specifically because we don&apos;t know which version of the algorithm will be dynamically applicable at runtime. 
+
+Ideally, when reading such algorithms you would like a reference link to take to a list (or a little OO method browser) of all of the possible implementations of the referenced algorithms.  The See Also line in such algorithms is an attempt to provide the contents for such a list.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14170</commentid>
+    <comment_count>2</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-04-13 11:18:10 -0700</bug_when>
+    <thetext>The &quot;See Also&quot; listings don&apos;t typically lead to alternative algorithm versions, but to other related algorithms.
+
+Maybe a step could be added to just generate the version-select info separately, I guess. The main pain point in es-spec-html is that there&apos;s no hyperlink &quot;at all&quot;, which is very painful on mobile Safari, and not so great on a desktop either. Some of these algorithms are referenced many, many times, and it can be quite a lot of digging to find the right one.
+
+But yeah, fine, maybe that&apos;s more a problem for es-spec-html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14171</commentid>
+    <comment_count>3</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-04-13 11:24:07 -0700</bug_when>
+    <thetext>Here&apos;s an idea:
+
+Metadata at the header of each version of these &quot;polymorphic&quot; sets of algorithm steps, as a description of the main use of those sets of algorithm steps.
+
+For instance:
+
+IteratorBindingInitialization [[Destructuring]]
+IteratorBindingInitialization [[Functions, Generators, Methods]]
+IteratorBindingInitialization [[Arrow Functions]]
+
+or something like that
+
+The little annotation would make it easier to generate a list of algorithm versions that would actually help you choose the one you&apos;re looking for?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14172</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-13 11:30:08 -0700</bug_when>
+    <thetext>(In reply to Caitlin Potter [:caitp] from comment #2)
+&gt; The &quot;See Also&quot; listings don&apos;t typically lead to alternative algorithm
+&gt; versions, but to other related algorithms.
+
+Nope.  All algorithms that are polymorphic over some set of grammar productions begin with a &quot;See Also:&quot; line that cross-references to all of the other sections that contains definitions of that algorithm. For one of many examples see: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-comma-operator-static-semantics-isfunctiondefinition</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14173</commentid>
+    <comment_count>5</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2015-04-13 11:35:42 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #4)
+&gt; (In reply to Caitlin Potter [:caitp] from comment #2)
+&gt; &gt; The &quot;See Also&quot; listings don&apos;t typically lead to alternative algorithm
+&gt; &gt; versions, but to other related algorithms.
+&gt; 
+&gt; Nope.  All algorithms that are polymorphic over some set of grammar
+&gt; productions begin with a &quot;See Also:&quot; line that cross-references to all of
+&gt; the other sections that contains definitions of that algorithm. For one of
+&gt; many examples see:
+&gt; http://people.mozilla.org/~jorendorff/es6-draft.html#sec-comma-operator-
+&gt; static-semantics-isfunctiondefinition
+
+Okay fine, but it&apos;s still just a list of numbers which are totally meaningless to human readers and don&apos;t really inform a decision about which item you care about, and you still have to hunt down these items to get to the &quot;See also&quot; section anyways. That&apos;s easily solved, with a little bit of metadata concisely explaining what each version is used for</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14174</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-13 15:21:47 -0700</bug_when>
+    <thetext>(In reply to Caitlin Potter [:caitp] from comment #5)
+
+&gt; 
+&gt; Okay fine, but it&apos;s still just a list of numbers which are totally
+&gt; meaningless to human readers and don&apos;t really inform a decision about which
+&gt; item you care about, and you still have to hunt down these items to get to
+&gt; the &quot;See also&quot; section anyways. That&apos;s easily solved, with a little bit of
+&gt; metadata concisely explaining what each version is used for
+
+There are actually lists of hyper-linked number and I spend a fair amount of time maintaining the metadata for the linking.  If you want you can use that metadata in your tools (as Jason does to replicate the hyper-linking in his HTML rendering).  For example, you might use them to present a drop down list.
+
+As for which items you care about, you care about all of them because typically they are all possible alternatives.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14394</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-07 09:40:06 -0700</bug_when>
+    <thetext>closing for ES6.  It current is written as intended and we can make any major structural change at this point in the ES6 publication process.
+
+Future editions might decide to change cross referencing conventions or add additional metadata.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3958</bug_id>
+          
+          <creation_ts>2015-02-16 11:37:00 -0800</creation_ts>
+          <short_desc>9.3: contradiction re [[Construct]]?</short_desc>
+          <delta_ts>2015-02-19 19:11:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12775</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-16 11:37:32 -0800</bug_when>
+    <thetext>In 9.3 &quot;Built-in Function Objects&quot;,
+para 4 says:
+    The behaviour specified for each built-in function via algorithm steps
+    or other means is the specification of the function body behaviour for
+    both [[Call]] and [[Construct]] invocations of the function.
+
+but para 5 says:
+    Built-in function objects that are not identified as constructors do not
+    implement the [[Construct]] internal method unless otherwise specified in
+    the description of a particular function.
+
+These seem to be contradictory. Is the para 5 sentence obsolete? Or is the para 4 sentence over-general? 
+
+---
+
+(Also, it&apos;s unclear what para 5&apos;s &quot;otherwise specified&quot; means. How (and why) would the description of a function indicate that it implements the [[Construct]] internal method *without* identifying the function as a constructor?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12778</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 12:34:25 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+added a clarifying sentence to paragraphs 4.
+
+&quot;otherwise specified&quot; is a general loophole that allows spec. text to explicitly over-ride such general statements on an &quot;as needed&quot; basis.
+
+For example, 19.2.4 doesn&apos;t identify bound function instances as constructors, but 9.4.1.3 conditionally give them a [[Construct]] is the target function has a [[Construct]]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13158</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:11 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

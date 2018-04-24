@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3582</bug_id>
+          
+          <creation_ts>2015-01-21 01:38:00 -0800</creation_ts>
+          <short_desc>7.1.* ToInt32, etc. : not clear what should be produced by -0.2</short_desc>
+          <delta_ts>2015-02-02 18:38:48 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>3581</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11572</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-21 01:38:03 -0800</bug_when>
+    <thetext>For To[U]Int{32, 16, 8} abstract operations, there is a similar issue to ToInteger (Bug 3581); but in those algorithms, the intended output is +0 rather than -0.
+
+I suggest the following formulation, which make super-clear the intent around -0:
+
+1. Let int be ToInteger(argument).
+2. ReturnIfAbrupt(int).
+3. If int is -0, let int be +0.
+4. (proceed with current steps 5-6).
+
+(The above does not apply to ToUInt8Clamp, which is fine.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11602</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-22 16:09:47 -0800</bug_when>
+    <thetext>and also, unlike ToInteger, +/- infinity is not preserved.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11603</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-22 16:23:49 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft
+
+I copied the new ToInteger langue into step 4 of each. I think they are easier to understand when everything except ToNumber is done in-line.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11922</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:48 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>264</bug_id>
+          
+          <creation_ts>2012-02-10 23:52:00 -0800</creation_ts>
+          <short_desc>Support for changing the prototype of an object using `Object.setPrototypeOf`</short_desc>
+          <delta_ts>2013-10-10 13:13:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Aadit M Shah">aaditmshah</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bluepx+ecmascriptBugs</cc>
+    
+    <cc>dave</cc>
+    
+    <cc>ecmascript.org</cc>
+    
+    <cc>ivan4th</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>637</commentid>
+    <comment_count>0</comment_count>
+      <attachid>9</attachid>
+    <who name="Aadit M Shah">aaditmshah</who>
+    <bug_when>2012-02-10 23:52:43 -0800</bug_when>
+    <thetext>Created attachment 9
+Demo of the advantages of being able to explicitly set the prototype of an object.
+
+Browsers support a non-standard deprecated property called `__proto__` on objects. This property points to the prototype of the object, and it&apos;s both readable and writable.
+
+Since the `__proto__` property deprecated, JavaScript engines like Rhino don&apos;t support it. Instead they support a method `Object.getPrototypeOf` to get the prototype of an object.
+
+However, Rhino doesn&apos;t allow the prototype of an object to be changed. To do so I suggest the implementation of a method `Object.setPrototypeOf` which would allow the internal `[[proto]]` property of an object to be changed iff it&apos;s not sealed or frozen.
+
+Syntax: `Object.setPrototypeOf(object, prototype)`
+
+Being able to change the internal `[[proto]]` property of an object has many advantages. For example, in some cases it&apos;s necessary to return functions from constructors. This is only possible in JavaScript if we use the constructor as a factory. However since the factory returns a function it wouldn&apos;t be an instance of the constructor, and wouldn&apos;t be able to share methods on its prototype:
+
+    Counter.prototype = function () {};              // Allow `instanceof Function` to return `true`, as well as `call`, `apply`, etc to be used.
+    Counter.prototype.constructor = Counter;         // Reset the `constructor` property of the prototype to point to the constructor `Counter`.
+    Counter.prototype.reset = function () {
+        while (this() &lt; this.max);
+    };
+    
+    var counter = new Counter(3);
+    
+    alert(counter());                                // 1
+    counter.reset();
+    
+    alert(counter());                                // 1
+    alert(counter());                                // 2
+    counter.reset();
+    
+    alert(counter());                                // 1
+    alert(counter());                                // 2
+    alert(counter());                                // 3
+    
+    function Counter(max) {
+        var count = 0;
+    
+        counter.max = Math.abs(parseInt(max)) || 1; 
+    
+        counter.__proto__ = Counter.prototype;       // Setting the internal `[[proto]]` property of the function being returned to the prototype of the constructor.
+    
+        return counter;
+    
+        function counter() {
+            if (count &lt; counter.max) return ++count;
+            else return count = 1;
+        }
+    }
+
+This program will not work on Rhino because on line 6 we are setting `counter.__proto__` to `Counter.prototype`. However since the `__proto__` property is not supported in Rhino, the prototype of `Counter` is never added to the prototype chain. Hence calling `counter.reset` would throw a `TypeError` since we are attempting to invoke `undefined`. To solve this problem we should use `Object.setPrototypeOf`:
+
+    Counter.prototype = function () {};                    // Allow `instanceof Function` to return `true`, as well as `call`, `apply`, etc to be used.
+    Counter.prototype.constructor = Counter;               // Reset the `constructor` property of the prototype to point to the constructor `Counter`.
+    Counter.prototype.reset = function () {
+        while (this() &lt; this.max);
+    };
+    
+    var counter = new Counter(3);
+    
+    print(counter());                                      // 1
+    counter.reset();
+    
+    print(counter());                                      // 1
+    print(counter());                                      // 2
+    counter.reset();
+    
+    print(counter());                                      // 1
+    print(counter());                                      // 2
+    print(counter());                                      // 3
+    
+    function Counter(max) {
+        var count = 0;
+    
+        counter.max = Math.abs(parseInt(max)) || 1; 
+    
+        Object.setPrototypeOf(counter, Counter.prototype); // Setting the internal `[[proto]]` property of the function being returned to the prototype of the constructor.
+    
+        return counter;
+    
+        function counter() {
+            if (count &lt; counter.max) return ++count;
+            else return count = 1;
+        }
+    }
+
+I sincerely hope this proposal will be taken into consideration. Being able to set the prototype of an object has a lot of uses. Allow programmers all over the world to make the best possible use of this new feature.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>638</commentid>
+    <comment_count>1</comment_count>
+    <who name="Aadit M Shah">aaditmshah</who>
+    <bug_when>2012-02-11 00:05:22 -0800</bug_when>
+    <thetext>http://stackoverflow.com/q/9238737/783743</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>662</commentid>
+    <comment_count>2</comment_count>
+    <who name="Ovidiu">ecmascript.org</who>
+    <bug_when>2012-02-24 08:21:11 -0800</bug_when>
+    <thetext>I can confirm this would be very useful. Another reason to add it is that developers might want to extend a class that&apos;s not yet defined. For example:
+
+define B
+
+define A
+
+extend B from A
+
+Which is easily achievable with __proto__</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>663</commentid>
+    <comment_count>3</comment_count>
+    <who name="Daniel">bluepx+ecmascriptBugs</who>
+    <bug_when>2012-02-24 08:30:15 -0800</bug_when>
+    <thetext>This is also the only way to set up circular prototype chains, e.g. the way the classes Object and Function inherit each other in EcmaScript.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>749</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-03-12 17:41:52 -0700</bug_when>
+    <thetext>Moved to Harmony Product because this isn&apos;t a bug in the ES5/5.1 spec. Intead, this is a request for a new feature.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>951</commentid>
+    <comment_count>5</comment_count>
+    <who name="David Rees">dave</who>
+    <bug_when>2012-05-19 18:02:37 -0700</bug_when>
+    <thetext>Another use case is when working with JSON and DB/PubSub libraries that sit on it. People commonly turn around and copy the structure again just to get it into an object with behavior. Simply swapping the initial object&apos;s proto would be much faster/cleaner.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5891</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 13:13:15 -0700</bug_when>
+    <thetext>Object.setPrototypeOf is included in ES6</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>9</attachid>
+            <date>2012-02-10 23:52:00 -0800</date>
+            <delta_ts>2012-02-10 23:52:43 -0800</delta_ts>
+            <desc>Demo of the advantages of being able to explicitly set the prototype of an object.</desc>
+            <filename>counter.html</filename>
+            <type>text/html</type>
+            <size>1610</size>
+            <attacher name="Aadit M Shah">aaditmshah</attacher>
+            
+              <data encoding="base64">PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQogIDxoZWFkPg0KICAgIDxtZXRhIGNo
+YXJzZXQ9IlVURi04Ii8+DQogICAgPHRpdGxlPkNvdW50ZXI8L3RpdGxlPg0KICAgIDxzY3JpcHQ+
+DQogICAgICAgIENvdW50ZXIucHJvdG90eXBlID0gZnVuY3Rpb24gKCkge307ICAgICAgICAgICAg
+ICAvLyBBbGxvdyBgaW5zdGFuY2VvZiBGdW5jdGlvbmAgdG8gcmV0dXJuIGB0cnVlYCwgYXMgd2Vs
+bCBhcyBgY2FsbGAsIGBhcHBseWAsIGV0YyB0byBiZSB1c2VkLg0KICAgICAgICBDb3VudGVyLnBy
+b3RvdHlwZS5jb25zdHJ1Y3RvciA9IENvdW50ZXI7ICAgICAgICAgLy8gUmVzZXQgdGhlIGBjb25z
+dHJ1Y3RvcmAgcHJvcGVydHkgb2YgdGhlIHByb3RvdHlwZSB0byBwb2ludCB0byB0aGUgY29uc3Ry
+dWN0b3IgYENvdW50ZXJgLg0KICAgICAgICBDb3VudGVyLnByb3RvdHlwZS5yZXNldCA9IGZ1bmN0
+aW9uICgpIHsNCiAgICAgICAgICAgIHdoaWxlICh0aGlzKCkgPCB0aGlzLm1heCk7DQogICAgICAg
+IH07DQogICAgICAgIA0KICAgICAgICB2YXIgY291bnRlciA9IG5ldyBDb3VudGVyKDMpOw0KICAg
+ICAgICANCiAgICAgICAgYWxlcnQoY291bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIC8vIDENCiAgICAgICAgY291bnRlci5yZXNldCgpOw0KICAgICAgICANCiAgICAgICAg
+YWxlcnQoY291bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIDENCiAg
+ICAgICAgYWxlcnQoY291bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8v
+IDINCiAgICAgICAgY291bnRlci5yZXNldCgpOw0KICAgICAgICANCiAgICAgICAgYWxlcnQoY291
+bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIDENCiAgICAgICAgYWxl
+cnQoY291bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIDINCiAgICAg
+ICAgYWxlcnQoY291bnRlcigpKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIDMN
+CiAgICAgICAgDQogICAgICAgIGZ1bmN0aW9uIENvdW50ZXIobWF4KSB7DQogICAgICAgICAgICB2
+YXIgY291bnQgPSAwOw0KICAgICAgICANCiAgICAgICAgICAgIGNvdW50ZXIubWF4ID0gTWF0aC5h
+YnMocGFyc2VJbnQobWF4KSkgfHwgMTsgDQogICAgICAgIA0KICAgICAgICAgICAgY291bnRlci5f
+X3Byb3RvX18gPSBDb3VudGVyLnByb3RvdHlwZTsgICAgICAgLy8gU2V0dGluZyB0aGUgaW50ZXJu
+YWwgYFtbcHJvdG9dXWAgcHJvcGVydHkgb2YgdGhlIGZ1bmN0aW9uIGJlaW5nIHJldHVybmVkIHRv
+IHRoZSBwcm90b3R5cGUgb2YgdGhlIGNvbnN0cnVjdG9yLg0KICAgICAgICANCiAgICAgICAgICAg
+IHJldHVybiBjb3VudGVyOw0KICAgICAgICANCiAgICAgICAgICAgIGZ1bmN0aW9uIGNvdW50ZXIo
+KSB7DQogICAgICAgICAgICAgICAgaWYgKGNvdW50IDwgY291bnRlci5tYXgpIHJldHVybiArK2Nv
+dW50Ow0KICAgICAgICAgICAgICAgIGVsc2UgcmV0dXJuIGNvdW50ID0gMTsNCiAgICAgICAgICAg
+IH0NCiAgICAgICAgfQ0KICAgIDwvc2NyaXB0Pg0KICA8L2hlYWQ+DQogIDxib2R5Pg0KICA8L2Jv
+ZHk+DQo8L2h0bWw+DQo=
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

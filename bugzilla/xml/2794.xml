@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2794</bug_id>
+          
+          <creation_ts>2014-05-02 12:06:00 -0700</creation_ts>
+          <short_desc>suggested notation change re parameterized productions</short_desc>
+          <delta_ts>2015-02-12 15:10:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8093</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-02 12:06:52 -0700</bug_when>
+    <thetext>I would like to suggest a small change to the notation of parameterized
+productions, specifically when parameters appear as subscripts of
+nonterminals in a production&apos;s RHS.
+
+For concreteness, consider the nonterminal N with parameter P.
+My suggestion is to change the notation as follows:
+
+    N[?P] -&gt;  N[P]
+    N[P]  -&gt;  N[+P]
+    N     -&gt;  N[~P]
+
+Two reasons:
+
+(1)
+I think this notation would make parameterized productions somewhat easier
+for readers to understand, mainly by leveraging their knowledge of how
+parameters work in mathematics and programming languages.
+
+(a) Changing N[?P] to N[P] ...
+
+Generally, when a function wants to &quot;pass down&quot; the value of one of its
+parameters, it simply references the parameter.
+
+(b) Changing
+    N[P]  to  N[+P]
+    N     to  N[~P]
+
+This re-uses the RHS-prefix notation [+P] and [~P], since the meanings are
+parallel: as RHS-prefixes, they &apos;check&apos; for the presence/absence of a
+parameter; as RHS-subscripts, they could *assert* the presence/absence
+of a parameter (for the RHS-use of a nonterminal).
+
+In an analogy with a programming language, we could imagine that each
+parameter has two possible values, &apos;+&apos; and &apos;~&apos;. Then a RHS-prefix is
+analogous to a boolean expression in a guard:
+     [+P]  is analogous to  (P == &apos;+&apos;)
+     [~P]                   (P == &apos;~&apos;)
+and (with my above suggestion) a RHS-subscript is analogous to a named
+argument:
+    N[+P]  is analogous to  N(P = &apos;+&apos;)
+    N[~P]                   N(P = &apos;~&apos;)
+(You could *state* a similar analogy using the current notation, but I think
+it&apos;d be less mnemonic, and wouldn&apos;t have the parallel with RHS-prefixes.)
+
+(Conceivably, you could allow &quot;N&quot; as an shorthand for &quot;N[~P]&quot;, but I don&apos;t
+think I&apos;d encourage it.)
+
+
+(2)
+In addition to making parameterized productions easier to understand,
+I think it would also clarify references to parameterized nonterminals
+*outside* productions.
+
+Currently, when we say &quot;N[P]&quot; outside a production, it&apos;s unclear whether we
+mean:
+(a) all variants of N-parameterized-by-P
+    (= what &quot;N[P]&quot; means when it appears in a production&apos;s *LHS*); or
+(b) the particular variant in which parameter P is present/used/on
+    (= what &quot;N[P]&quot; currently means when it appears in a production&apos;s *RHS*).
+
+With my suggested notation, we can distinguish these as &quot;N[P]&quot; vs &quot;N[+P]&quot;.
+
+Similarly, when we say &quot;N&quot; outside of a production, we almost always mean:
+(a) any variant of N-parameterized-by-P,
+but it&apos;s possible we might want to mean:
+(b) the particular variant in which parameter P is absent/unused/off.
+
+With my suggested notation, we can denote the latter as &quot;N[~P]&quot;.
+
+---------</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8094</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-02 12:08:37 -0700</bug_when>
+    <thetext>(By the way, this appears to be my 1000th bug at bugs.ecmascript.org!)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8235</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 18:06:57 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; (By the way, this appears to be my 1000th bug at bugs.ecmascript.org!)
+
+Thanks a lot!!!!!!!!
+
+Keep them coming.
+
+Allen</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12490</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 15:10:11 -0800</bug_when>
+    <thetext>deferred to ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

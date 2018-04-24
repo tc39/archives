@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>29</bug_id>
+          
+          <creation_ts>2011-02-21 11:03:00 -0800</creation_ts>
+          <short_desc>S15.4.4.2_A2_T1.js and S15.4.4.3_A2_T1.js are invalid (ES3=&gt;ES5 change)</short_desc>
+          <delta_ts>2011-09-24 16:57:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/947f8408a6eb</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>50</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 11:03:53 -0800</bug_when>
+    <thetext>S15.4.4.2_A2_T1 contains the following:
+    var obj = {};
+    obj.toString = Array.prototype.toString;
+
+    //CHECK#1
+    try {
+      obj.toString();
+      $ERROR(&apos;#1.1: var obj = {}; obj.toString = Array.prototype.toString; obj.toString() throw TypeError. Actual: &apos; + (obj.toString()));
+    } catch(e) {
+      if ((e instanceof TypeError) !== true) {
+        $ERROR(&apos;#1.2: var obj = {}; obj.toString = Array.prototype.toString; obj.toString() throw TypeError. Actual: &apos; + (e));
+      }
+    }
+
+According to ES5.1 (15.4.4.2), this test which is checking to ensure Array.prototype.toString is *not* generic is now invalid:
+    NOTE The toString function is intentionally generic; it does not require that its this value be an Array object. Therefore it can be transferred to other kinds of objects for use as a method. Whether the toString function can be applied successfully to a host object is implementation-dependent.
+
+Step 3 of 15.4.4.2 guarantees the snippet above will in fact not throw an exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>467</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:57:37 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/947f8408a6eb</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

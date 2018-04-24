@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>27</bug_id>
+          
+          <creation_ts>2011-02-21 10:39:00 -0800</creation_ts>
+          <short_desc>S15.1.1.1_A2_T1, S15.1.1.1_A2_T2, S15.1.1.2_A2_T1, S15.1.1.3_A2_T1, and S15.1.1.3_A2_T2 invalid (ES3 to ES5 change)</short_desc>
+          <delta_ts>2011-09-24 16:43:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>46</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:39:59 -0800</bug_when>
+    <thetext>These test cases assert that NaN/Infinity/etc are *not* readonly via assertions similar to:
+    NaN = true;
+    if (typeof(NaN) !== &quot;boolean&quot;) {
+    	$ERROR(&apos;#1: NaN = true; typeof(NaN) === &quot;boolean&quot;. Actual: &apos; + (typeof(NaN))); 
+    }
+
+While this might have been valid in ES3, it&apos;s not in ES5.  E.g., 15.1.1.1 states:
+   15.1.1.1 NaN
+    The value of NaN is NaN (see 8.5). This property has the attributes { [[Writable]]: false, [[Enumerable]]: false, [[Configurable]]: false }.
+meaning that NaN can no longer be reassigned.
+
+Disabling these tests.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>450</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2011-09-11 08:48:58 -0700</bug_when>
+    <thetext>S15.1.1.3_A2_T2 also calls &quot;ERROR()&quot; instead of &quot;$ERROR()&quot;. Not really worth fixing this bug since the complete test is currently disabled, but I thought to mention it nonetheless...
+---
+undefined = true;
+if (typeof(undefined) !== &quot;boolean&quot;) { 
+  ERROR(&apos;#1: undefined = true; typeof(undefined) === &quot;boolean&quot;. Actual: &apos; + (typeof(undefined)));	
+}
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>464</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:43:50 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/7ee6fc6143d8</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

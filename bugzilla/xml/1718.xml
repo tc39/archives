@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1718</bug_id>
+          
+          <creation_ts>2013-08-06 09:57:00 -0700</creation_ts>
+          <short_desc>Periods missing after list numbers in some deeply nested lists</short_desc>
+          <delta_ts>2013-08-23 08:23:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4762</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-08-06 09:57:08 -0700</bug_when>
+    <thetext>In some places, such as 5.2, algorithm steps that are at the 5th level
+of nesting do not have a period after the list marker.
+
+For example:
+    a  Subsubsubsubstep
+rather than:
+    a. Subsubsubsubstep
+
+The same thing happens in:
+
+  * 15.10.2.8 &quot;Atom&quot;, subsection &quot;Runtime Semantics: CharacterSetMatcher
+    Abstract Operation&quot;.
+
+  * 15.12.2 &quot;JSON.parse ( text [ , reviver ] )&quot;, subsection &quot;Runtime
+    Semantics: Walk Abstract Operation&quot;.
+
+and likely more; but in other places, like 9.3.9, the period
+is present, as I would have expected.
+
+(This is really aesthetic; it&apos;s not a big inconvenience to me. My program tries to check that the HTML numbering replicates the Word numbering, and it emits warnings if any list items do not match. But I can&apos;t make these match as there&apos;s apparently no consistent rule. So I have warnings. I can live with them!)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4783</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-06 17:27:37 -0700</bug_when>
+    <thetext>fixed these specific issues in rev17 editor&apos;s draft
+
+added bug 1734 on cleaning up all the styling of all of the algorithm.  Probably won&apos;t happen until on the ES6 technical work is done.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4873</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-13 09:18:29 -0700</bug_when>
+    <thetext>See bug 794.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5184</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:35 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

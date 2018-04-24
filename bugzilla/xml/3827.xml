@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3827</bug_id>
+          
+          <creation_ts>2015-02-11 16:56:00 -0800</creation_ts>
+          <short_desc>chapter 13: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:41 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12319</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:56:42 -0800</bug_when>
+    <thetext>----------------------------------------
+In 13.0.3 &quot;Static Semantics: ContainsUndefinedContinueTarget&quot;:
+
+{1}
+13.0.3 / group 2 / step 2:
+Return ContainsUndefinedContinueTarget of /IterationStatementList/ with ...
+
+    s|IterationStatementList|IterationStatement|
+
+----------------------------------------
+In 13.1.6 &quot;Static Semantics: LexicallyScopedDeclarations&quot;:
+
+{2}
+13.1.6 / group 3 / step 1:
+Return a new List containing /DeclarationPart/ of /Declaration/.
+
+    De-italicize &quot;DeclarationPart&quot;
+
+----------------------------------------
+In 13.2.2.2 &quot;Static Semantics: VarDeclaredNames&quot;:
+
+{3}
+13.2.2.2 / group 1 / production:
+/VariableStatement/ : var /VariableDeclarationList/
+
+    Append missing semi-colon.
+
+----------------------------------------
+In 13.5.2 &quot;Static Semantics: ContainsDuplicateLabels&quot;:
+
+{4}
+13.5.2 / group 1 / step 1:
+Let /hasUndefinedLabels/ be ContainsDuplicateLabels of the first /statement/ ...
+
+    s|statement|Statement|
+
+{5}
+13.5.2 / group 1 / step 3:
+Return ContainsDuplicateLabels of the second /statement/ ...
+
+    s|statement|Statement|
+
+{6}
+13.5.2 / group 2 / step 1:
+Return ContainsDuplicateLabels of /statement/ ...
+
+    s|statement|Statement|
+
+----------------------------------------
+In 13.6.0.2 &quot;Runtime Semantics: LoopContinues(completion, labelSet)&quot;:
+
+{7}
+13.6.0.2 / preamble:
+The abstract operation LoopContinues with arguments /completion/ and /labelSet/
+is defined by the following step:
+
+    s|step|steps|
+
+----------------------------------------
+In 13.6.3.8 &quot;Runtime Semantics: ForBodyEvaluation&quot;:
+
+{8}
+13.6.3.8 / step 4.a:
+If /testExpr/ is not `[empty`], then
+
+    The right-angle-bracket is in serif font, should be in sans.
+
+----------------------------------------
+In 13.11.2 &quot;Static Semantics: ContainsDuplicateLabels&quot;:
+
+{9}
+13.11.2 / group 5 / step 1:
+If the /StatementList/ is present, return ContainsDuplicateLabels of
+/StatementList/.
+
+    Append &quot;with argument /labelSet/&quot;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12346</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:40:44 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12449</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:41 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

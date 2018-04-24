@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2556</bug_id>
+          
+          <creation_ts>2014-02-18 10:41:00 -0800</creation_ts>
+          <short_desc>25.4.1.1 PromiseCapability Records: Typo &apos;a promise objects&apos; -&gt; &apos;a promise object&apos;</short_desc>
+          <delta_ts>2014-04-18 09:16:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Bartek Swierczynski">b.swierczynski</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7368</commentid>
+    <comment_count>0</comment_count>
+    <who name="Bartek Swierczynski">b.swierczynski</who>
+    <bug_when>2014-02-18 10:41:28 -0800</bug_when>
+    <thetext>25.4.1.1 PromiseCapability Records
+The spec says:
+
+&apos;A PromiseCapability is a Record value used to encapsulate a promise objects along with the functions that capable of resolving or rejecting that promise object.&apos;
+
+Fix:
+&apos;a promise objects&apos; -&gt; &apos;a promise object&apos;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

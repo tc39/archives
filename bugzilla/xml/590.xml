@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>590</bug_id>
+          
+          <creation_ts>2012-07-27 10:17:00 -0700</creation_ts>
+          <short_desc>13.7 Tail Position specification resolution</short_desc>
+          <delta_ts>2013-11-03 10:10:46 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1385</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-07-27 10:17:07 -0700</bug_when>
+    <thetext>Per resolution on July 24th at the in-person TC39 meeting...
+
+
+Anything that could invoke user written code in a tail position to act as a tail call.
+        
+This includes:
+call, apply, accessors, quasi aka template (interpolation), proxy calls
+
+
+NOTE: We still need to specify the tail positions in the syntax.  There&apos;s a start by DH on http://wiki.ecmascript.org/doku.php?id=harmony:proper_tail_calls which uses an attribute grammar, but the current spec draft leaves this blank.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6414</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-03 10:10:46 -0800</bug_when>
+    <thetext>regular calls, constructors, template tag calls, and the call and apply functions are specified to do tail calls.
+
+accessor calls, proxy traps, and internal methods in general aren&apos;t don&apos;t have their own execution context so they don&apos;t internally know when they may be making a tail call relative to the surrounding method and externally determining whether every possible internal operation that might trigger one of these seems way to hard.  It isn&apos;t going to happen for ES6.  Maybe in the future, but maybe not...</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

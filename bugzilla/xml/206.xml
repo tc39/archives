@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>206</bug_id>
+          
+          <creation_ts>2011-09-20 11:54:00 -0700</creation_ts>
+          <short_desc>Locale sensitivity in toLowerCase/toUpperCase</short_desc>
+          <delta_ts>2014-07-20 17:23:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>226</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>453</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2011-09-20 11:54:10 -0700</bug_when>
+    <thetext>The specification of String.prototype.toLowerCase in ES 5.1 (which is also referenced in String.prototype.toUpperCase) refers to the Unicode character database for case mappings, explicitly including &quot;not only the UnicodeData.txt file, but also the SpecialCasings.txt file that accompanies it in Unicode 2.1.8 and later&quot;.
+
+The SpecialCasings.txt file includes not only a large number of locale-insensitive mappings, but also a few locale-sensitive mappings. In particular, the Turkish mappings for the Latin letters &quot;I&quot; and &quot;i&quot; (which map to &quot;ı&quot; (U+0131) and &quot;İ&quot; (U+0130) in Turkish) have been in the file since Unicode 2.1.8, while additional ones were added later.
+
+The specification of String.prototype.toLocaleLowerCase in ES 5.1, however, seems to imply that String.prototype.toLowerCase should not use the locale-sensitive mappings: &quot;This function works exactly the same as toLowerCase except that its result is intended to yield the correct result for the host environment‘s current locale, rather than a locale-independent result. There will only be a difference in the few cases (such as Turkish) where the rules for that language conflict with the regular Unicode case mappings.&quot;
+
+Shouldn&apos;t the specification for String.prototype.toLowerCase explicitly exclude the locale-sensitive mappings in SpecialCasings.txt?
+
+SpecialCasing.txt in Unicode 2.1.8:
+http://www.unicode.org/Public/2.1-Update3/SpecialCasing-1.txt
+
+SpecialCasing.txt in Unicode 2.1.9, which corrected the Turkish mapping for &quot;I&quot;:
+http://www.unicode.org/Public/2.1-Update4/SpecialCasing-2.txt
+
+SpecialCasing.txt in Unicode 6.0:
+http://www.unicode.org/Public/6.0.0/ucd/SpecialCasing.txt</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1298</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 12:06:16 -0700</bug_when>
+    <thetext>As of ES6 draft July 2012, the algorithm now specifies use of the &quot;language insensitive lower case equivalent&quot;, but the following paragraph still has no such restriction.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5912</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-20 17:58:12 -0700</bug_when>
+    <thetext>fixed in rev 20 editor&apos;s draft.
+
+Paragrapth now reads:
+
+The result must be derived according to the locale-insensitive case mappings in the Unicode Character Database (this explicitly includes not only the UnicodeData.txt file, but also all locale-insensitive mappings in the SpecialCasings.txt file that accompanies it).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6092</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:41 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9412</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 17:23:30 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

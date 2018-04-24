@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3832</bug_id>
+          
+          <creation_ts>2015-02-11 17:00:00 -0800</creation_ts>
+          <short_desc>chapter 19: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:44 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12324</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 17:00:02 -0800</bug_when>
+    <thetext>----------------------------------------
+In 19.1.2.8.1 &quot;GetOwnPropertyKeys ( O, Type ) Abstract Operation&quot;:
+
+{1}
+19.1.2.8.1 / step 6:
+Repeat for each element /nextKey/ of /keys/ in List order ,
+
+    Delete space before comma
+
+----------------------------------------
+In 19.2.1.1.1 &quot;RuntimeSemantics: CreateDynamicFunction(...)&quot;:
+
+{2}
+19.2.1.1.1 / preamble:
+... and /args/ is a List containing the actual argument values that were
+passed to a /constructor/. ...
+
+    In &quot;passed to a /constructor/&quot;, delete &quot;a&quot;
+
+----------------------------------------
+In 19.2.3 &quot;Properties of the Function Prototype Object&quot;:
+
+{3}
+19.2.3 / para 1:
+The Function prototype object is itself a Built-in Function object. 
+
+    De-capitalize &quot;Built-in&quot;
+
+----------------------------------------
+In 19.2.3.3 &quot;Function.prototype.call (thisArg , ...args)&quot;:
+
+{4}
+19.2.3.3 / step 3:
+If this method was called with more than one argument then in left to right
+order starting with /the/ /second/ /argument/ append ...
+
+    De-italicize &quot;the second argument&quot; (and maybe append a comma)
+
+----------------------------------------
+In 19.2.3.5 &quot;Function.prototype.toString ( )&quot;:
+
+{5}
+19.2.3.5 / step 2:
+If Type(/func/) is Object and is either a Built-in function object ...
+
+    De-capitalize &quot;Built-in&quot;
+
+----------------------------------------
+In 19.4.2.1 &quot;Symbol.for ( key )&quot;:
+
+{6}
+19.4.2.1 / step 5:
+Let /newSymbol/ be a new unique Symbol value whose [[Description]] is ...
+
+    After &quot;[[Description]]&quot;, insert &quot;value&quot;.
+
+----------------------------------------
+In 19.4.3.2.1 &quot;SymbolDescriptiveString ( sym ) Abstract Operation&quot;:
+
+{7}
+19.4.3.2.1 / step 2:
+Let /desc/ be the value of /sym/&apos;s [[Description]] attribute.
+
+    Delete &quot;the value of&quot;
+    s|attribute|value|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12341</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:10:48 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s raft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12477</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:44 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

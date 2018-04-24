@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3006</bug_id>
+          
+          <creation_ts>2014-07-10 15:12:00 -0700</creation_ts>
+          <short_desc>eval/function constructor and tagged template call sites.</short_desc>
+          <delta_ts>2014-12-09 12:06:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9149</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-10 15:12:32 -0700</bug_when>
+    <thetext>let t = &quot;tag`hello, ${world}.`&quot;;
+eval(t);
+eval(t);
+
+or
+new Function(t)();
+new Function(t)();
+
+Do each of these pairs compile into different call sites or are they the same call site? I&apos;m inclined to say different.  That each parse of an input string whether via eval, the function constructor, or module/script loading represent a logically distinct input into the ES environment.
+
+Needs to be explicitly clarified in the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9153</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-10 17:42:30 -0700</bug_when>
+    <thetext>I think they must be different. I don&apos;t see how any other answer is possible without very surprising sharing of object-identity.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9195</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-14 18:19:54 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+
+I generally agree with you, but is two new function calls on the same string really that different from two closures created from the same source code?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9197</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-14 18:34:26 -0700</bug_when>
+    <thetext>Hi Allen, I didn&apos;t understand your response. Can you expand? Thanks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9851</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-23 17:50:23 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #3)
+&gt; Hi Allen, I didn&apos;t understand your response. Can you expand? Thanks.
+
+What  meant is that that there is really not very much difference (ignoring scoping issues) between:
+
+function makeFunction() {return function inner() {return tag`hello, ${world}.`}};
+var c1 = makeFunction();
+var c2 = makeFunction();
+//c1 and c2 are different function objects derived from the same source code //definition,
+// there is a single template string call site shared by both of them.
+
+and this:
+
+let t = &quot;tag`hello, ${world}.`&quot;;
+var c3 = new Function(t);
+var c4 = new Function(t);
+//c3 and c4 are different function objects derived from the same source code //definition,
+//There is a different template string call site for each of them.
+
+except that in the second case isn&apos;t very different from the first case, except we are arbitrarily saying two call sites are created instead of one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10976</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-09 12:06:28 -0800</bug_when>
+    <thetext>fixed in rev29 draft
+
+template caching is now per realm and based upon string equality of list of raw template segments.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

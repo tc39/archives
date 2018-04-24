@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>77</bug_id>
+          
+          <creation_ts>2011-03-21 09:55:00 -0700</creation_ts>
+          <short_desc>reference to space in JSON.stringify JO should not be italic</short_desc>
+          <delta_ts>2015-10-23 11:41:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>147</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>163</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-21 09:55:43 -0700</bug_when>
+    <thetext>On Mar 21, 2011, at 8:12 AM, Felix Klock II wrote:
+
+ES5 discussion group (cc&apos;ing Lars)-
+
+(My apologies if the issue described below has already been discussed; I could not find mention of it in the ES5 erratum [1], nor is it corrected in the 5.1 maintenance revision of the ES5 specification [2].) 
+
+In the ES5 spec from December 2009, at the top of page 206, there is a bit of text that is probably erroneously referring to the italicized /space/ parameter.
+
+In particular, the text in question (which is part of the definition of the abstract operation &quot;JO(value)&quot;) reads, starting from the bottom of page 205:
+
+  ii. Let /member/ be the concatenation of /member/ and the colon character.
+ iii. If /gap/ is not the empty String
+     1. Let /member/ be the concatenation of /member/ and the /space/ character.
+
+The text &quot;the /space/ character&quot;, interpreted literally, does not make sense; the use of italicized /space/ would be interpreted as a reference to the Number or String value, which do not generally serve as names for characters.
+
+Lars Hansen pointed out this problem in a comment while making an Actionscript implementation of the JSON class [3].  
+
+A reasonable hypothesis is that this is a formatting typo, and that the occurrence of the word &quot;space&quot; should not have been italicized.  However, the text introducing the &quot;JO(value)&quot; abstract operation explicitly states that the operation has access to /space/ of the invocation of the stringify method, while there are no other references to /space/ that I can see in the text defining the &quot;JO(value)&quot; abstract operation.  So that would also need to be corrected if this is just a formatting typo.
+
+Cheers,
+-Felix Klock</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>164</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-03-21 09:56:05 -0700</bug_when>
+    <thetext>It&apos;s a typo,  space in line 8.iii.1 should not be italic.  It is actually referring to the Unicode space character (character code 32, decimal).
+
+The reference to space in the intro text is superfluous.  It is also superfluous in the into to the JA abstract operation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14815</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-23 11:41:06 -0700</bug_when>
+    <thetext>Looks like this was fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2883</bug_id>
+          
+          <creation_ts>2014-05-22 06:44:00 -0700</creation_ts>
+          <short_desc>Array.from still not quite polyfillable using for-of</short_desc>
+          <delta_ts>2014-07-15 10:07:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8575</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-22 06:44:08 -0700</bug_when>
+    <thetext>Follow-up to bug 2083.
+
+That bug is about being able to polyfill Array.from using a for-of loop for iteration. From my implementation:
+
+    ...
+    // Steps 6-8.
+    if (items[std_Symbol_iterator] !== undefined) {
+        // Steps 8.a-c.
+        var A = IsConstructor(C) ? new C() : [];
+
+        // Step 8.f.
+        var k = 0;
+
+        // Steps 8.d-e and 8.g.i-vi.
+        for (var nextValue of items) {
+            ...
+        }
+    ...
+
+This is not quite what the spec says, because items.[[Get]](@@iterator) happens twice rather than once. What do you think--should we do the [[Get]] once to detect, and again for the loop? Or is that too much?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8577</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 09:41:59 -0700</bug_when>
+    <thetext>Hmm..
+
+I added the second argument to GetIterator specifically to avoid that second [[Get]] which I assumed native implementations would not want to perform. I could eliminate it (at least in this call) which would make the two [[get]]&apos;s normative. But is that really desirable?
+
+Wouldn&apos;t this be a more faithful translation of the spec. steps:
+
+     ...
+    // Steps 6-8.
+    let usingIterator = items[std_Symbol_iterator];
+    if (usingIterator !== undefined) {
+        // Steps 8.a-c.
+        var A = IsConstructor(C) ? new C() : [];
+
+        // Step 8.f.
+        var k = 0;
+
+        // Steps 8.d-e and 8.g.i-vi.
+        let itr = usingIterator.call(items)
+        for (var nextValue of itr) {
+            ...
+        }
+    ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8579</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 10:00:58 -0700</bug_when>
+    <thetext>On second thought, I guess that doesn&apos;t quite do it either because
+  for(var nextValue of itr)
+
+is still going to do:
+   itr[Symbol.iterator]]()
+
+...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8580</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-22 10:21:02 -0700</bug_when>
+    <thetext>...so, 
+
+you could use a while loop and explicitly check the IteratorResult objects. However, I suspect (in the long run) that doesn&apos;t optimize as easily as for-of
+
+or, 
+
+I wonder if the best approach isn&apos;t to not try to eliminate the extra [[Get]] in the spec. and leave it up to implementations to try to decide (if they are so inclined) when eliminating the second access would be non-observable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8662</commentid>
+    <comment_count>4</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-28 04:23:53 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; I wonder if the best approach isn&apos;t to not try to eliminate the extra [[Get]]
+&gt; in the spec. and leave it up to implementations to try to decide (if they are
+&gt; so inclined) when eliminating the second access would be non-observable.
+
+I&apos;ll write a while loop. We&apos;ll just have to make sure our optimizations are generic enough that we can make the while loop as fast as the for-of loop.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

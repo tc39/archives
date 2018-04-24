@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4174</bug_id>
+          
+          <creation_ts>2015-03-18 08:45:00 -0700</creation_ts>
+          <short_desc>B.3.5 VariableStatements in Catch blocks: Incorrect redefinition of steps</short_desc>
+          <delta_ts>2015-04-03 12:35:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13860</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-18 08:45:36 -0700</bug_when>
+    <thetext>B.3.5 VariableStatements in Catch blocks
+
+The current redefinition of step 6.d.ii.2 makes this code valid:
+---
+try { } catch(e) {
+  eval(&quot;for (var e of []) ;&quot;)
+}
+
+{ let e;
+  eval(&quot;for (var e of []) ;&quot;)
+}
+---
+
+but disallows:
+---
+{ let e;
+  eval(&quot;for (var e in []) ;&quot;)
+}
+---
+
+I think the correct definition is:
+---
+ii. If thisEnvRec is not an object Environment Record, then
+    1. NOTE: The environment of with statements can not contain any lexical declaration so it doesn’t need to be checked for var/let hoisting conflicts.
+    2. For each name in varNames, do
+        a. If thisEnvRec. HasBinding(name) is true, then
+            i. If thisEnvRec is not the Environment Record for a Catch clause, then throw a SyntaxError exception.
+            ii. Else, if name is not only bound by a VariableStatement or the VariableDeclarationList of a for statement, or the ForBinding of a for-in statement, then throw a SyntaxError exception.
+        b. NOTE: A direct eval will not hoist var declaration over a like-named lexical declaration.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13896</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-18 10:36:17 -0700</bug_when>
+    <thetext>fixed inrev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14087</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:36 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

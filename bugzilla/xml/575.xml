@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>575</bug_id>
+          
+          <creation_ts>2012-07-18 18:08:00 -0700</creation_ts>
+          <short_desc>Reorganize test262 directories</short_desc>
+          <delta_ts>2014-08-17 23:05:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>brbaker</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>sam.mikes</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1368</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-18 18:08:54 -0700</bug_when>
+    <thetext>test262 currently supports three different test suites (Ecma-262 conformance, Ecma-262 best practices, and Ecma-402 conformance) and two execution environments (website and console). The repository directory structure clearly wasn&apos;t designed for this, and so it&apos;s sometimes a bit difficult to navigate.
+
+As a newbie, I was wondering about questions such as:
+
+- If I want to change something in the website tree, which files do I edit directly there and which ones are generated from sources elsewhere?
+
+- Which files in console/harness are actually used when running tests from the console?
+
+- When a $INCLUDE works fine in the website environment, why doesn&apos;t the file get loaded in the console environment?
+
+- Why does sta.js duplicate some but not all of the contents of some other .js files? And what does &quot;sta&quot; mean?
+
+- How do I set different version numbers for Ecma-262 and Ecma-402?
+
+Some of these are related to different capabilities in the different environments, but as a first step I think it would help to make the directory layout easier to navigate. Goals:
+
+- Source files and generated files should be clearly separated.
+
+- Source files for harness and test cases should be clearly separated.
+
+- Within harness and test cases, the different execution environments and test suites should be clearly separated, with shared materials clearly labeled as shared.
+
+Here&apos;s a possible layout (I&apos;m omitting the current docs/ and external/ trees):
+
+*** source files ***
+
+harness/website/
+harness/website/images/
+harness/website/styles/
+harness/website/templates/
+harness/console/
+harness/shared/
+
+tests/ecma262/includes/
+tests/ecma262/ch*/
+tests/ecma262/metadata/
+tests/ecma262bp/includes/
+tests/ecma262bp/tests/
+tests/ecma402/includes/
+tests/ecma402/ch*/
+tests/ecma402/metadata/
+tests/shared/includes/
+
+tools/
+
+*** generated or copied files ***
+
+website/ecma262/ (index.html, ch*.html, *.js, *.json)
+website/ecma262bp/ (index.html, *.json)
+website/ecma402/ (index.html, includes/*.js, *.json)
+website/shared/ (harness/, includes/, images/, styles/)
+
+console/ecma262/
+console/ecma262bp/
+console/ecma402/
+console/shared/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9801</commentid>
+    <comment_count>1</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-08-17 23:05:28 -0700</bug_when>
+    <thetext>I propose closing this issue, even though not all the changes have been made.
+
+1. current test/suite directory contains ES5 tests in root, best practices and ECMA-402 tests in subdirs (bestPractice, intl402) and is getting ES6 tests in a subdir (es6).
+
+2. &quot;sta.js&quot; stands for &quot;simpleTestAPI&quot; which was apparently an older name for that file.  It duplicated the contents of other harness files because $INCLUDE was not supported by the console runner.
+
+3. Harness file inclusion is now supported in the console runner. (Though we no longer use the $INCLUDE function)
+
+4. The console/ subdirectory is no longer used at all.
+
+5. The contents of website/ are generated by running the packager script, and are only checked in to revision control for ease of deployment.
+
+6. The only location for harness files now is test/harness, from which they are copied to website/harness.
+
+Finally, development now is being managed through the github project.
+
+Comments?  I will resolve in a week if no follow-up.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

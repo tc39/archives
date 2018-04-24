@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>981</bug_id>
+          
+          <creation_ts>2012-11-21 12:50:00 -0800</creation_ts>
+          <short_desc>9.1.{5.6.7}: reiterating modulo</short_desc>
+          <delta_ts>2013-03-08 14:44:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2485</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-21 12:50:23 -0800</bug_when>
+    <thetext>In each of:
+    9.1.5 ToInt32: (Signed 32 Bit Integer)
+    9.1.6 ToUint32: (Unsigned 32 Bit Integer)
+    9.1.7 ToUint16: (Unsigned 16 Bit Integer)
+step 5 says something of the form:
+    Let int32bit be posInt modulo 2^32; that is, a finite integer value k
+    of Number type with positive sign and less than 2^32 in magnitude such
+    that the mathematical difference of posInt and k is mathematically an
+    integer multiple of 2^32.
+
+Delete everything after the semicolon, because it just reiterates the definition of &apos;modulo&apos; in 5.2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3264</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-02 10:50:11 -0800</bug_when>
+    <thetext>corrected in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3361</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:24 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

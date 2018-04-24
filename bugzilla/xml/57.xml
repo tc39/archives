@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>57</bug_id>
+          
+          <creation_ts>2011-03-07 13:25:00 -0800</creation_ts>
+          <short_desc>Some Sputnik test directories need to be renamed reflecting ES3=&gt;ES5 changes</short_desc>
+          <delta_ts>2011-10-03 13:46:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>120</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:25:39 -0800</bug_when>
+    <thetext>Some specification sections were moved around in ES5 as compared to ES3, and these changes need to be reflected in the &apos;test\suite\sputnik\Conformance&apos; directory.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>445</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-09-09 08:51:55 -0700</bug_when>
+    <thetext>As part of this work, we should also rename the directories the tests are in; removing words identifying the ES5 chapter/section/subsection.  For example, we would want to change:
+    test262\external\contributions\Google\sputniktests\tests\Conformance\15_Native_ECMA_Script_Objects\15.10_RegExp_Objects\15.10.2_Pattern_Semantics\15.10.2.10_CharacterEscape\S15.10.2.10_A1.1_T1.js
+
+to the more succinct:
+    test262\external\contributions\Google\sputniktests\tests\Conformance\ch15\15.10\15.10.2\15.10.2.10\S15.10.2.10_A1.1_T1.js
+
+All I&apos;ve done here is:
+1. Prepend &quot;ch&quot; to the test path (e.g., &quot;ch&quot;15)
+2. Remove all alphabetic characters and &apos;_&apos; from all subdirectories of &apos;test262\external\contributions\Google\sputniktests\tests\Conformance&apos;, while retaining all characters in the test filename
+
+There are a couple of advantages to doing this.  First and foremost, we&apos;re cutting the amount of characters needed for the test path in half =&gt; smaller test downloads from the live test262 website.  Secondly, this makes us a bit more impervious to any ES5 subsection title changes that might occur in ES6 (e.g., perhaps 15.10.2&apos;s &quot;Pattern Semantics&quot; changes to &quot;RegExp Pattern Semantics&quot;).
+
+Any ways, I&apos;d imagine it&apos;d only take half a day or so to write a small script to automatically make these name changes, run it, and check the changes in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>446</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-09 09:06:14 -0700</bug_when>
+    <thetext>Hi David, I&apos;m surprised to see this change to be applied to external/contributions/Google/sputniktests/tests/Conformance/ rather than
+test/suite/sputnik/Conformance/
+
+I would think the former should just continue to reflect the outside contributions as they were contributed.
+
+In any case, I&apos;d be very happy to see test/suite/sputnik/Conformance/ changed in this way. Also, ietestcenter tests should be changed at the same time from &quot;chapter15&quot; to &quot;ch15&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>485</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-09-25 21:32:07 -0700</bug_when>
+    <thetext></thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>492</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-10-03 13:46:39 -0700</bug_when>
+    <thetext>Done.  Changes will go live on the website with the next update.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

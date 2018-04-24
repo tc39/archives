@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>16</bug_id>
+          
+          <creation_ts>2011-02-12 01:25:00 -0800</creation_ts>
+          <short_desc>15.2.3.3-4-188 Function are forbidden to have a &apos;name&apos; property</short_desc>
+          <delta_ts>2011-03-07 14:29:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>25</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-12 01:25:21 -0800</bug_when>
+    <thetext>As per ES5.1 15.3.5 Properties of Function Instances, there is nothing forbidding a function to have a &apos;name&apos; property. This test results in a false negative in browsers implementing such a property.
+
+The vagueness of the spec should be addressed. Meanwhile, the test is wrong.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>31</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-14 10:21:36 -0800</bug_when>
+    <thetext>Agreed.  The test is clearly incorrect here and I&apos;ll be disabling it today.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>32</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-14 10:27:10 -0800</bug_when>
+    <thetext>Actually, I was wrong, the spec isn&apos;t vague. Section 16:
+&quot;An implementation may provide additional types, values, objects, properties, and functions beyond those described in this specification.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>75</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 13:42:24 -0800</bug_when>
+    <thetext>I&apos;ve modified the test in the following manner:
+  var desc = Object.getOwnPropertyDescriptor(f, &quot;name&quot;);
+  if (desc === undefined) {
+    return true;
+  }
+  return false;
+
+has become:
+  var desc = Object.getOwnPropertyDescriptor(f, &quot;functionNameHopefullyDoesNotExist&quot;);
+  return desc === undefined;
+
+While I do acknowledge some ECMAScript implementation could in theory add a property named &quot;functionNameHopefullyDoesNotExist&quot; to Function.prototype, the probability of this seems incredibly low, and they&apos;d likely be doing this just to break the test:)
+
+This change will go out with the next set of test case additions from Microsoft.  Leaving the bug open until this occurs and I re-enabled it on test262.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>77</commentid>
+    <comment_count>4</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-28 14:17:16 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; I&apos;ve modified the test in the following manner:
+&gt;   var desc = Object.getOwnPropertyDescriptor(f, &quot;name&quot;);
+&gt;   if (desc === undefined) {
+&gt;     return true;
+&gt;   }
+&gt;   return false;
+&gt; 
+&gt; has become:
+&gt;   var desc = Object.getOwnPropertyDescriptor(f,
+&gt; &quot;functionNameHopefullyDoesNotExist&quot;);
+&gt;   return desc === undefined;
+&gt; 
+&gt; While I do acknowledge some ECMAScript implementation could in theory add a
+&gt; property named &quot;functionNameHopefullyDoesNotExist&quot; to Function.prototype, the
+&gt; probability of this seems incredibly low, and they&apos;d likely be doing this just
+&gt; to break the test:)
+Here (https://bugs.ecmascript.org/show_bug.cgi?id=33#c5) I&apos;ve provided a method which, based on a object creates a property name which is different from all property names present on the object. Might be useful to add to the harness.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>80</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-01 11:09:24 -0800</bug_when>
+    <thetext>Got ambitious and pushed the change out to Mercurial early.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

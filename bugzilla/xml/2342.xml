@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2342</bug_id>
+          
+          <creation_ts>2013-12-02 17:45:00 -0800</creation_ts>
+          <short_desc>12.1.5.1 Static Semantics of PropertyDefinition : IdentifierReference</short_desc>
+          <delta_ts>2014-02-17 14:29:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Tom Care">tcare</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>tcare</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6872</commentid>
+    <comment_count>0</comment_count>
+    <who name="Tom Care">tcare</who>
+    <bug_when>2013-12-02 17:45:32 -0800</bug_when>
+    <thetext>From 12.1.5.1:
+
+PropertyDefinition : IdentifierReference 
+•	It is a Syntax Error if the PropertyDefinition is contained in strict code and if the IdentifierReference is: implements, interface, let, package, private, protected, public, static, or yield.
+•	It is a Syntax Error if IdentifierReference is a ReservedWord other than yield.
+
+The second line seems incorrect to me. The first line implies we are banning future reserved words (and yield,) but the second line uses ReservedWord which would cover a superset of the list given on the first line. It would also be enforced in non-strict mode.
+
+From 11.6.2:
+ReservedWord ::
+Keyword
+FutureReservedWord
+NullLiteral
+BooleanLiteral
+
+It seems to me that the intention here was to have the second line read:
+
+It is a Syntax Error if IdentifierReference is a Keyword other than yield.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6873</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-12-03 00:58:50 -0800</bug_when>
+    <thetext>The set of FutureReservedWord tokens has been reduced to only contain the token &apos;enum&apos;, regardless of strict mode. That means &apos;implements&apos;, &apos;interface&apos; etc. are never included in the ReservedWord token set.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6906</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Care">tcare</who>
+    <bug_when>2013-12-09 13:38:50 -0800</bug_when>
+    <thetext>You&apos;re correct. At a glance it seems that they are still part of FutureReservedWord. Perhaps we should highlight the difference a little more, since it looks similar to the ES5 version and may be missed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7352</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 14:29:52 -0800</bug_when>
+    <thetext>In Rev23 I made sure that the NOTE about former future reserved words is correctly styled as a Note.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

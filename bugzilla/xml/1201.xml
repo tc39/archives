@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1201</bug_id>
+          
+          <creation_ts>2013-01-18 17:17:00 -0800</creation_ts>
+          <short_desc>no space between LHS and colon(s)</short_desc>
+          <delta_ts>2013-07-15 17:03:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3129</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-18 17:17:50 -0800</bug_when>
+    <thetext>In a production, there&apos;s usually a space between the left-hand-side symbol and the colon(s). However, in a few cases, there isn&apos;t:
+
+  7.8.6 / Static Semantics: TV&apos;s and TRV&apos;s / bullets 9, 20, 21, 25
+
+  11.1 / Syntax / production 2
+
+  11.1.9 / Syntax / productions 2, 3
+
+  11.8.1 / Runtime Semantics: Evaluation / rule 5 header
+
+  12.2.1 / Static Semantics: BoundNames / rule 4 header
+  12.2.1 / Runtime Semantics: Evaluation / rule 5 header
+
+  12.2.4 / Static Semantics: BoundNames / rule 1 header
+  12.2.4 / Runtime Semantics: Binding Initialisation / rule 3 header
+  12.2.4 / Runtime Semantics: Indexed Binding Initialisation / rules 8, 9 header
+  12.2.4 / Runtime Semantics: Keyed Binding Initialisation / rule 1 header
+
+  13.2 / Static Semantics: CoveredFormalsList / rule 1 header
+
+  13.5 / Syntax / productions 1, 4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3228</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-25 16:04:45 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3370</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:26 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4031</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-05-16 12:25:58 -0700</bug_when>
+    <thetext>There are a few remaining/new occurrences of this:
+
+7.8.4 / Static Semantics: Early Errors
+    RegularExpressionFlags:: ...
+
+11.8.1 / Runtime Semantics: Evaluation / rule 5 header
+    RelationalExpression: ...
+
+13.3 / Runtime Semantics: Property Definition Evaluation / rule 3 / step 4
+    Let formalParameterList be the production FormalParameters: [empty]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4367</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 16:38:35 -0700</bug_when>
+    <thetext>fixed in rev16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4440</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:03:45 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

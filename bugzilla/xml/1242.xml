@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1242</bug_id>
+          
+          <creation_ts>2013-02-03 03:49:00 -0800</creation_ts>
+          <short_desc>[11.13.1, 12.2.4] Missing GetValue() call for default initialiser in patterns</short_desc>
+          <delta_ts>2013-03-08 14:44:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3176</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-03 03:49:48 -0800</bug_when>
+    <thetext>[11.13.1] Runtime Semantics: Destructuring Assignment Evaluation 
+Production: `AssignmentProperty : Identifier Initialiser{opt}`
+=&gt; Insert GetValue() call between step 4a and 4b
+
+
+
+[11.13.1] Runtime Semantics: Keyed Destructuring Assignment Evaluation
+Production: `AssignmentElement : DestructuringAssignmentTarget Initialiser{opt}`
+=&gt; Insert GetValue() call after step 3a
+
+
+
+[12.2.4] Runtime Semantics: Indexed Binding Initialisation
+Production: `BindingElement: BindingPattern Initialiser{opt}`
+=&gt; Insert GetValue() call between step 4a and 4b
+
+
+
+[12.2.4] Runtime Semantics: Keyed Binding Initialisation
+Production: `BindingElement: BindingPattern Initialiser{opt}`
+=&gt; Insert GetValue() call between step 3a and 3b
+
+Production: `SingleNameBinding : BindingIdentifier Initialiser{opt}`
+=&gt; Insert GetValue() call after step 3a</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3277</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 17:27:45 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3331</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:14 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

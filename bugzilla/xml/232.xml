@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>232</bug_id>
+          
+          <creation_ts>2011-12-11 11:45:00 -0800</creation_ts>
+          <short_desc>7.6: String value of an IdentifierName</short_desc>
+          <delta_ts>2013-10-22 12:57:50 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 4: November 7, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>519</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-12-11 11:45:54 -0800</bug_when>
+    <thetext>7.6 Identifier Names and Identifiers / Static Semantics: String Value / rule 2
+says:
+    IdentifierName ::
+        IdentifierStart
+        IdentifierName IdentifierPart
+
+    1. Return the String value consisting of the sequence of characters
+       corresponding to IdentifierName.
+
+This algorithm doesn&apos;t make sense. Either you need rules that say how to accumulate the String value of an IdentifierName depending on whether it&apos;s an instance of
+    IdentifierName :: IdentifierStart
+or
+    IdentifierName :: IdentifierName IdentifierPart
+
+OR you can say non-algorithmically that the String value of an IdentifierName is the sequence of characters making up the IdentifierName (after conversion of \ UnicodeEscapeSequences).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5945</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 12:57:50 -0700</bug_when>
+    <thetext>fixed in rev9</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

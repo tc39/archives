@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1089</bug_id>
+          
+          <creation_ts>2012-11-28 15:46:00 -0800</creation_ts>
+          <short_desc>Object.is() is not defined</short_desc>
+          <delta_ts>2013-03-08 14:44:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Joshua Bell">inexorabletash</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2896</commentid>
+    <comment_count>0</comment_count>
+    <who name="Joshua Bell">inexorabletash</who>
+    <bug_when>2012-11-28 15:46:35 -0800</bug_when>
+    <thetext>Based on http://wiki.ecmascript.org/doku.php?id=harmony:egal there was consensus to:
+
+* Add Object.is()
+* Add is and isnt as contextual keywords, where &quot;x is y&quot; desugars to Object.is(x, y), and &quot;x isnt y&quot; desugars to !Object.is(x, y)
+
+(There was further discussion on that page about Object.isnt)
+
+Currently, the Ref 12 Draft specifies the contextual keywords &quot;11.9 Equality Operators&quot; but Object.is() is not defined.
+
+I&apos;m not a TC-39 member so perhaps there was later discussion that eliminated Object.is(). That would be a shame as the function form can be trivially polyfilled while the operator form cannot (without transpiling).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3274</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 16:49:45 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3344</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:18 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

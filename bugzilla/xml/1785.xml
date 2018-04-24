@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1785</bug_id>
+          
+          <creation_ts>2013-08-16 03:08:00 -0700</creation_ts>
+          <short_desc>10.2.1.4.4: Environment Record not specified, &quot;uninitialised binding&quot; for Object Env. Records</short_desc>
+          <delta_ts>2013-08-23 08:22:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4924</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-16 03:08:45 -0700</bug_when>
+    <thetext>10.2.1.4.4 InitialiseBinding (N,V), steps 5a-5b:
+
+&gt; a.  Set the bound value for N in envRec to V.
+&gt; b.  Record that the binding for N in envRec has been initialised.
+
+- &apos;envRec&apos; is a Global Environment Record in this case, it&apos;s not clear what &quot;bound value for N in envRec&quot; means, should this just call &quot;ObjRec’s InitialiseBinding concrete method&quot;? 
+- and it&apos;s also not clear how to record that the binding has been initialised. Remove this step?
+
+
+And finally, the preamble says an &quot;uninitialised binding for N must already exist&quot;, but if no such binding exists (HasBinding for DclRec and ObjRec both return false) no further action is taken. Maybe throw an error?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4933</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 10:54:50 -0700</bug_when>
+    <thetext>see bug 1782
+
+fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5084</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:35 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

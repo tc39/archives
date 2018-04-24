@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2562</bug_id>
+          
+          <creation_ts>2014-02-21 13:27:00 -0800</creation_ts>
+          <short_desc>Array.from({0: 1, 2: 2, length: 3 }) should not return sparse array.</short_desc>
+          <delta_ts>2014-04-06 11:31:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7397</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-21 13:27:42 -0800</bug_when>
+    <thetext>Discussed in http://esdiscuss.org/topic/array-from-and-sparse-arrays
+
+Array.from([1,,2]) returns a non-sparse array (because it uses the iterator case, but see bug 2416), but Array.from({0: 1, 2: 2, length: 3 }) returns a sparse array (because it uses the &apos;array-like&apos; case).
+
+It was suggested that the two cases should be made consistent.  Since &quot;holes are evil&quot;, the array-like case should lose the kPresent test in step 17b etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7446</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-18 15:20:12 -0700</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7588</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:31:06 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

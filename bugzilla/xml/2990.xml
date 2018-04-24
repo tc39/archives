@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2990</bug_id>
+          
+          <creation_ts>2014-06-18 12:16:00 -0700</creation_ts>
+          <short_desc>Remove NormalCompletion from WeakMap and WeakSet constructors?</short_desc>
+          <delta_ts>2015-07-10 08:34:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9043</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-18 12:16:58 -0700</bug_when>
+    <thetext>For WeakSet ( [ iterable ] ) we have:
+
+&quot;If next is false, then return NormalCompletion(set).&quot;
+
+But for Set ( [ iterable ] ) we have:
+
+&quot;If iter is undefined, then return set.&quot;
+
+Other than that the two constructors are equal (minus WeakSetData vs SetData)
+
+Same goes for WeakMap.
+
+Another option is to refactor the spec so that WeakSet and Set can share the spec for their constructors.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9121</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-02 10:39:05 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+eliminated the unnecessary NormalCompletion&apos;s 
+
+It would be nice to refactor to share a common algorithm, the the differing internal slot names makes it difficult.  I&apos;m going to leave it as is in that regard, for now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9399</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:49:07 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

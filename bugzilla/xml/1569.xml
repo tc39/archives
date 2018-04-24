@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1569</bug_id>
+          
+          <creation_ts>2013-06-24 17:26:00 -0700</creation_ts>
+          <short_desc>Add regexp tests for resetting capture groups</short_desc>
+          <delta_ts>2013-06-24 17:26:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4326</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2013-06-24 17:26:12 -0700</bug_when>
+    <thetext>See email below from Paul Ruizendaal:
+
+The expression /((a)|(aa))b/.exec(&apos;aab&apos;) should result in [&apos;aab&apos;,&apos;aa&apos;,undefined,&apos;aa&apos;]. The key here is that the 2nd capture gets reset when the left alternative is abandoned. In the spec algorithm this is automatic, as States are &quot;copy on write&quot;; I think many implementations will use a &quot;save &amp; restore&quot; policy and then this then needs to be verified.
+
+This is not covered by test262, but it is by the mozilla suite test &quot;ecma_3/RegExp/regress-31316.js&quot;.
+
+Recommend to add the following test to section 15.10.2.3:
+
+function test() {
+  var rc = /((a)|(aa))b/.exec(&apos;aab&apos;);
+  return !rc[2];
+}</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

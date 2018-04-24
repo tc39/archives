@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2681</bug_id>
+          
+          <creation_ts>2014-04-17 14:04:00 -0700</creation_ts>
+          <short_desc>Treatment of [[Origin]] is confusing</short_desc>
+          <delta_ts>2014-04-29 23:01:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7799</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-17 14:04:41 -0700</bug_when>
+    <thetext>Eric Faust noticed this.
+
+[[Origin]] is present on property descriptor records, but it&apos;s not an &quot;attribute&quot;.
+
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-validateandapplypropertydescriptor
+
+9.1.6.3 ValidateAndApplyPropertyDescriptor step 10.a reads:
+&gt;     a. For each attribute field of Desc that is present, set the
+&gt;        correspondingly named attribute of the property named P of
+&gt;        object O to the value of the field.
+
+&quot;attribute field&quot; appears only in this section and isn&apos;t defined anywhere.
+4.3.33 seems to suggest that [[Origin]] is an attribute;
+6.1.7.1 suggests that it is not.
+
+In any case we don&apos;t want [[Origin]] to be copied here. The [[Origin]] of an ordinary property can&apos;t be observed at all. It would be useless and misleading to store it.
+
+I think the best fix is for 10.a to explicitly list the attributes that are copied.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7804</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 15:06:07 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+Added:
+
+The [[Origin]] field, if present, is ignore.
+
+to the text of step 10.a
+
+Also replaced &quot;attribute field&quot; with just &quot;field&quot;
+
+For what it&apos;s worth, [[Origin]] is a field of a Property Descriptor record but it is not a property attribute.
+
+I&apos;ll think about the naming of [[Origin]]...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8037</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 23:01:05 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

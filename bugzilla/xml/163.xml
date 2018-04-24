@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>163</bug_id>
+          
+          <creation_ts>2011-07-21 09:42:00 -0700</creation_ts>
+          <short_desc>15.4.4.6 Array pop stores string length value</short_desc>
+          <delta_ts>2011-07-21 09:49:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>162</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>362</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-21 09:42:33 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #162 +++
+
+from: https://mail.mozilla.org/pipermail/es5-discuss/2011-July/004062.html 
+
+
+
+Hi,
+
+I think there&apos;s a typo/bug in spec for Array.prototype.pop.  15.4.4.6,
+step 5d says:
+
+&quot;Call the [[Put]] internal method of O with arguments &quot;length&quot;, indx, and true&quot;
+
+But indx is the result of a call to ToString (step 5a).  Now the
+length property&apos;s value is a string, when it should be a number.
+
+Is that right?
+
+Thanks,
+
+Matt Carroll
+_________________________
+
+This but was introduced in the E5 Spec.  
+
+It needs to go into the ES5.1 errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>363</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-21 09:49:22 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

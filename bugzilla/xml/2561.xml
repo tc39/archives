@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2561</bug_id>
+          
+          <creation_ts>2014-02-21 09:47:00 -0800</creation_ts>
+          <short_desc>Array.from usingIterator path: mapfn call is missing args</short_desc>
+          <delta_ts>2014-05-06 16:40:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7389</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-02-21 09:47:28 -0800</bug_when>
+    <thetext>The call to mapfn is missing two arguments. 
+
+Expect: 
+  kValue, k, items
+
+Actual: 
+  kValue
+
+
+The arrayLike path is correct</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7445</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-18 15:19:12 -0700</bug_when>
+    <thetext>It isn&apos;t clear to me that three arguments are correct for the iterator case.
+
+The three arguments derive from A.p.map where  direct indexing is used rather than an iterator. The second argument is an index into the third argument.  Presumably, the intent is that the callback function could use the 2nd and 3rd argument to probe around in the collection being iterated.
+
+But when an iterator is being used instead of a collection, it isn&apos;t clear that there is anything useful that the callback function could do if it was passed the iterator.  Similarly, we don&apos;t have a an index associated with the iterator, just an iteration count that can&apos;t be used to access into the iterator.
+
+I seems to me that passing only one argument, is still best. That way will somebody does pass in a callback that expects three arguments they will probably get an exception when they try to index into non-existent the 3rd argument.
+
+If you feel strongly otherwise you might want to discuss this on esdiscuss</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7793</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 12:29:55 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+updated as per TC39 meeting consensus https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-04/apr-9.md#signature-of-arrayfrom-map-callback</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8181</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:40:04 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4262</bug_id>
+          
+          <creation_ts>2015-04-05 15:08:00 -0700</creation_ts>
+          <short_desc>mistakes in &quot;See also&quot;</short_desc>
+          <delta_ts>2015-04-16 14:01:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 37: April 3, 2015 Release Candidate 4</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14139</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-04-05 15:08:16 -0700</bug_when>
+    <thetext>The following sections have a mistake in their &quot;See also&quot; paragraph:
+
+12.2.9.2 Static Semantics: IsFunctionDefinition
+12.3.1.2 Static Semantics: IsFunctionDefinition
+12.4.2   Static Semantics: IsFunctionDefinition
+12.5.2   Static Semantics: IsFunctionDefinition
+12.6.1   Static Semantics: IsFunctionDefinition
+12.7.1   Static Semantics: IsFunctionDefinition
+12.8.1   Static Semantics: IsFunctionDefinition
+12.9.1   Static Semantics: IsFunctionDefinition
+12.10.1  Static Semantics: IsFunctionDefinition
+12.11.1  Static Semantics: IsFunctionDefinition
+12.12.1  Static Semantics: IsFunctionDefinition
+12.13.1  Static Semantics: IsFunctionDefinition
+12.14.2  Static Semantics: IsFunctionDefinition
+12.15.1  Static Semantics: IsFunctionDefinition
+14.1.11  Static Semantics: IsFunctionDefinition
+14.4.9   Static Semantics: IsFunctionDefinition
+14.5.8   Static Semantics: IsFunctionDefinition
+    Change &quot;12.2.0.2&quot; to &quot;12.2.0.3&quot;
+
+-----------------
+
+13.1.5    Static Semantics: LexicallyDeclaredNames
+13.11.5   Static Semantics: LexicallyDeclaredNames
+13.12.6   Static Semantics: LexicallyDeclaredNames
+14.1.13   Static Semantics: LexicallyDeclaredNames
+15.1.3    Static Semantics: LexicallyDeclaredNames
+15.2.1.11 Static Semantics: LexicallyDeclaredNames
+    Change &quot;14.2.9&quot; to &quot;14.2.10&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14141</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-05 15:41:00 -0700</bug_when>
+    <thetext>fixed in rev38 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14228</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-16 14:01:22 -0700</bug_when>
+    <thetext>in rev38</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

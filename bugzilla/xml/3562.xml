@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3562</bug_id>
+          
+          <creation_ts>2015-01-16 08:44:00 -0800</creation_ts>
+          <short_desc>12.3.5.1 NewSuper</short_desc>
+          <delta_ts>2015-07-10 08:34:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11492</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-16 08:44:35 -0800</bug_when>
+    <thetext>Why does `new Super()` need the NewTarget of the current function environment?
+
+class Derived extends Base {
+  constructor() {
+    var o = new Super();
+    // equivalent to
+    var o2 = new Base();
+
+    // With the current spec draft it is equivalent to
+    var o3 = Construct(Base, «», Derived)
+  }
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11495</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-16 09:20:08 -0800</bug_when>
+    <thetext>I think it is that way:
+
+class Derived extends Base {
+  constructor() {
+    var o = new super(); // Construct(Base, «», Derived)
+    // not equivalent to
+    var o2 = new Base(); // Construct(Base, «») === Construct(Base, «», Base)
+  }
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11506</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-16 10:20:23 -0800</bug_when>
+    <thetext>exactly, 
+
+In a constructor that is [[Construct]] invoked, &apos;new super()&apos; is semantically the same as &apos;super()&apos; except that it doesn&apos;t throw if &apos;this&apos; is already bound and it doesn&apos;t binding &apos;this&apos; with its return value.
+
+The third argument is the important thing. Also in your example, it isn&apos;t necessary &apos;Derived&apos;, it could be a subclass of &apos;Derived&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11514</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-16 10:56:57 -0800</bug_when>
+    <thetext>OK. Makes sense to me.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

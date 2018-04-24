@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3831</bug_id>
+          
+          <creation_ts>2015-02-11 16:59:00 -0800</creation_ts>
+          <short_desc>chapter 18: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12323</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:59:23 -0800</bug_when>
+    <thetext>----------------------------------------
+In 18.2.1.1 &quot;Runtime Semantics: PerformEval(...)&quot;:
+
+{1}
+18.2.1.1 / preamble:
+The abstract operation PerformEval takes with arguments /x/, /evalRealm/,
+/strictCaller/, and /direct/ performs the following steps:
+
+    Delete &quot;takes&quot;
+
+----------------------------------------
+In 18.2.1.2 &quot;Runtime Semantics: EvalDeclarationInstantiation(...)&quot;:
+
+{2+3+4+6+7}
+18.2.1.2 / step 6.a:
+18.2.1.2 / step 9.a.iv.1:
+18.2.1.2 / step 11.a.i.1.a:
+18.2.1.2 / step 15.c:
+18.2.1.2 / step 16.a:
+If /varEnvRec/ is a GlobalEnvironmentRecord, then
+
+    s|GlobalEnvironmentRecord|global environment record|
+
+{5}
+18.2.1.2 / step 12:
+NOTE: No abnormal terminations occur after this algorithm step unless
+/varEnvRec/ is a GlobalEnvironmentRecord ...
+
+    s|GlobalEnvironmentRecord|global environment record|
+
+----------------------------------------
+In 18.2.5 &quot;parseInt (string , radix)&quot;:
+
+{8}
+18.2.5 / step 3:
+Let /S/ be a newly created substring of /inputString/ consisting of the first
+code unit that is not a /StrWhiteSpaceChar/ and all code unit following that
+code unit.
+
+    At &quot;all code unit&quot;, append &quot;s&quot;
+
+{9}
+18.2.5 / step 13:
+If /S/ contains any code units that is not a radix-/R/ digit, ...
+
+    s|units|unit|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12342</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:18:50 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12416</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:37 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2998</bug_id>
+          
+          <creation_ts>2014-06-25 17:22:00 -0700</creation_ts>
+          <short_desc>EPSILON in base 2 would be clearer</short_desc>
+          <delta_ts>2015-02-18 14:12:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="johnjbarton">johnjbarton</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9101</commentid>
+    <comment_count>0</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2014-06-25 17:22:15 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.epsilon 
+uses base 10 but the max/mins are in base 2. Base 10 is fine as a comment, but to someone verifying an implementation they have to do work and perhaps fail.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9118</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-01 11:33:00 -0700</bug_when>
+    <thetext>Base 10 seems to be commonly used when talking about floating point epsilon.  For example see http://en.wikipedia.org/wiki/Machine_epsilon 
+
+Since this value is a very small fractional floating point value it isn&apos;t clear that base 2 would make things much clearer.  It sounds like what you would really like is a IEEE Binary64 encoding, but even that (in theory) could differ among processors so we general avoid taking about encoding at that level.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10002</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-08-28 16:17:06 -0700</bug_when>
+    <thetext>I agree with comment 0 that 2**-52 (I assume this is what he meant) would be a much clearer way to write this than base-10.  For comparison, Number.MAX_SAFE_INTEGER is defined with both a decimal number and (parenthetically) 2**53 - 1.  The latter is definitely the more useful number, and definition, in my estimation.
+
+I&apos;d actually get rid of all the decimal definitions of such IEEE-754 special numbers and have only base-two definitions, if it were me and it were easy to do so.  Unfortunately I&apos;m not sure that
+
+  2**1023 + 2**1022 + ... + 2**972 + 2**971
+
+is a more elegant definition for Number.MAX_VALUE than a decimal expansion, so I don&apos;t know that there&apos;s an equally readable way to define that one in binary terms.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10167</commentid>
+    <comment_count>3</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-09-08 20:56:18 -0700</bug_when>
+    <thetext>Actually, 2**1024 - 2**971 would be a perfectly elegant way to define Number.MAX_VALUE, on second thought.  This would rely on the spec language that math is on actual mathematical values, not IEEE-754 numbers (as 2**1024 becomes Infinity in that system), but otherwise it&apos;s much nicer than a decimal definition.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12928</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 14:12:14 -0800</bug_when>
+    <thetext>deferring for ES7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

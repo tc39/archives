@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3309</bug_id>
+          
+          <creation_ts>2014-11-11 14:17:00 -0800</creation_ts>
+          <short_desc>9.1.9 has an opportunity to assert</short_desc>
+          <delta_ts>2014-12-07 14:35:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10558</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-11-11 14:17:21 -0800</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-ordinary-object-internal-methods-and-internal-slots-set-p-v-receiver
+
+Eliding substeps, the algorithm reads:
+
+&gt; 2.  Let ownDesc be the result of calling the [[GetOwnProperty]] internal
+&gt;     method of O with argument P.
+&gt; 3.  ReturnIfAbrupt(ownDesc).
+&gt; 4.  If ownDesc is undefined, then
+&gt;     ...(substeps either set ownDesc to a PropertyDescriptor or return)
+&gt; 5.  If IsDataDescriptor(ownDesc) is true, then
+&gt;     ...(substeps always return)
+&gt; 6.  If IsAccessorDescriptor(ownDesc) is true, then
+&gt;     ...
+
+There is an invariant that [[GetOwnProperty]] always returns either a complete PropertyDescriptor or undefined (6.1.7.3). A complete PropertyDescriptor is either a data descriptor or an accessor descriptor (6.2.4.6).
+
+So when we reach step 6, IsAccessorDescriptor(ownDesc) can only be true. It can be asserted instead:
+
+&gt; 6.  Else IsAccessorDescriptor(ownDesc),
+&gt;     ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10796</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-05 12:28:33 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10880</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:04 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

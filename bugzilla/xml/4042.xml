@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4042</bug_id>
+          
+          <creation_ts>2015-02-20 13:36:00 -0800</creation_ts>
+          <short_desc>B.1.4: overdone grammatical parameters</short_desc>
+          <delta_ts>2015-02-24 12:00:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13213</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-20 13:36:46 -0800</bug_when>
+    <thetext>In B.1.4 &quot;Regular Expressions Patterns&quot;,
+under &quot;Syntax&quot;,
+the last production is:
+    ClassEscape[U] ::
+        [+U] DecimalEscape
+        [+U] CharacterEscape[U]
+        [+U] CharacterClassEscape
+        [~U] DecimalEscape
+        b
+        [~U] CharacterClassEscape
+        [~U] CharacterEscape
+
+It seems like there&apos;s no reason to have
+        [+U] DecimalEscape
+and
+        [~U] DecimalEscape
+Replace with just:
+        DecimalEscape
+
+Similarly for:
+        [+U] CharacterClassEscape
+        [~U] CharacterClassEscape
+
+Moreover, the pair
+        [+U] CharacterEscape[U]
+        [~U] CharacterEscape
+is presumably equivalent to just
+        CharacterEscape[?U]
+
+
+Leaving just:
+    ClassEscape[U] ::
+        DecimalEscape
+        b
+        CharacterEscape[?U]
+        CharacterClassEscape
+
+(i.e., same as the production in 21.2.1, except for the &quot;[+U]-&quot; rhs.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 11:31:03 -0800</bug_when>
+    <thetext>the grammar in B.1.4 uses the ordering of productions for disambiguation (see the first paragraph of B.1.4)
+
+The occurrences on [+U] and [~U] prefixes gives the corresponding RHS rules  different disambiguation priorities.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13292</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-24 12:00:15 -0800</bug_when>
+    <thetext>Ah, right.
+Resolved invalid then.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>444</bug_id>
+          
+          <creation_ts>2012-07-04 13:47:00 -0700</creation_ts>
+          <short_desc>Generated html files differ based on platform where they&apos;re generated</short_desc>
+          <delta_ts>2013-05-20 07:21:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1101</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-04 13:47:36 -0700</bug_when>
+    <thetext>The html files that packager.py generates in the website directory seem to differ slightly depending on the platform where they&apos;re generated. In the repository versions (presumably generated on Windows), the line
+    var TEST_LIST_PATH = &quot;json/testcases_ch07.json&quot;;
+is terminated with \r\r\n; in versions generated on Mac with \n.
+
+This means that in &quot;hg status&quot; these files show up as modified even though there are no changes worth committing.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3784</bug_id>
+          
+          <creation_ts>2015-02-05 17:59:00 -0800</creation_ts>
+          <short_desc>8.1.1: incomplete transition to Record</short_desc>
+          <delta_ts>2015-02-12 12:17:45 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12175</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-05 17:59:28 -0800</bug_when>
+    <thetext>Table 16 used to be titled &quot;Additional Components of Function Environment Records&quot;, but then rev31 changed &quot;Components&quot; to &quot;Fields&quot; and added double-square-brackets to the field names. Similarly for Global Environment Records in Table 18.
+
+These changes strongly suggest that Function+Global Environment Records are now Records. (Although this seems obvious from the names, it was clearly *not* the case before rev31.) However, if that&apos;s the case:
+
+(1) The tables&apos; header row should say &quot;Field Name&quot; rather than &quot;Component&quot;. And for consistency with other such tables (8, 21, 25, 36, ...), &quot;Purpose&quot; should be &quot;Meaning&quot;, and there should be a middle column labelled &quot;Value&quot; or &quot;Value Type&quot;.
+
+(2) You should actually *say* that these things are Records in the sense of 6.2.1.
+
+(3) You should maybe say how their bindings are represented in a Record.
+
+(4) You should maybe say that all Environment Records are Records?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12194</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 11:22:08 -0800</bug_when>
+    <thetext>Fixed in rev33 editor&apos;s draft
+
+covered 1,2, 4.
+
+3 is a separable issue.  We intentionally haven&apos;t described our bindings are represented.  It might be clearer to formalize in terms of lists and records. But probably not a high priority of ES6 release.  It may be worthwhile creating a separate  ticket for addressing this in the future.  Note there is a siilar issue relating to ordinary objects.  We don&apos;t really have a formalization of an object&apos;s property store.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12289</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-10 12:47:25 -0800</bug_when>
+    <thetext>Okay, I&apos;ve pulled out (3) as Bug 3812.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12485</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:45 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

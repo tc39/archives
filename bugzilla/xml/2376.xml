@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2376</bug_id>
+          
+          <creation_ts>2013-12-10 20:07:00 -0800</creation_ts>
+          <short_desc>Term &quot;character&quot; used without definition</short_desc>
+          <delta_ts>2013-12-10 23:33:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="James Clark">jjc</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>jjc</cc>
+    
+    <cc>pfpschneider</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6916</commentid>
+    <comment_count>0</comment_count>
+    <who name="James Clark">jjc</who>
+    <bug_when>2013-12-10 20:07:29 -0800</bug_when>
+    <thetext>The spec uses the term &quot;character&quot; in several places without any definition.
+
+Since the spec is written primarily in terms of code point, you might define it along the lines of &quot;a character is a code point corresponding to a Unicode encoded character&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6920</commentid>
+    <comment_count>1</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-10 20:43:18 -0800</bug_when>
+    <thetext>Unicode has &quot;Unicode scalar value&quot;, which is what I think should be used.
+
+Remember that Unicode contains many code points that do not (yet) correspond to a character, but it is generally good form to allow these code points (while not allowing surrogate code points).
+
+As a JSON text is a sequence of Unicode code points, it is not concerned with any Unicode encoding (except in string escapes for characters not in the Basic Multilingual Plane, which have their own problems).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

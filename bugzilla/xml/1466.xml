@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1466</bug_id>
+          
+          <creation_ts>2013-05-02 13:22:00 -0700</creation_ts>
+          <short_desc>should be command line argument to set logging level</short_desc>
+          <delta_ts>2013-05-17 07:42:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dan Schaffer">dschaffe</reporter>
+          <assigned_to name="Dan Schaffer">dschaffe</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3703</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dan Schaffer">dschaffe</who>
+    <bug_when>2013-05-02 13:22:17 -0700</bug_when>
+    <thetext>The tools/packaging/test262.py script should have a command line switch to set the logging level.  Currently you can only change the log level by editing the python script.  To change the log level I think you would do something like: getattr(logging,loglevel)  where loglevel is: DEBUG, INFO, WARNING, ERROR or CRITICAL.  The test262.py script only uses INFO, WARNING, and ERROR.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3712</commentid>
+    <comment_count>1</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-07 12:01:20 -0700</bug_when>
+    <thetext>Dan, patch please!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3717</commentid>
+    <comment_count>2</comment_count>
+      <attachid>35</attachid>
+    <who name="Dan Schaffer">dschaffe</who>
+    <bug_when>2013-05-08 10:55:47 -0700</bug_when>
+    <thetext>Created attachment 35
+patch to set loglevel in test262.py</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4058</commentid>
+    <comment_count>3</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-17 07:42:00 -0700</bug_when>
+    <thetext>pushed in http://hg.ecmascript.org/tests/test262/rev/e62e1b35f0d9</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>35</attachid>
+            <date>2013-05-08 10:55:00 -0700</date>
+            <delta_ts>2013-05-08 10:55:47 -0700</delta_ts>
+            <desc>patch to set loglevel in test262.py</desc>
+            <filename>loglevel.patch</filename>
+            <type>text/plain</type>
+            <size>1143</size>
+            <attacher name="Dan Schaffer">dschaffe</attacher>
+            
+              <data encoding="base64">ZGlmZiAtciA5OWFhYzNiYzFjYWQgdG9vbHMvcGFja2FnaW5nL3Rlc3QyNjIucHkKLS0tIGEvdG9v
+bHMvcGFja2FnaW5nL3Rlc3QyNjIucHkJTW9uIEFwciAyOSAxNzozNTo0OCAyMDEzIC0wNzAwCisr
+KyBiL3Rvb2xzL3BhY2thZ2luZy90ZXN0MjYyLnB5CVdlZCBNYXkgMDggMTM6NTM6NDEgMjAxMyAt
+MDQwMApAQCAtNjYsNiArNjYsOCBAQAogICAjIHRvICJib3RoIgogICByZXN1bHQuYWRkX29wdGlv
+bigiLS11bm1hcmtlZF9kZWZhdWx0IiwgZGVmYXVsdD0ibm9uX3N0cmljdCIsIAogICAgICAgICAg
+ICAgICAgICAgICBoZWxwPSJkZWZhdWx0IG1vZGUgZm9yIHRlc3RzIG9mIHVuc3BlY2lmaWVkIHN0
+cmljdG5lc3MiKQorICByZXN1bHQuYWRkX29wdGlvbigiLS1sb2dsZXZlbCIsIGRlZmF1bHQ9Indh
+cm5pbmciLAorICAgICAgICAgICAgICAgICAgICBoZWxwPSJzZXRzIGxvZyBsZXZlbCB0byBkZWJ1
+ZywgaW5mbywgd2FybmluZywgZXJyb3IsIG9yIGNyaXRpY2FsIikgCiAgIHJldHVybiByZXN1bHQK
+IAogCkBAIC00NDEsNiArNDQzLDE2IEBACiAgICAgICAgICAgICAgICAgICAgICAgICAgb3B0aW9u
+cy5ub25fc3RyaWN0X29ubHksCiAgICAgICAgICAgICAgICAgICAgICAgICAgb3B0aW9ucy51bm1h
+cmtlZF9kZWZhdWx0KQogICB0ZXN0X3N1aXRlLlZhbGlkYXRlKCkKKyAgaWYgb3B0aW9ucy5sb2ds
+ZXZlbCA9PSAnZGVidWcnOgorICAgIGxvZ2dpbmcuYmFzaWNDb25maWcobGV2ZWw9bG9nZ2luZy5E
+RUJVRykKKyAgZWxpZiBvcHRpb25zLmxvZ2xldmVsID09ICdpbmZvJzoKKyAgICBsb2dnaW5nLmJh
+c2ljQ29uZmlnKGxldmVsPWxvZ2dpbmcuSU5GTykKKyAgZWxpZiBvcHRpb25zLmxvZ2xldmVsID09
+ICd3YXJuaW5nJzoKKyAgICBsb2dnaW5nLmJhc2ljQ29uZmlnKGxldmVsPWxvZ2dpbmcuV0FSTklO
+RykKKyAgZWxpZiBvcHRpb25zLmxvZ2xldmVsID09ICdlcnJvcic6CisgICAgbG9nZ2luZy5iYXNp
+Y0NvbmZpZyhsZXZlbD1sb2dnaW5nLkVSUk9SKQorICBlbGlmIG9wdGlvbnMubG9nbGV2ZWwgPT0g
+J2NyaXRpY2FsJzoKKyAgICBsb2dnaW5nLmJhc2ljQ29uZmlnKGxldmVsPWxvZ2dpbmcuQ1JJVElD
+QUwpCiAgIGlmIG9wdGlvbnMuY2F0OgogICAgIHRlc3Rfc3VpdGUuUHJpbnQoYXJncykKICAgZWxz
+ZToK
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

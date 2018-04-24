@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2377</bug_id>
+          
+          <creation_ts>2013-12-10 20:09:00 -0800</creation_ts>
+          <short_desc>incorrect statement about numbers</short_desc>
+          <delta_ts>2013-12-10 20:44:56 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Peter F. Patel-Schneider">pfpschneider</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6917</commentid>
+    <comment_count>0</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-10 20:09:52 -0800</bug_when>
+    <thetext>The discussion of numbers in the introduction of ECMA-404, 1st Edition /
+October 2013 contains:
+
+  JSON instead offers only the representation of numbers that humans use: a
+  sequence of digits.
+
+However, JSON does not only use sequences of digits to represent numbers, and 
+there are many JSON numbers that cannot be represented as a sequence of 
+base-ten digits.
+
+Also, humans use many representations of numbers that are not sequences of
+digits, including two, one and one-half, and three-quarters.
+
+Finally, there are many numbers that humans interchange that are cannot be 
+represented as finite sequences of digits, even if you allow also a decimal 
+point and a negative sign, for example 1/7, pi, and the square root of two.  
+
+This statement should be changed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

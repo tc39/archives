@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3089</bug_id>
+          
+          <creation_ts>2014-07-29 11:28:00 -0700</creation_ts>
+          <short_desc>Need tighter spec language for &quot;implementation defined&quot; in sort, etc</short_desc>
+          <delta_ts>2014-08-25 08:29:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>3137</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9641</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-29 11:28:26 -0700</bug_when>
+    <thetext>&quot;Implementation defined&quot; allows, for example, [1, NaN].sort((a,b) =&gt; a-b), to violate memory safety. As observed (by Sam and Waldemar in 7/2014 TC39 mtg), the spec doesn&apos;t talk about memory safety, so it makes little sense to revise it to require memory safety for this particular case. And memory safety by itself is too weak -- it is just an example of how &quot;implementation defined&quot; makes the spec too weak to reason formally about security.
+
+Instead, in the example case where sort is given a misbehaving comparefn, we can say that it engages in an implementation defined sequence of the following operations:
+
+collection.[[Get]](arrayIndex)
+collection.[[Set]](arrayIndex, someValueFromPreviousGet)
+comparefn(someValueFromPreviousGet, someValueFromPreviousGet)
+
+and nothing else. Note that this spec allows sort not to terminate when the comparefn misbehaves. It also does not require that the sorting of a packed array results in a packed array. But it can&apos;t manufacture non-arrayIndex property names.
+
+Similar exercises should be attempted for other occurrences of &quot;implementation defined&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9642</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-29 11:53:04 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #0)
+&gt; &quot;Implementation defined&quot; allows, for example, [1, NaN].sort((a,b) =&gt; a-b),
+&gt; to violate memory safety. As observed (by Sam and Waldemar in 7/2014 TC39
+&gt; mtg), the spec doesn&apos;t talk about memory safety, so it makes little sense to
+&gt; revise it to require memory safety for this particular case. And memory
+&gt; safety by itself is too weak -- it is just an example of how &quot;implementation
+&gt; defined&quot; makes the spec too weak to reason formally about security.
+&gt; 
+&gt; Instead, in the example case where sort is given a misbehaving comparefn, we
+&gt; can say that it engages in an implementation defined sequence of the
+&gt; following operations:
+&gt; 
+&gt; collection.[[Get]](arrayIndex)
+&gt; collection.[[Set]](arrayIndex, someValueFromPreviousGet)
+&gt; comparefn(someValueFromPreviousGet, someValueFromPreviousGet)
+
+Other operations that must be allowed in the sequence, again in implementation defined order
+
+collection.[[Get]](&quot;length&quot;)
+
+throw something, i.e., terminate abruptly, which of course must be last
+
+
+
+&gt; 
+&gt; and nothing else. Note that this spec allows sort not to terminate when the
+&gt; comparefn misbehaves. It also does not require that the sorting of a packed
+&gt; array results in a packed array. But it can&apos;t manufacture non-arrayIndex
+&gt; property names.
+&gt; 
+&gt; Similar exercises should be attempted for other occurrences of
+&gt; &quot;implementation defined&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9795</commentid>
+    <comment_count>2</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 08:53:55 -0700</bug_when>
+    <thetext>Another potentially observable operation that implementations do, and which is not specced, is the abstract operation ToNumber, systematically applied to the result of `comparefn()`. See Bug #3137.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9798</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 10:18:26 -0700</bug_when>
+    <thetext>The algorithm may be specified as follows:
+
+(Steps 1-4 are already in the spec):
+
+1. Let obj be the result of calling ToObject passing the this value as the argument.
+
+2. Let lenValue be Get(obj, &quot;length&quot;).
+
+3. Let len be ToLength(lenValue).
+
+4. ReturnIfAbrupt(len).
+
+5. An implementation-defined succession of the following abstract operations:
+
+  * HasProperty(obj, kString), 
+    where kString is the string representation of an integer between 0 and len-1;
+
+  * Get(obj, kString), 
+    where kString is the string representation of an integer between 0 and len-1;
+
+  * SortCompare(V, W, comparefn), /* stylistic nit: comparefn is explicit arg */
+    where V and W are values returned by Get(obj, kString) operations;
+
+  * Put(obj, kString, V, true), 
+    where kString is the string representation of an integer between 0 and len-1,
+    and where V is a value returned by a Get(obj, kString) operation;
+
+  * DeletePropertyOrThrow(obj, kString), 
+    where kString is the string representation of an integer between 0 and len-1.
+    Moreover, that operation is allowed only if at least one call to 
+    HasProperty(obj, kString) had returned false.
+
+  Moreover, if any of these operations returns an abrupt completion, 
+  the algorithms ends immediately using that abrupt completion as its returned value.
+
+6. Return obj.
+
+Together with the amendment of SortCompare proposed in Bug #3137, I believe it is what the implementations do today.
+
+The rest of the section should just give the further requirement that, under reasonable conditions, `obj` must be sorted at the end of the algorithm. Here &quot;reasonable conditions&quot; might be hard to correctly specify, because some of the operations given in Step 5 may have nasty side effects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9799</commentid>
+    <comment_count>4</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 11:40:52 -0700</bug_when>
+    <thetext>Correction: As currently specified, SortCompare takes as arguments the indices of the array to be sorted, and not its values; moreover the HasProperty(...) and Get(...) operations are included in the SortCompare abstract operations. 
+
+However, some experiment show that what the spec says, is not exactly what the implementations do. More precisely, the Get and HasProperty operations should be taken away of the SortCompare abstract operation, in order to align with implementations:
+
+* IE and Firefox first do a series the HasProperty/Get operations, then a series of calls to comparefn, each of them followed by a ToNumber operation, then a series of Put/DeletePropertyOrThrow operations. Curiously, IE adds a further series of Get operations at the end of the process.
+
+* Safari, Chrome and Opera have their HasProperty/Get and Put/DeletePropertyOrThrow operations intermingled with their calls to comparefn (followed by ToNumber operation); however, they don&apos;t do all the Get operations required by SortCompare(...), but omit some of them when the value is already known from a previous Get operation.
+
+Here is what I used to induce the description above. Further experiment using proxies is needed in order to be sure of when the implementations do HasProperty and (in case of sparse arrays) DeletePropertyOrThrow.
+
+    var a = Array(10)
+    for (var i = 0; i &lt; a.length; i++) {
+        a[i] = Math.floor(Math.random()*900 + 100)
+    }
+
+    var b = Object.defineProperty({}, &apos;length&apos;, {
+        get: function() { console.log(&apos;Get(b, &quot;length&quot;)&apos;); return a.length }
+    })
+    for (var i = 0; i &lt; a.length; i++) (function(i) {
+        Object.defineProperty(b, i, {
+            get: function() { console.log(&apos;Get(b, &apos;+i+&apos;)&apos;); return a[i] }
+          , set: function(v) { console.log(&apos;Put(b, &apos;+i+&apos;, &apos;+v+&apos;)&apos;); a[i] = v }
+        })
+    })(i)
+
+    function comparefn(a, b) {
+        console.log(&apos;comparefn(&apos;+a+&apos;, &apos;+b+&apos;)&apos;)
+        return { valueOf: function() { console.log(&apos;valueOf()&apos;); return a - b } }
+    }
+
+    ;[].sort.call(b, comparefn)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9838</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-21 13:28:58 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9967</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:31 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3857</bug_id>
+          
+          <creation_ts>2015-02-12 22:53:00 -0800</creation_ts>
+          <short_desc>Add String.prototype[@@toStringTag] and other pre-ES6 constructors&apos; toStringTag property</short_desc>
+          <delta_ts>2015-02-15 14:56:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gary Guo">nbdd0121</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>nbdd0121</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12509</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gary Guo">nbdd0121</who>
+    <bug_when>2015-02-12 22:53:06 -0800</bug_when>
+    <thetext>By letting
+Array.prototype[@@toStringTag] = &apos;Array&apos;,
+String.prototype[@@toStringTag] = &apos;String&apos;,
+Function.prototype[@@toStringTag] = &apos;Function&apos;,
+Error.prototype[@@toStringTag] = &apos;Error&apos;,
+Boolean.prototype[@@toStringTag] = &apos;Boolean&apos;,
+Number.prototype[@@toStringTag] = &apos;Number&apos;,
+Date.prototype[@@toStringTag] = &apos;Date&apos;,
+RegExp.prototype[@@toStringTag] = &apos;RegExp,
+we are able to simplify Object.prototype.toString&apos;s algorithm and make constructor.prototype[@@toStringTag] more consistent.
+
+What&apos;s more, it can also preserve compatibility for pre-ES6 codes, since most prototypes are now ordinary objects.
+In ES5:
+Object.prototype.toString.call(String.prototype) == &apos;[object String]&apos;
+In current ES6 spec:
+Object.prototype.toString.call(String.prototype) == &apos;[object Object]&apos;
+After my proposal:
+Object.prototype.toString.call(String.prototype) == &apos;[object String]&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12742</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 14:56:01 -0800</bug_when>
+    <thetext>the final design for Object.prototype.toString was settled at the Jany 2015 TC39 meeting https://github.com/tc39/tc39-notes/blob/master/es6/2015-01/jan-28.md#45-tostringtag</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

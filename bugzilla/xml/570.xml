@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>570</bug_id>
+          
+          <creation_ts>2012-07-15 22:25:00 -0700</creation_ts>
+          <short_desc>15.9.5.44: &quot;the this value&quot;</short_desc>
+          <delta_ts>2012-10-26 15:34:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1357</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-15 22:25:07 -0700</bug_when>
+    <thetext>In 15.9.5.44 &quot;Date.prototype.toJSON ( key )&quot;,
+step 1 says:
+    &quot;Let O be the result of calling ToObject,
+    giving it the this value as its argument.&quot;
+
+But for functions in 15.9.5.*, the phrase &quot;this Date object&quot; is normally used instead of &quot;the this value&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1360</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-15 23:55:41 -0700</bug_when>
+    <thetext>Similarly, in B.2.3.2 &quot;Date.prototype.setYear (year)&quot;,
+steps 3, 7, and 8 refer to &quot;the this value&quot;,
+but would more normally refer to &quot;this Date object&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1460</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-13 16:55:10 -0700</bug_when>
+    <thetext>but toJSON is explicitly defined to be generic, so the this value need not be a Date object or even an object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1854</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-05 13:22:37 -0700</bug_when>
+    <thetext>Okay, that makes sense for toJSON(), but setYear() doesn&apos;t appear to be generic.
+
+Moreover, the algorithm for setYear refers to &quot;this time value&quot;, which is defined in terms of &quot;this Date object&quot;.
+
+So I&apos;m thinking that comment #1 is still valid.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2066</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 16:29:54 -0700</bug_when>
+    <thetext>fixed in setYear for rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2162</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:25 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

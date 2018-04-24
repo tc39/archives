@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4425</bug_id>
+          
+          <creation_ts>2015-07-16 12:32:00 -0700</creation_ts>
+          <short_desc>21.1.3.18 Typo: &quot;searchStr&quot; vs &quot;searchString&quot;</short_desc>
+          <delta_ts>2015-10-04 17:17:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>editorial issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14546</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-07-16 12:32:57 -0700</bug_when>
+    <thetext>Step 8 of String.prototype.startsWith incorrectly references the user-defined &quot;searchString&quot; variable (which can never be an abrupt completion) instead of the internally-defined &quot;searchStr&quot; variable (which may be an abrupt completion in cases where the ToString operation fails):
+
+&gt; 7. Let searchStr be ToString(searchString).
+&gt; 8. ReturnIfAbrupt(searchString).
+
+Although a literal interpretation could result in incorrect behavior, that would depend on very liberal implementation of the steps that follow, specifically:
+
+&gt; 13. Let searchLength be the number of elements in searchStr.
+&gt; [...]
+&gt; 15. If the sequence of elements of S starting at start of length searchLength is the same as the full element sequence of searchStr, return true.
+
+I&apos;m filing this as a editorial issue because I think the intent is clear.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14784</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-04 17:17:41 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4428</bug_id>
+          
+          <creation_ts>2015-07-17 19:34:00 -0700</creation_ts>
+          <short_desc>Annex B.3.3, needs to apply to Scripts as well as FunctionDeclarations</short_desc>
+          <delta_ts>2015-07-20 09:16:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>bugs.ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14555</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-07-17 19:34:05 -0700</bug_when>
+    <thetext>In addition to modify the FunctionDeclarationInstantiation abstract operation, Annex B.3.3 also needs to modify the GlobalDeclarationInstantiation operations.
+
+The steps similar to the replace steps given for FDI step 29 need to be inserted immediately after step 12 of GlobalDeclarationInstantiation (15.1.8). The only differences in the replacement steps are:
+
+1.a:  apply the changes described in Bug 4427
+1.a.ii.2 and 1.a.ii.2: Replace /instantiatedVarNames/ with /declaredVarNames/
+1.a.ii.2.a and 1.a.ii.2.c: Replace /varEnvRec/ with /envRec/
+
+
+Also see https://esdiscuss.org/topic/block-level-function-declarations-web-legacy-compatibility-bug</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14556</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-07-18 01:12:57 -0700</bug_when>
+    <thetext>Adding block-scoped function declarations to scripts requires more (static and dynamic) checks, that&apos;s why I thought B.3.3 was restricted to functions.
+
+Additional checks:
+- Check HasLexicalDeclaration() is false
+- Check CanDeclareGlobalFunction() is true
+- Install the global binding with CreateGlobalFunctionBinding()
+
+I&apos;ve put up a gist to show the additional changes:
+https://gist.github.com/anba/07c83c4137990bdaa932
+
+(It&apos;s not quite clear to me if the binding should be installed using CanDeclareGlobalFunction+CreateGlobalFunctionBinding or alternatively using CanDeclareGlobalVar+CreateGlobalVarBinding.)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

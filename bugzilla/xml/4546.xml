@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4546</bug_id>
+          
+          <creation_ts>2015-11-21 11:35:00 -0800</creation_ts>
+          <short_desc>Order of properties falsely described as implementation-specific</short_desc>
+          <delta_ts>2015-11-21 11:46:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14897</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-11-21 11:35:04 -0800</bug_when>
+    <thetext>http://www.ecma-international.org/ecma-262/6.0/#sec-object.keys
+
+“If an implementation defines a specific order of enumeration for the for-in statement, the same order must be used for the elements of the array returned in step 4.”
+
+AFAICT, this is wrong on two accounts:
+
+1. It’s not a question of “if an implementation defines a specific order” – it is defined for all implementations, by the spec.
+2. The order doesn’t depend on for-in, it depends on [[OwnPropertyKeys]].
+
+A note for EnumerableOwnNames [1] also misstates a dependency on for-in (similarly to #2 above):
+
+“The order of elements in the returned list is the same as the enumeration order that is used by a for-in statement.”
+
+[1] http://www.ecma-international.org/ecma-262/6.0/#sec-enumerableownnames
+
+
+Am I making sense?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14900</commentid>
+    <comment_count>1</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-11-21 11:46:26 -0800</bug_when>
+    <thetext>*** Bug 4547 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

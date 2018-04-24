@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3417</bug_id>
+          
+          <creation_ts>2014-12-08 04:43:00 -0800</creation_ts>
+          <short_desc>18.2.6.1.2: refer to the Encoding Standard’s definition of UTF-8</short_desc>
+          <delta_ts>2015-02-13 18:04:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>annevk</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10936</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-12-08 04:43:31 -0800</bug_when>
+    <thetext>&gt; A formal description and implementation of UTF-8 is given in RFC 3629.
+&gt; In UTF-8, characters are encoded using sequences of 1 to 6 octets. 
+
+Why not refer to The Encoding Standard (https://encoding.spec.whatwg.org/#utf-8) rather than RFC 3629?
+
+Then you can replace “sequences of 1 to 6 octets” with “sequences of 1 to 4 octets” which matches table 40.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10937</commentid>
+    <comment_count>1</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2014-12-08 04:49:04 -0800</bug_when>
+    <thetext>Note that the RFC has the same byte restriction, but that in particular for error handling the Encoding Standard is a better reference, since it says exactly how many U+FFFD can be produced for decoding purposes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12617</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 18:04:38 -0800</bug_when>
+    <thetext>This is all legacy ES specification language that isn&apos;t going to change for ES6.  I&apos;ll move this bug to ES7 in case somebody want to explore it in that context.
+
+A issue is that we want to preserve the legacy behavior described by these ES algorithms (even if it is different from the Encoding standard&apos;s definition).  Before changing normative references or replacing the algorithms in this section with references to other algorithms, somebody would need to verify that there were no observable differences in the results produced.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2864</bug_id>
+          
+          <creation_ts>2014-05-13 20:13:00 -0700</creation_ts>
+          <short_desc>UnicodeEscapeSequence and Contextual Keywords</short_desc>
+          <delta_ts>2014-06-16 16:10:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kevin Smith">zenparsing</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8407</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-05-13 20:13:11 -0700</bug_when>
+    <thetext>In 11.6.2, we have:
+
+&quot;Code point in a ReservedWord can not be expressed by a \ UnicodeEscapeSequence&quot;
+
+but there appears to be no such restriction for contextual keywords.  Is this intentional?
+
+Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8413</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 10:24:50 -0700</bug_when>
+    <thetext>Contextual keys are expressed in the grammar as literal character sequences that do not include unicode escape sequences. The same is true of ReservedWord.  In all places where unicode escapes are allowed (summarized in the NOTE in clause 10), they are explicitly enumerated by the grammar.
+
+It&apos;s probably best to turn the text you quote in 11.6.2 into a NOTE so that it doesn&apos;t carry any implication that it might not apply to contextual keywords,</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8488</commentid>
+    <comment_count>2</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2014-05-15 04:35:33 -0700</bug_when>
+    <thetext>Got it.  I agree that changing that text into a note would probably be helpful to the reader.
+
+Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8512</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-15 15:56:32 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9012</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:10:22 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

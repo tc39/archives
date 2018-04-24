@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2083</bug_id>
+          
+          <creation_ts>2013-10-29 19:24:00 -0700</creation_ts>
+          <short_desc>Make Array.from step 8 behave exactly like a for..of loop</short_desc>
+          <delta_ts>2013-11-08 13:09:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6189</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-10-29 19:24:11 -0700</bug_when>
+    <thetext>It should be possible for a polyfill to get Array.from right using a for..of loop to implement step 8.
+
+Currently there&apos;s just one very minor issue with that. Step 8 says:
+
+&gt; 8. If usingIterator is true, then
+&gt;     a. Let iterator be the result of performing GetIterator(items).
+&gt;     b. ReturnIfAbrupt(iterator).
+&gt;     c. If IsConstructor(C) is true, then
+&gt;         i. Let A be the result of calling the [[Construct]] internal
+&gt;            method of C with an empty argument list.
+&gt;     d. Else,
+&gt;         i. Let A be the result of the abstract operation ArrayCreate
+&gt;            with argument 0.
+&gt;     e. ReturnIfAbrupt(A).
+&gt;     f. Let k be 0.
+&gt;     g. Repeat
+&gt;         (...)
+
+This can&apos;t be written using for..of because:
+
+    var A = isConstructor(C) ? new C() : [];
+    var k = 0;
+    for (var nextValue of items) {
+        ...
+    }
+
+It is observable that `items[Symbol.iterator]()` is called after `new C()`.
+
+Can we swap the order so that A is created first?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6190</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-10-29 19:25:01 -0700</bug_when>
+    <thetext>Full disclosure: I actually want to self-host this in SpiderMonkey and I&apos;d like to use a for..of loop myself.  :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6191</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 19:37:47 -0700</bug_when>
+    <thetext>no problem, and a good reason to make the change. Let me know if you spot any more like that.
+
+foxed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6568</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:18 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2370</bug_id>
+          
+          <creation_ts>2013-12-10 05:28:00 -0800</creation_ts>
+          <short_desc>Notes for `Function#call` and `Function#apply` are confusing</short_desc>
+          <delta_ts>2014-04-06 11:30:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6908</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-12-10 05:28:44 -0800</bug_when>
+    <thetext>https://bugzilla.mozilla.org/show_bug.cgi?id=948407
+https://bugs.webkit.org/show_bug.cgi?id=125501
+https://code.google.com/p/v8/issues/detail?id=3052
+
+From http://people.mozilla.org/~jorendorff/es6-draft.html#sec-function.prototype.call
+&amp; http://people.mozilla.org/~jorendorff/es6-draft.html#sec-function.prototype.apply:
+
+&gt; The `thisArg` value is passed without modification as the `this` value. This is
+&gt; a change from Edition 3, where a `undefined` or `null` `thisArg` is replaced with
+&gt; the global object and `ToObject` is applied to all other values and that result is
+&gt; passed as the `this` value.
+
+What is not mentioned in this note is that this only applies to strict mode code. Paragraph
+11 of ES 5.1’s Annex C (http://ecma-international.org/ecma-262/5.1/#sec-C) clarifies this:
+
+&gt; If `this` is evaluated within strict mode code, then the `this` value is not coerced
+&gt; to an object. A `this` value of `null` or `undefined` is not converted to the global
+&gt; object and primitive values are not converted to wrapper objects. The `this` value
+&gt; passed via a function call (including calls made using `Function.prototype.apply` and
+&gt; `Function.prototype.call`) do not coerce the passed `this` value to an object (10.4.3,
+&gt; 11.1.1, 15.3.4.3, 15.3.4.4).
+
+Suggested fix: just prepend “in strict mode code, […]” to each of these two notes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6909</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-12-10 05:56:18 -0800</bug_when>
+    <thetext>&gt; Suggested fix: just prepend “in strict mode code, […]” to each of these two notes.
+
+The notes may be confusing, but are correct nonetheless. Whereas just adding &quot;In strict mode code&quot; makes them incorrect, since built-in functions like Function.prototype.{apply, call} have no notion of strict mode at all.
+There are two choices here: 
+(1) Either remove the notes because they were only useful during the transition from ES3 -&gt; ES5
+(2) Or if strict mode needs to be mentioned, then use a more thorough description. Like:
+
+&gt; Even though `thisArg` is passed without modification, non-strict mode functions still replace the `thisArg` with the global object and apply `ToObject`, cf. 9.2.1 [[Call]] (thisArgument, argumentsList).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6910</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-12-10 07:33:36 -0800</bug_when>
+    <thetext>&gt; There are two choices here: 
+&gt; (1) Either remove the notes because they were only useful during the transition
+&gt; from ES3 -&gt; ES5
+&gt; (2) Or if strict mode needs to be mentioned, then use a more thorough
+&gt; description. Like:
+&gt; 
+&gt; &gt; Even though `thisArg` is passed without modification, non-strict mode functions still replace the `thisArg` with the global object and apply `ToObject`, cf. 9.2.1 [[Call]] (thisArgument, argumentsList).
+
+Option 2 definitely gets my vote — would make things much clearer, at no significant cost.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7332</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-16 18:01:15 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+using a variation of choice 2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7567</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:35 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2011</bug_id>
+          
+          <creation_ts>2013-10-01 00:27:00 -0700</creation_ts>
+          <short_desc>14.4: Optional AssignmentExpression in YieldExpression leads to Shift/Reduce conflict?</short_desc>
+          <delta_ts>2014-02-17 18:14:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5746</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-01 00:27:17 -0700</bug_when>
+    <thetext>AssignmentExpression in YieldExpression is now optional, see bug 1803. Modelling this change in the following toy grammar, a shift/reduce conflict can be observed.
+
+SpiderMonkey (and Rhino) performs a lookahead after &quot;yield&quot; and tests whether the next token is not in the follow set (*) of AssignmentExpression. If the next token is not in the follow set and on the same line, it proceeds with the AssignmentExpression production rule. Otherwise it elides the AssignmentExpression.
+
+(*) or rather a subset of the follow set, testing for the first set of AssignmentExpression makes more sense to me, for example to successfully parse the legacy array comprehension syntax `[yield for (a of b)]`.
+
+
+---
+%token CLASS &quot;class&quot;
+%token EXTENDS &quot;extends&quot;
+%token YIELD &quot;yield&quot;
+
+%%
+
+class: CLASS classTail ;
+
+classTail: classHeritage &apos;{&apos; &apos;}&apos;
+         | &apos;{&apos; &apos;}&apos; ;
+
+classHeritage: EXTENDS assignExpr ;
+
+assignExpr: yieldExpr
+          | objectLiteral ;
+
+yieldExpr: YIELD
+         | YIELD assignExpr ;
+
+objectLiteral: &apos;{&apos; &apos;}&apos; ;
+
+%%
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6647</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2013-11-10 17:19:51 -0800</bug_when>
+    <thetext>[From es-discuss verbatim.]
+
+Python has requirements for over-parenthesization which we were trying to avoid. Nevertheless, did you consider
+
+5. Except on right of assignment and in actual argument position, yield expressions must be parenthesized
+
+This is easy to do grammatically if we change the over-general
+
+ClassHeritage :
+|    extends| AssignmentExpression
+
+I say over-general because: do we really want this to be valid ES6?
+
+class D extends B = C {
+}
+
+Using a higher-precedence expression non-terminal seems better. How about the next lower-precedence nonterminal that does not end in AssignmentExpression, namely LogicalORExpression?
+
+Then any yield without parentheses would be a syntax error.
+
+/be</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7363</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 18:14:53 -0800</bug_when>
+    <thetext>fixed in rev22
+
+
+
+the extends clause of a class is now restricted to being a LeftHandSideExpression</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

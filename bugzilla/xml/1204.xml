@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1204</bug_id>
+          
+          <creation_ts>2013-01-22 06:07:00 -0800</creation_ts>
+          <short_desc>11.2.4: Early error restriction for the &apos;super&apos; keyword w.r.t. eval code contained in function code</short_desc>
+          <delta_ts>2014-12-23 20:23:25 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3133</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-01-22 06:07:53 -0800</bug_when>
+    <thetext>The early errors restriction for [11.2.4 The super Keyword] currently specifies:
+---
+It is a Syntax Error if the source code parsed with this production is eval code and the source code is not being processed by a direct call to eval that is contained in function code.
+---
+
+This reads as if the following code should be allowed:
+---
+js&gt; class Base { f(){return &quot;base&quot;} }
+(void 0)
+js&gt; class Derived extends Base { f(){return &quot;@&quot; + eval(&quot;super.f()&quot;); super.whatever_create_homeobject_entry} }
+(void 0)
+js&gt; new Derived().f()
+&quot;@base&quot;
+---
+
+However, `eval` parses the supplied source code with goal symbol Script [15.1.2.1 - step 2] and early errors for Script explicitly disallow super [14.1]:
+---
+It is a Syntax Error if OuterStatementList Contains super.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3292</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-06 13:27:42 -0800</bug_when>
+    <thetext>The definition of eval probably needs to be updated to account for the various context where a direct eval can occur. 
+
+May also need to adjust the meaning/usage of &quot;function code&quot;
+
+allowing super to appear in eval code also complicates super binding of methods.  Essentially every method that contains a direct eval needs to be super bound just in case it evals a super.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10990</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-10 17:42:03 -0800</bug_when>
+    <thetext>Fixed in rev30 editor&apos;s draft
+
+Eliminated redundant static semantic rules about where super can occur. Only kept the rules in 15.1.1 (Script) and !5.2.1.1 (Module). In 15.1.1 may it explicit that the early error does not apply to eval code the is being processed by a direct eval from function code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11154</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:25 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3270</bug_id>
+          
+          <creation_ts>2014-10-08 12:17:00 -0700</creation_ts>
+          <short_desc>24.1.1.5 CloneArrayBuffer: Steps 5-10 should be reordered for clarity</short_desc>
+          <delta_ts>2014-10-14 15:18:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10295</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-08 12:17:38 -0700</bug_when>
+    <thetext>24.1.1.5 CloneArrayBuffer( srcBuffer, srcByteOffset )
+
+
+Steps 5, 8-9 and steps 6-7, 10 should be moved closer together, so it&apos;s easier to understand which step needs to be executed first (step 5 needs to appear before step 6 in case step 6 detaches the array buffer, otherwise the assertion in step 8 does not hold; Alternatively step 5 needs to appear after step 6 and step 13).
+
+Suggested reorder:
+---
+5.  Let bufferConstructor be Get(srcBuffer, &quot;constructor&quot;).
+6.  ReturnIfAbrupt(bufferConstructor).
+7.  If bufferConstructor is undefined, then let bufferConstructor be %ArrayBuffer%.
+8.  Let targetBuffer be AllocateArrayBuffer(bufferConstructor).
+9.  NOTE: Side-effects of the above steps may have detached srcBuffer.
+10.  If IsDetachedBuffer(srcBuffer) is true, then throw a TypeError exception.
+11.  Let srcBlock be the value of srcBuffer’s [[ArrayBufferData]] internal slot.
+12.  Let srcLength be the value of srcBuffer’s [[ArrayBufferByteLength]] internal slot.
+13.  Assert: srcByteOffset ≤ srcLength.
+14.  Let cloneLength be srcLength – srcByteOffset.
+15.  Let status be SetArrayBufferData(targetBuffer, cloneLength).
+16.  ReturnIfAbrupt(status).
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10303</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 17:16:47 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10488</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:18:03 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

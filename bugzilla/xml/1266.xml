@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1266</bug_id>
+          
+          <creation_ts>2013-03-08 11:08:00 -0800</creation_ts>
+          <short_desc>8.5.13 Proxy [[OwnPropertyKey]] requirements</short_desc>
+          <delta_ts>2014-07-18 23:27:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3309</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 11:08:00 -0800</bug_when>
+    <thetext>tomvc said: 
+
+8.5.13 Proxy [[OwnPropertyKeys]]
+
+- For [[OwnPropertyKeys]], I maintain that it&apos;s essential that this iterator at least enumerates all non-configurable own properties of the target.
+
+Otherwise, a proxy might &quot;hide&quot; properties from reflective code that tries to inspect all of its properties.
+
+Ideally, the iterator should also not enumerate any non-existent properties on a non-extensible target. Although if this invariant is violated, the invariants defined on getOwnPropertyDescriptor etc. should prevent the proxy from revealing any useful value associated with these &quot;made-up&quot; properties.
+
+- As &quot;ownPropertyKeys&quot; returns an iterator rather than an array of strings, it&apos;s no longer symmetric to getOwnPropertyNames anyway, so I agree with the name change. However, to ensure consistency of user-facing names, either the trap should be named &quot;ownKeys&quot; (for consistency with Reflect.ownKeys), or Reflect.ownKeys should be renamed Reflect.ownPropertyKeys.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9236</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-17 14:02:15 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9309</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:27:33 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

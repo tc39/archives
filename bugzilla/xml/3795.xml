@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3795</bug_id>
+          
+          <creation_ts>2015-02-08 18:53:00 -0800</creation_ts>
+          <short_desc>5.1 Missing section numbers</short_desc>
+          <delta_ts>2016-02-15 16:32:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12230</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-08 18:53:30 -0800</bug_when>
+    <thetext>The table of Well-Known Intrinsic Objects in section 5.1 is missing section numbers as provided in ES6, 6.1.7.4. There&apos;s an &quot;(X.X)&quot; for %Collator% though.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12252</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-09 09:42:07 -0800</bug_when>
+    <thetext>Fixed in rev7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12360</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 22:39:59 -0800</bug_when>
+    <thetext>The section number of %Collator% should be 10.1 to match those of %NumberFormat% and %DateTimeFormat%.
+
+The section number of %CollatorPrototype% should be 10.2.1. I hope we&apos;ll never have a section 10.210.2.1.
+
+The section number of %DateTimeFormatPrototype% should be 12.2.1.
+
+The section number of %StringProto_includes% should be ES6, 21.1.3.7.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12367</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-12 07:31:28 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #2)
+&gt; The section number of %Collator% should be 10.1 to match those of
+&gt; %NumberFormat% and %DateTimeFormat%.
+
+Fixed. 
+
+&gt; 
+&gt; The section number of %CollatorPrototype% should be 10.2.1. I hope we&apos;ll
+&gt; never have a section 10.210.2.1.
+
+My inexperience with Word shines through here...
+
+Fixed!
+
+&gt; 
+&gt; The section number of %DateTimeFormatPrototype% should be 12.2.1.
+
+Fixed
+
+&gt; 
+&gt; The section number of %StringProto_includes% should be ES6, 21.1.3.7.
+
+Fixed
+
+
+
+Thanks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12884</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 20:48:55 -0800</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #3)
+
+&gt; &gt; The section number of %DateTimeFormatPrototype% should be 12.2.1.
+&gt; 
+&gt; Fixed
+
+You &quot;fixed&quot; the wrong one, %DateTimeFormat%, and didn&apos;t fix %DateTimeFormatPrototype%.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12904</commentid>
+    <comment_count>5</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 08:27:46 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #4)
+&gt; (In reply to Rick Waldron from comment #3)
+&gt; 
+&gt; &gt; &gt; The section number of %DateTimeFormatPrototype% should be 12.2.1.
+&gt; &gt; 
+&gt; &gt; Fixed
+&gt; 
+&gt; You &quot;fixed&quot; the wrong one, 
+
+
+They all needed to be fixed.
+
+&gt; %DateTimeFormat%, and didn&apos;t fix
+&gt; %DateTimeFormatPrototype%.
+
+
+These just need to be updated, because the section numbers changed since last revision. I guess I assumed that Word auto-updated this stuff. I&apos;ll be more careful next time.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12906</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-02-18 08:34:43 -0800</bug_when>
+    <thetext>Current state after latest review and round of fixes: http://i.gyazo.com/ed345dfc9d2d0ebe56f42c940348e8fb.png</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14930</commentid>
+    <comment_count>7</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:32:53 -0800</bug_when>
+    <thetext>fixed with ecmarkup emu-xref</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

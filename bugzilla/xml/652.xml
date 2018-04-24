@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>652</bug_id>
+          
+          <creation_ts>2012-09-23 04:09:00 -0700</creation_ts>
+          <short_desc>Test 11.4.1-4.a-8-s might be invalid</short_desc>
+          <delta_ts>2012-09-23 04:09:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1599</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2012-09-23 04:09:55 -0700</bug_when>
+    <thetext>I see the test case fail on Firefox, but the following seems to work:
+
+(function(global){
+    &apos;use strict&apos;;
+
+    var desc = Object.getOwnPropertyDescriptor(global, &apos;NaN&apos;);
+    console.log(&apos;NaN desc&apos;, desc); // reports non-configurable
+    try{
+        delete global.NaN;
+    }
+    catch(e){ // properly throws an exception
+        console.log(&apos;caught&apos;, e)
+    }
+
+})(this);
+
+So it&apos;s unclear whether the problem comes from the test case or Firefox.
+
+Regardless, the test case does &quot;delete fnGlobalObject().NaN;&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

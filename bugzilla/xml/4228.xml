@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4228</bug_id>
+          
+          <creation_ts>2015-03-27 07:31:00 -0700</creation_ts>
+          <short_desc>22.2.1.5 %TypedArray%: Change &quot;all other argument combinations&quot; to &quot;no arguments&quot; or remove ?</short_desc>
+          <delta_ts>2015-04-03 12:35:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13945</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-27 07:31:24 -0700</bug_when>
+    <thetext>22.2.1.5 %TypedArray% ( all other argument combinations )
+
+The only other argument combination is &quot;no arguments&quot;, all other combinations are handled in 22.2.1.1-4.
+
+
+22.2.1.5 should either be changed to:
+&gt; 22.2.1.5 %TypedArray% ( no arguments )
+
+or 22.2.1.1 should be changed to handle the zero arguments case.
+
+
+Common browser behaviour for zero arguments (tested IE11, SpiderMonkey (hg tip), JavaScriptCore (trunk), V8 (master), Nashorn (hg tip)):
+Zero arguments is handled as `0`, e.g. `new Int8Array().length === 0` in all engines tested. Also: `new Int8Array(undefined)` throws in 3/5 engines tested.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14002</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 14:47:10 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s drafft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14094</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:38 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

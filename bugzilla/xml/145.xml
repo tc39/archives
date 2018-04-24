@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>145</bug_id>
+          
+          <creation_ts>2011-07-20 15:12:00 -0700</creation_ts>
+          <short_desc>eliminate uint32 length restriction the the length of array objects.</short_desc>
+          <delta_ts>2015-02-12 16:14:48 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>rossberg</cc>
+    
+    <cc>toshok</cc>
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="3"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>337</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 15:12:36 -0700</bug_when>
+    <thetext>see discussion in thread around https://mail.mozilla.org/pipermail/es-discuss/2011-July/015975.html 
+
+...Eliminating the range error and the Uint32 restriction on the association between array indexed properties and the &quot;length&quot; property.  Instead replace it with a ToInteger constraint.  This is essentially how string operations are defined. Implementations could still optimize for lengths &lt;2^32 and or any other size they deemed appropriate.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>397</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-28 08:31:57 -0700</bug_when>
+    <thetext>Also, the max length value should probably be limited to the largest precise IEEE double precision integer.  Exceeding that should be a RangeError.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3240</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2013-02-26 08:14:41 -0800</bug_when>
+    <thetext>The ES5 spec already violates its own invariant on array lengths. Consider this example:
+
+  var a = []
+  a[0xffffffff] = 1
+
+According to ES5.1 15.4.5.1 ([[DefineOwnProperty]] for arrays), step 4.e.i does not reject overflow of index+1, so step 4.e.ii should actually set &apos;length&apos; to the value 0x100000000, which is not a uint32. Both V8 and FF actually wrap around and set a.length to 0 in this case (which doesn&apos;t make a hell lot of sense either). Instead, the assignment should be rejected.
+
+Unfortunately, the problem won&apos;t go away by pushing the boundary to 2^53. The maximum allowed index has to be one less then the maximum allowed length either way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3556</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-03-28 09:44:39 -0700</bug_when>
+    <thetext>ES5.1 does not violate the invariant, step 4 of 15.4.5.1 is only used for array indices which means keys in [0, 0xffffffff[ , cf. introductory paragraph in 15.4.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3561</commentid>
+    <comment_count>4</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2013-04-03 01:18:36 -0700</bug_when>
+    <thetext>Ah, you are right, thanks! I indeed missed the bit about an index not being equal to 2^32-1 in the intro.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12255</commentid>
+    <comment_count>5</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2015-02-09 10:35:58 -0800</bug_when>
+    <thetext>Just ran into a case where 2^32 size is checked in rev32:
+
+9.4.2.2 ArrayCreate(length, proto) Abstract Operation
+
+  3. If length&gt;2^32-1, throw a RangeError exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12256</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-09 10:57:20 -0800</bug_when>
+    <thetext>(In reply to Chris Toshok from comment #5)
+&gt; Just ran into a case where 2^32 size is checked in rev32:
+&gt; 
+&gt; 9.4.2.2 ArrayCreate(length, proto) Abstract Operation
+&gt; 
+&gt;   3. If length&gt;2^32-1, throw a RangeError exception.
+
+I&apos;m not sure what you are trying to say here. Are you saying that you found code real world JS code that this check is breaking?
+
+(BTW, this is a ES5.x ticket, if you think there is an ES6 problem you should probably open a new ticket)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12257</commentid>
+    <comment_count>7</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2015-02-09 11:00:33 -0800</bug_when>
+    <thetext>Ah, sorry about adding it to an es5 issue. I didn&apos;t notice when it came up as a possible duplicate when I was entering a bug for 9.4.2.2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12496</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 16:14:48 -0800</bug_when>
+    <thetext>we didn&apos;t have this change in ES6</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

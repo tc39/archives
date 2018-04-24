@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3294</bug_id>
+          
+          <creation_ts>2014-10-19 12:41:00 -0700</creation_ts>
+          <short_desc>Mixed declarative and dynamic linking no longer supported</short_desc>
+          <delta_ts>2015-02-19 19:11:08 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10526</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-10-19 12:41:35 -0700</bug_when>
+    <thetext>In the previous module loader implementation, significant effort was put into enabling ES6 to load legacy modules, which could in turn load ES6. 
+
+This is an important feature as it allows ES6 interop with CommonJS inside an ecosystem like npm. We can&apos;t automate conversion of modules to ES6 as circular references in CommonJS will break, so there isn&apos;t another way around this interop scenario that I can see.
+
+One other proposal currently being suggested by some to enable this is the ability to write ES6 and CommonJS together using a CommonJS require for CommonJS and ES6 syntax for ES6:
+
+require(&apos;cjs-module&apos;);
+import &apos;es6-module&apos;;
+
+I find this idea incredibly worrying, because there is no way to progressively move out of this scenario without rewriting all dependencies. We collectively progress into a hole where we&apos;re using two module systems, which I believe will leave everyone worse off.
+
+Perhaps it is out of the scope of ES6 to consider the dynamics of progressive adoption at this level, in which case I concede, but the solution previously provided separating the legacy and ES6 layers and linking these layers alternately supporting circular references in both systems together, through the dynamic instantiation hook, was an incredibly general and elegant solution to this issue.
+
+I&apos;d ask that we consider bringing this back through a more general HostGetSource hook (HostGetModule perhaps) that supports the previous dynamic instantiate hook properties (deps and execute).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10528</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-10-19 15:23:44 -0700</bug_when>
+    <thetext>There may be a middle ground here by allowing loading CommonJS from ES6 but not vice-versa. This is effectively supported by the current HostGetSource implementation anyway.
+
+While not perfect, compiling ES6 to CommonJS is generally less error-prone than the reverse (circular references don&apos;t break as easily) so that we do allow legacy compilation scenarios when using ES6:
+
+npm package:
+es6/app.js
+cjs/app.js
+
+Where cjs/app.js is generated from es6/app.js.
+
+In this way, one can add an ES6 loader to Node, which would load from the es6 sources, in turn potentially loading CJS, while the package still supports being loaded without an ES6 loader through the CJS sources. But we do have to keep this compiled CJS folder around in npm for a little longer, which the reverse interop support scenario of allowing loading ES6 from CommonJS through an ES6 loader might help us progress past sooner.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12855</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:30:51 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13138</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:08 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

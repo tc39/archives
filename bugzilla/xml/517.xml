@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>517</bug_id>
+          
+          <creation_ts>2012-07-12 11:23:00 -0700</creation_ts>
+          <short_desc>15.5.3.3 Bugs in String.fromCodePoint</short_desc>
+          <delta_ts>2014-07-27 20:17:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1293</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 11:23:50 -0700</bug_when>
+    <thetext>(1) First line: &quot;fromCharCode&quot; -&gt; &quot;fromCodeCode&quot;
+
+(2) Step 1: &quot;codeUnits&quot; -&gt; &quot;codePoints&quot;
+
+(3) Step 2: &quot;codeUnits&quot; -&gt; &quot;codePoints&quot;
+
+(4) Step 5a: &quot;codePoint&quot; -&gt; &quot;codePoints&quot;
+
+(5) Step 5c: There should be a step here to filter out NaN and throw a RangeError exception for it. ToInteger would convert it to 0, which is just calling for trouble.
+
+(6) Step 5d calls a function SaveValue, which doesn&apos;t appear to be defined anywhere.
+
+(7) Step 5f: &quot;elements&quot; -&gt; &quot;code units&quot;
+
+(8) Step 5f: A reference to the algorithm in clause 6 seems appropriate.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1366</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-17 22:20:42 -0700</bug_when>
+    <thetext>*** Bug 565 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1566</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 16:09:19 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft
+
+(In reply to comment #0)
+
+&gt; (5) Step 5c: There should be a step here to filter out NaN and throw a
+&gt; RangeError exception for it. ToInteger would convert it to 0, which is just
+&gt; calling for trouble.
+&gt; 
+&gt; (6) Step 5d calls a function SaveValue, which doesn&apos;t appear to be defined
+&gt; anywhere.
+
+The SameValue comparision in step 5d will reject NaNs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1697</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:16 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9626</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 20:17:41 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

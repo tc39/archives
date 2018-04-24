@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>657</bug_id>
+          
+          <creation_ts>2012-09-26 00:28:00 -0700</creation_ts>
+          <short_desc>Wrong arguments for [[Put]] in 15.5.4.10</short_desc>
+          <delta_ts>2015-10-03 16:58:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sukyoung Ryu">sukyoung.ryu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>sukyoung.ryu</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1612</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sukyoung Ryu">sukyoung.ryu</who>
+    <bug_when>2012-09-26 00:28:56 -0700</bug_when>
+    <thetext>In 15.5.4.10 String.prototype.match (regexp), the step 8-a is as follows:
+
+    Call the [[Put]] internal method of rx with arguments &quot;lastIndex&quot; and 0.
+
+However, the [[Put]] internal method takes three arguments instead of two:
+
+    8.12.5 [[Put]](P,V,Throw)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14764</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-03 16:58:09 -0700</bug_when>
+    <thetext>Fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3444</bug_id>
+          
+          <creation_ts>2014-12-15 12:21:00 -0800</creation_ts>
+          <short_desc>String.prototype.replace looks up @@replace on &apos;this&apos;</short_desc>
+          <delta_ts>2014-12-15 13:37:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>3425</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Chris Toshok">toshok</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11041</commentid>
+    <comment_count>0</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2014-12-15 12:21:26 -0800</bug_when>
+    <thetext>right now the algorithm for String.prototype.replace reads:
+
+   4. Let replacer be GetMethod(O, @@replace).
+   5. ReturnIfAbrupt(replacer).
+   6. If replacer is not undefined, then
+      a. Return Call(replacer, searchValue, «string, replaceValue»).
+
+With those steps there&apos;s no way for the RegExp.prototype[@@replace] code to be called in, e.g. this code:
+
+  var re = /hello/;
+  console.log (&quot;hello, world&quot;.replace (re, &quot;goodbye&quot;));
+
+Given that searchValue is passed as the &apos;this&apos; to replacer, it seems like it @@replace should be looked up on searchValue.  i.e.:
+
+   4. Let replacer be GetMethod(searchValue, @@replace)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11042</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-15 13:37:37 -0800</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 3425 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

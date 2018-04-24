@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3142</bug_id>
+          
+          <creation_ts>2014-08-19 05:38:00 -0700</creation_ts>
+          <short_desc>22.1.3.24 Array.prototype.sort: Missing &quot;implementation defined&quot; exceptions</short_desc>
+          <delta_ts>2014-08-25 08:29:26 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9807</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-19 05:38:03 -0700</bug_when>
+    <thetext>22.1.3.24 Array.prototype.sort (comparefn)
+
+There are still some missing exceptions to trigger &quot;implementation defined&quot; behaviour (but see also bug 3089 why the term &quot;implementation defined&quot; is considered to be too broad).
+
+
+(1) consistent comparison function
+&gt; Calling comparefn(a,b) does not modify obj.
+
+This exception needs to be changed to &quot;Does neither modify obj nor any object in obj&apos;s prototype chain&quot;. 
+
+Reason:
+The initial list of exceptions when implementation defined behaviour is acceptable (before &quot;Otherwise, the following steps are taken&quot;) checks for indexed properties on obj&apos;s prototype chain (&quot;The result of HasProperty(proto, ToString(j )) is true&quot;). But this check is only performed once in the beginning. So it&apos;s still necessary to handle the case needs when comparefn invalidates this assumption. 
+
+
+(2) Side-effects when invoking ToString in SortCompare
+
+The two ToString calls in steps 18 and 20 may modify obj or an object in obj&apos; prototype chain. If that happens, implementation defined behaviour needs to be accepted.
+
+
+(3) Dynamic results for ToString in SortCompare
+
+The two ToString calls in step 18 and 20 are currently not required to produce consistent results. This makes the built-in lexicographical order less restrictive compared to when an explicit comparator function is supplied.
+
+
+(4) Sort on proxy objects
+
+For the same reason that currently accessor or non-writable/non-configurable properties trigger implementation defined behaviour, applying Array.prototype.sort on a proxy object (or if a proxy object is present in the prototype chain) should allow implementation defined behaviour.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9837</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-21 13:12:59 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9927</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:26 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

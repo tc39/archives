@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2219</bug_id>
+          
+          <creation_ts>2013-11-10 16:21:00 -0800</creation_ts>
+          <short_desc>misspelled nonterminals</short_desc>
+          <delta_ts>2014-05-22 22:10:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6637</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-10 16:21:25 -0800</bug_when>
+    <thetext>13.1.7 / rule 3 / step 2: GeneratorDeclarationDeclaration
+    Delete one &quot;Declaration&quot;.
+
+15.1.0.5 / rule 3: EzportDeclaration
+    s|z|x|
+
+21.2.1 / Syntax / prod 17: TailSurragate
+21.2.2.10 / last rule: TailSurragate
+    s|Tail|Trail|
+
+Also, change all occurrences of &quot;Surragate&quot; to &quot;Surrogate&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6642</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-10 17:05:21 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7056</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:03:28 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7622</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-07 09:52:48 -0700</bug_when>
+    <thetext>Not completely fixed in rev 22 or rev 23:
+
+21.2.1 / Syntax / prod 17: TailSurragate
+21.2.2.10 / last rule: TailSurragate
+    s|Tail|Trail|
+
+Also, change all occurrences of &quot;Surragate&quot; to &quot;Surrogate&quot;.
+
+
+(Also, GeneratorDeclarationDeclaration wasn&apos;t fixed in rev 22, but has been fixed in rev 23.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8462</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 16:59:23 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8620</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-22 22:10:08 -0700</bug_when>
+    <thetext>confirmed fixed in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3942</bug_id>
+          
+          <creation_ts>2015-02-14 15:17:00 -0800</creation_ts>
+          <short_desc>13.6.4.13 ForIn/OfBodyEvaluation: Switch steps 5.b.iv-v</short_desc>
+          <delta_ts>2015-02-19 19:11:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12689</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 15:17:56 -0800</bug_when>
+    <thetext>13.6.4.13 Runtime Semantics: ForIn/OfBodyEvaluation
+
+Steps 5.b.iv-v should be switched for consistency with other lexical declaration binding instantiations.
+
+
+Compare:
+---
+13.1.13 Runtime Semantics: Evaluation
+3. Perform BlockDeclarationInstantiation(StatementList, blockEnv).
+4. Set the running execution context’s LexicalEnvironment to blockEnv.
+
+13.6.3.7 Runtime Semantics: LabelledEvaluation
+5. For each element dn of boundNames do [...]
+6. Set the running execution context’s LexicalEnvironment to loopEnv
+
+13.6.3.9 Runtime Semantics: CreatePerIterationEnvironment
+e. For each element bn of perIterationBindings do, [...]
+f. Set the running execution context’s LexicalEnvironment to thisIterationEnv.
+
+13.6.4.12 Runtime Semantics: ForIn/OfHeadEvaluation ( TDZnames, expr, iterationKind, labelSet)
+c. For each string name in TDZnames, do [...]
+d. Set the running execution context’s LexicalEnvironment to TDZ.
+
+13.14.7 Runtime Semantics: CatchClauseEvaluation
+3. For each element argName of the BoundNames of CatchParameter, do [...]
+4. Set the running execution context’s LexicalEnvironment to catchEnv.
+---
+
+The new bindings are first created and then the lexical environment is applied.
+
+
+In 13.6.4.13 these steps are reversed.
+---
+13.6.4.13 Runtime Semantics: ForIn/OfBodyEvaluation ( lhs, stmt, iterator, lhsKind, labelSet )
+iv. Set the running execution context’s LexicalEnvironment to iterationEnv.
+v. Perform BindingInstantiation for lhs passing iterationEnv as the argument.
+---
+
+
+(The evaluation order is not observable from user script, so this is just spec polishing...)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12690</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 15:39:17 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13085</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:00 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

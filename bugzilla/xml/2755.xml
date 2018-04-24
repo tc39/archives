@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2755</bug_id>
+          
+          <creation_ts>2014-04-29 13:59:00 -0700</creation_ts>
+          <short_desc>Group linking algorithm bugs and optimizations</short_desc>
+          <delta_ts>2015-03-16 14:39:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jmdyck</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7966</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-04-29 13:59:51 -0700</bug_when>
+    <thetext>The group linking algorithms often refer to derived information that itself involves processing that wouldn&apos;t actually happen in that order practically. I am not sure what the goal of the spec is in a scenario like this, but in the process of converting these functions into code, they end up being implemented quite differently.
+
+The immediate bugs are:
+
+15.2.5.3.2 (3) Load.[[UnlinkedDependencies]] is not a defined property for load records. Working around this alters the implementation.
+15.2.5.3.1 (1) &quot;Assert start is a list of Linkset records&quot; should read &quot;Assert start is a list of Load records&quot;
+
+In the process of implementing the algorithm, I found it a lot more convenient to base the linking process on the following principles:
+
+1. Let Link act on a LinkSet instead of a set of Load records. This way we can assume that the first Load record has a [[groupIndex]] of 0, and calculate the group indices of other load records in the linkSet directly from this groupIndex working down the tree.
+2. This way, we only need to traverse the tree once for everything we need, calculating the group indices, declarativeGroups and dynamicGroups as we go.
+
+I&apos;m happy to help however I can and discuss further about corrections that can be made to ensure the pseudo-code is complete.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7967</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-04-29 14:02:50 -0700</bug_when>
+    <thetext>I also forgot to mention I reverse the order of the groupIndex to start at the top from 0 instead of the bottom being the maximum groupIndex so that we don&apos;t need to know the groupIndex of the whole linkSet from the beginning, but let it only be known after the full traversal. Then we link the groups in reverse rather.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8143</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 13:17:37 -0700</bug_when>
+    <thetext>(This bug was filed against Rev 22, but you may have meant to file against Rev 24, the current version. The Description appears to be valid against either.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13766</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:39:18 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

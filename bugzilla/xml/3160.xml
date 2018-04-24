@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3160</bug_id>
+          
+          <creation_ts>2014-08-29 11:23:00 -0700</creation_ts>
+          <short_desc>Should multiple __proto__: PropertyDefinitions be permitted?</short_desc>
+          <delta_ts>2014-08-29 13:36:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10009</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-08-29 11:23:31 -0700</bug_when>
+    <thetext>Currently, there&apos;s a special rule banning them:
+
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-__proto__-property-names-in-object-initializers
+&gt; *   It is a Syntax Error if PropertyNameList of PropertyDefinitionList
+&gt;     contains any duplicate entries for &quot;__proto__&quot; and at least two of those
+&gt;     entries were obtained from productions of the form
+&gt;     `PropertyDefinition : PropertyName : AssignmentExpression`.
+
+Since all other rules about duplicate property definitions have been dropped in ES6, I think it would make sense to drop this one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10010</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2014-08-29 11:28:03 -0700</bug_when>
+    <thetext>I disagree.  I think prototype mutation is bad, and multiple mutations bad enough, that this is a perfectly reasonable thing to have.
+
+The rationale for removing the restriction on normal properties was that computed property names could produce conflicts just as easily, conflicts not detectable until runtime.  Because no property form but p:n can trigger prototype mutation, the rationale is not valid as concerns this duplication-removal.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10018</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-29 13:36:35 -0700</bug_when>
+    <thetext>We&apos;ve talked about this at TC39 meetings.
+
+__proto__: expr
+
+and 
+&quot;__proto__&quot;: expr
+
+are considered a special form and are not regular property definitions. And we decided that the special form should only be allowed to occur only once in each object literal.
+
+However,
+[&quot;__proto__&quot;]:  expr
+&quot;__proto__&quot; () { }
+
+etc. are regular property definitions and can occur multiple times.
+
+You can even say:
+
+{__proto__: obj,        //set [[Prototype]]
+ [&quot;__proto__&quot;]: undefined //disable access to O.p.__prototype
+}
+
+I don&apos;t think we need to revisit that decisions so I&apos;m going to close this as WONTFIX</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

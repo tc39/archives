@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>128</bug_id>
+          
+          <creation_ts>2011-07-14 07:16:00 -0700</creation_ts>
+          <short_desc>S15.10.4.1_A5_T5 expects &quot;x&quot; flag for regexp to throw SyntaxError</short_desc>
+          <delta_ts>2011-09-25 10:52:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/e970d2ce6d77</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Geoffrey Sneddon">gsneddon</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>295</commentid>
+    <comment_count>0</comment_count>
+    <who name="Geoffrey Sneddon">gsneddon</who>
+    <bug_when>2011-07-14 07:16:57 -0700</bug_when>
+    <thetext>This is a permissible extension, and hence should not be in a conformance testsuite.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>317</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-18 08:15:36 -0700</bug_when>
+    <thetext>Thanks for reporting this Geoffrey.  &apos;x&apos; used as a flag should result in a SyntaxError =&gt; it is indeed a permissible extension via Chapter 16.  Just disabled the test in source control, and now re-assigning to Mark to address (e.g., move to a &quot;Sputnik\Negative\*&quot; directory?).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>474</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-25 10:52:08 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/e970d2ce6d77</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

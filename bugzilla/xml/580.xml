@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>580</bug_id>
+          
+          <creation_ts>2012-07-22 18:49:00 -0700</creation_ts>
+          <short_desc>11.1.9: missing &quot;Property Descriptor&quot;</short_desc>
+          <delta_ts>2012-09-28 12:24:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1373</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-22 18:49:02 -0700</bug_when>
+    <thetext>In 11.1.9 &quot;Quasi Literals&quot;,
+under &quot;Runtime Semantics: ArgumentListEvaluation&quot;,
+in the definition of the abstract operation GetQuasiCallSite,
+steps 8.c and 8.e say:
+
+    Call the [[DefineOwnProperty]] internal method of siteObj with arguments
+    prop,
+    {[[Value]]: cookedValue, [[Writable]]: false, [[Configurable]]: false}},
+    and false.
+
+    Call the [[DefineOwnProperty]] internal method of rawObj with arguments
+    prop,
+    {[[Value]]: rawValue, [[Writable]]: false, [[Configurable]]: false}},
+    and false.
+
+In each case, the second argument should start with &quot;Property Descriptor&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1374</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-07-22 18:52:48 -0700</bug_when>
+    <thetext>Oh, and each case, change &quot;}}&quot; to just &quot;}&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1455</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-13 16:38:00 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1693</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:15 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

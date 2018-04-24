@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3025</bug_id>
+          
+          <creation_ts>2014-07-22 02:18:00 -0700</creation_ts>
+          <short_desc>9.5.12 [[OwnPropertyKeys]]: Mutable keys array can violate object invariants</short_desc>
+          <delta_ts>2014-08-25 08:29:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9456</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-07-22 02:18:49 -0700</bug_when>
+    <thetext>9.5.12  [[OwnPropertyKeys]] ( )
+
+The array returned from ownKeys() can be mutated after all invariant checks were performed in 9.5.12. That way it is still possible to violate the object invariants from 6.1.7.3.
+
+
+Test case:
+---
+let o = Object.defineProperty({}, &quot;prop&quot;, {value: 123, configurable: false});
+let p = new Proxy(o, {
+  ownKeys() {
+    return Object.defineProperty([], &quot;0&quot;, {
+      get() {
+        // Alternatively return a different property name here.
+        this.length = 0;
+        return &quot;prop&quot;;
+      }, configurable: true
+    });
+  }
+});
+print(&quot;own-names:&quot;, Object.getOwnPropertyNames(p));
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9477</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-22 11:03:41 -0700</bug_when>
+    <thetext>Tom, Mark
+What do you think?
+
+The cleanest way I can think of for fixing this would be to respecify [[OwnPropertyKey]] as returning a List rather than an array. Of course a trap handler would still return an Array but Proxy [[OwnPropertyKey]] would convert it to a List before performing its other invariant checks.
+
+The array to list conversion could also be used to enforce  the invariant the elements are all valid property keys (strings or symbols). Se Bug 3026</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9480</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-22 11:17:07 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; Tom, Mark
+&gt; What do you think?
+&gt; 
+&gt; The cleanest way I can think of for fixing this would be to respecify
+&gt; [[OwnPropertyKey]] as returning a List rather than an array. Of course a
+&gt; trap handler would still return an Array but Proxy [[OwnPropertyKey]] would
+&gt; convert it to a List before performing its other invariant checks.
+&gt; 
+&gt; The array to list conversion could also be used to enforce  the invariant
+&gt; the elements are all valid property keys (strings or symbols). Se Bug 3026
+
+That seems reasonable to me. What are the possible downsides or alternatives that would still fix the problem?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9481</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-22 11:37:53 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #2)
+&gt; 
+&gt; That seems reasonable to me. What are the possible downsides or alternatives
+&gt; that would still fix the problem?
+
+We&apos;d  have to validate that now of the array indexed properties (or the &apos;length&apos;) property of the trap result are accessor properties. (we already forbid it being a Proxy, but that restriction could be eliminated if we to List conversion) 
+
+Using a List means that identify of the result array is not preserved from the trap call through a Object.getOwnPropertyKeys call. Requires copying, while the validation approach could be done in place. Passing the same object from handler to getOwnPropertyKeys caller also means that the result array as a communications channel for additional information from handler to caller (and possibly back).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9482</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-22 12:42:22 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; (In reply to Mark Miller from comment #2)
+&gt; &gt; 
+&gt; &gt; That seems reasonable to me. What are the possible downsides or alternatives
+&gt; &gt; that would still fix the problem?
+&gt; 
+&gt; We&apos;d  have to validate that now of the array indexed properties (or the
+&gt; &apos;length&apos;) property of the trap result are accessor properties. (we already
+&gt; forbid it being a Proxy, but that restriction could be eliminated if we to
+&gt; List conversion) 
+&gt; 
+&gt; Using a List means that identify of the result array is not preserved from
+&gt; the trap call through a Object.getOwnPropertyKeys call. Requires copying,
+&gt; while the validation approach could be done in place. Passing the same
+&gt; object from handler to getOwnPropertyKeys caller also means that the result
+&gt; array as a communications channel for additional information from handler to
+&gt; caller (and possibly back).
+
+All this makes me even more convinced of the List approach. This is all very parallel to the issues around the descriptor returned by getOwnPropertyDescriptor, in which we avoided the similar accidental communications channel issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9532</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-24 12:15:40 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+Made the result of [[OwnPropertyKeys]] a List</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9534</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-24 12:17:52 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; fixed in rev26 editor&apos;s draft
+&gt; 
+
+uh, rev27</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9545</commentid>
+    <comment_count>7</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-07-24 22:23:06 -0700</bug_when>
+    <thetext>Yes, +1 for either returning a List or having [[OwnPropertyKeys]] reconstruct an Array from scratch.
+
+Interestingly, the latter is what I already did for my harmony-reflect shim. And as was mentioned, this also allows us to make sure the result contains only Strings and Symbols.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9960</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:30 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

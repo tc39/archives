@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>656</bug_id>
+          
+          <creation_ts>2012-09-26 00:17:00 -0700</creation_ts>
+          <short_desc>Inconsistencies in 15.10.2.5 &amp; 15.10.2.6</short_desc>
+          <delta_ts>2012-09-26 00:30:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sukyoung Ryu">sukyoung.ryu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>sukyoung.ryu</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1611</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sukyoung Ryu">sukyoung.ryu</who>
+    <bug_when>2012-09-26 00:17:21 -0700</bug_when>
+    <thetext>In 15.10.2.5, the first step for the production &quot;Term :: Assertion&quot; is as follows:
+
+1. Evaluate Assertion to obtain an AssertionTester t.
+
+However, among the six productions for Assertion in 15.10.2.6, two of them do not return AssertionTester.  While each of the following four productions returns an internal AssertionTester closure:
+
+Assertion :: ^
+Assertion :: $
+Assertion :: \ b
+Assertion :: \ B
+
+each of the following two productions returns an internal Matcher closure:
+
+Assertion :: ( ? = Disjunction )
+Assertion :: ( ? ! Disjunction )
+
+We believe that the production &quot;Term :: Assertion&quot; in 15.10.2.5 should evaluate by evaluating Assertion to obtain a Matcher and returning that Matcher, and the four productions for Assertion above should return an internal Matcher closure instead of an internal AssertionTester closure.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

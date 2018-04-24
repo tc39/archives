@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2812</bug_id>
+          
+          <creation_ts>2014-05-04 08:54:00 -0700</creation_ts>
+          <short_desc>ExportDeclaration grammar is ambigious</short_desc>
+          <delta_ts>2015-07-10 08:34:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jmdyck</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8112</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-05-04 08:54:00 -0700</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-exports
+
+ExportDeclaration :
+  ...
+  export ExportClause[NoReference] FromClause ;
+  export ExportClause ;
+  ...
+
+To handle the above we need to first look ahead after all of ExportClause to know if [NoReference] should be set or not. Other options include using a cover grammar again or add &quot;static semantics early errors&quot; for this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8141</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 13:01:19 -0700</bug_when>
+    <thetext>(Changing this bug&apos;s &apos;Version&apos; from Rev 21 to Rev 24, since the latter was the current version when the bug was submitted, and there doesn&apos;t appear to be anything specific to Rev 21 in the Description.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8864</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-05 10:13:22 -0700</bug_when>
+    <thetext>We talked about this face to face and the simplest solution is to use IdentifierName in both cases. Since we have to check that the name is exported anyway we will get early errors anyway.
+
+We can therefore remove the [NoReference] parameter.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10169</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-09 09:59:58 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+keep just the IdentiferName form and added early errors that restrict the &quot;Reference&quot; form in the same ways as IdentiferReference.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10371</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:41 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

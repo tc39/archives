@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2619</bug_id>
+          
+          <creation_ts>2014-04-10 06:56:00 -0700</creation_ts>
+          <short_desc>21.2.5.2.1 RegExpExec: Misc. editorial</short_desc>
+          <delta_ts>2014-05-06 16:41:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7648</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-10 06:56:27 -0700</bug_when>
+    <thetext>21.2.5.2.1 Runtime Semantics: RegExpExec Abstract Operation
+
+- step 4 is empty
+- double full stops in step 5 and step 18b
+- typo &quot;isgreater&quot; -&gt; &quot;is greater&quot; in step 18a
+- typo &quot;a index&quot; -&gt; &quot;an index&quot; in step 18a
+- closing parentheses in step 8d and step 9 in bold instead of regular font width</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7691</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-11 16:28:26 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+the empty stop 4 isn&apos;t in the source document.  Empty steps like that are an artifact of change tracking of moves.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8182</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:41:12 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

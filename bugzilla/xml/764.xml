@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>764</bug_id>
+          
+          <creation_ts>2012-10-09 14:08:00 -0700</creation_ts>
+          <short_desc>Character properties</short_desc>
+          <delta_ts>2013-08-23 04:40:35 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>mathias</cc>
+    
+    <cc>tomerm</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1899</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:08:28 -0700</bug_when>
+    <thetext>Provide a way to:
+
+1. Get Unicode character property for a given set of characters
+2. Get characters that have specified property (e.g. script)
+
+We should skip actual property names in the data set, to save on size.
+
+This would be exposed in RegEx, but if not (or if it takes too long) we could expose low level API under Intl namespace.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2991</commentid>
+    <comment_count>1</comment_count>
+    <who name="Tomer Mahlin">tomerm</who>
+    <bug_when>2012-12-05 10:27:29 -0800</bug_when>
+    <thetext>I believe this is the right place to provide a support for following items:
+
+   1. Verification if specific character is strong RTL or strong LTR
+
+   2. Getting range of characters which belong to a given language
+
+   3. Verification if given language is RTL or LTR - this can be done by getting all characters for given language and inspecting their strong directionality property.
+
+   4. Returning natural base text direction for given language - this is the same as 3 but with different conceptual emphasis
+
+   5. Identification of Unicode scripts, blocks, character properties /
+   categories etc. For example:
+      a. Unicode character properties: \p{L} or \p{Letter} 
+      b. Unicode scripts: \p{Common} or  \p{Arabic} 
+      c. Unicode blocks:  \p{InArabic}, \p{InSyriac}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3022</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 16:46:15 -0800</bug_when>
+    <thetext>At the 2012-12-14 internationalization meeting, Norbert was asked to write a
+strawman.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>23</bug_id>
+          
+          <creation_ts>2011-02-18 14:06:00 -0800</creation_ts>
+          <short_desc>S15.5.4.10_A1_T3 asserting incorrect behavior</short_desc>
+          <delta_ts>2012-01-13 11:33:18 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>41</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2011-02-18 14:06:17 -0800</bug_when>
+    <thetext>S15.5.4.10_A1_T3 Checking by using eval
+function testcase() {
+   var match = String.prototype.match;
+   if (typeof toString === &quot;undefined&quot;) {
+       toString = Object.prototype.toString;
+   }
+   var __class__ = toString();
+   if (match(eval(&quot;\&quot;bj\&quot;&quot;))[0] !== &quot;bj&quot;) {
+       $ERROR(&quot;#1: match = String.prototype.match;
+match(eval(\&quot;\\\&quot;bj\\\&quot;\&quot;))[0] === \&quot;bj\&quot;. Actual: &quot; +
+match(eval(&quot;\&quot;bj\&quot;&quot;))[0]);
+   }
+}
+
+It seems like the four lines to do with __class__ are irrelevant and can just be deleted.
+
+More importantly, when match is called, step 1 in 15.5.4.10 requires that it throw a TypeError, because the this-value is undefined. But the test expects the call to succeed and return an array.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>52</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 10:25:31 -0800</bug_when>
+    <thetext>Agree that line 17 &quot;var __class__ = ...&quot; can and should be removed.
+
+I&apos;m not so convinced about the argument about 15.5.4.10 step 1 making this invalid though.  Line 11 equates to:
+   this.match = String.prototype.match;
+and lines 13-14:
+   this.toString = this.toString || Object.prototype.toString;
+
+when match is called, won&apos;t &apos;this&apos; be set to the global object (by 10.4.3 step 2)?  If so, the CheckObjectCoercible call won&apos;t throw.
+
+All this said, the test still seems invalid as the check on line 13 is making a pretty strong assumption about the the host object&apos;s toString method if it exists.  That is, the result will contain the substring &quot;Object&quot;.  While I&apos;d buy this is the case for (all?) built-in objects defined in ES5, it doesn&apos;t seem to be a sure thing for host objects...
+
+If you agree with this assessment, please let me know and I&apos;ll disable the test as invalid.
+
+Thanks,
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>159</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2011-03-16 07:58:38 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; when match is called, won&apos;t &apos;this&apos; be set to the global object (by 10.4.3 step
+&gt; 2)?  If so, the CheckObjectCoercible call won&apos;t throw.
+
+This is a change from ES3.
+
+10.4.3 only applies to functions that create an execution context. Functions written in ES5 all have the same [[Call]] method (13.2 step 6) and it creates an execution context (13.2.1 step 1; note that step 2 is not suitable for built-in functions, so this [[Call]] method clearly is not the one built-in functions use). Built-in functions don&apos;t. Their [[Call]] and [[Construct]] methods do exactly what their spec says. If they want &quot;this&quot; to be an object, they have to coerce it themselves.
+
+That&apos;s why the call to CheckObjectCoercible is there in the first place. Otherwise it would be useless.
+
+It&apos;s also why so many built-in functions were changed in ES5 to have a step 1 that reads, &quot;Let O be the result of calling ToObject passing the this value as the argument.&quot; That wasn&apos;t necessary in ES3, because the this value was always an object.
+
+Annex E mentions this change too: &quot;In particular, in Edition 5 built-in functions that are specified to actually use the passed this value as an object typically throw a TypeError exception if passed null or undefined as the this value.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>276</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 09:00:25 -0700</bug_when>
+    <thetext>Never mentioned it in this bug report, but the test case was disabled;)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>600</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-13 11:33:18 -0800</bug_when>
+    <thetext>I&apos;ve fixed the test by binding match&apos;s this to fnGlobalObject() and only asserting when we can use Object.prototype.toString for the global object&apos;s toString method:
+    var match = String.prototype.match.bind(fnGlobalObject());
+    try {
+        fnGlobalObject().toString = Object.prototype.toString;
+    } catch (e) { ; }
+
+    if (  (fnGlobalObject().toString === Object.prototype.toString)  &amp;&amp;
+          (match(eval(&quot;\&quot;bj\&quot;&quot;))[0] !== &quot;bj&quot;)) {
+        $ERROR(&apos;...&apos;);
+    }</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

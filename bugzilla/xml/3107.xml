@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3107</bug_id>
+          
+          <creation_ts>2014-08-04 22:39:00 -0700</creation_ts>
+          <short_desc>`Array#find` and `Array#findIndex` should treat holes as `undefined`</short_desc>
+          <delta_ts>2014-08-25 08:29:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>ljharb</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9666</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-04 22:39:52 -0700</bug_when>
+    <thetext>`Array#find` and `Array#findIndex` should treat holes as `undefined` rather than skipping them, for consistency with the recent trend in TC39 to treat holes as `undefined`.
+
+Ref. https://github.com/domenic/Array.prototype.contains/issues/15</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9680</commentid>
+    <comment_count>1</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-06 08:43:28 -0700</bug_when>
+    <thetext>I am not sure we should make this kind of call without consulting TC39.
+
+But then again I am frustrated that doing so would mean delaying 2 months until we know the answer.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9683</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-06 13:11:19 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #1)
+&gt; I am not sure we should make this kind of call without consulting TC39.
+&gt; 
+&gt; But then again I am frustrated that doing so would mean delaying 2 months
+&gt; until we know the answer.
+
+Meta:
+
+TC39 role is more about making general policy-level design directions. It can&apos;t a priori review every one of the thousands of decisions that go into the ES6 spec. 
+
+It&apos;s the job of feature champions (when there is one) and the editor to make detail level decision, taking into account the current TC39 consensus regarding general design directions.
+
+Once something is in a spec.  it can be reviewed and TC39 members and anybody else can file bug reports if they disagree with some detail level design decision.  The editor/champions should be able to deal with most such issue.  If they think general TC39 guidance or approval is needed they can add a meeting agenda item (you see me do that all the time, but I generally don&apos;t stop spec. work waiting for approval).  Similarly if a bug reporter disagrees with a decision they can also bring it to TC39.
+
+In this case, I believe that Rick Waldon was the original champion of these methods who wrote a JS level polyfill for the TC39 wiki.  I then took it over and wrote the detailed spec. algorithm.  I think it was at this level that the hole skipping was introduced. At the time, the general policy we were following, was to main consistency with the ES3/5 era array methods (which generally skipped holes).  Subsequently the consensus within TC39 has moved towards &quot;holes: nobody wants them&quot;, and we have been spec&apos;ing functions that ignore holes.
+
+This bug is essentially saying that the spec. text for these functions need to be reviewed and possibly revised because of this evolved TC39 design consensus concerning array holes. I&apos;m interested in Rick&apos;s thoughts on the matter (as original champion) and I&apos;ve been watching the es-discuss thread for other negative push back against such a change (so far none). Assuming that push-back doesn&apos;t emerge, I&apos;m quite comfortable with making and implementing the decision to eliminate hole-skipping from these functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9685</commentid>
+    <comment_count>3</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-06 13:38:08 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #2)
+&gt; (In reply to Domenic Denicola from comment #1)
+&gt; &gt; I am not sure we should make this kind of call without consulting TC39.
+&gt; &gt; 
+&gt; &gt; But then again I am frustrated that doing so would mean delaying 2 months
+&gt; &gt; until we know the answer.
+&gt; 
+&gt; Meta:
+&gt; 
+&gt; TC39 role is more about making general policy-level design directions. It
+&gt; can&apos;t a priori review every one of the thousands of decisions that go into
+&gt; the ES6 spec. 
+&gt; 
+&gt; It&apos;s the job of feature champions (when there is one) and the editor to make
+&gt; detail level decision, taking into account the current TC39 consensus
+&gt; regarding general design directions.
+&gt; 
+&gt; Once something is in a spec.  it can be reviewed and TC39 members and
+&gt; anybody else can file bug reports if they disagree with some detail level
+&gt; design decision.  The editor/champions should be able to deal with most such
+&gt; issue.  If they think general TC39 guidance or approval is needed they can
+&gt; add a meeting agenda item (you see me do that all the time, but I generally
+&gt; don&apos;t stop spec. work waiting for approval).  Similarly if a bug reporter
+&gt; disagrees with a decision they can also bring it to TC39.
+&gt; 
+&gt; In this case, I believe that Rick Waldon was the original champion of these
+&gt; methods who wrote a JS level polyfill for the TC39 wiki.  I then took it
+&gt; over and wrote the detailed spec. algorithm.  I think it was at this level
+&gt; that the hole skipping was introduced. At the time, the general policy we
+&gt; were following, was to main consistency with the ES3/5 era array methods
+&gt; (which generally skipped holes).  Subsequently the consensus within TC39 has
+&gt; moved towards &quot;holes: nobody wants them&quot;, and we have been spec&apos;ing
+&gt; functions that ignore holes.
+
+
+These always had &quot;skip holes&quot; semantics: 
+
+Array.prototype.find: https://gist.github.com/rwaldron/5079436 (10.b, c, d)
+Array.prototype.findIndex: https://gist.github.com/rwaldron/5079427 (10.b, c, d)
+
+As Allen said, this design was chosen to be consistent with the existing Array methods.
+
+
+
+&gt; 
+&gt; This bug is essentially saying that the spec. text for these functions need
+&gt; to be reviewed and possibly revised because of this evolved TC39 design
+&gt; consensus concerning array holes. I&apos;m interested in Rick&apos;s thoughts on the
+&gt; matter (as original champion) and I&apos;ve been watching the es-discuss thread
+&gt; for other negative push back against such a change (so far none). Assuming
+&gt; that push-back doesn&apos;t emerge, I&apos;m quite comfortable with making and
+&gt; implementing the decision to eliminate hole-skipping from these functions.
+
+
+I agree with &quot;holes: nobody wants them&quot; and the committee was anti-holes in 2013 as well. Inconsistencies like this are the sort of thing that end up in blog posts about PHP ;) but maybe now is the time to break from caring about holes. 
+
+Allen, here: https://github.com/domenic/Array.prototype.contains/issues/15#issuecomment-51134702 you mentioned consistency with indexOf, are you thinking we should throw it to the wind for both? 
+
+Lastly, is everyone here prepared to defend the inevitable mud-slinging that will result in creating inconsistent API semantics? I don&apos;t want to be thrown in front of a bus, but otherwise, I&apos;m in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9686</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-06 14:50:18 -0700</bug_when>
+    <thetext>Thanks for the meta-level help, Allen.
+
+Rick:
+
+&gt; you mentioned consistency with indexOf, are you thinking we should throw it to the wind for both?
+
+Although I would love to experiment with removing hole support (and switching === to SameValueZero) for other array APIs, I don&apos;t think anyone was proposing that. We&apos;d want to run some tests in Chrome first, I think. Arv is optimistic about SameValueZero but we didn&apos;t contemplate holes.
+
+&gt; Lastly, is everyone here prepared to defend the inevitable mud-slinging that will result in creating inconsistent API semantics? I don&apos;t want to be thrown in front of a bus, but otherwise, I&apos;m in.
+
+You&apos;ll have my sword.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9690</commentid>
+    <comment_count>5</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-06 14:58:02 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #4)
+&gt; Thanks for the meta-level help, Allen.
+&gt; 
+&gt; Rick:
+&gt; 
+&gt; &gt; you mentioned consistency with indexOf, are you thinking we should throw it to the wind for both?
+&gt; 
+&gt; Although I would love to experiment with removing hole support (and
+&gt; switching === to SameValueZero) for other array APIs, I don&apos;t think anyone
+&gt; was proposing that.
+
+I&apos;m not asking to change indexOf and wasn&apos;t implying that anyone else had either, so either you simply misunderstood what I was asking, or didn&apos;t read Allen&apos;s comment that I was referring to, so I will copy it here for you: 
+
+
+&quot;findIndex is specified to be consistent with [].indexOf which skips holes. But they are different functions and potentially could differ.&quot;
+
+So, when I asked Allen:
+
+&quot; are you thinking we should throw it to the wind for both?&quot;
+
+the &quot;both&quot; I&apos;m referring to are: find AND findIndex</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9693</commentid>
+    <comment_count>6</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-06 15:16:44 -0700</bug_when>
+    <thetext>Got it, yes indeed I misunderstood which &quot;both&quot; you were referring to.
+
+But yes, I think that if we are up for it, the strategy should be &quot;all new ES6 methods ignore holes.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9694</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-06 15:37:26 -0700</bug_when>
+    <thetext>(In reply to Rick Waldron from comment #5)
+&gt; 
+&gt; 
+&gt; &quot;findIndex is specified to be consistent with [].indexOf which skips holes.
+&gt; But they are different functions and potentially could differ.&quot;
+&gt; 
+&gt; So, when I asked Allen:
+&gt; 
+&gt; &quot; are you thinking we should throw it to the wind for both?&quot;
+&gt; 
+&gt; the &quot;both&quot; I&apos;m referring to are: find AND findIndex
+
+Yes, I&apos;m comfortable with removing hole detection from both.
+
+Note that [].find has a similar consistency issue relative to  [].filter, etc. which it is modeled after.
+
+while it is a visible issue for polyfill maintainers, I doubt that any use of these functions will even notice the change. That&apos;s the whole point of &quot;holes, nobody wants them&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9695</commentid>
+    <comment_count>8</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-06 15:41:38 -0700</bug_when>
+    <thetext>Agreed. I think polyfill authors will actually appreciate relief from checking holes :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9696</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-06 15:44:46 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9700</commentid>
+    <comment_count>10</comment_count>
+    <who name="Jordan Harband">ljharb</who>
+    <bug_when>2014-08-06 20:11:37 -0700</bug_when>
+    <thetext>Updated and released in https://github.com/paulmillr/es6-shim/issues/280 .
+
+Pull requested into https://github.com/paulmillr/Array.prototype.find/pull/6 and https://github.com/paulmillr/Array.prototype.findIndex/pull/4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9908</commentid>
+    <comment_count>11</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:24 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

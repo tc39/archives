@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3934</bug_id>
+          
+          <creation_ts>2015-02-14 12:32:00 -0800</creation_ts>
+          <short_desc>12.14.5 Destructuring Assignment: Parentheses in destructuring</short_desc>
+          <delta_ts>2015-02-15 14:35:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12677</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 12:32:33 -0800</bug_when>
+    <thetext>12.14.5 Destructuring Assignment
+
+From bug 3531 comment 2:
+
+`(({}) = {})`, `[...({})] = []`, `[({})] = [{}]` and `({p: ({})} = {p: {}})` is currently not allowed. 
+
+
+12.14.1 Static Semantics: Early Errors
+12.14.5.1 Static Semantics: Early Errors
+
+&gt; [...] if LeftHandSideExpression is either an ObjectLiteral or an ArrayLiteral
+
+This text does not match a parenthesized Object- or ArrayLiteral.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12739</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 14:35:33 -0800</bug_when>
+    <thetext>Also see 12.14.4
+
+My recollection is that this syntax issue was discussed by TC39 when destructuring was being designed and that current spec. text reflects the conclusions of that discussion.
+
+I&apos;m reluctant to change this in ES6 without bring the issue back to TC39, and there really isn&apos;t time in the schedule to do that. However, since this is a syntax error, the restriction could safely be relaxed in the future. 
+
+Rather than closing this ticket, I&apos;ll reassign it to ES7.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

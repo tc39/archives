@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1802</bug_id>
+          
+          <creation_ts>2013-08-22 11:38:00 -0700</creation_ts>
+          <short_desc>Section 7.6: Backwards compatibility and U+2E2F in `Identifier`s</short_desc>
+          <delta_ts>2013-09-18 14:33:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc>http://mathiasbynens.be/demo/javascript-identifier-regex</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>annevk</cc>
+    
+    <cc>ecmascriptbugs</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5010</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-08-22 11:38:47 -0700</bug_when>
+    <thetext>I wrote a (new) script that generates a regular expression that matches valid JavaScript identifiers as per ECMAScript 5.1 / Unicode v6.2.0. mathiasbynens.be/demo/javascript-identifier-regex
+
+Then, I made it do the same thing according to the latest ECMAScript 6 draft, which refers to Unicode Standard Annex #31: Unicode Identifier and Pattern Syntax (www.unicode.org/reports/tr31).
+
+After comparing the output, I noticed that both regular expressions are identical except for the following: ECMAScript 5 allows U+2E2F VERTICAL TILDE in IdentifierStart and IdentifierPart, but ECMAScript 6 / Unicode TR31 doesn’t.
+
+Was this potentially breaking change intentional? I’m fine with disallowing U+2E2F, but only if we’re sure it doesn’t break any existing code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5401</commentid>
+    <comment_count>1</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2013-09-18 14:33:59 -0700</bug_when>
+    <thetext>We decided on Sep 17 that it was intentional. Implementations need to use the ID_Start category instead.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

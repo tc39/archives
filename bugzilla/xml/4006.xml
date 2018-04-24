@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4006</bug_id>
+          
+          <creation_ts>2015-02-18 15:13:00 -0800</creation_ts>
+          <short_desc>FunctionDeclaration NeedsSuperBinding makes no sense in light of new early errors in ES6 draft rev33</short_desc>
+          <delta_ts>2015-02-18 15:32:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>3963</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Eric Faust">efaustbmo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12936</commentid>
+    <comment_count>0</comment_count>
+    <who name="Eric Faust">efaustbmo</who>
+    <bug_when>2015-02-18 15:13:10 -0800</bug_when>
+    <thetext>Rev 33 added new language to 14.1.2:
+
+It is a Syntax Error if FormalParameters Contains SuperProperty is true.
+It is a Syntax Error if FunctionBody Contains SupeProperty is true.
+
+Presumably, this is because the semantics of super make little sense outside methods, which makes sense.
+
+However, other things that handle FunctionDeclarations and FunctionExpressions do not reflect this change. For example, 14.1.17 still contains checks for SuperProperty. It seems to me that this can never happen because of the early errors above, and should simply return false. 
+
+Therefore, also, 14.1.22 and 14.1.23 need never consult NeedsSuperBinding when giving evaluation rules for these productions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12939</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 15:18:13 -0800</bug_when>
+    <thetext>This should be fixed in rev34 (bug 3963).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12941</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 15:32:53 -0800</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 3963 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

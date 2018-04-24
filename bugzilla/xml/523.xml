@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>523</bug_id>
+          
+          <creation_ts>2012-07-12 12:48:00 -0700</creation_ts>
+          <short_desc>15.5.4.5 Bugs in String.prototype.codePointAt</short_desc>
+          <delta_ts>2014-12-01 20:47:45 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1301</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 12:48:39 -0700</bug_when>
+    <thetext>(1) &quot;the UTF-16 encode code point value&quot; -&gt; &quot;the code point value of the code unit sequence&quot;
+
+(2) &quot;NaN&quot; -&gt; &quot;undefined&quot; (twice). Yes, that &quot;undefined&quot; was intentional - while NaN is what charCodeAt returns, I consider that a bug, because NaN is not a valid code point or code unit, and the normal convention in ECMAScript is to return undefined when a client asks for something that doesn&apos;t exist.
+
+(3) remove &quot;(leftmost)&quot;. We&apos;re not talking about rendering here, and which element is rendered leftmost depends on the element sequence within the string as well as the context in which it is rendered.
+
+(4) do we need the complicated explanation of indexing in this step anyway? Other methods, such as indexOf, seem to do fine with &quot;the code unit at position k+j of S&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1564</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 15:44:09 -0700</bug_when>
+    <thetext>fixed in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1635</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:23:51 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9630</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 21:28:23 -0700</bug_when>
+    <thetext>Checked in rev 26 draft:
+
+(1) problem still exists.
+
+(2)-(4) are fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9720</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 14:46:14 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft
+
+but I didn&apos;t use the phrase &quot;code unit sequence&quot; because that sounds like it might include the possibility of sequences that encode more than one code unit.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9868</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:19 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10698</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-01 20:47:45 -0800</bug_when>
+    <thetext>Verified in rev 28 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

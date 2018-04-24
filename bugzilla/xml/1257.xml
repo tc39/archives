@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1257</bug_id>
+          
+          <creation_ts>2013-02-20 10:26:00 -0800</creation_ts>
+          <short_desc>Make new Date(dateObj) work as expected</short_desc>
+          <delta_ts>2013-08-23 08:22:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3200</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-02-20 10:26:20 -0800</bug_when>
+    <thetext>1. `new Date(obj)` calls obj.[[DefaultValue]]()
+
+2. Date objects have a special weird [[DefaultValue]] method
+   that prefers to call .toString() rather than .valueOf().
+
+3. As it happens, Date.prototype.toString() is lossy.
+   The spec doesn&apos;t require it, but implementations don&apos;t show milliseconds
+   in Date toString output and it&apos;s unlikely to change.
+
+As a consequence, you can&apos;t use new Date(dateObj) to copy a Date object.
+
+Firefox implements this to spec and this causes real-world issues:
+  https://github.com/timrwood/moment/pull/629
+However at least Chrome doesn&apos;t implement the spec!
+
+Proposal: Special-case this in the Date constructor (15.9.3.2).
+
+&gt;- 1. Let v be ToPrimitive(value).
+&gt;+ 1. If value has a [[DateValue]] property then let v be value.[[DateValue]]; else let v be ToPrimitive(value).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3486</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-03-18 11:51:41 -0700</bug_when>
+    <thetext>Per Conclusion/Resolution here: https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-03/mar-13.md#414-make-new-datedateobj
+
+
+When date object is passed to the Date constructor, it makes an accurate copy of the date object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4910</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-15 15:44:20 -0700</bug_when>
+    <thetext>fixed in rev15 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5094</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:41 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

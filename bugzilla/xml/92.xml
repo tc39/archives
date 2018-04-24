@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>92</bug_id>
+          
+          <creation_ts>2011-04-17 11:41:00 -0700</creation_ts>
+          <short_desc>tests should never depend upon predicting the result of toStringing a function</short_desc>
+          <delta_ts>2011-05-31 16:38:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>93</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>188</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-04-17 11:41:21 -0700</bug_when>
+    <thetext>Some tests define a function and then compare the result returned by toString applied to that function to some expected result.  Presumably this is done to ensure that a function value is in fact the expected function value.
+
+However, such a test can produce false negatives because 15.3.3.3 says that Function.prototype.toString produces an implementation defined result.
+
+All tests that use toString on a function value need to be reviewed for this problem.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>220</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-25 13:28:59 -0700</bug_when>
+    <thetext>Searched through all IE Test Center tests for &quot;toString()&quot; and the only thing left that looked suspicious was 13.2-18-1.js:
+    var fun = function () { };
+    verifyValue = (fun.prototype !== 100 &amp;&amp; fun.prototype.toString() === &quot;[object Object]&quot;);
+
+As toString is being called on the prototype itself, this seems OK...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>222</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-05-25 13:57:26 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Searched through all IE Test Center tests for &quot;toString()&quot; and the only thing
+&gt; left that looked suspicious was 13.2-18-1.js:
+&gt;     var fun = function () { };
+&gt;     verifyValue = (fun.prototype !== 100 &amp;&amp; fun.prototype.toString() ===
+&gt; &quot;[object Object]&quot;);
+&gt; 
+&gt; As toString is being called on the prototype itself, this seems OK...
+
+The default value that is creates for the prototype property is not a function so, so this shouldn&apos;t be an issue here.  I&apos;m not sure what the the test against 100 is all about.
+
+I would think that this test should really be something like:
+  typeof fun.prototype === &apos;object&apos; &amp;&amp; {}.prototype.toString.call(fun.prototype) === &quot;[object Object]&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

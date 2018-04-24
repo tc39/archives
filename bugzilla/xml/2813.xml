@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2813</bug_id>
+          
+          <creation_ts>2014-05-04 10:44:00 -0700</creation_ts>
+          <short_desc>9.2.8: redundant code?</short_desc>
+          <delta_ts>2014-07-18 23:23:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8114</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-04 10:44:43 -0700</bug_when>
+    <thetext>In 9.2.8 &quot;AddRestrictedFunctionProperties Abstract Operation&quot;,
+steps 1 and 2 say:
+  1. If SameValue(F, %ThrowTypeError%) is true, then let thrower be F.
+  2. Else, let thrower be the %ThrowTypeError% intrinsic function Object.
+
+It seems like the net effect of the two branches are the same, so why distinguish them?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8212</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-07 17:45:04 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+this was a failed attempt to deal with initialization sequencing issues that arise from the fact that %ThrowTypeError%% is itself a built-in function that needs to have the restricted properties (which use %ThrowTypeError%)
+
+Fixed, in a more complex and hopefully correct manner as part of Realm initialization.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8724</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-31 23:54:49 -0700</bug_when>
+    <thetext>Ah, I see. In that case, I suggest:
+
+(a) In 8.2.2 CreateIntrinsics, replace steps 6-11 with:
+
+      Let thrower be CreateBuiltinFunction(realmRec, throwerSteps, undefined).
+      Assert: thrower is not an abrupt completion.
+
+(b) Here in 9.2.8, replace step 1 with:
+
+      If realm.[[intrinsics]].[[%ThrowTypeError%]] exists,
+          Let thrower be realm.[[intrinsics]].[[%ThrowTypeError%]]
+      Else,
+          Note: realm.[[intrinsics]] is in the process of being constructed
+              (by CreateIntrinsics), and F is the function that will be
+              assigned to realm.[[intrinsics]].[[%ThrowTypeError%]]
+          Let thrower be F.
+
+(In any event, in 9.2.8 / step 1, change &quot;realmRec&quot; to &quot;realm&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9083</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 13:42:41 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9306</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 23:23:46 -0700</bug_when>
+    <thetext>in rev26 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

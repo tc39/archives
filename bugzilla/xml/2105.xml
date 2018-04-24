@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2105</bug_id>
+          
+          <creation_ts>2013-10-30 02:01:00 -0700</creation_ts>
+          <short_desc>9.2 ECMAScript Function Objects: Typos</short_desc>
+          <delta_ts>2013-11-08 13:08:40 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6215</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-30 02:01:06 -0700</bug_when>
+    <thetext>9.2 ECMAScript Function Objects, 3rd paragraph:
+
+&gt; ECMAScript function objects are considered to be ordinary object [...]
+
+Change &quot;object&quot; to plural &quot;objects&quot;.
+
+
+&gt; [...] they may use alternative definitions [[Get]] and [[GetOwnProperty]].
+
+Missing &quot;of&quot; after &quot;definitions&quot;.
+
+
+9.2 ECMAScript Function Objects, 4th paragraph:
+
+&gt; All ECMAScript function objects all have the [[Call]] [...]
+
+Remove the second &quot;all&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6216</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-30 02:03:49 -0700</bug_when>
+    <thetext>9.2 ECMAScript Function Objects, 1st paragraph:
+
+Missing hyphen in &quot;non strict mode&quot;, change to &quot;non-strict mode&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6310</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-01 10:43:44 -0700</bug_when>
+    <thetext>fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6500</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:08:40 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

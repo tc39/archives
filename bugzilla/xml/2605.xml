@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2605</bug_id>
+          
+          <creation_ts>2014-04-06 20:21:00 -0700</creation_ts>
+          <short_desc>Promise.prototype.then now throws for non-functions</short_desc>
+          <delta_ts>2014-04-29 23:03:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>medikoo+ecmascript.org</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7611</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-04-06 20:21:22 -0700</bug_when>
+    <thetext>As discussed in a previous bug synchronous throw behavior for Promise.prototype.then is a massive footgun, a departure from all previous existing practice, and something that breaks consensus on previously agreed-upon behavior. Please revert this change.
+
+If there is talk of returning a rejected promise upon bad argument values, that is a separate decision, and the consequences there are simply that it breaks with all existing practice and existing consensus, and should still be run by the committee. But I stridently object to adding synchronous throw behavior in those cases.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7612</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 20:46:06 -0700</bug_when>
+    <thetext>yup, argument validation should be part of the synchronous call validation and has nothing to do with the async behavior of then. this fix derives from bug 2566
+
+We&apos;ll discuss it at this weeks TC39 meeting. 
+
+Can you find any example with such an &quot;early error&quot; would cause any issues with valid code that works with existing libraries.
+
+change the importance to normal, this is no more important than a bunch of other issues we have.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7618</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-04-07 01:50:37 -0700</bug_when>
+    <thetext>I am very sympathetic of this change, if we are sufficiently certain that it does not break existing code (but I have a hard time seeing how). I fully agree with Allen&apos;s argument: this is a different class of errors -- fatal bugs in the actual program -- that should not be confused with execution errors stemming from unexpected data or events. I see very little practical reason for lumping the two together. In particular, you want bugs reported as eagerly as possible, and there usually is no point in trying to recover from them, at least not locally.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7619</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mariusz Nowak">medikoo+ecmascript.org</who>
+    <bug_when>2014-04-07 03:07:16 -0700</bug_when>
+    <thetext>I think programmer errors should throw naturally, it&apos;s how it&apos;s solved in all other types of async API&apos;s and I don&apos;t remember it being an issue. Why it should be different for promises?
+
+This makes a good read on that subject: http://www.joyent.com/developers/node/design/errors
+
+As a side note I work with promise implementation that does that and find it as highly expected behavior.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7620</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-04-07 05:56:31 -0700</bug_when>
+    <thetext>OK, let&apos;s talk about existing code.
+
+I have spent the last few hours doing a survey of a several existing large codebases using promises at my current job. I&apos;ve done this both by inspection and by running through various codepaths with modified versions of the libraries in question. These are all unfortunately proprietary client software, and so I cannot link into the examples or even give them verbatim for fear of being sued, but I can extract the important details of each situation with different variable names etc.
+
+Some of these applications run in Node.js and use Q; others run in browsers and use a combination of Q, jQuery, or in two recent cases ES6 promises (with a fallback to existing shims), so that they use the existing implementations in Chrome and Firefox.
+
+In all cases the setup is largely the same: we have a promise-returning function in one isolated part of the application or UI, perhaps written by a different team; and we have another part of the application that calls that promise-returning function. And let&apos;s remember that the goal of this is not to critique coding style or impugn upon the competence of the original authors, but to discover the impact on existing code and refactoring hazards therein.
+
+### Case 1
+
+The function in question is
+
+function f(options) {
+  return aPromise.then(options.doTransformation &amp;&amp; someTransformFunction);
+}
+
+A call site that exists in another part of the codebase is
+
+function respondToSpecificRoute(res, req) {
+  f({ doTransformation: false }).then(
+    function () {
+      res.send(200);
+    },
+    function (err) {
+      res.send(500, err);
+    }
+  );
+}
+
+If we switched from Q to ES6 promises with the change in the existing draft, **every call to this route would cause our production servers to crash**, shutting down all existing connections to them until the auto-restart daemon kicks in. This would be a horrible impact on our business and open us up to essentially DDOS attacks, all because a function that previously failed asynchronously now fails synchronously.
+
+If we switched from Q to ES6 promises which started returning _rejected_ promises, then instead of crashing the server it would simply send a 500 every time this route is hit. Our monitoring would pick this up just as quickly as the crashing server, but it would not have the horrible business impact, and instead just inconvenience users who were trying to use that route, until we changed the code to compensate for ES6&apos;s shortcomings. So it is still a refactoring hazard, but not one that hurts the business as badly.
+
+
+### Case 2
+
+This code was quite surprising. It&apos;s pretty bad code to be honest. (But of course in real life it seems reasonable at first glance, given that there is much more stuff going on in the real codebase.) After I distill it down to its essence, it is:
+
+// Call as: g(onError), or g(options, onError)
+function g(onErrorOrOptions, onError) {
+  return getAPromise(onErrorOrOptions).catch(onErrorOrOptions).then(
+    function () {
+      // This code assumes onErrorOrOptions was a function, so the error was recovered from
+      // It does some stuff
+    },
+    function (originalErrFromAPromise) {
+      // This code assumes onErrorOrOptions was an options object, so the error still needs to be handled
+      // It does some stuff and then does
+      onError(aPromise);
+    }
+  );
+}
+
+A call site that exists in another part of the codebase is
+
+function handleUserAction() {
+  disableButton();
+  g({ option1: &quot;value1&quot; }, function (err) {
+    showErrorDialog(err.message);
+    reenableButton();
+  });
+}
+
+As you can see this code, which I promise is not as obviously horrible when obfuscated by layers of business logic, depends crucially on .catch(onErrorOrOptions) acting as a no-op passthrough of the error, so that it can handle the original error (originalErrFromAPromise) later.
+
+If Chrome updated their implementation to throw errors when objects were passed for onRejected, then this code would start breaking: instead of showing an error dialog with the original error&apos;s message (which is in this case a legitimate business reason, regarding transactions being unable to go through), the error would get thrown, unwinding the call stack surrounding handleUserAction and ending up in the console. The user would receive no actionable feedback, and the button would stay forever-disabled, forcing the user to refresh the page.
+
+If Chrome updated their implementation to return rejected promises when objects were passed for onRejected, then this code would end up calling onError with the resulting TypeError. Thus the user would be confronted with a nonsense error message about promises inside the error dialog, but at least the button would be reenabled.
+
+### And So On
+
+I actually have several more cases available after my cursory audit, but this is getting long and I think the above two are some of the more representative ones. If they are not convincing, or if I have not made the scope of the problem clear, I am happy to write up the others.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7626</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mariusz Nowak">medikoo+ecmascript.org</who>
+    <bug_when>2014-04-08 00:28:54 -0700</bug_when>
+    <thetext>&gt; If we switched from Q to ES6 promises with the change in the existing draft,
+**every call to this route would cause our production servers to crash**
+
+Has it crashed because `options.doTransformation &amp;&amp; someTransformFunction` resolved to neither function nor null nor undefined?
+
+Still, if it visibly crashed, then I take it was immediately obvious where the crash occurred and for what reason (it wouldn&apos;t be the case if error would be swallowed, so it&apos;s just for better).
+
+Switching from Q to ES6 you made a breaking change to other API that behaves differently. It&apos;s pretty normal that your code may crash and things should be tested upfront in such case.
+
+It looks as your point is: do not do it because *code written for Promises/A+ lib would break on that* and not because *it makes much more sense from logical point of view* I think we should focus strictly on latter part here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7794</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 12:33:03 -0700</bug_when>
+    <thetext>April 2014 TC39 meeting decided to remove the throw
+
+in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8039</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 23:03:36 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

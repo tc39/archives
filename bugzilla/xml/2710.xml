@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2710</bug_id>
+          
+          <creation_ts>2014-04-22 03:01:00 -0700</creation_ts>
+          <short_desc>ThrowTypeError changes vs ES5</short_desc>
+          <delta_ts>2014-04-29 22:24:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7866</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-04-22 03:01:15 -0700</bug_when>
+    <thetext>It seems that the %ThrowTypeError% function is no longer given a &apos;length&apos; property in the current draft.
+
+Also, the spec adds poisoned caller and arguments properties, but the way this is specified yields an infinite recursion between the creation algorithm, CreateBuiltinFunction, and AddRestrictedFunctionProperties (cf. https://bugs.ecmascript.org/show_bug.cgi?id=1538, which was marked fixed).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7880</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-22 11:24:26 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+restructed definition so that the built-in function defaults apply for it (except for [[Extensible]]
+
+also fixed the infinite recursion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8009</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:24:10 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

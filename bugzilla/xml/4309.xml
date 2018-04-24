@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4309</bug_id>
+          
+          <creation_ts>2015-04-16 14:52:00 -0700</creation_ts>
+          <short_desc>9.2.1 CanonicalizeLocaleList: Invalid call to CreateArrayFromList + editorial</short_desc>
+          <delta_ts>2015-04-16 20:37:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14264</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 14:52:32 -0700</bug_when>
+    <thetext>9.2.1 CanonicalizeLocaleList (locales)
+
+Step 3.a: Typo &quot;ArrayCreateFromList&quot; -&gt; &quot;CreateArrayFromList&quot;
+
+Step 4.a: Invalid call to CreateArrayFromList, `locales` is not a List type. I&apos;d simply remove the complete step and change step 3.a and step 4 to:
+
+&gt; 3.a Let locales be CreateArrayFromList(«locales»).
+&gt; 4. Let O be ToObject(locales).
+
+Step 5: Missing ReturnIfAbrupt after ToObject.
+
+Step 6 has wrong indentation (labelled as &quot;i&quot;) + merge with step labelled 6:
+
+&gt; 6. Let len be ToLength(Get(O, &quot;length&quot;)).
+
+Step 8.c: Change `kPresent` to italic font.
+
+Step 8.d.i: Missing ReturnIfAbrupt after Get
+
+Step 8.d.ii: Omit &quot;the&quot; and &quot;then&quot;
+
+&gt; If Type(kValue) is neither String nor Object, throw a TypeError exception.
+
+Step 8.d.iii: Missing ReturnIfAbrupt after ToString
+
+Step 8.d.iv: Omit &quot;the result of&quot;, omit &quot;then&quot;, remove comma after call to IsStructurallyValidLanguageTag
+
+
+Step 8.d.vi: Unnecessary ReturnIfAbrupt, CanonicalizeLanguageTag is not fallible
+
+Step 8.d.vii: Omit &quot;then&quot;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

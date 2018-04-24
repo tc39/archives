@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3684</bug_id>
+          
+          <creation_ts>2015-01-28 16:22:00 -0800</creation_ts>
+          <short_desc>9.2.3 [[Construct]], step 14: Handle explicit return with no value for derived constructor</short_desc>
+          <delta_ts>2015-02-12 12:17:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11742</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-28 16:22:06 -0800</bug_when>
+    <thetext>If I follow the algorithms correctly, when the body of a derived constructor is terminated with a bare `return` (without value), a TypeError is thrown at step 14.c, instead of returning the this-binding.
+
+A step should added before that step (imitating step 16):
+
+  14.c If kind is &quot;derived&quot; and result.[[value]] is undefined, return the result of calling the GetThisBinding concrete method of.envRec’s with no arguments.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11746</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-28 19:41:08 -0800</bug_when>
+    <thetext>(hum...)
+
+... the GetThisBinding concrete method of envRec with no arguments.
+
+(also to be corrected in step 16)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11748</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-29 02:35:45 -0800</bug_when>
+    <thetext>The proposed change and tail-call semantics may not play along nicely. If OrdinaryCallEvaluateBody returns from a tail-call, calleeContext is no longer the current execution context and any resource tied to calleeContext has been released (or reused) [14.6.3 PrepareForTailCall]. I&apos;d say the environment record is a resource which is tied to an execution context and therefore it&apos;s not valid to access `envRec` in step 14.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11750</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-29 04:16:19 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; The proposed change and tail-call semantics may not play along nicely.
+
+Yes, you&apos;re right: it will break in case of:
+
+    return functionThatReturnsUndefined()
+
+So, here is another solution I&apos;ve thought of: It consists of redefining the semantics of:
+
+    ReturnStatement : return ;
+
+(in section 13.9.1 The Return Statement / Runtime semantics), so that `return;` becomes equivalent to `return this;` when we are running a constructor.
+
+Concretely, the runtime semantics of `return;` would be approximately modified as follows:
+
+1. Let envRec be the environment record of the current execution context&apos;s VariableEnvironment (if any).
+2. If envRec.[[NewTarget]] is not null,
+  a. Let result be envRec.GetThisBinding().
+  b. ReturnIfAbrupt(result).
+  c. Return Completion{[[type]]: return, [[value]]: result, [[target]]: empty}.
+3. Return Completion{[[type]]: return, [[value]]: undefined, [[target]]: empty}.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12200</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 16:58:17 -0800</bug_when>
+    <thetext>I think what this really is pointing out is that you can&apos;t do a tail call from a [[Construct]] invocation because there is always constructor specific processing that needs to be done after returning from the call in the return statement.
+
+This was true, even before the recent changes.  The real bug is that the spec. was allowing such tail calls.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12201</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 17:35:16 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft
+
+fixed the return undefined base for derived constructors
+
+new and super() expressions are no longer tail calls.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12426</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:38 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

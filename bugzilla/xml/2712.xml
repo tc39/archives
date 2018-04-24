@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2712</bug_id>
+          
+          <creation_ts>2014-04-22 08:26:00 -0700</creation_ts>
+          <short_desc>Property attributes for all uses of @@iterator</short_desc>
+          <delta_ts>2015-07-10 08:35:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7868</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-04-22 08:26:59 -0700</bug_when>
+    <thetext>There are no property attributes defined for any _uses_ of well known symbol @@iterator (not the Symbol.iterator property itself). 
+
+Here&apos;s an example: 
+
+  23.2.3.11 Set.prototype [@@iterator ] ( )
+
+  The initial value of the @@iterator property is the same function object as 
+  the initial value of the values property.
+
+
+(http://people.mozilla.org/~jorendorff/es6-draft.html#sec-set.prototype-@@iterator)
+
+I expected to find a general definition here: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-properties-of-the-set-prototype-object but there is not. 
+
+
+This is the same for: 
+
+Reflect.prototype[@@iterator] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-reflect.loader.prototype-@@iterator
+
+Generator.prototype[@@iterator]] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator.prototype-@@iterator
+
+String.prototype[@@iterator] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-string.prototype-@@iterator
+
+Array.prototype[@@iterator] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-array.prototype-@@iterator
+
+Map.prototype[@@iterator] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-map.prototype-@@iterator
+
+Set.prototype[@@iterator] http://people.mozilla.org/~jorendorff/es6-draft.html#sec-set.prototype-@@iterator
+
+
+Presumably they should include: 
+
+  This property has the attributes { [[Writable]]: false, [[Enumerable]]: false, [[Configurable]]: true }.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7869</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-04-22 08:29:52 -0700</bug_when>
+    <thetext>Why writable false? It seems more consistent to use writable true (like all the other methods).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7870</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-04-22 08:31:53 -0700</bug_when>
+    <thetext>&gt; Why writable false?
+
+To match the attributes used to define @@toStringTag properties.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7872</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-22 09:00:16 -0700</bug_when>
+    <thetext>Shouldn&apos;t the clause 17 definition apply in that case?
+
+---
+Every other data property described in clauses 18 through 26 has the attributes { [[Writable]]: true, [[Enumerable]]: false, [[Configurable]]: true } unless otherwise specified.
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7873</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-04-22 09:03:25 -0700</bug_when>
+    <thetext>André, 
+
+Yes that&apos;s exactly what I was looking for, thank you.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

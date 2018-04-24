@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2951</bug_id>
+          
+          <creation_ts>2014-06-01 18:28:00 -0700</creation_ts>
+          <short_desc>14.5.11: NonConstructorMethodDefinitions is a List of what?</short_desc>
+          <delta_ts>2014-07-26 09:25:19 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8775</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 18:28:27 -0700</bug_when>
+    <thetext>In 14.5.11, NonConstructorMethodDefinitions is defined to return a List of ClassElements.
+
+In 14.5.16 / group 1 / step 16, it&apos;s assumed to return a List of MethodDefinitions.
+
+At some point, you have to use the phrase:
+    &quot;the MethodDefinition of the ClassElement&quot;.
+Given the name of the routine, you should probably do so in 14.5.11.
+
+(leftover from 2535)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8894</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-11 17:13:06 -0700</bug_when>
+    <thetext>We actually want to generate a list of method definition ClassElements.  They  need to be a class element because they are later test to see if they are static.
+
+It&apos;s generally ok to use ClassElement in place of MethodDefinition becase the the chain rule will just pass through any MethodDefinition sematic rules.
+
+However, there were a couple bugs in NonConstructorMethodDefinitions that I fixed in rev26 editor&apos;s draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9387</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:34:43 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9583</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-26 09:25:19 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>9</bug_id>
+          
+          <creation_ts>2011-02-09 11:50:00 -0800</creation_ts>
+          <short_desc>15.11.6/15.11.7 don&apos;t require new instances of native error objects</short_desc>
+          <delta_ts>2015-10-02 14:33:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Mac OS</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>158</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-02-09 11:50:51 -0800</bug_when>
+    <thetext>15.11.6 and 15.11.7 specify the &quot;native errors&quot; that are thrown for error conditions defined within the specification. However, the introductory text to both sections does not make it clear that a new Native Error instance is thrown on each such error occurrence.  In theory, an implementation might interpret this as meaning it only needs to keep a single instance of each Native Error and  reuse it for each required throw. Adding properties to such a common instance might be used as a covert communications channel.
+
+15.11.6 should say: &quot;A new instance of one of the NativeError objects ...&quot;
+15.11.7 should say: &quot;When an ECMASript implementation detects a runtime error it throws a new instance of one of the NativeError...&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>584</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:27:16 -0800</bug_when>
+    <thetext>set IN_PROGRESS to indicated this should go into ES5.1 Errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14726</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:00 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

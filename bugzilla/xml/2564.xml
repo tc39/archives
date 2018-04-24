@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2564</bug_id>
+          
+          <creation_ts>2014-02-24 07:30:00 -0800</creation_ts>
+          <short_desc>Arrow Function: apply, bind and call</short_desc>
+          <delta_ts>2014-07-19 18:42:53 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7400</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-02-24 07:30:29 -0800</bug_when>
+    <thetext>Currently apply, call and bind include no instruction for what to do when invoked on an ArrowFunction object.
+
+
+I&apos;m also a little confused about ArrowFunction&apos;s call to FunctionCreate instead of BoundFunctionCreate, perhaps there&apos;s a simple reason that I&apos;m just not seeing?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7417</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 14:07:05 -0800</bug_when>
+    <thetext>There is nothing special they need to do.  There is no difference between what happens when:
+   ({foo: a=&gt;this /*lexical this */}).foo()
+and what happens when a similar arrow function is called via call/apply/bind.  Arrow functions internally ignore  whatever is pass as the thisValue by a [[Call]] internal method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7422</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-03-03 14:53:15 -0800</bug_when>
+    <thetext>Yes, I realize that—what I&apos;m asking is if you think it might be wise to include some instruction to that effect? If you&apos;re saying you don&apos;t think it&apos;s necessary, that&apos;s fine too.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9218</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-15 18:15:26 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+added a note to call, bind, apply clarify that the thisArg is ignored for bound and arrow functions
+
+I didn&apos;t say anything about using FunctionCreate to create arrow functions.  I think you&apos;ve just picked up the meme that an arrow function is similar to saying:
+  (function () {}.bind(this))
+which is actually a pretty low fidelity  analogy. I really don&apos;t think we need to say anything about that because I don&apos;t think there is anything in the spec. that that equates arrow functions and bound functions in that manner.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9393</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:42:53 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

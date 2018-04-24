@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>52</bug_id>
+          
+          <creation_ts>2011-03-04 16:28:00 -0800</creation_ts>
+          <short_desc>Need Strict Mode tests</short_desc>
+          <delta_ts>2011-05-10 13:31:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Highest</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>bruant.d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>114</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-04 16:28:55 -0800</bug_when>
+    <thetext>We have zero Strict Mode tests today.  Ballpark figure is we need 250+ test cases for shallow, yet complete coverage.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>131</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 16:23:04 -0800</bug_when>
+    <thetext>In ES5.1, Strict Mode seems to affect:
+- 4.2.2
+- 7.6.1.2
+- 7.8.3
+- 7.8.4
+- 10.1.1
+- Table 17
+- 10.2.2.1
+- 10.3.1
+- 10.4.2.1
+- 10.5
+- 10.6
+- 11.2.1
+- 11.4.1
+- 11.13.1
+- 12.2.1
+- 12.10.1
+- 12.14.1
+- 13
+- 13.1
+- 14
+- 15.3.2.1
+- 15.3.5
+- 15.3.5.4
+- 16
+- B.1.1
+- B.1.2
+- Annex C</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>137</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-10 01:55:45 -0800</bug_when>
+    <thetext>For inspiration:
+http://kangax.github.com/es5-compat-table/strict-mode/
+https://developer.mozilla.org/en/JavaScript/Strict_mode
+
+All code snippets from MDN added after August 2010 (true for the strict mode article) are in public domain (https://developer.mozilla.org/Project:Copyrights).
+
+No idea what kangax&apos;s tests licence is.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>205</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-10 13:31:16 -0700</bug_when>
+    <thetext>We have at least a minimal number of Strict Mode tests for the ES5 sections called out previously.  Also, the test harness is now capable of supporting so-called early error parser test cases.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

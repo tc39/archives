@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>85</bug_id>
+          
+          <creation_ts>2011-04-05 08:35:00 -0700</creation_ts>
+          <short_desc>heredoc support</short_desc>
+          <delta_ts>2011-06-21 12:26:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Windows</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Slide">slide.o.mix</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>180</commentid>
+    <comment_count>0</comment_count>
+    <who name="Slide">slide.o.mix</who>
+    <bug_when>2011-04-05 08:35:21 -0700</bug_when>
+    <thetext>Many languages support multiline strings through a heredoc type syntax.
+
+Python:
+longStr = &quot;&quot;&quot;This
+is 
+a 
+multiline
+string&quot;&quot;&quot;
+
+C#:
+string longStr = @&quot;This
+is
+a
+multiline
+string&quot;;
+
+PHP:
+$foo = &lt;&lt;EOF
+This
+is
+a
+multiline
+string
+EOF
+
+ECMAScript supports multiline strings, but the continuation character can be cumbersome
+
+var longString = &quot;This\
+is\
+a\
+multiline\
+string&quot;;
+
+If you forget the continuation character, it can cause confusion trying to determine where the issue is.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>237</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-06-21 12:26:22 -0700</bug_when>
+    <thetext>Closing as fixed, since http://wiki.ecmascript.org/doku.php?id=harmony:quasis takes care of this need.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

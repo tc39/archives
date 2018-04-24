@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2877</bug_id>
+          
+          <creation_ts>2014-05-19 10:22:00 -0700</creation_ts>
+          <short_desc>7.1.3.1 has weird behavior w.r.t preceding +/- leading to ambiguity</short_desc>
+          <delta_ts>2014-06-16 13:57:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Oliver Hunt">oliver</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8556</commentid>
+    <comment_count>0</comment_count>
+    <who name="Oliver Hunt">oliver</who>
+    <bug_when>2014-05-19 10:22:40 -0700</bug_when>
+    <thetext>7.1.3.1 says
+ &quot;A StringNumericLiteral that is decimal may be preceded by + or - to indicate its sign.&quot;
+
+But the grammar also explicit includes +/- productions, so this would _imply_ that you could have up to two sign operators.
+
+It also leads to weirdness handling &quot;Infinity&quot; as we explicitly state &quot;-Infinity&quot; is allowed, but don&apos;t mention &quot;+Infinity&quot; so I believe it would be reasonable to interpret this as meaning that &quot;+Infinity&quot;, &quot;-+Infinity&quot;, and &quot;--Infinity&quot; are allowed, _or_ because &quot;Infinity&quot; is not handled by the grammar, we could also interpret the text as not allowing those literals, and logically therefore disallowing &quot;+Infinity&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8558</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-19 11:08:30 -0700</bug_when>
+    <thetext>[Changing this bug&apos;s &apos;Version&apos; from Rev17 to Rev24.
+Section 7.1.3.1 didn&apos;t exist in Rev17.]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8559</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-19 11:13:58 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; 7.1.3.1 says
+&gt;  &quot;A StringNumericLiteral that is decimal may be preceded by + or - to indicate
+&gt; its sign.&quot;
+
+But that&apos;s in a Note, so it&apos;s non-normative.
+
+It would be clearer if the wording were changed from &quot;may be preceded by&quot; to something like &quot;may start with&quot;. (So I think this is an editorial issue, not a technical one.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8564</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 12:16:05 -0700</bug_when>
+    <thetext>This is old language (and as Michael points out, non-normative) that goes back to at least ES3 (it&apos;s in 9.3.1 in ES3 and ES5)
+
+I agree that the language could be made less confusing.
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8957</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 13:57:10 -0700</bug_when>
+    <thetext>in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>197</bug_id>
+          
+          <creation_ts>2011-08-16 05:52:00 -0700</creation_ts>
+          <short_desc>Coverage: Missing Function.prototype.bind tests</short_desc>
+          <delta_ts>2012-01-12 09:50:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>421</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-08-16 05:52:47 -0700</bug_when>
+    <thetext>I went through http://hg.ecmascript.org/tests/test262/file/034836894a85/test/suite/ietestcenter/chapter15/15.3/15.3.4/15.3.4.5 and noticed that a bunch of things are not tested.
+For inspiration, John-David Dalton has some tests here: https://twitter.com/#!/jdalton/status/103332156687925249
+One of the goal being to test how a user-provided Function.prototype.bind function can emulate the spec expectations.
+A couple of attempts can be found on the web:
+* https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind#Compatibility
+* https://github.com/kriskowal/es5-shim/blob/master/es5-shim.js#L55
+
+In order to help improving these shims, it would be good to have tests testing other aspects of Function.prototype.bind. In particular, things that can&apos;t be emulated like the fact that a bound function doesn&apos;t have a &quot;prototype&quot; property (instanceof works anyway thanks to step 14).
+Also, calling [[Construct]] of a bound function should be not different from calling [[Target]].[[Construct]], etc.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

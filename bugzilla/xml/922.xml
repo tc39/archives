@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>922</bug_id>
+          
+          <creation_ts>2012-11-02 17:04:00 -0700</creation_ts>
+          <short_desc>15.5.4.21 String.prototype.repeat should allow a count value of 0</short_desc>
+          <delta_ts>2012-12-21 18:08:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>claude.pache</cc>
+    
+    <cc>tobie.langel</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2409</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2012-11-02 17:04:09 -0700</bug_when>
+    <thetext>Repeating a string 0 time should yield an empty string.
+
+According to the current version of the spec, it throws a RangeError (at step 6).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2547</commentid>
+    <comment_count>1</comment_count>
+    <who name="Tobie Langel">tobie.langel</who>
+    <bug_when>2012-11-22 12:51:15 -0800</bug_when>
+    <thetext>For reference, in Ruby:
+
+    irb(main):008:0&gt; &apos;foo&apos; * 3
+    =&gt; &quot;foofoofoo&quot;
+    irb(main):009:0&gt; &apos;foo&apos; * 1
+    =&gt; &quot;foo&quot;
+    irb(main):010:0&gt; &apos;foo&apos; * 0
+    =&gt; &quot;&quot;
+    irb(main):011:0&gt; &apos;foo&apos; * -1
+    ArgumentError: negative argument
+	from (irb):11:in `*&apos;
+	from (irb):11</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2559</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2012-11-22 21:50:11 -0800</bug_when>
+    <thetext>See also http://rosettacode.org/wiki/Repeat_a_string.
+
+/be</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2972</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-01 11:43:35 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

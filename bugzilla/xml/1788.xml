@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1788</bug_id>
+          
+          <creation_ts>2013-08-16 08:59:00 -0700</creation_ts>
+          <short_desc>15.1.2.1: Lexical declarations should always get into a new declarative environment</short_desc>
+          <delta_ts>2014-10-14 15:18:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4927</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-16 08:59:45 -0700</bug_when>
+    <thetext>&quot;10.5.5 Eval Declaration Instantiation&quot; is not yet specified, so it&apos;s hard to tell how lexical declarations interact with eval&apos;ed code, but I&apos;d still like to suggest to change 15.1.2.1, step 14 to add an else-branch which creates a new declarative environment:
+
+14.  If strictScript is true or if direct is true and strictCaller is true, then
+  a.  Let strictVarEnv be the result of calling NewDeclarativeEnvironment passing lexEnv as the argument.
+  b.  Let lexEnv be strictVarEnv.
+  c.  Let varEnv be strictVarEnv.
+15.  Else
+  a.  Let newLexEnv be the result of calling NewDeclarativeEnvironment passing lexEnv as the argument.
+  b.  Let lexEnv be newLexEnv.
+
+
+With this change lexical declarations in the eval&apos;ed code are always created within a new declarative environment. That means the following code does not add a let-bound variable to the block scope:
+---
+let x = 0;
+{ /* block scope */
+  eval(&quot;let x = 1&quot;);
+}
+---
+
+It also ensures lexical declarations are true lexical declarations. Without a new lexical environment, this code would create a data property &quot;x&quot; in the object &quot;o&quot; with value `1`:
+---
+let o = {};
+with(o) eval(&quot;let x = 1&quot;);
+---
+
+And obviously this approach is also beneficial for VMs, because they can give block scopes static shapes. 
+
+
+
+SpiderMonkey handles this a bit different, basically &quot;let &lt;id&gt; = &lt;expression&gt;&quot; is rewritten to &quot;var &lt;id&gt;; &lt;id&gt; = &lt;expression&gt;;&quot;. This also gives block scopes static shapes, but lexical declarations can still degenerate into other declaration forms as the following test case shows:
+---
+let o = {x: 0};
+with(o) eval(&quot;let x=1&quot;);
+assertEq(o.x, 1);
+assertEq(&apos;x&apos; in this, true);
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5008</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-22 11:16:37 -0700</bug_when>
+    <thetext>sounds like a good idea.  Probably need to discuss it on es-discuss or at  TC39 meeting</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10316</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-11 16:45:27 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10484</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:18:02 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

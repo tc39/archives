@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3526</bug_id>
+          
+          <creation_ts>2015-01-15 04:57:00 -0800</creation_ts>
+          <short_desc>yield* broken for throw()</short_desc>
+          <delta_ts>2015-02-02 18:38:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andy Wingo">wingo</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>jandemooij</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>marc.nieper+bugzilla</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11361</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2015-01-15 04:57:28 -0800</bug_when>
+    <thetext>The semantics for the interaction between throw() and yield* seem to have changed in a recent revision of the spec.  The text now is:
+
+YieldExpression : yield * AssignmentExpression
+1. Let exprRef be the result of evaluating AssignmentExpression.
+2. Let value be GetValue(exprRef).
+3. Let iterator be GetIterator(value).
+4. ReturnIfAbrupt(iterator).
+5. Let received be NormalCompletion(undefined).
+6. Repeat
+   a. If received.[[type]] is normal, then
+      i. Let innerResult be IteratorNext(iterator, received.[[value]]).
+      ii. ReturnIfAbrupt(innerResult).
+      iii. Let done be IteratorComplete(innerResult).
+      iv. ReturnIfAbrupt(done).
+      v. If done is true, then
+         1. Return IteratorValue (innerResult).
+      vi. Let received be GeneratorYield(innerResult).
+   b. Else if received.[[type]] is throw, then
+      i. Let hasThrow be HasProperty(iterator, &quot;throw&quot;).
+      ii. ReturnIfAbrupt(hasThrow).
+      iii. If hasThrow is true, then
+         1. Let innerResult be Invoke(iterator, &quot;throw&quot;, «‍received.[[value]]»).
+         2. ReturnIfAbrupt(innerResult).
+         3. NOTE: Exceptions from the inner iterator throw method are propagated.
+      iv. Return received.
+   c. Else,
+      i. Assert: received.[[type]] is return.
+      ii. Let hasReturn be HasProperty(iterator, &quot;return&quot;).
+      iii. ReturnIfAbrupt(hasReturn).
+      iv. If hasReturn is false, then return received.
+      v. Let innerReturnValue be Invoke(iterator, &quot;return&quot;, «‍received.[[value]]»).
+      vi. ReturnIfAbrupt(innerReturnValue).
+      vii. If Type(innerReturnValue) is not Object, then throw a TypeError exception.
+      viii. Let returnValue be IteratorValue(innerReturnValue).
+      ix. ReturnIfAbrupt(returnValue).
+      ix. Return Completion{[[type]]: return , [[value]]: returnValue , [[target]]:empty}.
+
+So now if we have the coroutine:
+
+function* ones_coroutine() {
+  while (true) {
+    try {
+      yield 1;
+    } catch (e) {}
+  }
+}
+
+And the yield* wrapper:
+
+function* wrap(iterable) {
+  return yield* iterable
+}
+
+I thought that the intention behind yield* was that wrap(ones_coroutine()) would be equivalent to ones_coroutine().
+
+However now they are different; consider
+
+var i1 = ones_coroutine()
+i1.next() // { value: 1, done: false }
+i1.throw(&apos;foo&apos;) // { value: 1, done: false }
+i1.next() // { value: 1, done: false }
+
+var i2 = wrap(ones_coroutine())
+i2.next() // { value: 1, done: false }
+i2.throw(42) // { value: undefined, done: true }
+i2.next() // { value: undefined, done: true }
+
+This is particularly egregious for async functions, consider:
+
+var task = async(function* () { ... yield* subtask(); ... });
+var subtask = async(function* () { ... });
+
+Now if a promise yielded by subtask() fails, subtask() will not have the chance to recover from the error and continue processing, yielding further values.  This seems to me to be an error in the specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11363</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2015-01-15 05:09:58 -0800</bug_when>
+    <thetext>Jan pointed out to me that i2.throw(42) would throw 42 instead of returning { done: true, value: undefined }.  Thanks Jan.  Still, the point stands.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11550</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2015-01-19 01:41:27 -0800</bug_when>
+    <thetext>This behavior is present in the latest draft too.  Allen, can you confirm please?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11551</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-19 08:12:39 -0800</bug_when>
+    <thetext>I haven&apos;t had a chance to get into it yet.  Hopefully this week</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11553</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-19 14:05:16 -0800</bug_when>
+    <thetext>(In reply to Andy Wingo from comment #0)
+&gt; The semantics for the interaction between throw() and yield* seem to have
+&gt; changed in a recent revision of the spec.  The text now is:
+&gt; 
+
+Actually, it&apos;s been this way since generator semantics for first incorporated into the spec. (I checked)
+
+But, I agree the currently spec&apos;d behavior is a bug.
+
+Fix on the way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11554</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-19 14:14:39 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft.
+
+the &apos;ReturnIfAbrupt&apos; in step 6.b.iii.2 should just be a &apos;return&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11557</commentid>
+    <comment_count>6</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2015-01-20 00:36:33 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #5)
+&gt; fixed in rev32 editor&apos;s draft.
+&gt; 
+&gt; the &apos;ReturnIfAbrupt&apos; in step 6.b.iii.2 should just be a &apos;return&apos;
+
+Thanks for taking a look, Allen! :)
+
+Shouldn&apos;t 6.b.iv not be executed if hasThrow is true?  I mean, if the iterator has &quot;throw&quot;, calling the throw method should update &quot;received&quot; and loop, seems to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11561</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-20 09:58:27 -0800</bug_when>
+    <thetext>(In reply to Andy Wingo from comment #6)
+
+&gt; 
+&gt; Shouldn&apos;t 6.b.iv not be executed if hasThrow is true?  I mean, if the
+&gt; iterator has &quot;throw&quot;, calling the throw method should update &quot;received&quot; and
+&gt; loop, seems to me.
+
+It&apos;s even more complex than that:
+
+
+b.  Else if received.[[type]] is throw, then
+  i.  Let hasThrow be HasProperty(iterator, &quot;throw&quot;).
+  ii.  ReturnIfAbrupt(hasThrow).
+  iii. If hasThrow is true, then
+    1.   Let innerResult be Invoke(iterator, &quot;throw&quot;, «received.[[value]]»).
+    2.	 ReturnIfAbrupt(innerResult).
+    3.	 NOTE:  Exceptions from the inner iterator throw method are propagated. Normal completions from an inner throw method are processed just like an inner next.
+    4.	 If Type(innerResult) is not Object, throw a TypeError exception.
+    5.	 Let done be IteratorComplete(innerResult).
+    6.	 ReturnIfAbrupt(done).
+    7.	 If done is true, return IteratorValue(innerResult).
+    8.	 Let received  be GeneratorYield(innerResult).
+      iv.  Else,
+        1.   NOTE:  If iterator does not have a throw method, this throw is going to terminate the yield* loop. But first we need to give iterator a chance to clean up.
+        2.   Return IteratorClose(iterator,  received).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11749</commentid>
+    <comment_count>8</comment_count>
+    <who name="Marc Nieper-Wißkirchen">marc.nieper+bugzilla</who>
+    <bug_when>2015-01-29 02:49:44 -0800</bug_when>
+    <thetext>What about the following example?
+
+var x;
+
+function* ones_coroutine() {
+  try {
+    yield 1;
+  } finally {
+    yield 2;
+    x = 10;
+  }
+}
+
+function* wrap(iterable) {
+  return yield* iterable;
+}
+
+x = 0;
+let g = ones_coroutine();
+g.next() // -&gt; {value: 1, done: false}
+g.return(42) // -&gt; {value: 2, done: false}
+g.next() // -&gt; {value: 42, done: true}
+x // -&gt; 10
+
+x = 0;
+let h = wrap(ones_coroutine());
+h.next() // -&gt; {value: 1, done: false}
+h.return(42) // -&gt; {value: 2, done: true}
+h.next() // -&gt; {value: undefined, done: true}
+x // -&gt; 0
+
+If I understand the rev 31 of the draft correctly, the values behind the comments // -&gt; reflect what the draft describes. However, this means that ones_coroutine() behaves very differently to wrap(ones_coroutine()).
+
+This semantics seems not very plausible to me. I would be expecting that all finally clauses are being run when a generator (even an inner one) is being closed by a call to return.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11956</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:52 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

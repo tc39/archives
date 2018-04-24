@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4355</bug_id>
+          
+          <creation_ts>2015-05-06 09:50:00 -0700</creation_ts>
+          <short_desc>Date.prototype.toString definition is incoherent</short_desc>
+          <delta_ts>2015-10-02 13:14:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Tom Schuster">evilpies</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>arai.unmht</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14379</commentid>
+    <comment_count>0</comment_count>
+    <who name="Tom Schuster">evilpies</who>
+    <bug_when>2015-05-06 09:50:39 -0700</bug_when>
+    <thetext>Date.prototype.toString is defined in a very strange way. I think the intention of the method is to be generic and use NaN as a time-value for non date objects.
+However Step 1. &quot;Let O be this Date object.&quot; doesn&apos;t really make sense in connection with Step 2., because only Date objects would have a [[DateValue]].
+
+My suggestion:
+1. Let O be the this value.
+2. If Type(O) is not Object, throw a TypeError exception.
+and like before:
+3. If O does not have a [[DateValue]] internal slot, then 
+...
+
+Note: This function is intentionally generic.
+
+If the function should _not_ be generic then current Step 2. makes no sense to me.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14381</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-06 10:03:54 -0700</bug_when>
+    <thetext>See the text in 20.3.4 that defines specification conventions that are specific to Date.prototype methods:
+
+In following descriptions of functions that are properties of the Date prototype object, the phrase “this Date object” refers to the object that is the this value for the invocation of the function. If the Type of the this value is not Object, a TypeError exception is thrown.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14382</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Schuster">evilpies</who>
+    <bug_when>2015-05-06 10:10:04 -0700</bug_when>
+    <thetext>That section also says &quot;Unless explicitly defined otherwise, the methods of the Date prototype object defined below are not generic&quot; ... Anyway using prose that does those not very obvious things is not very nice to the reader.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14383</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-06 10:26:24 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft
+
+Added a NOTE stating that Date.prototype.toString is &quot;intentionally generic&quot;.
+
+Phrases like &quot;this Date object&quot; and &quot;this time value&quot; that carry non-obvious semantics are a legacy of the ES3 spec.  Replacing them with something more explicit is too large a change to make at this point in the ES6 publication process.  Feel free to file a ES7 bug suggesting replacement of all such phrases.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

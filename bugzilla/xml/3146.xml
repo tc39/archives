@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3146</bug_id>
+          
+          <creation_ts>2014-08-22 10:08:00 -0700</creation_ts>
+          <short_desc>Please add EnsureNonNeuteredArrayBuffer() common abstract operation</short_desc>
+          <delta_ts>2015-02-09 17:31:34 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9844</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-08-22 10:08:29 -0700</bug_when>
+    <thetext>Many places in the spec want to check that something is a usable array buffer. We also want to do so for binary streams [1].
+
+Currently this involves
+
+1. If Type(O) is not Object, throw a TypeError exception.
+2. If O does not have an [[ArrayBufferData]] internal slot throw a TypeError exception.
+3. If the value of O’s [[ArrayBufferData]] internal slot is undefined, then throw a TypeError exception.
+4. If IsNeuteredBuffer(O) is true, then throw a TypeError exception.
+
+It would be great to abstract this into
+
+1. ReturnIfAbrupt(EnsureNonNeuteredArrayBuffer(O))
+
+(or, in promise-using specs, RejectIfAbrupt(EnsureNonNeuteredArrayBuffer(O), capability).)
+
+[1]: https://github.com/whatwg/streams/pull/173</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12271</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-09 17:31:21 -0800</bug_when>
+    <thetext>Step 3 is no longer necessary and a routine doing this would still require two steps to call it and check for the exception, and the difference between two and three steps isn&apos;t that great.
+
+Plus, it turns out that now there aren&apos;t very many (3-5) places that need to use this exact sequence.
+
+So, I&apos;m not going to bother with it this time around.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>55</bug_id>
+          
+          <creation_ts>2011-03-07 13:15:00 -0800</creation_ts>
+          <short_desc>Review Sputnik conformance tests looking for test holes</short_desc>
+          <delta_ts>2012-01-05 14:28:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>56</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>117</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:15:12 -0800</bug_when>
+    <thetext>To date, we&apos;ve assumed that Sputnik has complete test coverage for all JavaScript features present in both ES3 and ES5.  We really do need to verify this assumption is correct; minimally at the ES5 section level (e.g., is 11.1.1 covered?).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>130</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 14:27:31 -0800</bug_when>
+    <thetext>Guessing at least a couple of days will be needed on this.  Could be less or more depending upon how thorough we want to be.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>541</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-05 14:28:26 -0800</bug_when>
+    <thetext>Killing this in favor of https://bugs.ecmascript.org/show_bug.cgi?id=56.  Wouldn&apos;t taken much longer than two days any ways.
+
+*** This bug has been marked as a duplicate of bug 56 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

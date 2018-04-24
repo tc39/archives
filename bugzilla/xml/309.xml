@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>309</bug_id>
+          
+          <creation_ts>2012-03-15 12:15:00 -0700</creation_ts>
+          <short_desc>Community Feedback on Harmony Math functions proposal</short_desc>
+          <delta_ts>2015-10-02 14:36:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>proposals</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=262</see_also>
+    
+    <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=314</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>alex</cc>
+    
+    <cc>jens</cc>
+    
+    <cc>lukeh</cc>
+    
+    <cc>roger.andrews</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>766</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-03-15 12:15:21 -0700</bug_when>
+    <thetext>This item is for tracking community feedback and feature requests relating to the the Harmony Math related proposals (http://wiki.ecmascript.org/doku.php?id=harmony:more_math_functions and others ).
+
+Anybody with such feedback should record it as a comment on this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>767</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-15 13:08:50 -0700</bug_when>
+    <thetext>
+&gt; This item is for tracking community feedback and feature requests relating to
+&gt; the the Harmony Math related proposals
+&gt; (http://wiki.ecmascript.org/doku.php?id=harmony:more_math_functions and others
+&gt; ).
+&gt; 
+&gt; Anybody with such feedback should record it as a comment on this bug.
+
+Has anyone considered setting limits for the maximum error of different functions?
+
+Most of the added functions in that proposal are quite a bit less useful unless the results are guaranteed to be better than just implementing them in JS. Accuracy currently varies a bit between browsers (and platforms) which is a bit annoying.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>773</commentid>
+    <comment_count>2</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-16 14:36:04 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Has anyone considered setting limits for the maximum error of different
+&gt; functions?
+&gt; 
+&gt; Most of the added functions in that proposal are quite a bit less useful unless
+&gt; the results are guaranteed to be better than just implementing them in JS.
+&gt; Accuracy currently varies a bit between browsers (and platforms) which is a bit
+&gt; annoying.
+
+Agreed.
+
+The whole point of Math.log2, Math.log10, Math.log1p, Math.expm1 is to be more accurate than the user could achieve with a simplistic approach.
+Math.hypot too should accurately control cancellation errors (as well as avoiding overflow and managing Infinity).
+Math.cbrt (if it comes to pass) also manages accuracy.
+
+It should be possible to make a 1 ULP guarantee to most (all?) Math functions, though the exact nature of this issue is assumed to be a &quot;hard problem&quot; in computer science.
+
+See also the Table Maker&apos;s Dilemma:
+http://en.wikipedia.org/wiki/Rounding#The_table-maker.27s_dilemma</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>775</commentid>
+    <comment_count>3</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-16 14:55:53 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; (In reply to comment #1)
+&gt; &gt; Has anyone considered setting limits for the maximum error of different
+&gt; &gt; functions?
+&gt; &gt; 
+&gt; &gt; Most of the added functions in that proposal are quite a bit less useful unless
+&gt; &gt; the results are guaranteed to be better than just implementing them in JS.
+&gt; &gt; Accuracy currently varies a bit between browsers (and platforms) which is a bit
+&gt; &gt; annoying.
+&gt; 
+&gt; Agreed.
+&gt; 
+&gt; The whole point of Math.log2, Math.log10, Math.log1p, Math.expm1 is to be more
+&gt; accurate than the user could achieve with a simplistic approach.
+&gt; Math.hypot too should accurately control cancellation errors (as well as
+&gt; avoiding overflow and managing Infinity).
+&gt; Math.cbrt (if it comes to pass) also manages accuracy.
+&gt; 
+&gt; It should be possible to make a 1 ULP guarantee to most (all?) Math functions,
+&gt; though the exact nature of this issue is assumed to be a &quot;hard problem&quot; in
+&gt; computer science.
+&gt; 
+&gt; See also the Table Maker&apos;s Dilemma:
+&gt; http://en.wikipedia.org/wiki/Rounding#The_table-maker.27s_dilemma
+
+While it is correct that the &quot;Table Maker&apos;s Dilemma&quot; is a problem for general transcendental functions, I think that the ones currently proposed could be correctly rounded; I did a quick check through the IEEE 754-2008 standard and most (if not all) functions are on &apos;Recommended correctly rounded functions 9.2.0&apos; list.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>781</commentid>
+    <comment_count>4</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-16 16:13:26 -0700</bug_when>
+    <thetext>Re: Special Values in the es6libraryextensions.pdf document
+
+Note that sometimes the text has &quot;if x is +0 or -0&quot; other times both cases are enumerated even if the result is the same.  Maybe choose one style or the other for consistency.
+
+This document has a couple of issues in the Special Values of new Math functions:
+
+Math.acosh
+   add new line &quot;If x is -Inf, the result is +Inf&quot;
+Math.expm1(−Inf)  -&gt; −1
+   as already noted in Harmony bug 262
+Math.hypot
+   the statement &quot;the result is y&quot; is incorrect, result should be abs(y);
+   also, the check for infinite x or y should be done before the check for NaN
+   for IEEE754 conformance (see below)
+
+
+IEEE754 has hypot of +/-Infinity with anything (even NaN) as +Infinity:
+    hypot(Infinity,NaN) == hypot(NaN,-Infinity) == ... == Infinity
+
+This is similar to the existing Math.pow which conforms to IEEE754 handling of the indefinite number NaN:
+    Math.pow(NaN,0)  -&gt; 1
+(which is correct since pow(x,0)==1 for all x).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>782</commentid>
+    <comment_count>5</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-16 17:29:46 -0700</bug_when>
+    <thetext>Re: Math.hypot
+
+There seems to be agreement on making Math.hypot variadic: Math.hypot(x,y,z,...)
+
+The use cases in 3D geometry etc are obvious.
+
+Probably the function&apos;s arity should remain 2 (Math.hypot.length==2).  If given no arguments the return value should probably be 0 (not NaN), although what meaning does the Euclidean distance have in a 0-dimensional space?
+
+
+The documentation of Math.hypot should point out that hypot avoids overflow
+and minimises rounding errors.  Otherwise people might be tempted to naively use Math.sqrt on the sum of the squares.  This is easily implemented by dividing through by the largest argument then multiplying back at the end (see pseudocode below).
+
+As noted in comment 4 above, the hypot of +/-Infinity with anything (even NaN) should be +Infinity.
+
+Pseudocode implementation:
+   scan the arguments noting the maximum absolute value, maxabs;
+   if (maxabs is infinite)  return Infinity;
+   if (any of the arguments was NaN)  return NaN;
+   if (maxabs == 0)  return 0;
+   divide each argument by maxabs;
+   take the sqrt of the sum of the squares of the arguments, r;
+   return r * maxabs;
+
+There are a couple of speedups possible, such as the early detection of arguments.length being 0 or 1.  Otherwise take care of the value of maxabs if there are no arguments.  You might also want to sum the squared arguments from smallest to largest in an attempt to squeeze a little extra precision.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>783</commentid>
+    <comment_count>6</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-16 18:19:18 -0700</bug_when>
+    <thetext>Re: proposed new function Math.cbrt
+
+Several math libraries have the cube-root elementary function: cbrt.
+The proposal is for JavaScript to follow suit.
+
+cbrt is more accurate than pow(x,1/3) and does not have a domain error for x&lt;0.
+Unlike pow() it has the special values:
+    Math.cbrt(-0)  -&gt; -0
+    Math.cbrt(-Infinity)  -&gt; -Infinity
+because it is an odd function and therefore has rotational symmetry about the Origin (like sin(), tan(), etc).
+
+Specific use cases were not given, but observe that cbrt is arguably almost as generally useful as sqrt.  cbrt handles a negative domain (x&lt;0) with no nasty drama, unlike pow which returns NaN - forcing the user to check and correct before invoking.
+
+
+Comparing against Math.pow:
+1) cbrt is more explicit about -0 and -Infinity, whereas pow deals with the
+   general case.  (Note that sqrt is also explicit about -0.)
+2) cbrt correctly handles a negative domain (x&lt;0) with no nasty drama,
+   whereas pow returns NaN.
+3) Obviously, cbrt is more accurate than pow since 1/3 is not exact in
+   floating-point, and the error compounds internally.
+
+
+I offer the following implementation of Math.cbrt ...
+
+Math.cbrt = function (x)
+{
+  x = +x;    // guard against non-numeric
+
+  // handle NaN, infinities, zeroes -- thus avoid Inf/Inf and 0/0
+
+  if (isNaN( x/x ))  return x;
+
+  // estimate the cube root well;
+  // then improve by Halley&apos;s Method (more accurate ULP than Newton&apos;s!)
+
+  var r = Math.pow( Math.abs(x), 1/3 );
+  var t = x/r/r;    // safe!
+  return r + (r * (t-r) / (2*r + t));
+};</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>784</commentid>
+    <comment_count>7</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-17 02:32:43 -0700</bug_when>
+    <thetext>Re: rename Math.sign to Math.signum
+
+There isn&apos;t overwhelming precedent in either direction here.  To the extent there is precedent, it seems slightly in favor of &apos;sign&apos;, and it&apos;s slightly less cryptic. 
+
+One could argue that it&apos;s an advantage to be slightly more cryptic while remaining within well-accepted norms, see point 2 below.
+
+The sign function complements the abs (magnitude) function.
+
+
+The case for &apos;signum&apos;:
+
+1) Clearly the word &quot;sign&quot; has meaning on the Real line, but think of the Complex plane where the range of the &quot;sign&quot; function is the union of a circle of Unit Magnitude (note: UM) and the zeroes.  A complex number, z, in polar coordinates has a magnitude/modulus/amplitude, r, and an argument/phase, theta; where r=abs(z) and theta=sign[um](z).
+
+2) Also, the so-called &quot;sign&quot; function actually returns information about the magnitude as well as the +/- sign when the magnitude is a 0, and always implicitly returns the zero/nonzero status of the magnitude:
+      Math.sign[um](-0)  -&gt; -0
+      Math.sign[um](0)  -&gt; 0
+
+3) JavaScript often seems to follow Java&apos;s philosophy, and Java has &apos;signum&apos;.
+
+4) Wikipedia says &apos;signum&apos; is to avoid confusion with the sine function, (but maybe it isn&apos;t sufficiently confusing!):
+http://en.wikipedia.org/wiki/Sign_function
+
+
+The case for &apos;sign&apos;:
+
+5) It is the actual mathematical name for the function.
+
+6) The function is already currently called &apos;sign&apos;, just stick with that.
+
+7) Fewer characters to type.
+
+8) Less cryptic.
+
+
+This is pretty vague, but &apos;signum&apos; just feels to me better than &apos;sign&apos;, in the light of the above.  (But it is a 50-50 call!)
+
+
+PS:
+Here is an implementation that works with +0 and -0 and NaN and non-numerics ...
+
+    function(x) { return (x&gt;0)? 1 : (x&lt;0)? -1 : +x; }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>785</commentid>
+    <comment_count>8</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-17 02:49:05 -0700</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; Re: Math.hypot
+&gt; 
+&gt; There seems to be agreement on making Math.hypot variadic:
+&gt; Math.hypot(x,y,z,...)
+&gt; 
+&gt; The use cases in 3D geometry etc are obvious.
+&gt; 
+&gt; Probably the function&apos;s arity should remain 2 (Math.hypot.length==2).  If given
+&gt; no arguments the return value should probably be 0 (not NaN), although what
+&gt; meaning does the Euclidean distance have in a 0-dimensional space?
+&gt; 
+&gt; 
+&gt; The documentation of Math.hypot should point out that hypot avoids overflow
+&gt; and minimises rounding errors.  Otherwise people might be tempted to naively
+&gt; use Math.sqrt on the sum of the squares.  This is easily implemented by
+&gt; dividing through by the largest argument then multiplying back at the end (see
+&gt; pseudocode below).
+&gt; 
+&gt; As noted in comment 4 above, the hypot of +/-Infinity with anything (even NaN)
+&gt; should be +Infinity.
+&gt; 
+&gt; Pseudocode implementation:
+&gt;    scan the arguments noting the maximum absolute value, maxabs;
+&gt;    if (maxabs is infinite)  return Infinity;
+&gt;    if (any of the arguments was NaN)  return NaN;
+&gt;    if (maxabs == 0)  return 0;
+&gt;    divide each argument by maxabs;
+&gt;    take the sqrt of the sum of the squares of the arguments, r;
+&gt;    return r * maxabs;
+&gt; 
+&gt; There are a couple of speedups possible, such as the early detection of
+&gt; arguments.length being 0 or 1.  Otherwise take care of the value of maxabs if
+&gt; there are no arguments.  You might also want to sum the squared arguments from
+&gt; smallest to largest in an attempt to squeeze a little extra precision.
+
+I am still against it, mildly, only because the name does no longer make sense in my opinion. It does no longer calculate the hypotenuse of a right-angled triangle. Why not add both hypot (2-arity) and norm2 with an array argument?
+
+Possibly adding at the same time, add some more vector functions from BLAS L1. They have fast implementations on all platforms and many of them are quite obviously useful for games.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>792</commentid>
+    <comment_count>9</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-17 07:51:06 -0700</bug_when>
+    <thetext>Re: variadic Math.hypot
+
+&gt; I am still against it, mildly, only because the name does no longer make sense
+&gt; in my opinion. It does no longer calculate the hypotenuse of a right-angled
+&gt; triangle. Why not add both hypot (2-arity) and norm2 with an array argument?
+&gt; 
+&gt; Possibly adding at the same time, add some more vector functions from BLAS L1.
+&gt; They have fast implementations on all platforms and many of them are quite
+&gt; obviously useful for games.
+
+The Math library contains the elementary mathematical functions (plus a couple of numeric functions that sneaked in).
+
+I would love to see a BLAS library, and LAPACK, taking array-like vectors &amp; matrices as arguments.  But not in the &apos;Math&apos; namespace.  (If you know of a BLAS lib please private-email me.)
+
+3-adic &apos;hypot&apos; (or whatever it&apos;s called) is useful in basic 3D geometry for those who don&apos;t want to go the whole Linear Algebra route.  Not least in converting rectangular x-y-z coordinates into spherical lat-lng-alt -- [this is nice for dealing with other 3D spaces such as colorspace, map grid conversion, astronomy (especially heliocentric coordinates), others?].
+
+I&apos;d be happy with a &apos;hypot&apos; that is restricted to have either 2 or 3 arguments.
+
+
+The name &quot;hypot&quot; is well-established in 2D and could easily be extended to 3D, but what would you call it?
+
+The word &quot;norm2&quot; invites people to think of general vectors not coordinates (i.e. position vectors).  And it sounds a bit funny when it takes 3 arguments (cf. &apos;atan2&apos;).  It also invites the question: if you&apos;ve got 2-norms why not 1-norms and Inf-norms and ...
+
+Other words could be based on &quot;Euclidean distance&quot; or &quot;radius vector&quot; or even &quot;proper length&quot;.  But nothing really jumps out as very pleasant or better than boring old standard &quot;hypot&quot;.
+
+I&apos;ve seen 3-adic &apos;hypot&apos; called &quot;hypot3&quot; in places.  But why invent a new name when JavaScript easily copes with variable arguments?
+
+Would you really want a different name for the 3D version of the simple 2D sqrt(x*x+y*y) concept?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>793</commentid>
+    <comment_count>10</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-17 07:57:45 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Re: Special Values in the es6libraryextensions.pdf document
+&gt; 
+&gt; Math.acosh
+&gt;    add new line &quot;If x is -Inf, the result is +Inf&quot;
+
+Whoops, that line should not be added (I was thinking of cosh).
+acosh(-Inf) is of course a domain error (x&lt;1).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>794</commentid>
+    <comment_count>11</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-17 08:07:35 -0700</bug_when>
+    <thetext>(In reply to comment #9)
+&gt; Re: variadic Math.hypot
+&gt; 
+&gt; The Math library contains the elementary mathematical functions (plus a couple
+&gt; of numeric functions that sneaked in).
+&gt; 
+&gt; I would love to see a BLAS library, and LAPACK, taking array-like vectors &amp;
+&gt; matrices as arguments.  But not in the &apos;Math&apos; namespace.  (If you know of a
+&gt; BLAS lib please private-email me.)
+
+I agree, vectors should not be stuck in Math. (And probably would depend on something like Typed Arrays)
+
+&gt; 3-adic &apos;hypot&apos; (or whatever it&apos;s called) is useful in basic 3D geometry for
+&gt; those who don&apos;t want to go the whole Linear Algebra route.  Not least in
+&gt; converting rectangular x-y-z coordinates into spherical lat-lng-alt -- [this is
+&gt; nice for dealing with other 3D spaces such as colorspace, map grid conversion,
+&gt; astronomy (especially heliocentric coordinates), others?].
+&gt; 
+&gt; I&apos;d be happy with a &apos;hypot&apos; that is restricted to have either 2 or 3 arguments.
+
+It is definitely a useful operation.
+
+&gt; The name &quot;hypot&quot; is well-established in 2D and could easily be extended to 3D,
+&gt; but what would you call it?
+&gt; 
+&gt; The word &quot;norm2&quot; invites people to think of general vectors not coordinates
+&gt; (i.e. position vectors).  And it sounds a bit funny when it takes 3 arguments
+&gt; (cf. &apos;atan2&apos;).  It also invites the question: if you&apos;ve got 2-norms why not
+&gt; 1-norms and Inf-norms and ...
+
+That was the intention and was just something I was throwing around together with L1 BLAS, which would add those other norms etc.
+
+&gt; Other words could be based on &quot;Euclidean distance&quot; or &quot;radius vector&quot; or even
+&gt; &quot;proper length&quot;.  But nothing really jumps out as very pleasant or better than
+&gt; boring old standard &quot;hypot&quot;.
+
+I agree, if there is nothing significantly better than that, then &apos;hypot&apos; is a good compromise.
+
+&gt; I&apos;ve seen 3-adic &apos;hypot&apos; called &quot;hypot3&quot; in places.  But why invent a new name
+&gt; when JavaScript easily copes with variable arguments?
+&gt; 
+&gt; Would you really want a different name for the 3D version of the simple 2D
+&gt; sqrt(x*x+y*y) concept?
+
+I agree that there is no point in creating an additional &apos;hypot3&apos; because then  we just create a confusing variadic &apos;hypot&apos; with a weird implementation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>797</commentid>
+    <comment_count>12</comment_count>
+    <who name="Alexander Zeilmann">alex</who>
+    <bug_when>2012-03-17 11:20:41 -0700</bug_when>
+    <thetext>&gt; The name &quot;hypot&quot; is well-established in 2D and could easily be extended to 3D,
+&gt; but what would you call it?
+The hypot function is sometimes also called Pythagorean sum/addition.
+(http://en.wikipedia.org/wiki/Pythagorean_addition)
+Moler and Morrison (They found an algorithm for hypot without taking square roots, link to their paper in the Wikipedia article) call this function &quot;pythag&quot;. But I don&apos;t like this name very much, I&apos;d stick with hypot and make it variadic (even if hypotenuse isn&apos;t making sense for three or more arguments).
+
+&gt; I&apos;d be happy with a &apos;hypot&apos; that is restricted to have either 2 or 3 arguments.
+Moler and Morrison made an other interesting point in their paper; they calculate the hypot function with more than two arguments recursively
+   hypot(a, b, c) = hypot(a, hypot(b, c))
+and discuss the advantages of doing it this way.
+So if we have a good implementation of hypot(a, b), it should be no problem to support 3 or more arguments. Therefore I see no reason of being restricted to 2 or 3 arguments.
+Of course one problem with this approach is speed, because we have to call hypot n-1 times for n arguments.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>798</commentid>
+    <comment_count>13</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-17 18:54:47 -0700</bug_when>
+    <thetext>(In reply to comment #12)
+Re: Math.hypot implementation technique
+&gt; Moler and Morrison (They found an algorithm for hypot without taking square
+&gt; roots, link to their paper in the Wikipedia article) call this function
+&gt; &quot;pythag&quot;.
+
+Nice find.
+
+However Moler &amp; Morrison&apos;s pythag is less accurate than the sqrt technique:
+    pythag(3,4) == 5.000000000000001  == 5 + 2^-50
+    4*sqrt(1+3/4*3/4) == 5    == sqrt(3*3+4*4)  // not just because 4 is 2^2
+
+Presumably this is because sqrt is well-implemented to better than 1 ULP and then suffers from a single multiply; whereas pythag accumulates several rounding errors in the &quot;p&quot; variable, significantly worse than 1 ULP.
+
+Also note that sqrt is typically a basic function of hardware floating-point units.  Hence fast (and internally calculated to extended precision too) on decent systems with a hardware FPU.
+
+In 1983 Moler &amp; Morrison were only concerned with avoiding &quot;excessive&quot; rounding errors, not achieving 1 ULP within the confines of machine precision.
+
+
+&gt; Moler and Morrison made an other interesting point in their paper; they
+&gt; calculate the hypot function with more than two arguments recursively
+&gt;    hypot(a, b, c) = hypot(a, hypot(b, c))
+&gt; and discuss the advantages of doing it this way.
+&gt; So if we have a good implementation of hypot(a, b), it should be no problem to
+&gt; support 3 or more arguments. Therefore I see no reason of being restricted to &gt; 2 or 3 arguments.
+&gt; Of course one problem with this approach is speed, because we have to call
+&gt; hypot n-1 times for n arguments.
+
+The rounding error accumulates quite badly as the number of arguments increases.  In 1983 Moler &amp; Morrison didn&apos;t consider this &quot;excessive&quot;, but we can do better now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>799</commentid>
+    <comment_count>14</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-17 23:39:44 -0700</bug_when>
+    <thetext>(In reply to comment #13)
+
+&gt; However Moler &amp; Morrison&apos;s pythag is less accurate than the sqrt technique:
+&gt;     pythag(3,4) == 5.000000000000001  == 5 + 2^-50
+&gt;     4*sqrt(1+3/4*3/4) == 5    == sqrt(3*3+4*4)  // not just because 4 is 2^2
+&gt; 
+&gt; Presumably this is because sqrt is well-implemented to better than 1 ULP and
+&gt; then suffers from a single multiply; whereas pythag accumulates several
+&gt; rounding errors in the &quot;p&quot; variable, significantly worse than 1 ULP.
+&gt;
+&gt; …
+&gt;
+&gt; In 1983 Moler &amp; Morrison were only concerned with avoiding &quot;excessive&quot; rounding
+&gt; errors, not achieving 1 ULP within the confines of machine precision.
+
+The number 1 here seems magic, if the specification should demand anything, it should probably follow the IEEE 754-2008 recommendation that the hypot function (for arguments of length 2) should be correctly rounded.
+
+&gt; The rounding error accumulates quite badly as the number of arguments
+&gt; increases.  In 1983 Moler &amp; Morrison didn&apos;t consider this &quot;excessive&quot;, but we
+&gt; can do better now.
+
+A recommendation that it should use an algorithm that provides a good trade-off between accuracy, performance and over-/underflow (for arguments of longer length than 2) should be enough. I doubt that most BLAS NRM2 implementations are accurate for especially evil inputs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>804</commentid>
+    <comment_count>15</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-21 06:35:12 -0700</bug_when>
+    <thetext>Re: summary of variadic Math.hypot
+
+This is hopefully a summary of the recent interesting Math.hypot discussion.
+
+Math.hypot should take either 2 or 3 arguments, rather than being fully variadic.  2 is normal, 3 is a straightforward extension to 3D geometry.  (Otherwise we get into over-complicated issues with vector 2-norms, etc.)
+
+Math.hypot&apos;s arity should be 2 (the normal case), i.e. Math.hypot.length==2.
+
+It should remain named &quot;hypot&quot;, which has become standard terminology, even though the diagonal of a cuboid is not really a &quot;hypotenuse&quot;.
+
+Math.hypot of +/-Infinity with anything (even NaN) is +Infinity:
+    hypot(Infinity,NaN) == hypot(NaN,-Infinity,NaN) == ... == Infinity
+
+The documentation should point out that Math.hypot:
+1) always avoids underflow,
+2) avoids overflow if possible,
+3) minimises rounding errors.
+
+In the documentation: the incorrect statement &quot;the result is y&quot; should be fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>805</commentid>
+    <comment_count>16</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-21 16:33:01 -0700</bug_when>
+    <thetext>Re: implementation of &apos;log1p&apos; and &apos;expm1&apos;
+
+There are a couple of simple implementations of &apos;log1p&apos; -- has anyone analysed their accuracy considering the hard work in a polynomial approximation (to better than 1ULP)?
+(http://en.wikipedia.org/wiki/Approximation_theory#Remez.27_algorithm)
+
+log1p(x) = function(x) {
+    if (isNaN( x ) || x == Infinity || x == 0)  return x;
+    var xp1 = x+1;
+    return (xp1 == 0)? -Infinity : Math.log(xp1) - ((xp1-1)-x)/xp1;    // (1)
+    return (xp1 == 1)? x         : Math.log(xp1) * (x/(xp1-1));        // (2)
+};
+
+Version (2) is believed accurate to a few ULP.  Version (1) seems better.
+They both seem suspiciously simple.
+
+
+For &apos;expm1&apos;, is it necessary to find a polynomial approximation, or is evaluating the &apos;exp&apos; power series without the first term good enough?
+
+
+(With a good &apos;expm1&apos; the hyperbolic functions can be good;
+with a good &apos;log1p&apos; the inverse hyperbolic functions can be good.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>809</commentid>
+    <comment_count>17</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-23 05:52:41 -0700</bug_when>
+    <thetext>Re: Number.isNaN &amp; Number.isFinite
+
+If &apos;isNaN&apos; and &apos;isFinite&apos; are being carried over from the global namespace into
+&apos;Number&apos;, then we could take the opportunity likewise to carry &apos;parseFloat&apos; and
+&apos;parseInt&apos; for completeness:
+     isNaN       -&gt; Number.isNaN
+     isFinite    -&gt; Number.isFinite
+     parseInt    -&gt; Number.parseInt
+     parseFloat  -&gt; Number.parse
+
+See Bug 314&apos;s 6th comment for more on the possible improvements to parseFloat.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>825</commentid>
+    <comment_count>18</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-03-28 08:13:08 -0700</bug_when>
+    <thetext>I&apos;ve uploaded a new draft of proposed ES6 library extensions spec
+(http://wiki.ecmascript.org/doku.php?do=show&amp;id=harmony%3Amore_math_functions).
+
+This so far addresses the following asks from this thread:
+- Support for 2- and 3- arg variants of hypot
+- Adds hypot2 which computes sum of squares
+- Adds cbrt
+- Addresses bugs and editorial inconsistency in description of special values
+
+Other topics raised here, including specification of accuracy and under/overflow requirements, will be discussed at TC39 f2f this week.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>826</commentid>
+    <comment_count>19</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-28 08:18:23 -0700</bug_when>
+    <thetext>I have quite a few times been annoyed by the lack of a fused multiply-add function in ES, and wondered if anyone have any arguments against adding it? It is available in the C99 standard, and most non-x86 hardware has support for it.
+
+It is useful for a lot of things, but mainly when implementing high-precision double-double arithmetic, to increase accuracy when calculating dot products, matrix operations, evaluating polynomials or when trying to implement other transcendental functions.
+
+The current solution of faking it is a bit suboptimal performance-wise.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>829</commentid>
+    <comment_count>20</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 09:04:13 -0700</bug_when>
+    <thetext>(In reply to comment #19)
+&gt; I have quite a few times been annoyed by the lack of a fused multiply-add
+&gt; function in ES, and wondered if anyone have any arguments against adding it? It
+&gt; is available in the C99 standard, and most non-x86 hardware has support for it.
+&gt; 
+&gt; It is useful for a lot of things, but mainly when implementing high-precision
+&gt; double-double arithmetic, to increase accuracy when calculating dot products,
+&gt; matrix operations, evaluating polynomials or when trying to implement other
+&gt; transcendental functions.
+&gt; 
+&gt; The current solution of faking it is a bit suboptimal performance-wise.
+
++1.
+A fused multiply-add (FMA) facility would improve IEEE754 conformance, but it needn&apos;t be a named function.
+
+For comments about FMA (&quot;a mixed blessing&quot;) see page 5 of William Kahan&apos;s 1997 lecture notes on IEEE754:
+ http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF
+
+He suggests using parentheses to decide when to use FMA in arithmetic:
+   (a*b+c)        // FMA
+   (a*b+c*d)      // no FMA
+   (a*b+(c*d))    // FMA
+   ((a*b)+c*d)    // FMA
+
+FMA should be available in a conforming hardware FPU.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>830</commentid>
+    <comment_count>21</comment_count>
+    <who name="Jens Nockert">jens</who>
+    <bug_when>2012-03-28 09:14:35 -0700</bug_when>
+    <thetext>&gt; A fused multiply-add (FMA) facility would improve IEEE754 conformance, but it
+&gt; needn&apos;t be a named function.
+&gt; 
+&gt; For comments about FMA (&quot;a mixed blessing&quot;) see page 5 of William Kahan&apos;s 1997
+&gt; lecture notes on IEEE754:
+&gt;  http://www.cs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF
+&gt; 
+&gt; He suggests using parentheses to decide when to use FMA in arithmetic:
+&gt;    (a*b+c)        // FMA
+&gt;    (a*b+c*d)      // no FMA
+&gt;    (a*b+(c*d))    // FMA
+&gt;    ((a*b)+c*d)    // FMA
+
+This changes the semantics of existing programs, so in my opinion it is a _really_ bad idea. A function allows us to stay backwards compatible with older applications that depend on the current version of the language.
+
+In addition, performance would probably suffer since the most common platform (x86) does generally _not_ have hardware FMA (but you can do it easily in software, and AMD Bulldozer and Intel&apos;s upcoming Haswell provide competing FMA implementations.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>831</commentid>
+    <comment_count>22</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 09:36:40 -0700</bug_when>
+    <thetext>(In reply to comment #18)
+&gt; I&apos;ve uploaded a new draft of proposed ES6 library extensions spec
+&gt; (http://wiki.ecmascript.org/doku.php?do=show&amp;id=harmony%3Amore_math_functions).
+&gt; 
+&gt; This so far addresses the following asks from this thread:
+&gt; - Adds hypot2 which computes sum of squares
+&gt;[snip]
+
+Thanks for the feedback.  A couple of questions on the new spec.
+
+What&apos;s the point of Math.hypot2?
+The sum of squares is easily computed arithmetically, and there is no chance of avoiding overflow (unlike plain hypot).  The name looks funny when the &apos;2&apos; means &apos;squared&apos; not &apos;takes 2 arguments&apos; (cf. Math.atan2).
+
+Why Number.parseFloat not Number.parse?
+Just thinking of Date.parse which parses a Date, so Number.parse would parse a Number, and Foo.parse parse a Foo.  Whereas Number.parseInt parses a special sort of Number.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>832</commentid>
+    <comment_count>23</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 09:59:37 -0700</bug_when>
+    <thetext>(In reply to comment #21)
+&gt; &gt; He suggests using parentheses to decide when to use FMA in arithmetic:
+&gt; 
+&gt; This changes the semantics of existing programs, so in my opinion it is a
+&gt; _really_ bad idea. A function allows us to stay backwards compatible with older
+&gt; applications that depend on the current version of the language.
+&gt; 
+&gt; In addition, performance would probably suffer since the most common platform
+&gt; (x86) does generally _not_ have hardware FMA (but you can do it easily in
+&gt; software, and AMD Bulldozer and Intel&apos;s upcoming Haswell provide competing FMA
+&gt; implementations.)
+
+Fair enough.
+
+May I suggest it is called Number.muladd or Number.FMA -- in the Number namespace since it is arithmetic:
+    Number.muladd(a,b,c)   // returns a+(b*c)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>833</commentid>
+    <comment_count>24</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 10:43:03 -0700</bug_when>
+    <thetext>Re: String.prototype.repeat
+
+Should String.prototype.repeat limit the repetition count, to avoid &gt;8 gigabyte string results?
+What if the count is negative?
+
+
+Re: String.prototype.reverse
+
+The steps are numbered from 8 not 1.
+The description refers to an Array not a String.
+
+
+Since a String.prototype.reverse function is being carried over from Array, do you want to invent String.prototype.splice too?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>834</commentid>
+    <comment_count>25</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 10:45:23 -0700</bug_when>
+    <thetext>Re: String.prototype.endsWith
+
+The description for String.prototype.endsWith has a typo: &quot;endPoisition&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>835</commentid>
+    <comment_count>26</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 11:27:35 -0700</bug_when>
+    <thetext>Re: String.prototype.contains
+
+    obj.contains( searchString, position )
+is equivalent to
+    (obj.indexOf( searchString, position ) &gt;= 0)
+
+Why define a new function for this simple procedure?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>836</commentid>
+    <comment_count>27</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 11:49:35 -0700</bug_when>
+    <thetext>Re: String.prototype.toArray
+
+    str.toArray()
+is equivalent to
+    str.split(&apos;&apos;)
+
+Why define a new function for this simple procedure?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>837</commentid>
+    <comment_count>28</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-28 12:10:52 -0700</bug_when>
+    <thetext>Re: Number.EPSILON &amp; Number.MAX_INTEGER
+
+The descriptions of these refer to Number.MAX_VALUE not these properties.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>838</commentid>
+    <comment_count>29</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2012-03-28 12:47:19 -0700</bug_when>
+    <thetext>Thanks for great feedback.  I&apos;ve updated the draft.
+
+Re: String.prototype.repeat
+I&apos;ve updated the spec text to use ToUInt32.  This matches spec convention for things like new Array(len).
+
+Re: String.prototype.reverse
+This was actually intended to be removed, based on previous TC39 feedback about issues with reversing surrogate pairs.
+
+Re: String.prototype.endsWith
+Typo corrected.
+
+Re: String.prototype.contains
+Re: String.prototype.toArray
+These are developer conveniences based on frequent requests and expectations from other programming languages and developer platforms.
+
+Re: Number.EPSILON &amp; Number.MAX_INTEGER
+Type fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>847</commentid>
+    <comment_count>30</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-03-29 01:23:53 -0700</bug_when>
+    <thetext>(In reply to comment #29)
+&gt; Thanks for great feedback.  I&apos;ve updated the draft.
+
+Looking at es6libraryextensions-3-28-12.2.pdf ...
+
+
+Re: Number.MAX_INTEGER
+
+In the PDF there is a large space between &quot;MAX_INTEGER    is the largest&quot;.
+
+
+Re: String.prototype.repeat
+
+Much nicer.
+But still allows the programmers to easily specify enormous strings with length len*count.  Maybe that&apos;s OK, after all they can easily shoot themselves in the foot in other ways e.g. an infinite loop like &apos;for i=1 to 2^54 step 1&apos;.
+
+What happens to &quot;longstring&quot;.repeat(0xFFFFFFFF) -- do they wait a long time until memory runs out?  Maybe that&apos;s better than imposing an arbitrary limit.
+
+
+Re: Math.hypot2
+
+Repeating comment 22.
+What&apos;s the point of Math.hypot2?
+The sum of squares is easily computed arithmetically, and there is no chance of
+avoiding overflow (unlike plain hypot).  The name looks funny when the &apos;2&apos;
+means &apos;squared&apos; not &apos;takes 2 arguments&apos; (cf. Math.atan2).
+
+
+Re: Number.parseFloat
+
+Rephrasing comment 22.
+Why Number.parseFloat not Number.parse?  (ala Date.parse)
+
+Will there be a new Number.parse which can parse fractions/infinity in any base [2-36]?  Then the parser would be able to decode any format that the formatters can produce, just like Date.parse can.  And Number.parseFloat would really mean parseDecimal.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>854</commentid>
+    <comment_count>31</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-04-03 04:00:42 -0700</bug_when>
+    <thetext>Re: Number.isNaN description
+
+The note after Number.isNaN says the function is equivalent to X!==X,
+this is not quite correct:
+          x = new Number(NaN)
+          isNaN(x)         // is true
+          Number.isNaN(x)  // is true
+          x!==x            // is false
+however:
+          +x!==x           // is true
+
+Also:
+          x = &quot;123&quot;
+          isNaN(x)         // is false
+          Number.isNaN(x)  // is true
+          x!==x            // is false
+          +x!==x           // is true
+And:
+          x = &quot;abc&quot;
+          isNaN(x)         // is true
+          Number.isNaN(x)  // is true
+          x!==x            // is false
+          +x!==x           // is true
+
+The global isNaN(x) is equivalent to (+x!=x).
+Number.isNaN(x) is equivalent to (+x!==x).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>867</commentid>
+    <comment_count>32</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-04-19 04:04:00 -0700</bug_when>
+    <thetext>Re: Unicode surrogates and String.prototype.toArray, also ~.reverse;
+    introducing new StringError
+
+As described, String.prototype.toArray splits Unicode surrogate pairs; the reason given for not doing ~.reverse is that it would break surrogates if implemented naively.
+
+Sooner or later a programmer is going to reverse a string by using &apos;toArray&apos; followed by an Array reverse, thus hurting themselves when it doesn&apos;t work on surrogate pairs.
+
+We can avoid these problems by making &apos;toArray&apos; split the string into Unicode codepoints not UTF-16 codeunits -- normal chars would become single array elements, surrogate pairs would become single array elements (of 2 UTF-16 codeunits).
+
+What to do with unpaired surrogates in an ill-formed string?  I suggest throwing an exception, just like encodeURI &amp; encodeURIComponent do.  (It is not &apos;toArray&apos;s job to undertake surrogate corrective descisions/actions.)
+
+Following this pattern, String.prototype.reverse could also work on well-formed strings, treating surrogate pairs as Unicode codepoints too.  Implemented natively this would be faster than converting to an array, reversing, and joining.
+
+The exception could be a new Error type: say &apos;StringError&apos;.
+This would be used in other cases where a surrogate problem is detected and rejected aborting further processing.
+It would be sensible to use this new Error in encodeURI &amp; encodeURIComponent too (currently they throw URIError).
+
+... to be continued with new String.prototype.repair ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>868</commentid>
+    <comment_count>33</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-04-19 04:23:25 -0700</bug_when>
+    <thetext>Re: new String.prototype.repair
+
+Following on from comment 32, it would be nice to have a function that repairs ill-formed strings.  Then the programmer could either 1) preemptively force strings to be well-formed, or 2) catch a StringError exception and decide to repair &amp; retry or simply abandon further processing.
+
+Suggested API:  String.prototype.repair( replacechar_opt )
+where unpaired surrogates in this string are replaced by &apos;replacechar_opt&apos; if its given or otherwise U+FFFD (the Unicode replacement character).
+If &apos;replacechar_opt&apos; is the empty string then unpaired surrogates are simply deleted.
+
+I believe the following implementation using RegExps would work (the RegExp is split over 2 lines for readability):
+
+
+var re_badsurrogate = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])
+                      |([^\uD800-\uDBFF])[\uDC00-\uDFFF]|^[\uDC00-\uDFFF]/g;
+
+String.prototype.repair(replchar)
+{
+    if (arguments.length == 0)  replchar = &quot;\uFFFD&quot;;
+
+    return this.replace( re_badsurrogate, &quot;$1&quot;+replchar );
+};</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>894</commentid>
+    <comment_count>34</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-04 14:57:05 -0700</bug_when>
+    <thetext>(In reply to comment #31)
+&gt; Re: Number.isNaN description
+&gt; 
+&gt; The note after Number.isNaN says the function is equivalent to X!==X,
+&gt; this is not quite correct:
+
+the note was removed in the May 4, 2012 drafrt</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>895</commentid>
+    <comment_count>35</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-04 15:04:41 -0700</bug_when>
+    <thetext>(In reply to comment #30)
+&gt; (In reply to comment #29)
+&gt; &gt; Thanks for great feedback.  I&apos;ve updated the draft.
+&gt; 
+&gt; Looking at es6libraryextensions-3-28-12.2.pdf ...
+&gt; 
+&gt; 
+&gt; Re: Number.MAX_INTEGER
+&gt; 
+&gt; In the PDF there is a large space between &quot;MAX_INTEGER    is the largest&quot;.
+&gt; 
+Fixed in May 4 2012 draft
+
+
+&gt; 
+&gt; Re: String.prototype.repeat
+&gt; 
+&gt; Much nicer.
+&gt; But still allows the programmers to easily specify enormous strings with length
+&gt; len*count.  Maybe that&apos;s OK, after all they can easily shoot themselves in the
+&gt; foot in other ways e.g. an infinite loop like &apos;for i=1 to 2^54 step 1&apos;.
+&gt; 
+&gt; What happens to &quot;longstring&quot;.repeat(0xFFFFFFFF) -- do they wait a long time
+&gt; until memory runs out?  Maybe that&apos;s better than imposing an arbitrary limit.
+&gt; 
+
+In general the ES spec. does place arbitrary limits to try to prevent resource exhaustion errors.  that is left to implementations 
+
+
+
+
+&gt; 
+&gt; Re: Math.hypot2
+&gt; 
+
+It&apos;s now gone.  Killed at March TC39 meeting</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14743</commentid>
+    <comment_count>36</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:15 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3104</bug_id>
+          
+          <creation_ts>2014-08-04 10:51:00 -0700</creation_ts>
+          <short_desc>Updates to Generators/Iterators</short_desc>
+          <delta_ts>2015-07-10 08:35:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9662</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-04 10:51:31 -0700</bug_when>
+    <thetext>- Add a prototype for iterators, but do not expose a global Iterator constructor for ES6 (leave that for ES7)
+  - Between Object prototype and Generator prototype
+  - Initially empty, but accessible
+- Comprehensions in general deferred to ES7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9698</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-06 17:22:18 -0700</bug_when>
+    <thetext>The prototype for iterators should have an @@iterator method with the following semantics: `function @@iterator() { return this }`.
+
+That will replace the corresponding method currently defined on
+%{String|Array|Map|Set|Generator|Loader}IteratorPrototype%
+(Sections { 21.1 | 22.1 | 23.1 | 23.2 | 26.3 }.5.2.2, and 25.3.1.5)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9724</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-07 16:46:52 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #1)
+&gt; The prototype for iterators should have an @@iterator method with the
+&gt; following semantics: `function @@iterator() { return this }`.
+&gt; 
+&gt; That will replace the corresponding method currently defined on
+&gt; %{String|Array|Map|Set|Generator|Loader}IteratorPrototype%
+&gt; (Sections { 21.1 | 22.1 | 23.1 | 23.2 | 26.3 }.5.2.2, and 25.3.1.5)
+
+I generally agree, although this was not discussed at the meeting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9732</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-08-08 08:23:45 -0700</bug_when>
+    <thetext>That does seem like a simplification. I don&apos;t think we need to wait another 2 months for this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9733</commentid>
+    <comment_count>4</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-08 10:00:20 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #3)
+&gt; That does seem like a simplification. I don&apos;t think we need to wait another
+&gt; 2 months for this.
+
+I agree. I actually read that suggestion as an implementation detail ie. implementing the update to the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9734</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-08 10:43:25 -0700</bug_when>
+    <thetext>I agree that this is probably a good thing to do.  (I was actually thinking about it before Clauds&apos;s comment showed up).
+
+My only reservation, is that @@iterator is not currently listed as part of the Iterator interface http://people.mozilla.org/~jorendorff/es6-draft.html#sec-iterator-interface and some people have argued that  Iterators, in general, should not be required to support @@iterator. By putting such a method into %IteratorPrototype% along with the expectation that user defined iterators will want to inherit from it pretty much enshrining @@iterator as part of the Iterator interface.
+
+In practice this may not be such a bad thing as for-of essentially requires it.  As part of putting this change into the spec. I noted a bug where the iterators returned by some operations in the ES6 spec, for example [[Enumerate]] of string exotic objects, didn&apos;t include an @@iterator method.  Since those iterator will now inherit from %IteratorPrototype% the bug will just go away if %IteratorPrototype% implements @@iterator.
+
+BTW, this is what I&apos;ve documented in the spec. for how you can gain access to %IteratorPrototype%:
+
+Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator()))
+
+I have a hard time believing that very many ES6 devs are going to bother to write that to set the [[Prototype]] of any ad hoc iterators they define.  Or even:
+
+    return {
+     __proto__:[][Symbol.iterator].__proto__.__proto__],
+     next() {...body of custom iterator next method ...}
+    }
+
+If we think that inheriting from %IteratorPrototype% is important for future extensibility, then it might be better to just go ahead and define the global Iterator.  Then people could define ad hoc iterator like the above by saying:
+
+     return new class extends Iterator{
+       next() {...body of custom iterator next method ...}
+     }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9749</commentid>
+    <comment_count>6</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-08-09 17:22:50 -0700</bug_when>
+    <thetext>That would certainly be nicer for user code</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10311</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-11 16:34:47 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10441</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:54 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

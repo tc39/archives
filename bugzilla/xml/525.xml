@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>525</bug_id>
+          
+          <creation_ts>2012-07-12 16:25:00 -0700</creation_ts>
+          <short_desc>Issues in section 6</short_desc>
+          <delta_ts>2014-07-27 22:05:51 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1304</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-12 16:25:58 -0700</bug_when>
+    <thetext>(1) see bug 524.
+
+(2) Replace &quot;The phrase “Unicode character” refer to the abstract linguistic or typographical unit represented by a single Unicode scalar value.&quot; with &quot;All Unicode code point values from U+0000 to U+10FFFF, including surrogate code points, may occur in source text where permitted by the grammar.&quot;
+
+(3) Remove &quot;Any well defined encoding such as UTF-32 or UTF-16 may be used. Source text might even be externally represented using a non-Unicode character encoding.&quot; Since the sentence before says it&apos;s not relevant, we don&apos;t need to discuss it.
+
+(4) Remove  &quot;Each source character being an abstract Unicode characters with a corresponding Unicode scalar value.&quot; Code point is all we need.
+
+(5) Remove the paragraph &quot;The phrase “code point” ....&quot;. It&apos;s partially wrong (Unicode scalar values are a proper subset of Unicode code points), and we don&apos;t need it.
+
+(6) The description of Unicode escape sequences has to allow for expression of a single (supplementary) code point by a sequence of two old-style Unicode escape sequences, e.g., &quot;\u{10000}&quot; === &quot;\uD800\uDC00&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1305</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-12 19:01:59 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+...
+&gt; 
+&gt; (6) The description of Unicode escape sequences has to allow for expression of
+&gt; a single (supplementary) code point by a sequence of two old-style Unicode
+&gt; escape sequences, e.g., &quot;\u{10000}&quot; === &quot;\uD800\uDC00&quot;.
+
+I don&apos;t necessarily agree. See discussion under https://bugs.ecmascript.org/show_bug.cgi?id=469 
+
+Basically, the only places in current implementations where a sequence old-style Unicode escape sequences that form a valid surrogate pair is equivalent to the literal appearance of the corresponding supplementary character is in a string or regexp literal. In particular such a sequence in an IdentiferName always results in a syntax error, even if the supplementary character is an ID_Start or ID_Continue.  For example,
+    var x\uD87E\uDC00;
+
+reportedly produces an early error in current browsers, even though U+2F800 is a valid ID_Continue character as of Unicode 3.1.  So, this doesn&apos;t appear to be a backwards compat. issues.
+
+The current draft deals with such sequences in sting literals  and quasis and in the future RegExp literals.  It isn&apos;t clear that they need to be allowed out side of such literal contexts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1364</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-17 17:44:23 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+
+This bug is about clause 6, which covers source text in general. Its third paragraph says &quot;In string literals, regular expression literals,quasi literals and identifiers, any Unicode characters may also be expressed as a Unicode escape sequence that explicitly express a code point’s numeric value. &quot;
+
+The text assumes a 1:1 match between Unicode escape sequences and code points. I think we have agreement that in at least some of the situations mentioned a pair of Unicode escape sequences can be used to express a code point.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5953</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 15:05:37 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6071</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:26 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9634</commentid>
+    <comment_count>5</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 22:05:51 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

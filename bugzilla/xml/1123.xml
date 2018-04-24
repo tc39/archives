@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1123</bug_id>
+          
+          <creation_ts>2012-12-11 15:27:00 -0800</creation_ts>
+          <short_desc>Error behaviour for non-generic functions should be described in more detail</short_desc>
+          <delta_ts>2013-03-08 14:44:27 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3002</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-11 15:27:46 -0800</bug_when>
+    <thetext>Certain functions are labelled as non-generic, e.g. Number.prototype.toFixed, and should raise TypeError exception if called with the wrong type of object. But the specification is not entirely precise when to raise the TypeError: Does it happen on function entry or when actually trying to access the value?
+
+For Example Number.prototype.toFixed [15.7.4.5]:
+---
+1.  Let f be ToInteger(fractionDigits). (If fractionDigits is undefined, this step produces the value 0).
+2.  ReturnIfAbrupt(f).
+3.  If f &lt; 0 or f &gt; 20, throw a RangeError exception.
+4.  Let x be this Number value.
+5.  ReturnIfAbrupt(x).
+---
+
+
+Let&apos;s recall [15.7.4] to get the explanation for the phrase “this Number value”:
+---
+[...]
+Also, the phrase “this Number value” refers to either the Number value represented by this Number object, that is, the value of the [[NumberData]] internal data property of this Number object or the `this` value if its type is Number. A TypeError exception is thrown if the `this` value is neither an object that has a [[NumberData]] internal data property or a value whose type is Number.
+---
+
+
+I&apos;d say calling toFixed with an incompatible object should nevertheless execute the steps 1-3, and then finally in step 4 raise a TypeError, because at that point “this Number value” is retrieved. All engines tested (IE10, Opera, JSC, Spidermonkey [1]) raise the TypeError on function entry, that means steps 1-3 are _not_ executed. I&apos;ve used the following test case:
+---
+Number.prototype.toFixed.call({}, {valueOf: function(){throw &quot;value-of&quot;}})
+---
+
+
+
+[1] V8 is not included in this list because of http://code.google.com/p/v8/issues/detail?id=2449</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3299</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-07 10:54:47 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft
+
+as far as I can tell, toFixed was the only method with this issue.  Let me know if you find others.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3374</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:27 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

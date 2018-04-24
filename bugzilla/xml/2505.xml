@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2505</bug_id>
+          
+          <creation_ts>2014-02-06 09:34:00 -0800</creation_ts>
+          <short_desc>12.1.7.2 Generator Comprehension Evaluation: Amend note to speak about variable environment?</short_desc>
+          <delta_ts>2014-06-12 15:22:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2853</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7199</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-06 09:34:03 -0800</bug_when>
+    <thetext>12.1.7.2 Runtime Semantics: Evaluation.
+
+The note in 12.1.7.2 only describes that the GeneratorFunction object is unobservable from ECMAScript code, so an implementation may avoid its allocation, but care must be taken to create the `prototype` object. Actually there&apos;s another caveat which may be worthwhile to document: 
+
+In addition to the `prototype` object, an implementation must also ensure to create a new variable environment (not only a new lexical environment!) for the generator comprehension. This is currently only implicitly specified due to the use of a GeneratorFunction object to implement the generator comprehension semantics.
+
+
+Test case:
+---
+function outer() {
+  var x = 0;
+  function inner() {
+    // The direct eval creates a new var-binding in the variable environment
+    // of the generator comprehension, not in the variable environment
+    // of the &apos;inner&apos; function
+    var r = (for (x of [0]) (eval(&quot;var x = 1&quot;), x)).next().value;
+    return [x, r];
+  }
+  return inner();
+}
+outer(); // returns [0, 1]
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8360</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 18:09:44 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+Added to 12.2.7.2 note as suggested. 
+
+Created bug 2853 relating to the legality of that particular eval.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8918</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-12 15:22:27 -0700</bug_when>
+    <thetext>in rev25</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

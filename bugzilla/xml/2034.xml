@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2034</bug_id>
+          
+          <creation_ts>2013-10-02 09:40:00 -0700</creation_ts>
+          <short_desc>Allow the spread/rest operator in any position of the destructuring or function parameters</short_desc>
+          <delta_ts>2015-10-02 14:36:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>Suggestions</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Egor">termi1uc1</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascript</cc>
+    
+    <cc>ibnrubaxa</cc>
+    
+    <cc>monolithed</cc>
+    
+    <cc>shocksilien</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5800</commentid>
+    <comment_count>0</comment_count>
+    <who name="Egor">termi1uc1</who>
+    <bug_when>2013-10-02 09:40:29 -0700</bug_when>
+    <thetext>The current spec says that the spread(or rest) operator should be the last operation in the destructuring assignment or function parameters.
+The opportunity to set the spread operator to any position is an extremely useful.
+
+While
+```ecmascript6
+let [a, ...c] = [1, 2]
+```
+is a simple
+```javascript
+var $__0 = [1, 2], a = $__0[0], c = [].slice.call($__0, 1);
+```
+the
+```ecmascript6
+let [...c, a] = [1, 2]
+```
+is a bit difficult
+```javascript
+var $__0 = [1, 2], a = $__0[$__0.length - 1], c = [].slice.call($__0, 0, $__0.length - 1);
+```
+and become more difficult (especially when developer must print it by the hand) with increasing the number of parameters.
+For example:
+```ecmascript6
+let [a, b, ...c, d, f] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+goes to
+```javascript
+var $__0 = [1, 2, 3, 4, 5, 6, 7, 8, 9], $__1, a = $__0[0], b = $__0[1], c = (5 &lt;= $__0.length ? [].slice.call($__0, 2, $__1 = $__0.length - 2) : ($__1 = 2, [])), d = $__0[$__1++], f = $__0[$__1++];
+```
+
+The same thing in function parameters.
+
+
+I my opinion, there are no strong arguments to restrict the spread/rest operator position as a last one. The destructuring and function parameters should support the spread/rest in any position:
+
+function test(p1, ...params, p2) { }
+test();				//p1 == undefined, params = [], p2 == undefined
+test(1);			//p1 == 1, params = [], p2 == undefined
+test(1, 2);			//p1 == 1, params = [], p2 == 2
+test(1, 2, 3);			//p1 == 1, params = [2], p2 == 3
+test(1, 2, 3, 4);		//p1 == 1, params = [2, 3], p2 == 4
+function test2(p1, ...params, p2, p3) { }
+test2(1, 2, 3, 4);		//p1 == 1, params = [2], p2 == 3, p3 == 4
+test2(1, 2, 3);			//p1 == 1, params = [], p2 == 2, p3 == 3
+
+let [v1, ...vars, v2] = [];		//v1 == undefined, vars = [], v2 == undefined
+let [v1, ...vars, v2] = [1];		//v1 == 1, vars = [], v2 == undefined
+let [v1, ...vars, v2] = [1, 2];		//v1 == 1, vars = [], v2 == 2
+let [v1, ...vars, v2] = [1, 2, 3];	//v1 == 1, vars = [2], v2 == 3
+let [v1, ...vars, v2] = [1, 2, 3, 4];	//v1 == 1, vars = [2, 3], v2 == 4
+
+let [v1, ...vars, v2, v3]= [1, 2, 3, 4];//v1 == 1, vars = [2], v2 == 3, v3 == 4
+let [v1, ...vars, v2, v3] = [1, 2, 3];	//v1 == 1, vars = [], v2 == 2, v3 == 3
+
+CoffeScript has this feature http://coffeescript.org/#try:%5Ba%2C%20b%2C%20c...%2C%20d%2C%20f%5D%20%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%2C%207%2C%208%2C%209%5D as well.
+Also similar syntax is allowed in Python 3:
+```Python3
+a, *b, c = [1, 2, 3, 4];
+print(a, b, c);//1 [2, 3] 4
+```</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5884</commentid>
+    <comment_count>1</comment_count>
+    <who name="Egor">termi1uc1</who>
+    <bug_when>2013-10-10 07:39:11 -0700</bug_when>
+    <thetext>Example with a default parameters:
+(rest/spread already has a default value - empty array)
+```ecmascript6
+function test3( p1 = 1, p2 = 2, ...spread, p3 = 3, p4 = 4 ) {
+	console.log(p1, p2, spread, p3, p4)
+}
+test3();                // p1 = 1, p2 = 2, spread = [], p3 = 3, p4 = 4
+test3(9, 8, 7, 6);      // p1 = 9, p2 = 8, spread = [], p3 = 7, p4 = 6
+test3(9, 8, 7, 6, 5, 4);// p1 = 9, p2 = 8, spread = [7, 6], p3 = 5, p4 = 4
+```
+
+a CoffeeScript version:
+http://coffeescript.org/#try:test3%20%3D%20(%20p1%20%3D%201%2C%20p2%20%3D%202%2C%20spread...%2C%20p3%20%3D%203%2C%20p4%20%3D%204%20)%20-%3E%0A%09console.log(p1%2C%20p2%2C%20spread%2C%20p3%2C%20p4)%0A%0Atest3()%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20p1%20%3D%201%2C%20p2%20%3D%202%2C%20spread%20%3D%20%5B%5D%2C%20p3%20%3D%203%2C%20p4%20%3D%204%0Atest3(9%2C%208%2C%207%2C%206)%3B%20%20%20%20%20%20%20%23%20p1%20%3D%209%2C%20p2%20%3D%208%2C%20spread%20%3D%20%5B%5D%2C%20p3%20%3D%207%2C%20p4%20%3D%206%0Atest3(9%2C%208%2C%207%2C%206%2C%205%2C%204)%3B%20%23%20p1%20%3D%209%2C%20p2%20%3D%208%2C%20spread%20%3D%20%5B7%2C%206%5D%2C%20p3%20%3D%205%2C%20p4%20%3D%204</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5892</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 13:16:11 -0700</bug_when>
+    <thetext>This has already been discussed and the decision was not to include more general pattern matching such as this in ES6. 
+
+Reclassify issue as a Harmony feature request</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5897</commentid>
+    <comment_count>3</comment_count>
+    <who name="Egor">termi1uc1</who>
+    <bug_when>2013-10-11 06:51:44 -0700</bug_when>
+    <thetext>I would love to see it in a spec. With this pattern you can save a lot of time and lines of code.
+One of the common example is a working with a DOM tree:
+
+```ecmascript6
+let [firstOne, ...rest, lastOne] = document.findAll(&quot;.someClass&quot;);
+firstOne.classList.add(&quot;first&quot;);
+lastOne.classList.add(&quot;last&quot;);
+```</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5898</commentid>
+    <comment_count>4</comment_count>
+    <who name="Konstantin">ibnrubaxa</who>
+    <bug_when>2013-10-11 06:58:37 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; I would love to see it in a spec. With this pattern you can save a lot of time
+&gt; and lines of code.
+&gt; One of the common example is a working with a DOM tree:
+&gt; 
+&gt; ```ecmascript6
+&gt; let [firstOne, ...rest, lastOne] = document.findAll(&quot;.someClass&quot;);
+&gt; firstOne.classList.add(&quot;first&quot;);
+&gt; lastOne.classList.add(&quot;last&quot;);
+&gt; ```
+
+I agree with Egor, it&apos;s quite logical.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5904</commentid>
+    <comment_count>5</comment_count>
+    <who name="Pavel Ponomarenko">shocksilien</who>
+    <bug_when>2013-10-16 10:27:08 -0700</bug_when>
+    <thetext>I think, it good idea, and can be used everywhere. E.G.: 
+
+```ecmascript6
+function download (...files, callback) {
+    var downloaded = 0;
+
+    for (let i of files) {
+      downloadSingle(files[i], function () {
+        downloaded++;
+        if (downloaded == files.length) callback();
+      });
+    }
+
+    
+}
+
+download( &apos;file1.txt&apos;, &apos;file2.txt&apos;, function() {
+    alert(&apos;ready&apos;);
+});
+```
+
+In such way &quot;array_udiff&quot; works in PHP &amp; php.js:
+
+```php
+array array_uintersect ( array $array1 , array $array2 [, array $... ], callable $value_compare_func )
+```
+
+It can be usefull</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5932</commentid>
+    <comment_count>6</comment_count>
+    <who name="Alexander Guinness">monolithed</who>
+    <bug_when>2013-10-22 08:39:32 -0700</bug_when>
+    <thetext>+1. Its logical</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6003</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 11:14:08 -0700</bug_when>
+    <thetext>changed priority to normal</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14750</commentid>
+    <comment_count>8</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:16 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

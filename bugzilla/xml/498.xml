@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>498</bug_id>
+          
+          <creation_ts>2012-07-11 12:35:00 -0700</creation_ts>
+          <short_desc>String.endsWith and String.startsWith will have unexpected behavior when used with a regular expression</short_desc>
+          <delta_ts>2013-12-23 00:29:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Ian Bicking">ianb</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jorendorff</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>steves_list</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1271</commentid>
+    <comment_count>0</comment_count>
+    <who name="Ian Bicking">ianb</who>
+    <bug_when>2012-07-11 12:35:32 -0700</bug_when>
+    <thetext>Regular expressions can be used in place of strings for many string methods.  But consider startsWith/endsWith:
+
+  &quot;foo&quot;.startsWith(/f/)    // =&gt; false
+  &quot;/a/b/c&quot;.startsWith(/a/) // =&gt; true
+
+A developer who is confused about these methods won&apos;t get any real feedback.  No type error, and though it will not match as they intended it will largely appear to work.
+
+One option would be:
+
+  String.prototype.startsWith = function (pattern) {
+    if (typeof pattern == &quot;object&quot; &amp;&amp; pattern.constructor == RegExp) {
+      return this.search(pattern == 0)
+    }
+    return this.indexOf(pattern) == 0;
+  };
+
+but endsWith is harder:
+
+  String.prototype.endsWith = function (pattern) {
+    if (typeof pattern == &quot;object&quot; &amp;&amp; pattern.constructor == RegExp) {
+      var newReg = new RegExp(pattern.source + &apos;$&apos;);
+      return newReg.test(this);
+    }
+    ...
+  }
+
+Not sure if mucking about with the regex is kosher.
+
+String.prototype.contains has the same issue I suppose.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1273</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2012-07-11 16:38:44 -0700</bug_when>
+    <thetext>&gt;      var newReg = new RegExp(pattern.source + &apos;$&apos;);
+
+Nit: This wouldn&apos;t work if pattern is a disjunction, like /a|b/.
+
+I&apos;m not sure, but maybe
+    new RegExp(&apos;(?:&apos; + pattern.source + &apos;)$&apos;)
+would be correct.
+
+I think supporting regexps here is an excellent idea.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1306</commentid>
+    <comment_count>2</comment_count>
+    <who name="Steven Levithan">steves_list</who>
+    <bug_when>2012-07-13 11:23:02 -0700</bug_when>
+    <thetext>Agree that supporting regular expressions would be nice. But, as already highlighted, endsWith might be a concern. Mainly I&apos;m commenting to point out that Jason&apos;s modification of Ian&apos;s code still wouldn&apos;t work, since it doesn&apos;t account for RegExp flags. You can&apos;t simply add the flags and make it work, either, because /m changes the meaning of the $ anchor.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5995</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 18:05:43 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+Defined endWidth and startsWith as throwing if first argument is a RegExp.  This allows for a adding RegExp support in a future editions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6118</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:59 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6956</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-12-23 00:29:00 -0800</bug_when>
+    <thetext>Seems `String.prototype.contains` was forgotten about during the fix. See bug 2407.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

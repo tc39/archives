@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3145</bug_id>
+          
+          <creation_ts>2014-08-21 02:04:00 -0700</creation_ts>
+          <short_desc>21.2.2.8.2: clarify whether this affects `\w` and `\W` or not</short_desc>
+          <delta_ts>2014-12-10 18:54:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascriptbugs</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9833</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-21 02:04:47 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-runtime-semantics-canonicalize-abstract-operation
+
+“In case-insignificant matches when Unicode is true, all characters are implicitly case-folded using the simple mapping provided by the Unicode standard immediately before they are compared. The simple mapping always maps to a single code point, so it does not map, for example, &quot;ß&quot; (U+00DF) to &quot;SS&quot;. It may however map a code point outside the Basic Latin range to a character within, for example, “ſ” (U+017F) to “s”. Such characters are not mapped if Unicode is false. This prevents Unicode code points such as U+017F and U+212A from matching regular expressions such as /[a‑z]/i, but they will match /[a‑z]/ui.”
+
+Does this case-folding apply before or after evaluating `CharacterClassEscape`s as per https://people.mozilla.org/~jorendorff/es6-draft.html#sec-characterclassescape?
+
+This matters because of `\w` and `\W`. `/\w/` is equivalent to `/[0-9A-Z_a-z]/`. Is `/\w/iu` the same, or should it match U+017F and U+212A too? In case of the latter, does that mean `/\W/iu` must not match U+017F and U+212A?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9836</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-21 12:04:41 -0700</bug_when>
+    <thetext>Note that this is an only an informative note so the answer to your question needs to come from the normative algorithms.
+
+In this case, in https://people.mozilla.org/~jorendorff/es6-draft.html#sec-atomescape the last production evaluates CharacterClassEscape to produce the CharSet.  There is no /u sensitivity specified for w or W.
+
+However, the CharacterSet matcher that is subsequently produced  applies Canonicalize to each both the members of that character set  and to the characters being matched. Canonicalize is where the case folding takes (depending upon the i flag). So,/\w/iu will match U+017F because U+017F canonicalizes to &apos;S&apos; which is in the match set. /\W/iu also matches U+017F (and strangely &apos;S&apos;) because \W includes U+017F which matches either canonicalized U+017F or &apos;S&apos;.
+
+
+Norbert, is this what you actually intended for /\W/iu</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9842</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-22 06:44:48 -0700</bug_when>
+    <thetext>Another related question:
+
+`/[a-z]/iu` is equivalent to `/[a-z\u017F\u212A]/i`. Is `/[A-Z]/iu` the same, or should that be equivalent to just `/[A-Z]/i` instead (since it’s the lowercase `s` and `k` that case-fold to U+017F and U+212A, and not the uppercase `S` and `K` symbols)?
+
+I’m guessing it’s the latter, but it’s slightly confusing either way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9843</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-22 09:21:34 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #2)
+&gt; Another related question:
+&gt; 
+&gt; `/[a-z]/iu` is equivalent to `/[a-z\u017F\u212A]/i`. Is `/[A-Z]/iu` the
+&gt; same, or should that be equivalent to just `/[A-Z]/i` instead (since it’s
+&gt; the lowercase `s` and `k` that case-fold to U+017F and U+212A, and not the
+&gt; uppercase `S` and `K` symbols)?
+&gt; 
+&gt; I’m guessing it’s the latter, but it’s slightly confusing either way.
+
+/[A-Z]/iu will match U+01FE (and U+212A) because case folding is applied to both the pattern and the string being matched.  So, U+01FE in the match string turns into &apos;S&apos;.
+
+I think what is happening is clear enough at the algorithm level. I agree it is challenging to craft a good conceptual explanation.  You probably need to emphasize that under /iu Unicode case folding is takes place before any comparisons and that one the pattern side it is applied to match sets rather than the actual pattern text.  
+
+For example, /[\u017F-\u0181]/iu is equivalent to /[S\u0180\u0181]/u rather than /[S-\u0181]/u</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9845</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-22 13:48:03 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #3)
+&gt; (In reply to Mathias Bynens from comment #2)
+&gt; &gt; Another related question:
+&gt; &gt; 
+&gt; &gt; `/[a-z]/iu` is equivalent to `/[a-z\u017F\u212A]/i`. Is `/[A-Z]/iu` the
+&gt; &gt; same, or should that be equivalent to just `/[A-Z]/i` instead (since it’s
+&gt; &gt; the lowercase `s` and `k` that case-fold to U+017F and U+212A, and not the
+&gt; &gt; uppercase `S` and `K` symbols)?
+&gt; &gt; 
+&gt; &gt; I’m guessing it’s the latter, but it’s slightly confusing either way.
+&gt; 
+&gt; /[A-Z]/iu will match U+01FE (and U+212A) because case folding is applied to
+&gt; both the pattern and the string being matched.  So, U+01FE in the match
+&gt; string turns into &apos;S&apos;.
+
+Thanks for clarifying. What do you think would be the best way to approach this for an ES6-to-ES5 transpiler? It’s tempting to rewrite both `/[a-z]/iu` and `/[A-Z]/iu` into `/[a-z\u017F\u212A]/i`, which should behave exactly the same in ES5 environments (unless I’m missing something).
+
+&gt; I think what is happening is clear enough at the algorithm level. I agree it
+&gt; is challenging to craft a good conceptual explanation.  You probably need to
+&gt; emphasize that under /iu Unicode case folding is takes place before any
+&gt; comparisons and that one the pattern side it is applied to match sets rather
+&gt; than the actual pattern text.  
+&gt; 
+&gt; For example, /[\u017F-\u0181]/iu is equivalent to /[S\u0180\u0181]/u rather
+&gt; than /[S-\u0181]/u
+
+Shouldn’t that be `/[S\u017F-\u0181]/` (with or without `u` flag) instead? IIUC, `/[S\u0180\u0181]/u` wouldn’t match `\u017F`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9846</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-23 12:12:45 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #4)
+&gt; 
+&gt; Thanks for clarifying. What do you think would be the best way to approach
+&gt; this for an ES6-to-ES5 transpiler? It’s tempting to rewrite both `/[a-z]/iu`
+&gt; and `/[A-Z]/iu` into `/[a-z\u017F\u212A]/i`, which should behave exactly the
+&gt; same in ES5 environments (unless I’m missing something).
+
+But see line 5 of the ES5 Canonicalize algorithm (15.10.2.8) and line 3.h of ES6 21.2.2.8.2.
+
+I think you general problem is with /S/iu  in order to correctly match U+017F in ES5 the pattern needs to beES5 transformed into /[S\u017F]/i.  Basically, when transpiling as /iu  pattern all implicit or explicit occurences of S in the pattern need to be translated to [S\u0178]. 
+
+&gt; 
+&gt; &gt; I think what is happening is clear enough at the algorithm level. I agree it
+&gt; &gt; is challenging to craft a good conceptual explanation.  You probably need to
+&gt; &gt; emphasize that under /iu Unicode case folding is takes place before any
+&gt; &gt; comparisons and that one the pattern side it is applied to match sets rather
+&gt; &gt; than the actual pattern text.  
+&gt; &gt; 
+&gt; &gt; For example, /[\u017F-\u0181]/iu is equivalent to /[S\u0180\u0181]/u rather
+&gt; &gt; than /[S-\u0181]/u
+&gt; 
+&gt; Shouldn’t that be `/[S\u017F-\u0181]/` (with or without `u` flag) instead?
+&gt; IIUC, `/[S\u0180\u0181]/u` wouldn’t match `\u017F`.
+
+Probably, it&apos;s trickly to try to map from /i to no /i in this manner.  You will need to verify that non of the match algorithm will produce wrong result after you translation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10727</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-12-04 12:20:46 -0800</bug_when>
+    <thetext>Is there any real-life use case where this matters, or are we just talking about test262? In the examples so far, if you don&apos;t want Unicode case folding you can just remove the &quot;i&quot; flag and replace a-z with a-zA-Z.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10729</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-12-04 13:50:24 -0800</bug_when>
+    <thetext>(In reply to Norbert from comment #6)
+&gt; Is there any real-life use case where this matters, or are we just talking
+&gt; about test262? In the examples so far, if you don&apos;t want Unicode case
+&gt; folding you can just remove the &quot;i&quot; flag and replace a-z with a-zA-Z.
+
+The reason I asked for clarification is because I wanted to confirm my transpiler for ES6 `u` regexps (https://mths.be/regexpu) was working correctly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10997</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-10 18:54:30 -0800</bug_when>
+    <thetext>marking as wontfix because the specified behavior seems technically correct in context and nobody has come up with anything better</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

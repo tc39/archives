@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1047</bug_id>
+          
+          <creation_ts>2012-11-25 16:23:00 -0800</creation_ts>
+          <short_desc>&quot;Essential Internal Data Properties&quot;?</short_desc>
+          <delta_ts>2015-01-17 05:24:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2801</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-25 16:23:46 -0800</bug_when>
+    <thetext>Section 8.1.6.2 has Table 8 &quot;Essential Internal Methods&quot;.
+
+It seems like there should be a companion table:
+&quot;Essential Internal Data Properties&quot;,
+with rows for [[Prototype]] and [[Extensible]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2821</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-26 09:38:45 -0800</bug_when>
+    <thetext>I don&apos;t think so.  Those are internal data properties of ordinary objects.  The MOP doesn&apos;t require them and some exotic objects don&apos;t have them.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

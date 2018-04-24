@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4532</bug_id>
+          
+          <creation_ts>2015-08-26 15:33:00 -0700</creation_ts>
+          <short_desc>Assignment of global variables deleted by their RHS in strict mode is permitted</short_desc>
+          <delta_ts>2015-08-26 15:41:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kevin Gibbons">bakkot</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>bakkot</cc>
+    
+    <cc>bugs.ecmascript</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14693</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kevin Gibbons">bakkot</who>
+    <bug_when>2015-08-26 15:33:36 -0700</bug_when>
+    <thetext>See https://esdiscuss.org/topic/assignment-of-global-variables-deleted-by-their-rhs-in-strict-mode.
+
+In short, it is possible to have a Reference to a global variable which has been deleted. Normally, bare assignments to undeclared variables in strict mode cause ReferenceErrors. However, calling PutValue on a reference to a global variable which has been deleted since the reference was created does not throw a ReferenceError in strict mode, even though, at the time of writing, that variable does not exist.
+
+This circumvents a protection which strict mode is intended to provide.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

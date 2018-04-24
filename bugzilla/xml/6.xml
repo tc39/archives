@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>6</bug_id>
+          
+          <creation_ts>2011-02-08 11:13:00 -0800</creation_ts>
+          <short_desc>Should there be a better indicator that a test case is just slow and not hung?</short_desc>
+          <delta_ts>2011-03-07 14:06:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-08 11:13:07 -0800</bug_when>
+    <thetext>&lt;ReportedBy&gt;AlexChi&lt;/ReportedBy&gt;
+
+The web UI for Test262 shows the individual test case that&apos;s currently being executed under the progress bar (e.g., &quot;Executing Test: S11.10_13.A8_T9&quot;), but gives no clear indication of the progress of the individual test case.  Typically this text is updated so quickly you cannot read the screen, but a in few cases most modern browsers take 1+ seconds on modern hardware.  This can lead to the impression a test case has hung.
+
+The question is should the web UI also show the progress of individual test cases?  Given that most tests finish in milliseconds, perhaps it makes more sense to split up heavyweight test cases instead?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>123</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 13:43:51 -0800</bug_when>
+    <thetext>A largely blind estimate is that one day will be needed on this.  Could be more or less time depending on what the exact fix is.  For example, a very quick fix is to break-up tests that take more than a second on the fastest mainstream browser running on &apos;modern hardware&apos; (whatever that means:) ).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

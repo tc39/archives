@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1521</bug_id>
+          
+          <creation_ts>2013-05-18 20:06:00 -0700</creation_ts>
+          <short_desc>Annex D (In Edition 5.1): 15.11.1.2 does not exist</short_desc>
+          <delta_ts>2015-02-19 19:11:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 15: May 14, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yoshinori TAKESAKO">takesako262</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4072</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yoshinori TAKESAKO">takesako262</who>
+    <bug_when>2013-05-18 20:06:31 -0700</bug_when>
+    <thetext>Shigeru Kizu reports:
+
+In Annex D (In Edition 5.1): There are the following three lines;
+
+15.11.x.x: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
+
+But 15.11.1.2 does not exist in 5.1th-spec and 6th-draft(rev15).
+
+Change
+
+15.11.1.1: Removed requirement ...
+15.11.1.2: Removed requirement ...
+15.11.1.2: Removed requirement ...
+
+to
+
+15.11.1.1: Removed requirement ...
+15.11.2.1: Removed requirement ...
+15.11.7.4: Removed requirement ...
+
+diff:
+  15.11.1.1: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
+- 15.11.1.2: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
++ 15.11.2.1: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
+  15.11.4.4: Steps 6-10 modified/added to correctly deal with missing or empty message property value.
+- 15.11.1.2: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
++ 15.11.7.4: Removed requirement that the message own property is set to the empty String when the message argument is undefined.
+
+See page 6 of es5_errata_7-31-10.pdf:
+http://wiki.ecmascript.org/lib/exe/fetch.php?id=es3.1%3Aes3.1_proposal_working_draft&amp;cache=cache&amp;media=resources:es5_errata_7-31-10.pdf</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12971</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 10:26:42 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13114</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:04 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

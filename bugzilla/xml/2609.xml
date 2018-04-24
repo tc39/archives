@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2609</bug_id>
+          
+          <creation_ts>2014-04-09 14:11:00 -0700</creation_ts>
+          <short_desc>`RegExp.prototype.toString()`</short_desc>
+          <delta_ts>2014-04-16 15:22:38 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>lukeh</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7631</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-04-09 14:11:16 -0700</bug_when>
+    <thetext>As discussed during the Apr 9 meeting, specifying `RegExp.prototype.toString` completely is a can of worms, and we should leave it up to implementations.
+
+Waldemar suggested the spec should add a requirement that makes `eval(RegExp(string))` hold true for all values of string (browsers get this wrong).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7637</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-04-09 16:45:14 -0700</bug_when>
+    <thetext>Requirement could go something among the lines of:
+
+&gt; The result of `RegExp.prototype.toString`, when called on a regular expression object, should be usable as a regular expression literal.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7756</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 15:22:38 -0700</bug_when>
+    <thetext>this is already covered in much more detail within
+21.2.3.3.4 EscapeRegExpPattern</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

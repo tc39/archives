@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1063</bug_id>
+          
+          <creation_ts>2012-11-26 21:21:00 -0800</creation_ts>
+          <short_desc>15.*: Is [[Match]] a method or a data property?</short_desc>
+          <delta_ts>2013-03-08 14:44:19 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2862</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-26 21:21:34 -0800</bug_when>
+    <thetext>The spec refers to [[Match]] as both:
+-- an internal method (15.5.4.14, 15.10.6.2); and
+-- an internal data property (15.10.2, 15.10.4.1, 15.10.7).
+
+It&apos;s possible these aren&apos;t in conflict -- the terms aren&apos;t defined precisely enough to say for sure -- but regardless, it would probably be better to pick one and use it consistently.
+
+I think &quot;internal method&quot; has the stronger claim, given that one can &quot;call&quot; it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2889</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-27 22:18:33 -0800</bug_when>
+    <thetext>In ES3 and 5 it was an internal method.  I&apos;m hoping that it becomes something else.  Possibly a real method such as @@match, but it could potentially also be a function valued internal data property. 
+
+In either case, I really haven&apos;t work on that problem yet, and the RegExp spec language is still in a transitional state.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3269</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-05 16:42:33 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3348</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:19 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

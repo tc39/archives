@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>157</bug_id>
+          
+          <creation_ts>2011-07-20 17:12:00 -0700</creation_ts>
+          <short_desc>&quot;do{}while(false)false&quot; prohibited in spec but allowed in consensus reality</short_desc>
+          <delta_ts>2012-02-27 16:52:30 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>8</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erights</cc>
+          <cf_tc39approval>2011-07-28 00:00:00</cf_tc39approval>
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="2"
+          type_id="1"
+          status="+"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>355</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 17:12:01 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #8 +++
+
+See thread beginning at https://mail.mozilla.org/pipermail/es-discuss/2011-February/012751.html especially https://mail.mozilla.org/pipermail/es-discuss/2011-February/012758.html
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=238945
+https://bugs.ecmascript.org/show_bug.cgi?id=7
+http://code.google.com/p/v8/issues/detail?id=1127
+
+If it is too late to add an errata to the ES5.1 spec to make it meet reality, we need to at least record this on the ecmascript wiki. And we should fix it in the next spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>457</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-09-23 08:25:50 -0700</bug_when>
+    <thetext>efrom July 2001 meting notes:
+
+Approved -- this is the de-facto standard whereby do;while(0)x will have a semicolon inserted before x.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>693</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-02-27 16:52:30 -0800</bug_when>
+    <thetext>corrected by removing required semicolon as final token of do-while statement.
+
+fixed in feb 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

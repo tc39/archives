@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2503</bug_id>
+          
+          <creation_ts>2014-02-05 19:25:00 -0800</creation_ts>
+          <short_desc>Invalid test? S15.9.3.1_A5_T4</short_desc>
+          <delta_ts>2014-07-17 23:40:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=330</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>andyd</reporter>
+          <assigned_to name="Brian Terlson">brterlso</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>sam.mikes</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7195</commentid>
+    <comment_count>0</comment_count>
+    <who name="">andyd</who>
+    <bug_when>2014-02-05 19:25:02 -0800</bug_when>
+    <thetext>DESCRIPTION
+Date tests using static values for verification are failing erroneously outside of PST time zone.
+
+Date constructor uses local time so generating a date and comparing to ticks off of epoch returns a different value in differing timezones. You must explicitly specify UTC in the constructor to get a consistent result, which the current test code for all 15.9.3.1_A5 does not do.
+
+------------------
+TEST:            TestCases/ch15/15.9/15.9.3/S15.9.3.1_A5_T4.js
+SOURCE:          http://hg.ecmascript.org/tests/test262/file/tip/test/suite/ch15/15.9/15.9.3/S15.9.3.1_A5_T4.js
+TEST SUITE DATE: 2013-06-13
+PLATFORM:        Mozilla/5.0 (Linux; U; en-us; KFSOWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.13 Safari/535.19 Silk-Accelerated=true
+ERROR:           Error: Unexpected exception, &quot;Uncaught Test262 Error: #1: Incorrect value of Date&quot; was thrown.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7197</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-06 04:40:13 -0800</bug_when>
+    <thetext>See also bug 293</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9254</commentid>
+    <comment_count>2</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 23:13:41 -0700</bug_when>
+    <thetext>I also observe these failures, one timezone to the east of Pacific time.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9256</commentid>
+    <comment_count>3</comment_count>
+    <who name="Sam Mikes">sam.mikes</who>
+    <bug_when>2014-07-17 23:40:52 -0700</bug_when>
+    <thetext>Add see also bug 293[1] and bug 330[2] ; note that bug 330 includes a candidate fix which forces the use of UTC+8, which should yield correct results in all timezones and year-round.
+
+[1]: https://bugs.ecmascript.org/show_bug.cgi?id=293
+[2]: https://bugs.ecmascript.org/show_bug.cgi?id=330</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

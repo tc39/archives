@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1548</bug_id>
+          
+          <creation_ts>2013-06-06 05:42:00 -0700</creation_ts>
+          <short_desc>Update results handling for Annex B section</short_desc>
+          <delta_ts>2013-06-07 04:36:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brent Baker">brbaker</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>brbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4143</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-06 05:42:21 -0700</bug_when>
+    <thetext>Currently the code that handles tracking testcase results only handles sections that are numeric section names. This needs to be modified to also handle sections &quot;A-F&quot; for the annex sections of the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4144</commentid>
+    <comment_count>1</comment_count>
+      <attachid>60</attachid>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-06 05:46:58 -0700</bug_when>
+    <thetext>Created attachment 60
+Add handling for sections &quot;A-F&quot;
+
+- Update code that determines the test section to also allow &quot;A-F&quot; followed by &quot;.&quot;. This will capture tests such as &quot;B.2.1&quot;
+
+- If a test name doesn&apos;t match anything in getSectionById() just return the global section instead of trying to access a null object.
+
+- Add section &quot;Annex B&quot; to the exam-262 TOC</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4147</commentid>
+    <comment_count>2</comment_count>
+      <attachid>60</attachid>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2013-06-06 11:36:33 -0700</bug_when>
+    <thetext>Comment on attachment 60
+Add handling for sections &quot;A-F&quot;
+
+Patch looks good. Just make sure to test with a complete run and ensure that results are reported appropriately on the reporting tab for all sections!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4150</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-07 03:29:07 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Patch looks good. Just make sure to test with a complete run and ensure that
+&gt; results are reported appropriately on the reporting tab for all sections!
+
+Yup, I should have mentioned, tested full and partial runs with FF, Chrome and Safari</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4151</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brent Baker">brbaker</who>
+    <bug_when>2013-06-07 04:36:36 -0700</bug_when>
+    <thetext>changeset:   375:89ff32d0344b
+user:        Brent Baker &lt;brbaker@adobe.com&gt;
+date:        Fri Jun 07 07:05:37 2013 -0400
+summary:     Bug 1548: Update results handling for Annex B section (r+bterlson)
+
+NOTE: I am still waiting to get access to update the live website @ http://test262.ecmascript.org</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>60</attachid>
+            <date>2013-06-06 05:46:00 -0700</date>
+            <delta_ts>2013-06-06 05:46:58 -0700</delta_ts>
+            <desc>Add handling for sections &quot;A-F&quot;</desc>
+            <filename>bug_1548.patch</filename>
+            <type>text/plain</type>
+            <size>4678</size>
+            <attacher name="Brent Baker">brbaker</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL2NvbnNvbGUvaGFybmVzcy9oZWxwZXIuanMgYi9jb25zb2xlL2hhcm5lc3Mv
+aGVscGVyLmpzCi0tLSBhL2NvbnNvbGUvaGFybmVzcy9oZWxwZXIuanMKKysrIGIvY29uc29sZS9o
+YXJuZXNzL2hlbHBlci5qcwpAQCAtMjU0LDE5ICsyNTQsMjIgQEAgZnVuY3Rpb24gUHJlc2VudGVy
+KCkgewogDQogICAgIC8qIFJldHVybnMgdGhlIHNlY3Rpb24gb2JqZWN0IGZvciB0aGUgc3BlY2lm
+aWVkIHNlY3Rpb24gaWQNCiAgICAgICogKGVnLiAiNy4xIiBvciAiMTUuNC40LjEyIikuDQogICAg
+ICAqLw0KICAgICBmdW5jdGlvbiBnZXRTZWN0aW9uQnlJZChpZCkgew0KICAgICAgICAgaWYoaWQg
+PT0gMCkNCiAgICAgICAgICAgICByZXR1cm4gZ2xvYmFsU2VjdGlvbjsNCiANCi0gICAgICAgIHZh
+ciBtYXRjaCA9IGlkLm1hdGNoKC9cZCsvZyk7DQorICAgICAgICB2YXIgbWF0Y2ggPSBpZC5tYXRj
+aCgvXGQrfFtBLUZdKD89XC4pL2cpOw0KICAgICAgICAgdmFyIHNlY3Rpb24gPSBnbG9iYWxTZWN0
+aW9uOw0KIA0KKyAgICAgICAgaWYgKG1hdGNoID09PSBudWxsKQ0KKyAgICAgICAgICAgIHJldHVy
+biBzZWN0aW9uOw0KKw0KICAgICAgICAgZm9yKHZhciBpID0gMDsgaSA8IG1hdGNoLmxlbmd0aDsg
+aSsrKSB7DQogICAgICAgICAgICAgaWYodHlwZW9mIHNlY3Rpb24uc3Vic2VjdGlvbnNbbWF0Y2hb
+aV1dICE9PSAidW5kZWZpbmVkIikgew0KICAgICAgICAgICAgICAgICBzZWN0aW9uID0gc2VjdGlv
+bi5zdWJzZWN0aW9uc1ttYXRjaFtpXV07DQogICAgICAgICAgICAgfSBlbHNlIHsNCiAgICAgICAg
+ICAgICAgICAgYnJlYWs7DQogICAgICAgICAgICAgfQ0KICAgICAgICAgfQ0KICAgICAgICAgcmV0
+dXJuIHNlY3Rpb247DQpAQCAtMzUzLDE3ICszNTYsMTcgQEAgZnVuY3Rpb24gUHJlc2VudGVyKCkg
+ewogDQogICAgIC8qIFJlY3Vyc2l2ZWx5IHBhcnNlcyB0aGUgVE9DIHhtbCwgcHJvZHVjaW5nIG5l
+c3RlZCBzZWN0aW9ucy4gKi8NCiAgICAgZnVuY3Rpb24gYWRkU2VjdGlvbnNGcm9tWE1MKG5vZGVz
+LCBwYXJlbnRTZWN0aW9uKXsNCiAgICAgICAgIHZhciBzdWJzZWN0aW9uOw0KIA0KICAgICAgICAg
+Zm9yICh2YXIgaSA9IDA7IGkgPCBub2Rlcy5sZW5ndGg7IGkrKykgew0KICAgICAgICAgICAgIGlm
+IChub2Rlc1tpXS5ub2RlTmFtZSA9PT0gInNlYyIpIHsNCiAgICAgICAgICAgICAgICAgc3Vic2Vj
+dGlvbiA9IG5ldyBTZWN0aW9uKHBhcmVudFNlY3Rpb24sIG5vZGVzW2ldLmdldEF0dHJpYnV0ZSgn
+aWQnKSwgbm9kZXNbaV0uZ2V0QXR0cmlidXRlKCduYW1lJykpOw0KLSAgICAgICAgICAgICAgICBw
+YXJlbnRTZWN0aW9uLnN1YnNlY3Rpb25zW3N1YnNlY3Rpb24uaWQubWF0Y2goL1xkKyQvKV0gPSBz
+dWJzZWN0aW9uOw0KKyAgICAgICAgICAgICAgICBwYXJlbnRTZWN0aW9uLnN1YnNlY3Rpb25zW3N1
+YnNlY3Rpb24uaWQubWF0Y2goL1xkKyR8W0EtRl0kLyldID0gc3Vic2VjdGlvbjsNCiAgICAgICAg
+ICAgICAgICAgYWRkU2VjdGlvbnNGcm9tWE1MKG5vZGVzW2ldLmNoaWxkTm9kZXMsIHN1YnNlY3Rp
+b24pOw0KICAgICAgICAgICAgIH0NCiAgICAgICAgIH0NCiAgICAgfQ0KICAgICANCiAgICAgLyog
+UmVuZGVycyB0aGUgYnJlYWRjcnVtYnMgZm9yIHJlcG9ydCBuYXZpZ2F0aW9uLiAqLw0KICAgICBm
+dW5jdGlvbiByZW5kZXJCcmVhZGNydW1icygpIHsNCiAgICAgICAgIHZhciBjb250YWluZXIgPSAk
+KCdkaXYuY3J1bWJDb250YWluZXIgZGl2LmNydW1icycpOw0KZGlmZiAtLWdpdCBhL3dlYnNpdGUv
+aGFybmVzcy9oZWxwZXIuanMgYi93ZWJzaXRlL2hhcm5lc3MvaGVscGVyLmpzCi0tLSBhL3dlYnNp
+dGUvaGFybmVzcy9oZWxwZXIuanMKKysrIGIvd2Vic2l0ZS9oYXJuZXNzL2hlbHBlci5qcwpAQCAt
+MjU0LDE5ICsyNTQsMjIgQEAgZnVuY3Rpb24gUHJlc2VudGVyKCkgewogDQogICAgIC8qIFJldHVy
+bnMgdGhlIHNlY3Rpb24gb2JqZWN0IGZvciB0aGUgc3BlY2lmaWVkIHNlY3Rpb24gaWQNCiAgICAg
+ICogKGVnLiAiNy4xIiBvciAiMTUuNC40LjEyIikuDQogICAgICAqLw0KICAgICBmdW5jdGlvbiBn
+ZXRTZWN0aW9uQnlJZChpZCkgew0KICAgICAgICAgaWYoaWQgPT0gMCkNCiAgICAgICAgICAgICBy
+ZXR1cm4gZ2xvYmFsU2VjdGlvbjsNCiANCi0gICAgICAgIHZhciBtYXRjaCA9IGlkLm1hdGNoKC9c
+ZCsvZyk7DQorICAgICAgICB2YXIgbWF0Y2ggPSBpZC5tYXRjaCgvXGQrfFtBLUZdKD89XC4pL2cp
+Ow0KICAgICAgICAgdmFyIHNlY3Rpb24gPSBnbG9iYWxTZWN0aW9uOw0KIA0KKyAgICAgICAgaWYg
+KG1hdGNoID09PSBudWxsKQ0KKyAgICAgICAgICAgIHJldHVybiBzZWN0aW9uOw0KKw0KICAgICAg
+ICAgZm9yKHZhciBpID0gMDsgaSA8IG1hdGNoLmxlbmd0aDsgaSsrKSB7DQogICAgICAgICAgICAg
+aWYodHlwZW9mIHNlY3Rpb24uc3Vic2VjdGlvbnNbbWF0Y2hbaV1dICE9PSAidW5kZWZpbmVkIikg
+ew0KICAgICAgICAgICAgICAgICBzZWN0aW9uID0gc2VjdGlvbi5zdWJzZWN0aW9uc1ttYXRjaFtp
+XV07DQogICAgICAgICAgICAgfSBlbHNlIHsNCiAgICAgICAgICAgICAgICAgYnJlYWs7DQogICAg
+ICAgICAgICAgfQ0KICAgICAgICAgfQ0KICAgICAgICAgcmV0dXJuIHNlY3Rpb247DQpAQCAtMzUz
+LDE3ICszNTYsMTcgQEAgZnVuY3Rpb24gUHJlc2VudGVyKCkgewogDQogICAgIC8qIFJlY3Vyc2l2
+ZWx5IHBhcnNlcyB0aGUgVE9DIHhtbCwgcHJvZHVjaW5nIG5lc3RlZCBzZWN0aW9ucy4gKi8NCiAg
+ICAgZnVuY3Rpb24gYWRkU2VjdGlvbnNGcm9tWE1MKG5vZGVzLCBwYXJlbnRTZWN0aW9uKXsNCiAg
+ICAgICAgIHZhciBzdWJzZWN0aW9uOw0KIA0KICAgICAgICAgZm9yICh2YXIgaSA9IDA7IGkgPCBu
+b2Rlcy5sZW5ndGg7IGkrKykgew0KICAgICAgICAgICAgIGlmIChub2Rlc1tpXS5ub2RlTmFtZSA9
+PT0gInNlYyIpIHsNCiAgICAgICAgICAgICAgICAgc3Vic2VjdGlvbiA9IG5ldyBTZWN0aW9uKHBh
+cmVudFNlY3Rpb24sIG5vZGVzW2ldLmdldEF0dHJpYnV0ZSgnaWQnKSwgbm9kZXNbaV0uZ2V0QXR0
+cmlidXRlKCduYW1lJykpOw0KLSAgICAgICAgICAgICAgICBwYXJlbnRTZWN0aW9uLnN1YnNlY3Rp
+b25zW3N1YnNlY3Rpb24uaWQubWF0Y2goL1xkKyQvKV0gPSBzdWJzZWN0aW9uOw0KKyAgICAgICAg
+ICAgICAgICBwYXJlbnRTZWN0aW9uLnN1YnNlY3Rpb25zW3N1YnNlY3Rpb24uaWQubWF0Y2goL1xk
+KyR8W0EtRl0kLyldID0gc3Vic2VjdGlvbjsNCiAgICAgICAgICAgICAgICAgYWRkU2VjdGlvbnNG
+cm9tWE1MKG5vZGVzW2ldLmNoaWxkTm9kZXMsIHN1YnNlY3Rpb24pOw0KICAgICAgICAgICAgIH0N
+CiAgICAgICAgIH0NCiAgICAgfQ0KICAgICANCiAgICAgLyogUmVuZGVycyB0aGUgYnJlYWRjcnVt
+YnMgZm9yIHJlcG9ydCBuYXZpZ2F0aW9uLiAqLw0KICAgICBmdW5jdGlvbiByZW5kZXJCcmVhZGNy
+dW1icygpIHsNCiAgICAgICAgIHZhciBjb250YWluZXIgPSAkKCdkaXYuY3J1bWJDb250YWluZXIg
+ZGl2LmNydW1icycpOw0KZGlmZiAtLWdpdCBhL3dlYnNpdGUvbWV0YWRhdGEvZWNtYS0yNjItdG9j
+LnhtbCBiL3dlYnNpdGUvbWV0YWRhdGEvZWNtYS0yNjItdG9jLnhtbAotLS0gYS93ZWJzaXRlL21l
+dGFkYXRhL2VjbWEtMjYyLXRvYy54bWwKKysrIGIvd2Vic2l0ZS9tZXRhZGF0YS9lY21hLTI2Mi10
+b2MueG1sCkBAIC0yOTgsOSArMjk4LDIzIEBACiAgICAgICAgIDxzZWMgaWQ9IjE1LjExLjciIG5h
+bWU9Ik5hdGl2ZUVycm9yIE9iamVjdCBTdHJ1Y3R1cmUiLz4NCiAgICAgICA8L3NlYz4NCiAgICAg
+ICA8c2VjIGlkPSIxNS4xMiIgbmFtZT0iVGhlIEpTT04gT2JqZWN0Ij4NCiAgICAgICAgIDxzZWMg
+aWQ9IjE1LjEyLjEiIG5hbWU9IlRoZSBKU09OIEdyYW1tYXIiLz4NCiAgICAgICAgIDxzZWMgaWQ9
+IjE1LjEyLjIiIG5hbWU9InBhcnNlICggdGV4dCBbICwgcmV2aXZlciBdICkiLz4NCiAgICAgICAg
+IDxzZWMgaWQ9IjE1LjEyLjMiIG5hbWU9InN0cmluZ2lmeSAoIHZhbHVlIFsgLCByZXBsYWNlciBb
+ICwgc3BhY2UgXSBdICkiLz4NCiAgICAgICA8L3NlYz4NCiAgIDwvc2VjPg0KKyAgPHNlYyBpZD0i
+QiIgbmFtZT0iQW5uZXggQiAoaW5mb3JtYXRpdmUpIENvbXBhdGliaWxpdHkiPg0KKyAgICA8c2Vj
+IGlkPSJCLjEiIG5hbWU9IkFkZGl0aW9uYWwgU3ludGF4Ij4NCisgICAgICA8c2VjIGlkPSJCLjEu
+MSIgbmFtZT0iTnVtZXJpYyBMaXRlcmFscyIvPg0KKyAgICAgIDxzZWMgaWQ9IkIuMS4yIiBuYW1l
+PSJTdHJpbmcgTGl0ZXJhbHMiLz4NCisgICAgPC9zZWM+DQorICAgIDxzZWMgaWQ9IkIuMiIgbmFt
+ZT0iQWRkaXRpb25hbCBQcm9wZXJ0aWVzIj4NCisgICAgICA8c2VjIGlkPSJCLjIuMSIgbmFtZT0i
+ZXNjYXBlIi8+DQorICAgICAgPHNlYyBpZD0iQi4yLjIiIG5hbWU9InVuZXNjYXBlIi8+DQorICAg
+ICAgPHNlYyBpZD0iQi4yLjMiIG5hbWU9IlN0cmluZy5wcm90b3R5cGUuc3Vic3RyIi8+DQorICAg
+ICAgPHNlYyBpZD0iQi4yLjQiIG5hbWU9IkRhdGUucHJvdG90eXBlLmdldFllYXIiLz4NCisgICAg
+ICA8c2VjIGlkPSJCLjIuNSIgbmFtZT0iRGF0ZS5wcm90b3R5cGUuc2V0WWVhciIvPg0KKyAgICAg
+IDxzZWMgaWQ9IkIuMi42IiBuYW1lPSJEYXRlLnByb3RvdHlwZS50b0dNVFN0cmluZyIvPg0KKyAg
+ICA8L3NlYz4NCisgIDwvc2VjPg0KICA8L2VzU3BlYz4KXCBObyBuZXdsaW5lIGF0IGVuZCBvZiBm
+aWxlCg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

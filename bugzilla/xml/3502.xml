@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3502</bug_id>
+          
+          <creation_ts>2014-12-26 21:44:00 -0800</creation_ts>
+          <short_desc>26.2.1: incomplete</short_desc>
+          <delta_ts>2015-03-05 09:10:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11255</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-12-26 21:44:14 -0800</bug_when>
+    <thetext>26.2.1 &quot;The Proxy Constructor Function&quot; says
+    The Proxy Constructor is a B
+and that&apos;s it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11259</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-29 15:30:02 -0800</bug_when>
+    <thetext>This appears to be a PDF rendering problem.  I poked at the text to so see if I can perturb it.
+
+I keep this open so we can keep an eye on this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11329</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 10:40:32 -0800</bug_when>
+    <thetext>see ok in the rev31 html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11335</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 12:33:35 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #2)
+&gt; see ok in the rev31 html
+
+derr, seems ok</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12086</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-03 18:39:21 -0800</bug_when>
+    <thetext>The second paragraph is mostly missing in the Rev32 PDF.
+
+I moved it into 26.2.2, which seems like a better place for.  Weill see if this fixes things for Reg33</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13339</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 17:04:25 -0800</bug_when>
+    <thetext>in rev34 the second paragraph on 26.2.2 is still mostly missing the PDFs.
+
+That paragraph has tiny purple dots underlining it which apparently are Word &quot;smart tag&quot; indicators.  It isn&apos;t clear how to get rid of them, so I retyped the paragraph and deleted the old one.
+
+still need to generate a pdf and verify that this fixed it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13570</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-05 09:10:26 -0800</bug_when>
+    <thetext>The PDF for Rev35 looks fine, so
+
+fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3251</bug_id>
+          
+          <creation_ts>2014-09-30 06:49:00 -0700</creation_ts>
+          <short_desc>Assertion fails in CreateDataProperty</short_desc>
+          <delta_ts>2015-07-10 08:34:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10252</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-30 06:49:44 -0700</bug_when>
+    <thetext>https://people.mozilla.org/~jorendorff/es6-draft.html#sec-createdataproperty
+
+I believe we can get here with a primitive. It can happen when `super.x = 1` is executed where we have [[This]] as a primitive (strict function) and [[HomeObject]].__proto__ has no x property.
+
+PutValue calls [[Set]] of /base/ passing &apos;x&apos;, 1, and a primitive as the /Receiver/
+
+Then in https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ordinary-object-internal-methods-and-internal-slots-set-p-v-receiver, step 5.f.i calls CreateDataProperty with a primitive value, &apos;x&apos; and 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10253</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-09-30 08:18:18 -0700</bug_when>
+    <thetext>9.1.9 [[Set]], step 5.b handles the case when `Receiver` is a primitive value.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10254</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-09-30 08:32:00 -0700</bug_when>
+    <thetext>Thanks André.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

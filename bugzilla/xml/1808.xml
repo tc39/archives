@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1808</bug_id>
+          
+          <creation_ts>2013-08-23 15:30:00 -0700</creation_ts>
+          <short_desc>Algorithm steps with missing periods in numbering</short_desc>
+          <delta_ts>2013-09-27 14:47:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5208</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-08-23 15:30:18 -0700</bug_when>
+    <thetext>Trivial.
+
+Some algorithm steps at the fifth nesting level are missing periods, so for example we get things like:
+
+&gt;      d. If SameValue( value, oldValue) is false, then return false.
+&gt;  3.  Else
+&gt;      a  Let status be the result of IntegerIndexedElementSet (O, intIndex,
+&gt;         value).
+
+Note the missing period after the &quot;a&quot; on the third line.
+
+They can probably all be fixed at once in a numbering style dialog somewhere, but here&apos;s the complete list, just in case:
+
+
+- In 8.4.6.3 &quot;[[DefineOwnProperty]] ( P, Desc)&quot;, step 3.c.xi.3, two
+  substeps.
+
+- In 10.5.1 &quot;Global Declaration Instantiation&quot;, step 11.a.i.1, three
+  substeps.
+
+- In 10.6 &quot;Arguments Object&quot;, the abstract operation
+  CompleteMappedArgumentsObject, steps 6.a.ii.2, four substeps.
+
+- In 12.11.2 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics: Case
+  Block Evaluation&quot;, the second production (&quot;CaseBlock : {
+  CaseClauses_opt DefaultClause CaseClauses_opt }&quot;), step 6.b.i.2,
+  missing periods on the two substeps.
+
+- In 13.4.1.2 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics:
+  Evaluation&quot;, the fourth production (&quot;YieldExpression : yield
+  YieldDelegator_opt AssignmentExpression&quot;), step 4.d.viii.1, missing
+  periods on the two substeps.
+
+- In 15.1.3 &quot;URI Handling Function Properties&quot;, subsection &quot;Runtime
+  Semantics: Decode Abstract Operation&quot;, sixteen substeps (all the ones
+  at the fifth nesting level).
+
+- In 15.2.3.14 &quot;Object.keys ( O )&quot;, step 7.f.iii.3.a.
+
+- 15.4.3.4 &quot;Array.prototype.concat ( [ item1 [ , item2 [ , ... ] ] ] )&quot;,
+  step 9.d.v.4, two substeps.
+
+- 15.7.3.7 &quot;Number.prototype.toPrecision (precision)&quot;, step 12.c.iv,
+  three substeps.
+
+- 15.10.2.8 &quot;Atom&quot;, subsection &quot;Runtime Semantics: CharacterSetMatcher
+   Abstract Operation&quot;, in the closure, steps 5.a and 6.a.
+
+- 15.10.5.11 &quot;RegExp.prototype.match (string)&quot;, step 10.g.iv, four
+  substeps.  (Also, the number for step 10.g.iv is randomly bold.)
+
+- 15.10.5.14 &quot;RegExp.prototype.split (string, limit)&quot;, step 17.d.iii.8,
+  five substeps.
+
+- 15.12.3 &quot;JSON.stringify ( value [ , replacer [ , space ] ] )&quot;, step
+  4.b.ii, two substeps.
+
+At least, I think that&apos;s all of them!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5377</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-10 14:56:13 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5592</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:58 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

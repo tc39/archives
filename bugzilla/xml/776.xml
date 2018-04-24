@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>776</bug_id>
+          
+          <creation_ts>2012-10-09 14:36:00 -0700</creation_ts>
+          <short_desc>Relative times formatting (15mins ago)</short_desc>
+          <delta_ts>2016-02-15 16:03:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Caridy Patiño">caridy</assigned_to>
+          <cc>caridy</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1911</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:36:05 -0700</bug_when>
+    <thetext>We should support locale friendly relative time formatting.
+
+More research is necessary to check what platforms actually support.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14921</commentid>
+    <comment_count>1</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:03:52 -0800</bug_when>
+    <thetext>proposal: https://github.com/caridy/intl-relative-time-spec</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>26</bug_id>
+          
+          <creation_ts>2011-02-21 10:21:00 -0800</creation_ts>
+          <short_desc>S13.2.2_A18_T1.js and S15.2.2.1_A2_T4 are invalid (Sputnik to Test262 conversion issue)</short_desc>
+          <delta_ts>2012-01-05 09:19:22 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>44</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:21:09 -0800</bug_when>
+    <thetext>S13.2.2_A18_T1.js contains the following:
+   var callee=0, b;
+   var __obj={callee:&quot;a&quot;};
+      
+   result=(function(){
+        with (arguments){
+            callee=1;
+            b=true;
+        }
+        return arguments;
+    })(__obj);
+
+    //...
+    if (!(this.b)) { $ERROR(...)}
+
+The Test262 converter tool wraps all of the snippet above in a test case function attached to a test metadata object.  Problem is the final assert in this test case actually depends upon the entire snippet being defined at the global level.  That is, in the converted test the line &quot;var callee=0, b;&quot; actually creates a local &apos;b&apos; object instead of a &apos;b&apos; attached to the global scope =&gt; any conformant ES5 implementation will now fail this.
+
+Disabling the test until we get the converter refactored to account for test cases like this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>47</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-21 10:42:44 -0800</bug_when>
+    <thetext>Same scoping issue for S15.2.2.1_A2_T4.js which I&apos;ve disabled as well.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>129</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 14:23:55 -0800</bug_when>
+    <thetext>Fix for this one might be keeping the semantics of the original test with the Sputnik Test Conversion tool.  Already a bug on this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>528</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-04 15:06:17 -0800</bug_when>
+    <thetext>The following are all disabled due to this:
+  &lt;test id=&quot;S13.2.2_A18_T1&quot;&gt;https://bugs.ecmascript.org/show_bug.cgi?id=26&lt;/test&gt;
+  &lt;test id=&quot;S13.2.2_A18_T2&quot;&gt;https://bugs.ecmascript.org/show_bug.cgi?id=26&lt;/test&gt;
+  &lt;test id=&quot;S13.2.2_A19_T7&quot;&gt;https://bugs.ecmascript.org/show_bug.cgi?id=26&lt;/test&gt;
+  &lt;test id=&quot;S15.2.2.1_A2_T4&quot;&gt;https://bugs.ecmascript.org/show_bug.cgi?id=26&lt;/test&gt;
+
+Now that the Sputnik converted has been replaced, this may be a non-issue.  Checking now...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>529</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-05 09:19:22 -0800</bug_when>
+    <thetext>Verified that the new test262 converter fixed this.  Re-enabled the tests in Hg and the changes will go live with the next test262 website update (later this month).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

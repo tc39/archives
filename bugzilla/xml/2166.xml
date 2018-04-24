@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2166</bug_id>
+          
+          <creation_ts>2013-11-02 03:23:00 -0700</creation_ts>
+          <short_desc>23.3.3.1, 23.4.3.2: Use the same approach to clear WeakMap/WeakSet</short_desc>
+          <delta_ts>2013-11-08 13:08:46 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6367</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-02 03:23:01 -0700</bug_when>
+    <thetext>23.3.3.1 WeakMap.prototype.clear (), step 5:
+23.4.3.2 WeakSet.prototype.clear (), steps 5-6:
+
+WeakMap simply reassigns [[WeakMapData]] to a new empty List, whereas WeakSet iterates over all entries of [[WeakSetData]] to manually set the value to `empty`. This should be changed to use a single approach.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6401</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-02 17:28:26 -0700</bug_when>
+    <thetext>they are different because Maps are Iterable and WeakMaps are not.  When a map is cleared, there may be existing MapIterators that have not completed.  This form of clearing and the explicit indexing in the Map.iterator next ensures that what happens in this case is well defined.
+
+I think I&apos;ll put a not in Map.prototype.clear explaining some of this</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6404</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-03 01:34:08 -0800</bug_when>
+    <thetext>Re-opening:
+Neither WeakMap [1] nor WeakSet [2] is iterable, so the justification for bug 1157 does not apply here. 
+
+[1] https://people.mozilla.org/~jorendorff/es6-draft.html#sec-weakmap.prototype.clear
+[2] https://people.mozilla.org/~jorendorff/es6-draft.html#sec-weakset.prototype.clear</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6405</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-03 01:38:09 -0800</bug_when>
+    <thetext>This bug is only about the difference for clear() in WeakMap compared to WeakSet. The clear() method for normal Map and Set must not be changed for exactly the reason you&apos;ve given.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6406</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-03 08:46:05 -0800</bug_when>
+    <thetext>go it
+
+fixed in rev21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6509</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:08:46 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

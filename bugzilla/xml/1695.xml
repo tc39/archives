@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1695</bug_id>
+          
+          <creation_ts>2013-08-01 11:48:00 -0700</creation_ts>
+          <short_desc>15.4.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:21:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4673</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-01 11:48:10 -0700</bug_when>
+    <thetext>15.4.2.1 / para 1
+    The value of Array.prototype is %ArrayPrototype% the intrinsic
+    Array prototype object (15.4.3).
+
+After &quot;%ArrayPrototype%&quot;, insert a comma.
+
+---
+
+15.4.2.4 / step 4
+    If mapfn is undefined, then let mapping be true.
+
+s|true|false|, I&apos;m pretty sure.
+
+---
+
+15.4.2.4 / step 8.a
+    Let iterator be the result of performing GetIterator(obj).
+
+&apos;obj&apos; is not defined. Change to &apos;items&apos;?
+
+---
+
+15.4.2.4 / step 8.h.ix.1, 8.h.x, 8.h.xi
+    ... and a List containing kValue as argumentsList.
+    Else, let mappedValue be kValue.
+    Property Descriptor {[[Value]]: kValue, ...
+
+&apos;kValue&apos; is not defined. Change to &apos;nextValue&apos;?
+
+---
+
+15.4.2.4 / step 8.h.xi
+15.4.2.4 / step 17.d.v
+    ... DefinePropertyOrThrow(A, Pk Property Descriptor {...}).
+
+After &quot;Pk&quot;, insert a comma.
+
+---
+
+15.4.3.4 / step 3.a
+    Let C be the Get(O, &quot;constructor&quot;).
+
+Delete &quot;the&quot;, or insert &quot;result of&quot;.
+
+---
+
+15.4.3.4.1 / preamble
+    The abstract operation HasArrayConstructor with argument O performs ...
+
+s|HasArrayConstructor|IsConcatSpreadable|
+
+---
+
+15.4.3.4.1 / step 2
+    Let spreadable be the Get(O, @@isConcatSpreadable).
+
+Delete &quot;the&quot;, or insert &quot;result of&quot;.
+
+---
+
+15.4.3.12 / step 17.b.vii
+    Increase k by 1.
+
+Italicize &quot;k&quot;.
+
+---
+
+15.4.4 / para 1
+    ... have a [Array[InitialisationState]] internal data property .
+
+s| a | an |
+misplaced left-bracket: s| [Array[Init| [[ArrayInit|
+Delete space before period.
+
+---
+
+15.4.5.3 / para 1
+    Array Iterator instances inherit properties from the Array Iterator
+    prototype (the intrinsic, %ArrayIteratorPrototype%.)
+
+Move the period outside the parens.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4674</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-01 12:42:09 -0700</bug_when>
+    <thetext>fixed in rev 17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4881</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-13 11:08:26 -0700</bug_when>
+    <thetext>*** Bug 1768 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5020</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:21:58 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

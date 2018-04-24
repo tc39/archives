@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>203</bug_id>
+          
+          <creation_ts>2011-08-30 11:27:00 -0700</creation_ts>
+          <short_desc>13.2: extra left brace</short_desc>
+          <delta_ts>2015-10-02 13:26:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>187</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>jmdyck</cc>
+    
+    <cc>kennyluck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>436</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-08-30 11:27:54 -0700</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #187 +++
+
+13.2 Creating Function Objects
+
+Step 17 says:
+    Property Descriptor {[[Value]]: F, { [[Writable]]: true, ...
+and step 18 says:
+    Property Descriptor {[[Value]]: proto, { [[Writable]]: true, ...
+
+In each case, delete the second &quot;{&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>593</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:50:24 -0800</bug_when>
+    <thetext>should go into ES5.1 errata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14714</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 13:26:16 -0700</bug_when>
+    <thetext>Fixed in ES2015.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

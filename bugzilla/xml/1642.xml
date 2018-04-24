@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1642</bug_id>
+          
+          <creation_ts>2013-07-30 19:13:00 -0700</creation_ts>
+          <short_desc>9.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:22:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4616</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-30 19:13:58 -0700</bug_when>
+    <thetext>9.1.1 / OrdinaryToPrimitive / step 10.a
+    Let /result/ be the result of calling the [[Call]] internal method
+    of /second/, with /O/ as /thisArgument/ and an empty argument list.
+
+s|an empty argument list|an empty List as /argumentsList/|
+
+---
+
+9.2.6 / preamble
+    The abstract operation IsPropertyKey determine if its argument,
+
+s/determine/determines/
+
+---
+
+9.2.7 / preamble
+    The abstract operation IsExtensible is used to determine whether
+    additional properties can be added to an object. A Boolean value
+    is returned. The the argument /O/ where is the object that is tested.
+
+The third sentence is a jumble. Delete it, and simply append &quot;O&quot; to the
+first sentence:
+    ... whether additional properties can be added to an object /O/. ...
+
+---
+
+9.3.5 / preamble
+    The abstract operation Put is used to remove a specific own property of
+    an object.
+
+s/Put/DeletePropertyOrThrow/
+
+---
+
+9.3.8 / preamble
+    The operation is called with arguments P, O, and optionally args
+    where P is the property key, O serves as both the lookup point for
+    the property and the &apos;this&apos; value of the call, and args ...
+
+In this sentence, swap the order of &apos;P&apos; and &apos;O&apos; (in both the main clause
+and the subordinate clause), to match the declared order of parameters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4803</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-07 15:13:11 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5051</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:16 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

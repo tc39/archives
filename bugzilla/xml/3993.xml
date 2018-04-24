@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3993</bug_id>
+          
+          <creation_ts>2015-02-17 19:01:00 -0800</creation_ts>
+          <short_desc>21.1.3.10 and Bibliography: Improve references to Unicode publications</short_desc>
+          <delta_ts>2015-03-08 14:03:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12876</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-17 19:01:35 -0800</bug_when>
+    <thetext>The references to various Unicode publications could be improved in section 21.1.3.10, the Bibliography, and the Normative References:
+
+21.1.3.10 Note 2:
+
+- Unicode Annex #15, Unicode Normalization Forms → Unicode Standard Annex #15, Unicode Normalization Forms,
+
+- Unicode Technical Note #5 Canonical Equivalence in Applications → Unicode Technical Note #5, Canonical Equivalence in Applications
+
+- URLs would be nice, similar to section 20.3.1.7:
+http://www.unicode.org/reports/tr15/
+http://www.unicode.org/notes/tn5/
+http://www.unicode.org/reports/tr10/
+
+
+Bibliography:
+
+- Remove item 7 (that&apos;s already in the Normative References)
+
+- Add:
+
+Unicode Technical Note #5, Canonical Equivalence in Applications
+http://www.unicode.org/notes/tn5/
+
+Unicode Technical Standard #10, Unicode Collation Algorithm, version 5.1.0, or successor
+http://www.unicode.org/reports/tr10/
+
+
+Normative References:
+
+- Add URLs:
+
+Unicode: http://www.unicode.org/versions/latest
+
+UAX #15: http://www.unicode.org/reports/tr15/
+
+UAX #31: http://www.unicode.org/reports/tr31/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12910</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 08:52:59 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13103</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:03 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13346</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-24 21:11:53 -0800</bug_when>
+    <thetext>If we need years in the Bibliography, then item 8 should have year 2008 (for Unicode 5.1.0).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13355</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 09:37:07 -0800</bug_when>
+    <thetext>Fixed in rev35 editor&apos;s draft
+
+I can&apos;t find anything that says we have to list the year to say &quot;Unicode Inc.&quot;.  So, I dropped both.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13496</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:15 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13648</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-03-08 14:03:52 -0700</bug_when>
+    <thetext>Verified in rev 35 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

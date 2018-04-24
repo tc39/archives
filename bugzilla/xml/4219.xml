@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4219</bug_id>
+          
+          <creation_ts>2015-03-26 16:06:00 -0700</creation_ts>
+          <short_desc>Ch. 24: Various editorial issues</short_desc>
+          <delta_ts>2015-04-03 12:35:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13936</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-26 16:06:54 -0700</bug_when>
+    <thetext>24.1.1.3 DetachArrayBuffer( arrayBuffer )
+  Note: &quot;uses the&quot; -&gt; &quot;use the&quot;
+
+
+24.1.1.4 CloneArrayBuffer( srcBuffer, srcByteOffset [, cloneConstructor] )
+  &gt; The abstract operation CloneArrayBuffer takes two parameters, an ArrayBuffer srcBuffer, an integer srcByteOffset and optional parameter cloneConstructor.
+
+  =&gt; The abstract operation CloneArrayBuffer takes three parameters, an ArrayBuffer srcBuffer, an integer srcByteOffset and optionally a constructor function cloneConstructor.
+
+
+
+24.1.1.6 SetValueInBuffer ( arrayBuffer, byteIndex, type, value, isLittleEndian )
+  Step 9.a: &quot;IEEE-754-2008&quot; -&gt; &quot;IEEE 754-2008&quot;
+  Step 9.a: &quot;rawValue&quot; -&gt; &quot;rawBytes&quot;
+  Step 10.a: &quot;IEEE-754-2008&quot; -&gt; &quot;IEEE 754-2008&quot;
+  Step 10.a: &quot;rawValue&quot; -&gt; &quot;rawBytes&quot;
+
+
+24.1.4.1 get ArrayBuffer.prototype.byteLength
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+24.1.4.2 ArrayBuffer.prototype.constructor
+  1st para: Change &quot;ArrayBuffer.prototype.constructor&quot; to fixed width font
+
+
+24.1.4.3 ArrayBuffer.prototype.slice ( start, end )
+  Step 3: Missing comma between &quot;slot throw&quot;
+  Step 17: Missing comma between &quot;slot throw&quot;
+
+
+24.2.1.1 GetViewValue ( view, requestIndex, isLittleEndian, type )
+  Step 3: Missing full stop
+
+
+24.2.1.2 SetViewValue ( view, requestIndex, isLittleEndian, type, value )
+  Step 3: Missing full stop
+
+
+24.2.4.1 get DataView.prototype.buffer
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+24.2.4.2 get DataView.prototype.byteLength
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+
+24.2.4.3 get DataView.prototype.byteOffset
+  Step 3: Missing comma between &quot;slot throw&quot;
+
+24.2.4.5 DataView.prototype.getFloat32 ( byteOffset [ , littleEndian ] )
+24.2.4.6 DataView.prototype.getFloat64 ( byteOffset [ , littleEndian ] )
+24.2.4.8 DataView.prototype.getInt16 ( byteOffset [ , littleEndian ] )
+24.2.4.9 DataView.prototype.getInt32 ( byteOffset [ , littleEndian ] )
+24.2.4.11 DataView.prototype.getUint16 ( byteOffset [ , littleEndian ] )
+24.2.4.12 DataView.prototype.getUint32 ( byteOffset [ , littleEndian ] )
+  Preamble: wrong font for &quot;and optional argument &quot;
+
+
+24.2.5 Properties of DataView Instances
+  1st para: &quot;each have a&quot; -&gt; &quot;each have&quot;
+
+
+24.3 The JSON Object
+  1st para: Missing space &quot;object.The&quot;
+  2nd para: &quot;described in this specification&quot; -&gt; &quot;described in that specification&quot;
+
+
+24.3.2.2 Runtime Semantics: QuoteJSONString ( value )
+  Step 2a: Add &quot;, then&quot; after if-clause
+  Step 2b: Add &quot;, then&quot; after if-clause
+  Step 2c: Add &quot;, then&quot; after if-clause
+
+
+24.3.2.3 Runtime Semantics: SerializeJSONObject ( value )
+  Preamble: &quot;to the stack&quot; -&gt; &quot;to stack&quot; ?
+  Step 10a: Add &quot;, then&quot; after if-clause
+
+
+24.3.2.4 Runtime Semantics: SerializeJSONArray ( value )
+  Preamble: &quot;to the stack&quot; -&gt; &quot;to stack&quot; ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13970</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-31 14:25:44 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14088</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:36 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

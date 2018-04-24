@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1778</bug_id>
+          
+          <creation_ts>2013-08-13 10:47:00 -0700</creation_ts>
+          <short_desc>15.*: Missing ReturnIfAbrupt calls in several algorithms</short_desc>
+          <delta_ts>2015-02-19 19:10:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4877</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-13 10:47:00 -0700</bug_when>
+    <thetext>ReturnIfAbrupt calls are missing after several fallible operations:
+
+
+15.4.3.4, step 8.d.iv.4.a: Get(E, P) is fallible
+15.4.3.4, step 8.d.iv.4.b: [[DefineOwnProperty]] is fallible
+15.4.3.4, step 8.e: [[DefineOwnProperty]] is fallible
+
+15.4.3.5, step 7: ToString(separator) is fallible
+
+15.4.3.16, step 9.b: HasProperty(O, Pk) is fallible
+
+15.5.3.13, step 5: ToInteger(start) is fallible
+15.5.3.13, step 6: ToInteger(end) is fallible
+
+15.5.3.14, step 8: ToUint32(limit) is fallible
+
+15.5.3.15, step 5: ToInteger(start) is fallible
+15.5.3.15, step 6: ToInteger(end) is fallible
+
+15.9.4.28, step 1: &apos;this time value&apos; is fallible
+15.9.4.28, step 2: ToNumber(ms) is fallible
+
+15.9.4.29, step 1: ToNumber(ms) is fallible
+
+15.9.4.30, step 1: &apos;this time value&apos; is fallible
+15.9.4.30, step 2: ToNumber(sec) is fallible
+15.9.4.30, step 3: ToNumber(ms) is fallible
+
+15.9.4.31, step 3: ToNumber(sec) is fallible
+15.9.4.31, step 4: ToNumber(ms) is fallible
+
+15.9.4.32, step 1: &apos;this time value&apos; is fallible
+15.9.4.32, step 2: ToNumber(min) is fallible
+15.9.4.32, step 3: ToNumber(sec) is fallible
+15.9.4.32, step 4: ToNumber(ms) is fallible
+
+15.9.4.33, step 3: ToNumber(min) is fallible
+15.9.4.33, step 4: ToNumber(sec) is fallible
+15.9.4.33, step 5: ToNumber(ms) is fallible
+
+15.9.4.34, step 1: &apos;this time value&apos; is fallible
+15.9.4.34, step 2: ToNumber(hour) is fallible
+15.9.4.34, step 3: ToNumber(min) is fallible
+15.9.4.34, step 4: ToNumber(sec) is fallible
+15.9.4.34, step 5: ToNumber(ms) is fallible
+
+15.9.4.35, step 3: ToNumber(hour) is fallible
+15.9.4.35, step 4: ToNumber(min) is fallible
+15.9.4.35, step 5: ToNumber(sec) is fallible
+15.9.4.35, step 6: ToNumber(ms) is fallible
+
+15.9.4.36, step 1: &apos;this time value&apos; is fallible
+15.9.4.36, step 2: ToNumber(date) is fallible
+
+15.9.4.37, step 3: ToNumber(date) is fallible
+
+15.9.4.38, step 1: &apos;this time value&apos; is fallible
+15.9.4.38, step 2: ToNumber(month) is fallible
+15.9.4.38, step 3: ToNumber(date) is fallible
+
+15.9.4.39, step 3: ToNumber(month) is fallible
+15.9.4.39, step 4: ToNumber(date) is fallible
+
+15.9.4.40, step 1: &apos;this time value&apos; is fallible
+15.9.4.40, step 2: ToNumber(year) is fallible
+15.9.4.40, step 3: ToNumber(month) is fallible
+15.9.4.40, step 4: ToNumber(date) is fallible
+
+15.9.4.41, step 3: ToNumber(year) is fallible
+15.9.4.41, step 4: ToNumber(month) is fallible
+15.9.4.41, step 5: ToNumber(date) is fallible
+
+15.9.4.44, step 2: ToPrimitive is fallible
+
+15.12.2, Walk, step 3.a.iv.1: Walk is fallible
+15.12.2, Walk, step 3.b.i: [[Enumerate]] is fallible
+15.12.2, Walk, step 3.b.ii.1: Walk is fallible
+
+15.12.3, step 4.b.ii: Retrieving the value &apos;v&apos; is fallible
+15.12.3, step 4.b.ii.4.a: ToString(v) is fallible
+15.12.3, step 5.a.i: ToNumber(space) is fallible
+15.12.3, step 5.b.i: ToString(space) is fallible
+
+15.12.3, Str, step 3a: Get(value, &quot;toJSON&quot;) is fallible
+15.12.3, Str, step 5a: ToNumber(value) is fallible
+15.12.3, Str, step 5b: ToString(value) is fallible
+
+15.12.3, JO, step 6.a: [[Enumerate]] is fallible</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5297</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-02 02:06:27 -0700</bug_when>
+    <thetext>15.4.3.12, step 17.d.iii: [[DefineOwnProperty]] is fallible
+15.4.3.19, step 13.d.v: [[DefineOwnProperty]] is fallible
+15.4.3.20, step 13.d.v.1: [[DefineOwnProperty]] is fallible</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5451</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-27 04:35:47 -0700</bug_when>
+    <thetext>21.2.3.3 - RegExpAlloc, step 2: OrdinaryCreateFromConstructor is fallible</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12684</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 14:45:17 -0800</bug_when>
+    <thetext>All fixed except for Date.prototype.setXXX methods.
+
+
+In Date.prototype.setXXX, abrupt completions in this step:
+&gt; 1. Let t be LocalTime(this time value).
+
+Require these steps instead:
+&gt; 1. Let t be this time value.
+&gt; 2. ReturnIfAbrupt(t).
+&gt; 3. Let t be LocalTime(t).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12748</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 16:46:32 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+in particula the date setXXXs
+
+thanks for verifying all of these</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13076</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:59 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

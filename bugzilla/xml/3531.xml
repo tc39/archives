@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3531</bug_id>
+          
+          <creation_ts>2015-01-15 09:02:00 -0800</creation_ts>
+          <short_desc>12.14.1, 12.14.5.1 Early Errors: Unnecessary Early Errors rules</short_desc>
+          <delta_ts>2015-01-15 16:19:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11372</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 09:02:15 -0800</bug_when>
+    <thetext>12.14.1 Static Semantics: Early Errors
+
+`AssignmentExpression : LeftHandSideExpression  = AssignmentExpression`
+
+The second bullet item can be removed.
+
+
+
+12.14.5.1  Static Semantics: Early Errors  
+
+`AssignmentProperty : IdentifierReference Initializer_opt`
+
+The second bullet item can be removed, static resolution has been removed.
+
+
+`DestructuringAssignmentTarget : LeftHandSideExpression`
+
+The third bullet item and its corresponding note can be removed.
+
+
+Somewhat related: `[...([])] = []` is a syntax error, right?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11387</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 10:56:06 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft
+
+`[...([])] = []` is valid syntax.  It eventually evaluates using second rule in 12.14.5.2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11389</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-15 11:12:17 -0800</bug_when>
+    <thetext>In `[...([])]`, DestructuringAssignmentTarget : LeftHandSideExpression is `([])`. `([])` is neither an ObjectLiteral nor an ArrayLiteral, so the second early error restriction in 12.14.5.1 applies. And IsValidSimpleAssignmentTarget of `([])` is false, so an early error should be thrown.
+
+---
+
+AssignmentRestElement[Yield] : 
+  ... DestructuringAssignmentTarget[?Yield]
+
+DestructuringAssignmentTarget[Yield] :
+  LeftHandSideExpression[?Yield]
+
+
+12.14.5.1 Static Semantics: Early Errors
+
+- It is a Syntax Error if LeftHandSideExpression is either an ObjectLiteral or an ArrayLiteral and if the lexical token sequence matched by LeftHandSideExpression cannot be parsed with no tokens left over using AssignmentPattern as the goal symbol.
+
+- It is a Syntax Error if LeftHandSideExpression is neither an ObjectLiteral nor an ArrayLiteral and IsValidSimpleAssignmentTarget(LeftHandSideExpression) is false.
+
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11455</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:06 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

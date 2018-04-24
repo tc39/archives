@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>40</bug_id>
+          
+          <creation_ts>2011-03-02 15:46:00 -0800</creation_ts>
+          <short_desc>Create a &apos;simple test harness&apos; for command-line JavaScript executables</short_desc>
+          <delta_ts>2013-05-20 07:18:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>38</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>dschaffe</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>90</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:46:01 -0800</bug_when>
+    <thetext>We need a command-line test harness for command-line JavaScript executables such as cscript.exe.  Requirements to be determined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>91</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:47:04 -0800</bug_when>
+    <thetext>Conservatively guesstimating a week will be needed for this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>556</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-10 12:22:18 -0800</bug_when>
+    <thetext>There&apos;s something that works for V8 now.  Still need to test out other executables though.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>842</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-03-28 16:15:37 -0700</bug_when>
+    <thetext>I&apos;ve heard this works on at least one non-browser based JS implementation.  Closing.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>111</bug_id>
+          
+          <creation_ts>2011-06-21 13:27:00 -0700</creation_ts>
+          <short_desc>Step 9.a in string.prototype.splice incorrect.</short_desc>
+          <delta_ts>2014-12-06 20:52:46 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Windows</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="John Gietzen">otac0n</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>chainesearle</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>238</commentid>
+    <comment_count>0</comment_count>
+    <who name="John Gietzen">otac0n</who>
+    <bug_when>2011-06-21 13:27:39 -0700</bug_when>
+    <thetext>Step 9.a of Section 15.4.4.12 of the current version of ECMA-262 specifies the following:
+
+Let from be ToString(relativeStart+k).
+
+Whereas, the method&apos;s description implies that the actual definition should be:
+
+Let from be ToString(actualStart+k).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>289</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-13 16:05:36 -0700</bug_when>
+    <thetext>this is corrected in 5.1</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

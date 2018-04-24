@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4276</bug_id>
+          
+          <creation_ts>2015-04-15 12:52:00 -0700</creation_ts>
+          <short_desc>Abrupt completions not handled for HasProperty?</short_desc>
+          <delta_ts>2015-10-02 13:14:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 37: April 3, 2015 Release Candidate 4</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14184</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-04-15 12:52:26 -0700</bug_when>
+    <thetext>This is almost certainly me not understanding the spec notation and conventions, but guidance appreciated...
+
+In e.g. ToPropertyDescriptor, there are steps like
+
+&gt; If HasProperty(Obj, &quot;enumerable&quot;) is true, then 
+
+HasProperty(O, P) is defined to return O.[[HasProperty]](P). Since O could e.g. be a proxy, this seems like it could return an abrupt completion.
+
+If that happens, is the error implicitly rethrown, or is it ignored, or...? The &quot;is true&quot; phrasing seems a bit imprecise, whereas for rethrow I would expect something like
+
+1. Let hasPropResult be HasProperty(Obj, &quot;enumerable&quot;)
+2. ReturnIfAbrupt(hasPropResult)
+3. If hasPropResult is true, then...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14186</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-15 14:49:21 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #0)
+&gt; This is almost certainly me not understanding the spec notation and
+&gt; conventions, but guidance appreciated...
+
+No, you&apos;re correct. ReturnIfAbrupt is missing after all HasProperty calls in ToPropertyDescriptor.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14188</commentid>
+    <comment_count>2</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-04-15 15:08:59 -0700</bug_when>
+    <thetext>Hmm ok. I suspect it&apos;s a more widespread problem then. It&apos;d be good to audit all &quot;is true&quot; and &quot;is false&quot; occurrences.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14189</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-15 15:37:05 -0700</bug_when>
+    <thetext>(In reply to Domenic Denicola from comment #2)
+&gt; Hmm ok. I suspect it&apos;s a more widespread problem then. It&apos;d be good to audit
+&gt; all &quot;is true&quot; and &quot;is false&quot; occurrences.
+
+I&apos;ve found only two missing ReturnIfAbrupt calls. (It&apos;s unlikely to be a widespread problem, I&apos;ve tried to be quite strict about missing ReturnIfAbrupt calls in the past, e.g. bug 1778 and several others. So I think we&apos;re safe. :-)
+
+
+15.1.8 Runtime Semantics: GlobalDeclarationInstantiation (script, env)
+- step 5.c: HasRestrictedGlobalProperty is fallible
+
+18.2.1.2 Runtime Semantics: EvalDeclarationInstantiation( body, varEnv, lexEnv, strict)
+- step 9.a.iv.1.a: CanDeclareGlobalFunction is fallible</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14315</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-22 09:48:20 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

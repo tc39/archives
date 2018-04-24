@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3932</bug_id>
+          
+          <creation_ts>2015-02-14 10:09:00 -0800</creation_ts>
+          <short_desc>15.1.1 Early Errors: Incomplete early error restrictions for &quot;super&quot; and &quot;new.target&quot; in eval code</short_desc>
+          <delta_ts>2015-02-19 19:10:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12670</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 10:09:45 -0800</bug_when>
+    <thetext>15.1.1 Static Semantics: Early Errors
+
+&gt; It is a Syntax Error if StatementList Contains super unless
+&gt; the source code containing super is eval code that is being
+&gt; processed by a direct eval that is contained in function code.
+
+&gt; It is a Syntax Error if StatementList Contains NewTarget unless
+&gt; the source code containing NewTarget is eval code that is being
+&gt; processed by a direct eval that is contained in function code.
+
+
+(This is probably a follow-up of bug 3844.)
+
+The early error restrictions are incomplete for arrow functions which are not embedded in a function with a this-binding. 
+
+For example this script:
+---
+(() =&gt; eval(&quot;new.target&quot;))();
+---
+
+Does not produce an early error with the current semantics because the eval script is executed within function code. But when `new.target` gets evaluated, 8.3.4 GetNewTarget ( ) will throw an assertion error in step 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12672</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 11:10:20 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+see 15.1.1 and 14.2.3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13001</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:51 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

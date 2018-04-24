@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4184</bug_id>
+          
+          <creation_ts>2015-03-18 09:12:00 -0700</creation_ts>
+          <short_desc>8.1.1.5.5 CreateImportBinding: Unclear use of &quot;instantiated&quot;</short_desc>
+          <delta_ts>2015-04-04 10:54:57 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>adamk</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13870</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-18 09:12:00 -0700</bug_when>
+    <thetext>8.1.1.5.5 CreateImportBinding (N, M, N2)
+
+Step 4: 
+&gt; Assert: When M.[[Environment]] is instantiated it will have a direct binding for N2.
+
+I think this assertion actually needs to test that the module record M was successfully instantiated, i.e. its ModuleDeclarationInstantiation concrete method has been invoked and successfully completed (cf. 15.2.1.15.5 ModuleEvaluation step 2).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14017</commentid>
+    <comment_count>1</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-04-02 08:06:14 -0700</bug_when>
+    <thetext>Also, as I mentioned in a thread to es-discuss (https://esdiscuss.org/topic/re-exporting-imports-and-createimportbinding-assertions), this assertion&apos;s claim about the binding of N2 seems too strong: it needs to have a binding, but it may be an indirect binding if it is itself an import binding.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14021</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 09:03:52 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #0)
+&gt; 8.1.1.5.5 CreateImportBinding (N, M, N2)
+&gt; 
+&gt; Step 4: 
+&gt; &gt; Assert: When M.[[Environment]] is instantiated it will have a direct binding for N2.
+&gt; 
+&gt; I think this assertion actually needs to test that the module record M was
+&gt; successfully instantiated, i.e. its ModuleDeclarationInstantiation concrete
+&gt; method has been invoked and successfully completed (cf. 15.2.1.15.5
+&gt; ModuleEvaluation step 2).
+
+I don&apos;t thing that needs to be true at the time the binding is created.  If the binding is every used (via GetBindingValue) and M has not been fully instantiated then GetBindingValue with throw because M.[[Environbment]] will be undefined.
+
+All the assertion is saying is that the source code for M must have a local export for the referenced name. It&apos;s essentially an assertion about the linkability of the two modules rather than about actual initializaiton</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14022</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-02 09:14:28 -0700</bug_when>
+    <thetext>(In reply to Adam Klein from comment #1)
+&gt; Also, as I mentioned in a thread to es-discuss
+&gt; (https://esdiscuss.org/topic/re-exporting-imports-and-createimportbinding-
+&gt; assertions), this assertion&apos;s claim about the binding of N2 seems too
+&gt; strong: it needs to have a binding, but it may be an indirect binding if it
+&gt; is itself an import binding.
+
+No the only place CreateImportBinding is called (in ModuleDeclarationInstantiation) M and N2 are supplied by a preceding call to ResolveExport where the /resolution/ has already been determine to be neither unresolved or ambiguous.  Because ResolveExport in such cases  never resolves to another indirect binding.  Instead it always resolved to the &quot;leaf&quot; definition (ie, a module binding that is not an indirect binding).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14123</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-04 10:53:45 -0700</bug_when>
+    <thetext>With the fixes made in rev37 WRT indirect bindings and export records should address the concern in comment #1</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

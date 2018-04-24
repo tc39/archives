@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4013</bug_id>
+          
+          <creation_ts>2015-02-19 18:16:00 -0800</creation_ts>
+          <short_desc>Specify behaviour of forEach when structure is mutated during iteration</short_desc>
+          <delta_ts>2015-03-04 18:58:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>infinity0</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12987</commentid>
+    <comment_count>0</comment_count>
+    <who name="">infinity0</who>
+    <bug_when>2015-02-19 18:16:13 -0800</bug_when>
+    <thetext>~~~~
+var o = [0, 1, 2], seen = [];
+o.forEach(function (value, i, obj) {
+  seen.push(value);
+  if (value === 1) {
+    o.pop();
+    o.push(3);
+  }
+});
+~~~~
+
+This results in `o === seen === [0, 1, 3]` in both Firefox 31.4 and Chrome 40.0. Similar results are obtained for Set and Map as well. However, the spec for `Array.prototype.forEach` says:
+
+&gt; Elements which are appended to the array after the call to `forEach` begins will not be visited by *callbackfn*
+
+It would also be nice if the spec for `Set.prototype.forEach` and `Map.prototype.forEach` mentioned this behaviour explicitly. Currently, the Set spec &quot;sort of&quot; implies this behaviour, and the Map spec does not mention it at all:
+
+&gt; [Set] However, a value will be revisited if it is deleted after it has been visited and then re-added before the to `forEach` call completes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13294</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-02-24 12:05:28 -0800</bug_when>
+    <thetext>The non-normative NOTE on Array.prototype.forEach is incorrect in this detail, but the algorithm is the real standard, and that&apos;s what Firefox and Chrome are following here.
+
+(Incidentally my HTML-generating script doesn&apos;t read that NOTE properly; I should go figure that out...)
+
+
+The spec for Set.prototype.forEach explicitly says:
+
+&gt; New values added, after the call to forEach begins are visited.
+
+I think this is appropriate because that&apos;s how SetIterator objects work.
+
+Two typos:
+
+1.  The comma quoted above seems ungrammatical to me.
+
+2.  There&apos;s a stray &quot;to&quot; in that paragraph as well:
+    &quot;before the to forEach call completes&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13331</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 16:15:25 -0800</bug_when>
+    <thetext>Deleted the troublesome informative paragraph  from Array forEach because the algorithm is clear enough. 
+
+Kept the corresponding paragraph for Set and added a similar one for Map. These paragraphs also shouldn&apos;t be necessary but they should resolve any doubt a reader may have about whether a pseudo code for each over a list see mutation to the list.
+
+fixed the typos that Jason identified.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13497</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:15 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

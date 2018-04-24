@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4145</bug_id>
+          
+          <creation_ts>2015-03-08 19:12:00 -0700</creation_ts>
+          <short_desc>10.2.1: definition of strict function code</short_desc>
+          <delta_ts>2015-03-17 16:57:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13651</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-08 19:12:01 -0700</bug_when>
+    <thetext>In 10.2.1 &quot;Strict Mode Code&quot;,...
+
+{1}
+bullet 5 says:
+     Function code is strict mode code if its FunctionDeclaration,
+     FunctionExpression, GeneratorDeclaration, GeneratorExpression,
+     MethodDefinition, or ArrowFunction is contained in strict mode code ...
+
+This is an unusual use of the word &quot;its&quot;. Normally, when the spec introduces a parse tree node X and then refers to &quot;its &lt;nonterminal&gt;&quot;, it&apos;s talking about a *child* of X (i.e., the child that is an instance of &lt;nonterminal&gt;). But here it means (pretty much) the *parent* of X. You could maybe replace &quot;its&quot; with &quot;the immediately containing&quot;.
+
+{2}
+bullet 5 continues:
+    ... or if it is within a FunctionBody that begins with a Directive
+    Prologue that contains a Use Strict Directive.
+
+I gather than (roughly speaking), the function code for the parameters of a strict function is also strict function code, but the above condition leaves it out.
+
+{3}
+bullet 6 says:
+    Function code that is supplied as the last argument to the built-in
+    Function constructor is strict mode code if the last argument is a
+    String that when processed as a FunctionBody begins with a Directive
+    Prologue that contains a Use Strict Directive.
+
+Again, this leaves out the function code for parameters. Change the first occurrence of &quot;the last argument&quot; to just &quot;arguments&quot;.
+
+{4}
+It seems to me that bullet 6 is just a special case of (the second half of) bullet 5. But I guess it doesn&apos;t hurt to call it out on its own.
+
+{5}
+Shouldn&apos;t there be a GeneratorFunction analogue to bullet 6? (Or you could just merge it with bullet 6.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13678</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-10 11:17:20 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13800</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:03 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

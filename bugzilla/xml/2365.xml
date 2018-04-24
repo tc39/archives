@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2365</bug_id>
+          
+          <creation_ts>2013-12-08 19:13:00 -0800</creation_ts>
+          <short_desc>21.2.3.3.2: if all characters of P where not matched</short_desc>
+          <delta_ts>2014-07-20 20:28:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6902</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 19:13:41 -0800</bug_when>
+    <thetext>Should be &quot;if all characters of P were not matched&quot;. Or even better: &quot;if not all characters of P were matched&quot; - I know English treats the two as equivalent, but for me there&apos;s still a big difference between ∀x¬P and ¬∀xP.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8438</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 14:08:42 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+...if any characters of P were not matched...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8715</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-05-30 23:39:06 -0700</bug_when>
+    <thetext>The &quot;where&quot; is still present in rev 25 draft; should be &quot;were&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9090</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 17:11:38 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9354</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 17:54:15 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9422</commentid>
+    <comment_count>5</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 20:28:18 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

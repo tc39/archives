@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3298</bug_id>
+          
+          <creation_ts>2014-10-24 14:29:00 -0700</creation_ts>
+          <short_desc>18.4.5: See Error! Reference source not found..</short_desc>
+          <delta_ts>2014-12-07 14:34:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 28: October 14, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Caitlin Potter [:caitp]">caitpotter88</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>caitpotter88</cc>
+    
+    <cc>impinball</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10537</commentid>
+    <comment_count>0</comment_count>
+    <who name="Caitlin Potter [:caitp]">caitpotter88</who>
+    <bug_when>2014-10-24 14:29:47 -0700</bug_when>
+    <thetext>System section seems to be missing from the latest draft. Forwarded from https://github.com/jorendorff/es-spec-html/issues/81</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10673</commentid>
+    <comment_count>1</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2014-11-23 22:17:02 -0800</bug_when>
+    <thetext>Same is true for the no-markup PDF. For both diff PDFs, it simply has a link whose text is 1.1 and reference points to the page where a large deletion of the Reflect.Loader API was.
+
+I changed the severity from &quot;enhancement&quot; to &quot;normal&quot; because a bug isn&apos;t exactly an enhancement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10675</commentid>
+    <comment_count>2</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2014-11-23 22:20:45 -0800</bug_when>
+    <thetext>*** Bug 3370 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10798</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-05 12:53:53 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft
+
+removed mention of System in 18.3.  It is supposed to be completely gone from the spec.
+
+Let me know if you see any other references containing all ones.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10820</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:34:57 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

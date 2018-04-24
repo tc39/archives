@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2997</bug_id>
+          
+          <creation_ts>2014-06-25 15:40:00 -0700</creation_ts>
+          <short_desc>Destructuring assignment can call .next() on a spent iterator</short_desc>
+          <delta_ts>2015-01-18 13:23:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9099</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-06-25 15:40:19 -0700</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-runtime-semantics-iteratordestructuringassignmentevaluation
+
+Is this intentional? IteratorDestructuringAssignmentEvaluation of the production
+
+&gt; AssignmentElement : DestructuringAssignmentTarget Initializer_opt
+
+calls IteratorStep unconditionally. This means that if an ArrayAssignmentPattern contains multiple such AssignmentElements, and iterator.next() returns {done:true} when called for the first element, it will be called again for the other elements anyway.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9102</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-25 19:16:35 -0700</bug_when>
+    <thetext>http://people.mozilla.org/~jorendorff/es6-draft.html#sec-iterator-interface  requires that a valid Iterator implementation must continue to return {done: true} on subsequent calls to next. 
+
+Of course there is not guarantee that an user provided supposed iterator will behave that way, but nothing else we assume is guaranteed either. There may not even be a next method or it might disappear after a few iterations.  Regardless, the behavior of a destructuring assignment is fully specified (relative to the behavior of the iterator object), even for cases where the supposed iterator is poorly behaved.
+
+(Also, note that iterator.next() is also called unconditionally at least once for an AssignmentRegElement.)
+
+I could add extra logic to the spec. to keep track of whether the iterator that is being used has ready reported done: true and not make the iterator.next() calls in that case. But I&apos;m not sure that it would be any better if we did that.   It would add complexity to the spec. and probably to implementations but it still wouldn&apos;t guarantee that the iterator won&apos;t misbehave in other ways.
+
+Given all the ways that destructing can fail to complete normally, trying to do something about this one form of failure doesn&apos;t seem necessary.
+
+But, if you have a stronger argument for explicitly tracking done, I&apos;d be happy to consider it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9104</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-26 00:57:37 -0700</bug_when>
+    <thetext>[Changing this bug&apos;s &apos;Version&apos; from rev23 to rev25, as it seems just as relevant to rev25, and there&apos;s not much point raising it against an old version.]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11545</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-18 13:23:47 -0800</bug_when>
+    <thetext>I looked at this again today and changing the spec. the destructuring spec. to stop calling spent iterators would still require significant spec. changes and I still don&apos;t seen any actual problems it creates.
+
+I&apos;m resolving it as won&apos;t fix.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

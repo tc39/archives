@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2856</bug_id>
+          
+          <creation_ts>2014-05-13 08:47:00 -0700</creation_ts>
+          <short_desc>9.2.8 AddRestrictedFunctionProperties: Use %ThrowTypeError% from function&apos;s [[Realm]]?</short_desc>
+          <delta_ts>2014-06-16 17:12:47 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8364</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-13 08:47:11 -0700</bug_when>
+    <thetext>9.2.8  AddRestrictedFunctionProperties Abstract Operation
+
+AddRestrictedFunctionProperties uses the current execution context&apos;s realm instead of the function&apos;s [[Realm]] (if present for that function - bound functions also call AddRestrictedFunctionProperties, but they don&apos;t have a [[Realm]] slot). That means cloning a function with Function.prototype.toMethod() from a different realm won&apos;t preserve the original function&apos;s %ThrowTypeError%. 
+
+Question: Does it need to preserve the original function&apos;s %ThrowTypeError%?
+
+Test case:
+---
+let r = new Reflect.Realm()
+let f = r.eval(&quot;function f() {&apos;use strict&apos;} f&quot;)
+let clone = Function.prototype.toMethod.call(f, {})
+Object.getPrototypeOf(f) === Object.getPrototypeOf(clone); // Evaluates to true
+
+let foreignThrower = Object.getOwnPropertyDescriptor(f, &quot;caller&quot;).get;
+let cloneThrower = Object.getOwnPropertyDescriptor(clone, &quot;caller&quot;).get;
+foreignThrower === cloneThrower; // Evaluates to false
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8365</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-13 10:21:31 -0700</bug_when>
+    <thetext>yes it does
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9039</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 17:12:47 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

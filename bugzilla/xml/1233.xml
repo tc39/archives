@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1233</bug_id>
+          
+          <creation_ts>2013-01-26 19:30:00 -0800</creation_ts>
+          <short_desc>13.1 + 15.2.3.7: extraneous underlining</short_desc>
+          <delta_ts>2013-03-08 14:44:20 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3164</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-26 19:30:21 -0800</bug_when>
+    <thetext>In 13.1 &quot;Function Definitions&quot;,
+under &quot;Runtime Semantics: Indexed Binding Initialisation&quot;,
+in rule 3, step 6.b says:
+    Assert: array is a well formed arguments object,
+    hence it must have a property P.
+where the &quot;P&quot; is underlined.
+
+
+Similarly, in 15.2.3.7 &quot;Object.defineProperties ( O, Properties )&quot;,
+under &quot;Runtime Semantics: ObjectDefineProperties Abstract Operation&quot;,
+step 3 says:
+    Let names be an internal list containing the keys
+    of each enumerable own property of props.
+where the final &quot;.&quot; is underlined.
+
+
+In each case, remove the underline.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3211</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-25 09:12:08 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3352</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:20 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

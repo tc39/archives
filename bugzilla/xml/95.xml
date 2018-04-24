@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>95</bug_id>
+          
+          <creation_ts>2011-04-25 11:53:00 -0700</creation_ts>
+          <short_desc>Problems with module grammar</short_desc>
+          <delta_ts>2015-07-10 08:34:16 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>191</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-04-25 11:53:23 -0700</bug_when>
+    <thetext>Both ExportPath and QualifiedReference needs to use back tracking since ModuleExpression can be (Identifier &quot;.&quot; IdentifierName)*</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>193</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-04-25 13:22:52 -0700</bug_when>
+    <thetext>Here is an example where back tracking is needed...
+
+export a.b.c;
+
+...since ModuleExpression will consume a.b.c.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5885</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 12:12:59 -0700</bug_when>
+    <thetext>no longer applicable to ES6 module features</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

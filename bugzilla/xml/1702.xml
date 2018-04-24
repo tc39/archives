@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1702</bug_id>
+          
+          <creation_ts>2013-08-01 22:48:00 -0700</creation_ts>
+          <short_desc>15.10.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:22:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4714</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-01 22:48:37 -0700</bug_when>
+    <thetext>The names of abstract operations are not normally presented in italic font,
+but these are:
+    CharacterRange:      15.10.2.{5-16}
+    IsWordChar           15.10.2.6
+    Canonicalize:        15.10.2.{8-9}
+    CharacterSetMatcher: 15.10.2.{8-9}
+
+---
+
+15.10.2.6 / rule 4 / steps 3,4,5
+    3. Call IsWordChar(e) and let b be the Boolean result.
+    4. If a is true and b is false, return false.
+    5. If a is false and b is true, return false.
+
+Italicize occurrences of &quot;a&quot; and &quot;b&quot;.
+
+---
+
+15.10.3.3 / Runtime Semantics: RegExpAlloc Abstract Operation / step 1
+    Assert: constructor is a constructable function
+
+There&apos;s no definition for &quot;constructable function&quot;.
+
+---
+
+15.10.5.8 / step 9
+    If match is not null, then return true; else return false.
+
+Put &quot;null&quot; in bold font.
+
+---
+
+15.10.5.14 / step 15.d
+15.10.5.14 / step 17.d.iii.2
+15.10.5.14 / step 17.d.iii.8.b
+15.10.5.14 / step 19
+    Let status be the result of [[DefineOwnProperty]] internal method of A ...
+
+After &quot;result of&quot;, insert &quot;calling the&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4748</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-05 17:02:26 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5108</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:49 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

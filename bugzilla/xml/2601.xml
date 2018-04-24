@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2601</bug_id>
+          
+          <creation_ts>2014-04-01 06:47:00 -0700</creation_ts>
+          <short_desc>Loader.prototype.import should not throw if the module is already loaded</short_desc>
+          <delta_ts>2015-03-16 14:41:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>guybedford</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7494</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-01 06:47:12 -0700</bug_when>
+    <thetext>Guy Bedford found this bug. Loader.prototype.import launches AsyncStartLoadPartwayThrough. But no load should be started if the requested module is already loaded or loading. Loader.prototype.import needs to check first, to see if the module is already loaded or loading.
+
+The loading case is slightly tricky. The easiest fix is to add a Promise to each Load Record that resolves when the module is removed from loader.[[Loads]].</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9066</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-22 19:12:20 -0700</bug_when>
+    <thetext>Moving this to modules.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13772</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:41:30 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

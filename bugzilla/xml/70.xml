@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>70</bug_id>
+          
+          <creation_ts>2011-03-14 14:17:00 -0700</creation_ts>
+          <short_desc>Test 15.2.3.6-4-124 is invalid</short_desc>
+          <delta_ts>2011-05-12 15:56:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>153</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-14 14:17:59 -0700</bug_when>
+    <thetext>Testcase
+-------------------
+function testcase() {
+    var arrObj = [];
+    Object.defineProperty(arrObj, &quot;length&quot;, {writable: false});
+    return dataPropertyAttributesAreCorrect(arrObj, &quot;length&quot;, 0, false, false, false);
+}
+-------------------
+ES5.1 15.4.5.2 length:
+The length property is not configurable, so do an Object.defineProperty on it has no effect (or throw on strict mode).
+
+Anyway, length cannot be made non-writable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>156</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-14 15:10:50 -0700</bug_when>
+    <thetext>Still need to verify this completely (i.e., re-review 8.12.9), but I think you&apos;re correct here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>212</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-12 15:56:30 -0700</bug_when>
+    <thetext>Hi David, the reason I didn&apos;t originally modify the test and close this is because while I agreed with your expectation intuitively, ES5.1 didn&apos;t seem to match up.  After taking the time to thoroughly research this, ES5.1 states:
+1. Object.defineProperty ends up calling 15.4.5.1
+2. Step 3.a.i of 15.4.5.1 ends up calling 8.12.9
+3. 8.12.9 states that a transition from Writable===true to Writable===false on a non-configurable property is actually OK
+
+Spent two hours second-guessing this and looking for a flaw in either 8.12.9 *or* my interpretation, but there is none.  ES5.1 actually allows Writable properties to become non-Writable when the property is non-Configurable!  
+
+I&apos;ve filed a bug for Table 5 of ES5.1 to be fixed - see https://bugs.ecmascript.org/show_bug.cgi?id=100.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

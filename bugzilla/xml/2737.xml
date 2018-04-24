@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2737</bug_id>
+          
+          <creation_ts>2014-04-25 03:22:00 -0700</creation_ts>
+          <short_desc>12.2.4.2.4 ComprehensionComponentEvaluation, 13.6.4.6 ForIn/OfExpressionEvaluation: Align behaviour for iteration over undefined/null?</short_desc>
+          <delta_ts>2014-06-27 13:20:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7920</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-25 03:22:33 -0700</bug_when>
+    <thetext>12.2.4.2.4 Runtime Semantics: ComprehensionComponentEvaluation
+13.6.4.6 Runtime Semantics: ForIn/OfExpressionEvaluation Abstract Operation
+
+for-of statement iteration follows the legacy for-in statement behaviour w.r.t to undefined/null, that means undefined/null values are silently ignored. Comprehension iteration throws a type error for undefined/null.
+
+It may make sense to give the same behaviour for any for-of iteration, may it be in a for-of statement or in a for-of comprehension. To provide the same behaviour in for-of statement as in for-in statement seems less important.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8568</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 18:37:28 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+made comprehensions do 0 iterations if value of for-of expression is undefined or null to be consistent with for-in/of statements.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9037</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 17:10:36 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9106</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2014-06-27 09:26:22 -0700</bug_when>
+    <thetext>Didn&apos;t you reverse this? Reopen, or new bug with bug # citation here?
+
+/be</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9107</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-27 13:20:04 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Didn&apos;t you reverse this? Reopen, or new bug with bug # citation here?
+
+yes, made the edit yesterday.
+
+
+This changed was backed out in rev26 along with removing the similar behavior for for-of based upon TC39 review of the issue.  
+
+Changing to resolved-wontfix</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

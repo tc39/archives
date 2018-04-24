@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2073</bug_id>
+          
+          <creation_ts>2013-10-21 10:53:00 -0700</creation_ts>
+          <short_desc>`String.prototype.at` (improved `String.prototype.charAt`)</short_desc>
+          <delta_ts>2015-10-15 17:11:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5915</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2013-10-21 10:53:27 -0700</bug_when>
+    <thetext>Proposal from https://mail.mozilla.org/pipermail/es-discuss/2013-October/034240.html:
+
+## String.prototype.at(pos)
+
+NOTE: Returns a single-element String containing the code point at element position `pos` in the String `value` resulting from converting the `this` object to a String. If there is no element at that position, the result is the empty String. The result is a String value, not a String object.
+
+When the `at` method is called with one argument `pos`, the following steps are taken:
+
+01. Let `O` be `CheckObjectCoercible(this value)`.
+02. Let `S` be `ToString(O)`.
+03. `ReturnIfAbrupt(S)`.
+04. Let `position` be `ToInteger(pos)`.
+05. `ReturnIfAbrupt(position)`.
+06. Let `size` be the number of elements in `S`.
+07. If `position &lt; 0` or `position ≥ size`, return the empty String.
+08. Let `first` be the code unit at index `position` in the String `S`.
+09. Let `cuFirst` be the code unit value of the element at index `0` in the String `first`.
+10. If `cuFirst &lt; 0xD800` or `cuFirst &gt; 0xDBFF` or `position + 1 = size`, then return `first`.
+11. Let `cuSecond` be the code unit value of the element at index `position + 1` in the String `S`.
+12. If `cuSecond &lt; 0xDC00` or `cuSecond &gt; 0xDFFF`, then return `first`.
+13. Let `second` be the code unit at index `position + 1` in the string `S`.
+14. Let `cp` be `(first – 0xD800) × 0x400 + (second – 0xDC00) + 0x10000`.
+15. Return the elements of the UTF-16 Encoding (clause 6) of `cp`.
+
+The `length` of the `at` function is `1`.
+
+NOTE: The `at` function is intentionally generic; it does not require that its `this` value be a String object. Therefore it can be transferred to other kinds of objects for use as a method.
+
+Here’s a polyfill based on this algorithm: http://mths.be/at
+
+Tests: https://github.com/mathiasbynens/String.prototype.at/blob/master/tests/tests.js</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14811</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:11:55 -0700</bug_when>
+    <thetext>This is already being tracked as part of the standard proposal process so a bug is not necessary.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

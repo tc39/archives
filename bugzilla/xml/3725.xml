@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3725</bug_id>
+          
+          <creation_ts>2015-02-02 09:15:00 -0800</creation_ts>
+          <short_desc>SpeciesConstructor: should not let null trigger defaults</short_desc>
+          <delta_ts>2015-07-10 08:35:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11869</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-02 09:15:36 -0800</bug_when>
+    <thetext>In general in ES, undefined triggers defaults, whereas null does not. However apparently you can get default species behavior if you set species to null. This seems incorrect: it should throw a TypeError instead (since null is not a constructor).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11888</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 12:27:58 -0800</bug_when>
+    <thetext>WThe null or undefined test is consistent with the behavior of GetMethod and the GetMethod behavior was arrived at based upon discussions at TC39 meetings.
+
+The undefined gets you default is a rule that is specific to destructuring (which includes function parameter processing)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11889</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-02-02 12:38:50 -0800</bug_when>
+    <thetext>Allen, are you saying that we will fall back to the default function in the case of GetMethod(obj, &apos;foo&apos; defaultFunction) when obj.foo === null? I cannot recall us having this discussion. We did allow null in then(resolveHandler, rejectHandler) but that was mostly for backwards compat.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11890</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 15:27:38 -0800</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; Allen, are you saying that we will fall back to the default function in the
+&gt; case of GetMethod(obj, &apos;foo&apos; defaultFunction) 
+
+No, GetMethod doesn&apos;t even have a defaultFunction argument. 
+
+This is about what property values are are reported by GetMethod() (and other similar use cases) as no method found.
+
+GetMethod
+   returns the property value if it is callable
+   returns undefined if the property value is undefined or null 
+   Throws a TypeError for all other property values
+
+Mostly,  this about what value you use for situations like:
+
+let itr = function*() {yield 1}().
+itr.throw = undefined;  // hide the inherited &apos;throw&apos; method
+itr.throw = null;       // hide the inherited &apos;throw&apos; method 
+//either of the above two lines will work
+
+I&apos;m pretty sure that when we talked about this pattern, people in TC39 thought that both null and undefined should be acceptable.
+
+In fact, the change markup for GetMethod shows that the null case was added in the Rev26 and the release notes for Rev26 explicitly mention that change.  I&apos;m pretty sure, the change was based upon discussion at the preceding meeting.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

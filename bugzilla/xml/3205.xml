@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3205</bug_id>
+          
+          <creation_ts>2014-08-30 14:30:00 -0700</creation_ts>
+          <short_desc>Pipelines: promises evolved</short_desc>
+          <delta_ts>2015-10-15 16:56:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="KOLANICH">kolan_n</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10091</commentid>
+    <comment_count>0</comment_count>
+    <who name="KOLANICH">kolan_n</who>
+    <bug_when>2014-08-30 14:30:18 -0700</bug_when>
+    <thetext>I think, it would be very good to have the following asyncronous model.
+
+new Pipe(PipeObject)
+PipeObject has the following schema
+{
+init:function(){
+ //ctor
+},
+sync:function(syncObj){
+//syncObj is obj, whose fields are the input ports and they are true is the signal have come
+}
+i:{
+ portA:()=&gt;{},//default implementation, null can be used instead
+ portB:function(b){.....}//some custom code
+......
+}
+o:outputInterface{
+ portC:(obj)=&gt;obj;,//postprocessing functions (here is default implementation), null can be used instead
+ portD:function(){}
+......
+}
+}
+
+new Pipe transforms that PipeObject  object into Pipe object with prototype
+{
+i{
+set portA:function(port){this.__portA.bind(port)};//connects output port to port a
+get portA:function(){return this.__portA};//allows access to methods of Port object
+......
+},
+o:{
+get portC:function(){...},
+....
+},
+trigger:function(){...},
+bind:function(){....}
+}
+
+
+InputPort object
+{
+bind:function(port){},//attaches output port port to input port this
+unbind:function(port),
+}
+
+So we can create a graph.
+
+function createImgSrc(img){
+return new Pipe({
+  init:function(img){
+   var canv=document.createElement(&quot;CANVAS&quot;);
+   var ctx=canv.getContext(&quot;2d&quot;);
+   //ajusting sizes and drawing image
+   .......
+   o.image(ctx);
+  },
+ o:{ctx:null}
+}
+});
+
+var src=createImageSource(img);
+var edgeDetector=new Pipe({
+ i:{
+  ctx:function(ctx){
+   //edge detection
+  }
+ },
+ o:outputInterface{
+  ctx:null,
+  error:null
+ }
+});
+
+var gaussianBlur=new Pipe({
+ i:{
+  ctx:function(ctx){
+   //bluring
+  }
+ },
+ o:outputInterface{
+  ctx:null,
+  error:null
+ }
+});
+
+var tween=new Pipe({
+ sync:function(s){
+ if(s.ctx1&amp;&amp;s.ctx2&amp;&amp;!s.err){
+  makeTween()
+ }
+},
+ i:{
+  ctx1:function(ctx){
+  },
+  ctx2:function(ctx){
+  },
+  err:function(){}
+ },
+ o:outputInterface{
+  ctx:null,
+  error:null
+ },
+makeTween:function(ctx1,ctx2){
+....making tweening
+o.ctx(ctx);
+}
+});
+
+var save= new Pipe({
+ i:{
+  ctx:function(ctx){
+   ctx.canvas.toBlobHD((b)=&gt;{window.location.href=URL.createObjectURL(b)});
+  }
+ }
+});
+
+//binding graph
+save.i.ctx=tween.o.ctx;
+tween.i.ctx1=gaussianBlur.o.ctx;
+tween.i.ctx2=edgeDetector.o.ctx;
+tween.i.err=Pipe.Any([edgeDetector.o.err,gaussianBlur.o.err]);
+gaussianBlur.i.ctx=src.o.ctx;
+edgeDetector.i.ctx=src.o.ctx;
+src.trigger();
+
+
+//Pipes can be bound to each other automatically if they have at least partly compatible interfaces
+save.bind(tween);
+tween.i.ctx1=gaussianBlur.o.ctx;
+tween.i.ctx2=edgeDetector.o.ctx;
+tween.i.err=Pipe.Any([edgeDetector.o.err,gaussianBlur.o.err]);
+gaussianBlur.bind(src);
+edgeDetector.bind(src);
+src.trigger();
+
+
+execution is asynchronic, 
+
+
+inspired by verilog modules https://en.wikibooks.org/wiki/Programmable_Logic/Verilog_Module_Structure</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14806</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 16:56:43 -0700</bug_when>
+    <thetext>Feature requests should follow the proposal process.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

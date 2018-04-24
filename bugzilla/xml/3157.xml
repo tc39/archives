@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3157</bug_id>
+          
+          <creation_ts>2014-08-26 10:53:00 -0700</creation_ts>
+          <short_desc>Reserve `\p{}` and `\P{}` within `/u` RegExp patterns</short_desc>
+          <delta_ts>2014-10-17 05:47:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>claude.pache</cc>
+    
+    <cc>ecmascriptbugs</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9992</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-26 10:53:54 -0700</bug_when>
+    <thetext>Reserve the syntax `\p{…}` and `\P{…}` within `/u` RegExp patterns. https://mail.mozilla.org/pipermail/es-discuss/2014-August/039033.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9996</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-26 18:43:54 -0700</bug_when>
+    <thetext>We may also want to reserve \X for &quot;grapheme cluster&quot;, for example.
+
+More generally, one should disallow to interpret \&lt;char&gt; as &lt;char&gt;, where &lt;char&gt; is one of 0-9, A-Z, a-z, at the prospect to attach more useful meaning to these sequences.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9997</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-27 00:55:54 -0700</bug_when>
+    <thetext>+1 to Claude’s proposal.
+
+Another example: in addition to the standard notation e.g. `\p{L}`, Java, Perl, and PCRE allow you to use the shorthand `\pL`. The shorthand only works with single-letter Unicode properties. `\pLl` is not the equivalent of `\p{Ll}`. It is the equivalent of `\p{L}l` which matches `Al` or `àl` or any Unicode letter followed by a literal `l`.
+
+I’m not saying we should support this in ECMAScript but it’d be nice to keep our options open. For that, we’d have to do what Claude suggested and reserve `\p…` and `\P…` in addition to `\p{…}` and `\P{…}`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9998</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-27 01:00:49 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #1)
+&gt; We may also want to reserve \X for &quot;grapheme cluster&quot;, for example.
+&gt; 
+&gt; More generally, one should disallow to interpret \&lt;char&gt; as &lt;char&gt;, where
+&gt; &lt;char&gt; is one of 0-9, A-Z, a-z, at the prospect to attach more useful
+&gt; meaning to these sequences.
+
+`\` followed by `0` already has special meaning (it’s equivalent to `\x00`) and `\` followed by a digit from `1` to `9` is already used for back-references. Just A-Z &amp; a-z sounds good.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9999</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-08-27 11:17:49 -0700</bug_when>
+    <thetext>This was already decided by TC39 at the March 2012 meeting, and if I read the spec correctly, it’s already specified:
+
+IdentityEscape[U] ::
+   [+U] SyntaxCharacter
+   [~U] SourceCharacter but not IdentifierPart
+   [~U] &lt;ZWJ&gt;
+   [~U] &lt;ZWNJ&gt;
+
+https://mail.mozilla.org/pipermail/es-discuss/2012-March/021919.html
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-patterns</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10000</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-28 06:15:25 -0700</bug_when>
+    <thetext>(In reply to Norbert from comment #4)
+&gt; 
+&gt; IdentityEscape[U] ::
+&gt;    [+U] SyntaxCharacter
+&gt;    [~U] SourceCharacter but not IdentifierPart
+&gt;    [~U] &lt;ZWJ&gt;
+&gt;    [~U] &lt;ZWNJ&gt;
+
+Yes, that defines what implementations must accept, but that doesn&apos;t define what implementations don&apos;t accept.
+
+For instance, the sequence \p is not (and has never been) part of the specced syntax of regular expression: for `p` is included in IdentifierPart, which is excluded from IdentityEscape. However, most (all?) implementations extend the syntax and treat \p as a synonym of a literal `p`.
+
+In fact, it is absolutely fine to keep the old ES5.1 definition, namely:
+
+IdentityEscape ::
+    SourceCharacter but not IdentifierPart
+    &lt;ZWJ&gt;
+    &lt;ZWNJ&gt;
+
+because digits and letters are not part of IdentityEscape, and it is all we need. It is even better to revert to that definition, because otherwise it would create an *unnecessary* discrepancy between u- and non-u-regexps.
+
+What is needed, is to explicitly forbid implementations to extend the syntax by including other identity sequences than those specced. Because of BC constraints, we could require that only when the u-flag is set.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10001</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-28 09:00:13 -0700</bug_when>
+    <thetext>(In reply to Claude Pache from comment #5)
+&gt; For instance, the sequence \p is not (and has never been) part of the
+&gt; specced syntax of regular expression: for `p` is included in IdentifierPart,
+&gt; which is excluded from IdentityEscape. However, most (all?) implementations
+&gt; extend the syntax and treat \p as a synonym of a literal `p`.
+
+Engines are generally required to implement &quot;B.1.4  Regular Expressions Patterns&quot; instead of &quot;21.2.1  Patterns&quot; because of interoperability reasons, and B.1.4 allows \p. 
+
+&gt; 
+&gt; In fact, it is absolutely fine to keep the old ES5.1 definition, namely:
+&gt; 
+&gt; IdentityEscape ::
+&gt;     SourceCharacter but not IdentifierPart
+&gt;     &lt;ZWJ&gt;
+&gt;     &lt;ZWNJ&gt;
+&gt; 
+&gt; because digits and letters are not part of IdentityEscape, and it is all we
+&gt; need. It is even better to revert to that definition, because otherwise it
+&gt; would create an *unnecessary* discrepancy between u- and non-u-regexps.
+
+Note that IdentifierPart includes $, so strictly speaking /\$/ is not a valid regular expression according to 21.2.1. To properly escape $, you either need to use character classes or unicode-/hex-escape sequences. On my todo list is an item to request changing IdentityEscape to:
+
+  IdentityEscape ::
+    [+U] SyntaxCharacter
+    [~U] SourceCharacter but not UnicodeIDContinue or _
+
+&gt; 
+&gt; What is needed, is to explicitly forbid implementations to extend the syntax
+&gt; by including other identity sequences than those specced. Because of BC
+&gt; constraints, we could require that only when the u-flag is set.
+
+Sounds good, hopefully implementations adhere to this restriction. :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10005</commentid>
+    <comment_count>7</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-08-28 18:12:17 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #6)
+
+&gt; Engines are generally required to implement &quot;B.1.4  Regular Expressions
+&gt; Patterns&quot; instead of &quot;21.2.1  Patterns&quot; because of interoperability reasons,
+&gt; and B.1.4 allows \p.
+
+Where does it do that? Our intent was certainly that, with the &quot;u&quot; flag set, it would not.
+
+&gt; Sounds good, hopefully implementations adhere to this restriction. :)
+
+Hope is good, conformance test cases are better.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10008</commentid>
+    <comment_count>8</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-29 04:22:15 -0700</bug_when>
+    <thetext>(In reply to Norbert from comment #7)
+&gt; Where does it do that? Our intent was certainly that, with the &quot;u&quot; flag set,
+&gt; it would not.
+
+Are any of the web compatibility extensions allowed for Unicode regular expressions at all? I thought Unicode mode means no web extensions, so my comment in #6 implied non-Unicode mode. I should have made that more clear, sorry!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10016</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-29 13:13:01 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+Added a 16.1 restriction forbidding extendings IdentifyEscape to include a-z and A-Z for /u patterns.
+
+Added text to B.1.4 that clarifies that the Annix B extensions don&apos;t change the syntax or semantics of Unicode RegExps.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10462</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:58 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10517</commentid>
+    <comment_count>11</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-10-17 05:47:33 -0700</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #10)
+&gt; fixed in rev28
+
+Looks like there’s a typo: `IdentifyEscape` (should be `IdentityEscape`).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

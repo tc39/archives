@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>17</bug_id>
+          
+          <creation_ts>2011-02-12 01:39:00 -0800</creation_ts>
+          <short_desc>Inelegancies with booleans</short_desc>
+          <delta_ts>2011-02-28 13:43:47 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>26</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-12 01:39:32 -0800</bug_when>
+    <thetext>In 15.2.3.6-4-118 (http://hg.ecmascript.org/tests/test262/file/f25942ef2292/test/suite/ietestcenter/chapter15/15.2/15.2.3/15.2.3.6/15.2.3.6-4-118.js), the following line can read :
+
+var verifyWritable = arrObj.length === 2 ? true : false;
+
+Nothing truly fundamental, but that&apos;s inelegant. &quot;arrObj.length === 2&quot; is already a boolean.
+
+I would write:
+var verifyWritable = (arrObj.length === 2);
+Parenthesis aren&apos;t compulsory, but they make clear to the reader that the boolean value is retrieved.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>53</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 10:50:37 -0800</bug_when>
+    <thetext>Agreed!  This will be cleaned up with the next push of IE Test Center tests to Test262.
+
+My best,
+
+Dave</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>54</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-22 11:03:43 -0800</bug_when>
+    <thetext>I forgot to point something out.
+
+Some tests end with something like:
+if(condition){
+    return true;
+}
+return false;
+
+It could be seen as another inelegancy for purists (and asked to be replaced by &quot;return condition;&quot;), but in the context of tests, I think it&apos;s acceptable to have this pattern because it allows test readers to text-search for &quot;return true&quot; and &quot;return false&quot; in order to better understand which cases/flow path make the test fail or pass. Actually, may/could/should this be considered as some guideline for writing tests? (is it already?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>60</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 16:21:54 -0800</bug_when>
+    <thetext>Yeah, I&apos;m all too familiar with this pattern as well.  If you have any suggestions on automatically detecting these so they can be fixed, I&apos;m all ears. Otherwise it&apos;s going to take a bit of time to go through all the test cases by hand.  Thanks again for the great suggestions!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

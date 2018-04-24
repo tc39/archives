@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2993</bug_id>
+          
+          <creation_ts>2014-06-22 18:44:00 -0700</creation_ts>
+          <short_desc>Store evaluation errors as &quot;failed&quot; modules</short_desc>
+          <delta_ts>2015-03-16 14:35:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>johnjbarton</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9061</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-22 18:44:48 -0700</bug_when>
+    <thetext>Consider the following scenario:
+
+I load two modules simultaneously - 
+
+System.import(&apos;A&apos;).then(function() {
+  // a completed
+});
+System.import(&apos;B&apos;).then(function() {
+  // b completed
+});
+
+A is dependent on B. B has a runtime error in its evaluation.
+
+Linking happens fine, as in A and B are both placed in the module table linked.
+
+But when it comes to evaluation, B is evaluated first and fails. The import promise throws. Yet its module object is still marked as evaluated due to 15.2.6.2 (7).
+
+Now A is evaluated and completes. That is, despite the evaluation failure of B it returns successfully.
+
+That is the import promise for A completes successfully and returns the module object.
+
+Perhaps this is a feature and not a bug? It was a little surprising though.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9062</commentid>
+    <comment_count>1</comment_count>
+    <who name="Sam Tobin-Hochstadt [:samth]">samth</who>
+    <bug_when>2014-06-22 18:56:16 -0700</bug_when>
+    <thetext>This is as intended.
+
+While this behavior is potentially surprising, other options are worse. In particular, we can&apos;t tell what is a failure of &apos;B&apos; to properly load, and what is just standard ES code execution which ends in an exception.
+
+Possible alternatives that we rejected include:
+
+- removing linked modules from the table (a very bad idea)
+- not running the code for &apos;A&apos; -- then you have weirdly unexecuted module lying around. When would A get executed?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9079</commentid>
+    <comment_count>2</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-23 12:43:55 -0700</bug_when>
+    <thetext>I can deal with this from the perspective of how the imports operate, but the bad part is not having an easy trace of how the error happened.
+
+Typically when there is an error in my code, I want to know the list of modules loaded that caused that execution to happen in the first place.
+
+If I see an error on some third party library on a random line, that is affecting my code, I need to know why I am even running that third party library in the first place.
+
+ensureEvaluated effectively has this information, as it represents a single line of execution down the module tree, this module list being the exact information the user wants to know at this point.
+
+Perhaps this is the realm of debugging tools, but it needs to be provided to the user somehow, we can&apos;t ignore debuggability.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9097</commentid>
+    <comment_count>3</comment_count>
+    <who name="johnjbarton">johnjbarton</who>
+    <bug_when>2014-06-25 07:16:49 -0700</bug_when>
+    <thetext>This example looks simply like an example of the fundamental flaw in Promises: if the dev fails to explicitly add a handler for the rejection of import B, then there is no way to know that it failed.
+
+The example is unclear on the import of A. If by &quot;A is dependent on B&quot; means that A imports B, then if B&apos;s import throws, A&apos;s import must reject. 
+
+Any preceding import of B cannot alter this result: its is not a valid module, that is what it means to throw during evaluation.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9100</commentid>
+    <comment_count>4</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-25 16:39:56 -0700</bug_when>
+    <thetext>The proposal is to store modules that fail execution as &quot;failed&quot; in the module registry. And whenever another module imports from a &quot;failed&quot;, module it should by default also fail and return a reject promise handler for its import as well.
+
+EnsureEvaluated does maintain an evaluation thread allowing it to report useful debugging information too.
+
+So if I import A, which imports B, which imports C, which imports D, and D throws. We should get:
+
+System.import(&apos;B&apos;).catch(function(e) {
+  // e = error description, while executing D, dependency of C, dependency of B
+});
+
+That is we can get a useful evaluation stack.
+
+Then when we import from A later, the proposal above would enable this to also error:
+
+System.import(&apos;A&apos;).catch(function(e) {
+  // e = Module A imports from failed module B
+});
+
+Or something potentially to that affect at least.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13760</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:35:23 -0700</bug_when>
+    <thetext>works as intended
+
+see Comment #1</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1633</bug_id>
+          
+          <creation_ts>2013-07-30 13:40:00 -0700</creation_ts>
+          <short_desc>13.4.1.1: Error recovery in delegating yield incomplete</short_desc>
+          <delta_ts>2013-11-08 13:08:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jorendorff</cc>
+    
+    <cc>wingo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4607</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-30 13:40:54 -0700</bug_when>
+    <thetext>Runtime Semantics: Evaluation for &quot;YieldExpression : yield YieldDelegator opt AssignmentExpression&quot;, step 4.d.viii. In case of an error, the &quot;throw&quot; handler is called (4.d.viii.1), but then the original error is still propagated, cf. step 4.d.viii.2. 
+
+The original delegating yield proposal included error recovery, but this isn&apos;t currently spec&apos;ed (http://wiki.ecmascript.org/doku.php?id=harmony:generators#delegating_yield). Is this an oversight or an intended change?
+
+
+test case
+---
+function* gen(){ print(&quot;start&quot;); yield 1; print(&quot;stop&quot;) }
+gen.prototype.throw = function(e){ print(&quot;caught: &quot; + e); return {done: false} }
+let g = function*(){ yield*gen(); }();
+g.next(); g.throw(&quot;Stop!&quot;); g.next();
+---
+
+expected output with error recovery:
+---
+start
+caught: Stop!
+stop
+---
+
+current output:
+---
+start
+caught: Stop!
+uncaught exception: Stop!
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5306</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-09-03 15:53:09 -0700</bug_when>
+    <thetext>Yep, I just independently found the same issue.
+
+Maybe the spec text we want is like this:
+
+  ...
+  4. ...
+      c. Let status be NormalCompletion(undefined).
+      d. Repeat
+          i. Let delegateResult be IteratorDelegate(iterator, status).
+         ii. If delegateResult.[[type]] is return, then
+              1. Return NormalCompletion(delegateResult.[[value]]).
+        iii. ReturnIfAbrupt(delegateResult).
+         iv. Let status be GeneratorYield(delegateResult).
+
+emphasizing that we&apos;re just passing Completion values back and forth between the caller and the delegate iterator. The abstract operation IteratorDelegate(iterator, status) can be defined like this:
+
+  1. If status.[[type]] is normal, then
+      a. Let result be IteratorNext(iterator, status.[[value]]).
+      b. ReturnIfAbrupt(methodCompletion).
+  2. Else,
+      a. Assert: status.[[type]] is throw.
+      b. If HasProperty(iterator, &quot;throw&quot;) is true, then
+          i. Let result = Invoke(iterator, &quot;throw&quot;, received).
+         ii. ReturnIfAbrupt(result).
+        iii. If Type(result.[[value]]) is not Object, throw a
+             TypeError exception.
+      c. Else,
+          i. Return status.
+  3. Let done = IteratorComplete(result).
+  4. ReturnIfAbrupt(done).
+  5. Let value = IteratorValue(result).
+  6. ReturnIfAbrupt(value).
+  7. If done is true, then
+      a. Return {[[type]]: return, [[value]]: value, [[target]]: empty}.
+  8. Return NormalCompletion(result).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5402</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andy Wingo">wingo</who>
+    <bug_when>2013-09-19 00:50:54 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; Yep, I just independently found the same issue.
+
+Me too.  Would be great to fix this soon.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6419</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-03 14:50:16 -0800</bug_when>
+    <thetext>fixed in rev21 editor&apos;s draft
+approximately like Jason&apos;s suggestion but with IteratorDelegate inlined.
+
+BTW, you guys should feel free to set the importance field appropriately high on any bugs you need a quick response to.
+
+1.   Let exprRef be the result of evaluating AssignmentExpression.
+2.   Let value be GetValue(exprRef).
+3.   ReturnIfAbrupt(value).
+4.   Let iterator be the result of GetIterator(value).
+5.   ReturnIfAbrupt(iterator).
+6.   Let received be NormalCompletion(undefined).
+7.	Repeat 
+  a.	If received.[[type]] is normal, then
+     i.	Let innerResult be the result of IteratorNext(iterator, received.[[value]]).
+     ii.    ReturnIfAbrupt(innerResult).
+  b.	Else
+     i.	    Asssert: received.[[type]] is throw.
+     ii.    If HasProperty(iterator, &quot;throw&quot;) is true, then
+         1.	Let innerResult be the result of Invoke(iterator, &quot;throw&quot;, (received.[[value]])).
+         2.	ReturnIfAbrupt(innerResult).
+         3.	If Type(innerResult) is not Object, then throw a TypeError exception.
+     iii.   Else, return received.
+  c.	Let done be IteratorComplete(innerResult).
+  d.	ReturnIfAbrupt(done).
+  e.	If done is true, then
+     i.	    Return IteratorValue (innerResult).
+  f.	Let received  be the result of GeneratorYield(innerResult).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6505</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:08:43 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1797</bug_id>
+          
+          <creation_ts>2013-08-22 02:40:00 -0700</creation_ts>
+          <short_desc>8.3.16.10: Attach [[Construct]] when allocating function objects?</short_desc>
+          <delta_ts>2014-07-19 18:43:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4998</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-22 02:40:23 -0700</bug_when>
+    <thetext>The way 8.3.16.10 MakeConstructor() currently works makes it possible to access uninitialised function objects before [[Construct]] was attached. This seems quite unfortunate, maybe it&apos;s possible to refactor that part of the specification to ensure no user code runs before [[Construct]] is added. 
+
+
+Here&apos;s a simple test case to demonstrate this issue:
+
+class F extends Function {
+  constructor(...args){
+    this.boundNoConstruct = this.bind(null);
+    super(...args);
+    this.boundConstruct = this.bind(null);
+  }
+}
+
+f = new F(&quot;return []&quot;);
+new f; // works, [[Construct]] present
+new f.boundConstruct; // works, [[Construct]] present
+new f.boundNoConstruct; // throws TypeError: object is not a constructor</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9230</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-16 18:32:09 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft.
+
+Constructor functions now get their [[Construct]] internal method when they are allocated.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9394</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 18:43:59 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

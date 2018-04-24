@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>406</bug_id>
+          
+          <creation_ts>2012-06-22 09:40:00 -0700</creation_ts>
+          <short_desc>CreateHTML abstract operation needs to define escaping in attributes</short_desc>
+          <delta_ts>2012-09-28 12:56:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>http://code.google.com/p/v8/issues/detail?id=2217</see_also>
+    
+    <see_also>https://bugzilla.mozilla.org/show_bug.cgi?id=352437</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Joshua Bell">inexorabletash</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="9"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1044</commentid>
+    <comment_count>0</comment_count>
+    <who name="Joshua Bell">inexorabletash</who>
+    <bug_when>2012-06-22 09:40:20 -0700</bug_when>
+    <thetext>The steps in B.2.2.2 which define the CreateHTML abstract operation for compatibility functions like String.prototype.anchor includes the creation of strings representing the serialized form of HTML elements with attributes.
+
+The steps for creating the serialized form of the attribute do not take into account the escaping necessary for some characters in attributes which are implemented by at least some browsers.
+
+In Chrome, at least the following characters are escaped: &lt; &gt; &quot; &apos;
+
+For example, in Chrome:
+
+&quot;abc&quot;.anchor(&quot;123&lt;&gt;\&quot;&apos;789&quot;)
+
+Produces:
+
+&quot;&lt;a name=&quot;123&amp;lt;&amp;gt;&amp;quot;&amp;#039;789&quot;&gt;abc&lt;/a&gt;&quot;
+
+whereas the current draft spec would indicate that the output should be:
+
+&quot;&lt;a name=&quot;123&lt;&gt;&quot;&apos;789&quot;&gt;abc&lt;/a&gt;&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1049</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-22 18:44:01 -0700</bug_when>
+    <thetext> Firefox, IE, and Safari all appear to conform to the current ES6 spec. and not do this escaping. Chrome&apos;s behavior, while reasonable,  seems like a deviation from the previous interoperable behavior. We can bring this up with TC39 and see if there is any interest in adopting the Chrome approach.  However, as these functions a generally consider legacy features with marginal utility, I don&apos;t know how much interest there will be in making any changes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1050</commentid>
+    <comment_count>2</comment_count>
+    <who name="Joshua Bell">inexorabletash</who>
+    <bug_when>2012-06-22 19:53:03 -0700</bug_when>
+    <thetext>Ah, sorry - I saw the addition to Annex B, tested the only browser I had handy and noticed the difference. Sounds like a low priority web compat bug for Chrome rather than a spec bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1184</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-08 15:56:59 -0700</bug_when>
+    <thetext>*** Bug 463 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1191</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-08 23:48:21 -0700</bug_when>
+    <thetext>Escaping &lt;, &gt; and &apos; (like Chrome/V8 does) is pointless and doesn’t improve security, as the result appears in a quoted HTML attribute value wrapped in double quoted anyway. It should not be specced, IMHO.
+
+However, escaping &quot; into &amp;quot; (like Chrome/V8 has always done) seems like the right thing to do for security reasons. Not escaping it results in an XSS vector, e.g.:
+
+    &apos;&apos;.link(&apos;&quot;&gt;&lt;script&gt;alert(&quot;h4x&quot;)&lt;\/script&gt;&apos; // XSS vector in Firefox, Opera, and IE
+
+Escaping &quot; into &amp;quot; doesn’t seem to introduce any compatibility problems, as Chrome/V8 has always escaped those four characters mentioned before. Furthermore, no code that relies on this could be found by grepping the web200904 data set. http://krijnhoetmer.nl/irc-logs/whatwg/20120620#l-567
+
+I’d say it’s fair to assume the only Web content that relies on &quot; not getting escaped by these functions are XSS vectors.
+
+Some more info, cross-posted from bug 463:
+
+Firefox/Spidermonkey is going to change its behavior to escape &quot; as &amp;quot; for the reasons mentioned above: https://bugzilla.mozilla.org/show_bug.cgi?id=352437 Opera/Carakan will change its behavior too, as soon as other browsers change (bug DSK-369206). The IE bug is here: https://connect.microsoft.com/IE/feedback/details/752391
+
+FWIW, http://mathias.html5.org/specs/javascript/#escapeattributevalue requires escaping the &quot;. Tests for this behavior can be found here: http://mathias.html5.org/tests/javascript/string/
+
+Here’s a list of the methods that have this issue:
+
+* String.prototype.anchor(name)
+* String.prototype.fontcolor(color)
+* String.prototype.fontsize(size)
+* String.prototype.link(href)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1192</commentid>
+    <comment_count>5</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-08 23:52:30 -0700</bug_when>
+    <thetext>FWIW, here’s the bug about V8 needlessly escaping &apos;, &lt;, and &gt;: http://code.google.com/p/v8/issues/detail?id=2217 A patch that removes the escaping and only leaves the &quot; → &amp;quot; escape is available.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1400</commentid>
+    <comment_count>6</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-08-04 06:56:07 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; Firefox/Spidermonkey is going to change its behavior to escape &quot; as &amp;quot; for
+&gt; the reasons mentioned above […]
+
+Update: Firefox/Spidermonkey just landed this change. https://bugzilla.mozilla.org/show_bug.cgi?id=352437#c16</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1558</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-30 14:02:10 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1775</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:56:24 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

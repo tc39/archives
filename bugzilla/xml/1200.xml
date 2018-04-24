@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1200</bug_id>
+          
+          <creation_ts>2013-01-17 14:16:00 -0800</creation_ts>
+          <short_desc>8.4.2.4: ArraySetLength algorithm can produce broken arrays</short_desc>
+          <delta_ts>2013-03-08 14:44:22 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>1262</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3128</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-01-17 14:16:09 -0800</bug_when>
+    <thetext>The ArraySetLength algorithm can produce arrays which no longer respect the array invariant described in [8.4.2]. 
+
+test case sketch (most likely only reproducible if you use a custom ES5/6 implementation):
+---
+function defLen(arr, len, f) {
+  Object.defineProperty(arr, &quot;length&quot;, {value: {valueOf: function(){ f &amp;&amp; f(); return len }}});
+}
+
+a = [];
+defLen(a, 1, function() {defLen(a, 10); a[5]=&apos;test&apos;});
+---
+
+
+ArraySetLength retrieves and stores the current &apos;length&apos; PropertyDescriptor in steps 1-2. When ToUint32() is called in step 5, user defined code can be executed (e.g. a custom &apos;valueOf&apos; function, see above). This user code may change the array&apos;s length again and thereby invalidate the previously stored `oldLen` value. And as a result, both ArraySetLength invocations assume `newLen &gt;= oldLen` (step 8) and no array trimming will be applied. 
+
+a = [];
+a.[[DefineOwnProperty]](&quot;length&quot;, {[[Value: 1 (user code)]]})
+ -&gt; ArraySetLength(A = a, Desc = {[[Value: 1 (user code)]]})
+   -&gt; oldLen = 0
+   -&gt; newLen = ToUint32(Desc.[[Value]]) = 1
+     /* start user code as a side-effect of ToUint32() */
+     -&gt; a.[[DefineOwnProperty]](&quot;length&quot;, {[[Value: 10]]})
+       -&gt; ArraySetLength(A = a, Desc = {[[Value: 10]]})
+         -&gt; oldLen = 0
+         -&gt; newLen = ToUint32(Desc.[[Value]]) = 10
+         -&gt; newLen(10) &gt;= oldLen(0) =&gt; OrdinaryDefineOwnProperty(A, &quot;length&quot;, newLenDesc = {[[Value: 10]]})
+         -&gt; return
+     -&gt; a.[[SetP]](&quot;5&quot;, &apos;test&apos;, a)
+     /* end user code as a side-effect of ToUint32() */
+   -&gt; newLen(1) &gt;= oldLen(0) =&gt; OrdinaryDefineOwnProperty(A, &quot;length&quot;, newLenDesc = {[[Value: 1]]})
+
+Now `a`&apos;s &quot;length&quot; property will be `1`, but the property at index 5 wasn&apos;t removed. 
+
+
+This bug is also present in the ES5.1 specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3293</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-06 13:48:27 -0800</bug_when>
+    <thetext>Really good catch! Please find more like this..,
+
+Fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3356</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:22 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

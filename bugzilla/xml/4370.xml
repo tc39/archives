@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4370</bug_id>
+          
+          <creation_ts>2015-05-19 14:56:00 -0700</creation_ts>
+          <short_desc>11.6.1.2: make more formal</short_desc>
+          <delta_ts>2015-05-21 08:52:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14423</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-05-19 14:56:54 -0700</bug_when>
+    <thetext>In 11.6.1.2 &quot;Static Semantics: StringValue&quot;,
+step 1 says:
+    Return the String value consisting of the sequence of code units
+    corresponding to IdentifierName. In determining the sequence any
+    occurrences of \ UnicodeEscapeSequence are first replaced with the code
+    point represented by the UnicodeEscapeSequence and then the code points
+    of the entire IdentifierName are converted to code units by UTF16Encoding
+    (10.1.1) each code point.
+
+This step is fairly informal. For consistency, you could change the section body to something like:
+
+    IdentifierName :: IdentifierStart
+        1. Return the StringValue of IdentifierStart.
+
+    IdentifierName :: IdentifierName IdentifierPart
+        1. Return the result of concatenating the StringValue of IdentifierName
+           and the StringValue of IdentifierPart.
+
+    IdentifierStart ::
+           UnicodeIDStart
+           $
+           _
+    IdentifierPart ::
+           UnicodeIDContinue
+           $
+           _
+           &lt;ZWNJ&gt;
+           &lt;ZWJ&gt;
+        1. Return the UTF16Encoding of the code point matched by this production
+
+    IdentifierStart :: \ UnicodeEscapeSequence
+    IdentifierPart  :: \ UnicodeEscapeSequence
+        1. Return SV(UnicodeEscapeSequence).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

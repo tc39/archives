@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2920</bug_id>
+          
+          <creation_ts>2014-05-29 15:05:00 -0700</creation_ts>
+          <short_desc>Initialize function expression name</short_desc>
+          <delta_ts>2015-07-10 08:34:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8673</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-05-29 15:05:23 -0700</bug_when>
+    <thetext>14.1.22 Runtime Semantics: Evaluation
+
+FunctionExpression : function ( FormalParameters ) { FunctionBody }
+
+Do we need set name to &quot;&quot; or are names initialized to &quot;&quot; by default?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9168</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-12 09:10:12 -0700</bug_when>
+    <thetext>see 19.2.4.2: &quot;Anonymous functions objects that do not have a contextual name associated with them by this specification do not have a  name own property but inherit the name property of %FunctionPrototype%. &quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

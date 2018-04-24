@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>119</bug_id>
+          
+          <creation_ts>2011-07-06 09:20:00 -0700</creation_ts>
+          <short_desc>clarification needed regarding extended date-time format</short_desc>
+          <delta_ts>2013-10-29 09:45:43 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>264</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-06 09:20:39 -0700</bug_when>
+    <thetext>﻿﻿﻿From: Allen Wirfs-Brock &lt;allen@wirfs-brock.com&gt;
+Date: July 6, 2011 10:08:38 AM PDT
+To: Lasse Reichstein &lt;reichsteinatwork@gmail.com&gt;
+Cc: es5-discuss@mozilla.org
+Subject: Re: Extended Date Time String years and toISOString/parse
+
+good points for clarification in future editions
+
+On Jul 4, 2011, at 3:47 AM, Lasse Reichstein wrote:
+
+&gt;&gt;ES5.1 specificaiton of Date Time String formats allow an extended signed-six-digit format for years outside of 0000..9999.
+
+&gt;&gt; It&apos;s not clear whether &quot;the ability to specify 6 digit years&quot; only applies to parsing, or whether toISOString should also generate extended years for dates outside the four-digit range. I&apos;m guessing it should (otherwise the behavior of toISOString isn&apos;t specified at all).
+
+agreed, toISOString should generate the extended year format when appropriate.  The conditions for the RangeError should probably be expended to include any time value that can not be represented using extended year format.
+
+
+&gt;&gt;I.e., is it a requirement that new Date(DATE.UTC(10000,0,1)).toISOString() is &quot;+010000-01-01T00:00:00.000Z&quot;?
+that was the intent
+
+&gt;&gt;Also, if the date is invalid, but follows the format of a Date Time String, e.g., &quot;1972-02-30&quot;, are there any requirements on the behavior of Date.parse on that string?
+
+In general, if a data doesn&apos;t conform to the &quot;ISO date&quot; rules in 15.9.1.15 then Date.parse is allowed to fall back on implementation specific rules for processing the string. It isn&apos;t clear from the spec. language whether any semantic constraints on the the number of days in a month are to be considered.  However, if we assume that such semantic restrictions on day in month are are intended then an invalid  date such as &quot;1972-02-30&quot; presented to Date.parse would still fall back to an implementation specific interpretation and hence might be accepted. 
+
+It isn&apos;t obvious to me whether or not it is worthwhile including such days-in-month restrictions in the spec.  &quot;valid&quot; dates work the same regardless and the actual result for invalid dates would remain implementation specific.
+
+
+&gt;&gt;(As a side note, the &quot;hh&quot; field isn&apos;t specified the way the remaining ones are ... I assume it&apos;s supposed to be 00..23 - as opposed to HH which is 00..24, but since it&apos;s signed it could also be 00..12).
+
+ISO 8601 also doesn&apos;t seem to be explicit in this regard.
+
+Because ES5.1 uses HH rather than hh in describing the timezone offset I think we need to interpret it as meaning 0..24
+
+
+
+&gt;&gt;/L &apos;And pedantically, YYYY is the decimal digits of the year in the *proleptic* Gregorian calendar!&apos;
+
+true
+
+&gt;&gt;-- 
+&gt;&gt;Lasse Reichstein - reichsteinatwork@gmail.com
+_______________________________________________
+es5-discuss mailing list
+es5-discuss@mozilla.org
+https://mail.mozilla.org/listinfo/es5-discuss</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>671</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-02-27 08:28:26 -0800</bug_when>
+    <thetext>It&apos;s actually implicitly stated that toISOString() should be able to return a string in extended years format. 
+
+From 15.9.4.2  Date.parse (string)
+---
+If x is any Date object whose milliseconds amount is zero within a particular implementation of ECMAScript, then all of the following expressions should produce the same numeric value in that implementation, if all the properties referenced have their initial values: 
+  x.valueOf()
+  Date.parse(x.toString())
+  Date.parse(x.toUTCString())
+  Date.parse(x.toISOString())
+---
+
+If toISOString() wouldn&apos;t return a string with extended years, the statement about &quot;same numeric value&quot; couldn&apos;t apply.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5913</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-20 18:35:35 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+Added a range error within toISOString if year can&apos;t be represented using the ISO format (including extended years)
+
+clarified that Date.parse does handle ISO extended years.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6094</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:43 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

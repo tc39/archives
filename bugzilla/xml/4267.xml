@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4267</bug_id>
+          
+          <creation_ts>2015-04-07 08:56:00 -0700</creation_ts>
+          <short_desc>%ThrowTypeError% has a mutable name property</short_desc>
+          <delta_ts>2015-07-10 08:34:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 37: April 3, 2015 Release Candidate 4</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>critical</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>caitpotter88</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14152</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-04-07 08:56:05 -0700</bug_when>
+    <thetext>The %ThrowTypeError% function is supposed to be a frozen function so that it cannot be used as a side channel. However, in ES6 we added a configurable name property to all functions.
+
+(We also made length configurable but that case is handled in the spec already.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14153</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-07 09:41:01 -0700</bug_when>
+    <thetext>%ThrowTypeError% does not have an own .name property per 9.2.7.1 + 19.2.4.2:
+
+&gt; 9.2.7.1 %ThrowTypeError% ( )
+&gt; The %ThrowTypeError% intrinsic is an anonymous built-in function object [...]
+
+&gt; 19.2.4.2 name
+&gt; Anonymous functions objects that do not have a contextual name associated with them by this
+&gt; specification do not have a name own property but inherit the name property of 
+&gt; %FunctionPrototype%.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14154</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-04-07 10:01:50 -0700</bug_when>
+    <thetext>Thanks André. Crisis averted.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14155</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-07 10:02:44 -0700</bug_when>
+    <thetext>(In reply to Erik Arvidsson from comment #2)
+&gt; Thanks André. Crisis averted.
+
+:-D</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

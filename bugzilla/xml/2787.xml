@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2787</bug_id>
+          
+          <creation_ts>2014-05-01 08:58:00 -0700</creation_ts>
+          <short_desc>26.2.1.1 Reflect.Realm: Remove step 4 and invert condition in step 8</short_desc>
+          <delta_ts>2014-06-16 16:11:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>till</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8081</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 08:58:38 -0700</bug_when>
+    <thetext>26.2.1.1 Reflect.Realm ( [ target  , handler ] ) 
+
+
+- Remove steps 5-6, already handled in step 4. 
+
+- Change condition in step 8, remove &quot;no&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8125</commentid>
+    <comment_count>1</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 11:22:56 -0700</bug_when>
+    <thetext>I think the intent is to keep steps 5 and 6 as a pair, so it&apos;s step 4 that should be removed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8133</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-04 12:03:47 -0700</bug_when>
+    <thetext>Step 5 does not make any sense at its position, because steps 1-4 can never trigger any side effects which means the constructor function won&apos;t ever be reentrantly applied during 1-4.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8140</commentid>
+    <comment_count>3</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 12:52:17 -0700</bug_when>
+    <thetext>You&apos;re right - I guess the NOTE really only makes sense as step 23.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8545</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-18 11:47:54 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9013</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:11:28 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

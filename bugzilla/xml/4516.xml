@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4516</bug_id>
+          
+          <creation_ts>2015-08-21 14:14:00 -0700</creation_ts>
+          <short_desc>24.2.2.1 DataView: &quot;byteOffset&quot; argument should be optional</short_desc>
+          <delta_ts>2016-02-04 16:22:27 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14677</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-08-21 14:14:30 -0700</bug_when>
+    <thetext>24.2.2.1 DataView (buffer [ , byteOffset [ , byteLength ] ] )
+
+
+Per steps 4-7, calling `new DataView(new ArrayBuffer(0))` throws a RangeError since ToNumber(undefined)=NaN and ToInteger(NaN)=0 and Nan!=0.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14695</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-09-17 09:40:20 -0700</bug_when>
+    <thetext>In addition, the handling of byteOffset for 
+ DataView (buffer [ , byteOffset [ , byteLength ] ] )
+is different from its handling for 
+   %TypedArray% (buffer [ , byteOffset [ , byteLength ] ] )
+
+this seems like an undesirable inconsistency that should be fixed.
+
+The fix in 24.2.2.1:
+
+Remove the current step 4.
+Replace current step 5 with:
+    Let /offset/ be ToInteger(/byteoffset/).
+Replace current step 7 with:
+    If /offset/ &lt; 0, throw a *RangeError* exception.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14702</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-09-18 07:32:46 -0700</bug_when>
+    <thetext>If 24.2.2.1 DataView(...) gets changed to match 22.2.1.5 %TypedArray%(...), the offset checks in 24.2.1.1 GetViewValue and 24.2.1.2 SetViewValue should probably be changed, too.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

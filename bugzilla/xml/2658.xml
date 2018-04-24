@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2658</bug_id>
+          
+          <creation_ts>2014-04-15 11:30:00 -0700</creation_ts>
+          <short_desc>Numbering glitches in rev 23</short_desc>
+          <delta_ts>2014-04-27 14:02:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7733</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 11:30:22 -0700</bug_when>
+    <thetext>These are in addition to those reported in bug 2655 and bug 2656.
+
+- In 9.4.6.10 &quot;[[Delete]] (P)&quot;, the steps are numbered 1, 6, 7, 2.
+
+- In 20.3.2.2 &quot;Date ( value )&quot;, the list starts with step 6.
+
+- In the next section, 20.3.2.3 &quot;Date ( )&quot;, the list starts with step 11.
+
+- In 24.1.1.4 &quot;GetValueFromBuffer ( arrayBuffer, byteIndex, type, isLittleEndian )&quot;, after step 9, the next step is numbered 1.
+
+- In 24.1.4.1 &quot;get ArrayBuffer.prototype.byteLength&quot;, the list starts with step 9.
+
+- In 24.2.4.3 &quot;get DataView.prototype.byteOffset&quot;, the list starts with step 16.
+
+- In 24.3.2.4 &quot;Runtime Semantics: JA Abstract Operation&quot;, the list starts with step 5.
+
+- In 25.4.4.5 &quot;Promise.resolve ( x )&quot;, the first two steps are both numbered 1.
+
+
+
+And lastly, several instances of a common issue:
+
+- In 26.1.4 &quot;Reflect.get ( target, propertyKey [ , receiver ])&quot;, under step 5, the substep is numbered &quot;1.&quot; It should be &quot;a.&quot;
+
+- Same thing in 26.1.12 &quot;Reflect.set ( target, propertyKey, V [ , receiver ] )&quot;.
+
+- And in 26.2.3.4 &quot;get Reflect.Realm.prototype.intrinsics&quot; under step 6.
+
+- And in 26.2.3.5 &quot;get Reflect.Realm.prototype.stdlib&quot; under step 6. (Also,  the first substep there has two periods at the end of the sentence; and step 6 contains an extra comma.)
+
+- And in 26.3.3.7 &quot;Reflect.Loader.prototype.has ( name )&quot; under step 7.
+
+- And in 26.3.3.12 &quot;Reflect.Loader.prototype.newModule ( obj )&quot; under step 4, but that section has more substantive problems...
+
+- And in 26.3.3.14 &quot;Reflect.Loader.prototype.set ( name, module )&quot; under step 8.
+
+- And in 26.3.5.2.1 &quot;%LoaderIteratorPrototype%.next ( )&quot; under step 10.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7736</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-04-15 16:35:40 -0700</bug_when>
+    <thetext>Oops, found another:
+
+- In 13.2.3.3 &quot;Static Semantics: HasInitializer&quot;, all four lists only have a single step, but in three of them it&apos;s numbered &quot;2.&quot;
+
+But I&apos;m pretty sure that&apos;s all.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7740</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-15 18:29:25 -0700</bug_when>
+    <thetext>Fixed in rev24 editor&apos;s draft
+
+basically almost all the algorithms in clause 26 had the wrong list style.
+
+It show up in Word with them having the wrong left margin.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7935</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-27 14:00:24 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7936</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-27 14:02:25 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

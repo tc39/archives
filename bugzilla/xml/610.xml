@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>610</bug_id>
+          
+          <creation_ts>2012-08-08 17:52:00 -0700</creation_ts>
+          <short_desc>Web harness breaks test cases with supplementary characters</short_desc>
+          <delta_ts>2012-10-09 22:24:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>gphemsley</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1412</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-08 17:52:54 -0700</bug_when>
+    <thetext>The following test case contains a Unicode supplementary character as the first character of the first string:
+
+var strings = [&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1417</commentid>
+    <comment_count>1</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2012-08-09 12:52:36 -0700</bug_when>
+    <thetext>It looks like those characters also break bugs.ecmascript.org too, as this bug appears to be truncated :-/  
+
+Can you articulate the issue without characters this tool can&apos;t handle (or just email me directly).  Thanks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1418</commentid>
+    <comment_count>2</comment_count>
+    <who name="Gordon P. Hemsley">gphemsley</who>
+    <bug_when>2012-08-09 13:28:38 -0700</bug_when>
+    <thetext>The characters in the Unicode Supplementary Plane are those at codepoints of U+010000 or higher.
+
+The issue with Bugzilla itself is like due to what is discussed here:
+http://mathiasbynens.be/notes/mysql-utf8mb4</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1419</commentid>
+    <comment_count>3</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2012-08-09 13:30:07 -0700</bug_when>
+    <thetext>Actually I&apos;ve reproduced the issue.  If I put a character outside the BMP (Unicode CodePoint &gt; 0xFFFF) inside a test-case, running the test fails with &quot;Uncaught SyntaxError: Unexpected token ILLEGAL&quot;.  It looks like we&apos;ve not encoding surrogate pairs properly in the JSON files.  I&apos;ll dig into it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1420</commentid>
+    <comment_count>4</comment_count>
+    <who name="Bill Ticehurst">billti</who>
+    <bug_when>2012-08-09 18:06:19 -0700</bug_when>
+    <thetext>Looks like a bug in jquery.base64.js not being able to handle UTF-8 encodings of greater than 3 bytes (required for U+FFFF).  I&apos;ve made a fix and sent the patch to Norbert to verify.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1422</commentid>
+    <comment_count>5</comment_count>
+      <attachid>24</attachid>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-10 11:32:51 -0700</bug_when>
+    <thetext>Created attachment 24
+test case including supplementary character</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1423</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-08-10 11:39:57 -0700</bug_when>
+    <thetext>I&apos;ve added the test file for posterity.
+
+The data loss in bugzilla is apparently caused by this bug:
+https://bugzilla.mozilla.org/show_bug.cgi?id=405011
+
+Bill&apos;s fix fixes the immediate problem, but isn&apos;t fully compliant with the UTF-8 spec (Unicode 6.1, chapter 3.9, pages 94-97): Not all byte value sequences are allowed in UTF-8: Code points end at U+10FFFF so sequences representing higher values are illegal, and &quot;overlong&quot; sequences representing code points that can be represented using shorter sequences are also illegal. Accepting illegal sequences can be a security issue, so a parser should throw exceptions for them, or at least replace them with U+FFFD.
+
+The one thing we definitely need is a limitation of code points to U+10FFFF.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1920</commentid>
+    <comment_count>7</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-09 22:24:13 -0700</bug_when>
+    <thetext>Committed Bill&apos;s fix with additional check for valid code points.</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>24</attachid>
+            <date>2012-08-10 11:32:00 -0700</date>
+            <delta_ts>2012-08-10 11:32:51 -0700</delta_ts>
+            <desc>test case including supplementary character</desc>
+            <filename>8.8.js</filename>
+            <type>application/x-javascript</type>
+            <size>252</size>
+            <attacher name="Norbert">ecmascriptbugs</attacher>
+            
+              <data encoding="base64">Ly8gQ29weXJpZ2h0IDIwMTIgTW96aWxsYSBDb3Jwb3JhdGlvbi4gQWxsIHJpZ2h0cyByZXNlcnZl
+ZC4KLy8gVGhpcyBjb2RlIGlzIGdvdmVybmVkIGJ5IHRoZSBCU0QgbGljZW5zZSBmb3VuZCBpbiB0
+aGUgTElDRU5TRSBmaWxlLgoKLyoqCiAqIEBkZXNjcmlwdGlvbiB0ZXN0cyBzdXBwbGVtZW50YXJ5
+IGNoYXJhY3RlciBzdXBwb3J0IGluIGhhcm5lc3MuCiAqLwoKCnZhciBzdHJpbmdzID0gWyLwoK63
+6YeO5a62IiwgIuWQiemHjuWutiJdOwoK
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

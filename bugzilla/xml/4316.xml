@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4316</bug_id>
+          
+          <creation_ts>2015-04-17 09:50:00 -0700</creation_ts>
+          <short_desc>12.14.5 - Omitted Productions</short_desc>
+          <delta_ts>2015-04-17 22:15:34 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14284</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-04-17 09:50:37 -0700</bug_when>
+    <thetext>Section 12.14.5 Destructuring Assignment lists the valid productions for ArrayAssignmentPattern as:
+
+&gt; ArrayAssignmentPattern[Yield] :
+&gt;   [ Elisionopt AssignmentRestElement[?Yield]opt ]
+&gt;   [ AssignmentElementList[?Yield] ]
+&gt;   [ AssignmentElementList[?Yield] , Elisionopt AssignmentRestElement[?Yield]opt ]
+
+However, 12.14.5.2 (Runtime Semantics: DestructuringAssignmentEvaluation) lists semantics for two additional productions, namely:
+
+&gt; ArrayAssignmentPattern : [ ]
+
+and
+
+&gt; ArrayAssignmentPattern : [ Elision ]
+
+The grammar initially defined in 12.14.5 should be updated to include these productions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14295</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-04-17 22:15:34 -0700</bug_when>
+    <thetext>Those aren&apos;t &quot;additional&quot; productions, they&apos;re just two possible &apos;expansions&apos; of the defining production you quoted. (Note that the first RHS has two optional symbols, and see section 5.1.5.)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

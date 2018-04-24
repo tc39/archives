@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1908</bug_id>
+          
+          <creation_ts>2013-09-25 16:09:00 -0700</creation_ts>
+          <short_desc>Need to respecify @@unscopable binding</short_desc>
+          <delta_ts>2015-07-10 08:35:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>brterlso</cc>
+    
+    <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5424</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-25 16:09:15 -0700</bug_when>
+    <thetext>Declarative Environment Record needs to be update to reflect @@unscopable approach discussed at Sept 2013 TC39 meeting 
+
+
+https://github.com/rwaldron/tc39-notes/blob/master/es6/2013-09/sept-17.md#53-unscopeable</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6622</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-09 10:51:58 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft
+
+Note that an ordinary object is now used as the object containing the unscopable property names. they are the own property names of the unscopable object.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6657</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-11 12:12:34 -0800</bug_when>
+    <thetext>Here are the main spec. updates (to Rev21)
+
+8.1.1.2.1	HasBinding(N)
+The concrete Environment Record method HasBinding for object environment records determines if its associated binding object has a property whose name is the value of the argument N:
+1.	Let envRec be the object environment record for which the method was invoked.
+2.	Let bindings be the binding object for envRec.
+3.	If the withEnvironment flag of newEnv is true, then
+   a.	Let unscopables be Get(bindings, @@unscopables).
+   b.	ReturnIfAbrupt(unscopables).
+   c.	If Type(unscopables) is Object, then
+      i.	Let found be HasOwnProperty(unscopables, N).
+      ii.	ReturnIfAbrupt(found).
+      iii.	If found is true, then return false.
+4.	Return the result of HasProperty(bindings, N).
+
+22.1.3.31	Array.prototype [ @@unscopables ]
+The initial value of the @@unscopables data property is an object created by the following steps:
+1.	Let blackList be the result of calling ObjectCreate(%ObjectPrototype%).
+2.	Call CreateDataProperty(blackList, &quot;find&quot;, true).
+3.	Call CreateDataProperty(blackList, &quot;findIndex&quot;, true).
+4.	Call CreateDataProperty(blackList, &quot;fill&quot;, true).
+5.	Call CreateDataProperty(blackList, &quot;copyWithin&quot;, true).
+6.	Call CreateDataProperty(blackList, &quot;entries&quot;, true).
+7.	Call CreateDataProperty(blackList, &quot;keys&quot;, true).
+8.	Call CreateDataProperty(blackList, &quot;values&quot;, true).
+9.	Assert: Each of the above calls will return true.
+10.	Return blackList.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7108</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:05:47 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8041</commentid>
+    <comment_count>4</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-04-30 15:08:38 -0700</bug_when>
+    <thetext>Reopening since this is not in rev 24
+
+The algorithms in #2 do not use an array. The discussion on es-discuss was using an array. I find using any Object and doing HasOwnProperty cleaner.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8047</commentid>
+    <comment_count>5</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-04-30 15:36:42 -0700</bug_when>
+    <thetext>Another reason why using has property is better is that we do not need to invoke any getters or any toString methods.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8048</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-30 18:24:54 -0700</bug_when>
+    <thetext>The correct code was in rev21, but somehow got lost in rev22 and later.  What is currently in the spec. is essentially what was in rev20.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8084</commentid>
+    <comment_count>7</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-05-01 09:14:45 -0700</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; The correct code was in rev21, but somehow got lost in rev22 and later.  What
+&gt; is currently in the spec. is essentially what was in rev20.
+
+I looked through rev 20, 21, 22 and the unscopables are never extracted in those revs either.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8085</commentid>
+    <comment_count>8</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 09:26:04 -0700</bug_when>
+    <thetext>unscopables extraction was added in rev17 and then later removed in rev19.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8088</commentid>
+    <comment_count>9</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-05-01 11:01:55 -0700</bug_when>
+    <thetext>(In reply to comment #8)
+&gt; unscopables extraction was added in rev17 and then later removed in rev19.
+
+Just double checked and there is more spec text here but it has issues. (unscopables is never set, probably just a typo)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8861</commentid>
+    <comment_count>10</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-06-04 12:44:38 -0700</bug_when>
+    <thetext>Upping the priority of this as discussed.
+
+I would also appreciate the rationale for why @@unscopable cannot be an object.
+
+If @@unscopable must be an array, please consider looking up entries in the @@unscopable array using GetOwn rather than Get as it&apos;s simpler.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9046</commentid>
+    <comment_count>11</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-20 13:41:59 -0700</bug_when>
+    <thetext>Here is a gist with an update spec algorithm for 8.1.1.2.1 HasBinding(N)
+
+https://gist.github.com/arv/f820c7c02a8119eb27a3
+
+With this we can remove the notion that an ObjectEnvironment has an unscopables list since this is all localized to HasBinding.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9047</commentid>
+    <comment_count>12</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-06-21 06:33:41 -0700</bug_when>
+    <thetext>The HasBinding algorithm in the gist retrieves @@unscopables even if `hasProperty` is false. Is this on purpose?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9070</commentid>
+    <comment_count>13</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-23 07:22:49 -0700</bug_when>
+    <thetext>(In reply to comment #12)
+&gt; The HasBinding algorithm in the gist retrieves @@unscopables even if
+&gt; `hasProperty` is false. Is this on purpose?
+
+You are right, this can be optimized to do one less HasOwnProperty call.
+
+Fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9084</commentid>
+    <comment_count>14</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 16:11:38 -0700</bug_when>
+    <thetext>(In reply to comment #11)
+&gt; Here is a gist with an update spec algorithm for 8.1.1.2.1 HasBinding(N)
+&gt; 
+&gt; https://gist.github.com/arv/f820c7c02a8119eb27a3
+
+I see a problem with this design.  Consider this ES5ish code snippet:
+
+window.values = 100;
+Array.prototype.__proto__ = {values: 42};
+var obj = [ ];
+with (obj) console.log(value);  //should be 42;
+
+In ES5, the HasBinding call on the with environment would find the property with the value 42. But, with Erik&apos;s changes we would we would log &quot;100&quot; because his HasBinding look up would stop when it saw an @@unscopable &apos;values&apos; property on Array.prototype. This causes the with environment to be by passed and lexical lookup would climb the environment until it came to the global environment and finds &apos;values&apos; with the value 100.
+
+This issue might or might not be observable if &apos;values&apos; was added to Object.prototype instead of splicing in a new prototype object.  It would depend upon whether the global object also had a &apos;values&apos; own property.
+
+In practice we may never see this, but we&apos;re already adding a fair amount of complexity to maintain backwards compatability while adding these new methods.  To fix it in HasBinding we would have to continue looking up the prototype chain even when isBlocked is true. Worse, we will also have to add a similar @@unscopable lookup algorithm to Object Environment Record&apos;s GetBindingValue.
+
+I think we have to do it?  Any other thoughts?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9091</commentid>
+    <comment_count>15</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-06-24 07:13:17 -0700</bug_when>
+    <thetext>(In reply to comment #14)
+&gt; (In reply to comment #11)
+&gt; &gt; Here is a gist with an update spec algorithm for 8.1.1.2.1 HasBinding(N)
+&gt; &gt; 
+&gt; &gt; https://gist.github.com/arv/f820c7c02a8119eb27a3
+&gt; 
+&gt; I see a problem with this design.  Consider this ES5ish code snippet:
+&gt; 
+&gt; window.values = 100;
+&gt; Array.prototype.__proto__ = {values: 42};
+&gt; var obj = [ ];
+&gt; with (obj) console.log(value);  //should be 42;
+&gt; 
+&gt; In ES5, the HasBinding call on the with environment would find the property
+&gt; with the value 42. But, with Erik&apos;s changes we would we would log &quot;100&quot; because
+&gt; his HasBinding look up would stop when it saw an @@unscopable &apos;values&apos; property
+&gt; on Array.prototype. This causes the with environment to be by passed and
+&gt; lexical lookup would climb the environment until it came to the global
+&gt; environment and finds &apos;values&apos; with the value 100.
+&gt; 
+&gt; This issue might or might not be observable if &apos;values&apos; was added to
+&gt; Object.prototype instead of splicing in a new prototype object.  It would
+&gt; depend upon whether the global object also had a &apos;values&apos; own property.
+&gt; 
+&gt; In practice we may never see this, but we&apos;re already adding a fair amount of
+&gt; complexity to maintain backwards compatability while adding these new methods. 
+&gt; To fix it in HasBinding we would have to continue looking up the prototype
+&gt; chain even when isBlocked is true. Worse, we will also have to add a similar
+&gt; @@unscopable lookup algorithm to Object Environment Record&apos;s GetBindingValue.
+&gt; 
+&gt; I think we have to do it?  Any other thoughts?
+
+It is unfortunate that we have to do this dance in both HasBinding and GetBindingValue but I don&apos;t see any other way.
+
+Let me think about it a bit more.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9158</commentid>
+    <comment_count>16</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-07-11 14:26:14 -0700</bug_when>
+    <thetext>Do we need to update SetMutableBinding too? If not we get very strange results when the object has blacklisted a property that is then set.
+
+(function TestSetterOnBlacklisted() {
+  var proto = {
+    set x(x) {
+      assertTrue(false);
+    },
+    get x() {
+      return &apos;proto&apos;;
+    }
+  };
+  var object = {
+    __proto__: proto,
+    get x() {
+      return this.x_;
+    },
+    set x(x) {
+      this.x_ = x;
+    },
+    x_: 1
+  };
+
+  with (object) {
+    x = 2;
+    assertEquals(x, 2);
+  }
+
+  assertEquals(object.x, 2);
+
+  object[Symbol.unscopables] = {x: true};
+
+  with (object) {
+    x = 3;
+    assertEquals(x, &apos;proto&apos;);
+  }
+
+  assertEquals(object.x, 3);
+})();</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9160</commentid>
+    <comment_count>17</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-11 15:34:52 -0700</bug_when>
+    <thetext>(In reply to comment #16)
+&gt; Do we need to update SetMutableBinding too? If not we get very strange results
+&gt; when the object has blacklisted a property that is then set.
+&gt; 
+
+ugh!!  The swamp just keeps getting deeper and deeper...
+
+I think we probably have to do it, if we continue down this path. We would also have to consider the interaction  with data property assignments when there is an inherited non-writable property that is @@unscoped 
+
+And this whole approach completely ignores that fact that the with object or any of its prototypes could be Proxy object that has redefined [[Get]] or [[Set]] and we may be imposing the a wrong lookup semantics on them.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9646</commentid>
+    <comment_count>18</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-07-29 22:16:46 -0700</bug_when>
+    <thetext>At the F2F today we decided to back track this to plan a. This means that we do a HasProperty for name, if found we do a Get for @@unscopables and if found we do a HasProperty on the unscopables object.
+
+https://gist.github.com/arv/f820c7c02a8119eb27a3
+
+Allen, as far as I can tell we do not need to update SetMutableBinding anymore, since before the assignment, we will have already determined whether the property name has been black listed or not. Also, with plan a we always do a Get/Put on the object being the receiver so we do not get into the strange edge cases we got to before where a property on the instance was blocked but accepted further down the prototype type chain.
+
+(sorry for not making the SetMtableBinding case clear today with the plan b approach)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9841</commentid>
+    <comment_count>19</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-21 17:05:22 -0700</bug_when>
+    <thetext>fixed in rev27 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9973</commentid>
+    <comment_count>20</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-25 08:29:32 -0700</bug_when>
+    <thetext>fixed in rev27 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4080</bug_id>
+          
+          <creation_ts>2015-02-23 08:18:00 -0800</creation_ts>
+          <short_desc>7.4.8 + 7.4.9 + more: &quot;a new built-in function object&quot;</short_desc>
+          <delta_ts>2015-03-16 11:32:58 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13256</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-23 08:18:03 -0800</bug_when>
+    <thetext>7.4.8 &quot;CreateListIterator ( list )&quot; / step 4
+and
+7.4.9 &quot;CreateCompoundIterator ( iterator1, iterator2 )&quot; / step 5
+both say:
+    Let next be a new built-in function object as defined in ...
+
+In both cases, &quot;a new built-in function object ...&quot; should probably be changed to an invocation of CreateBuiltinFunction.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13257</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-23 08:34:12 -0800</bug_when>
+    <thetext>Similarly in:
+  25.4.1.3   / step 2
+  25.4.1.3   / step 5
+  25.4.1.5   / step 4
+  25.4.4.1.1 / step 6.k
+  26.2.2.1   / step 3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13262</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-23 16:30:31 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+The clause 24 and 25 meanings is defined in paragraph 10 of clause 17:
+
+Unless otherwise specified, each built-in function defined in clauses 18 through 26 is created as if by calling the CreateBuiltinFunction abstract operation (9.3.3).
+
+I changed it to:
+
+Unless otherwise specified, each built-in function defined in this specification is created as if by calling the CreateBuiltinFunction abstract operation (9.3.3).
+
+Also added a similar paragraph to 9.3.3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13274</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-23 19:02:36 -0800</bug_when>
+    <thetext>Are you saying that those changes to clauses 17 and 9.3.3 constitute the &apos;fix&apos;,
+or they&apos;re in addition to explicitly invoking CreateBuiltinFunction at the 7 algorithm steps I noted?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13276</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 09:43:51 -0800</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #3)
+&gt; Are you saying that those changes to clauses 17 and 9.3.3 constitute the
+&gt; &apos;fix&apos;,
+&gt; or they&apos;re in addition to explicitly invoking CreateBuiltinFunction at the 7
+&gt; algorithm steps I noted?
+
+I think the clause 9.3.3 and clause 17 changes are sufficient. Basically all algorithmically specified built-in functions are defined using CreateBuiltinFunction. 
+
+The header of 7.4.8.1 and 7.4.9.1 say:
+
+The &lt;interatorkind&gt; next method is a standard built-in function object (clause 17) ...
+
+that is intended to be enough to imply the CreateBuiltinFunction requirement</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13289</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-24 11:24:53 -0800</bug_when>
+    <thetext>Please note that my point is *not* &quot;the spec is unclear as to whether CreateBuiltinFunction is involved in the creation of these particular functions&quot;,
+my point is &quot;when you have a step that creates a built-in function, it would be better to invoke CreateBuiltinFunction explicitly rather than implicitly&quot;. (For one thing, doing so would specify the new function&apos;s [[Realm]], which I don&apos;t think is specified elsewhere.)
+
+Do you think implicit is preferable in such cases?
+
+(And, just be really clear, I&apos;m *not* suggesting that the invocations implied by 8.2.2 step 13 be made explicit.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13526</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:19 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13592</commentid>
+    <comment_count>7</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-05 20:39:40 -0800</bug_when>
+    <thetext>It would be nice to get a response to comment #5.
+
+While the changes are an improvement, I don&apos;t agree they&apos;re a fix.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13698</commentid>
+    <comment_count>8</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-11 14:01:37 -0700</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #7)
+&gt; It would be nice to get a response to comment #5.
+&gt; 
+
+
+I think implicit is fine and good enough for this edition.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13700</commentid>
+    <comment_count>9</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-11 16:54:15 -0700</bug_when>
+    <thetext>So it wouldn&apos;t be out of line to suggest it for the next edition?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13748</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 11:32:58 -0700</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #9)
+&gt; So it wouldn&apos;t be out of line to suggest it for the next edition?
+
+Feel free</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

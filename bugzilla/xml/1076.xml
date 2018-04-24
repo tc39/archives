@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1076</bug_id>
+          
+          <creation_ts>2012-11-27 13:54:00 -0800</creation_ts>
+          <short_desc>Coverage: All built-ins that may throw with sealed/frozen objects should be verified (especially array methods on sealed/frozen arrays)</short_desc>
+          <delta_ts>2014-09-20 12:40:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>princexcess69</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2877</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2012-11-27 13:54:18 -0800</bug_when>
+    <thetext>Need a test to validate that Object.seal with arrays work properly (specifically that push will throw a TypeError). Relevant V8 bug report: http://code.google.com/p/v8/issues/detail?id=2412</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2878</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2012-11-27 13:57:29 -0800</bug_when>
+    <thetext>Should also validate that we have coverage for all built-in operations that throw on sealed/frozen objects.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

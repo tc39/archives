@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>697</bug_id>
+          
+          <creation_ts>2012-10-02 15:59:00 -0700</creation_ts>
+          <short_desc>API for BCP 47 language tags</short_desc>
+          <delta_ts>2016-02-15 16:23:48 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 3.0 Drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>caridy</cc>
+    
+    <cc>gphemsley</cc>
+    
+    <cc>marcos</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1817</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-02 15:59:59 -0700</bug_when>
+    <thetext>The ECMAScript Internationalization API Specification describes a number of abstract operations to process BCP 47 language tags. Some of them might be useful to expose as public API:
+- IsStructurallyValidLanguageTag
+- CanonicalizeLanguageTag
+- CanonicalizeLocaleList
+- LookupMatcher</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14409</commentid>
+    <comment_count>1</comment_count>
+    <who name="Marcos">marcos</who>
+    <bug_when>2015-05-15 12:32:59 -0700</bug_when>
+    <thetext>*** Bug 4365 has been marked as a duplicate of this bug. ***</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14410</commentid>
+    <comment_count>2</comment_count>
+    <who name="Marcos">marcos</who>
+    <bug_when>2015-05-15 12:52:14 -0700</bug_when>
+    <thetext>Cloned this to GitHub... easier to track/discuss there. 
+
+https://github.com/tc39/ecma402/issues/5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14926</commentid>
+    <comment_count>3</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:23:48 -0800</bug_when>
+    <thetext>Update: this proposal has reached stage 2 https://github.com/tc39/ecma402/issues/46</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

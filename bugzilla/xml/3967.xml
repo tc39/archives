@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3967</bug_id>
+          
+          <creation_ts>2015-02-17 02:04:00 -0800</creation_ts>
+          <short_desc>18.2.1.2 EvalDeclarationInstantiation: WebCompat and lexical redeclaration checks in with/catch blocks</short_desc>
+          <delta_ts>2015-02-19 19:10:55 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12804</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-17 02:04:01 -0800</bug_when>
+    <thetext>18.2.1.2 Runtime Semantics: EvalDeclarationInstantiation( body, varEnv, lexEnv, strict)
+
+EvalDeclarationInstantiation should probably skip object environment records, because object env records can hold arbitrary bindings. Currently they&apos;re processed:
+---
+js&gt; function f() { with({a: 0}) eval(&quot;var a = 1&quot;) } f()
+uncaught exception: SyntaxError: redeclaration of variable: &quot;a&quot;
+---
+
+I&apos;m not sure if it is necessary for web-compat to special case catch blocks when checking for lexical redeclarations. Currently:
+---
+js&gt; function f() { try {throw null} catch (e){ eval(&quot;var e = 0&quot;) } } f()
+uncaught exception: SyntaxError: redeclaration of variable: &quot;e&quot;
+---
+
+&quot;B.3.5 VariableStatements in Catch blocks&quot; explicitly allows this form, does EvalDeclarationInstantiation need a similar extension?
+---
+js&gt; function f() { try {throw null} catch (e){ var e = 0 } } f()
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12831</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 13:00:52 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+including additions to B.3.5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13044</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:55 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

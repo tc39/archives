@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2732</bug_id>
+          
+          <creation_ts>2014-04-24 09:03:00 -0700</creation_ts>
+          <short_desc>14.2  Arrow Function Definitions: ArrowFormalParameters need [GeneratorParameter] like restriction</short_desc>
+          <delta_ts>2014-06-16 16:14:00 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7909</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-24 09:03:54 -0700</bug_when>
+    <thetext>14.2  Arrow Function Definitions
+---
+ArrowFormalParameters[Yield] : ( StrictFormalParameters[?Yield] )
+---
+
+Following the production rules StrictFormalParameters -&gt; FormalParameters -&gt; FormalParameterList -&gt; FormalsList -&gt; FormalParameter -&gt; BindingElement -&gt; SingleNameBinding, you&apos;ll end up at SingleNameBinding:
+---
+SingleNameBinding[Yield,GeneratorParameter] :
+  [+GeneratorParameter] BindingIdentifier[Yield] Initializer[In]opt
+  [~GeneratorParameter] BindingIdentifier[?Yield] Initializer[In, ?Yield]opt
+---
+
+Without the [GeneratorParameter] production parameter, but with [Yield] being present, Initializer -&gt; AssignmentExpression -&gt; YieldExpression can be parsed...
+
+
+test case:
+---
+function*g() {
+  (a = yield) =&gt; {}
+}
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8571</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-19 20:24:06 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9015</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:14:00 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

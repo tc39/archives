@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1274</bug_id>
+          
+          <creation_ts>2013-03-08 17:30:00 -0800</creation_ts>
+          <short_desc>Document ECMA-402 overrides of locale-sensitive functions</short_desc>
+          <delta_ts>2015-03-17 16:57:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3403</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-03-08 17:30:33 -0800</bug_when>
+    <thetext>The first edition of ECMA-402, ECMAScript Internationalization API Specification, provides specifications for several locale-sensitive functions that supersede specifications in ECMA-262. The second edition is adding to that set.
+
+The ECMA-262 specifications of these functions should have language referring to ECMA-402.
+
+For
+- String.prototype.localeCompare
+- Number.prototype.toLocaleString
+- Date.prototype.toLocaleString
+- Date.prototype.toLocaleDateString
+- Date.prototype.toLocaleTimeString
+
+&quot;Implementations that also implement standard ECMA-402, ECMAScript Internationalization API Specification, must follow the specification provided in that standard.&quot;
+
+For
+- String.prototype.toLocaleLowerCase
+- String.prototype.toLocaleUpperCase
+and likely
+- Object.prototype.toLocaleString
+- Array.prototype.toLocaleString
+
+&quot;Implementations that also implement the second edition of standard ECMA-402, ECMAScript Internationalization API Specification, must follow the specification provided in that standard.&quot;
+
+The current notes warning that the first or second &quot;parameter to this function is likely to be used in a future version of this standard&quot; should be replaced in all functions that have them with:
+
+&quot;The first and second [for localeCompare: second and third] parameters to this function are used in the version described in standard ECMA-402, ECMAScript Internationalization API Specification. Implementations must not use these parameter positions in ways other than described in that specification.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5987</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-26 17:42:53 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft 
+
+also see the conformance cluase</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6042</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:04 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9638</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 23:21:46 -0700</bug_when>
+    <thetext>Checked in rev 26 draft:
+
+- The specs for the functions respecified in the first edition of ECMA-402 look good.
+
+- The specs for the functions that are candidates for respecification in the second edition of ECMA-402 are incomplete, but then development of that second edition itself has not progressed to a point where it&apos;s clear what ECMA-262 can say about it:
+
+-- The specs for String.prototype.toLocaleLowerCase and String.prototype.toLocaleUpperCase say nothing about ECMA-402. The most recent draft of the second edition of ECMA-402 has specifications for them:
+http://norbertlindenberg.com/ecmascript/intl.html#sec-13.1.2
+
+-- The spec for Array.prototype.toLocaleString shows the optional arguments, requires that an implementation with the internationalization API &quot;must implement the Array.prototype.toLocaleString method as specified in the ECMA-402 specification&quot;, but notes that &quot;the first edition of ECMA-402 did not include a replacement specification&quot;. The  most recent draft of the second edition still does not.
+
+-- The spec for Object.prototype.toLocaleString shows the optional arguments, notes that they &quot;are not used but may be passed by inplementations that include ECMA-402 support&quot; and that ECMA-402 &quot;intentionally does not provide an alternative to this default implementation&quot;. That reflects the outcome of a discussion on es-discuss, but hasn&apos;t been confirmed by the internationalization ad-hoc yet. The spec also stutters &quot;the the&quot;.
+
+-- The spec for %TypedArray%.prototype.toLocaleString states that its initial value &quot;is the same built-in function object as the Array.prototype.toLocaleString method&quot;. This sounds about right, but it&apos;s not immediately clear that the elements will have Number.prototype.toLocaleString called on them.
+
+This needs to be looked at again together with bug 1260, bug 573, and bug 2383.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13737</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 12:47:08 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13811</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:04 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

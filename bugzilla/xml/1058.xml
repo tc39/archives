@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1058</bug_id>
+          
+          <creation_ts>2012-11-26 13:43:00 -0800</creation_ts>
+          <short_desc>11.1.2: wrong reference to 10.3.1</short_desc>
+          <delta_ts>2012-12-21 18:08:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Murat Sutunc">muratsu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2856</commentid>
+    <comment_count>0</comment_count>
+    <who name="Murat Sutunc">muratsu</who>
+    <bug_when>2012-11-26 13:43:08 -0800</bug_when>
+    <thetext>In 11.1.2 Runtime Semantics: Evaluation,
+    PrimaryExpression : Identifier says: &quot;...Identifier Resolution as specified in 10.3.1 using...&quot;
+
+Identifier Resolution is located at 10.4.1, 
+10.3.1 should be changed to 10.4.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2970</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-01 11:38:30 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

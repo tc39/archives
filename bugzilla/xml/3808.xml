@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3808</bug_id>
+          
+          <creation_ts>2015-02-09 20:43:00 -0800</creation_ts>
+          <short_desc>9.5: Notes for Proxy internal methods don&apos;t mention every enforced invariant</short_desc>
+          <delta_ts>2015-02-12 12:17:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Leon Arnott">leonarnott</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12278</commentid>
+    <comment_count>0</comment_count>
+    <who name="Leon Arnott">leonarnott</who>
+    <bug_when>2015-02-09 20:43:13 -0800</bug_when>
+    <thetext>In [9.5.9](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-proxy-object-internal-methods-and-internal-slots-set-p-v-receiver), the informative note for Proxy [[Set]] mentions only two invariants. However, in [6.1.7.3](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-invariants-of-the-essential-internal-methods), a third invariant (that the return type of the handler must be boolean) is mentioned. The 9.5.9 note should mention this as well.
+
+9.5.4, 9.5.6, 9.5.7 and 9.5.10 have this issue as well, and maybe others.
+
+Also, the 9.5.10 text &quot;A property cannot be deleted, if it exists as a non-configurable own property of the target object.&quot; seems only nominally correct: the algorithm itself doesn&apos;t prevent properties from being deleted except as a result of calling Ordinary Object [[Delete]].
+
+Also, the 9.5.5 text &quot;The result of [[GetOwnProperty]] can be applied to the target object using [[DefineOwnProperty]] and will not throw an exception.&quot; doesn&apos;t seem to be an invariant mentioned at all in 6.1.7.3.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12296</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-10 14:35:43 -0800</bug_when>
+    <thetext>foxed in rev33 editor&apos;s draft
+
+(In reply to Leon Arnott from comment #0)
+&gt; In
+&gt; [9.5.9](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-proxy-
+&gt; object-internal-methods-and-internal-slots-set-p-v-receiver), the
+&gt; informative note for Proxy [[Set]] mentions only two invariants. However, in
+&gt; [6.1.7.3](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-
+&gt; invariants-of-the-essential-internal-methods), a third invariant (that the
+&gt; return type of the handler must be boolean) is mentioned. The 9.5.9 note
+&gt; should mention this as well.
+&gt; 
+&gt; 9.5.4, 9.5.6, 9.5.7 and 9.5.10 have this issue as well, and maybe others.
+
+added bullet item about boolean result
+
+
+&gt; 
+&gt; Also, the 9.5.10 text &quot;A property cannot be deleted, if it exists as a
+&gt; non-configurable own property of the target object.&quot; seems only nominally
+&gt; correct: the algorithm itself doesn&apos;t prevent properties from being deleted
+&gt; except as a result of calling Ordinary Object [[Delete]].
+
+changed the text to &quot;...cannot be reported as deleted...&quot; which is what 9.5.10 actually enforces.
+
+
+&gt; 
+&gt; Also, the 9.5.5 text &quot;The result of [[GetOwnProperty]] can be applied to the
+&gt; target object using [[DefineOwnProperty]] and will not throw an exception.&quot;
+&gt; doesn&apos;t seem to be an invariant mentioned at all in 6.1.7.3.
+
+I agree, this isn&apos;t really correct.  Deleted that bullet item</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12413</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:37 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

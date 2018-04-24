@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2435</bug_id>
+          
+          <creation_ts>2014-01-26 17:30:00 -0800</creation_ts>
+          <short_desc>Throwing on Array.from(undefined) should be reconsidered.</short_desc>
+          <delta_ts>2014-02-21 13:25:56 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>ecmascript</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7004</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-01-26 17:30:16 -0800</bug_when>
+    <thetext>A contribution to test-262 shed light on the current spec that says: 
+
+  Array.from(undefined) 
+
+Will actually throw a TypeError. 
+
+After discussion with Brian Terlson, we agreed that an explicit undefined that produces an empty array (or instance of whatever subclass it&apos;s called from) is more useful than the TypeError.
+
+The proposed change is: 
+
+  Array.from(arrayLike = [], mapFn = undefined, thisArg = undefined)
+
+Where arrayLike will default to an empty array if omitted or receives explicit undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7396</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2014-02-21 13:25:56 -0800</bug_when>
+    <thetext>Resolved per Jan 28 discussion: 
+
+https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-01/jan-28.md#arrayfrom</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

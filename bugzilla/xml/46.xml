@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>46</bug_id>
+          
+          <creation_ts>2011-03-02 16:53:00 -0800</creation_ts>
+          <short_desc>Include the ability to search for particular types of test cases and dynamically run them.</short_desc>
+          <delta_ts>2011-03-07 14:05:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test262 website</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Lowest</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>101</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 16:53:42 -0800</bug_when>
+    <thetext>The metadata attribute aspect of this is covered by other bugs:
+&gt; There are now about 10000 tests. By default, they are sorted in the 
+&gt; repo by source(Sputnik | ietestcenter)/chapter/section/subsection/...
+&gt; Even if it certainly makes sense from a test suite producer point of 
+&gt; view (and directory choices has to be made anyway), it doesn&apos;t cover all search use cases.
+&gt; In order to &quot;identify test holes&quot; more efficiently as suggested under 
+&gt; &quot;Community Contributions&quot; it would be helpful to have some tool to 
+&gt; search for tests. For instance, it&apos;s currently hard to find if a test has been forgotten regarding:
+&gt; * native prototype objects
+&gt; For instance, in 15.4.2.2 is written &quot;The [[Prototype]] internal 
+&gt; property of the newly constructed object is set to the original Array 
+&gt; prototype object, the one that is the initial value of Array.prototype&quot;.
+&gt; There is clearly a test to write based on that to make sure that 
+&gt; Monkey-patched Array.prototype aren&apos;t used. Such a pattern can be 
+&gt; found for functions (15.3.3, 15.3.4), objects (15.2.2.1 step 4) and certainly in other places.
+&gt; * length properties
+&gt; * Errors (make sure that code that should throw errors have a test for 
+&gt; them)
+&gt; * strict mode (I assume it&apos;s not going to be covered in a chapter)
+&gt; * Any other cross-chapter topic you could think of.
+&gt; Several different approaches could be taken to tackle that issue:
+&gt; -- text-search
+&gt; -- tags search</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>102</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 16:55:02 -0800</bug_when>
+    <thetext>Quoted the wrong email section:
+
+&gt; - Run partial test suite
+&gt; Running the test suite is currently long. I&apos;m currently reviewing FF4 
+&gt; fails. When I close my web browser, I have to re-run all tests. 
+&gt; However, most of the time, I don&apos;t care about most of them. I just 
+&gt; want all those that I haven&apos;t reviewed yet. I wish the website could offer an easy way to run for instance:
+&gt; - all chapter 15.2 tests (or any chapter/section/subsection obviously)
+&gt; - all tests found through a search (if/when some search feature will 
+&gt; be
+&gt; available)
+&gt; - all tests that has been added or changed between two test suite 
+&gt; versions. If I have reviewed all tests of version x, I may not care 
+&gt; about them when the x+1 version comes out.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>127</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-07 14:05:33 -0800</bug_when>
+    <thetext>A wild guess is two weeks would be needed to implement this.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

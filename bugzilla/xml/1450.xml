@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1450</bug_id>
+          
+          <creation_ts>2013-04-26 01:43:00 -0700</creation_ts>
+          <short_desc>No-one seems to know why Test 12.6.4-2.js does what it does.</short_desc>
+          <delta_ts>2013-05-20 08:02:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>IN_PROGRESS</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gareth Smith">bugzilla</reporter>
+          <assigned_to name="Brent Baker">brbaker</assigned_to>
+          <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3669</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gareth Smith">bugzilla</who>
+    <bug_when>2013-04-26 01:43:09 -0700</bug_when>
+    <thetext>As discussed on-list[1], this test (quoted below) sets up a non-enumerable property in the prototype of an object we wish to loop over. It does not shadow this property. It does not test to see if that property is enumerated.
+
+Since no-one seems to know what behaviour this is intended to expose, it seems likely that it&apos;s not doing what it was intended to do.
+
+ function testcase() {
+       var obj = {};
+
+       var proto = {};
+
+       Object.defineProperty(proto, &quot;prop&quot;, {
+           value: &quot;inheritedValue&quot;,
+           enumerable: false,
+           configurable: true,
+           writable: true
+       });
+
+       var ConstructFun = function () { };
+       ConstructFun.prototype = proto;
+
+       var child = new ConstructFun();
+
+       Object.defineProperty(child, &quot;prop1&quot;, {
+           value: &quot;overridedValue1&quot;,
+           enumerable: false
+       });
+       Object.defineProperty(child, &quot;prop2&quot;, {
+           value: &quot;overridedValue2&quot;,
+           enumerable: true
+       });
+       var accessedProp1 = false;
+       var accessedProp2 = false;
+
+       for (var p in child) {
+           if (child.hasOwnProperty(p)) {
+               if (p === &quot;prop1&quot;) {
+                   accessedProp1 = true;
+               }
+               if (p === &quot;prop2&quot;) {
+                   accessedProp2 = true;
+               }
+           }
+       }
+       return !accessedProp1 &amp;&amp; accessedProp2 &amp;&amp; child.prop1 === &quot;overridedValue1&quot; &amp;&amp; child.prop2 === &quot;overridedValue2&quot;;
+   }
+
+[1] https://mail.mozilla.org/pipermail/test262-discuss/2013-April/000188.html</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

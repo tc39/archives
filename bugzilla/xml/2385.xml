@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2385</bug_id>
+          
+          <creation_ts>2013-12-12 07:30:00 -0800</creation_ts>
+          <short_desc>ArrayBuffer.prototype.byteLength should not throw when neutered</short_desc>
+          <delta_ts>2015-03-15 12:03:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Anne van Kesteren">annevk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>bzbarsky</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6931</commentid>
+    <comment_count>0</comment_count>
+    <who name="Anne van Kesteren">annevk</who>
+    <bug_when>2013-12-12 07:30:23 -0800</bug_when>
+    <thetext>The specification does not implementations. See e.g.
+
+&lt;script&gt; var x = new ArrayBuffer(10); postMessage(x, &quot;*&quot;, [x]); w(x.byteLength) &lt;/script&gt;
+
+in
+
+http://software.hixie.ch/utilities/js/live-dom-viewer/
+
+That works fine and does not throw. I suspect this might be a wider issue (the specification not matching implementations), we encountered this when looking at how ArrayBuffer should behave in the context of platform APIs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6932</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-12-12 11:53:29 -0800</bug_when>
+    <thetext>so what do you think should happen byteLength still works and returns 0? The Khronos Array Buffer spec. doesn&apos;t say, one way or another?
+
+Is this returns 0 behavior currently universally implemented? I&apos;m having trouble getting the test case to work on IE11 and Safari.
+
+Are there any other undocumented expectations WRT neutering?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11406</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-01-15 14:49:49 -0800</bug_when>
+    <thetext>I believe we should update ArrayBuffer byteLength to return 0 for a detached array buffer because:
+
+1) Google maps appears to depend on this behavior
+2) This is how it is currently implemented in Chrome
+3) TypedArrays now return 0 instead of throwing when attached so it makes sense to be consistent.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11583</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-01-21 15:22:51 -0800</bug_when>
+    <thetext>I think this should also apply to DataView.prototype.byteLength and DataView.prototype.byteOffset (eg. neither of these should throw, all byteLength and byteOffset accessors should return 0).
+
+It seems strange that only these accessors should return 0 and the prototype methods throw, but if we can get away with prototype methods throwing (seems like we can) I think this is ok.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12096</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-04 09:58:13 -0800</bug_when>
+    <thetext>(In reply to Brian Terlson from comment #3)
+
+I could easily make this change, however, the margin comment in the draft says the TC39 at its June 2014 meeting decided it wants this to throw see https://github.com/tc39/tc39-notes/blob/master/es6/2014-06/jun-4.md#48-arraybuffer-neutering).
+
+Do you want to raise this on the reflector? If you resolve it quickly I can still make the change.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12750</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 16:57:36 -0800</bug_when>
+    <thetext>(In reply to Brian Terlson from comment #3)
+so are you ok with the status quo or do you still want ArrayBuffer.byteLength to throw?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13734</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 12:03:54 -0700</bug_when>
+    <thetext>currently works are intended by TC39 and nobody has taken it to  TC39 to try to change that decision.
+
+If implementations find this change untenable we can always change it in ES7...</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

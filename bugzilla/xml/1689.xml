@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1689</bug_id>
+          
+          <creation_ts>2013-07-31 22:10:00 -0700</creation_ts>
+          <short_desc>13.*: misc typos</short_desc>
+          <delta_ts>2013-08-23 08:23:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4666</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-31 22:10:15 -0700</bug_when>
+    <thetext>13.1.1.1 / Static Semantics: Early Errors / group 2 / bullet 1,2
+    It is a Syntax Error if BoundNames of FormalParameterList contains ...
+
+s|FormalParameterList|FormalParameters|
+
+---
+
+13.3.1.2 / R.S.: Property Definition Evaluation / group 1 / step 10
+    NormalCompletion(closure).
+
+Italicize &quot;closure&quot;.
+(= bug 753)
+
+---
+
+13.3.1.2 / R.S.: Property Definition Evaluation / group 4/ step 8
+    Let status be the result of DefinePropertyOrThrow(object, propName desc).
+
+After &quot;propName&quot;, insert comma.
+(= bug 1498)
+
+---
+
+13.4.1.2 / R.S.: EvaluateBody / group 1 / step 3
+    Let G be the of calling the result of calling the GetThisBinding ...
+
+Delete &quot;the of calling&quot;
+
+---
+
+13.4.1.2 / R.S.: EvaluateBody / group 2 / step 4
+    Let startStatus be the result of GeneratorStart(G, Comprehension).
+
+Change &quot;be&quot; to upright font.
+
+---
+
+13.4.1.2 / R.S.: Property Definition Evaluation / group 1 / step 6.a
+    ... with arguments Method, StrictormalParameters, body, scope, and strict
+
+s|Strictormal|StrictFormal|
+
+---
+
+13.4.1.2 / R.S.: Property Definition Evaluation / group 1 / step 11
+    Let status be the result of DefinePropertyOrThrow(object, propName desc).
+
+After &quot;propName&quot;, insert comma.
+(= bug 1498)
+
+---
+
+13.5.1.1 / Static Semantics: PrototypeMethodDefinitions / group 2 / step 5
+
+Empty step.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4681</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-01 13:17:27 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5173</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:28 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

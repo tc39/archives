@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3999</bug_id>
+          
+          <creation_ts>2015-02-18 05:44:00 -0800</creation_ts>
+          <short_desc>15.2.1.17 HostResolveImportedModule: Missing requirement to instantiate modules ?</short_desc>
+          <delta_ts>2015-02-19 19:11:06 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12894</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 05:44:35 -0800</bug_when>
+    <thetext>15.2.1.17 Runtime Semantics: HostResolveImportedModule (referencingModule, specifier )
+
+The concrete module instance returned by HostResolveImportedModule must already have been instantiated, but this requirement is not listed in 15.2.1.17.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12913</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 09:10:55 -0800</bug_when>
+    <thetext>What do yo mean?  That it&apos;s ModuleDeclarationInstantiation method has already been called? but that&apos;s not an actualrequirement</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12914</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 09:19:01 -0800</bug_when>
+    <thetext>For example in 15.2.1.16.5 ModuleEvaluation() Concrete Method:
+
+Step 5.a calls requiredModule = HostResolveImportedModule and step 5.c calls requiredModule.ModuleEvaluation(). But calling ModuleEvaluation() is only valid when requiredModule was previously instantiated through ModuleDeclarationInstantiation().</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12916</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 10:45:28 -0800</bug_when>
+    <thetext>should more like a precondition on ModuleEvaluation rather than a requirement of HostResolveImportedModule</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12918</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-18 11:55:13 -0800</bug_when>
+    <thetext>Not only for 15.2.1.16.5 ModuleEvaluation, it&apos;s also required in 15.2.1.16.4 ModuleDeclarationInstantiation( ) step 10.a for this example:
+
+m1.js (main module)
+---
+import {} from &quot;./m2.js&quot;;
+import* as mod3 from &quot;./m3.js&quot;;
+export {mod3};
+---
+
+m2.js
+---
+print(mod1.mod3.foo); // &lt;- Expected: ReferenceError at runtime
+
+import* as mod1 from &quot;./m1.js&quot;;
+---
+
+m3.js
+---
+export let foo = &quot;hello world&quot;;
+---
+
+
+m1.js is the main module and parsed by TopLevelModuleEvaluationJob. When the line `print(mod1.mod3.foo)` gets executed, it&apos;s necessary that ModuleDeclarationInstantiation for m3.js was already performed to ensure targetModule.[[Environment]] in 9.4.6.8 [[Get]] is not undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12922</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 12:59:22 -0800</bug_when>
+    <thetext>Hmm.. required modules aren&apos;t being recursively instantiated.  that used to happen in LinkModules before it went awayu</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12955</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 18:03:48 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+ModuleDeclrationInstantion for source text module records recursively instantiates the modules on its [[RequestedModules]] list</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13123</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:06 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

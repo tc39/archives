@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>785</bug_id>
+          
+          <creation_ts>2012-10-10 12:09:00 -0700</creation_ts>
+          <short_desc>Refactor [[Enumerate]] signature</short_desc>
+          <delta_ts>2012-11-23 09:45:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Tom Van Cutsem">tomvc.be</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1922</commentid>
+    <comment_count>0</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2012-10-10 12:09:13 -0700</bug_when>
+    <thetext>As discussed on es-discuss (see &lt;https://mail.mozilla.org/pipermail/es-discuss/2012-October/025654.html&gt;), it would be beneficial if the current [[Enumerate]](includePrototype, onlyEnumerable) built-in would be refactored to better align with traps from the Proxy API.
+
+One proposal that I made on the above-mentioned thread:
+
+Introduce a helper function GetPropertyKeys which is equivalent to the current [[Enumerate]] built-in, but with only an enumerateOnly flag, and with includePrototype=false (i.e. it considers only &quot;own&quot; properties).
+
+Introduce the following built-ins:
+
+[[Keys]]
+On built-in objects, call helper function GetPropertyKeys(enumerableOnly=true)
+On proxies, call the &quot;keys&quot; trap
+
+[[GetOwnPropertyNames]]
+On built-in objects, call helper function GetPropertyKeys(enumerableOnly=false)
+On proxies, call the &quot;getOwnPropertyNames&quot; trap
+
+[[Enumerate]]
+On built-in objects, specify an ad hoc algorithm that does the proto-chain-walk
+On proxies, call the &quot;enumerate&quot; trap</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2553</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 13:14:18 -0800</bug_when>
+    <thetext>done in rev 12.  But we should continue to look at ways to simply the handler interface.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2626</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:35 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1526</bug_id>
+          
+          <creation_ts>2013-05-25 18:28:00 -0700</creation_ts>
+          <short_desc>Test 11.3.2_TRP (ToRawPrecision) seems flawed</short_desc>
+          <delta_ts>2013-05-27 05:53:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-402 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andy Earnshaw">andyearnshaw</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4095</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andy Earnshaw">andyearnshaw</who>
+    <bug_when>2013-05-25 18:28:10 -0700</bug_when>
+    <thetext>The ECMA-402 specification defines the ToRawPrecision algorithm to be very similar to Number.prototype.toPrecision.  The only real difference is that TRP displays the full number instead of collapsing the exponential.  Therefore, it stands to reason that, for numbers with a length shorter than 21, the output should be identical.
+
+Part of the test data defines the following numbers and their respective formatted output with test data options {useGrouping: false, minimumSignificantDigits: 3, maximumSignificantDigits: 5}:
+
+    &quot;123.44500&quot;: &quot;123.45&quot;,
+    &quot;-123.44500&quot;: &quot;-123.45&quot;,
+
+However, because of the issue we have with floating point accuracy, this test should be expected to fail because
+
+   123.445.toPrecision(5) === &quot;123.44&quot;
+
+and
+
+   123.445.toFixed(2) === &quot;123.44&quot;
+
+In both V8 and Spidermonkey.  Because of the underlying floating point operations, the number is rounded down instead of up.  The tests following, &quot;123.44501&quot; and &quot;-123.44501&quot; would pass.
+
+I can&apos;t actually test this in Firefox or Chrome because neither have complete implementations of Intl.NumberFormat yet (Chrome&apos;s doesn&apos;t appear to support maximumSignificantDigits), so this could be invalid.  Assuming the complete implementations would follow the same algorithm as Number.prototype.toPrecision/toFixed, though, I would expect it to be impossible for them to pass this test.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4098</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-05-26 04:33:59 -0700</bug_when>
+    <thetext>If I follow the logic of the bug description correctly, it&apos;s roughly:
+
+1) Functions a and b are specified similarly.
+
+2) There is a test case for function b, but not for function a.
+
+3) Function a is implemented incorrectly in some browsers such that it would fail the test case for function b if it were rewritten to use function a.
+
+4) Therefore function b must be implemented incorrectly in those browsers once they are implemented.
+
+5) Therefore the test case for function b is invalid.
+
+Comments:
+
+1) Correct, ToRawPrecision is intentionally very similar to Number.prototype.toPrecision.
+
+2) That seems like a gap in the test coverage for toPrecision. I&apos;ve filed bug 1527.
+
+3) That&apos;s sad. Are there bug reports against those browsers?
+
+4) That might be true if functions a and b shared an implementation. At least in SpiderMonkey, they don&apos;t: NumberFormat.prototype.format uses ICU, while toPrecision doesn&apos;t. Intl.NumberFormat(&quot;en&quot;, {maximumSignificantDigits: 5}).format(123.44500) returns &quot;123.45&quot; as required by the spec. If you&apos;d like to test with Firefox, here&apos;s one nightly build that has the Internationalization API enabled:
+http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/2013-05-08-03-11-13-mozilla-central/
+
+5) That doesn&apos;t follow at all. A test case is only invalid if it tests something that&apos;s not required by the spec. Failing implementations may possibly lead to changes in the spec, which would then lead to changes in the tests.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4099</commentid>
+    <comment_count>2</comment_count>
+    <who name="Andy Earnshaw">andyearnshaw</who>
+    <bug_when>2013-05-26 05:05:40 -0700</bug_when>
+    <thetext>Fair enough.  I did say that it may be invalid, but I was anticipating this issue cropping up in Spidermonkey and V8 based on my own analysis and implementation of the specification, which obviously wasn&apos;t correct.  Either way, at least one valid bug was filed as a result of my blundering ― my work here is done ;-)
+
+I can&apos;t tell if you&apos;re saying I should file a bug regarding Number.prototype.toPrecision for V8 and Spidermonkey.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4100</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-05-27 05:53:20 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; I can&apos;t tell if you&apos;re saying I should file a bug regarding
+&gt; Number.prototype.toPrecision for V8 and Spidermonkey.
+
+If there are no bugs reporting the incorrect rounding behavior yet, then yes, it would be a good idea to file these bugs.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

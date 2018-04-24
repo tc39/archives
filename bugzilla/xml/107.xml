@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>107</bug_id>
+          
+          <creation_ts>2011-06-09 11:03:00 -0700</creation_ts>
+          <short_desc>Missing coverage? https://bugs.webkit.org/show_bug.cgi?id=26382</short_desc>
+          <delta_ts>2012-01-09 15:05:20 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>230</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-06-09 11:03:10 -0700</bug_when>
+    <thetext>&lt;Thanks&gt;Mark Miller&lt;/Thanks&gt;
+
+We might be missing coverage for the following test scenario.  Add test case(s)
+assuming this scenario can be mapped to ES5.1 somewhere
+--------------------------------------------------------------------------
+*See
+http://codereview.appspot.com/4547070/diff/6003/src/com/google/caja/ses/es5shim.js?context=10&amp;column_width=80
+for the original*
+
+167 * Workaround for https://bugs.webkit.org/show_bug.cgi?id=26382
+
+168 *
+
+169 * &lt;p&gt;As of this writing, the only major browser that does implement
+
+170 * Object.getOwnPropertyNames but not Function.prototype.bind is
+
+171 * Safari 5 (JavaScriptCore), including the current Safari beta
+
+172 * 5.0.4 (5533.20.27, r84622).
+
+173 *
+
+174 * &lt;p&gt;This kludge is safety preserving. But see
+
+175 * https://bugs.webkit.org/show_bug.cgi?id=26382#c25 for why this
+
+176 * kludge cannot faithfully implement the specified semantics.
+
+177 *
+
+178 * &lt;p&gt;See also https://bugs.webkit.org/show_bug.cgi?id=42371
+
+179 */
+
+180 function test_MISSING_BIND() {
+
+181 if (&apos;bind&apos; in Function.prototype) { return false; }
+
+182 log(&apos;Function.prototype.bind is missing. &apos; +
+
+183 &apos;See https://bugs.webkit.org/show_bug.cgi?id=26382&apos;);
+
+184 return true;
+
+185 }
+
+186 //var TOLERATE_MISSING_BIND = false;
+
+187 var TOLERATE_MISSING_BIND = test_MISSING_BIND();</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>548</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-09 15:01:22 -0800</bug_when>
+    <thetext>Check to see if we have coverage for Function.prototype.bind.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>549</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-09 15:05:20 -0800</bug_when>
+    <thetext>We seem to have at least 110 test cases for Function.prototype.bind:
+Find all &quot;Function.prototype.bind&quot;, Subfolders, Find Results 1, &quot;E:\262\test262\test\suite&quot;, &quot;&quot;
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.3\15.2.3.3-4-38.js(23): * @description Object.getOwnPropertyDescriptor returns data desc for functions on built-ins (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.3\15.2.3.3-4-38.js(29):  if (desc.value === Function.prototype.bind &amp;&amp;
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-417.js(23): * @description ES5 Attributes - [[Value]] attribute of inherited property of [[Prototype]] internal property is correct(Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-418.js(23): * @description ES5 Attributes - Successfully add a property to an object when the object&apos;s prototype has a property with the same name and [[Writable]] set to true (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-419.js(23): * @description ES5 Attributes - Inherited property whose [[Enumerable]] attribute is set to true is enumerable (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-420.js(23): * @description ES5 Attributes - Failed to add a property to an object when the object&apos;s prototype has a property with the same name and [[Writable]] set to false(Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-421.js(23): * @description ES5 Attributes - Inherited property whose [[Enumerable]] attribute is set to false is non-enumerable (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-593.js(23): * @description ES5 Attributes - [[Get]] field of inherited property of [[Prototype]] internal property is correct (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-594.js(23): * @description ES5 Attributes - Success to update value of property into of [[Proptotype]] internal property (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-595.js(23): * @description ES5 Attributes - Inherited property is enumerable (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-596.js(23): * @description ES5 Attributes - Fail to update value of property into of [[Proptotype]] internal property (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-597.js(23): * @description ES5 Attributes - Inherited property is non-enumerable (Function.prototype.bind)
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-611.js(23): * @description ES5 Attributes - all attributes in Function.prototype.bind are correct
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-611.js(32):        var temp = Function.prototype.bind;
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-611.js(35):            Function.prototype.bind = &quot;2010&quot;;
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-611.js(37):            var isWritable = (Function.prototype.bind === &quot;2010&quot;);
+  E:\262\test262\test\suite\ch15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-611.js(47):            delete Function.prototype.bind;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.3\S15.3.4.3_A16.js(16):    Function.prototype.bind.call(re, undefined);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.4\S15.3.4.4_A16.js(16):    Function.prototype.bind.call(re, undefined);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-0-1.js(23): * @description Function.prototype.bind must exist as a function
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-0-1.js(28):  var f = Function.prototype.bind;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-0-2.js(23): * @description Function.prototype.bind must exist as a function taking 1 parameter
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-0-2.js(28):  if (Function.prototype.bind.length === 1) {
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-10-1.js(23): * @description Function.prototype.bind - internal property [[Class]] of &apos;F&apos; is set as Function
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-11-1.js(23): * @description Function.prototype.bind - internal property [[Prototype]] of &apos;F&apos; is set as Function.prototype
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-1.js(23): * @description Function.prototype.bind, bound fn has a &apos;length&apos; own property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-2.js(23): * @description Function.prototype.bind, &apos;length&apos; set to remaining number of expected args
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-3.js(23): * @description Function.prototype.bind, &apos;length&apos; set to remaining number of expected args (all args prefilled)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-4.js(23): * @description Function.prototype.bind, &apos;length&apos; set to remaining number of expected args (target takes 0 args)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-5.js(23): * @description Function.prototype.bind, &apos;length&apos; set to remaining number of expected args (target provided extra args)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-13.b-6.js(23): * @description Function.prototype.bind, &apos;length&apos; set to remaining number of expected args
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-15-1.js(23): * @description Function.prototype.bind, &apos;length&apos; is a data valued own property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-15-2.js(23): * @description Function.prototype.bind, &apos;length&apos; is a data valued own property with default attributes (false)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-15-3.js(23): * @description Function.prototype.bind - The [[Writable]] attribute of length property in F set as false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-15-4.js(23): * @description Function.prototype.bind - The [[Enumerable]] attribute of length property in F set as false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-15-5.js(23): * @description Function.prototype.bind - The [[Configurable]] attribute of length property in F set as false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-16-1.js(23): * @description Function.prototype.bind, [[Extensible]] of the bound fn is true
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-16-2.js(23): * @description Function.prototype.bind - The [[Extensible]] attribute of internal property in F set as true
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-1.js(25): * @description Function.prototype.bind throws TypeError if the Target is not callable (but an instance of Function)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-10.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is undefined
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-10.js(26):            Function.prototype.bind.call(undefined);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-11.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is NULL
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-11.js(26):            Function.prototype.bind.call(null);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-12.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is a boolean
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-12.js(26):            Function.prototype.bind.call(true);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-13.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is a number
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-13.js(26):            Function.prototype.bind.call(5);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-14.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is a string
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-14.js(26):            Function.prototype.bind.call(&quot;abc&quot;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-15.js(20): * @description Function.prototype.bind throws TypeError if &apos;Target&apos; is Object without Call internal method
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-15.js(26):            Function.prototype.bind.call({});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-16.js(20): * @description Function.prototype.bind - &apos;Target&apos; is a function
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-2.js(25): * @description Function.prototype.bind throws TypeError if the Target is not callable (bind attached to object)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-2.js(33):  f.bind = Function.prototype.bind;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-3.js(25): * @description Function.prototype.bind allows Target to be a constructor (Number)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-4.js(25): * @description Function.prototype.bind allows Target to be a constructor (String)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-5.js(25): * @description Function.prototype.bind allows Target to be a constructor (Boolean)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-6.js(25): * @description Function.prototype.bind allows Target to be a constructor (Object)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-7.js(25): * @description Function.prototype.bind throws TypeError if the Target is not callable (JSON)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-8.js(25): * @description Function.prototype.bind allows Target to be a constructor (Array)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-2-9.js(23): * @description Function.prototype.bind allows Target to be a constructor (Date)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-20-1.js(23): * @description Function.prototype.bind - &apos;caller&apos; is defined as one property of &apos;F&apos;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-20-2.js(23): * @description Function.prototype.bind - [[Get]] attribute of &apos;caller&apos; property in &apos;F&apos; is thrower
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-20-3.js(23): * @description Function.prototype.bind - [[Set]] attribute of &apos;caller&apos; property in  &apos;F&apos; is thrower
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-20-4.js(23): * @description Function.prototype.bind - The [[Enumerable]] attribute of &apos;caller&apos; property in  &apos;F&apos; is false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-20-5.js(23): * @description Function.prototype.bind - The [[Configurable]] attribute of &apos;caller&apos; property in  &apos;F&apos; is false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-21-1.js(23): * @description Function.prototype.bind - &apos;arguments&apos; is defined as one property of &apos;F&apos;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-21-2.js(23): * @description Function.prototype.bind - [[Get]] attribute of &apos;arguments&apos; property in  &apos;F&apos; is thrower
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-21-3.js(23): * @description Function.prototype.bind - [[Set]] attribute of &apos;arguments&apos; property in  &apos;F&apos; is thrower
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-21-4.js(23): * @description Function.prototype.bind - The [[Enumerable]] attribute of &apos;arguments&apos; property in  &apos;F&apos; is false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-21-5.js(23): * @description Function.prototype.bind - The [[Configurable]] attribute of &apos;arguments&apos; property in  &apos;F&apos; is false
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-3-1.js(23): * @description Function.prototype.bind - each arg is defined in A in list order
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-1.js(23): * @description Function.prototype.bind - F can get own data property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-10.js(23): * @description Function.prototype.bind - F can get own accessor property without a get function that overrides an inherited accessor property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-11.js(23): * @description Function.prototype.bind - F can get inherited accessor property without a get function
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-12.js(23): * @description Function.prototype.bind - F cannot get property which doesn&apos;t exist
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-2.js(23): * @description Function.prototype.bind - F can get inherited data property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-3.js(23): * @description Function.prototype.bind - F can get own data property that overrides an inherited data property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-4.js(23): * @description Function.prototype.bind - F can get own data property that overrides an inherited accessor property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-5.js(23): * @description Function.prototype.bind - F can get own accessor property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-6.js(23): * @description Function.prototype.bind - F can get inherited accessor property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-7.js(23): * @description Function.prototype.bind - F can get own accessor property that overrides an inherited data property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-8.js(23): * @description Function.prototype.bind - F can get own accessor property that overrides an inherited accessor property
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-6-9.js(23): * @description Function.prototype.bind - F can get own accessor property without a get function
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-8-1.js(23): * @description Function.prototype.bind, type of bound function must be &apos;function&apos;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-8-2.js(23): * @description Function.prototype.bind, [[Class]] of bound function must be &apos;Function&apos;
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-9-1.js(23): * @description Function.prototype.bind, [[Prototype]] is Function.prototype
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\15.3.4.5-9-2.js(23): * @description Function.prototype.bind, [[Prototype]] is Function.prototype (using getPrototypeOf)
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A13.js(10):Function.prototype.bind.call(undefined, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A14.js(10):Function.prototype.bind.call(null, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A15.js(10):Function.prototype.bind.call({}, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A16.js(13):  Function.prototype.bind.call(re, undefined);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A16.js(16):    Function.prototype.bind.call(re, undefined);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A3.js(6): * @description Function.prototype.bind must exist
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A3.js(10):  $ERROR(&apos;Function.prototype.bind is missing&apos;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A4.js(6): * @description Function.prototype.bind call the original&apos;s internal
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A4.js(14):  $ERROR(&quot;Function.prototype.bind called original&apos;s .apply method&quot;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A5.js(6): * @description Function.prototype.bind must curry [[Construct]] as
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5\S15.3.4.5_A5.js(11):  var bound = Function.prototype.bind.apply(f, [null].concat(args));
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-1.js(32):        var newFunc = Function.prototype.bind.call(func, {}, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-10.js(34):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-11.js(34):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-12.js(35):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-13.js(35):        var newFunc = Function.prototype.bind.call(func, obj, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-14.js(35):        var newFunc = Function.prototype.bind.call(func, obj, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-15.js(35):        var newFunc = Function.prototype.bind.call(func, obj, 1, 2);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-2.js(34):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-3.js(32):        var newFunc = Function.prototype.bind.call(func, {}, &quot;a&quot;, &quot;b&quot;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-4.js(32):        var newFunc = Function.prototype.bind.call(func);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-5.js(32):        var newFunc = Function.prototype.bind.call(func);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-6.js(34):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-7.js(34):        var newFunc = Function.prototype.bind.call(func, obj, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-8.js(34):        var newFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.1\15.3.4.5.1-4-9.js(34):        var newFunc = Function.prototype.bind.call(func, obj, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-1.js(35):        var NewFunc = Function.prototype.bind.call(func, {}, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-10.js(32):        var NewFunc = Function.prototype.bind.call(func, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-11.js(32):        var NewFunc = Function.prototype.bind.call(func, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-12.js(32):        var NewFunc = Function.prototype.bind.call(func, {}, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-13.js(32):        var NewFunc = Function.prototype.bind.call(func, {}, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-14.js(32):        var NewFunc = Function.prototype.bind.call(func, {}, 1, 2);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-2.js(35):        var NewFunc = Function.prototype.bind.call(func, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-3.js(32):        var NewFunc = Function.prototype.bind.call(func);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-4.js(32):        var NewFunc = Function.prototype.bind.call(func);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-5.js(37):            var NewFunc = Function.prototype.bind.call(func, obj);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-6.js(32):        var NewFunc = Function.prototype.bind.call(func, {}, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-7.js(32):        var NewFunc = Function.prototype.bind.call(func, {});
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-8.js(32):        var NewFunc = Function.prototype.bind.call(func, {}, 1);
+  E:\262\test262\test\suite\ch15\15.3\15.3.4\15.3.4.5.2\15.3.4.5.2-4-9.js(32):        var NewFunc = Function.prototype.bind.call(func, {});
+  Matching lines: 128    Matching files: 110    Total files searched: 11197</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

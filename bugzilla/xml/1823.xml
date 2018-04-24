@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1823</bug_id>
+          
+          <creation_ts>2013-08-27 11:24:00 -0700</creation_ts>
+          <short_desc>8.1.2.3: anomalous use of &quot;Let X be Y&quot;</short_desc>
+          <delta_ts>2013-11-10 16:58:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5231</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-27 11:24:37 -0700</bug_when>
+    <thetext>In 10.2.2.3 &quot;NewObjectEnvironment (O, E)&quot;,
+step 3 says:
+    Let envRec’s unscopables be an empty List.
+
+Normally, &quot;Let X be Y&quot; is only used when X is a metavariable.
+Change &quot;Let ... be ...&quot; to &quot;Set ... to ...&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5364</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-10 12:54:46 -0700</bug_when>
+    <thetext>fixed in rev19 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5568</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:42 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5621</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-09-28 14:05:57 -0700</bug_when>
+    <thetext>8.1.2.3 / step 3 now says:
+    Set envRec’s unscopables be an empty List.
+(i.e., you changed &quot;Let&quot; to &quot;Set&quot;, but not &quot;be&quot; to &quot;to&quot;.)
+
+Change &quot;be&quot; to &quot;to&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6340</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-01 19:49:20 -0700</bug_when>
+    <thetext>fixed in rev 21 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6565</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:16 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

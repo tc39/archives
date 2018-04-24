@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3689</bug_id>
+          
+          <creation_ts>2015-01-29 16:48:00 -0800</creation_ts>
+          <short_desc>ArraySetLength step 17.c should be strengthened to an assertion.</short_desc>
+          <delta_ts>2015-02-02 18:38:49 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11754</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-01-29 16:48:48 -0800</bug_when>
+    <thetext>Step 17 is the loop that deletes elements from the array if the &quot;length&quot; property is being decreased.
+
+    17. While newLen &lt; oldLen repeat,
+        a.  Set oldLen to oldLen – 1.
+        b.  Let deleteSucceeded be the result of calling the [[Delete]]
+            internal method of A passing ToString(oldLen).
+        c.  ReturnIfAbrupt(succeeded).
+        d.  If deleteSucceeded is false, then 
+            i.-v. (...cleanup steps...)
+
+It would be bad if we actually bailed out on step 17.c., because the cleanup steps would be skipped. The array could be left in violation of the array length invariant.
+
+Fortunately, that can&apos;t happen: [[Delete]] on an Array object never terminates abruptly.
+
+Asserting that fact would be clearer than silently relying on it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11755</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2015-01-29 16:57:33 -0800</bug_when>
+    <thetext>I think 17.d.iv. is also infallible and we can even assert that the return value is true.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11792</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-31 08:27:52 -0800</bug_when>
+    <thetext>Steps 7 and 15 are also infallible.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11808</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-31 13:50:03 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11927</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:49 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2995</bug_id>
+          
+          <creation_ts>2014-06-23 00:41:00 -0700</creation_ts>
+          <short_desc>15.2.5.2.3 UpdateLinkSetOnLoad 5 startingLoad can be undefined</short_desc>
+          <delta_ts>2015-03-16 14:33:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Guy Bedford">guybedford</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9068</commentid>
+    <comment_count>0</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-23 00:41:41 -0700</bug_when>
+    <thetext>This has been a very hard bug to track down that&apos;s caused loading stalling for quite some time in roughly once every 30 runs of the loader polyfill test cases.
+
+The scenario happens when updateLinkSetOnLoad triggers linking of LinkSets one by one.
+
+Basically, it is possible for a LinkSet to be cleared of loads through finishLoad, where the linkSet itself has not resolved yet, making the linkSet startingLoad in updateLinkSetOnLoad undefined, resolving the linkSet to resolve to undefined, resulting in LoadModule returning an undefined load record.
+
+I&apos;ve described the test case below. There is certainly a simpler example than this, but this is the one that I&apos;ve actually been able to catch.
+
+Consider a tree where A depends on D, B depends on A, C depends on B.
+
+The Linksets when almost fully loaded look like:
+
+load record: linkSets
+A: {A D} {C B A D} {C A D}
+B: {B A D} {C B A D}
+C: {C B A D}
+D: {A D} {C B A D} {B A D}
+
+A, B, C have all called LoadSucceeded in the above, and UpdateLinkSetOnLoad. That is, we are just waiting on D to finish the load.
+
+D hits LoadSucceeded, and has no dependencies to contribute.
+
+It then runs UpdateLinkSetOnLoad for each of its linksets, cloning this list before running it.
+
+It first runs UpdateLinkSetOnLoad for the linkset {A D} resulting in this linkset linking and removing its records from the list through a finishLoad call for both A and D, thus we now have:
+
+load record: linkSets
+A: {C B} {C}
+B: {B} {C B}
+C: {C B}
+D: {C B} {B}
+
+We now run UpdateLinkSetOnLoad for {C B} resulting in calling finishLoad for both C and B. We have now cleared all the linksets.
+
+Finally, we get to our last linkSet in the cloned list to run UpdateLinkSetOnLoad, which was {B} above, but it has been cleared already since B has finished loading.
+
+But LinkSets resolve to their starting load, so we resolve this linkset to undefined.
+
+As a result, System.import(&quot;B&quot;), which has run LoadModule, gets an undefined load record back for its promise though AsyncStartLoadPartwayThrough resolving to this linkSet.
+
+---
+
+In terms of a fix, not clearing the first load of a linkSet in finishLoad seems to resolve the issue.
+
+That is, in 15.2.5.2.5 4.a, ensure that load is not the first element of linkSet.[[Loads]] first.
+
+This fix is by no means ideal and it breaks the final assertion in UpdateLinkSetOnLoad that the loads have been cleared.
+
+There is most likely a better fix. As mentioned I&apos;d be happy to assist, just let me what I can do further to help.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9069</commentid>
+    <comment_count>1</comment_count>
+    <who name="Guy Bedford">guybedford</who>
+    <bug_when>2014-06-23 00:48:30 -0700</bug_when>
+    <thetext>A better fix is to store linkSet.startingLoad during createLinkSet, and to use this instead of linkSet.loads[0] in UpdateLinkSetOnLoad.
+
+Note that we should be careful not to try to link an empty linkSet then too.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13758</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:33:01 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

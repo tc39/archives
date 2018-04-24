@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3507</bug_id>
+          
+          <creation_ts>2015-01-02 07:38:00 -0800</creation_ts>
+          <short_desc>21.1.3.* GetMethod usage</short_desc>
+          <delta_ts>2015-01-02 10:20:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Chris Toshok">toshok</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11293</commentid>
+    <comment_count>0</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2015-01-02 07:38:49 -0800</bug_when>
+    <thetext>While implementing the new versions of the String.prototype methods, I found I had to diverge from the specified algorithm slightly.
+
+All of these methods use the following opening (but using String.p.replace as an example):
+
+String.prototype.replace (searchValue, replaceValue )
+ 1. Let O be RequireObjectCoercible(this value).
+ 2. Let string be ToString(O).
+ 3. ReturnIfAbrupt(string).
+ 4. Let replacer be GetMethod(searchValue, @@replace).
+ 5. ReturnIfAbrupt(replacer).
+ 6. If replacer is not undefined, then
+    a. Return Call(replacer, searchValue, «string, replaceValue»).
+
+
+GetMethod is being called on searchValue without first checking if searchValue is Type Object.  This fails (crash on ejs) when the first arg to .replace is a primitive string.
+
+Working backward from my code yields this algorithm fragment:
+
+String.prototype.replace (searchValue, replaceValue )
+ 1. Let O be RequireObjectCoercible(this value).
+ 2. Let string be ToString(O).
+ 3. ReturnIfAbrupt(string).
+ 4. Let replacer be undefined
+ 5. if Type(searchValue) is Object
+    a. Let replacer be GetMethod(searchValue, @@replace).
+    b. ReturnIfAbrupt(replacer).
+ 6. If replacer is not undefined, then
+    a. Return Call(replacer, searchValue, «string, replaceValue»).
+
+Am I missing some behavior of GetMethod (or something it calls?)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11294</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-02 08:03:15 -0800</bug_when>
+    <thetext>GetMethod was changed in rev30, it&apos;s now using GetV instead of Get.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11295</commentid>
+    <comment_count>2</comment_count>
+    <who name="Chris Toshok">toshok</who>
+    <bug_when>2015-01-02 10:20:24 -0800</bug_when>
+    <thetext>(In reply to André Bargull from comment #1)
+&gt; GetMethod was changed in rev30, it&apos;s now using GetV instead of Get.
+
+Ahhh, Thanks André.  Missed that change in GetMethod.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

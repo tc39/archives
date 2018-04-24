@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>462</bug_id>
+          
+          <creation_ts>2012-07-08 04:49:00 -0700</creation_ts>
+          <short_desc>String.prototype HTML methods in Annex B should probably call CheckObjectCoercible()</short_desc>
+          <delta_ts>2012-07-08 15:59:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          <see_also>http://code.google.com/p/v8/issues/detail?id=2218</see_also>
+    
+    <see_also>https://bugs.webkit.org/show_bug.cgi?id=64677</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1144</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-08 04:49:36 -0700</bug_when>
+    <thetext>I’ve previously made an attempt at defining these methods here: http://mathias.html5.org/specs/javascript/#string
+
+It would make sense to have these methods call the CheckObjectCoercible() abstract operation on the `this` object, so that they cannot be applied to `null` or `undefined`, just like the other String.prototype methods.
+
+The majority of the engines I tested in implement it like this, with no compatibility issues: Firefox/Spidermonkey, Safari/JavaScriptCore, and Opera/Carakan.
+
+Chrome/V8 and IE/Chakra are the only engines I tested that don’t currently perform the CheckObjectCoercible() step. Here are some relevant bugs:
+
+* Safari/JavaScriptCore: https://bugs.webkit.org/show_bug.cgi?id=64677 (old bug from last year)
+* Chrome/V8: http://code.google.com/p/v8/issues/detail?id=2218
+* IE/Chakra: https://connect.microsoft.com/IE/feedback/details/752807
+
+It would improve interoperability and consistency within the spec if ES6 could define these methods with something like `CheckObjectCoercible(this)` as their first step. Please consider doing so.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1145</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-08 04:52:32 -0700</bug_when>
+    <thetext>Tests for these methods as defined on http://mathias.html5.org/specs/javascript/#string (i.e. including the CheckObjectCoercible step) can be found here: http://mathias.html5.org/tests/javascript/string/</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1185</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-08 15:59:59 -0700</bug_when>
+    <thetext>That check is already there.  It is step 1 of the abstract operation CreateHTML</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

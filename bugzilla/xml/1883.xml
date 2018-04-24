@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1883</bug_id>
+          
+          <creation_ts>2013-09-02 01:51:00 -0700</creation_ts>
+          <short_desc>15.4.3.10: CreateOwnDataProperty no longer valid to use</short_desc>
+          <delta_ts>2013-09-27 14:47:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5295</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-09-02 01:51:30 -0700</bug_when>
+    <thetext>CreateOwnDataProperty asserts when there is already an own property with the same property key. That means it&apos;s no longer safe to use CreateOwnDataProperty in 15.4.3.10 Array.prototype.slice at step 19.d.iii.
+
+
+The following test case currently throws an assertion error:
+
+(new class extends Array{constructor(){this.push(0)}}).slice(0,1)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5386</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-12 12:32:06 -0700</bug_when>
+    <thetext>Fixed in rev19 editor&apos;s draft
+
+Removed the assert, CreateOwnDataProperty can now fail, but all uses already don&apos;t need (it can&apos;t fail) or already have the necessary checks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5512</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-27 14:47:05 -0700</bug_when>
+    <thetext>fixed in rev19</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

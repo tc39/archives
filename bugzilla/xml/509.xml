@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>509</bug_id>
+          
+          <creation_ts>2012-07-11 20:02:00 -0700</creation_ts>
+          <short_desc>Issues in Record description</short_desc>
+          <delta_ts>2015-02-11 21:58:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1285</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-07-11 20:02:10 -0700</bug_when>
+    <thetext>Section 8.7 The List and Record Specification Type
+
+(1) &quot;aggrations&quot; -&gt; &quot;aggregations&quot;
+
+(2) &quot;specifation&quot; -&gt; &quot;specification&quot;
+
+(3) &quot;the ECMAScript type value&quot; -&gt; &quot;an ECMAScript type value&quot;
+
+(4) &quot;a an&quot; -&gt; &quot;an&quot;
+
+(5) &quot;assocatiated&quot; -&gt; &quot;associated&quot;
+
+(6) &quot;in double brackets.  For example, [[value]]&quot; -&gt; &quot;in double brackets, for example [[field1]].&quot;
+
+(7) &quot;fields three fields each of why&quot; -&gt; &quot;three fields, each of which&quot;
+
+(8) &quot;[[Field2]]&quot; -&gt; &quot;[[field2]]&quot;
+
+(9) rename &quot;D&quot; to &quot;r&quot;, three times
+
+(10) &quot;commonly used Record field combination&quot; -&gt; &quot;commonly used Record field combinations&quot;
+
+(11) &quot;named and&quot; -&gt; &quot;named, and&quot;
+
+(12) &quot;aggrations -&gt; &quot;aggregations&quot; (yes, again)
+
+(13) &quot;[[Configurable]]: true}&quot; -&gt; &quot;[[Configurable]]: true}.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1506</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-08-14 17:12:46 -0700</bug_when>
+    <thetext>corrected in editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1758</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:37 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9436</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 23:05:27 -0700</bug_when>
+    <thetext>Checked in rev 26 draft:
+
+(1)-(5), (8)-(13) verified as fixed.
+
+(6) The period at the end of the paragraph is still missing, and &quot;field1&quot; seems more appropriate in this context than &quot;value&quot;.
+
+(7) The comma after &quot;three fields&quot; is still missing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11012</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-11 11:11:22 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11222</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:34 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12353</commentid>
+    <comment_count>6</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-02-11 21:58:13 -0800</bug_when>
+    <thetext>Verified in rev 32 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

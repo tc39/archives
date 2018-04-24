@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2707</bug_id>
+          
+          <creation_ts>2014-04-19 16:30:00 -0700</creation_ts>
+          <short_desc>chapter 26: misc editorial</short_desc>
+          <delta_ts>2014-05-04 11:59:42 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>till</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7855</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:30:31 -0700</bug_when>
+    <thetext>----------------------------------------
+In 26.2.1.1 &quot;Reflect.Realm ( [ options [ , initializer ] ] )&quot;:
+
+{1}
+26.2.1.1 / step 29.b:
+Let /status/ be the result of calling the [[Call]] internal method ..., passing
+/realmObject/ as the *this* value and /builtins/ as the single argument.
+    &apos;builtins&apos; is not defined
+
+----------------------------------------
+In 26.2.3.2 &quot;Reflect. Realm.prototype.eval ( source )&quot;:
+
+{2}
+26.2.3.2 / header:
+Reflect. Realm.prototype.eval ( source )
+    Delete space after &quot;Reflect.&quot;
+
+{3}
+26.2.3.2 / para 1:
+When Reflect.Realm.prototype.eval is called with arguent /source/ ...
+    s|arguent|argument|
+
+----------------------------------------
+In 26.2.3.4 &quot;get Reflect.Realm.prototype.intrinsics&quot;:
+
+{4}
+26.2.3.4 / step 6.3:
+.Perfrom CreateDataProperty(/table/, /key/, /object/).
+    Delete initial dot.
+    s|Perfrom|Perform|
+
+----------------------------------------
+In 26.2.3.5 &quot;get Reflect.Realm.prototype.stdlib&quot;:
+
+{5}
+26.2.3.5 / step 6:
+For each property of the Global Object specified in clause 18, , do
+    Delete extra comma.
+
+{6}
+26.2.3.5 / step 6.2:
+For propties whose values are functions, ...
+    s|propties|properties|
+
+{7}
+26.2.3.5 / step 6.2:
+... the value the of the [[Value]] attribute ...
+    s|the of|of|
+
+{8}
+26.2.3.5 / step 6.3:
+Let /status/ be DefinePropertyOrTrhow(/props/, /name/, /desc/).
+    s|Trhow|Throw|
+
+----------------------------------------
+In 26.2.3.6 &quot;Reflect.Realm.prototype [ @@toStringTag ]&quot;:
+
+{9}
+26.2.3.6 / para 1:
+The initial value of the @@toStringTag property is the string value *&quot;* Reflect.Realm&quot;.
+    Put &apos;Reflect&apos; and the preceding quote in monospace.
+    Delete the space between them.
+
+----------------------------------------
+In 26.2.3.7 &quot;Realm Subclass Extension Properties&quot;:
+
+{10-14}
+26.2.3.7.*:
+    In 26.2.3.7.*,
+    -- All preambles think they&apos;re defining &quot;.eval&quot;.
+    -- All preamble say &quot;arguent&quot; (-&gt; &quot;argument&quot;)
+    -- All algorithms end with a call to &quot;IndirectEval&quot;.
+
+    Plus the headers for .2 and .4 both say &quot;indirectEval&quot;.
+
+----------------------------------------
+In 26.3.3.3 &quot;Loader.prototype.delete ( name )&quot;:
+
+{15}
+26.3.3.3 / header:
+Loader.prototype.delete ( name )
+    Insert &quot;Reflect.&quot; before &quot;Loader&quot;
+
+----------------------------------------
+In 26.3.3.6 &quot;get Loader.prototype.global&quot;:
+
+{16}
+26.3.3.6 / header:
+26.3.3.6 get Loader.prototype.global
+    Insert &quot;Reflect.&quot; before &quot;Loader&quot;
+
+{17}
+26.3.3.6 / para 1:
+Loader.prototype.global is an accessor property ...
+    Insert &quot;Reflect.&quot; before &quot;Loader&quot;
+
+{18}
+26.3.3.6 / algorithm
+    The steps appear as a bulleted list, should be a numbered list.
+
+----------------------------------------
+In 26.3.3.12 &quot;Reflect.Loader.prototype.newModule ( obj )&quot;:
+
+{19}
+26.3.3.12 / step 4.1:
+For each key in keys, do
+    This should presumably be a top-level step.
+
+----------------------------------------
+In 26.3.3.13 &quot;get Reflect.Loader.prototype.realm&quot;:
+
+{20}
+26.3.3.13 / para 1:
+Loader.prototype.realm is an accessor property ...
+    Insert &quot;Reflect.&quot; before &quot;Loader&quot;
+
+----------------------------------------
+In 26.3.3.17 &quot;Reflect.Loader.prototype [ @@toStringTag ]&quot;:
+
+{21}
+26.3.3.17 / para 1:
+The initial value of the @@toStringTag property is the string value
+*&quot;Reflect.Loader&quot;*.
+    &quot;Reflect.Loader&quot; is in sans-serif bold, should be in monospace
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7857</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:34:52 -0700</bug_when>
+    <thetext>Bug 2686 came in while I was preparing my comments for submission. I should have gone through and eliminated my duplicates, but didn&apos;t, sorry.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7892</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-23 17:08:06 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7977</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 18:32:39 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8132</commentid>
+    <comment_count>4</comment_count>
+    <who name="Till Schneidereit">till</who>
+    <bug_when>2014-05-04 11:59:42 -0700</bug_when>
+    <thetext>Closing per comments 2 and 3.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

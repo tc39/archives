@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2774</bug_id>
+          
+          <creation_ts>2014-05-01 08:07:00 -0700</creation_ts>
+          <short_desc>9.2.14  Function Declaration Instantiation: &quot;arguments&quot; as function declaration not handled</short_desc>
+          <delta_ts>2014-06-16 16:31:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8067</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-05-01 08:07:59 -0700</bug_when>
+    <thetext>9.2.14  Function Declaration Instantiation:
+
+Executing the following test case results in an assertion error in CreateMutableBinding, because it attempts to redeclare &quot;arguments&quot;.
+
+I needed to update step 23 as follows:
+---
+23.
+  a. ...
+  b. ...
+  c. ...
+  d. ...
+  e. Else if needsParameterEnvironment is false then
+    i. Assert ao is undefined.
+    ii. Call env’s InitializeBinding concrete method passing &quot;arguments&quot; and ao as arguments.
+    iii. Append &quot;arguments&quot; to instantiatedVarNames.
+  f. Else 
+    i. Assert ao is undefined.
+    ii. Call env’s InitializeBinding concrete method passing &quot;arguments&quot; and ao as arguments.
+---
+
+Obviously steps 23d-23f could be merged. 
+
+
+test case:
+---
+function f() {
+  function arguments() {}
+}
+f()
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8535</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-17 10:11:20 -0700</bug_when>
+    <thetext>It looks to me that all we need to do is move what was (in rev24):
+  23.d.ii Append &quot;arguments&quot; to instantiatedVarNames.
+up a level and make it 23.e
+
+and then add after the rev25 step 26:
+
+27. If needsSpecialArgumentsBinding is true and argumentsObjectNeeded is false, then
+   a. Call env’s InitializeBinding concrete method passing &quot;arguments&quot; and undefined as arguments.
+
+
+fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9030</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-16 16:31:27 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

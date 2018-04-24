@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2465</bug_id>
+          
+          <creation_ts>2014-01-27 09:47:00 -0800</creation_ts>
+          <short_desc>Missing step in ToNumber / Redundancy in definition of Number.prototype.clz.</short_desc>
+          <delta_ts>2014-02-14 08:16:20 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7036</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-01-27 09:47:33 -0800</bug_when>
+    <thetext>The steps in the definition of Number.prototype.clz begin:
+
+1. Let x be thisNumberValue(this value).
+2. Let n be ToUint32(x).
+
+The definition of ToUint32 begins:
+
+1. Let number be the result of calling ToNumber on the input argument.
+
+It seems like it would be preferable, for consistency, to omit step 1 of Number.prototype.clz (and similar methods) and have the first step be &quot;Let n by ToUint32(this value)&quot;.
+
+This implies that `ToNumber` should return the same result as `thisNumberValue`, that is, the following steps should be performed by `ToNumber`:
+
+&quot;If Type(value) is Object and value has a [[NumberData]] internal slot, then
+Let n be the value of value’s [[NumberData]] internal slot.
+If n is not undefined, then return n.&quot;
+
+That could either be folded directly into the definition of `ToNumber`, or else added to `ToPrimitive` when the &quot;number&quot; hint is given (or even pushed down into the definition of @@toPrimitive for classes which define the [[NumberData]] internal slot).
+
+These changes would make the first two steps exactly equivalent to &quot;var n = this &gt;&gt;&gt; 0&quot; instead of requiring an additional step: &quot;var n = Number.prototype.valueOf.call(this) &gt;&gt;&gt; 0&quot;.  It would also make the ToNumber internal operation more consistent with the methods defined on Number.prototype.
+
+See https://github.com/paulmillr/es6-shim/pull/196 for some related discussion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7039</commentid>
+    <comment_count>1</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-01-27 09:58:16 -0800</bug_when>
+    <thetext>A closer reading reveals that thisNumberValue also has the side-effect of throwing a TypeError if this value is not sufficiently numeric.  So I would recommend changing step 1 to a simple type check (perhaps using a new &quot;checkNumberValue&quot; helper).  IMO it would still be useful to ensure that the numeric results of `ToUint32(n)` and `n &gt;&gt;&gt; 0` are identical; that is, the `ToNumber` operation should include the check of the `[[NumberData]]` internal slot.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7299</commentid>
+    <comment_count>2</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-13 17:21:40 -0800</bug_when>
+    <thetext>Apparently Number.prototype.clz() is going to become Math.clz32(n).
+
+Since all of the Math.* functions perform ToNumber on the arguments, again it seems that the ToNumber algorithm ought to look at the [[NumberData]] internal slot.
+
+And presumably the type-check and TypeError of thisNumberValue would be replaced by returning NaN to be consistent with the rest of the Math.* functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7301</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-14 08:16:20 -0800</bug_when>
+    <thetext>both ToNumber and ToUnit32 date to the earliest days of ES and are widely used in the ES spec. Changing, there semantics, for example by not calling valueOf on Number wrapper objects, could break existing code.
+
+However, implementations are free to optimize algorithms in any manner that has no observable effect.
+
+For example,  Math.clz32(x) implicitly does:
+     ToUint32(ToNumber(x))
+
+I would expect implementations to note that the ToNumber operation in step 1 of ToUint32 has no observable effect and can be skipped.
+
+ES operation upon [U]int32 values consistently treat NaN as 0 rather than throwing.  The current spec. for Math.clr32 is consistent with that behavior just like Math.imul.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

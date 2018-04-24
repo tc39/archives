@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4384</bug_id>
+          
+          <creation_ts>2015-05-29 22:29:00 -0700</creation_ts>
+          <short_desc>Wrong reference in 14.1.18</short_desc>
+          <delta_ts>2015-10-02 13:14:03 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>manish.tripathi.777</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14471</commentid>
+    <comment_count>0</comment_count>
+    <who name="">manish.tripathi.777</who>
+    <bug_when>2015-05-29 22:29:43 -0700</bug_when>
+    <thetext>14.1.18 Runtime Semantics: IteratorBindingInitialization
+production FormalParameter : BindingElement
+Note at the end should refer to step 6 (currently refers to step 5):
+
+&quot;The new Environment Record created in step !!5!! is only used if the BindElement’s Initializer contains a direct eval.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14474</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-06-01 12:15:43 -0700</bug_when>
+    <thetext>fixed in rev39 publication draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

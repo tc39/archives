@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4330</bug_id>
+          
+          <creation_ts>2015-04-21 07:48:00 -0700</creation_ts>
+          <short_desc>22.1.3.24.1 SortCompare doesn&apos;t define the sort order of string values</short_desc>
+          <delta_ts>2016-02-04 16:23:42 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>tobie.langel</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14313</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-21 07:48:11 -0700</bug_when>
+    <thetext>It says:
+9.	If xString &lt; yString, return -1.
+10.	If xString &gt; yString, return 1.
+
+but what does &lt; mean in this context
+
+It should use the default relational comparison algorithm 
+
+Apparently not all browser implementations use that comparison semantics
+
+(thanks to Tobie Langel for reporting via twitter)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14314</commentid>
+    <comment_count>1</comment_count>
+    <who name="Tobie Langel">tobie.langel</who>
+    <bug_when>2015-04-22 00:21:34 -0700</bug_when>
+    <thetext>For the record, the discrepancy appeared between:
+
+* node.js version 0.12.0 (running V8 3.28.73) on Ubuntu 14.04.2 LTS
+
+and:
+
+* io.js version 1.2.0 (running V8 4.1.0.14) on Mac OS 10.9.5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14915</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2016-02-04 16:23:42 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (31593103e)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

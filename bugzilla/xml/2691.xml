@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2691</bug_id>
+          
+          <creation_ts>2014-04-19 16:16:00 -0700</creation_ts>
+          <short_desc>chapter 8: misc editorial</short_desc>
+          <delta_ts>2014-04-29 22:00:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7838</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:16:40 -0700</bug_when>
+    <thetext>----------------------------------------
+In 8.1.1.4.8 &quot;HasThisBinding ()&quot;:
+
+{1}
+8.1.1.4.8 / para 2:
+HasSuperBinding()
+    HasSuperBinding() should be a section unto itself,
+    a sibling to 8.1.1.4.8 HasThisBinding().
+
+----------------------------------------
+In 8.1.2.1 &quot;GetIdentifierReference (lex, name, strict)&quot;:
+
+{2}
+8.1.2.1 / step 3:
+Let /exists/ be the result of calling the HasBinding(/N/)
+concrete method of /envRec/ passing /name/ as the argument /N/.
+    Delete &quot;(N)&quot; and &quot;N&quot;.
+
+----------------------------------------
+In 8.3 &quot;Execution Contexts&quot;:
+
+{3}
+8.3 / para 4:
+The value is the Realm component of the running execution context
+is also called the /current Realm/.
+    s|value is|value of|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7883</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-22 14:08:39 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7953</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 00:21:46 -0700</bug_when>
+    <thetext>Not fixed in rev24:
+
+{6}
+9.2.4 / step 10.a:
+If /thisMode/ is `strict`, then let /thisValue/ to /thisArgument/.
+    s|to|be|
+
+{8}
+9.2.4 / step 10.b.ii.1:
+if Type(/thisArgument/) is not Object, then let /needsThisWrapper/ to *true*.
+    s|to|be|
+    
+{18}
+9.2.14 / step 23:
+If /needSpecialArgumentsBinding/ is *true*, then
+    s|need|needs|
+
+{59}
+Abstract operation ModuleObjectCreate() is never invoked.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7955</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 00:29:49 -0700</bug_when>
+    <thetext>Ignore that. The comment went to the wrong Bug, not sure how.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7991</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:00:06 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2917</bug_id>
+          
+          <creation_ts>2014-05-29 10:31:00 -0700</creation_ts>
+          <short_desc>5.1.5: incorrect IterationStatement expansion</short_desc>
+          <delta_ts>2014-07-18 14:29:54 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="guptha">gupta.rajagopal</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>gupta.rajagopal</cc>
+    
+    <cc>jorendorff</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8667</commentid>
+    <comment_count>0</comment_count>
+    <who name="guptha">gupta.rajagopal</who>
+    <bug_when>2014-05-29 10:31:28 -0700</bug_when>
+    <thetext>In section 5.1.5, there are missing semi-colons.
+IterationStatement :
+for ( LexicalDeclaration Expressionopt ; Expressionopt ) Statement
+is a convenient abbreviation for:
+IterationStatement :
+for ( LexicalDeclaration Expressionopt ) Statement
+for ( LexicalDeclaration Expression ; Expressionopt ) Statement
+which in turn is an abbreviation for:
+IterationStatement :
+for ( LexicalDeclaration ) Statement
+for ( LexicalDeclaration Expression) Statement
+for ( LexicalDeclaration Expression ; ;) Statement
+for ( LexicalDeclaration Expression ; Expression) Statement
+
+should be:
+
+IterationStatement :
+for ( LexicalDeclaration Expressionopt ; Expressionopt ) Statement
+is a convenient abbreviation for:
+IterationStatement :
+for ( LexicalDeclaration ; Expressionopt ) Statement
+for ( LexicalDeclaration Expression ; Expressionopt ) Statement
+which in turn is an abbreviation for:
+IterationStatement :
+for ( LexicalDeclaration ; ) Statement
+for ( LexicalDeclaration ; Expression) Statement
+for ( LexicalDeclaration Expression ;) Statement
+for ( LexicalDeclaration Expression ; Expression) Statement</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8668</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-05-29 10:54:34 -0700</bug_when>
+    <thetext>Allen, Guptha is working at Mozilla in Mountain View. We&apos;re working together and he might decide to implement some new ES6 features for us.
+
+Guptha, Allen is the editor of the ECMAScript Language Specification. He also works for Mozilla.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9170</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-12 09:23:23 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9275</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:29:54 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

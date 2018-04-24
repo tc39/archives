@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>177</bug_id>
+          
+          <creation_ts>2011-07-25 22:10:00 -0700</creation_ts>
+          <short_desc>7.8.4: &quot;SingleStringCharacters&quot; wrong font</short_desc>
+          <delta_ts>2012-01-05 11:58:41 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>202</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>390</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-07-25 22:10:01 -0700</bug_when>
+    <thetext>7.8.4 String Literals / Semantics / bullet 8
+says:
+  &quot;The SV of SingleStringCharacters ::
+   SingleStringCharacter SingleStringCharacters is ...&quot;
+
+The &quot;SingleStringCharacters&quot; in the RHS is in the wrong font:
+it&apos;s sans-serif upright, should be serif italic.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>432</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-08-30 11:02:53 -0700</bug_when>
+    <thetext>corrected in working draft.
+Also occurs in ES5.1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>494</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-10-04 20:16:38 -0700</bug_when>
+    <thetext>Confirming fixed in 2011-09-23 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

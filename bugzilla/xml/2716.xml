@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2716</bug_id>
+          
+          <creation_ts>2014-04-23 10:17:00 -0700</creation_ts>
+          <short_desc>Add __(define|lookup)(Getter|Setter)__ to Annex B</short_desc>
+          <delta_ts>2016-03-02 21:59:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>claude.pache</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7888</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2014-04-23 10:17:08 -0700</bug_when>
+    <thetext>Per Jan 2014 consensus, these methods should be added to Annex B because there is web content that depends on these methods most or all runtimes implement it.
+
+See: https://github.com/rwaldron/tc39-notes/blob/07a99722d9f2594a51fd62e9ea320d72caabc01a/es6/2014-01/jan-30.md#definegetter-definesetter-etc-in-annex-b</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7891</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-23 13:47:14 -0700</bug_when>
+    <thetext>I wrote this some time ago: https://gist.github.com/anba/9140946
+It may serve as a starting point.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9706</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2014-08-07 06:33:28 -0700</bug_when>
+    <thetext>I wrote this a few years back; it may also be of help: http://javascript.spec.whatwg.org/#object</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14919</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2016-02-11 11:03:17 -0800</bug_when>
+    <thetext>See https://github.com/tc39/ecma262/pull/381</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

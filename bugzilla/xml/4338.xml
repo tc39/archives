@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4338</bug_id>
+          
+          <creation_ts>2015-04-29 09:39:00 -0700</creation_ts>
+          <short_desc>13.13.14 LabelledEvaluation: Completion value for break completions</short_desc>
+          <delta_ts>2015-10-02 13:14:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14337</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-29 09:39:16 -0700</bug_when>
+    <thetext>13.13.14 Runtime Semantics: LabelledEvaluation
+
+---
+LabelledStatement : LabelIdentifier : LabelledItem
+1. Let label be the StringValue of LabelIdentifier.
+2. Append label as an element of labelSet.
+3. Let stmtResult be LabelledEvaluation of LabelledItem with argument labelSet.
+4. If stmtResult.[[type]] is break and SameValue(stmtResult.[[target]], label), then
+  a. If stmtResult.[[value]] is empty, let stmtResult be NormalCompletion(undefined).
+  b. Else, let stmtResult be NormalCompletion(stmtResult.[[value]]).
+5. Return Completion(stmtResult).
+---
+
+Steps 4.a-b should be changed to:
+---
+a. Let stmtResult be NormalCompletion(stmtResult.[[value]]).
+---
+
+That means empty break normal completions are not changed to normal completions with value=undefined. 
+
+Reasons: Steps 4.a-b were changed in bug 4126 when other parts of the completion reform were still missing (cf. completion value for breakable statements). This is no longer necessary and the current specification is somewhat a pain to implement (it&apos;s not difficult, but nonetheless it requires some extra efforts which I don&apos;t consider to be justified).
+
+Replacing steps 4.a-b also ensures these two statements will return the same completion value
+---
+L: ;  // current completion value = {type=normal, value=empty}
+---
+
+And:
+---
+L: break L;  // current completion value = {type=normal, value=undefined}
+---
+
+WDYT?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14422</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-19 14:14:09 -0700</bug_when>
+    <thetext>fixed in rev29 publication draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

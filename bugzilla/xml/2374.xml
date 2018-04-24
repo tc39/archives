@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2374</bug_id>
+          
+          <creation_ts>2013-12-10 19:55:00 -0800</creation_ts>
+          <short_desc>Define a data model</short_desc>
+          <delta_ts>2013-12-11 05:25:03 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="James Clark">jjc</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>james.h.manger</cc>
+    
+    <cc>jjc</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6914</commentid>
+    <comment_count>0</comment_count>
+    <who name="James Clark">jjc</who>
+    <bug_when>2013-12-10 19:55:38 -0800</bug_when>
+    <thetext>ECMA-404 would be a better basis on which to build higher-level specifications, if it defined a relatively abstract, low-level data model.
+
+This would define the least restrictive reasonable semantics: the semantics should not treat as identical any values that higher layers might reasonably want to treat as distinct.  This would not claim to be the one, true JSON semantics: it would merely a semantic layer on which other higher-level semantic layers can conveniently be built.
+
+I would suggest the following strawman
+
+1. a JSON value is an object value, an array value, a number value, a string value, a boolean value or a null value.
+2. an object value is an ordered sequence of &lt;string, value&gt; pairs
+3. an array value is an ordered sequence of values
+4. a number value is a rational number x/(10^n), where n is a non-negative integer, and x is an integer, and is not a multiple of 10 unless n is 0
+5. a string value is an ordered sequence of Unicode code points
+
+In terms of conformance, I would suggest the spec should say that a conforming parser must interpret JSON texts that represent the same JSON value identically.  It should not require that a conforming parser expose this low-level data model.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6925</commentid>
+    <comment_count>1</comment_count>
+    <who name="James Manger">james.h.manger</who>
+    <bug_when>2013-12-11 05:25:03 -0800</bug_when>
+    <thetext>Syntactically a JSON object looks like &quot;an ordered sequence of &lt;string, value&gt; pairs&quot;. However, in practice the *data model* used in the vast majority of implementations for a JSON object is: a collection of &lt;name, value&gt; pairs, where order does not matter, and each name is a unique string.
+
+Attempting to expand the object data model to allow duplicates and make order significant can only dilute the great interoperability JSON enjoys. Saying a message is JSON would no longer be sufficient to know that practically any JSON library can handle it.
+
+The specification could add a paragraph noting that the syntax could be useful when element order matters or duplicates are allowed, but any such use of the syntax must not be labelled &quot;JSON&quot; as it will not be interoperable with many JSON-compliant systems.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

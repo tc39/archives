@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1859</bug_id>
+          
+          <creation_ts>2013-08-29 10:59:00 -0700</creation_ts>
+          <short_desc>NOTE in section 15.14.3.4 conflicts with specified algorithm</short_desc>
+          <delta_ts>2013-11-08 13:09:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Oliver Hunt">oliver</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5268</commentid>
+    <comment_count>0</comment_count>
+    <who name="Oliver Hunt">oliver</who>
+    <bug_when>2013-08-29 10:59:59 -0700</bug_when>
+    <thetext>The NOTE in section 15.14.3.4 (Map.prototype.forEach) states that the same key is not visited multiple times, however the algorithm as specified leads to this behavior if a key is deleted and then re-added.
+
+I believe that the algorithm text is correct - I&apos;m unsure the NOTE is even required as set() is defined explicitly as not changing the iteration order, nor moving the entry in the MapData&apos;s list.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6179</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 11:15:02 -0700</bug_when>
+    <thetext>fixed in rev 21 editor&apos;s draft
+
+deleted the note</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6538</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:01 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

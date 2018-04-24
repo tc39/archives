@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2978</bug_id>
+          
+          <creation_ts>2014-06-06 07:55:00 -0700</creation_ts>
+          <short_desc>Array.prototype.sort: specify the expected behaviour of, e.g., `[Infinity, -Infinity].sort( (a, b) =&gt; a - b )`</short_desc>
+          <delta_ts>2014-08-15 07:57:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascript</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8867</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-06-06 07:55:07 -0700</bug_when>
+    <thetext>Consider the following code:
+
+    let compareFn = (a,b) =&gt; a - b
+    [Infinity, 9, 3, 4 , -Infinity, 6, Infinity, 2].sort(compareFn)
+
+The behaviour of the `sort` method is left undefined by the spec, because the `compareFn` produce `NaN` instead of `0` in the following case:
+
+    compareFn(Infinity, Infinity)
+
+However, four browsers I&apos;ve tried (latest stable versions of Safari, Firefox, IE and Chrome) do produce the expected result in that particular example.
+
+That case could be easily specified by allowing `compareFn(a, b)` to produce any number including `NaN`, and by requiring to treat `NaN` the same way as `0`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9258</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 09:26:54 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9287</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-18 14:45:55 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9288</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-07-18 15:41:03 -0700</bug_when>
+    <thetext>What if NaNs appear in the list to be sorted?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9556</commentid>
+    <comment_count>4</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-25 10:39:49 -0700</bug_when>
+    <thetext>(In reply to Mark Miller from comment #3)
+&gt; What if NaNs appear in the list to be sorted?
+
+Some experience with current browsers show inconsistent results (generally an incompletely sorted array).
+
+js&gt; [NaN, 4, 2, NaN, 1, NaN, 3].sort(function(a, b) { return a - b })
+
+Safari 7:   [NaN, 1, 2, 4, NaN, NaN, 3]
+Firefox 31: [3, NaN, 1, NaN, 2, 4, NaN]
+Chrome 36:  [NaN, 2, 4, NaN, 1, NaN, 3]
+IE 11:      [NaN, 2, 4, NaN, 1, NaN, 3]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9644</commentid>
+    <comment_count>5</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-07-29 16:12:08 -0700</bug_when>
+    <thetext>This is maybe nitpicking, but...
+
+The change made in Rev. 26 has consisted of adding a special case for NaN in the SortCompare Abstract Operation algorithm (Section 22.1.3.24.1; step 17.d).
+
+Now: In case `comparefn` produces `NaN` for some pairs of values, then `comparefn` is never a &quot;consistent comparison function&quot; (as defined in Section 22.1.3.24 Array.prototype.sort), and thus the behaviour of sort is still allowed to be &quot;implementation-defined&quot;.
+
+But actually, we are not interested whether `comparefn` is a consistent comparison function, but whether SortCompare (defined in Section 22.1.3.24.1 Runtime Semantics: SortCompare Abstract Operation) is &quot;consistent&quot;.
+
+However, since the change made in Rev.26, it is no longer the same thing for SortCompare or for `comparefn` to be consistent...
+
+I think that the more elegant way to resolve the issue is as follows:
+
+* Revert the change made in Rev. 26; that is, in the abstract operation SortCompare, remove the special-casing for NaN. That will effectively remove the discrepancy between the &quot;consistence&quot; of `comparefn` and the &quot;consistence&quot; of SortCompare.
+
+* Change the definition of &quot;consistent comparison function&quot; by allowing NaN to denote the &quot;equality&quot;; more precisely, make the following changes in the text:
+
+  * &quot;a =CF b means comparefn(a,b) = 0 (of either sign)&quot;
+      ==&gt; &quot;a =CF b means comparefn(a,b) is +0, -0, or NaN&quot;
+  
+  * &quot;Furthermore, Type(v) is Number, and v is not NaN.&quot;
+      ==&gt; &quot;Furthermore, Type(v) is Number.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9793</commentid>
+    <comment_count>6</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-08-15 07:57:52 -0700</bug_when>
+    <thetext>In fact, the objection of Comment #5 may be applied to further cases, e.g. when the `compareFn` does not produce values of type Number. In that case, implementations have also a more well-defined behaviour than what is currently specced; see Bug #3137.
+
+I&apos;m reclosing this Bug because of that, and because it is superseded by Bug #3137. In case I&apos;m finding a convenient formulation for &quot;consistent&quot; that handles more cases than &quot;non-NaN numbers&quot;, I could open a new Bug.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

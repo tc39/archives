@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>419</bug_id>
+          
+          <creation_ts>2012-06-28 17:42:00 -0700</creation_ts>
+          <short_desc>Upgrade UTS 35 reference to version 21 or later</short_desc>
+          <delta_ts>2012-10-16 15:13:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1061</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-06-28 17:42:00 -0700</bug_when>
+    <thetext>The specification draft currently references version 2.0.1; to fix bug 227, we have to move past version 21.
+
+Version 21 introduces two new features that have to be addressed in the spec in some form:
+
+1) For collation, there&apos;s a new key &quot;kr&quot;, reordering. This key is followed by a  sequence of subtags, something that the resolveLocale abstract operation is currently not prepared to handle.
+
+2) For number formatting, there are new numbering systems &quot;native&quot;, &quot;traditio&quot;, and &quot;finance&quot;. These are not mentioned in section 3 of UTS 35, but show up in the bcp47 data files. They seem inappropriate as identifiers, and so should not be processed as such. We could specify to ignore them, or we could accept them in requests but canonicalize them to actual numbering system identifiers for format and resolvedOptions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1810</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-10-02 14:30:43 -0700</bug_when>
+    <thetext>Updated reference to 21.0.1 in August 2012 draft. Specified that &quot;kr&quot;, &quot;native&quot;, &quot;traditio&quot;, and &quot;finance&quot; are unsupported.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

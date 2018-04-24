@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2612</bug_id>
+          
+          <creation_ts>2014-04-09 21:40:00 -0700</creation_ts>
+          <short_desc>Class definitions do not define a single descriptor for get + set</short_desc>
+          <delta_ts>2014-04-14 10:42:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yehuda Katz">wycats</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7638</commentid>
+    <comment_count>0</comment_count>
+    <who name="Yehuda Katz">wycats</who>
+    <bug_when>2014-04-09 21:40:46 -0700</bug_when>
+    <thetext>In the current algorithm for class definition, getters and setters are each defined as a separate ClassElement.
+
+In ClassDefinitionEvaluation, each ClassElement results in a separate call to PropertyDefinitionEvaluation. If both a getter and setter for the same name exist in a class body, the second one will end up overriding the first.
+
+In other words, as far as I can tell, no part of the algorithm attempts to create a single combined descriptor for getters and setters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7640</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-10 02:38:52 -0700</bug_when>
+    <thetext>ClassDefinitionEvaluation works in the same manner as ObjectLiteral Evaluation. And just as in `{get a(){}, set a(_){}}` the getter is not overridden by the setter, the getter is not overridden in `class C {get a(){} set a(_){}}`. 
+
+In 14.3.9 Runtime Semantics: PropertyDefinitionEvaluation, the descriptor for the setter accessor does not define the [[Get]] field, and in 9.1.6.3 ValidateAndApplyPropertyDescriptor step 10a, fields which are not present are not copied over to the existing property.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7722</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-14 10:42:14 -0700</bug_when>
+    <thetext>As explained in comment 1, they do get combined.
+
+If necessary, the algorithms can be refactored in the future to support annotation syntax</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

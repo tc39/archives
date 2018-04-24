@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3640</bug_id>
+          
+          <creation_ts>2015-01-23 14:52:00 -0800</creation_ts>
+          <short_desc>Typo &quot;initialized&quot; -&gt; &quot;initializes&quot;</short_desc>
+          <delta_ts>2015-02-02 18:38:53 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11651</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-01-23 14:52:35 -0800</bug_when>
+    <thetext>19.3.1 The Boolean Constructor
+20.1.1 The Number Constructor
+20.3.2 The Date Constructor
+21.1.1 The String Constructor
+22.1.1 The Array Constructor
+23.1.1 The Map Constructor
+23.2.1 The Set Constructor
+23.3.1 The WeakMap Constructor
+23.4.1 The WeakSet Constructor
+24.1.2 The ArrayBuffer Constructor
+24.2.2 The DataView Constructor
+25.4.3 The Promise Constructor
+26.2.1 The Proxy Constructor Function
+
+
+Typo: &quot;it creates and initialized&quot; -&gt; &quot;it creates and initializes&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11828</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-31 15:28:37 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11964</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:53 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

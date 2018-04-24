@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3936</bug_id>
+          
+          <creation_ts>2015-02-14 13:51:00 -0800</creation_ts>
+          <short_desc>B.3.3: applying the extensions</short_desc>
+          <delta_ts>2015-02-19 19:10:49 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12680</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-14 13:51:04 -0800</bug_when>
+    <thetext>[Same neighbourhood as Bug 3918, but different.]
+
+In B.3.3 &quot;Block-Level Function Declarations Web Legacy Compatibility Semantics&quot;,
+we&apos;re given an algorithm that modifies/replaces algorithms elsewhere in the spec (9.2.13 and 14.1.23). That alone would be odd, but what&apos;s even odder is that these changes aren&apos;t &apos;universal&apos;, i.e. the changes only affect *some* applications of the changed algorithms. So now we have to imagine that for each affected algorithm, there are actually two versions, with the choice of which to use for any given application being made somewhat magically.
+
+I think a far more straightforward approach would be to take the steps 2.a.* and 2.b.* out of the B.3.3 algorithm, and insert them at the corresponding points in 9.2.13 and 14.1.23 respectively, but embed them in an &apos;If&apos; that only invokes them when appropriate. The condition would be something along the lines of:
+    the ECMAScript host implements the annex B.3.3 extension
+    and
+    we&apos;re dealing with a FunctionDeclaration that&apos;s affected by that extension
+
+It would probably make sense to define an abstract operation that ascertains whether a FunctionDeclaration is affected by the B.3.3 extension. It would use the remains of the B.3.3 algorithm, and also some of its preamble, something like:
+    1. Assert: /f/ is a /FunctionDeclaration/.
+    2. If /f/ is directly contained in the /StatementList/ of a /Block/,
+       /CaseClause/, or /DefaultClause/ that is part of the function code
+       of non-strict mode function /g/, then
+       a. Let F be StringValue of the BindingIdentifier of /f/.
+       b. If replacing /f/ with a /VariableStatement/ [etc], then return true.
+    3. Return false</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12925</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-18 14:01:32 -0800</bug_when>
+    <thetext>I really don&apos;t want to embed annex B semantics into the main body of the specification.  Instead I placed marker place holder step in 89.2.13 and a note in 14.1.21 reference B.3.3
+
+fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12935</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-18 15:11:47 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; I really don&apos;t want to embed annex B semantics into the main body of the
+&gt; specification.
+
+Yeah, I can understand that.
+
+Okay, how about something in-between: the annex B semantics stay in annex B, but you still get rid of the weirdness of an algorithm that makes variants of other algorithms. Specifically, B.3.3 could say (something like):
+
+  Step 29 of the algorithm in 9.2.13 is replaced with the following step:
+
+     29. If $code is the FunctionBody of a FunctionDeclaration f,
+         and f is affected by B.3.3, then:
+           i.   Let F be StringValue of the BindingIdentifier of f.
+           ii.  NOTE A var binding for F ...
+           iii. If instantiated VarNames does not contain F, ...
+
+  The FunctionDeclaration Evaluation algorithm in 14.1.23 is replaced with:
+
+    1. If this FunctionDeclaration is affected by B.3.3, then:
+         a. Let F be StringValue of the BindingIdentifier of this FunctionDecl
+         b. Let fenv be ...
+         c. Let benv be ...
+         d. [etc]
+    2. Else, return NormalCompletion(empty)
+
+where &quot;is affected by B.3.3&quot; could be a suitably-named abstract operation that you also define in B.3.3.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12988</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:49 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

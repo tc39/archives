@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3587</bug_id>
+          
+          <creation_ts>2015-01-21 11:57:00 -0800</creation_ts>
+          <short_desc>Clarification needed in 14.2.17 (arrow functions)</short_desc>
+          <delta_ts>2015-02-02 18:38:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Felix Kling">es</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11578</commentid>
+    <comment_count>0</comment_count>
+    <who name="Felix Kling">es</who>
+    <bug_when>2015-01-21 11:57:51 -0800</bug_when>
+    <thetext>The note says:
+
+&gt; Any reference to `arguments`, `super`, or `this` within an ArrowFunction are resolved to their bindings in the lexically enclosing function. 
+
+But arrow functions can also be directly contained in global or module code. So it should probably be &quot;... in the lexically enclosing environment&quot; or similar.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11584</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-21 17:37:38 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft:
+
+The updated text:
+
+NOTE	An ArrowFunction does not define local bindings for arguments, super, or this. Any reference to arguments, super, or this within an ArrowFunction must resolve to a binding in a lexically enclosing environment. Typically this will be the Function Envionment of an immediately enclosing function. ...(unchanged)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11939</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:38:50 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

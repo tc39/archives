@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>655</bug_id>
+          
+          <creation_ts>2012-09-26 00:16:00 -0700</creation_ts>
+          <short_desc>LabelledStatement has semantic meaning.</short_desc>
+          <delta_ts>2015-10-14 17:39:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>editorial issues</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Sukyoung Ryu">sukyoung.ryu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>sukyoung.ryu</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1610</commentid>
+    <comment_count>0</comment_count>
+    <who name="Sukyoung Ryu">sukyoung.ryu</who>
+    <bug_when>2012-09-26 00:16:23 -0700</bug_when>
+    <thetext>The first paragraph of &quot;12 Statements&quot; says &quot;A LabelledStatement has no semantic meaning other than the introduction of a label to a label set.&quot;  However, &quot;12.12 Labelled Statements&quot; says that &quot;If the result of evaluating Statement is (break, V, L) where L is equal to Identifier, the production results in (normal, V, empty).&quot;  Therefore, because of the sentence in 12.12, a LabelledStatement has some semantic meaning.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1615</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-26 09:51:27 -0700</bug_when>
+    <thetext>yes, this is really an editorial issue</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1616</commentid>
+    <comment_count>2</comment_count>
+    <who name="Sukyoung Ryu">sukyoung.ryu</who>
+    <bug_when>2012-09-27 00:20:04 -0700</bug_when>
+    <thetext>Indeed, thanks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14802</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-14 17:39:59 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

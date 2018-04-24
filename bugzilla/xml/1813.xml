@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1813</bug_id>
+          
+          <creation_ts>2013-08-23 16:15:00 -0700</creation_ts>
+          <short_desc>Incorrect section number references in the text</short_desc>
+          <delta_ts>2013-09-10 14:17:49 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 17: August 23, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5214</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-08-23 16:15:18 -0700</bug_when>
+    <thetext>- In 11.9.1 &quot;Runtime Semantics&quot;, subsection &quot;Runtime Semantics: Strict Equality
+  Comparison&quot;, the NOTE at the end, the text says &quot;the SameValue Algorithm
+  (9.12)&quot; but it means 9.2.3.
+
+- 8.1.6.3 &quot;Invariants of the Essential Internal Methods&quot; also refers to &quot;9.12&quot;. 
+
+- In 11.1.5 &quot;Object Initialiser&quot;, subsection &quot;Runtime Semantics: Property
+  Definition Evaluation&quot;, the text says &quot;Identifier Resolution as specified in
+  10.3.1&quot; but that is now specified in 10.4.1.
+
+- 11.13.3.2 &quot;Runtime Semantics&quot; also refers to &quot;10.3.1&quot;.
+
+- 15.5.3.10 &quot;String.prototype.match (regexp)&quot; says &quot;the abstract operation
+  RegExpCreate (15.10.4.1)&quot; but that algorithm is specified in 15.10.3.3.
+
+There are too many of these to find and list them all just now. The table in Annex F has a lot of dangling pointers in it too.
+
+Unfortunately the right fix here is probably to use Word { REF } fields, which would make work for me. But I&apos;ll do it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5215</commentid>
+    <comment_count>1</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2013-08-23 16:17:16 -0700</bug_when>
+    <thetext>Another example of dangling pointers can be seen here:
+
+https://people.mozilla.com/~jorendorff/es6-draft.html#sec-15.11.5.5
+
+The script keeps the text, but does not create a link, when the referenced section doesn&apos;t exist.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5225</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-08-26 20:15:19 -0700</bug_when>
+    <thetext>See also Bug 1595.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5372</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-10 14:17:49 -0700</bug_when>
+    <thetext>except for Annex F, these should all be fixed in rev18
+
+Annex F will either go away or will be updated someday.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

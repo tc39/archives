@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2806</bug_id>
+          
+          <creation_ts>2014-05-03 10:11:00 -0700</creation_ts>
+          <short_desc>chapter 21: misc editorial</short_desc>
+          <delta_ts>2014-06-01 10:09:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8106</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:11:28 -0700</bug_when>
+    <thetext>----------------------------------------
+In 21.1.3.14.1 &quot;Runtime Semantics: GetReplaceSubstitution Abstract Operation&quot;:
+
+{1}
+21.1.3.14.1 / step 10:
+Let /result/ be a String value derived from /matched/ by copy code unit elements
+from /matched/ to /result/ ...
+    s|copy|copying|
+
+----------------------------------------
+In 21.2.5.5 &quot;RegExp.prototype.match ( string )&quot;:
+
+{2}
+21.2.5.5 / step 7.a:
+Return the result ofRegExpExec(/rx/, /S/).
+    Insert space into &quot;ofRegExpExec&quot;.
+
+----------------------------------------
+In 21.2.5.7 &quot;RegExp.prototype.replace ( string, replaceValue )&quot;:
+
+{3}
+21.2.5.7 / step 13.e:
+If result is not *null*, then append /result/ to the end of /results/.
+    Italicize the first &quot;result&quot;.
+
+{4}
+21.2.5.7 / step 17:
+Repeat, for each /result/ in /results/.
+    Change final dot to a comma or colon
+
+{5,6}
+21.2.5.7 / step 17.l:
+If /position/&gt;=/nextSourcePosition/, then
+    Put spaces around the operator.
+
+    &apos;nextSourcePosition&apos; is not defined.  s|Source|Src|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8223</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 11:41:20 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8728</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 10:09:44 -0700</bug_when>
+    <thetext>confirmed fixed except for {6}, re-raised as Bug 2941.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

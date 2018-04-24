@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1074</bug_id>
+          
+          <creation_ts>2012-11-27 12:22:00 -0800</creation_ts>
+          <short_desc>9.1.1: undefined &quot;O&quot;</short_desc>
+          <delta_ts>2012-12-21 18:08:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2875</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-27 12:22:11 -0800</bug_when>
+    <thetext>In 9.1.1 &quot;ToPrimitive&quot;,
+algorithm 1 steps 4, 6.b, 8 refer to metavariable &quot;O&quot;,
+which is not defined.
+
+Change to &quot;argument&quot;, or start with a step &quot;Let O be argument.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2879</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-27 14:50:02 -0800</bug_when>
+    <thetext>Same algorithm,
+step 6.a says:
+    If IsCallable(toString) is false, then throw a TypeError exception.
+but &apos;toString&apos; is not defined.
+
+Change to &quot;exoticToPrim&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2880</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-27 14:59:47 -0800</bug_when>
+    <thetext>Same algorithm,
+step 6.d says:
+    If result is an ECMAScript language value and Type(resul) is not Object,
+    then return result.
+but &quot;resul&quot; is not defined.
+
+Change to &quot;result&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2881</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-27 15:06:23 -0800</bug_when>
+    <thetext>(That last one duplicates the first point of Bug 989.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2957</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-01 11:05:16 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

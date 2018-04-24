@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3009</bug_id>
+          
+          <creation_ts>2014-07-17 13:03:00 -0700</creation_ts>
+          <short_desc>typeof on TDZ variable</short_desc>
+          <delta_ts>2015-03-16 14:26:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9231</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-17 13:03:49 -0700</bug_when>
+    <thetext>typeof x; // &quot;undefined&quot;
+
+{
+  // TDZ
+  typeof x; // ReferenceError
+  let x = 42;
+}
+
+Not debating TDZ semantics here.
+
+But I think since `typeof` has the special case that it doesn&apos;t throw an error on undeclared variables, it would be good for consistency if `typeof` on a variable in its TDZ was also error-safe, and just also returned &quot;undefined&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9237</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-17 15:30:50 -0700</bug_when>
+    <thetext>You can take this up on esdiscuss if you want to get other opinions, but I don&apos;t agree.
+
+In you example &apos;x&apos; isn&apos;t undeclared, it&apos;s uninitialized.  The TDZ is designed to find errors like this.  Why would you want to hide them.
+
+Type legacy typeof behavior presumably goes back to the days when it was considered ok to create global variable simply by assigning to an undeclared named. From that perspective you could consider all possible names to preexist as global variables with the value undefined.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9238</commentid>
+    <comment_count>2</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-17 15:56:48 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; In you example &apos;x&apos; isn&apos;t undeclared, it&apos;s uninitialized.
+
+I never claimed that the `x` in the block was undeclared. But it is unusable (without an error) at that point in a very similar way to how undeclared variables are unusable.
+
+I (and many others) have always considered it a useful feature of `typeof` that you can &quot;safely&quot; (without an error) check if a variable can be referenced. I would like the same capability with `let` declarations.
+
+And that goes a thousand times more since the official stance from TC39 seems to be &quot;let is the new var&quot;.
+
+
+
+&gt; The TDZ is designed  to find errors like this.  Why would you want to hide them.
+
+I don&apos;t consider it an error anymore than the common practice of checking to see if a global has been defined -- if so, using it; if not, using some other value.
+
+This kind of pattern has been around in JS for ages:
+
+var y = (typeof x !== &quot;undefined&quot;) ? x : z;
+
+I&apos;m suggesting that the same type of pattern could be useful for `let` declarations.
+
+
+
+&gt; Type legacy typeof behavior presumably goes back to the days when it was
+&gt; considered ok to create global variable simply by assigning to an undeclared
+&gt; named. From that perspective you could consider all possible names to preexist
+&gt; as global variables with the value undefined.
+
+I&apos;m not sure if that&apos;s where this exception to `typeof` comes from historically, but it&apos;s not at all the motivating scenario for my issue report (see above).
+
+I most definitely don&apos;t want to assign to variables to implicitly declare them. I (like almost everyone else) explicitly warn to do the exact opposite.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13752</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:26:48 -0700</bug_when>
+    <thetext>closing
+
+I don&apos;t think you are going to find any T39 interest in this proposal</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>356</bug_id>
+          
+          <creation_ts>2012-05-12 18:26:00 -0700</creation_ts>
+          <short_desc>AssignmentPattern does not allow initializers</short_desc>
+          <delta_ts>2015-07-10 08:34:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>All</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>940</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2012-05-12 18:26:26 -0700</bug_when>
+    <thetext>The following does not seem allowed with the grammar for ObjectAssignmentPattern:
+
+var x;
+{y: x = 1} = {z: 2}
+assert(x === 1);
+
+Similar issues are there for ArrayAssignmentPattern.
+
+Is this intentional?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>942</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-05-13 10:22:53 -0700</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; 
+&gt; Is this intentional?
+
+It is. I think there was some es-discuss talk that led to that conclusion.  However, looking at it now I don&apos;t see any compelling reason to not have them.
+
+Related is the more general question of what should happen when the property doesn&apos;t exist in the source object. As currently specified undefine is used as the source value for the LHSExpression. A reasonable alternative would be to skip that LHS entirely.  EG:
+
+var a=1,b=2;
+{a,b} ={ a:3};
+
+console.log(a,b); //current spec:  3, undefined
+                  //reasonable alternative:  3, 2
+
+Which makes more sense?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1018</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-16 09:43:15 -0700</bug_when>
+    <thetext>fixed in &quot;Rev 8&quot;, June 12,2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

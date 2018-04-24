@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>695</bug_id>
+          
+          <creation_ts>2012-10-02 15:20:00 -0700</creation_ts>
+          <short_desc>Please require &quot;new&quot; with TypedArray constructor functions</short_desc>
+          <delta_ts>2013-10-18 13:54:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Kenneth Russell">kbr</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dslomov</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1815</commentid>
+    <comment_count>0</comment_count>
+    <who name="Kenneth Russell">kbr</who>
+    <bug_when>2012-10-02 15:20:50 -0700</bug_when>
+    <thetext>In the new sections on Typed Arrays in the ES6 draft:
+
+15.13.5.1 The ArrayBuffer Object Called as a Function
+15.13.6.1 TypeArray Constructors Called as a Function
+15.13.7.1 The DataView Constructor Called as a Function
+
+I would like to require that the &quot;new&quot; operator be used with the ArrayBuffer, Typed Array and DataView constructors.
+
+Pure JavaScript constructor functions do not work correctly without using the &quot;new&quot; operator. There should not be an expectation that these built-ins do.
+
+Some web platform constructor functions necessarily support calling them without the &quot;new&quot; operator because of necessary backward compatibility requirements. The typed array constructors have no such legacy. It is difficult to support calling them without the &quot;new&quot; operator in some browser implementations -- at least as long as they are implemented at the DOM binding level and not in the JS engine directly. Further, the typed array spec editors have to this point declined requests to require support for calling them without the &quot;new&quot; operator. Please don&apos;t add this requirement in the ES6 spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4286</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-23 13:15:37 -0700</bug_when>
+    <thetext>I&apos;ve love to spec. it in the way you suggest.  However, when I checked I found that Firefox doesn&apos;t require the use of new.  
+
+
+If you can confirm that other browsers don&apos;t already work like Firefox in this regard then I&apos;ll make the change you are requesting.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4305</commentid>
+    <comment_count>2</comment_count>
+    <who name="Kenneth Russell">kbr</who>
+    <bug_when>2013-06-24 01:44:32 -0700</bug_when>
+    <thetext>It definitely doesn&apos;t work in any WebKit based browser.
+
+Chrome:
+
+&gt; var t = Float32Array(5);
+&lt; TypeError: DOM object constructor cannot be called as a function.
+
+WebKit nightly:
+
+&gt; var t = Float32Array(5);
+&lt; TypeError: &apos;[object Float32ArrayConstructor]&apos; is not a function (evaluating &apos;Float32Array(5)&apos;)
+
+&gt; t = new Float32Array(5);
+&lt; [0, 0, 0, 0, 0]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4306</commentid>
+    <comment_count>3</comment_count>
+    <who name="Kenneth Russell">kbr</who>
+    <bug_when>2013-06-24 02:24:39 -0700</bug_when>
+    <thetext>Dmitry Lomov (CC&apos;d) has been working on implementing Typed Arrays directly in the V8 VM. He points out that in the VM, it is trivial to make
+
+  Float32Array(5)
+
+work the same as
+
+  new Float32Array(5)
+
+Since a goal of typed arrays&apos; incorporation into the ES spec is to make them work similarly to Arrays, perhaps their constructors should be allowed to be called as functions after all, because &quot;var t = Array(5)&quot; works in every browser.
+
+If it seems this should be possible then please close this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4308</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-06-24 08:43:41 -0700</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Dmitry Lomov (CC&apos;d) has been working on implementing Typed Arrays directly in
+&gt; the V8 VM. He points out that in the VM, it is trivial to make
+&gt; 
+&gt;   Float32Array(5)
+&gt; 
+&gt; work the same as
+&gt; 
+&gt;   new Float32Array(5)
+&gt; 
+&gt; Since a goal of typed arrays&apos; incorporation into the ES spec is to make them
+&gt; work similarly to Arrays, perhaps their constructors should be allowed to be
+&gt; called as functions after all, because &quot;var t = Array(5)&quot; works in every
+&gt; browser.
+&gt; 
+&gt; If it seems this should be possible then please close this bug.
+
+Actually, in ES6 we have moving away from using constructor functions in this manner.  While it is easy enough for engines (particularly V8) to make this distinction, it is harder for JS code to do so.  In particular in ES6 we have this problem:
+   class Foo {
+      constructor() {
+         if /*called directly */ {/* act like a factory */}
+         else if /* super called from subclass constructor */ 
+            {/* initialize subclass provided this value */}
+         else /* must be a new Foo call */
+            { /* initialize new Foo instance */ }
+      }
+   }
+   class Bar extends Foo () {
+      constructor() {
+         super();
+      }
+   }
+
+The issue is what do those predicated look like coded in JS? They have to be written by the JS programmer and it is actually pretty difficult of reliably discriminate the cases. Because of this, I expect having class constructors that  also act as factory functions is going to become an ES6 anti-pattern.
+
+Also for  Binary Data, we want calls like Int8Array(10) to produce a type object describing a 10 element Int8Array rather than an actual array. The present state where using new is required for portable code, in theory, lets us apply that interpretation to calls without new.
+
+Hopefully, V8 won&apos;t change its current behavior until ES6 if finalized in this regard.  Making the new optional on Typed Array constructors at this time would probably turn that into a de facto standard and block that aspect of the Binary Data extension.
+
+Given all of this, I think your original bug is correct.  We do want to require new for actual data object creation by these constructors.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4309</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dmitry Lomov">dslomov</who>
+    <bug_when>2013-06-24 08:54:31 -0700</bug_when>
+    <thetext>Great, I am fine either way (and happy to see &quot;constructor as function&quot; pattern gone); and I&apos;ll be happy to kill this behavior in V8 implementation.
+It will be great to reflect this decision in the spec draft (in rev 15 e.g. it is still &quot;If its this value is undefined, it creates and initialises a new ArrayBuffer object. Thus the function call ArrayBuffer(…) is equivalent to the object creation expression new ArrayBuffer (…) with the same arguments.&quot;</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

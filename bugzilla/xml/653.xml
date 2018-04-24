@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>653</bug_id>
+          
+          <creation_ts>2012-09-23 15:38:00 -0700</creation_ts>
+          <short_desc>[11.13.1 Destructuring Assignment] AssignmentProperty should not allow &quot;Identifier Initialiser{opt}&quot;</short_desc>
+          <delta_ts>2015-07-10 08:35:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 9: July 8, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+    
+    <cc>zenparsing</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1600</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-09-23 15:38:29 -0700</bug_when>
+    <thetext>From [11.13.1 Destructuring Assignment]:
+---
+AssignmentProperty :
+  Identifier Initialiser{opt}
+  PropertyName : AssignmentElement
+---
+
+The optional `Initialiser` is most likely provided for consistency purposes, cf. `SingleNameBinding` [12.2.4 Destructuring Binding Patterns]. But since [11.1.5 Object Initialiser] does not contain any `PropertyDefinition -&gt; Identifier Initialiser{opt}` production rule, an `Initialiser` can never occur in an `ObjectAssignmentPattern` and therefore the optional `Initialiser` should be removed from `AssignmentProperty`. That means the rule should look like:
+
+---
+AssignmentProperty :
+  Identifier
+  PropertyName : AssignmentElement
+---
+
+
+Note: This restriction does not apply to `AssignmentElement`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1604</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-25 12:28:46 -0700</bug_when>
+    <thetext>We want consistency between Assignment destructuring and binding destructuring so we need to allow for an initialiser in both bases.
+
+Rather than removing it from AssignmentProperty the fix is to add it to ObjectLiteral as a covering production.  A static semantic restriction in PostfixExpression prevents this form from being used from regular object literals.  It is in PostfixExpressiion because that is the lowers point in the expression grammar where we know we aren&apos;t on the lefthand-side of an assignment operator.
+
+Fixed in Rev 10 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1605</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-09-25 13:55:24 -0700</bug_when>
+    <thetext>I&apos;m not sure whether adding a semantic restriction only to PostfixExpression helps, though. On the LHS of an AssignmentExpression could be a MemberExpression with a leading ObjectLiteral:
+---
+function f(){
+  ({}.x = 0);
+}
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1607</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-25 14:59:44 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; I&apos;m not sure whether adding a semantic restriction only to PostfixExpression
+&gt; helps, though. On the LHS of an AssignmentExpression could be a
+&gt; MemberExpression with a leading ObjectLiteral:
+&gt; ---
+&gt; function f(){
+&gt;   ({}.x = 0);
+&gt; }
+&gt; ---
+You&apos;re right.  I also need a few such restrictions on MemberExpression, CallExpression, and NewExpression.
+
+An example of a case that would be of concern is ({x=1}.x = 0)
+This is filtered out with restrictions on some of the 
+   MemberExpression : MemberExpression . IdentifierName
+production.  The MemberExpression to the left of the . isn&apos;t allowed to derive an ObjectLiteral that contains an 
+  PropertyDefinition : CoveredInitialisedIdentifier
+production.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1608</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-09-25 15:26:35 -0700</bug_when>
+    <thetext>A semantic restriction on PostfixExpression (and MemberExpression, CallExpression, and NewExpression) won&apos;t help to resolve the additional issue reported at https://mail.mozilla.org/pipermail/es-discuss/2012-September/025124.html .</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1613</commentid>
+    <comment_count>5</comment_count>
+    <who name="Kevin Smith">zenparsing</who>
+    <bug_when>2012-09-26 06:13:03 -0700</bug_when>
+    <thetext>This could get really complicated.  What about just removing the optional initializer from BindingProperty and AssignmentProperty  when there is no &quot;:&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1724</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-09-28 12:24:25 -0700</bug_when>
+    <thetext>fixed in rev10, Sept. 27 2012 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

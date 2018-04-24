@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>208</bug_id>
+          
+          <creation_ts>2011-09-26 10:31:00 -0700</creation_ts>
+          <short_desc>Destructuring should work with LeftHandSideExpression</short_desc>
+          <delta_ts>2015-07-10 08:34:20 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 3: September 23, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Erik Arvidsson">arv</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>486</commentid>
+    <comment_count>0</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-09-26 10:31:47 -0700</bug_when>
+    <thetext>SpiderMonkey allows a LeftHandSideExpression and not just a SingleNameBinding on the right hand side of a BindingProperty. The following should work:
+
+var object = {};
+({x: object.y}) = {x: 42};
+print(object.y);  // 42</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>487</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-09-26 11:31:16 -0700</bug_when>
+    <thetext>The rev 3 draft does allow LeftHandSideExpression to appear as the target of  destructuring assignment.  See 11.13
+
+It is only binding forms (let, const, var, parameters, etc.) defined in 12.2.4 that require a single name.  I believe that this is a valid restriction on binding forms.  I don&apos;t think we want binding forms to act as as arbitrary assignment statements.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>488</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2011-09-26 11:39:57 -0700</bug_when>
+    <thetext>The draft looks fine. I didn&apos;t see the ArrayAssignmentPattern forms.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

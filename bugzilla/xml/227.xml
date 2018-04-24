@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>227</bug_id>
+          
+          <creation_ts>2011-11-29 16:52:00 -0800</creation_ts>
+          <short_desc>Remove table &quot;Numbering systems with simple digit mappings&quot;</short_desc>
+          <delta_ts>2015-02-20 23:07:32 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>srl</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>513</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2011-11-29 16:52:20 -0800</bug_when>
+    <thetext>The NumberFormat section contains a table &quot;Numbering systems with simple digit mappings&quot;, which is extracted from CLDR data. It would be better to replace the table and references to it with a generic description of such numbering systems and their digits. Right now this isn&apos;t possible because there is no stable standard naming scheme for numbering systems:
+http://unicode.org/cldr/trac/ticket/4177
+
+Once the CLDR bug has been adequately addressed, the NumberFormat section should be updated.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>696</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-02-27 20:51:34 -0800</bug_when>
+    <thetext>CLDR ticket 4177 was addressed in a way that doesn&apos;t fully meet our needs. I filed a new ticket:
+http://unicode.org/cldr/trac/ticket/4437</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13216</commentid>
+    <comment_count>2</comment_count>
+    <who name="Steven R. Loomis">srl</who>
+    <bug_when>2015-02-20 23:07:32 -0800</bug_when>
+    <thetext>All of the cited CLDR tickets are marked fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

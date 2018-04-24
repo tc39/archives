@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4153</bug_id>
+          
+          <creation_ts>2015-03-10 20:35:00 -0700</creation_ts>
+          <short_desc>10.1.2 + 6.1.4: &quot;UTF16Decode&quot;</short_desc>
+          <delta_ts>2015-03-11 11:46:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13691</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-10 20:35:41 -0700</bug_when>
+    <thetext>{1}
+In 10.1.2 &quot;Static Semantics: UTF16Decode( lead, trail )&quot;...
+
+Because the operation only decodes a surrogate pair, it should maybe be renamed to &apos;UTF16DecodeSurrogatePair&apos;. (Or &apos;DecodeUTF16SurrogatePair&apos; to be more grammatical, or just &apos;DecodeSurrogatePair&apos; because UTF-16 is implied by &quot;Surrogate Pair&quot;.)
+
+{2}
+Also, there are a few places that could invoke this operation but don&apos;t:
+    6.1.4 / bullet 2
+    18.2.6.1.1 / step 4.d.iii.5
+    21.1.3.3 / step 12
+
+---
+
+{3}
+In 6.1.4, the bullets should be changed into an abstract operation, and *that* should get the name &apos;UTF16Decode&apos; (or &apos;DecodeUTF16&apos;).
+
+{4}
+This could then be explicitly invoked from:
+    7.1.3.1
+    18.2.1.1 / step 3
+    19.2.1.1.1 / steps 11+13
+    21.1.3.22 / step 4
+    21.2.2.2 / step 2.1
+    21.2.3.2.2 / step 10.a+10.b
+    24.3.1 / step 3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13695</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-11 10:14:23 -0700</bug_when>
+    <thetext>In ES6 rev36 editor&apos;s draft
+
+{2}
+6.1.4 added a cross reference to 10.1.2
+changed 18.2.6.1.1 and 21.1.3.3 to use UTF16Decoede
+
+Deferring to ES7 consideration of the larger changes suggested</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13696</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-11 11:20:24 -0700</bug_when>
+    <thetext>Deferring {3} and {4} makes sense, but {1} renaming UTF16Decode doesn&apos;t strike me as a &quot;larger change&quot;: in rev35, there&apos;s only *one* use of it (21.2.2.10).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13697</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-11 11:46:09 -0700</bug_when>
+    <thetext>(In reply to Michael Dyck from comment #2)
+&gt; Deferring {3} and {4} makes sense, but {1} renaming UTF16Decode doesn&apos;t
+&gt; strike me as a &quot;larger change&quot;: in rev35, there&apos;s only *one* use of it
+&gt; (21.2.2.10).
+
+the current name seems adequate for now.  But I might consider changing it in the context of a larger redo. BTW, it is now referenced 4 places.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

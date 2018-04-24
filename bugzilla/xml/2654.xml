@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2654</bug_id>
+          
+          <creation_ts>2014-04-14 10:05:00 -0700</creation_ts>
+          <short_desc>Is a [no LineTerminator here] needed in the arrow grammar?</short_desc>
+          <delta_ts>2014-04-29 22:45:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Luke Hoban">lukeh</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7720</commentid>
+    <comment_count>0</comment_count>
+    <who name="Luke Hoban">lukeh</who>
+    <bug_when>2014-04-14 10:05:27 -0700</bug_when>
+    <thetext>We decided at the last meeting that for the async feature, we want to maintain forward compatibility with the option to elide &quot;()&quot; in arrows fucntions.
+
+As noted in https://github.com/lukehoban/ecmascript-asyncawait/issues/13#issuecomment-40126866 we would have to add an additinal [no LineTerminator here] to the ES6 arrow grammar to ensure we have this option.
+
+&lt;quote&gt;
+
+If we&apos;re really trying to preserve the option of elided arrow params, do we want to add that second [no LineTerminator here] restriction to regular arrow functions in ES6? (I don&apos;t see that restriction in the current draft.)
+
+// Successfully parses with ES6 grammar
+x = y
+=&gt; 1;
+
+&lt;/quote&gt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7753</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-16 14:50:44 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8025</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-29 22:45:04 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

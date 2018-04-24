@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>31</bug_id>
+          
+          <creation_ts>2011-02-24 17:37:00 -0800</creation_ts>
+          <short_desc>S15.3.4.2_A1_T1.js is invalid</short_desc>
+          <delta_ts>2011-09-24 16:48:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/71c63c10dcd3</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>dfugate</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>61</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-24 17:37:51 -0800</bug_when>
+    <thetext>S15.3.4.2_A1_T1.js contains the following:
+    11 f = function(x) {
+    12   return x*x;
+    13 }
+    14 
+    15 //CHECK#1
+    16 if (eval(f.toString())(10) !== f(10)) {
+    17   $ERROR(&apos;#1: An implementation-dependent representation of the function is returned. This representation has the syntax of a FunctionDeclaration&apos;);
+    18 }
+
+This test case is *almost* valid.  The only issue with it is the assertion on line 16 which assumes the return value of &apos;eval(&quot;f = function(x) {return x*x;}&quot;)&apos; (or whatever implementation dependent representation of &apos;f&apos; the interpreter comes up) is in fact something functionally equivalent to the original &apos;f&apos;.  By 15.1.2.1 (eval function) and chapter 14, the return value of eval here is in fact &apos;undefined&apos; which invalidates the test.
+
+Haven&apos;t thoroughly checked this, but seems like a simple fix could be:
+    16 if (eval(f.toString() + &quot;(10);&quot;) !== f(10)) {
+
+Better yet would be to simply verify that f.toString() matches a very generic RegExp that has the pattern of a FunctionDeclaration.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>274</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 08:22:41 -0700</bug_when>
+    <thetext>Looks like this was fixed in Hg&apos;s revision 99.  Verifying now...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>275</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 08:39:37 -0700</bug_when>
+    <thetext>Doesn&apos;t look the change:
+  f = function(x) ...
+to:
+  var f = function(x) ...
+
+actually fixed the underlying problem - running eval on a function expression returns &apos;undefined&apos;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>465</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:48:14 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/71c63c10dcd3</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

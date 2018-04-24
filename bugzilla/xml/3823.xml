@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3823</bug_id>
+          
+          <creation_ts>2015-02-11 16:53:00 -0800</creation_ts>
+          <short_desc>chapter 8: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12314</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:53:03 -0800</bug_when>
+    <thetext>----------------------------------------
+In 8.1.1.4.7 &quot;DeleteBinding (N)&quot;:
+
+{1}
+8.1.1.4.7 / step 5.c.i:
+Let /varNames/ be /envRec/.[[VarNames]] List.
+
+    Delete &quot;List&quot;.
+
+----------------------------------------
+In 8.1.1.5.1 &quot;GetBindingValue(N,S)&quot;:
+
+{2}
+8.1.1.5.1 / step 3.a:
+Assert: /M/ and /N2/ are the indirection values provided when this binding for
+/N/ was created.
+
+    This is a misuse of Assert.
+    Change to &quot;Let /M/ and /N2/ be the indirection...&quot;
+
+----------------------------------------
+In 8.1.2.5 &quot;NewGlobalEnvironment ( G ) Abstract Operation&quot;:
+
+{3}
+8.1.2.5 / step 3:
+Set /objRec/&apos;s /unscopables/ to an empty List.
+
+    &apos;unscopables&apos; isn&apos;t a component of object environment record any more.
+    Delete the step.
+
+----------------------------------------
+In 8.2.2 &quot;CreateIntrinsics ( realmRec ) Abstract Operation&quot;:
+
+{4}
+8.2.2 / step 5:
+Let /throwerSteps/ be the algorithm steps of the %ThrowTypeError% function
+(9.2.8.1).
+
+    It&apos;s slightly incongruous to refer to the steps of a function
+    that hasn&apos;t been created yet.
+    Of course, the algorithm exists, even though the function doesn&apos;t.
+    Maybe change &quot;of&quot; to &quot;specified for&quot;.
+
+{5}
+8.2.2 / step 9:
+Let /funcProto/ be the CreateBuiltinFunction(/realmRec/, /noSteps/, /objProto/).
+
+    Delete extraneous &quot;the&quot;
+
+----------------------------------------
+In 8.2.3 &quot;SetRealmGlobalObj ( realmRec, globalObj ) Abstract Operation&quot;:
+
+{6+7}
+8.2.3 / step 3 + 4:
+Set /realmRec/.[[globalThis]] to /newGlobal/.
+Let /newGlobalEnv/ be NewGlobalEnvironment(/newGlobal/).
+
+    &apos;newGlobal&apos; isn&apos;t defined. s|newGlobal|globalObj|
+
+----------------------------------------
+In 8.4.1 &quot;EnqueueJob ( queueName, job, arguments) Abstract Operation&quot;:
+
+{8}
+8.4.1 / step 7:
+Perform any implementation or host environment defined processing of /pending/.
+This may including modify the [[HostDefined]] field ...
+
+    s|including modify|include modifying|
+
+----------------------------------------
+In 8.5 &quot;Initialization&quot;:
+
+{9}
+8.5 / header:
+
+    Add &quot;()&quot; to indicate no parameters.
+
+{10+11}
+8.5 / step 8.a.ii, 8.b.i:
+EnqueueJob(&quot;ScriptJobs&quot;, ScriptEvaluationJob, &lt;&lt;/sourceCodeId/&gt;&gt;).
+EnqueueJob(&quot;ScriptJobs&quot;, ModuleEvaluationJob, &lt;&lt;/sourceCodeId/ &gt;&gt;).
+
+    For consistency with other invocations, insert &quot;Perform&quot; before &quot;EnqueueJob&quot;
+
+----------------------------------------
+In 8.5.1 &quot;InitializeFirstRealm ( realm ) Abstract Operation&quot;:
+
+{12}
+8.5.1 / step 3:
+Perform SetRealmGlobalObject(/realm/, /global/).
+
+    s|Object|Obj|
+    (or change the name of the abstract operation)
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12350</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 19:27:24 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12418</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:37 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

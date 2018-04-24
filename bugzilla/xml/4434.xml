@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4434</bug_id>
+          
+          <creation_ts>2015-08-05 12:40:00 -0700</creation_ts>
+          <short_desc>[21.2.5.11 RegExp.prototype [ @@split ]: Missing Boundary Check</short_desc>
+          <delta_ts>2015-11-02 18:01:05 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>mike</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14590</commentid>
+    <comment_count>0</comment_count>
+    <who name="">mike</who>
+    <bug_when>2015-08-05 12:40:08 -0700</bug_when>
+    <thetext>Step 25 reads:
+
+&gt; Let T be a String value equal to the substring of S consisting of the
+&gt; elements at indices p (inclusive) through size (exclusive).
+
+In the case where there is a successful match against a non-empty `string`
+argument, the value of `p` can be traced through the following steps:
+
+&gt; 19. Let size be the number of elements in S.
+&gt; 20. Let p be 0.
+&gt; [...]
+&gt; 23. Let q be p.
+&gt; 24. Repeat, while q &lt; size
+&gt;     [...]
+&gt;     c. Let z be RegExpExec(splitter, S).
+&gt;     [...]
+&gt;     f. Else z is not null,
+&gt;        i. Let e be ToLength(Get(splitter, &quot;lastIndex&quot;)).
+&gt;        ii. ReturnIfAbrupt(e).
+&gt;        [...]
+&gt;        iv. Else e ≠ p,
+&gt;            [...]
+&gt;            6. Let p be e.
+&gt;            [...]
+&gt;            12. Let q be p.
+&gt; 25. (see above)
+
+Because RegExpExec defers to the user-defined `exec` method where present, `e`
+may take any value at 24.f.i (as suggested by the ReturnIfAbrupt in the
+following step). This will also be the value of `p` as the algorithm approaches
+completion. The ToLength abstract operation ensures that `p` is greater than or
+equal to zero, but there is no guarantee that it will be less than the value of
+`size`. The specification does not include any detail about how the host should
+behave if the value is out-of-bounds here. Maybe a RangeError is appropriate?
+
+Example code:
+
+    var obj = {
+      constructor: function() {}
+    };
+    var fakeRe = {
+      exec: function() {
+        fakeRe.lastIndex = 999;
+        return [];
+      }
+    };
+    obj.constructor[Symbol.species] = function() {
+      return fakeRe;
+    };
+    RegExp.prototype[Symbol.split].call(obj, &apos;a&apos;);</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14882</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-11-02 18:01:05 -0800</bug_when>
+    <thetext>Fixed in ES2016 Draft (08b4756).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

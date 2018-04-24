@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>214</bug_id>
+          
+          <creation_ts>2011-10-18 22:34:00 -0700</creation_ts>
+          <short_desc>Define Host Object</short_desc>
+          <delta_ts>2012-10-26 15:34:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 6: February 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Garrett">dhtmlkitchen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>497</commentid>
+    <comment_count>0</comment_count>
+    <who name="Garrett">dhtmlkitchen</who>
+    <bug_when>2011-10-18 22:34:11 -0700</bug_when>
+    <thetext>The current specification defines host object as:
+
+| host object
+| object supplied by the host environment to complete the 
+| execution environment of ECMAScript.
+| 
+| NOTE Any object that is not native is a host object.
+
+Thus, a host object is any object defined by the host environment. This would include the window object which acts as the global object (this === window).
+
+The specification does not disallows host object from being a native ES object. 
+
+The problem is that Mark Miller believes otherwise: ``&quot;host&quot; simply means &quot;non-native&quot;&apos;&apos;
+http://www.mail-archive.com/es-discuss@mozilla.org/msg04972.html
+
+While Allen agrees that there are two types of host objects:
+https://mail.mozilla.org/pipermail/es-discuss/2010-July/011514.html
+
+The specification further allows implementations to implement extensions.
+
+| 16 Errors
+| An implementation may extend program syntax[...]
+| [...]
+| An implementation may provide additional types, values, objects, 
+| properties, and functions beyond those described in this specification.
+
+
+Which of the following are host objects:
+  window
+  window.atob
+  window.alert
+  ArrayBuffer
+ -?
+
+The specification needs to differentiate between native host object and non-native host object.
+
+Host object:
+| object supplied by the host environment to complete the 
+| execution environment of ECMAScript.
+| 
+| native host object - host object whose semantics can be fully described 
+| by this specification.
+| 
+| non-native host object - host object that implements semantics or behavior 
+| that cannot be explained by this specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>771</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-03-16 14:07:45 -0700</bug_when>
+    <thetext>See discussion thread starting at https://mail.mozilla.org/pipermail/es-discuss/2012-January/020133.html</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2080</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 19:26:34 -0700</bug_when>
+    <thetext>In the current draft the terms Host object and native object has been generally replaced with exotic objects and ordinary objects (with somewhat different meanings)
+
+There is one lingering reference to Host Object that hopefully can be eliminated</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2085</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:02 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

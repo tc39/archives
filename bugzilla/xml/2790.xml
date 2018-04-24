@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2790</bug_id>
+          
+          <creation_ts>2014-05-01 10:11:00 -0700</creation_ts>
+          <short_desc>anomalous step labels</short_desc>
+          <delta_ts>2014-06-01 11:33:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8086</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-01 10:11:58 -0700</bug_when>
+    <thetext>8.1.2.5 / alg 1       Expected &apos;4&apos;, got &apos;6&apos;
+8.1.2.5 / alg 1       Expected &apos;12&apos;, got &apos;4&apos;
+
+13.2.2.2 / alg 2      Expected &apos;1&apos;, got &apos;2&apos;
+
+24.1.4.1 / alg 1      Expected &apos;1&apos;, got &apos;9&apos;
+
+26.1.3 / alg 1        Expected &apos;1&apos;, got &apos;7&apos;
+
+26.2.3.7.3 / alg 1    Expected &apos;5&apos;, got &apos;8&apos;
+26.2.3.7.3 / alg 1    Expected &apos;10&apos;, got &apos;5&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8237</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-08 18:16:37 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8740</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 11:33:08 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

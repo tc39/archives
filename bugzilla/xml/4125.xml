@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4125</bug_id>
+          
+          <creation_ts>2015-03-06 04:50:00 -0800</creation_ts>
+          <short_desc>9.4.5.3 [[DefineOwnProperty]]: wrong return</short_desc>
+          <delta_ts>2015-03-17 16:57:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13594</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2015-03-06 04:50:15 -0800</bug_when>
+    <thetext>In 9.4.5.3, [[DefineOwnProperty]] for integer-indexed objects, step 3.c.xi.3 should be &quot;return status&quot;, not &quot;ReturnIfAbrupt(status)&quot;, otherwise a reject in IntegerIndexedElementSet in the previous step will be silently swallowed. (Alternatively, tail-call IntegerIndexedElementSet, as in [[Set]].)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13595</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 05:11:36 -0800</bug_when>
+    <thetext>Step 3.c.xi.3 never returns `false` (array bounds are checked in 9.4.5.3 steps 3.c.i, 3.c.iii, 3.c.iv, 3.c.vi).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13596</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-06 05:17:20 -0800</bug_when>
+    <thetext>Maybe it&apos;s possible to remove steps 3.c.i, 3.c.iii, 3.c.iv, 3.c.vi and rely on IntegerIndexedElementSet to perform the bounds checks. This will lead to a different behaviour for detached buffers, but I don&apos;t think that&apos;s a problem.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13608</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-06 09:31:38 -0800</bug_when>
+    <thetext>(Note that this bug was raised today against rev 34, when the current Version is rev 35. It might have a better chance of being seen if you bump the Version.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13730</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-15 11:27:10 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft
+
+The tail call solution was easiest fix as I think we want to the return false behavior when the buffer is detached.
+
+In practice, an  implementation is going to want to inline IntegerIndexedElementSet here and eliminate all the redundant checks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13805</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:04 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

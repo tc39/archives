@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1245</bug_id>
+          
+          <creation_ts>2013-02-06 17:21:00 -0800</creation_ts>
+          <short_desc>Add test for missing argument to String.prototype.localeCompare</short_desc>
+          <delta_ts>2013-02-07 21:22:16 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3182</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-02-06 17:21:04 -0800</bug_when>
+    <thetext>Browsers currently show inconsistent behavior when String.prototype.localeCompare is called without the &quot;that&quot; argument. A test should be added to guide them to standard behavior.
+
+According to ES5, introduction to clause 15, &quot;if a function or constructor described in this clause is given fewer arguments than the function is specified to require, the function or constructor shall behave exactly as if it had been given sufficient additional arguments, each such argument being the undefined value.&quot;
+
+According to ES5, 15.5.4.9, the actual string to be used for comparison, That, is determined as &quot;3. Let That be ToString(that).&quot;
+
+According to ES5, 9.8, ToString(undefined) is the string &quot;undefined&quot;.
+
+Taken together, a missing &quot;that&quot; argument has to be treated as of the string &quot;undefined&quot; had been provided.
+
+Internet Explorer (9/10, Windows) and Chrome (24, Mac/Windows) conform to the specification. Firefox (18, Mac/Windows), Safari (6.0, Mac), and Opera (12, Mac/Windows) return 0, as did Chrome when I first tested it for this issue in September 2012.
+
+Brian Terlson found no calls to localeCompare without &quot;that&quot; argument in his large collection of scripts from the Alexa 10000, so it&apos;s extremely unlikely that anybody depends on the existing non-conformant behavior in some browsers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3183</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-02-07 21:22:16 -0800</bug_when>
+    <thetext>Added test to both test262 and test402.
+http://hg.ecmascript.org/tests/test262/rev/7a04972dd77b</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

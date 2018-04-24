@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2704</bug_id>
+          
+          <creation_ts>2014-04-19 16:28:00 -0700</creation_ts>
+          <short_desc>chapter 23: misc editorial</short_desc>
+          <delta_ts>2014-06-01 12:33:39 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 24: April 27, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7852</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-19 16:28:03 -0700</bug_when>
+    <thetext>----------------------------------------
+In 23.1.1 &quot;The Map Constructor&quot;:
+
+{1}
+23.1.1 / para 1:
+... it iinitializes its *this* value ...
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.1.1.2 &quot;new Map ( ... argumentsList )&quot;:
+
+{2}
+23.1.1.2 / para 1:
+... it iinitializes a newly created object.
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.1.5.2.1 &quot;%MapIteratorPrototype%.next ( )&quot;:
+
+{3}
+23.1.5.2.1 / step 8:
+Assert: /m/ has a [[MapData]] internal slot and /m/ has been iinitialized ...
+    s|iinitialized|initialized|
+
+----------------------------------------
+In 23.2.1 &quot;The Set Constructor&quot;:
+
+{4}
+23.2.1 / para 1:
+... it iinitializes its *this* value ...
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.2.1.1 &quot;Set ( [ iterable ] )&quot;:
+
+{5}
+23.2.1.1 / step 8:
+If the value of /sets/&apos;s [[SetData]] internal slot is not *undefined*, ...
+    s|sets|set|
+
+----------------------------------------
+In 23.2.1.2 &quot;new Set ( ...argumentsList )&quot;:
+
+{6}
+23.2.1.2 / para 1:
+... it iinitializes a newly created object. ...
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.2.5.2.1 &quot;%SetIteratorPrototype%.next ( )&quot;:
+
+{7}
+23.2.5.2.1 / step 8:
+Assert: /s/ has a [[SetData]] internal slot and /s/ has been iinitialized ...
+    s|iinitialized|initialized|
+
+----------------------------------------
+In 23.3.1 &quot;The WeakMap Constructor&quot;:
+
+{8}
+23.3.1 / para 1:
+... it iinitializes its *this* value with the internal state necessary ...
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.3.1.1 &quot;WeakMap ( [ iterable ] )&quot;:
+
+{9}
+23.3.1.1 / step 8:
+If the value of /map/&apos;s [Weak[MapData]] internal slot is not *undefined*, ...
+    Move the second left-square-bracket
+
+----------------------------------------
+In 23.3.1.2 &quot;new WeakMap ( ...argumentsList )&quot;:
+
+{10}
+23.3.1.2 / para 1:
+... it iinitializes a newly created object.
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.3.3.5 &quot;WeakMap.prototype.has ( key )&quot;:
+
+{11}
+23.3.3.5 / step 7.a:
+If /p/.[[key]] is not `empty` and SameValue(/p/.[[key]], /key/) is *true* t, ...
+    After &quot;true&quot;, delete the stray &quot;t&quot;
+
+----------------------------------------
+In 23.4.1 &quot;The WeakSet Constructor&quot;:
+
+{12}
+23.4.1 / para 1:
+... it iinitializes its *this* value with the internal state necessary ...
+    s|iinitializes|initializes|
+
+----------------------------------------
+In 23.4.1.1 &quot;WeakSet ( [ iterable ] )&quot;:
+
+{13}
+23.4.1.1 / step 8:
+If the value of /sets/&apos;s [[WeakSetData]] internal slot is not *undefined*, ...
+    s|sets|set|
+
+----------------------------------------
+In 23.4.1.2 &quot;new WeakSet ( ...argumentsList)&quot;:
+
+{14}
+23.4.1.2 / para 1:
+... it iinitializes a newly created object.
+    s|iinitializes|initializes|
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7974</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-29 16:41:17 -0700</bug_when>
+    <thetext>Rev24 has fixed most of these. Here&apos;s what&apos;s left:
+
+----------------------------------------
+In 23.2.1.1 &quot;Set ( [ iterable ] )&quot;:
+
+{5}
+23.2.1.1 / step 8:
+If the value of /sets/&apos;s [[SetData]] internal slot is not *undefined*, ...
+    s|sets|set|
+
+----------------------------------------
+In 23.3.1.1 &quot;WeakMap ( [ iterable ] )&quot;:
+
+{9}
+23.3.1.1 / step 8:
+If the value of /map/&apos;s [Weak[MapData]] internal slot is not *undefined*, ...
+    Move the second left-square-bracket
+
+----------------------------------------
+In 23.3.3.5 &quot;WeakMap.prototype.has ( key )&quot;:
+
+{11}
+23.3.3.5 / step 7.a:
+If /p/.[[key]] is not `empty` and SameValue(/p/.[[key]], /key/) is *true* t,
+...
+    After &quot;true&quot;, delete the stray &quot;t&quot;
+
+----------------------------------------
+In 23.4.1.1 &quot;WeakSet ( [ iterable ] )&quot;:
+
+{13}
+23.4.1.1 / step 8:
+If the value of /sets/&apos;s [[WeakSetData]] internal slot is not *undefined*, ...
+    s|sets|set|
+
+XXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8280</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 15:20:19 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8756</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 12:33:39 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

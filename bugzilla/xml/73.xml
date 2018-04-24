@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>73</bug_id>
+          
+          <creation_ts>2011-03-15 15:18:00 -0700</creation_ts>
+          <short_desc>Listing the for-in enumeration order as an internal object method</short_desc>
+          <delta_ts>2014-09-01 10:27:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>158</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-15 15:18:19 -0700</bug_when>
+    <thetext>E-mail on the topic: https://mail.mozilla.org/pipermail/es-discuss/2011-March/013039.html.
+Reviewed copy:
+------------
+I think it would be worth for spec readability to give a name to the
+for-in property enumeration internal method and list it as such in ES5
+8.6.2 Table 8 regardless the fact that it is implementation-dependent.
+&gt;From the spec edition point of view, it would require a bit of
+re-writing for the for-in statement semantics algorithm.
+
+I have noticed that there is no mention of this internal method in
+Allen&apos;s resource
+(http://www.wirfs-brock.com/allen/things/es5-technial-notes-and-resources).
+For the record, this internal method is &quot;called&quot; in (at least I haven&apos;t
+found any other place):
+* 12.6.4 The for-in Statement (twice)
+* 15.2.3.7 Object.defineProperties
+* 15.2.3.14 Object.keys
+* (Indirect) 15.12.3 JSON.stringify
+&quot;The ordering of the Strings should be the same as that used by the
+Object.keys standard built-in function.&quot;
+
+It would probably help to define more easily how proxies reify
+Object.keys. The &apos;enumerate&apos; trap would just reify this new internal
+method ( [[enumerate]]? ) and as such there would be no need to modify
+the for-in statement definition as it is in
+http://wiki.ecmascript.org/doku.php?id=harmony:proxies_semantics#modifications_to_the_evaluation_of_expressions_and_statements.
+----------------</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>342</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 16:09:38 -0700</bug_when>
+    <thetext>move to ES6 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10111</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-09-01 10:27:59 -0700</bug_when>
+    <thetext>In ES6 this is the [[Enumerate]]  internal method</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

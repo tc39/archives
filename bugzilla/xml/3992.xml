@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3992</bug_id>
+          
+          <creation_ts>2015-02-17 17:13:00 -0800</creation_ts>
+          <short_desc>new early errors should be SyntaxError, not ReferenceError</short_desc>
+          <delta_ts>2015-02-19 19:11:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Herman">dherman</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12851</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Herman">dherman</who>
+    <bug_when>2015-02-17 17:13:44 -0800</bug_when>
+    <thetext>There are a number of places where the spec produces new early errors, which are sometimes SyntaxErrors and sometimes ReferenceErrors. In particular failed checks for IsValidSimpleAssignmentTarget are inconsistent about which type of error they produce.
+
+My suggestion is that we stick with SyntaxError since that&apos;s seen as the early error type. We may not be able to be 100% consistent about that, if ES5 already mandates some early ReferenceErrors, but I believe SyntaxError matches expectations better.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12868</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-17 17:52:19 -0800</bug_when>
+    <thetext>see last item in first bullet list of http://www.ecma-international.org/ecma-262/5.1/#sec-16.  That was the ES5 equivalent of isValidSimpleAssignment.
+ES3 also had more or less that same language in its use 16
+
+It&apos;s PutValue that throws a ReferenceError in those cases, hence the origin or &quot;early ReferenceError&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12979</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 11:59:18 -0800</bug_when>
+    <thetext>I checked and the only early Reference Errors I could find are the ones that are carry overs from ES3/5.
+
+So fixed there were any others they are now gone.
+
+Sp...
+
+fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13159</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:11 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

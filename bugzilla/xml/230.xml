@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>230</bug_id>
+          
+          <creation_ts>2011-11-29 19:27:00 -0800</creation_ts>
+          <short_desc>Bugs in Number.prototype.toPrecision algorithm</short_desc>
+          <delta_ts>2014-07-20 18:20:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>516</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2011-11-29 19:27:09 -0800</bug_when>
+    <thetext>The algorithm for Number.prototype.toPrecision has a bug as well as a section that seems unnecessary.
+
+The bug: When execution completes step 10.c.v, m is a string that&apos;s ready to be returned to the caller. However, the algorithm doesn&apos;t return it at this point, but instead stumbles through steps 11-14, adding unwanted characters to the string before finally returning it to the caller. For example, here are the steps taken for (-12340000).toPrecision(3):
+
+1. x = -12340000
+2. skip
+3. p = 3
+4. skip
+5. s = &quot;&quot;
+6. then
+    a. s = &quot;=&quot;
+    b. x = 12340000
+7. skip
+8. skip
+9. skip
+10. else
+    a. e = 7, n = 123
+    b. m = &quot;123&quot;
+    c. then
+        i. a = &quot;1&quot;, b = &quot;23&quot;
+        ii. m = &quot;1.23&quot;
+        iii. skip
+        iv. else
+            1. then
+                a. c = &quot;+&quot;
+            2. skip
+            3. d = &quot;7&quot;
+        v. m = &quot;-1.23e+7&quot;
+11. skip
+12. then
+    a. m = &quot;-1.23e+7.&quot;
+13. skip
+14. return &quot;--1.23e+7.&quot;
+
+The unnecessary section: The test e = 0 in 10.c.iii as well as the dependent step 10.c.iii.1 seem unnecessary because from 10.c we know that either e &lt; -6 or e &gt;= p, and from 8 that p &gt;= 1.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5416</commentid>
+    <comment_count>1</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-09-23 19:16:05 -0700</bug_when>
+    <thetext>Step numbers in draft ES6 are two higher.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5911</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-20 17:48:11 -0700</bug_when>
+    <thetext>fixed in rev 20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6070</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:45:26 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9414</commentid>
+    <comment_count>4</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 18:20:04 -0700</bug_when>
+    <thetext>Verified in rev 26 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

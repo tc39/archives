@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>277</bug_id>
+          
+          <creation_ts>2012-02-24 05:00:00 -0800</creation_ts>
+          <short_desc>Keywords vs unicode escapes in IdentifierName</short_desc>
+          <delta_ts>2015-10-02 14:33:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>2131</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>odinho</cc>
+    
+    <cc>princexcess69</cc>
+    
+    <cc>utatane.tea</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>660</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2012-02-24 05:00:18 -0800</bug_when>
+    <thetext>Section 7.6 isn&apos;t particularly clear on whether identifier names with unicode escapes can be treated as keywords. The only respective text is the sentence &quot;All interpretations of identifiers within this specification are based upon their actual characters regardless of whether or not an escape sequence was used to contribute any particular characters.&quot;  It is probably intended, but not clear, that this overrides/amends the formal grammar definition.
+
+Implementations differ in their interpretation. For example,
+
+v\u0061r x = 0
+eval(&quot;v\\u0061r y = 1&quot;)
+
+Is accepted by FF 10, rejected by V8 3.8, and JSC seems to reject the former but accepts the latter. Conversely,
+
+var v\u0061r = 1
+eval(&quot;var v\\u0061r = 2&quot;)
+
+is rejected by FF but accepted by V8 (actually introducing a variable named &quot;var&quot;).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>665</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-02-24 09:41:53 -0800</bug_when>
+    <thetext>From http://mathiasbynens.be/notes/javascript-identifiers:
+
+For compatibility reasons, browsers must support identifiers that unescape to a reserved word, as long as at least one character is escaped using a Unicode escape sequence. For example, `var var;` wouldn’t work, but e.g. `var v\u0061r;` would — even though strictly speaking, the ECMAScript spec disallows it. Subsequent use of such identifiers must also have at least one character escaped (otherwise the reserved word will be used instead), but it doesn’t have to be the same character(s) that were originally used to create the identifier. For example, `var v\u0061r = 42; alert(va\u0072);` would alert `42`.
+
+This is documented here: http://wiki.whatwg.org/wiki/Web_ECMAScript#Identifiers</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>864</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-04-12 10:15:45 -0700</bug_when>
+    <thetext>http://wiki.whatwg.org/wiki/Web_ECMAScript#Identifiers shouldn&apos;t be used justify any particular interpretation of the ES specification. There is nothing normative about that document and the section on Identifiers is actually labelled as &quot;this is very rough&quot;.  Nobody should be making implementation decisions on the basis of that document.
+
+There may well be web compatibility requirements that are not covered by the current ES5.1 spec. We should try to understand those requirements before implementations start trying to match each others deviations from the spec. Difference between implementations suggest areas where there currently isn&apos;t complete interoperability in this area so we shouldn&apos;t be creating interoperability among spec. deviations (and future compatibility requirements) unless we actually decide we want those deviations to be part of the standard language.
+
+On es-discuss Andreas reported that Waldemar told him that keywords are supposed to be recognized before canonicalization.  Waldemar&apos;s observation may well be correct for ES&lt;=3. He would know, and if that was the intent then I can see how the spec. could be read in that manner.  But for ES5 we rewrote that portion of the specification and introduced the concept of IdentifierName as a lexical category that includes both ReservedWord and Identifier  and all the escape and canonicalization language was applied to IdentifierName rather than Identifier.  This was all intentional.  We certainly didn&apos;t expect true and tru\u0065 to be recognized as different identifier names in newly allowed contexts such as:
+
+    obj.true == obj.tru\u0065
+
+I&apos;m pretty sure that no reviewers  brought up issues related to a ES3 interpretation of  unicode escapes as keyword escapes.
+
+At this point I think we need to do two things:
+
+1) Understand the actual browser interop situation. For example, do all major browsers accept:
+      var tru\u0065;
+2) Within the constraints of 1) decide what we actually want to specify.  Do we want
+      console.log(fals\u0065)
+to print &quot;false&quot; or &quot;undefined&quot;?
+3)  For ES6 we have to decide how \u{0065} fits in.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1106</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-06 06:02:07 -0700</bug_when>
+    <thetext>To echo the discussion in https://bugzilla.mozilla.org/show_bug.cgi?id=744784:
+
+(In reply to comment #2)
+&gt; At this point I think we need to do two things:
+&gt; 
+&gt; 1) Understand the actual browser interop situation. For example, do all major
+&gt; browsers accept:
+&gt;       var tru\u0065;
+
+The latest versions of Firefox and IE throw an error in this case. Other browsers accept it. Firefox used to support this syntax, but removed this non-standard extension little over half a year ago, and hasn’t received any reports of compatibility problems.
+
+Let’s try to get other browsers/engines to remove this non-standard extension as well. I’ve filed the following bugs:
+
+* Opera/Carakan bug: https://bugs.opera.com/browse/DSK-369398
+* Chrome/V8: http://code.google.com/p/v8/issues/detail?id=2222
+* Safari/JavaScriptCore: https://bugs.webkit.org/show_bug.cgi?id=90678</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1107</commentid>
+    <comment_count>4</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2012-07-06 06:21:23 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; At this point I think we need to do two things:
+&gt; 
+&gt; 1) Understand the actual browser interop situation. For example, do all major
+&gt; browsers accept:
+&gt;       var tru\u0065;
+&gt; 2) Within the constraints of 1) decide what we actually want to specify.  Do we
+&gt; want
+&gt;       console.log(fals\u0065)
+&gt; to print &quot;false&quot; or &quot;undefined&quot;?
+&gt; 3)  For ES6 we have to decide how \u{0065} fits in.
+
+A closely related issue: is /foo/\u0069 a legal regexp? The grammar parses the regexp flags as IdentifierParts, which can contain unicode escapes, but is then rather vague about the semantics via conversion to a string (end of Section 7.8).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1199</commentid>
+    <comment_count>5</comment_count>
+    <who name="Odin Hørthe Omdal (Opera)">odinho</who>
+    <bug_when>2012-07-09 01:23:12 -0700</bug_when>
+    <thetext>Carakan (Opera) has a ready patch waiting to be integrated that changes to throwing here.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3522</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-21 09:12:53 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; 
+&gt; A closely related issue: is /foo/\u0069 a legal regexp? The grammar parses the
+&gt; regexp flags as IdentifierParts, which can contain unicode escapes, but is then
+&gt; rather vague about the semantics via conversion to a string (end of Section
+&gt; 7.8).
+
+I agree, the spec. is vague.  On O3/21/13 I tested this on recent versions of Firefox, Chrome, Safari, and IE9.  Only IE9 accepted the escaped flag as valid.
+
+Based on this, for ES6 I will make it clear that escaped flags are not allowed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6246</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-30 10:10:51 -0700</bug_when>
+    <thetext>mark as in_progress to flag that it needs to go into a future ES5.1 errata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14488</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-06-10 06:45:24 -0700</bug_when>
+    <thetext>FWIW, Safari/JavaScriptCore just dropped the “escaped reserved words as identifiers” compatibility measure. https://trac.webkit.org/changeset/185414</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14729</commentid>
+    <comment_count>9</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:01 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>982</bug_id>
+          
+          <creation_ts>2012-11-22 09:33:00 -0800</creation_ts>
+          <short_desc>problems with restrictions on non-strict Function caller property</short_desc>
+          <delta_ts>2012-12-21 18:08:37 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>https://mail.mozilla.org/pipermail/es5-discuss/2012-March/004107.html</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>310</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2512</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 09:33:02 -0800</bug_when>
+    <thetext>+++ This bug was initially created as a clone of Bug #310 +++
+
+15.3.5.4 should have redefined [[GetOwnProperty]] instead of [[Get]] to restrict access to strict-mode functions from non-strict code. 
+
+AllenWB:
+
+OK, it looks like the addition of line 6 of 15.3.4.5 was an error.  Line 20 and the informative note in 15.3.5.4 had been around for quite a while when lines 5 and 6 were added in the August 31, 2009 ES5 draft. Technically line 5 is needed and I probably also added line 6 to also incorporate 15.3.5.4 but didn&apos;t notice that line 20 made it unnecessary.
+
+I&apos;m disinclined to do anything at all for non-strict caller other than correcting the spec. to use [[GetOwnProperty]] instead of [[Get]].  I&apos;m haven&apos;t yet heard any real interoperability issues involving this non-standard feature and unless there are I don&apos;t thing we should do anything beyond the minimum necessary to ensure &quot;caller&quot; doesn&apos;t leak strict callers form the call stack.  As I mentioned earlier, we might consider just specify that as a requirement and moving a away for an algorithmic spec. for this mis-feature.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2555</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 13:41:16 -0800</bug_when>
+    <thetext>in rev 12 define both [[GetP]  and [[GetownProperty]] to sensor such function references.  Currently as undefined, but perhaps should be null.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2558</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2012-11-22 21:43:20 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; in rev 12 define both [[GetP]  and [[GetownProperty]] to sensor such function
+&gt; references.  Currently as undefined, but perhaps should be null.
+
+I sense censoring ;-).
+
+Yes, definitely should be null. Otherwise you can tell there&apos;s a strict caller, an info leak that might lead to trouble. Hoping Mark will confirm.
+
+/be</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2637</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 09:45:38 -0800</bug_when>
+    <thetext>corrected in rev 12, Nov. 22, 2012 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2702</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-23 12:01:32 -0800</bug_when>
+    <thetext>reopened on rev 12 to change censor value to null</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2996</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-05 15:41:27 -0800</bug_when>
+    <thetext>changed to null in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4332</bug_id>
+          
+          <creation_ts>2015-04-22 15:14:00 -0700</creation_ts>
+          <short_desc>Problem with string padding algorithm</short_desc>
+          <delta_ts>2015-10-02 14:36:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Harmony</product>
+          <component>strawmen</component>
+          <version>Initial draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Richard">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>ecmascript</cc>
+    
+    <cc>kgrandon</cc>
+    
+    <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14319</commentid>
+    <comment_count>0</comment_count>
+    <who name="Richard">ecmascript</who>
+    <bug_when>2015-04-22 15:14:01 -0700</bug_when>
+    <thetext>The current specification for lpad/rpad at http://wiki.ecmascript.org/doku.php?id=strawman:string_padding have problems. I&apos;m assuming the algorithm is untested.
+
+(for this post I&apos;m going to just be referring to lpad, but the same issues exist for rpad)
+
+An example implementation: https://jsfiddle.net/e3ceyupt/1/
+
+There are at least two issues with the current specification. 
+
+1) The operators for step 5 are switched:
+For the lpad function to even be used, the length of the string must be less than the &quot;minimum length&quot;. Thus, `S.length` will always be smaller than `intMinLength`, so at step 5 `fillLen = S.length - intMinLength` will always yield a value less than 0, which will then fail on step 6.
+
+2) The specification assumes that the string for which lpad is call will always need to be padded. (That is: it assumes S.length &lt; minLength)
+A counter usage example: if I have a variable length string variable, and I want to guarantee that it&apos;s at least N characters, I should be able use `strVar.lpad(N)`. If the variable length is already &gt;= N, then the lpad should be a no-op. Currently, the specification will throw a RangeError.
+There is precedent for allowing lpad to be a no-op: python&apos;s &quot;&quot;.ljust will return the original string in this case.
+
+I propose the following changes be made:
+- After step 4, add a step: &quot;If intMinLength &lt; 0, then throw a RangeError exception&quot;
+- Change step 5 to be &quot;Let fillLen be intMinLength minus the number of characters in S&quot;
+- Change step 6 to be &quot;if fillLen &lt;= 0, then return S&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14320</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-22 15:42:45 -0700</bug_when>
+    <thetext>added champions to CC list</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14321</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-22 17:06:11 -0700</bug_when>
+    <thetext>Seems good, thanks for the report!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14738</commentid>
+    <comment_count>3</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:36:13 -0700</bug_when>
+    <thetext>Bulk closing all Harmony bugs. Proposals should be tracked on GitHub. The ES wiki is completely defunct at this point.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

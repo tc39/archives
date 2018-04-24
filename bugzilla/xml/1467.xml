@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1467</bug_id>
+          
+          <creation_ts>2013-05-03 06:35:00 -0700</creation_ts>
+          <short_desc>15.10.6.11/15.10.6.12: RegExp.prototype.{match, replace} algorithm is wrong for empty matches</short_desc>
+          <delta_ts>2014-12-23 20:23:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3704</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-03 06:35:08 -0700</bug_when>
+    <thetext>From ES3, 15.5.4.10 String.prototype.match:
+&gt; Set the regexp.lastIndex property to 0 and invoke RegExp.prototype.exec
+&gt; repeatedly until there is no match. If there is a match with an empty
+&gt; string (in other words, if the value of regexp.lastIndex is left unchanged),
+&gt; increment regexp.lastIndex by 1.
+
+The part `(in other words, if the value of regexp.lastIndex is left unchanged)` is actually wrong. Nevertheless, this part was carried over to ES5/5.1 and eventually also into the current ES6 draft. See 15.10.6.11, step 10.g.iv.3.
+
+These are the expected results from RegExp.prototype.match:
+js&gt; matchWithLength(/^|$/g, &quot;aa&quot;)
+[&quot;&quot;, &quot;&quot;]
+js&gt; matchWithLength(/\b/g, &quot;aa aa&quot;)
+[&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]
+
+These are results with the currently specified algorithm:
+js&gt; matchWithLastIndex(/^|$/g, &quot;aa&quot;)
+[&quot;&quot;, &quot;&quot;, &quot;&quot;]
+js&gt; matchWithLastIndex(/\b/g, &quot;aa aa&quot;)
+[&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]
+
+RegExp.prototype.match as expected:
+----
+function matchWithLength(re,s) {
+  re.lastIndex = 0;
+  var a = [];
+  for (;;) {
+    var r = re.exec(s);
+    if (!r) break;
+    a.push(r[0]);
+    if (r[0].length === 0)
+      re.lastIndex = re.lastIndex + 1;
+  }
+  return a;
+}
+----
+
+RegExp.prototype.match as currently specified:
+----
+function matchWithLastIndex(re, s) {
+  re.lastIndex = 0;
+  var a = [];
+  var prev = 0;
+  for(;;) {
+    var r = re.exec(s);
+    if (!r) break;
+    a.push(r[0]);
+    if (re.lastIndex === prev)
+      re.lastIndex = re.lastIndex + 1;
+    prev = re.lastIndex
+  }
+  return a;
+}
+----</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3846</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-14 08:46:23 -0700</bug_when>
+    <thetext>need to confirm that &quot;expected&quot; results matches current browsers reality</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7646</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-10 06:09:26 -0700</bug_when>
+    <thetext>Still present in new RegExp.prototype.replace implementation. 
+
+Test case:
+---
+&quot;aa&quot;.replace(/^|$/g, &quot;bb&quot;)
+---
+
+Expected: &quot;bbaabb&quot;
+Actual: &quot;bbaabbbb&quot;
+
+Tested in: V8, IE11, JSC, SpiderMonkey, Nashorn</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10994</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-10 18:33:12 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+also added an item to Annex D.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11169</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:28 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

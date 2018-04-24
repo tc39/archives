@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3523</bug_id>
+          
+          <creation_ts>2015-01-15 03:40:00 -0800</creation_ts>
+          <short_desc>7.3.21 SpeciesConstructor and 9.4.2.3 ArraySpeciesCreate: discrepancy on the condition under which the @@species property is examined</short_desc>
+          <delta_ts>2015-01-15 16:19:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11355</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-15 03:40:02 -0800</bug_when>
+    <thetext>7.3.21 SpeciesConstructor
+9.4.2.3 ArraySpeciesCreate
+
+Beyond necessary hacks in ArraySpeciesCreate for ensuring backward web compatibility, there is the following discrepancy between the two abstract operations:
+
+originalObj[@@constructor][@@species] is examined:
+  * in SpeciesConstructor, when originalObj[@@constructor] is an object, but
+  * in ArraySpeciesCreate, when originalObj[@@constructor] is a constructor.
+
+(In fact, when originalObj[@@constructor] is a non-constructor object, the algorithm of ArraySpeciesCreate terminates with a TypeError in step 8.)
+
+The following patch will remove that difference. Remove step 6.c.iv and replace it with the following:
+
+    6.d. If Type(C) is Object, then
+        1. Let C be Get(C, @@species).
+        2. ReturnIfAbrupt(C).
+
+
+(An interesting feature of that patch is that it becomes easy for a user-defined Array subclass to avoid the realm check:
+
+    class MyArray extends Array { /* ... */ }
+    MyArray.prototype.constructor = { [Symbol.species]: MyArray }
+
+)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11356</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-15 03:48:34 -0800</bug_when>
+    <thetext>In Comment 0, read &quot;constructor&quot; instead of @@constructor.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11405</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 13:25:05 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11441</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:04 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

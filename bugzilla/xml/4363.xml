@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4363</bug_id>
+          
+          <creation_ts>2015-05-12 17:41:00 -0700</creation_ts>
+          <short_desc>Typo in referring to TypedArray constructor in 22.2.6.2</short_desc>
+          <delta_ts>2015-05-14 11:25:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 38: April 14, 2015 Final Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Daniel Ehrenberg">dehrenberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14398</commentid>
+    <comment_count>0</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-12 17:41:03 -0700</bug_when>
+    <thetext>```
+22.2.6.2 TypedArray.prototype.constructor
+The initial value of a TypedArray.prototype.constructor is the corresponding %TypedArray% intrinsic object.
+```
+
+In the above text, all three instances of TypedArray were italicized. In the spec, italicized TypedArray refers to a specific constructor such as Uint8Array. Non-italicized %TypedArray% refers to the __proto__ of these constructors. I believe in this case, the italicized %TypedArray% should simply be italicized TypedArray, as the constructor should be the particular constructor, not the proto of the constructor.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14399</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-13 16:54:40 -0700</bug_when>
+    <thetext>The italicized %TypedArray% is a meta variable representing all of the specific intrinsic names of the the built-in constructors, such as %Uint8Array%, $Float32arrau%, etc.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14401</commentid>
+    <comment_count>2</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-13 18:38:10 -0700</bug_when>
+    <thetext>This is the only instance in the spec where I see %TypedArray% italicized. If it is meant to stand in for individual constructors, why not just call it TypedArray (italicized) as the earlier references to those individual constructors are called? The built-in constructors are called Uint8Array etc, not %Uint8Array%.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14404</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-14 11:18:58 -0700</bug_when>
+    <thetext>(In reply to Daniel Ehrenberg from comment #2)
+&gt; This is the only instance in the spec where I see %TypedArray% italicized.
+&gt; If it is meant to stand in for individual constructors, why not just call it
+&gt; TypedArray (italicized) as the earlier references to those individual
+&gt; constructors are called? The built-in constructors are called Uint8Array
+&gt; etc, not %Uint8Array%.
+
+Uint8Array is the global object property name.  %Uint8Array% is the specification&apos;s internal name for the intrinsic object that is the initial value of that property.  See Table 7 http://people.mozilla.org/~jorendorff/es6-draft.html#table-7</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14406</commentid>
+    <comment_count>4</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2015-05-14 11:25:41 -0700</bug_when>
+    <thetext>Oh, sorry for the misunderstanding.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

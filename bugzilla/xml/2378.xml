@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2378</bug_id>
+          
+          <creation_ts>2013-12-10 20:17:00 -0800</creation_ts>
+          <short_desc>JSON objects as (arbitrary) collections of name/value pairs</short_desc>
+          <delta_ts>2013-12-10 20:45:17 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Peter F. Patel-Schneider">pfpschneider</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6918</commentid>
+    <comment_count>0</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-10 20:17:26 -0800</bug_when>
+    <thetext>The discussion of objects in the introduction of ECMA-404, 1st Edition /
+October 2013 contains:
+
+  JSON instead provides a simple notation for expressing collections of
+  name/value pairs. Most programming languages will have some feature for
+  representing such collections, which can go by names like record, struct,
+  dict, map, hash, or object.
+
+However, most of these programming language features cannot represent
+arbitrary collections of name/value pairs.  Instead they represent something
+more like a (single-valued) mapping from names to values.  If JSON objects
+are intended to be arbitrary collections of name-value pairs, then the list
+of analogous programming language constructs should be changed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

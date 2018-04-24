@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3828</bug_id>
+          
+          <creation_ts>2015-02-11 16:57:00 -0800</creation_ts>
+          <short_desc>chapter 14: misc editorial</short_desc>
+          <delta_ts>2015-02-12 12:17:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12320</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-11 16:57:35 -0800</bug_when>
+    <thetext>----------------------------------------
+In 14.1.12 &quot;Static Semantics: IsFunctionDefinition&quot;:
+
+{1}
+14.1.12 / group 1 / production:
+/FunctionExpression/ : function ( /FormalParameters/ ) { /FunctionBody/ }
+
+    The final &quot;}&quot; is serif italic, should be monospace upright
+
+----------------------------------------
+In 14.1.23 &quot;Runtime Semantics: Evaluation&quot;:
+
+{2}
+14.1.23 / group 1 / production 2:
+/FunctionDeclaration/ : function( /FormalParameters/ ) { /FunctionBody/ }
+
+    Insert a space before the left-paren
+
+----------------------------------------
+In 14.4.12 &quot;Runtime Semantics: EvaluateBody&quot;:
+
+{3}
+14.4.12 / step 1:
+Let /G/ be be OrdinaryCreateFromConstructor(...).
+
+    Delete extra &quot;be&quot;
+
+----------------------------------------
+In 14.5.15 &quot;Runtime Semantics: BindingClassDeclarationEvaluation&quot;:
+
+{4}
+14.5.15 / group 1 / step 2:
+Let /value/ be the result of ClassDefinitionEvaluation of /classTail/ ...
+
+    s|classTail|ClassTail|
+
+----------------------------------------
+In 14.6.2.1 &quot;Statement Rules&quot;:
+
+{5,6,7,8,9}
+14.6.2.1 / group 2 / step 2:
+14.6.2.1 / group 4 / step 2:
+14.6.2.1 / group 9 / step 3:
+14.6.2.1 / group 9 / step 5:
+14.6.2.1 / group 10 / step 2:
+If /has/ is *true, return true*.
+
+    De-bold &quot;, return&quot;
+
+----------------------------------------
+In 14.6.2.2 &quot;Expression Rules&quot;:
+
+{10}
+14.6.2.2 / group 3 / step 2:
+If /has/ is *true, return true*.
+
+    De-bold &quot;, return&quot;
+
+{11}
+14.6.2.2 / group 6 / step 1:
+If this /CallExpression/ is /nonterminal/*, return true*.
+
+    De-bold &quot;, return&quot;
+
+{12}
+14.6.2.2 / group 7 / step 1:
+If this /MemberExpression/ is /nonterminal/*, return true*.
+
+    De-bold &quot;, return&quot;
+
+{13}
+14.6.2.2 / group 8 / step 1:
+If this /NewExpression/ is /nonterminal/*, return true*.
+
+    De-bold &quot;, return&quot;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12345</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-11 18:33:12 -0800</bug_when>
+    <thetext>fixed in rev33 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12392</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 12:17:35 -0800</bug_when>
+    <thetext>fixed in rev33</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

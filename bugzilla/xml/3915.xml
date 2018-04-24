@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3915</bug_id>
+          
+          <creation_ts>2015-02-14 07:53:00 -0800</creation_ts>
+          <short_desc>8.1.1.4.{7,15,16,17}: Missing ReturnIfAbrupt after HasBinding</short_desc>
+          <delta_ts>2015-02-19 19:10:50 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12643</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 07:53:03 -0800</bug_when>
+    <thetext>8.1.1.4.7 DeleteBinding (N)
+Step 5: Missing ReturnIfAbrupt after HasBinding
+
+8.1.1.4.15 CanDeclareGlobalVar (N)
+Step 3: Missing ReturnIfAbrupt after HasBinding
+
+8.1.1.4.16 CanDeclareGlobalFunction (N)
+Step 6: Missing ReturnIfAbrupt after HasBinding
+
+8.1.1.4.17 CreateGlobalVarBinding (N, D)
+Step 3: Missing ReturnIfAbrupt after HasBinding
+
+
+
+(ReturnIfAbrupt is still needed even if after HasBinding was changed to HasOwnProperty - bug 3279)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12663</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 08:44:39 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12993</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:50 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

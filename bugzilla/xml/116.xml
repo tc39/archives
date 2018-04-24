@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>116</bug_id>
+          
+          <creation_ts>2011-07-01 06:22:00 -0700</creation_ts>
+          <short_desc>Spec should say: Non-configurable properties MUST not disappear</short_desc>
+          <delta_ts>2015-02-19 19:10:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Initial draft July 12, 2011</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>https://mail.mozilla.org/pipermail/es5-discuss/2011-July/004003.html</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mark S. Miller">erights</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brendan</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>249</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-07-01 06:22:02 -0700</bug_when>
+    <thetext>The problem isn&apos;t limited to the internal [[Delete]] method. The real constraint is that the spec should say (or clearly imply) that Non-configurable properties MUST not disappear.
+
+
+
+Excerpted from https://mail.mozilla.org/pipermail/es5-discuss/2011-July/004003.html
+
+
+On Sun, Jun 19, 2011 at 4:36 AM, David Bruant &lt;david.bruant@labri.fr&gt; wrote:
+[...]
+ES5.1 11.4.1 the delete operator &quot;In addition, if a delete operator occurs within strict mode code and the property to be deleted has the attribute { [[Configurable]]: false }, a TypeError exception is thrown.&quot;
+An exception is thrown, however, nothing is said on the destiny of the property. Has it been deleted anyways? One can assume not, but the spec leaves it implicit.
+
+
+On Jun 28, 2011, at 9:59 AM, Mark S. Miller wrote:
+[...]
+If the spec nowhere states this explicitly, I would consider it a spec bug to be added to the errata. The intent is clearly that the property not disappear in this circumstance.
+
+
+On Fri, Jul 1, 2011 at 7:01 AM, Allen Wirfs-Brock &lt;allen@wirfs-brock.com&gt; wrote:
+[...]
+If it was desired to forbid the implementation of a version of [[Delete]] that ignores the configurable attribute then that restriction should have been stated in section 8.6.2.  It isn&apos;t there and I don&apos;t specifically recall it ever being discussed. Because of this I see this more as a change request then a bug that should be listed in the errata.
+
+If you think such a restriction should be placed on all implementations of [[Delete]] then I suggest that you file a &quot;normative change from ES5.x&quot; bug against the next edition [...]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>251</commentid>
+    <comment_count>1</comment_count>
+    <who name="Brendan Eich">brendan</who>
+    <bug_when>2011-07-01 14:08:41 -0700</bug_when>
+    <thetext>8.12.7 seems complete and unambiguous:
+
+8.12.7 [[Delete]] (P, Throw)
+
+When the [[Delete]] internal method of O is called with property name P and the Boolean flag Throw, the following steps are taken:
+
+1. Let desc be the result of calling the [[GetOwnProperty]] internal method of O with property name P.
+2. If desc is undefined, then return true.
+3. If desc.[[Configurable]] is true, then
+a. Remove the own property with name P from O.
+b. Return true.
+4. Else if Throw, then throw a TypeError exception.
+5. Return false
+
+To back it up in general, ES5.1 5.2 last paragraph says:
+
+&gt; If an algorithm is defined to “throw an exception”, execution of the algorithmis terminated and no result is returned. The calling algorithms are also terminated, until an algorithm step is reached that explicitly deals with the exception, using terminology such as “If an exception was thrown…”. Once such an algorithm step has been encountered the exception is no longer considered to have occurred.
+
+Allen&apos;s point about a for-all-[[Delete]]-implementations restriction requiring new normative spec language seems on target.
+
+/be</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12495</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-12 16:11:44 -0800</bug_when>
+    <thetext>Fixed in rev34 editor&apos;s draft
+
+added a paragraph to 6.1.7.3 covering this:
+
+An implementation must not allow these invariants to be circumvented in any manner such as by providing alternative interfaces that implement the functionality of the essential internal methods without enforcing their invariants.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13068</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:57 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

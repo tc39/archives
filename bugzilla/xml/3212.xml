@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3212</bug_id>
+          
+          <creation_ts>2014-09-05 15:25:00 -0700</creation_ts>
+          <short_desc>11.8.4: Spec and implementations disagree about &quot;\8&quot; and &quot;\9&quot;</short_desc>
+          <delta_ts>2014-12-18 06:54:35 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>3477</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Gabe Levi">gabelevi</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>caitpotter88</cc>
+    
+    <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10156</commentid>
+    <comment_count>0</comment_count>
+    <who name="Gabe Levi">gabelevi</who>
+    <bug_when>2014-09-05 15:25:10 -0700</bug_when>
+    <thetext>According to the ES5 and ES6 spec, &quot;\8&quot; is not a valid string and neither is &quot;\9&quot;, however everywhere I try it (Firefox 32, Firefox 34, node, Chrome 37, esprima) they are treated like \ NonEscapeCharacter. This also seems to affect template strings.
+
+Is this discrepancy between the spec and the implementations tracked? Could the spec be brought in line by changing EscapeCharacter from
+
+EscapeCharacter ::
+  SingleEscapeCharacter
+  DecimalDigit
+  x
+  u
+
+to
+
+EscapeCharacter ::
+  SingleEscapeCharacter
+  OctalDigit
+  x
+  u</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10163</commentid>
+    <comment_count>1</comment_count>
+    <who name="Gabe Levi">gabelevi</who>
+    <bug_when>2014-09-07 14:29:07 -0700</bug_when>
+    <thetext>I suppose &quot;\08&quot; and &quot;\09&quot; also suffer from a similar problem. If we were able to fix the spec, then we could change
+
+EscapeSequence ::
+  CharacterEscapeSequence
+  0 [lookahead ∉ DecimalDigit]
+  HexEscapeSequence
+  UnicodeEscapeSequence
+
+to
+
+EscapeSequence ::
+  CharacterEscapeSequence
+  0 [lookahead ∉ OctalDigit]
+  HexEscapeSequence
+  UnicodeEscapeSequence</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10164</commentid>
+    <comment_count>2</comment_count>
+    <who name="Gabe Levi">gabelevi</who>
+    <bug_when>2014-09-07 17:14:14 -0700</bug_when>
+    <thetext>I suppose this situation parallels the discussion for integer literals: 
+
+Bug and suggested patch: https://bugs.ecmascript.org/show_bug.cgi?id=2792#c11
+Thread discussing it: https://mail.mozilla.org/pipermail/es-discuss/2014-August/thread.html#38596</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11092</commentid>
+    <comment_count>3</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 01:31:35 -0800</bug_when>
+    <thetext>(In reply to Gabe Levi from comment #2)
+&gt; I suppose this situation parallels the discussion for integer literals: 
+&gt; 
+
+There is a big difference, in that implementations do not support &quot;noctal integral sequences&quot; (phew). The question here is merely to throw or not to throw a syntax error.
+
+See Bug 1553 comment 2 for the behaviour of &quot;\8&quot; and &quot;\08&quot; across browsers. In particular, note the difference between sloppy and strict mode.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11097</commentid>
+    <comment_count>4</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-18 06:54:35 -0800</bug_when>
+    <thetext>I&apos;ve open Bug 3477 for a definite answer to the more general issue of backslash followed by one ore more digits in string and template literals.
+
+*** This bug has been marked as a duplicate of bug 3477 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

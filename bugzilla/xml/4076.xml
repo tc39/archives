@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4076</bug_id>
+          
+          <creation_ts>2015-02-21 15:04:00 -0800</creation_ts>
+          <short_desc>9.2.2 [[Call]] and 9.2.3 [[Construct]]: unnecessary ReturnIfAbrupt (4x) after PrepareForOrdinaryCall and OrdinaryCallBindThis</short_desc>
+          <delta_ts>2015-03-04 18:58:19 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          <dependson>4055</dependson>
+    
+    <dependson>4074</dependson>
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13251</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-21 15:04:27 -0800</bug_when>
+    <thetext>Unless I missed something, PrepareForOrdinaryCall() (cf. bug 4055) and OrdinaryCallBindThis() (cf. bug 4074) do never return an abrupt completion. It is therefore not useful to follow their invocations with a ReturnIfAbrupt.
+
+The following steps could be deleted.
+
+9.2.2 [[Call]], steps 5 and 7;
+9.2.3 [[Construct]], steps 7 and 9b.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13364</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-25 16:03:58 -0800</bug_when>
+    <thetext>OrdinaryCallBindThis calls fixed</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13392</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 10:05:31 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13527</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:19 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

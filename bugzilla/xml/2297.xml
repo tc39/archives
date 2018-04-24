@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2297</bug_id>
+          
+          <creation_ts>2013-11-15 04:36:00 -0800</creation_ts>
+          <short_desc>9.5.6: No TypeError thrown in step 21b if [[Configurable]] field not present</short_desc>
+          <delta_ts>2014-07-16 17:03:28 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6793</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-15 04:36:05 -0800</bug_when>
+    <thetext>9.5.6  [[DefineOwnProperty]] (P, Desc), step 21.b:
+
+&gt; b.  If settingConfigFalse is true, then throw a TypeError exception.
+
+This condition is not correct, instead it needs to be:
+
+&gt; b.  If Desc does not have a [[Configurable]] field or settingConfigFalse is true, then throw a TypeError exception.
+
+
+Test case:
+---
+Object.defineProperty(Proxy({}, {defineProperty(){return true}}), &quot;p&quot;, {})
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7360</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 17:33:53 -0800</bug_when>
+    <thetext>That can&apos;t be right either.
+
+Assume that proxy P is maintaining a side table of virtual configurable propertie and that  property &quot;p&quot; is already in that table.  &quot;p&quot; need not exist as a property of P&apos;s target object.  In that case, it would be perfect reasonable to say:
+
+Object.defineProperty(P,&quot;p&quot;, {value:42}); //or even just { } as the PD.
+
+but I believe that your proposed change would throw in that case.
+
+It seems like the root issue is that simply by looking at the argument Desc and the boolean trap result we don&apos;t know anything about what the handler actually did including how it interpreted the absence of various fields.  It isn&apos;t clear that we can actually check the desired invariants without call [[GetOwnProperty]] on the Prozy to see what it claims to have done.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7370</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-18 13:39:01 -0800</bug_when>
+    <thetext>From http://wiki.ecmascript.org/doku.php?id=harmony:direct_proxies#invariant_enforcement
+&gt; on success, if argument descriptor is non-configurable, check if 
+&gt; the property exists on the target and is also non-configurable
+
+If the argument descriptor does not have a configurable field, is it considered to be a non-configurable or configurable property descriptor?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7381</commentid>
+    <comment_count>3</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-02-20 10:51:01 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; From
+&gt; http://wiki.ecmascript.org/doku.php?id=harmony:direct_proxies#invariant_enforcement
+&gt; &gt; on success, if argument descriptor is non-configurable, check if 
+&gt; &gt; the property exists on the target and is also non-configurable
+&gt; 
+&gt; If the argument descriptor does not have a configurable field, is it considered
+&gt; to be a non-configurable or configurable property descriptor?
+
+I think my intent was that an argument descriptor is only considered non-configurable if it explicitly has a configurable:false attribute.
+
+If the configurable: attribute is missing, then for ordinary (non-exotic) objects it depends on whether the property being set already exists or not. If it exists, and configurable is not specified, the attribute remains untouched. If the property being defined is new, it will be configurable:false.
+
+So imagine performing Object.defineProperty(o, &quot;p&quot;, {}) on an object you don&apos;t know anything about. Then you can&apos;t tell at this time whether &quot;p&quot; will be configurable or not. So I think it&apos;s fine if this case doesn&apos;t throw a TypeError for proxies. IOW I think your test case outlined above should just work.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7383</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-20 12:12:34 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+
+Going back to the original bug bug report, the spec (at least currently) only sets &apos;settingConfigFalse&apos; to true if the Desc actually has a [[Configurable]] field, so the original test case wouldn&apos;t throw.
+
+So, I guess I now don&apos;t see a problem in the current spec. language. Does anybody else see one?
+
+A handler might decide to treat a missing Configurable property as meaning non-configurable for a virtual property as long as it didn&apos;t also create a corresponding configurable property on the target object.  A configurable target property would case the invariant checks for [[GetOwnProperty]] to fail if it tried to claim the virtual property was non-configurable. 
+
+&gt; 
+&gt; So imagine performing Object.defineProperty(o, &quot;p&quot;, {}) on an object you don&apos;t
+&gt; know anything about. Then you can&apos;t tell at this time whether &quot;p&quot; will be
+&gt; configurable or not. So I think it&apos;s fine if this case doesn&apos;t throw a
+&gt; TypeError for proxies. IOW I think your test case outlined above should just
+&gt; work.
+
+Presumably, somebody making a call like this know their intent and would make an explicit Object.hasOwnProperty check if they wanted the result to be dependent upon the actual existence of the property.
+
+A different approach that would still be ES5 compatible would be to move the missing attribute defaulting out of ordinary [[DefineOwnProperty]] and instead do it in Object.definePropery.  That way no Object.defineProperty originated  [[DefineOwnProperty]] would ever get an partial descriptor for a non-existent property.  However, that would probably be undesirable for Proxy handlers that wanted do support virtual properties with new attributes or different defaulting rules.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7386</commentid>
+    <comment_count>5</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-02-21 08:38:29 -0800</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; However, that would probably be undesirable for Proxy handlers that
+&gt; wanted do support virtual properties with new attributes or different
+&gt; defaulting rules.
+
+Exactly. We didn&apos;t discuss different defaulting rules before, but I remember that we aimed for the defineProperty trap to be able to process non-standard attributes on the argument descriptor.
+
+We could still attempt to &quot;complete&quot; the argument descriptor by filling in missing standard attributes, but I think that would be a can of worms (e.g. if it&apos;s an empty descriptor, would we turn it into a data or accessor descriptor?)
+
+In any case, I&apos;m not sure anything is wrong with the current spec text either.
+
+André, can you perhaps elaborate on the problem you identified?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7391</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-21 11:34:35 -0800</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; André, can you perhaps elaborate on the problem you identified?
+
+I don&apos;t recall if there was a specific issue which required to throw in that case or if throwing a TypeError was just the expected result from some Mozilla Proxy test. I suspect it was the latter, but I&apos;d need to inspect the individual test cases to be sure. (Or maybe just I wrongly assumed that Object.defineProperty() with an empty property descriptor works the same for ordinary objects and proxies.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7424</commentid>
+    <comment_count>7</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-03-07 03:02:58 -0800</bug_when>
+    <thetext>(In reply to comment #6)
+&gt; I suspect it was the latter, but I&apos;d need to inspect the individual
+&gt; test cases to be sure. 
+
+I tried to reproduce any failures with the rev21 implementation from last November, but to no avail. So from point of you view, this bug report can be closed as invalid...</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

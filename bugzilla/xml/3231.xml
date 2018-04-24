@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3231</bug_id>
+          
+          <creation_ts>2014-09-19 08:49:00 -0700</creation_ts>
+          <short_desc>7.3.11, 7.3.12, 19.1.2.1, 19.1.2.3.1: Different placeholder for pendingException</short_desc>
+          <delta_ts>2014-10-14 15:17:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10198</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-09-19 08:49:03 -0700</bug_when>
+    <thetext>7.3.11  SetIntegrityLevel (O, level)
+7.3.12  TestIntegrityLevel (O, level)
+19.1.2.1 Object.assign ( target, ...sources ) 
+19.1.2.3.1 Runtime Semantics: ObjectDefineProperties Abstract Operation  
+
+
+`undefined` as a placeholder for `pendingException` seems to confuse readers, it&apos;s unclear to them whether `undefined` is the ECMAScript value `undefined` or should be treated as a standalone value like `empty`. This issue often arises when implementing the algorithms in ECMAScript code (sketched as options A and B below). 
+
+
+A) `undefined` as the ECMAScript value `undefined`:
+---
+var pendingException = undefined;
+for (...) {
+  try {
+    ...
+  } catch (e) {
+    if (pendingException === undefined) {
+      pendingException = e;
+    }
+  }
+}
+if (pendingException !== undefined) {
+  throw pendingException;
+}
+---
+
+
+B) `undefined` as a standalone value:
+---
+var pendingException;
+var hasPendingException = false;
+for (...) {
+  try {
+    ...
+  } catch (e) {
+    if (!hasPendingException) {
+      hasPendingException = true;
+      pendingException = e;
+    }
+  }
+}
+if (hasPendingException) {
+  throw pendingException;
+}
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10285</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 11:06:46 -0700</bug_when>
+    <thetext>fixed in rev28 editor&apos;s draft
+
+now use &apos;empty&apos; to indicate &quot;no pendingExeption value&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10368</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-14 15:17:41 -0700</bug_when>
+    <thetext>fixed in rev28</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

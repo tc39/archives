@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2235</bug_id>
+          
+          <creation_ts>2013-11-12 04:44:00 -0800</creation_ts>
+          <short_desc>9.2, 9.2.4: Some plural forms and [[Get]] still present</short_desc>
+          <delta_ts>2014-01-27 10:04:23 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6669</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-12 04:44:34 -0800</bug_when>
+    <thetext>9.2  ECMAScript Function Objects:
+
+3rd paragraph:
+&gt; [...] provide alternative definitions [...]
+
+=&gt; &quot;provide an alternative definition&quot;
+
+&gt; This alternatives prevents
+
+=&gt; &quot;This alternative prevents&quot;
+
+&gt; [...] not implement these alternative internal methods [...]
+
+=&gt; &quot;not implement this alternative internal method&quot;
+
+
+4th paragraph:
+&gt; [...] the [[Get]] and [[GetOwnProperty]] internal methods defined here.
+
+=&gt; &quot;the [[GetOwnProperty]] internal method defined here.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6670</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-12 04:49:09 -0800</bug_when>
+    <thetext>9.2.4  FunctionAllocate Abstract Operation, steps 6-7:
+
+s/methods/method
+s/definitions/definition</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6742</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-14 10:09:32 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7077</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:04:23 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4239</bug_id>
+          
+          <creation_ts>2015-03-27 08:33:00 -0700</creation_ts>
+          <short_desc>IteratorComplete: access own property?</short_desc>
+          <delta_ts>2015-04-01 10:53:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13956</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-03-27 08:33:41 -0700</bug_when>
+    <thetext>7.4.3 IteratorComplete ( iterResult )
+
+This operation retrieves `done` via [[Get]]. Wouldn’t it be safer to restrict access to own properties? Otherwise, `Object.prototype.done = true` will break some code.
+
+It may also make sense to document whether `done` is optional. Currently, nothing bad happens if you omit it (instead of specifying it as `false`). Should an exception be thrown, instead?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13990</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-01 10:45:02 -0700</bug_when>
+    <thetext>In general that&apos;s how all [[Get]] access work. Pointless to try to address it in just this one case.
+
+25.1.1.3 explicitly states that &apos;done&apos; need not be explicitly present.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13992</commentid>
+    <comment_count>2</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-04-01 10:53:25 -0700</bug_when>
+    <thetext>Right. Claude Pache recently – convincingly – argued [1] that using [[Get]] has advantages, too.
+
+
+[1] https://gist.github.com/rauschma/73e5f86a595b7709f39e#comment-1422556</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

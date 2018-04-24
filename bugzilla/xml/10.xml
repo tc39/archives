@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>10</bug_id>
+          
+          <creation_ts>2011-02-09 16:26:00 -0800</creation_ts>
+          <short_desc>Some tests assume some non-standard properties (&apos;window&apos;, &apos;document&apos;, &apos;ActiveXObject&apos;) exist</short_desc>
+          <delta_ts>2011-07-06 10:29:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Highest</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>bruant.d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>15</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-09 16:26:13 -0800</bug_when>
+    <thetext>There&apos;s a number of tests which depend upon the &apos;window&apos; or &apos;document&apos; web browser hosts objects being present and will fail if they&apos;re not.
+
+This assumption is incorrect as ES5 does not specify which host objects a JavaScript implementation must support.  Furthermore, this implies we&apos;ll see many failures for console-based JavaScript interpreters.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>24</commentid>
+    <comment_count>1</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-12 01:13:18 -0800</bug_when>
+    <thetext>Here are a couple of them (Based on Jeff Walden e-mail (https://mail.mozilla.org/pipermail/es5-discuss/2011-February/003915.html)):
+* 15.2.3.6-3-263: Assumes the global object has a &apos;document&apos; property.
+* 15.2.3.6-4-354-4, 15.2.3.6-4-531-13, 15.2.3.6-4-531-4: depends on there being an object-valued &quot;window&quot; global variable.
+* 15.2.3.6-4-401: depends on there being an ActiveXObject global property
+
+The global object doesn&apos;t have to be called &quot;window&quot; in ES5-compliant environments.
+A classic way to get the global object is to do:
+var obj = (function(){return this;}).call();
+Using undefined as the &quot;this&quot; argument of call makes that this evaluates to the global object. This was true in non-strict mode, this isn&apos;t anymore in strict mode for which I don&apos;t know how to retrieve the global object.
+
+In general, I think that all tests attempting to test something on host objects should be removed. As said in ES5.1 8.6.2, &quot;Every object (including host objects) must implement all of the internal properties listed in Table 8.&quot;. However, there is no constraint whatsoever in what should/should not happen with these implementation. There is at most a hope that host objects will roughly behave like native objects do, but that hope isn&apos;t testable.
+
+Test regarding &apos;window&apos; or &apos;document&apos; had better being in a WebIDL (http://dev.w3.org/2006/webapi/WebIDL/) or DOM test suite.
+The ActiveXObject has never been part of any standard I&apos;d be aware of.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>27</commentid>
+    <comment_count>2</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-12 02:02:09 -0800</bug_when>
+    <thetext>As said here (https://mail.mozilla.org/pipermail/es5-discuss/2011-February/003920.html), to retrieve the global object in an standard and interoperable way, you can do the following:
+
+var o = Function(&quot;return this&quot;)();
+
+Works in strict and non-strict mode as far as I can tell. Tested on FF4b11.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>33</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-14 10:42:24 -0800</bug_when>
+    <thetext>A search on &quot;document.&quot; and &quot;window.&quot; throughout Test Center contributions shows the following:
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-150.js(33):            document.value = &quot;document&quot;;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-176.js(33):            document.writable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-229.js(32):            document.get = function () {
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-233.js(32):            get: document.getElementsByTagName
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-259.js(33):            document.set = function (value) {
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-263.js(32):            set: document.getElementsByTagName
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-44.js(34):            document.enumerable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-97.js(33):            document.configurable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-44.js(38):            delete document.foo;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.14\15.4.4.14-1-16.js(33):            var oldLen = document.length;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.14\15.4.4.14-2-16.js(33):            var oldLen = document.length;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.14\15.4.4.14-9-b-i-24.js(34):            var oldLen = document.length;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.15\15.4.4.15-1-16.js(35):            var oldLen = document.length;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.15\15.4.4.15-2-16.js(33):            var oldLen = document.length;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.15\15.4.4.15-8-b-i-24.js(34):            var oldLen = document.length;
+
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-151.js(33):            window.value = &quot;window&quot;;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-177.js(33):            window.writable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-230.js(32):            window.get = function () {
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-260.js(33):            window.set = function (value) {
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-45.js(35):            window.enumerable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-3-98.js(33):            window.configurable = true;
+test\suite\ietestcenter\chapter15\15.2\15.2.3\15.2.3.6\15.2.3.6-4-45.js(38):            delete window.foo;
+test\suite\ietestcenter\chapter15\15.4\15.4.4\15.4.4.19\15.4.4.19-5-1.js(31):    window._15_4_4_19_5_1 = true;
+
+
+Didn&apos;t look at all of them, but a number appear to be valid if they would just use the global object instead of document or window directly.  Regardless, there are no checks present which let them pass if window/document do not exist =&gt; I&apos;m disabling them for now.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>34</commentid>
+    <comment_count>4</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-14 13:05:56 -0800</bug_when>
+    <thetext>For the record, another solution has been provided to retrieve the global object both in strict and non-strict mode:
+https://mail.mozilla.org/pipermail/es5-discuss/2011-February/003925.html
+
+var global = (&quot;global&quot;, eval)(&quot;this&quot;);</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>55</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 11:34:25 -0800</bug_when>
+    <thetext>I&apos;ve (blindly) converted all references to &apos;window&apos; to &apos;fnGlobalObject()&apos; and will be pushing this to Test262 soon.  That said, some tests still look fishy to me WRT their expectations on the global object:
+- 15.2.3.13-2-29.js.  Can we count on [[Extensible]]===true on the global object?  I&apos;d hope so...
+- 15.2.3.5-4-124.js.  Changing this.configurable to a new value.  No safety checks
+- 15.2.3.5-4-177.js.  Very real chance this this.value already exists.  No safety checks
+- 15.2.3.5-4-203.js.  Adding this.writable
+- 15.2.3.5-4-256.js.  Adding this.get
+- 15.2.3.5-4-291.js.  Adding this.set
+- 15.2.3.5-4-71.js.  Adding this.enumerable
+- 15.2.3.6-3-151.js.  Adding this.value
+- 15.2.3.6-3-177.js.  Adding this.writable
+- 15.2.3.6-3-230.js.  Adding this.get
+- 15.2.3.6-3-260.js.  Adding this.set
+- 15.2.3.6-3-45.js.  Adding this.enumerable
+- 15.2.3.6-3-98.js.  Adding this.configurable
+- 15.2.3.6-4-354-4.js.  Adding this.property
+- 15.2.3.6-4-354-8.js.  Adding this.prop
+- 15.2.3.6-4-45.js.  Adding this.foo
+- 15.2.3.6-4-531-13.js.  Adding this[0]
+- 15.2.3.6-4-531-4.js.  Adding this.property
+- 15.2.3.7-2-18.js.  Adding this.prop
+- 15.2.3.7-5-b-137.js.  Adding this.value
+- 15.2.3.7-5-b-163.js.  Adding this.writable
+- 15.2.3.7-5-b-216.js.  Adding this.get
+- 15.2.3.7-5-b-31.js. Adding this.enumerable
+- 15.2.3.7-5-b-84.js.  Adding this.configurable
+- 15.2.3.7-6-a-24.js.  Adding this.prop
+- 15.3.4.5-2-17.js.  DEFINITELY NEEDS TO BE REWRITTEN. DEPENDENT UPON window.alert!
+- 15.4.3.2-1-15.js.  Can the global object be of Array type?  I don&apos;t think so...
+- 15.4.4.16-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.16-5-8.js.  DEFINITELY INVALID. Depends on this.alert
+- 15.4.4.17-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.17-5-8.js.  DEFINITELY INVALID.  Depends on this.alert
+- 15.4.4.18-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.18-5-8.js.  DEFINITELY INVALID.  Depends on this.alert
+- 15.4.4.19-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.20-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.20-5-8.js.  DEFINITELY INVALID.  Depends on this.alert
+- 15.4.4.21-2-16.js.  DEFINITELY INVALID.  Depends on this.document
+- 15.4.4.22-2-16.js.  DEFINITELY INVALID.  Depends on this.document</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>57</commentid>
+    <comment_count>6</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 11:35:21 -0800</bug_when>
+    <thetext></thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>58</commentid>
+    <comment_count>7</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-02-22 12:58:42 -0800</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; I&apos;ve (blindly) converted all references to &apos;window&apos; to &apos;fnGlobalObject()&apos; and
+&gt; will be pushing this to Test262 soon.  That said, some tests still look fishy
+&gt; to me WRT their expectations on the global object:
+&gt; - 15.2.3.13-2-29.js.  Can we count on [[Extensible]]===true on the global
+&gt; object?  I&apos;d hope so...
+I haven&apos;t found this test. Where is it?
+Otherwise, ES5.1, section 15 Standard Built-in ECMAScript Objects, &quot;Unless specified otherwise, the [[Extensible]] internal property of a built-in object initially has the value true.&quot;
+In the section dealing with the global object (15.1), nothing is specified te negate this.
+
+&gt; - 15.2.3.5-4-124.js.  Changing this.configurable to a new value.  No safety
+&gt; checks
+&gt; - 15.2.3.5-4-177.js.  Very real chance this this.value already exists.  No
+&gt; safety checks
+&gt; - 15.2.3.5-4-203.js.  Adding this.writable
+&gt; - 15.2.3.5-4-256.js.  Adding this.get
+&gt; - 15.2.3.5-4-291.js.  Adding this.set
+&gt; - 15.2.3.5-4-71.js.  Adding this.enumerable
+I haven&apos;t been able to find these tests either
+
+&gt; - 15.2.3.6-3-151.js.  Adding this.value
+&gt; - 15.2.3.6-3-177.js.  Adding this.writable
+&gt; - 15.2.3.6-3-230.js.  Adding this.get
+&gt; - 15.2.3.6-3-260.js.  Adding this.set
+&gt; - 15.2.3.6-3-45.js.  Adding this.enumerable
+&gt; - 15.2.3.6-3-98.js.  Adding this.configurable
+&gt; - 15.2.3.6-4-354-4.js.  Adding this.property
+&gt; - 15.2.3.6-4-354-8.js.  Adding this.prop
+&gt; - 15.2.3.6-4-45.js.  Adding this.foo
+&gt; - 15.2.3.6-4-531-13.js.  Adding this[0]
+&gt; - 15.2.3.6-4-531-4.js.  Adding this.property
+&gt; - 15.2.3.7-2-18.js.  Adding this.prop
+&gt; - 15.2.3.7-5-b-137.js.  Adding this.value
+&gt; - 15.2.3.7-5-b-163.js.  Adding this.writable
+&gt; - 15.2.3.7-5-b-216.js.  Adding this.get
+&gt; - 15.2.3.7-5-b-31.js. Adding this.enumerable
+&gt; - 15.2.3.7-5-b-84.js.  Adding this.configurable
+&gt; - 15.2.3.7-6-a-24.js.  Adding this.prop
+&gt; - 15.3.4.5-2-17.js.  DEFINITELY NEEDS TO BE REWRITTEN. DEPENDENT UPON
+&gt; window.alert!
+&gt; - 15.4.3.2-1-15.js.  Can the global object be of Array type?  I don&apos;t think
+&gt; so...
+What do you mean by &quot;Array type&quot;?
+- Since the global object is an object, typeof globalObject === &quot;object&quot; stands as a language invariant (it could actually be a test to add).
+- Based on what is written in 15.1 &quot;The values of the [[Prototype]] and [[Class]] internal properties of the global object are implementation-dependent.&quot;, we could imagine an implementation in which: [[Class]] be equal to &quot;Array&quot; which would make that &quot;Array.isArray(globalObject) === true&quot; and [[Prototype]] could be the native Array.prototype object which would make that &quot;globalObject instanceOf Array === true&quot;.
+
+So, my answer to your question is: yes, it could be of &quot;Array type&quot;, but that&apos;s implementation-dependent so that shouldn&apos;t be considered in a test.
+
+I cannot find most of the tests you mention. Are they under &quot;/test/suite/ietestcenter/&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>59</commentid>
+    <comment_count>8</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-22 13:17:18 -0800</bug_when>
+    <thetext>The tests below currently absent from Test262 haven&apos;t gone through our internal process around releasing sources publically yet.  I&apos;m working on this now so it should happen soon. Of course the invalid tests identified below will not make the cut for Test262:)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>73</commentid>
+    <comment_count>9</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-28 13:25:48 -0800</bug_when>
+    <thetext>All tests identified as having direct references to &apos;window&apos; have either been updated to use a global object helper function or removed outright.  If you notice anything I&apos;ve inadvertantly missed, please reopen this bug or a file a new one.  Thanks!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>244</commentid>
+    <comment_count>10</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-06-30 08:45:40 -0700</bug_when>
+    <thetext>Reopening because test 15.2.3.6-4-401 (http://hg.ecmascript.org/tests/test262/file/93d928736a0d/test/suite/ietestcenter/chapter15/15.2/15.2.3/15.2.3.6/15.2.3.6-4-401.js) is in the test suite and shouldn&apos;t.
+ActiveXObject is an IE-specific feature. Not part of any standard I know especially not ECMAScript</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>245</commentid>
+    <comment_count>11</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-06-30 09:06:57 -0700</bug_when>
+    <thetext>Looks like one of our internal tests slipped into IE Test Center/test262 by mistake.  Removed from Hg a few minutes ago.
+
+Double-checked that we&apos;re still good on &apos;window&apos; and &apos;document&apos;, but I&apos;m going to leave this bug open for the time being.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>246</commentid>
+    <comment_count>12</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-06-30 13:16:52 -0700</bug_when>
+    <thetext>Test has been removed from the live website now as well.  Thanks for spotting this David!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>266</commentid>
+    <comment_count>13</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-06 10:29:37 -0700</bug_when>
+    <thetext>Closing hopefully for the last time.
+
+We now have a small tool at tools/misc/InvalidTestDetector.py which should help catch many of these types of problems in the future.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

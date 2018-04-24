@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1782</bug_id>
+          
+          <creation_ts>2013-08-16 02:44:00 -0700</creation_ts>
+          <short_desc>10.2.1.2.4: Meaning of &quot;uninitialised binding&quot; unclear for Object Environment Records</short_desc>
+          <delta_ts>2015-02-19 19:11:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4921</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-16 02:44:34 -0700</bug_when>
+    <thetext>10.2.1.2.4 InitialiseBinding (N,V), steps 2-3:
+
+&gt; 2.  Assert: envRec must have an uninitialised binding for N.
+&gt; 3.  Record that the binding for N in envRec has been initialised.
+
+It is not clear (to me) what &quot;uninitialised binding&quot; means in connection with Object Environment Records. Maybe those two steps were simply copied over from 10.2.1.1.4 (InitialiseBinding for Declarative Environment Records) and don&apos;t actually apply to Object Environment Records.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4932</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 10:33:48 -0700</bug_when>
+    <thetext>Object environment records can, in theory, have uninitialized bindings and it&apos;s up to use how you track them.
+
+However, I&apos;m pretty sure that the spec. always creates and then immediately initializes such bindings so the uninitialized state is never observable to ES code.  So, in reality you don&apos;t actually need to track it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12784</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-16 13:51:10 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+added a note to 8.1.1.2.4 pointing out that object env record create binding calls are always immediately followed by an InitializeBinding call.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13087</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:00 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

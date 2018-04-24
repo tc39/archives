@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2372</bug_id>
+          
+          <creation_ts>2013-12-10 19:28:00 -0800</creation_ts>
+          <short_desc>ambiguous JSON texts</short_desc>
+          <delta_ts>2013-12-10 20:44:11 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Peter F. Patel-Schneider">pfpschneider</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6912</commentid>
+    <comment_count>0</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-10 19:28:18 -0800</bug_when>
+    <thetext>In ECMA-404, 1st edition / October 2013, the JSON text &quot;\uD834\uDD1E&quot; (a sequence of 14 Unicode code points) represents two different sequences of Unicode code points (strings), namely &lt;D834, DD1E&gt; and &lt;1D11E&gt;.
+
+This is a bug that should be fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

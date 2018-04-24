@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3918</bug_id>
+          
+          <creation_ts>2015-02-14 08:06:00 -0800</creation_ts>
+          <short_desc>B.3.3: describing where the extensions apply</short_desc>
+          <delta_ts>2015-02-19 19:11:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12646</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-14 08:06:14 -0800</bug_when>
+    <thetext>In B.3.3 &quot;Block-Level Function Declarations Web Legacy Compatibility Semantics&quot;,
+the preamble to the algorithm says:
+    These extensions are applied to each non-strict mode function g for each
+    FunctionDeclaration f that is directly contained in the StatementList of a
+    Block, CaseClause, or DefaultClause that is part of the function code of g
+
+Every time I return to this sentence, it trips me up, and I have to work out what it means again. It would be clearer if you incorporated it into the algorithm, e.g.:
+
+    1. For each non-strict mode function g, do:
+        a. For each FunctionDeclaration f that is directly contained in the
+           StatementList of a Block, CaseClause, or DefaultClause that is
+           part of the function code of g, do:
+            i. [current algorithm]
+
+If you don&apos;t want to do that, then I think you could at least make the sentence clearer, e.g.
+
+    These extensions are applied to every FunctionDeclaration f that is directly
+    contained in the StatementList of a Block, CaseClause, or DefaultClause
+    that is part of the function code of some non-strict mode function g.
+
+or
+    These extensions are applied for each non-strict mode function g, and
+    more specifically, to each FunctionDeclaration f that is directly
+    contained in the StatementList of a Block, CaseClause, or DefaultClause
+    that is part of the function code of g.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12703</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 17:35:52 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft
+
+incorporated the precondition test into the algorithm</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13088</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:11:00 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

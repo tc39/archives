@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4432</bug_id>
+          
+          <creation_ts>2015-07-29 10:13:00 -0700</creation_ts>
+          <short_desc>String.prototype.split should revert to ES5 behavior, using ToUint32 to coerce limit argument</short_desc>
+          <delta_ts>2015-10-15 05:18:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262 Edition 6</product>
+          <component>technical issues</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Adam Klein">adamk</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14588</commentid>
+    <comment_count>0</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-07-29 10:13:47 -0700</bug_when>
+    <thetext>See this gist, discussed at the meeting on 28 July 2015: https://gist.github.com/ajklein/335e0f948c500a0c25dc (copy/pasted below with poorer formatting)
+
+ES5 (15.5.4.14.5): If limit is undefined, let lim = 2^32-1; else let lim = ToUint32(limit).
+
+ES6 (21.1.3.17.8): If limit is undefined, let lim = 2^53-1; else let lim = ToLength(limit).
+
+Two problems with ES6 behavior:
+
+- Return value is an Array, so a limit greater than 232-1 would result in a &quot;malformed&quot; array (one with elements past the end of the array). Iteration over the return value will skip all such elements.
+- Behavior changes for negative limit: ToUint32 transforms -1 to 232-1; ToLength instead transforms -1 to 0.
+
+Proposal: Revert this spec change. Existing implementations still match ES5, and the old behavior still makes sense (even with ES6&apos;s longer String length limit). If we want a split that can return more than 2^32-1 elements, a new method should be created (or split() should return something other than an Array).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14805</commentid>
+    <comment_count>1</comment_count>
+    <who name="Adam Klein">adamk</who>
+    <bug_when>2015-10-15 05:18:23 -0700</bug_when>
+    <thetext>Resolution from the July meeting was to revert this change:
+
+https://github.com/rwaldron/tc39-notes/blob/master/es7/2015-07/july-28.md#612-stringprototypesplit-its-limit-argument-and-tolength-vs-touint32</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

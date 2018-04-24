@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1459</bug_id>
+          
+          <creation_ts>2013-05-02 01:31:00 -0700</creation_ts>
+          <short_desc>15.2.4.2: Censor &quot;Object&quot; again (revert bug 1148)</short_desc>
+          <delta_ts>2014-07-19 17:33:17 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 14: March 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3696</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-02 01:31:16 -0700</bug_when>
+    <thetext>The algorithm for Object.prototype.toString has substantially changed in rev14 from the version in rev12, which may make it necessary to censor &quot;Object&quot; again. That means reverting the solution from bug 1148. 
+
+Specifically it&apos;s currently possible to masquerade non-Objects as Objects:
+&gt; js&gt; a = [], a[getSym(&quot;@@toStringTag&quot;)] = &quot;Object&quot;
+&gt; &quot;Object&quot;
+&gt; js&gt; Object.prototype.toString.call(a)
+&gt; &quot;[object Object]&quot;
+&gt; js&gt; f = ()=&gt;{}, f[getSym(&quot;@@toStringTag&quot;)] = &quot;Object&quot;
+&gt; &quot;Object&quot;
+&gt; js&gt; Object.prototype.toString.call(f)
+&gt; &quot;[object Object]&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3829</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 13:00:38 -0700</bug_when>
+    <thetext>Why is this a problem.  &quot;Object&quot; should also be available as a toStringTag.  I don&apos;t seen any problem at all in somebody, for example, subclassing Array (which by default will give them exotic array instance objects) and then using @@toStringTag to cause toString to report [object Object] instead of [object Array].
+
+We&apos;re only support identify the ES5 built-in exotics (plus symbols) to keep legacy code working.  As soon as you start using @@toStringTag it isn&apos;t pre-ES6 legacy code anymore.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3830</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-13 13:21:55 -0700</bug_when>
+    <thetext>I don&apos;t see how this matches the note in 15.2.4.2:
+&gt; The above definition of toString preserves the ability to use it
+&gt; as a reliable test for those specific kinds of built-in objects [...]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3831</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-05-13 13:41:49 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; I don&apos;t see how this matches the note in 15.2.4.2:
+&gt; &gt; The above definition of toString preserves the ability to use it
+&gt; &gt; as a reliable test for those specific kinds of built-in objects [...]
+
+Well, I wrote the text of that note so perhaps I could have be made clearer that it is talking about compatibility with legacy code. That is one of the implications of the &quot;but&quot; clause of the final sentence. 
+
+There was no real &quot;subclassing&quot; of Array (or other built-ins) prior to ES6 so we don&apos;t have to worry about compatibility with legacy subclassing of them.  
+
+Can you think of any valid ES5 code that would break because of how this is currently spec&apos;ed?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3833</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-13 14:10:27 -0700</bug_when>
+    <thetext>Although custom @@toString hooks will most likely used for sub-classing, this particular problem is not restricted to sub-classing. I&apos;ve just wanted to raise this bug report to make sure the behavioral change from rev13 to rev14 was intentional.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9235</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-17 13:54:28 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft
+
+toString has evlolved since this bug was filed, but the basic issue remains. Elaborated the note to clarify that @@toStringTag could be used to invalidate the legacy compatibility of type testing using toString.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9338</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 17:33:17 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

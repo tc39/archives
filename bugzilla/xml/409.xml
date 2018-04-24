@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>409</bug_id>
+          
+          <creation_ts>2012-06-22 16:39:00 -0700</creation_ts>
+          <short_desc>Add U+0085 to LineTerminator</short_desc>
+          <delta_ts>2014-07-20 20:34:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>normative change from ES5.x</component>
+          <version>Rev 8: June 15, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1047</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-06-22 16:39:13 -0700</bug_when>
+    <thetext>From Markus Scherer&apos;s comments on Unicode support in ECMAScript
+edition 4 (applicable to all editions from ES3 to ES6 draft 8):
+
+Chapter 7.3 defines a small number of characters as LineTerminator characters.
+
+Proposal: To add the ISO Control U+0085 Next Line (NEL) to the list of LineTerminator characters.
+
+ECMAScript already lists several Unicode and ISO 6429 controls that are commonly used as line break characters, except for U+0085 Next Line. See &lt;a href=&quot;http://www.unicode.org/reports/tr13/&quot;&gt;UAX #13: Unicode Newline Guidelines&lt;/a&gt; and &lt;a href=&quot;http://www.w3.org/TR/xml11/&quot;&gt;XML 1.1&lt;/a&gt;.
+
+https://sites.google.com/site/markusicu/unicode/es/unicode-2003#Line_Breaks
+
+(The additional comment on StrWhiteSpaceChar has been addressed in ES5.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1048</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-22 17:27:03 -0700</bug_when>
+    <thetext>NEL was originally going to be incorporated into ES5 and was included in draft specifications through June 2009.  At the May 2009 TC39 meeting (see http://wiki.ecmascript.org/lib/exe/fetch.php?id=es3.1%3Aes3.1_proposal_working_draft&amp;cache=cache&amp;media=es3.1:es5_candidate_errata_june_17.pdf item 7.2) it was decided not incorporate it as a line terminator or whitespace character.  That decision was based upon a es-discuss thread that starts at https://mail.mozilla.org/pipermail/es5-discuss/2009-May/002676.html (&lt;NEL&gt; Considered Harmful.
+
+Before adding it back into ES6 we would have to carefully reconsider the arguments that were made at that time and convince TC39 that they are no longer valid.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9423</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-20 20:34:52 -0700</bug_when>
+    <thetext>Thanks for the pointers – I wasn&apos;t aware of that older discussion, and agree with its conclusion.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

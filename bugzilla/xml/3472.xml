@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3472</bug_id>
+          
+          <creation_ts>2014-12-17 13:59:00 -0800</creation_ts>
+          <short_desc>19.1.3.6  Object.prototype.toString: Possible to detect proxied array objects</short_desc>
+          <delta_ts>2014-12-23 20:23:31 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11075</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-17 13:59:17 -0800</bug_when>
+    <thetext>19.1.3.6  Object.prototype.toString ( )  
+
+Object.prototype.toString possibly needs to use IsArray, otherwise it can be (ab-)used to detect proxied array objects, because it&apos;s not possible for proxied array objects to use the tag &quot;Array&quot;.
+
+
+
+
+---
+js&gt; p = new Proxy([], {
+ get(t,pk,r){
+  if(pk === Symbol.toStringTag) return &quot;Array&quot;;
+  return Reflect.get(t,pk,r)
+}})
+{}
+js&gt; Array.isArray(p)
+true
+js&gt; Object.prototype.toString.call(p)
+&quot;[object ~Array]&quot;
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11079</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-17 16:34:32 -0800</bug_when>
+    <thetext>Mark/Tom are you ok if we make this change?  I don&apos;t really like it, as it allows a Proxy that expose no array behavior to still claim to be a built-in Array. But give that we agreed to make Array.isArray work in this manner I don&apos;t see why we wouldn&apos;t also do it for O.p.toString.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11091</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mark Miller">erights</who>
+    <bug_when>2014-12-17 20:11:03 -0800</bug_when>
+    <thetext>Yes, I think that is the most consistent thing to do.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11106</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-18 09:06:41 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11127</commentid>
+    <comment_count>4</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-12-21 11:13:25 -0800</bug_when>
+    <thetext>+1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11197</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:31 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

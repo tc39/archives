@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4107</bug_id>
+          
+          <creation_ts>2015-03-04 15:02:00 -0800</creation_ts>
+          <short_desc>9.4.3.3 [[Enumerate]], 9.4.5.6 [[Enumerate]]: Duplicate property names not detected</short_desc>
+          <delta_ts>2015-03-04 18:58:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13462</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-04 15:02:47 -0800</bug_when>
+    <thetext>9.4.3.3 [[Enumerate]] ()
+9.4.5.6 [[Enumerate]] ()
+
+Duplicate property names are possible with current definition of [[Enumerate]] for String and Integer Indexed objects if an integer indexed property is present on an object in the prototype chain. 
+
+For example:
+---
+Object.defineProperty(Object.prototype, &quot;0&quot;, {enumerable: true});
+print([...Reflect.enumerate(new String(&quot;abc&quot;))]);
+---
+
+Expected: Prints &quot;0, 1, 2&quot;
+Actual: Prints &quot;0, 1, 2, 0&quot;
+
+
+Are 9.4.3.3 and 9.4.5.6 actually needed? Maybe this issue can be fixed by simply changing 9.1.11 to use &quot;[[OwnPropertyKeys]]&quot; instead of &quot;properties&quot; and then deleting 9.4.3.3 and 9.4.5.6 because they are no longer needed. (This also allows to delete CompoundIterator object.)
+
+&gt; Return an Iterator object (25.1.1.2) whose next method iterates over all
+&gt; the String-valued keys of enumerable properties of O.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13463</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 16:21:46 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+eliminated 9.4.3.3 and 9.4.5.6, via various tweaks in 9.4.5.6, the nost inport being the addition of:
+
+[[Enumerate]] must obtain the own property keys of the target object as if by calling its [[OwnPropertyKeys]] internal method. Property attributes of the target object must be obtained as if by calling its [[GetOwnProperty]] internal method.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13498</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:15 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

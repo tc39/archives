@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4078</bug_id>
+          
+          <creation_ts>2015-02-22 04:26:00 -0800</creation_ts>
+          <short_desc>21.2 RegExp: Incomplete compatibility for %RegExpPrototype%</short_desc>
+          <delta_ts>2015-03-04 18:58:21 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>d</cc>
+    
+    <cc>getify</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13253</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-22 04:26:16 -0800</bug_when>
+    <thetext>js&gt; &quot;&quot;.match(RegExp.prototype)
+uncaught exception: TypeError: function called on an incompatible object
+js&gt; &quot;&quot;.split(RegExp.prototype)
+uncaught exception: TypeError: function called on an incompatible object
+js&gt; &quot;&quot;.replace(RegExp.prototype)
+uncaught exception: TypeError: function called on an incompatible object
+
+The TypeErrors are thrown because %RegExpPrototype% is not handled in the various RegExp flags accessors methods.
+
+
+It is certainly possible to patch each accessor to handle %RegExpPrototype%, but I start to believe
+that simply adding [[OriginalSource]] and [[OriginalFlags]] internal slots to %RegExpPrototype% is
+a better solution. Therefore I&apos;d like to propose the following changes:
+
+
+1) Remove special casing %RegExpPrototype% in RegExp.prototype.test( S ) step 5.
+2) Add [[OriginalSource]] and [[OriginalFlags]] internal slots to %RegExpPrototype%. The slot values are the empty string.
+3) Add an assertion to 21.2.3.2.2 RegExpInitialize as the first step: &quot;1. Assert: obj has a [[RegExpMatcher]] internal slot.&quot;.
+4) Handle %RegExpPrototype% in 21.2.5.2 RegExp.prototype.exec and 21.2.5.2.1 RegExpExec this way:
+
+21.2.5.2 RegExp.prototype.exec ( string ) - Replace steps 3-4 with:
+  3.  If R has [[OriginalSource]] and [[OriginalFlags]] internal slots, then
+    a.  If R does not have a [[RegExpMatcher]] internal slot, then
+        i.  Let R be RegExpCreate(R.[[OriginalSource]], R.[[OriginalFlags]]).
+        ii. ReturnIfAbrupt(R).
+  4. Else, throw a TypeError exception.
+
+21.2.5.2.1 Runtime Semantics: RegExpExec ( R, S ) - Replace step 6 with:
+  6.  If R has [[OriginalSource]] and [[OriginalFlags]] internal slots, then
+    a.  If R does not have a [[RegExpMatcher]] internal slot, then
+        i.  Let R be RegExpCreate(R.[[OriginalSource]], R.[[OriginalFlags]]).
+        ii. ReturnIfAbrupt(R).
+  7. Else, throw a TypeError exception.
+
+5) Change 21.2.5 Properties of the RegExp Prototype Object, from:
+     &gt; It is not a RegExp instance and does not have a [[RegExpMatcher]] internal slot or any of the other internal slots of RegExp instance objects.
+   to:
+     &gt; It is not a RegExp instance and does not have a [[RegExpMatcher]] internal slot. However, it has [[OriginalSource]] and [[OriginalFlags]] internal slots.
+     &gt; The value of the [[OriginalSource]] and [[OriginalFlags]] internal slot is the empty string.
+
+6) Change 21.2.3.1 RegExp - Replace step 5 with:
+  5.  If Type(pattern) is Object and pattern has [[OriginalSource]] and [[OriginalFlags]] internal slots, then
+
+7) Change 7.2.8 IsRegExp - Replace step 5 with:
+  5.  If argument has [[OriginalSource]] and [[OriginalFlags]] internal slots, return true.
+
+8) Change B.2.5.1 RegExp.prototype.compile (pattern, flags ) - Replace step 3 with:
+  3.  If Type(pattern) is Object and pattern has [[OriginalSource]] and [[OriginalFlags]] internal slots, then</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13393</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-26 10:25:18 -0800</bug_when>
+    <thetext>Legacy compat for these built-in prototypes is something we have been approaching on an asymptotically good-enough basis. It isn&apos;t clear whether or not using RegExp.prototype as the argument to those string methods are inside or beyond the good=enough line.
+
+If we really found we needed to push legacy compatibility to include them it would probably be better to simply revert to %RegExpPrototype% being a fully configured RegExp instance with all the appropriately initialized internal slots.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13399</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 13:58:58 -0800</bug_when>
+    <thetext>I consider the current workarounds in RegExp.prototype.exec and RegExp.prototype.test [1] to be half-baked solutions. If compatibility is needed for %RegExpPrototype%, it should be present for every legacy API - that includes the String.prototype methods. 
+
+[1] RegExp.prototype.test doesn&apos;t even need to special case %RegExpPrototype% !
+
+
+(In reply to Allen Wirfs-Brock from comment #1)
+&gt; If we really found we needed to push legacy compatibility to include them it
+&gt; would probably be better to simply revert to %RegExpPrototype% being a fully
+&gt; configured RegExp instance with all the appropriately initialized internal
+&gt; slots.
+
+That&apos;s the alternative solution. The only reason why I&apos;m proposing to add just [[OriginalSource]] and [[OriginalFlags]], is the RegExp.prototype.compile issue described in [2]. If %RegExpPrototype% is reverted to a normal RegExp instance, RegExp.prototype.compile needs to handle %RegExpPrototype% (for the current and foreign realms; looking at you, V8! [3]).
+
+[2] https://mail.mozilla.org/pipermail/es-discuss/2015-February/041656.html
+[3] https://github.com/v8/v8-git-mirror/blob/27a3879617245f347213a739eee3727e24a0c608/src/regexp.js#L63-L67</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13400</commentid>
+    <comment_count>3</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 14:00:30 -0800</bug_when>
+    <thetext>Cc&apos;ing Kyle Simpson.
+Maybe he can share some use cases where RegExp.prototype is used as a RegExp instance?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13401</commentid>
+    <comment_count>4</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-02-26 14:12:01 -0800</bug_when>
+    <thetext>I think these changes should be reverted. We do not yet have compelling evidence that this will break enough sites to cause browser game theory to make it un-implementable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13409</commentid>
+    <comment_count>5</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2015-02-26 15:24:05 -0800</bug_when>
+    <thetext>As I&apos;ve said on es-discuss, my primary usage pattern is, in order, `Function.prototype`, `Array.prototype`, and to a much lesser (but non-zero) extent, `RegExp.prototype`. I have never relied on `String.prototype` being a String, `Number.prototype` being a Number, or `Boolean.prototype` being a Boolean. `Object.prototype` is a non-issue since it was already a plain object, and I&apos;ve never cared about its `instanceof` behavior.
+
+We&apos;ve already discussed `Function.prototype` and why it had to be rolled back. I also provided some evidence for `Array.prototype` being rolled back.
+
+As for `RegExp.prototype`, the only place I ever used this was as a default value for a parameter to a function utility, something similar to this:
+
+
+function lookForAllMatches(str,re) {
+   str = str || &quot;&quot;;
+   re = re || RegExp.prototype;
+   if (!re.global) re = new RegExp(re.source,&quot;g&quot;);
+   return str.match(re);
+}
+
+
+Could I have done just `/(?:)/` instead of `RegExp.prototype`? Of course. But there was no compelling reason back then, nor was there any sense or signal that such a fundamental and simple thing would ever be changed.
+
+That&apos;s it, that&apos;s my only evidence.
+
+-------
+
+That evidence is not, admittedly, very compelling. But I would submit that the evidence for the change (making RegExp.prototype not a regex) is equally uncompelling, perhaps even less so. I really can&apos;t imagine any scenarios where people will be confused by `RegExp.prototype` being `instanceof RegExp`. I think that&apos;s just academic fodder.
+
+One other tiny point in favor is keeping consistency with `Function.prototype` and `Array.prototype`, since all 3 of these have at least some demonstrated utility as default &quot;empties&quot; of their respective types.
+
+But to boil it all down, I won&apos;t lose any sleep if `RegExp.prototype` changes. I would be vehemently opposed (not that that matters) to `Function.prototype` or `Array.prototype` changing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13465</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:24:39 -0800</bug_when>
+    <thetext>fixed in rev35
+
+I reverted the %RegExpPrototype% test in the exec and test methods. I think they are two much of a mack to standardize.
+
+For, for now at least RegExp.prototype is an ordinary object that doesn&apos;t have any  RegExp internal slots and no special legacy compat. recognition.
+
+I think we may still end up  revert it to being a RegExp instance, but not in this draft.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13539</commentid>
+    <comment_count>7</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:21 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

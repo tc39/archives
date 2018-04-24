@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2224</bug_id>
+          
+          <creation_ts>2013-11-11 00:32:00 -0800</creation_ts>
+          <short_desc>12.7.2: missing &quot;Static&quot; in header</short_desc>
+          <delta_ts>2014-06-02 12:06:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6653</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-11 00:32:59 -0800</bug_when>
+    <thetext>In the header for 12.7.2 &quot;Semantics: IsValidSimpleAssignmentTarget&quot;,
+insert &quot;Static&quot; before &quot;Semantics&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6654</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-11 11:52:16 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7072</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:04:10 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7234</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-02-09 20:40:13 -0800</bug_when>
+    <thetext>Nope, rev22 is still missing &quot;Static&quot; there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8459</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-14 16:27:11 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft
+
+actually 12.8.2 was the lingering problem</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8470</commentid>
+    <comment_count>5</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-14 17:42:56 -0700</bug_when>
+    <thetext>(In reply to comment #4)
+&gt; 
+&gt; actually 12.8.2 was the lingering problem
+
+In rev23 &amp; rev24, yes; but it was 12.7.2 in rev21 &amp; rev22 (the version I raised the bug against).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8828</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 12:06:21 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

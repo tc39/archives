@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>341</bug_id>
+          
+          <creation_ts>2012-05-09 12:19:00 -0700</creation_ts>
+          <short_desc>13.5 Has steps for kind: Normal, but not Method &amp; Arrow</short_desc>
+          <delta_ts>2014-03-27 10:02:11 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>913</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2012-05-09 12:19:31 -0700</bug_when>
+    <thetext>There is an explicit set of steps when _kind_ is &quot;Normal&quot;, but for Method or Arrow
+
+
+It occurs to me that this could simply be incomplete :)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2082</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 10:12:40 -0700</bug_when>
+    <thetext>this is about adding position pill caller and arguments properties to function objects.  ES5 adds these for strict mode functions.
+
+the current ES6 draft doesn&apos;t add them for arrow or method functions.  The questions for those is should should those since they are new forms always get such poison pills, only get them if they are strict, or never get them (because no implementor would be silly enough to add those legacy properties to a new ES6 construct.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7483</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-27 10:02:11 -0700</bug_when>
+    <thetext>current all strict function have poison pills, regard of the the syntactic form used to create them.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

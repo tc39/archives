@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3014</bug_id>
+          
+          <creation_ts>2014-07-21 11:50:00 -0700</creation_ts>
+          <short_desc>Generator&apos;s iterator.next() queue&apos;ing microtask while generator running?</short_desc>
+          <delta_ts>2015-03-15 12:07:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="getify@gmail.com">getify</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9442</commentid>
+    <comment_count>0</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-07-21 11:50:48 -0700</bug_when>
+    <thetext>Pretty strongly guessing this is going to be impossible or rejected, but I figured I&apos;d just ask, since on the surface (in my ignorance) it seems like a fairly minor spec tweak.
+
+Consider code like this:
+
+
+var cache = {};
+var getData(url) {
+   if (cache[url]) {
+      it.next( cache[url] );
+   }
+   else {
+      makeAjaxRequest( url, function(data) {
+         cache[url] = data;
+         it.next( data );
+      } );
+   }
+}
+
+function* main() {
+   var res1 = yield getData(&quot;http://some.url.1&quot;);
+   var res2 = yield getData(&quot;http://some.url.2&quot;);
+   console.log(res1 + res2);
+}
+
+var it = main();
+it.next();
+
+
+
+This code seems simple enough: request data, if in the in-memory cache, use it, otherwise fetch from server.
+
+There&apos;s a kind of hidden/subtle bug, which is that it breaks in the case of fulfilling from the cache. The reason? Because you&apos;re calling `it.next( cache[url] )` in the middle of the `yield getData(..)` expression, so the generator is still running. An error is thrown.
+
+The solution?
+
+
+if (cache[url]) {
+   setTimeout( function(){
+      it.next( cache[url] );
+   }, 0 );
+}
+
+
+That&apos;s unfortunate, but it&apos;s yet another place where having no exposed hook to queue a micro-task forces reliance on ugly (and performance-troublesome) `setTimeout(..0)`.
+
+--------
+
+So, my question, in two parts...
+
+1. is it at all possible that calling `next(..)` or `throw(..)` on a generator&apos;s iterator could queue a microtask for that rather than doing it directly?
+
+For #1, it could be that it does this always, or it could be that it only enqueues a task if the generator is currently running.
+
+Either way, at the end of the current execution thread, if the generator is no longer running, you could immediately drain those tasks (if any), rather than actually waiting for the next cycle.
+
+The net result would be that generators would continue to work normally the way they already do, but in the special case where you call a `next(..)` or `throw(..)` on a running generator, THAT call would be queued to defer until the end of the thread, so that it didn&apos;t need to be an error.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9668</commentid>
+    <comment_count>1</comment_count>
+    <who name="getify@gmail.com">getify</who>
+    <bug_when>2014-08-05 07:04:51 -0700</bug_when>
+    <thetext>After further consideration, this idea would never work, because you wouldn&apos;t be able to get back the return values from the `next()` call, which is obviously a deal breaker.
+
+Please close. Apologies for the noise.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

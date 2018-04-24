@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2803</bug_id>
+          
+          <creation_ts>2014-05-03 10:07:00 -0700</creation_ts>
+          <short_desc>chapter 15: misc editorial</short_desc>
+          <delta_ts>2014-07-26 00:43:46 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 25: May 22, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>8103</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-03 10:07:59 -0700</bug_when>
+    <thetext>----------------------------------------
+In 15.1.8 &quot;Runtime Semantics: GlobalDeclarationInstantiation&quot;:
+
+{1}
+15.1.8 / step 9.a:
+If /d/ not a /VariableDeclaration/, then
+    Insert &quot;is&quot; before &quot;not&quot;
+
+----------------------------------------
+In 15.1.9 &quot;Runtime Semantics: ScriptEvaluationTask ( source )&quot;:
+
+{2}
+    ScriptEvaluationTask is not referenced anywhere else in the spec.
+
+----------------------------------------
+In 15.2.3.2 &quot;Load Records and LoadRequest Objects&quot;:
+
+{3}
+15.2.3.2 / Table 35:
+    The table is missing entries for:
+    [[Factory]]    (referenced in 15.2.5.6)
+    [[GroupIndex]] (referenced in 15.2.5.3.1, 15.2.5.3.2)
+
+----------------------------------------
+In 15.2.4.7.1 &quot;AsyncStartLoadPartwayThrough Functions&quot;:
+
+{4}
+15.2.4.7.1 / para 1:
+... used to implement builtin methods like Loader.prototype.load, ...
+    Insert &quot;Reflect.&quot; before &quot;Loader.prototype&quot;
+
+----------------------------------------
+In 15.2.5.1 &quot;ModuleLinkage Record&quot;:
+
+{5}
+15.2.5.1 / Table 36:
+    The table is missing an entry for:
+    [[Evaluated]] (referenced in 15.2.6.2)
+
+----------------------------------------
+In 15.2.6.1 &quot;EvaluateLoadedModule(load) Functions&quot;:
+
+{6,7,8}
+15.2.6.1 / para 1:
+An EvaluateLoadedModule function is an anonymous built-in function that is used
+by Loader.prototype.module and Loader.prototype.import to ensure that ...
+    In &quot;Loader.prototype.module&quot;, &quot;Loader&quot; is sans upright bold and &quot;module&quot;
+    is monospace italic. The whole thing should be monospace upright.
+    
+    In &quot;Loader.prototype.import&quot;, &quot;Loader&quot; is sans, should be monospace.
+    
+    In both cases, insert &quot;Reflect.&quot; before &quot;Loader&quot;.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8349</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 16:36:30 -0700</bug_when>
+    <thetext>all fixed in rev26 editor&apos;s draft except for {3} and {5}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8353</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-12 17:10:54 -0700</bug_when>
+    <thetext>rev26?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8356</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-12 17:20:38 -0700</bug_when>
+    <thetext>make that rev25</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8808</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-02 10:55:16 -0700</bug_when>
+    <thetext>What remains in rev25:
+
+----------------------------------------
+In 15.2.3.2 &quot;Load Records and LoadRequest Objects&quot;:
+
+{3}
+15.2.3.2 / Table 35:
+    The table is missing an entry for:
+    [[GroupIndex]] (referenced in 15.2.5.3.1, 15.2.5.3.2)
+
+----------------------------------------
+In 15.2.5.1 &quot;ModuleLinkage Record&quot;:
+
+{5}
+15.2.5.1 / Table 36:
+    The table is missing an entry for:
+    [[Evaluated]] (referenced in 15.2.6.2)
+
+----------------------------------------
+In 15.2.6.1 &quot;EvaluateLoadedModule(load) Functions&quot;:
+
+{7}
+15.2.6.1 / para 1:
+An EvaluateLoadedModule function is an anonymous built-in function that is
+used by Reflect.Loader.prototype.module and Reflect.Loader.prototype.import
+to ensure that ...
+
+   In &quot;Reflect.Loader.prototype.import&quot;, &quot;Loader&quot; is sans, should be monospace.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9085</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-06-23 16:57:06 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9333</commentid>
+    <comment_count>6</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-07-19 17:26:47 -0700</bug_when>
+    <thetext>fixed in rev26</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9577</commentid>
+    <comment_count>7</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-07-26 00:43:46 -0700</bug_when>
+    <thetext>confirmed fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

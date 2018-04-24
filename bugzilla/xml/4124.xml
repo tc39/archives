@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4124</bug_id>
+          
+          <creation_ts>2015-03-05 21:06:00 -0800</creation_ts>
+          <short_desc>&quot;is&quot; -&gt; &quot;is an instance of (the production)&quot;</short_desc>
+          <delta_ts>2015-03-16 11:29:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=2985</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13593</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-05 21:06:44 -0800</bug_when>
+    <thetext>In 13.1.{5 to 10} and 13.12.{10,11}, there are steps of the form:
+    If /Statement/ is /Statement/ : /LabelledStatement/, return ...
+
+Using &quot;is&quot; here is a category error.
+It would be better to say &quot;is an instance of&quot;
+(or &quot;is an instance of the production&quot;).
+
+---
+
+Similarly, in 15.2.1.{11,13,14}, there are steps that say:
+    If /ExportDeclaration/ is &apos;export&apos; /VariableStatement/, return ...
+
+It would be better to say:
+    If /ExportDeclaration/ is an instance of [the production]
+       /ExportDeclaration/ : &apos;export&apos; /VariableStatement/, return ...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13597</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-06 08:12:07 -0800</bug_when>
+    <thetext>True, although I don&apos;t think anybody is actually confused by it.
+
+How about &quot;matches&quot; or &quot;matched&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13607</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-03-06 09:12:02 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; True, although I don&apos;t think anybody is actually confused by it.
+
+Probably not. The same could be said of many of the bugs I submit.
+
+&gt; How about &quot;matches&quot; or &quot;matched&quot;?
+
+Currently, when the spec says &quot;X matches production P&quot;, X is source text. (E.g. &quot;Always throw a Syntax Error if code matches this production.&quot;) So a usage in which X is a node in the parse tree seems like a category error too. However, it&apos;s better than &quot;is&quot;, so I&apos;d live with it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13746</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 11:29:21 -0700</bug_when>
+    <thetext>deferring to ES7 along with Bug 2985</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

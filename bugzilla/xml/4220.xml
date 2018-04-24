@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4220</bug_id>
+          
+          <creation_ts>2015-03-26 16:06:00 -0700</creation_ts>
+          <short_desc>Ch. 25: Various editorial issues</short_desc>
+          <delta_ts>2015-04-03 12:35:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 36: March 17, 2015 Release Candidate 3</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13937</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-26 16:06:57 -0700</bug_when>
+    <thetext>25.2.3 Properties of the GeneratorFunction Prototype Object
+  1st para: &quot;and is itself&quot; -&gt; &quot;, it is itself&quot;
+
+
+25.2.4.2 prototype
+  &gt; before the generator function object is invoked as a constructor for that newly created object.
+
+  But generator functions are not used as constructor functions.
+
+
+25.4.1.3.2 Promise Resolve Functions
+  Step 6a: &quot;newly-created&quot; -&gt; &quot;newly created&quot;
+
+
+25.4.1.8 TriggerPromiseReactions ( reactions, argument )
+  Preamble: 
+  &gt; The abstract operation TriggerPromiseReactions takes a collection of functions to trigger in the next Job, and calls them, passing each the given argument.
+
+  `reactions` is a collection of PromiseReaction records, not a collection of functions. &quot;to trigger in the next Job&quot;, but TriggerPromiseReactions enqueues multiple Jobs (or at least can enqueue multiple Jobs).
+
+
+25.4.4.3.1 PerformPromiseRaceLoop( iteratorRecord, promiseCapability, C )
+  Title: -&gt; &quot;Runtime Semantics: PerformPromiseRace( iteratorRecord, promiseCapability, C )&quot;
+
+
+Table 59 — Internal Slots of Promise Instances
+  [[PromiseState]] - Description: `undefined` can be removed.
+  [[PromiseFulfillReactions]] - Description: Missing space &apos;the&quot;fulfilled&quot;&apos;
+  [[PromiseRejectReactions]] - Description: Missing space &apos;the&quot;rejected&quot;&apos;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13968</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-31 13:52:23 -0700</bug_when>
+    <thetext>25.2.4.2 GeneratorFunctions actually have a [[Construct]] so they can be invoked using &apos;new&apos;.  Regardless, I still cleanup the langauge in this paragraph.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13969</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-31 14:03:06 -0700</bug_when>
+    <thetext>fixed in rev37 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14046</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-04-03 12:35:31 -0700</bug_when>
+    <thetext>In Rev37</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>274</bug_id>
+          
+          <creation_ts>2012-02-22 13:01:00 -0800</creation_ts>
+          <short_desc>S13.2.1_A7_T3 erroneously declares global var</short_desc>
+          <delta_ts>2012-02-24 15:42:46 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>651</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-02-22 13:01:30 -0800</bug_when>
+    <thetext>S13.2.1_A7_T3 initially declares the variable &quot;x&quot; in global scope with a standard variable statement. This is actually wrong since the first check tests whether getValue() throws a ReferenceError for an unresolvable reference.
+So the first statement in S13.2.1_A7_T3 must not be &quot;var x;&quot;. 
+
+Also compare to the original Sputnik test case.
+
+
+Bug No.2 in S13.2.1_A7_T3:
+The &apos;$ERROR()&apos; function should never be called within a try-catch block if the catch-block is empty. At least if the &apos;$ERROR()&apos; implementation from sta.js is used which simply throws a &apos;Test262Error&apos; instance. Surrounding the &apos;$ERROR()&apos; call in try-catch will now catch the &apos;Test262Error&apos;...
+try {
+  /* code which is expected to throw an error */
+  $ERROR(&quot;...&quot;);
+} catch (e) {}
+
+=&gt; should be rewritten to:
+
+try {
+  /* code which is expected to throw an error */
+  $ERROR(&quot;...&quot;);
+} catch (e) {
+  if (e instanceof Test262Error) throw e;
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>668</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-24 11:06:28 -0800</bug_when>
+    <thetext>No idea why the &apos;var x;&apos; was ever removed.
+
+Bug #2 below is a frightening oversight.  Looks like the following might be affected as well:
+  E:\262\test262\test\suite\ch12\12.6\12.6.1\S12.6.1_A2.js(14):} catch (e) {}
+  E:\262\test262\test\suite\ch12\12.6\12.6.1\S12.6.1_A9.js(20):} catch (e) {}
+  E:\262\test262\test\suite\ch12\12.6\12.6.2\S12.6.2_A9.js(20):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.1_A7_T3.js(24):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.1_A7_T4.js(23):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.1_A7_T4.js(50):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.2_A11.js(26):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.2_A13.js(24):} catch (e) {}
+  E:\262\test262\test\suite\ch13\13.2\S13.2.2_A9.js(26):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.1\S15.1.3.1_A2.2_T1.js(28):  } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.1\S15.1.3.1_A2.3_T1.js(24):    } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.1\S15.1.3.1_A2.4_T1.js(28):      } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.1\S15.1.3.1_A2.5_T1.js(32):        } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.2\S15.1.3.2_A2.2_T1.js(22):  } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.2\S15.1.3.2_A2.3_T1.js(24):    } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.2\S15.1.3.2_A2.4_T1.js(28):      } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.1\15.1.3\15.1.3.2\S15.1.3.2_A2.5_T1.js(32):        } catch (e) {}   
+  E:\262\test262\test\suite\ch15\15.11\15.11.4\S15.11.4_A3.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.11\15.11.4\S15.11.4_A4.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.3\S15.5.3.2_A4.js(20):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.10\S15.5.4.10_A7.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.11\S15.5.4.11_A7.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.14\S15.5.4.14_A7.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.5\S15.5.4.5_A7.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.6\S15.5.4.6_A7.js(16):} catch (e) {}
+  E:\262\test262\test\suite\ch15\15.5\15.5.4\15.5.4.9\S15.5.4.9_A7.js(16):} catch (e) {}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>670</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-02-24 15:42:46 -0800</bug_when>
+    <thetext>Fixed S13.2.1_A7_T3.js plus all the others I called out above in Hg.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

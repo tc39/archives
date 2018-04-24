@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>709</bug_id>
+          
+          <creation_ts>2012-10-03 17:10:00 -0700</creation_ts>
+          <short_desc>11.1.4.2: invalid RHS for ArrayComprehension</short_desc>
+          <delta_ts>2014-05-15 10:32:05 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1830</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-03 17:10:43 -0700</bug_when>
+    <thetext>In 11.1.4.2 &quot;Array Comprehension&quot;,
+under &quot;Runtime Semantics: Evaluation&quot;,
+the production is:
+    ArrayComprehension :: [ ElementList ]
+
+but that is not a valid RHS for ArrayComprehension.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2046</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-25 15:10:03 -0700</bug_when>
+    <thetext>replaced with TODO placeholder</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4108</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-05-31 02:22:10 -0700</bug_when>
+    <thetext>Fixed in rev15, close issue?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8500</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-05-15 10:32:05 -0700</bug_when>
+    <thetext>Yup, fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

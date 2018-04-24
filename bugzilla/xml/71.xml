@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>71</bug_id>
+          
+          <creation_ts>2011-03-14 15:06:00 -0700</creation_ts>
+          <short_desc>Test 15.2.3.6-4-531-13 may be false</short_desc>
+          <delta_ts>2011-05-25 12:25:10 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="David Bruant">bruant.d</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>154</commentid>
+    <comment_count>0</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-14 15:06:31 -0700</bug_when>
+    <thetext>Test case: 
+---------------------------------------
+function testcase() {
+    var obj = fnGlobalObject();
+    try {
+        obj.verifySetFunction = &quot;data&quot;;
+        Object.defineProperty(obj, &quot;0&quot;, {get: function () {return obj.verifySetFunction;}, set: function (value) {obj.verifySetFunction = value;}, configurable: true});
+        obj.verifySetFunction1 = &quot;data1&quot;;
+        var getFunc = function () {return obj.verifySetFunction1;};
+        var setFunc = function (value) {obj.verifySetFunction1 = value;};
+        Object.defineProperty(obj, &quot;0&quot;, {get: getFunc, set: setFunc});
+        return accessorPropertyAttributesAreCorrect(obj, &quot;0&quot;, getFunc, setFunc, &quot;verifySetFunction1&quot;, false, true);
+    } finally {
+        delete obj[0];
+        delete obj.verifySetFunction;
+        delete obj.verifySetFunction1;
+    }
+}
+---------------------------------------
+I am not familiar with accessorPropertyAttributesAreCorrect however, &quot;verifySetFunction1&quot; is being defined within the testcase function. I think that it value should be &quot;data1&quot; (obj.verifySetFunction1)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>155</commentid>
+    <comment_count>1</comment_count>
+    <who name="David Bruant">bruant.d</who>
+    <bug_when>2011-03-14 15:09:18 -0700</bug_when>
+    <thetext>Same with 15.2.3.6-4-531-4 ?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>217</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-25 12:25:10 -0700</bug_when>
+    <thetext>The test case is OK based on the definition of accessorPropertyAttributesAreCorrect.  The relevant snippet is:
+    function accessorPropertyAttributesAreCorrect(obj, name, get, set, setVerifyHelpProp, ...) {
+        //...
+        obj[name] = &quot;toBeSetValue&quot;;
+        if (obj[setVerifyHelpProp] !== &quot;toBeSetValue&quot;) {
+            attributesCorrect = false;
+        }
+        //...
+        return attributesCorrect;
+    }
+
+It&apos;s not all that intuitive, but the helper function is checking that the value of obj.verifySetFunction1 changes from &quot;data1&quot; to &quot;toBeSetValue&quot;; not that it&apos;s &quot;data1&quot; before the setter gets invoked.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

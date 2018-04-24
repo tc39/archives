@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4294</bug_id>
+          
+          <creation_ts>2015-04-16 10:38:00 -0700</creation_ts>
+          <short_desc>12.1.1 BasicFormatMatcher: Incorrect call to ArrayCreateFromList + editorial</short_desc>
+          <delta_ts>2015-04-16 20:43:41 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14206</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-04-16 10:38:53 -0700</bug_when>
+    <thetext>12.1.1 BasicFormatMatcher:
+
+Step 10: The `formats` argument is an Array object (per 12.2.3 Internal Properties), so the call to ArrayCreateFromList does not make sense. ArrayCreateFromList must be called with a List parameter. 
+
+Maybe change steps 10-11 to:
+&gt; 10. Assert: formats is an Array object.
+
+Step 13.c.iii: Omit &quot;then&quot;
+Step 13.c.iv: Omit &quot;then&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14210</commentid>
+    <comment_count>1</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2015-04-16 12:00:31 -0700</bug_when>
+    <thetext>
+&gt; Maybe change steps 10-11 to:
+&gt; 10. Assert: formats is an Array object.
+
+Fixed.
+
+&gt; Step 13.c.iii: Omit &quot;then&quot;
+&gt; Step 13.c.iv: Omit &quot;then&quot;
+
+Fixed</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

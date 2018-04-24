@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1198</bug_id>
+          
+          <creation_ts>2013-01-16 22:51:00 -0800</creation_ts>
+          <short_desc>step labels in italic</short_desc>
+          <delta_ts>2013-03-08 14:44:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3123</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-16 22:51:17 -0800</bug_when>
+    <thetext>In a few cases, the label of a step (e.g., &quot;a.&quot;) is in an italic font.
+In each case, change it to an upright font.
+
+  10.5.1 / steps 13.a, 16.a, 16.b
+
+  10.5.3 / steps 8.a.i, 8.a.ii
+
+  15.13.6.1.4 / step 11.a</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3124</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-16 22:58:26 -0800</bug_when>
+    <thetext>Also:
+    15.10.6.2 / Runtime Semantics: RegExpExec Abstract Operation / step 9.c.i</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3125</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-17 00:03:42 -0800</bug_when>
+    <thetext>(And on that last one:
+    i.   Let i = i + 1.
+not just the label is incorrectly italic. Only the two occurrences of metavariable &quot;i&quot; should be italic.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3126</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-17 00:14:14 -0800</bug_when>
+    <thetext>Found some more:
+  
+  12.6.4 / Static Semantics: VarDeclaredNames / rule 2 steps 2,3
+  12.6.4 / Static Semantics: VarDeclaredNames / rule 5 steps 2,3
+  12.6.4 / Runtime Semantics: Binding Instantiation / step 1</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3230</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-25 16:13:44 -0800</bug_when>
+    <thetext>fixed in rev 14 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3329</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 14:44:14 -0800</bug_when>
+    <thetext>in Rev 14 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

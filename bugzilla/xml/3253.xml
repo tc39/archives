@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3253</bug_id>
+          
+          <creation_ts>2014-10-01 11:58:00 -0700</creation_ts>
+          <short_desc>assignment to const variable don&apos;t throw in non-strict code</short_desc>
+          <delta_ts>2014-12-07 14:34:59 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dslomov</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10258</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-01 11:58:33 -0700</bug_when>
+    <thetext>On Sep 30, 2014, at 5:09 PM, Shu-yu Guo wrote:
+
+Hi all,
+
+In the current draft, I see 2 different places where assigning to an immutable binding (&apos;const&apos;) throws an error:
+
+1) Dynamically throwing a TypeError in SetMutableBinding, http://people.mozilla.org/~jorendorff/es6-draft.html#sec-declarative-environment-records-setmutablebinding-n-v-s
+...
+1) throws only in strict mode code, while 2) throws regardless. 2) is also best effort; seems to be implementation-dependent what &quot;can statically determine&quot; entails.
+
+Is the intention that assigning to consts silently nops if the implementation cannot determine the assignment to be to a const statically, in non-strict code, but implementations *should* make a best effort to report such cases eagerly, regardless of strictness? Seems kind of odd to me; perhaps I am misreading?
+
+&gt;response
+
+1) looks like a bug to me.  I pretty sure it was never the intent for assignments to const binding to silently fail in non-strict code. The current semantics of SetMutableBinding is a carry over from ES5 where immutable bindings were only used (I have to double check this) for FunctionExpression function name bindings. The legacy of ES3 (hence non-strict ES5) was to did not throw on assignments to such function name bindings.
+
+I&apos;ll probably have to do some extra special casing to preserve the ES3/5 semantics for assignment to function names and make the throw unconditional to other immutable bindings
+
+Allen</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10278</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-08 09:12:17 -0700</bug_when>
+    <thetext>however, after thinking about this for a while I think the current spec&apos;ed behavior is probably necessary in order to not break existing code that uses various pre-ES6 standard forms of const declarations.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10683</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-25 22:33:09 -0800</bug_when>
+    <thetext>also see https://github.com/tc39/tc39-notes/blob/master/es6/2014-11/nov-18.md#43-assignment-to-a-const-static-error
+
+fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10833</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:34:59 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2256</bug_id>
+          
+          <creation_ts>2013-11-12 05:49:00 -0800</creation_ts>
+          <short_desc>21.2.2.8.2 Canonicalize: Non-unicode canonicalization not compatible with ES5</short_desc>
+          <delta_ts>2014-05-30 17:51:25 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascriptbugs</cc>
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="12"
+          type_id="1"
+          status="?"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6691</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-12 05:49:17 -0800</bug_when>
+    <thetext>21.2.2.8.2 Runtime Semantics: Canonicalize Abstract Operation, steps 2-3:
+
+&gt; 2.  If the file CaseFolding.txt of the Unicode Character Database does not provides a simple or common case folding mapping for ch, return ch.
+&gt; 3.  Else, Let u be the result of apply that mapping to ch.
+
+These steps are not compatible with ES5 for non-unicode, case-insensitive matching. Example:
+
+- CaseFolding-6.3.0.txt, simple/common case folding entry for u1E9E is u00DF. 
+- CaseFolding-6.3.0.txt, simple/common case folding entry for u00DF is not explicitly defined, that means it defaults to u00DF.
+
+So Canonicalize(u00DF) == u00DF and Canonicalize(u1E9E) == u00DF, but for ES5 compatibility Canonicalize(u1E9E) must not be mapped to u00DF, but instead to u1E9E (if ignoreCase=true and unicode=false).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6774</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-14 12:14:31 -0800</bug_when>
+    <thetext>For the equivalent of steps 2 and 3, the ES5 spec. indirects through String.prototype.toUpperCase (which itself is defined in terms of toLowerCase)
+
+The ES5 toLowerCase language that corresponds to steps 2 and 3 is: 
+
+toLowerCase step 3: &quot;Let L be a String where each character of L is either the Unicode lowercase equivalent of the corresponding character of S or the actual corresponding character of S if no Unicode lowercase equivalent exists.&quot;
+
+and 
+
+&quot;The result must be derived according to the case mappings in the Unicode character database (this includes not only the UnicodeData.text file,, but also the SpecialCasings.txt file...&quot;
+
+I read, the ES5 language and ES6 steps 2 and 3 as equivalent semantic statements.  If that is correct, then this is an ES5 compatibility issue.  
+
+Perhaps your implementation doesn&apos;t conform to ES5 or perhaps ES5 differs from consensus web reality and needs to be brought back into conformance. Or, perhaps ES5 specifies an acceptable breaking change to web reality...
+
+It probably needs to be discussed on es-discuss where the Unicode experts may see it.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6777</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-14 13:46:06 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; I read, the ES5 language and ES6 steps 2 and 3 as equivalent semantic
+&gt; statements.  If that is correct, then this is an ES5 compatibility issue.  
+&gt; 
+
+The mapping in CaseFolding.txt maps code points to their lower-case counterpart, that means it uses (more or less) String.prototype.toLowerCase(). Compared to that ES5&apos;s Canonicalize operation uses String.prototype.toUpperCase(). And just substituting toUpperCase() with toLowerCase() does not give the same semantics, at least for &apos;u00df&apos;, which is kind of special.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6819</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-15 13:16:22 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; (In reply to comment #1)
+&gt; &gt; I read, the ES5 language and ES6 steps 2 and 3 as equivalent semantic
+&gt; &gt; statements.  If that is correct, then this is an ES5 compatibility issue.  
+&gt; &gt; 
+&gt; 
+&gt; The mapping in CaseFolding.txt maps code points to their lower-case
+&gt; counterpart, that means it uses (more or less) String.prototype.toLowerCase().
+&gt; Compared to that ES5&apos;s Canonicalize operation uses
+&gt; String.prototype.toUpperCase(). And just substituting toUpperCase() with
+&gt; toLowerCase() does not give the same semantics, at least for &apos;u00df&apos;, which is
+&gt; kind of special.
+
+But, the ES5 spec. for toUpperCase (and the ES3 spec. before it) says to do that exact substitution (and to use the Unicode uppercase mappings). Also, doesn&apos;t the Unicode mapping tables (including the specialcase mappings) take u+00df into account?
+
+Are you suggesting that the base ES3/5 spec. language is wrong? If so, what should it be?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6831</commentid>
+    <comment_count>4</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-17 04:07:58 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; But, the ES5 spec. for toUpperCase (and the ES3 spec. before it) says to do
+&gt; that exact substitution (and to use the Unicode uppercase mappings). Also,
+&gt; doesn&apos;t the Unicode mapping tables (including the specialcase mappings) take
+&gt; u+00df into account?
+
+Here&apos;s my thought process why the current definition in the ES6 draft is not compatible with ES5.
+
+First of all the relevant data from UnicodeData, SpecialCasing and CaseFolding.
+
+UnicodeData-6.3.0.txt:
+&lt;code&gt;; &lt;name&gt;; fields 2...11; &lt;simple-uppercase-mapping&gt;; &lt;simple-lowercase-mapping&gt;; &lt;simple-titlecase-mapping&gt;
+00DF;LATIN SMALL LETTER SHARP S;Ll;0;L;;;;;N;;;;;
+1E9E;LATIN CAPITAL LETTER SHARP S;Lu;0;L;;;;;N;;;;00DF;
+
+SpecialCasing-6.3.0.txt:
+&lt;code&gt;; &lt;lower&gt; ; &lt;title&gt; ; &lt;upper&gt; ; (&lt;condition_list&gt; ;)? # &lt;comment&gt;
+00DF; 00DF; 0053 0073; 0053 0053; # LATIN SMALL LETTER SHARP S
+
+CaseFolding-6.3.0.txt
+&lt;code&gt;; &lt;status&gt;; &lt;mapping&gt;; # &lt;name&gt;
+00DF; F; 0073 0073; # LATIN SMALL LETTER SHARP S
+1E9E; F; 0073 0073; # LATIN CAPITAL LETTER SHARP S
+1E9E; S; 00DF; # LATIN CAPITAL LETTER SHARP S
+
+ES5-Canonicalize using the data from UnicodeData + SpecialCasing gives the following results:
+(1) u+00df:
+- no upper-case mapping entry in UnicodeData
+- upper-case mapping in SpecialCasing to &quot;0053 0053&quot;, which is rejected because |length| &gt; 1
+=&gt; result: u+00df
+
+(2) u+1e9e:
+- no upper-case mapping entry in UnicodeData
+- no upper-case mapping entry in SpecialCasing
+=&gt; result: u+1e9e
+
+
+ES6-Canonicalize using the data from CaseFolding gives the following results:
+(1) u+00df:
+- mapping to &quot;0073 0073&quot; is rejected, because it is not a simple or common case folding
+=&gt; result: u+00df
+
+(2) u+1e9e:
+- mapping to &quot;0073 0073&quot; is rejected, because it is not a simple or common case folding
+- mapping to &quot;00DF&quot; is accepted, because it is a simple case folding
+=&gt; result: u+00df
+
+
+That means ES6-Canonicalize gives a different result than ES5-Canonicalize for u+1e9e.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6836</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-18 16:17:28 -0800</bug_when>
+    <thetext>(In reply to comment #4)
+...
+&gt; 
+&gt; ES5-Canonicalize using the data from UnicodeData + SpecialCasing gives the
+&gt; following results:
+&gt; (1) u+00df:
+&gt; - no upper-case mapping entry in UnicodeData
+&gt; - upper-case mapping in SpecialCasing to &quot;0053 0053&quot;, which is rejected because
+&gt; |length| &gt; 1
+&gt; =&gt; result: u+00df
+&gt;
+
+ES5 doesn&apos;t have that length restriction.  There is an explicit note that the length of the result string may not be the same as the input string.
+
+But I&apos;m not sure that really changes you point.  Norbet and the other Unicode champions need to address this.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6842</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-11-19 02:05:48 -0800</bug_when>
+    <thetext>(In reply to comment #5)
+&gt; ES5 doesn&apos;t have that length restriction.  There is an explicit note that the
+&gt; length of the result string may not be the same as the input string.
+
+No? ES5.1, p.189, abstract operation Canonicalize steps 2-3:
+&gt; 2.  Let u be ch converted to upper case as if by calling the standard built-in method String.prototype.toUpperCase on the one-character String ch.
+&gt; 3.  If u does not consist of a single character, return ch.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6879</commentid>
+    <comment_count>7</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-07 18:12:20 -0800</bug_when>
+    <thetext>André is right, case insensitive matching using Unicode case folding results in different behavior in a few cases than using toUpperCase. Case folding should therefore only be used in Unicode mode, as noted in my proposal in the second bullet list under Regular Expressions:
+http://norbertlindenberg.com/2012/05/ecmascript-supplementary-characters/index.html#RegExp
+
+In non-Unicode mode, toUpperCase restricted to results with length 1 has to be used for compatibility with ES5.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6883</commentid>
+    <comment_count>8</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2013-12-08 16:43:48 -0800</bug_when>
+    <thetext>Note that this also affects the non-normative last paragraph of 21.2.2.8.2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7348</commentid>
+    <comment_count>9</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-17 12:35:57 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7568</commentid>
+    <comment_count>10</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:37 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

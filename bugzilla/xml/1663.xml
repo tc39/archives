@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1663</bug_id>
+          
+          <creation_ts>2013-07-31 04:42:00 -0700</creation_ts>
+          <short_desc>15.11.1, 15.11.6.1: Subclass initialisation for Error and NativeError</short_desc>
+          <delta_ts>2013-08-23 08:22:09 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4637</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-31 04:42:39 -0700</bug_when>
+    <thetext>Error and NativeError can both be used to initialise any error subclass instances, because both initialise the [[ErrorData]] internal data property. But the current text says Error must be used to initialise Error subclasses whereas NativeError must be used to initialise NativeError subclasses.
+
+
+test case:
+---
+js&gt; class MyError extends Error {constructor(){}}
+js&gt; err = new MyError(); err === TypeError.call(err)
+true
+js&gt; class MyTypeError extends TypeError {constructor(){}}
+js&gt; err = new MyTypeError(); err === Error.call(err)
+true
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4967</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-18 13:03:34 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft
+
+
+I changed a could &quot;musts&quot; to &quot;shoulds&quot;
+
+I think this overall behavior is probably ok.  However, it may not be valid if am implementation attaches additional state to native errors (eg, a stack trace) that is not also associated with generic Error objects</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5038</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:09 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1900</bug_id>
+          
+          <creation_ts>2013-09-17 15:51:00 -0700</creation_ts>
+          <short_desc>Make it easy to iterate over iterables in spec language</short_desc>
+          <delta_ts>2013-10-29 09:44:45 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>restructure</component>
+          <version>Rev 18: September 5, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>annevk</cc>
+    
+    <cc>d</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5397</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2013-09-17 15:51:30 -0700</bug_when>
+    <thetext>In all functions that allow iterables as input arguments, a great number of steps are present to perform the iteration process. For example, in the Map constructor:
+
+Let next be the result of IteratorNext(iter).
+ReturnIfAbrupt(next).
+Let done be IteratorComplete(next).
+ReturnIfAbrupt(done).
+If done is true, then return NormalCompletion(map).
+Let nextItem be IteratorValue(next).
+ReturnIfAbrupt(nextItem).
+
+are all just setup for getting nextItem. Set has almost-the-same steps:
+
+Let next be the result of IteratorNext(iter).
+ReturnIfAbrupt(next).
+Let done be IteratorComplete(next).
+ReturnIfAbrupt(done).
+If done is true, then return set.
+Let nextValue be IteratorValue(next).
+ReturnIfAbrupt(nextValue).
+
+DOM promises [1] want this, but I chickened out of actually copying all those steps in to the spec and just said &quot;For each value `nextValue` of `iterable.&quot;
+
+It would be great if you abstracted the above steps into some reusable construct that could be used throughout the spec. I think the only modification would be that you&apos;d say &quot;If done is true, stop repeat.&quot; or similar instead of &quot;If done is true, then return x.&quot; You&apos;d then move the &quot;return set&quot; and &quot;return NormalCompletion(map)&quot; (why are they different?) after the repeat.
+
+[1]: https://github.com/domenic/promises-unwrapping#promiseraceiterable</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5413</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-09-20 13:26:13 -0700</bug_when>
+    <thetext>I&apos;ve looked into this and I could replace most uses of IteratorNext+IteratorComplete in the spec. with a new abstract operations IteratorStep(iterator [, value]) which returns either true indicating &quot;done&quot; or an iteration result obj for the not done cases. The 7 line sequence could then be expressed in 5 lines like: 
+
+let next be the result of IteratorStep(iter).
+ReturnIfAbrupt(next).
+If next is true, then return NormalCompletion(map).
+Let nextItem be IteratorValue(next).
+ReturnIfAbrupt(nextItem).
+
+But I think there is a tension between conciseness and clarity.  This is a specification,  not an actual implementation, and it primary goal is to clearly and precisely communicate the required semantics. Adding an additional layer of procedural abstraction that over-loads its  result type won&apos;t necessarily make the spec. easier to understand. IteratorStep would make some algorithms slightly easier to write but will it make them harder to read/understand?
+
+What do you think?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6004</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-28 11:18:45 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+added IteratorStep</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6034</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:44:45 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

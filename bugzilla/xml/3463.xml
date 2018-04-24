@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3463</bug_id>
+          
+          <creation_ts>2014-12-17 12:37:00 -0800</creation_ts>
+          <short_desc>12.14.5.3 IteratorDestructuringAssignmentEvaluation: Evaluation order</short_desc>
+          <delta_ts>2014-12-23 20:23:33 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          <see_also>https://bugs.ecmascript.org/show_bug.cgi?id=3213</see_also>
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11065</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-12-17 12:37:39 -0800</bug_when>
+    <thetext>12.14.5.3 Runtime Semantics: IteratorDestructuringAssignmentEvaluation 
+
+Production:
+  AssignmentElement[Yield] : DestructuringAssignmentTarget  Initializer_opt
+
+
+The evaluation order for this production is not consistent with the evaluation order for other destructuring assignment or destructuring binding productions.
+
+
+Test case:
+---
+(function() {
+var a, b, c;
+var o = {};
+
+with (o) {
+  ([a] = function*(){ o.a = 0; yield 1; }());
+  ([...b] = function*(){ o.b = 0; yield 1; }());
+  ({c} = {get c(){ o.c = 0; return 1 }});
+}
+
+print(`a = ${a}, o.a = ${o.a}`);
+print(`b = ${b}, o.b = ${o.b}`);
+print(`c = ${c}, o.c = ${o.c}`);
+
+})();
+
+(function() {
+var o = {};
+
+with (o) {
+  var [A] = function*(){ o.A = 0; yield 1; }();
+  var [...B] = function*(){ o.B = 0; yield 1; }();
+  var {C} = {get C(){ o.C = 0; return 1 }};
+}
+
+print(`A = ${A}, o.A = ${o.A}`);
+print(`B = ${B}, o.B = ${o.B}`);
+print(`C = ${C}, o.C = ${o.C}`);
+
+})();
+---
+
+Output with current semantics:
+---
+a = 1, o.a = 0
+b = undefined, o.b = 1
+c = undefined, o.c = 1
+
+A = undefined, o.A = 1
+B = undefined, o.B = 1
+C = undefined, o.C = 1
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11109</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-18 12:49:43 -0800</bug_when>
+    <thetext>and unfortunately, the odd man out, in this case, appears to be correct and all the others appear incorrect. 
+
+In general, we are supposed to do left-to-right evaluation for assignment/binding initialization unless the target is a destructing object/array.  In all these cases, the target is a simple identifier binding so it should be resolved before fetching the value (nexting the iterator, accessing the property, etc.) so they should all resolve the assignment/binding target to the outer variable rather than the property of the with object.
+
+This is going to take some thought to fix.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11131</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-22 15:07:37 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11212</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:33 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3510</bug_id>
+          
+          <creation_ts>2015-01-04 21:36:00 -0800</creation_ts>
+          <short_desc>B.3.1 Incorrect definition of invalid duplicate __proto__ properties</short_desc>
+          <delta_ts>2015-07-10 08:35:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Fred K. Schott">Fkschott</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erik.arvidsson</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11307</commentid>
+    <comment_count>0</comment_count>
+    <who name="Fred K. Schott">Fkschott</who>
+    <bug_when>2015-01-04 21:36:04 -0800</bug_when>
+    <thetext>In Section B.3.1 on &quot;__proto__ Property Names in Object Initializers&quot; there is a paragraph explaining when duplicate properties will result in a syntax error. It says:
+
+It is a Syntax Error if PropertyNameList of PropertyDefinitionList contains any duplicate entries for &quot;__proto__&quot; and at least two of those entries were obtained from productions of the form PropertyDefinition : PropertyName : AssignmentExpression .
+
+Where PropertyName is defined as:
+
+PropertyName[Yield,GeneratorParameter] :
+  LiteralPropertyName
+  [+GeneratorParameter] ComputedPropertyName
+  [~GeneratorParameter] ComputedPropertyName[?Yield]
+
+LiteralPropertyName :
+  IdentifierName
+  StringLiteral
+  NumericLiteral
+
+That paragraph (using the definitions provided) asserts that it is a syntax error if there are any duplicate uses of __proto__ with an IdentifierName, StringLiteral, or ComputedPropertyName. To translate this into an example, it seems to assert that in ES6 this is not valid:
+
+// Error: SyntaxError
+var obj = {
+  __proto__: somePrototype,
+  [&quot;__proto__&quot;]: somePrototype
+}</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11308</commentid>
+    <comment_count>1</comment_count>
+    <who name="Fred K. Schott">Fkschott</who>
+    <bug_when>2015-01-04 21:39:32 -0800</bug_when>
+    <thetext>Allen Wirfs-Brock Confirmed this as a bug here: https://esdiscuss.org/topic/question-regarding-duplicate-computed-proto-properties
+
+Expected behavior: Computed properties are excempt from duplicate restrictions on __proto__ literal property names.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11322</commentid>
+    <comment_count>2</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2015-01-09 07:53:51 -0800</bug_when>
+    <thetext>The PropName of a ComputedPropertyName is **empty**.
+
+http://people.mozilla.org/~jorendorff/es6-draft.html#sec-object-initializer-static-semantics-propname</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11340</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 15:14:47 -0800</bug_when>
+    <thetext>Ah, thanks Erik for pointing that out.
+
+So, the spec. is correct, as is.
+
+Fred, thanks any way for bring it up.  As often as not, such things actually are bugs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11351</commentid>
+    <comment_count>4</comment_count>
+    <who name="Fred K. Schott">Fkschott</who>
+    <bug_when>2015-01-13 22:10:24 -0800</bug_when>
+    <thetext>Ah nice catch Erik, I missed that.
+
+Thanks both of you for taking the time. At least now the issue &amp; es-discuss emails are documented for anyone who comes looking with the same misunderstanding.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11352</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-14 08:13:32 -0800</bug_when>
+    <thetext>I added a NOTE to B.3.1 pointing out that PropertyNameList does not return any ComputerPropertyName valules.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2569</bug_id>
+          
+          <creation_ts>2014-03-03 00:05:00 -0800</creation_ts>
+          <short_desc>25.4: consolidated list of editorial/typo fixes</short_desc>
+          <delta_ts>2014-04-06 11:29:27 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7406</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-03-03 00:05:17 -0800</bug_when>
+    <thetext>Consolidated diff at https://github.com/domenic/promises-unwrapping/commit/3f5d43e576712b737e750d196e4f474f1206f5a1#diff-04c6e90faac2675aa89e2176d2eec7d8
+
+Subsumes bug #2430, bug #2544, bug #2556, bug #2557, and bug #2466, and includes some fixes I didn&apos;t find there.
+
+You can also try the rendered diff, but it falls down on numbered lists, so it&apos;s not as helpful:
+
+https://github.com/domenic/promises-unwrapping/commit/show/3f5d43e576712b737e750d196e4f474f1206f5a1/04c6e90#diff-04c6e90faac2675aa89e2176d2eec7d8</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7411</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-03 11:35:56 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7515</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:27 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

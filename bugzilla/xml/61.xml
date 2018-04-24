@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>61</bug_id>
+          
+          <creation_ts>2011-03-11 08:36:00 -0800</creation_ts>
+          <short_desc>Some split tests are invalid according to ES5</short_desc>
+          <delta_ts>2012-01-16 11:18:01 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jan de Mooij">jandemooij</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>jwalden+beo</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>140</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jan de Mooij">jandemooij</who>
+    <bug_when>2011-03-11 08:36:09 -0800</bug_when>
+    <thetext>We rewrote SpiderMonkey&apos;s split implementation to be more ES5 compliant. This introduced some new test failures which I believe are invalid.
+
+Some tests assume an |undefined| separator should be treated as the string &quot;undefined&quot;. This is invalid per ES5 15.5.4.14 step 10.
+
+- S15.5.4.14_A2_T7 
+- S15.5.4.14_A1_T8
+- S15.5.4.14_A1_T6 
+- S15.5.4.14_A1_T7
+- S15.5.4.14_A1_T9 
+
+Another test calls split with |undefined| this value. This is invalid per ES5 15.5.4.14 step 1 (CheckObjectCoercible throws a TypeError if |this| is undefined)
+
+- S15.5.4.14_A1_T3</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>208</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-05-12 14:02:05 -0700</bug_when>
+    <thetext>Agreed on S15.5.4.14_A1_T6 through S15.5.4.14_A1_T8.  According to ES5.1 (15.5.4.14 prologue):
+    If separator is undefined, then the result array contains just one String, which is the this value (converted to a String).
+Step 10 implements this behavior.
+
+There does seem to be a minor spec issue though:  Step 8 of 15.5.4.14 does weakly indicate that the &apos;R&apos; used in the algorithm will in fact be the string &quot;undefined&quot; though.
+
+
+As for S15.5.4.14_A1_T9, could you offer an explanation as to why this is invalid?  Step 10 definitely doesn&apos;t apply and it should sail through Step 1.
+
+
+Finally, I completely agree on S15.5.4.14_A1_T3.  Will be disabling everything except S15.5.4.14_A1_T9 in Hg shortly.  If you can provide a justification for this as well, I&apos;ll disable it too.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>210</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jan de Mooij">jandemooij</who>
+    <bug_when>2011-05-12 14:37:34 -0700</bug_when>
+    <thetext>Thanks for looking at this.
+
+The result of step 8 is assigned to R and step 10 looks at the original, unmodified |separator| argument, but I agree that it would&apos;ve been clearer if step 10 came before step 8.
+
+S15.5.4.14_A1_T9 check 3 does something like this:
+
+assert(new String(some_object).split(function(){}()).length === 2);
+
+As far as I see this does go through step 10 because separator is undefined?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>254</commentid>
+    <comment_count>3</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2011-07-05 15:03:21 -0700</bug_when>
+    <thetext>I&apos;ve been looking at the individual test262 tests to figure out what&apos;s up with all of them, and these three, mentioned in this bug, are still apparently-buggy tests:
+
+S15.5.4.14_A1_T6	Argument is x, and instance is new String. x is undefined variable	fail
+S15.5.4.14_A1_T9	Argument is function(){}(), and instance is String(object), object have overrided toString and valueOf functions	fail
+S15.5.4.14_A2_T7	Call split(void 0), instance is &quot;thisundefinedisundefinedaundefinedstringundefinedobject&quot;	fail
+
+Any chance of disabling them soon, or of modifying them to be correct?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>257</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-05 15:41:18 -0700</bug_when>
+    <thetext>Sorry for the delay. There were two typos that prevented S15.5.4.14_A1_T6 and S15.5.4.14_A2_T7 from being disabled, and I just hadn&apos;t gotten back to S15.5.4.14_A1_T9 yet. Disabled all three in Hg now, and these will make it to the live website with the next minor update (sometime this week?).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>261</commentid>
+    <comment_count>5</comment_count>
+    <who name="Jeff Walden (remove +beo to mail)">jwalden+beo</who>
+    <bug_when>2011-07-05 16:11:10 -0700</bug_when>
+    <thetext>Sounds good, thanks.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>604</commentid>
+    <comment_count>6</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-16 11:18:01 -0800</bug_when>
+    <thetext>I&apos;ve fixed the assertions in:
+- S15.5.4.14_A1_T6 
+- S15.5.4.14_A1_T7
+- S15.5.4.14_A1_T8
+- S15.5.4.14_A2_T7
+
+For, S15.5.4.14_A1_T3, I bound the &apos;split&apos; function to the global object and did something similar for &apos;toString&apos; =&gt; this is now valid as well.
+
+Your explanation on S15.5.4.14_A1_T9 makes sense (didn&apos;t notice the second &apos;()&apos; in &apos;function(){}()&apos; when I commented on this previously.  Fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

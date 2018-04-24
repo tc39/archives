@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2134</bug_id>
+          
+          <creation_ts>2013-10-30 13:48:00 -0700</creation_ts>
+          <short_desc>19.1.2.8.1 header</short_desc>
+          <delta_ts>2013-11-08 20:10:56 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6253</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-10-30 13:48:44 -0700</bug_when>
+    <thetext>The header for 19.1.2.8.1 says:
+
+  19.1.2.8.1 Return GetOwnPropertyKeys(O, Symbol).GetOwnPropertyKeys ( O, Type )
+  Abstract Operation
+
+Change to:
+
+    1. Return GetOwnPropertyKeys(O, Symbol).
+
+    19.1.2.8.1 GetOwnPropertyKeys ( O, Type ) Abstract Operation</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6271</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-31 01:18:29 -0700</bug_when>
+    <thetext>Only visible in working_draft_ecma-262_edition_6_10-28-13-nomarkup.pdf ?!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6287</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-01 09:45:49 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6338</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-11-01 14:36:45 -0700</bug_when>
+    <thetext>(rev21, presumably)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6339</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-01 16:10:21 -0700</bug_when>
+    <thetext>yes, rev21</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6584</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-08 13:09:28 -0800</bug_when>
+    <thetext>fixed in rev21 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1752</bug_id>
+          
+          <creation_ts>2013-08-12 11:20:00 -0700</creation_ts>
+          <short_desc>13.5 Class Runtime Semantics: extra Type(superclass) call</short_desc>
+          <delta_ts>2013-08-23 08:23:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Murat Sutunc">muratsu</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4849</commentid>
+    <comment_count>0</comment_count>
+    <who name="Murat Sutunc">muratsu</who>
+    <bug_when>2013-08-12 11:20:04 -0700</bug_when>
+    <thetext>On chapter 13.5.1.2 Runtime Semantics item 2.d calls Type(superclass), however on item 2.e we call for the IsContructor(superclass). 
+1.	Else if Type(superclass) is not Object, throw a TypeError exception.
+2.	Else if IsConstructor(superclass) is false, then throw a TypeError exception.
+
+If we look at the definition of the function IsConstructor, it is already is calling Type(superclass):
+1.	If Type(argument) is not Object, return false.
+2.	If argument has a [[Construct]] internal method, return true.
+3.	Return false.
+
+So the extra call for Type(superclass) is not necessary in 13.5.1.2</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4937</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 13:18:49 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5132</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:04 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

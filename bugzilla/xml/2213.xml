@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2213</bug_id>
+          
+          <creation_ts>2013-11-10 08:06:00 -0800</creation_ts>
+          <short_desc>Properties of the Symbol Constructor: well known Symbols</short_desc>
+          <delta_ts>2013-11-10 13:47:43 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6625</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-11-10 08:06:22 -0800</bug_when>
+    <thetext>In each of the well known symbol definitions, there are parens at the end of the @@foo name that may imply the value being assigned isn&apos;t the well known symbol itself, but an invocation of the well known symbol.
+
+eg. 
+
+  The initial value of Symbol.create is the well known symbol @@create().
+
+
+If I were to write this out in ECMAScript, it would look like:
+  
+  Symbol.create = @@create();
+
+... which assigns the value of whatever is returned by calling @@create()
+
+
+
+Sections:
+
+19.4.2.1
+19.4.2.2
+19.4.2.3
+19.4.2.4
+19.4.2.5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6626</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-10 09:11:15 -0800</bug_when>
+    <thetext>This has been fixed in Rev21 (are you still reading Rev20?).  Those parens are supposed to contain a reference to (Table 1).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6634</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-11-10 13:47:43 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; This has been fixed in Rev21 (are you still reading Rev20?).  Those parens are
+&gt; supposed to contain a reference to (Table 1).
+
+Looks like I forgot to move the latest to it&apos;s expected home in my filesystem... whoops!</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

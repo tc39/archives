@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2744</bug_id>
+          
+          <creation_ts>2014-04-26 16:03:00 -0700</creation_ts>
+          <short_desc>13.2.3.6: missing argument to IteratorBindingInitialization</short_desc>
+          <delta_ts>2014-06-01 11:47:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7927</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-26 16:03:06 -0700</bug_when>
+    <thetext>In 13.2.3.6 &quot;Runtime Semantics: IteratorBindingInitialization&quot;,
+group 10 / step 1 and group 11 / step 3 both say:
+    Return the result of performing IteratorBindingInitialization
+    of /BindingElement/ with /iterator/ as the argument.
+
+This is missing an argument for IteratorBindingInitialization&apos;s &quot;environment&quot; parameter. Change:
+    with /iterator/ as the argument
+to:
+    with /iterator/ and /environment/ as arguments
+?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7928</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-04-26 16:17:07 -0700</bug_when>
+    <thetext>In the same section, group 14 / step 7 says:
+    Return the result of performing BindingInitialization
+    of /BindingPattern/ with /v/ as the argument.
+
+This is missing an argument for BindingInitialization&apos;s &quot;environment&quot; parameter. Change:
+    with /v/ as the argument
+to:
+    with /v/ and /environment/ as arguments
+?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8263</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-09 12:27:28 -0700</bug_when>
+    <thetext>fixed in rev25 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8744</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2014-06-01 11:47:55 -0700</bug_when>
+    <thetext>confirmed fixed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

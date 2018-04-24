@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3809</bug_id>
+          
+          <creation_ts>2015-02-10 06:00:00 -0800</creation_ts>
+          <short_desc>Annex B: octal escapes in regular expressions</short_desc>
+          <delta_ts>2015-02-10 13:05:20 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 32: February 2, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12280</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-02-10 06:00:01 -0800</bug_when>
+    <thetext>See https://javascript.spec.whatwg.org/#octal-escapes-in-regular-expression-literals
+
+In existing implementations, the octal escape sequence syntax for string literals as described in Annex B of the ECMAScript spec also applies to regular expression literals, even in strict mode code.
+
+    /\123/.test(&apos;S&apos;); // true
+
+    (function() {
+      &apos;use strict&apos;;
+       console.log(/\123/.test(&apos;S&apos;)); // true
+    }());</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12290</commentid>
+    <comment_count>1</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-02-10 12:57:01 -0800</bug_when>
+    <thetext>This is already covered by B.1.4 (search for LegacyOctalEscapeSequence), where they are specified as supported for non-u-pattern.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

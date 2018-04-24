@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2371</bug_id>
+          
+          <creation_ts>2013-12-10 19:24:00 -0800</creation_ts>
+          <short_desc>JSON cannot be transmitted using any Unicode encoding form</short_desc>
+          <delta_ts>2013-12-11 09:57:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Peter F. Patel-Schneider">pfpschneider</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>james.h.manger</cc>
+    
+    <cc>pfpschneider</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6911</commentid>
+    <comment_count>0</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-10 19:24:51 -0800</bug_when>
+    <thetext>According to ECMA-404, 1st edition / October 2013, a JSON text is a sequence
+of Unicode code points.   In particular, the code point sequence &lt;0022,
+DEAD, 0022&gt; is a valid JSON text. 
+
+However, this code point sequence cannot be represented in UTF-8, UTF-16, or
+UTF-32, as it is not a sequence of Unicode scalar values, and Unicode
+encoding forms are only defined on Unicode scalar values.
+
+As JSON is a text format designed to facilitate data interchange, this is a
+bug that should be fixed.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6926</commentid>
+    <comment_count>1</comment_count>
+    <who name="James Manger">james.h.manger</who>
+    <bug_when>2013-12-11 05:44:44 -0800</bug_when>
+    <thetext>If ECMA-404 defined JSON text (and JSON strings) as a sequence of Unicode scalar values it would work well.
+
+Additional rules mandating specific support for unpaired surrogates (as 16-bit code units and as \uDxxx escapes) could be put in ECMAScript.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6927</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-12-11 09:21:26 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; If ECMA-404 defined JSON text (and JSON strings) as a sequence of Unicode
+&gt; scalar values it would work well.
+&gt; 
+&gt; Additional rules mandating specific support for unpaired surrogates (as 16-bit
+&gt; code units and as \uDxxx escapes) could be put in ECMAScript.
+
+That would force ECMA=262 to define an extended JSON grammar and that is something we are trying to avoid. We want to be able to just reference the normative grammar in ECMA-404.
+
+ECMAScript/JavaScript is far from being the only language that has a string data type that allows the encoding of unpaired surrogates.  Embedded JSON parsers for those languages all have to deal with them, one way or another.  
+
+It&apos;s better for ECMA-404 to define this rather than each language doing its own thing.
+
+Specifications such as 4627bis that define encodings used to transmit/interchange JSON texts are free to requiring the use of a subset of Unicode code points. For example only scalar values or at an extreme only ASCII values.
+
+Basically, the ECMA=404 approach is to start with a more general specification of the JSON format with the expectation that other specification will specialize it with restrictions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6928</commentid>
+    <comment_count>3</comment_count>
+    <who name="Peter F. Patel-Schneider">pfpschneider</who>
+    <bug_when>2013-12-11 09:57:04 -0800</bug_when>
+    <thetext>Comment 2 is quite astonishing to me.
+
+I had thought that the idea of ECMA-404 was to have a useful, stable definition of JSON as it is used to interchange data.   I thus expected that ECMA-404 would permit natural transmittal between senders and receivers that use different languages or toolsets.
+
+If ECMA-404 has to be subsetted so that it can be reliably used for data exchange then why would it get any use outside of the ECMAScript community?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

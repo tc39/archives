@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3596</bug_id>
+          
+          <creation_ts>2015-01-23 10:13:00 -0800</creation_ts>
+          <short_desc>Function Environment Records: The dual role of [[thisValue]] and its relation with [[thisInitializationState]] render the situation somewhat confusing: suggesting to use [[thisBindingStatus]] and [[thisValue]] instead with redistributed roles</short_desc>
+          <delta_ts>2015-02-19 19:10:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11606</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-01-23 10:13:52 -0800</bug_when>
+    <thetext>For function environment records, one has to record the following informations regarding its this-binding:
+
+(a) whether the environment record has a local this-value;
+(b) if yes, whether the this-value is initialised;
+(c) if yes, the value of the this-value.
+
+These informations are stored in two components:
+
+(1) [[thisValue]] stores informations (a) and (c);
+(2) [[thisInitializationState]] stores (b).
+
+That situation is mildly confusing, for the HasThisBinding() method of the environment record has to make the distinction between: 
+* &quot;[[thisValue]] has the value empty&quot; (arrow-function), returning `false`; and:
+* &quot;[[thisValue]] has no value&quot; (derived constructor with non-initialised this-binding), returning `true`.
+
+--
+
+I suggest to use the following fields instead.
+
+(1) [[thisBindingStatus]], encodes informations (a) and (b). It has three possible values:
+  *  Absent:  there is no local this-binding (arrow-function);
+  *  Uninitilized:  there is a local, but uninitialized, this-binding;
+  *  Initialized:  the this-binding is initialised and its value is recorded in [[thisValue]].
+
+(2) [[thisValue]] encodes information (c) only. It contains the this-value when it is present and initialised; but it is not explicitly set to empty in case of arrow-functions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12744</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-15 15:39:33 -0800</bug_when>
+    <thetext>fixed in rev34 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13064</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-19 19:10:57 -0800</bug_when>
+    <thetext>fixed in rev34</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

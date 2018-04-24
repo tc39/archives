@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>787</bug_id>
+          
+          <creation_ts>2012-10-10 21:48:00 -0700</creation_ts>
+          <short_desc>use of ES operators in algorithms</short_desc>
+          <delta_ts>2012-10-26 15:34:31 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1924</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-10 21:48:49 -0700</bug_when>
+    <thetext>When an algorithm uses a operator that is both a conventional mathematical operator and also an ECMAScript operator, it&apos;s not always clear which is meant.
+
+My guess is that, in the absence of an obvious cross-reference (e.g. &quot;the result of performing abstract equality comparison algorithm rval == lval&quot;), operators are meant in the conventional mathematical sense. It would be good to clarify this.
+
+You can also reduce the number of cases where confusion might arise:
+
+    Change &quot;&gt;=&quot; to &quot;≥&quot; in:
+        10.6 / alg 1 / step 4
+        10.6 / alg 2 / step 7
+        15.13.7.4 / alg 1 / step 4
+        15.13.7.4 / alg 2 / step 4
+
+    Change &quot;==&quot; to &quot;=&quot; (or &quot;equals&quot;) in:
+        15.8.2.13 / bullets 7,8
+        15.9.1.12 / step 7
+        15.10.2.6 / IsWordChar / step 1
+        15.10.2.8 / CharacterSetMatcher / steps 1.2, 1.5a, 1.6a
+
+    Change &quot;!==&quot; to &quot;≠&quot; in:
+        15.13.6.2.1 / step 2.d.vii
+
+(Actually, &quot;==&quot; and &quot;!==&quot; aren&apos;t conventional mathematical operators, but I&apos;m still guessing they aren&apos;t meant to be invocations of ECMAScript operators.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1991</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-24 08:58:59 -0700</bug_when>
+    <thetext>correct in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2183</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:31 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

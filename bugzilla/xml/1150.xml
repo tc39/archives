@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1150</bug_id>
+          
+          <creation_ts>2012-12-19 09:12:00 -0800</creation_ts>
+          <short_desc>15.10.7: &quot;length&quot; property for RegExp instances</short_desc>
+          <delta_ts>2014-03-27 13:43:21 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>2079</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3042</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-19 09:12:56 -0800</bug_when>
+    <thetext>---
+RegExp instances also have a [[Match]] internal  data property and a length property.
+---
+
+RegExp instances do not have a &apos;length&apos; property. (This is also present in the ES5.1 spec)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3057</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-12-21 02:59:03 -0800</bug_when>
+    <thetext>Most likely a leftover when RegExp instances were callable...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3420</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-03-11 10:08:38 -0700</bug_when>
+    <thetext>Fixed in rev15.
+
+(I&apos;m not closing this bug yet, because this is also present in the ES5.1 spec)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7490</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-27 13:43:21 -0700</bug_when>
+    <thetext>cloned ES5.1 Bug 2599</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

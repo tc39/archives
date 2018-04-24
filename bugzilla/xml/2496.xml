@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2496</bug_id>
+          
+          <creation_ts>2014-02-04 06:28:00 -0800</creation_ts>
+          <short_desc>&quot;same&quot; is determined but not used in Map.prototype.set</short_desc>
+          <delta_ts>2014-05-13 16:31:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascript</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7178</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-02-04 06:28:37 -0800</bug_when>
+    <thetext>&gt; 6.  If M’s [[MapComparator]] internal slot is undefined, then let same be
+&gt;     the abstract operation SameValueZero.
+&gt; 7.  Else, let same be the abstract operation SameValue.
+&gt; 8.  Repeat for each Record {[[key]], [[value]]} p that is an element of
+&gt;     entries,
+&gt;     a.  If SameValueZero(p.[[key]], key), then
+&gt;         i.  Set p.[[value]] to value.
+&gt;         ii. Return M.
+
+8.a. should say &quot;If same(...)&quot; not &quot;If SameValueZero(...)&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7186</commentid>
+    <comment_count>1</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2014-02-04 14:35:11 -0800</bug_when>
+    <thetext>Actually, I believe that [[MapComparator]] is being removed from the spec.  So steps 6 and 7 should just be deleted.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7191</commentid>
+    <comment_count>2</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-02-05 07:39:14 -0800</bug_when>
+    <thetext>I didn&apos;t know that! Excellent!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7192</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-05 07:48:47 -0800</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; I didn&apos;t know that! Excellent!
+
+right, the second argument to the constructors was removed at (I think) the Nov. TC39 meeting.
+
+If somebody wants to have a Map/set that distingishes -0 they can easily create a subclass that does that.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

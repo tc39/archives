@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2064</bug_id>
+          
+          <creation_ts>2013-10-07 02:52:00 -0700</creation_ts>
+          <short_desc>9.2.6.1 CreateBuiltinFunction: Add call to AddRestrictedFunctionProperties?</short_desc>
+          <delta_ts>2013-10-29 09:46:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 19: September 27, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5851</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-10-07 02:52:02 -0700</bug_when>
+    <thetext>9.2.6.1 CreateBuiltinFunction does not automatically poison pill .caller and .arguments, maybe add call to AddRestrictedFunctionProperties()?
+
+Later:
+Currently the AddRestrictedFunctionProperties() call for built-in functions is described in ch17, what if ch17 was changed to say that all built-in functions are created by a call to CreateBuiltinFunction() and CreateBuiltinFunction() automatically calls AddRestrictedFunctionProperties()? Then &quot;9.2.6  Built-in Function Objects&quot; can be simplified to say that built-in functions to use the ordinary [[Get]] and [[GetOwnProperty]] behaviour.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5894</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-10 18:04:00 -0700</bug_when>
+    <thetext>fixed in rev20 editor&apos;s draft
+
+I suspect this is an area where we will keep tinkering until it feels just right.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6134</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-29 09:46:22 -0700</bug_when>
+    <thetext>fixed in rev20 draft, Oct. 28, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

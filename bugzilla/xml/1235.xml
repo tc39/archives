@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1235</bug_id>
+          
+          <creation_ts>2013-01-29 19:35:00 -0800</creation_ts>
+          <short_desc>15.10.2.12: repeated lines</short_desc>
+          <delta_ts>2013-02-25 09:07:29 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3166</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-29 19:35:51 -0800</bug_when>
+    <thetext>In 15.10.2.12 &quot;CharacterClassEscape&quot;,
+in the rule for production:
+    CharacterClassEscape :: w
+the set of sixty-three characters contains all 52 letters twice,
+once at the bottom of page 312 and once at the top of page 313.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3209</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-02-25 09:07:29 -0800</bug_when>
+    <thetext>Must have been some sort of rendering error. the lines aren&apos;t repeated in the source document.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

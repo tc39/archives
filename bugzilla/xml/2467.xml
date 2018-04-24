@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2467</bug_id>
+          
+          <creation_ts>2014-01-27 09:57:00 -0800</creation_ts>
+          <short_desc>eliminate British ise usages and replace with ize</short_desc>
+          <delta_ts>2014-05-13 17:34:55 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>1483</blocked>
+    
+    <blocked>2463</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7038</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 09:57:00 -0800</bug_when>
+    <thetext>Current public APIs use ize (such as initialize) while spec. prose and abstraction operations use ise (such as initialise).
+
+the Ecma/ISO rules say we are supposed to use British spelling. However, the analysis in http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences#-ise.2C_-ize_.28-isation.2C_-ization.29 suggests that ize is acceptable British and perhaps even preferred. 
+
+http://www.oxforddictionaries.com/us/words/british-and-american-spelling suggests that consistency (use only ize or ise, not a mix of both) is important.
+
+Based on this, I think we should adopted the ize spelling for all appropriate words in the specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7126</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-27 10:10:49 -0800</bug_when>
+    <thetext>(In reply to comment #0)
+&gt; the Ecma/ISO rules say we are supposed to use British spelling.
+
+Actually ISO says OED should be used, from http://en.wikipedia.org/wiki/Oxford_spelling#Usage:
+&gt; Other international organizations that adhere to this standard include the International Organization for Standardization (ISO), [...]</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7163</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-29 20:30:46 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; (In reply to comment #0)
+&gt; &gt; the Ecma/ISO rules say we are supposed to use British spelling.
+&gt; 
+&gt; Actually ISO says OED should be used, from
+&gt; http://en.wikipedia.org/wiki/Oxford_spelling#Usage:
+&gt; &gt; Other international organizations that adhere to this standard include the International Organization for Standardization (ISO), [...]
+
+and it is really ISO that drives Ecma&apos;s requirments.  So I guess we should indeed be using &quot;ize&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8392</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-13 17:34:55 -0700</bug_when>
+    <thetext>in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4388</bug_id>
+          
+          <creation_ts>2015-06-03 11:00:00 -0700</creation_ts>
+          <short_desc>Reorder arguments for PerformPromiseRace</short_desc>
+          <delta_ts>2015-06-08 16:29:15 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="C. Scott Ananian">ecmascript</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14479</commentid>
+    <comment_count>0</comment_count>
+    <who name="C. Scott Ananian">ecmascript</who>
+    <bug_when>2015-06-03 11:00:22 -0700</bug_when>
+    <thetext>The arguments for PerformPromiseAll are:
+  ( iteratorRecord, constructor, resultCapability)
+The arguments for PerformPromiseRace are:
+   ( iteratorRecord, promiseCapability, C )
+
+It would be more pleasant if these two helpers shared the same argument order and names.  I like the names for PerformPromiseAll, so that suggests that:
+
+1. The 2nd and 3rd arguments to PerformPromiseRace be switched in the definition of Promise.race step 11.
+
+2. The argument names be changed in the heading for 25.4.4.3.1 (&quot;Runtime Semantics: PerformPromiseRace&quot;)
+
+3. &quot;promiseCapability&quot; be changed to &quot;resultCapability&quot; in step 1.d.ii and 1.j in the definition of PerformPromiseRace
+
+4. &quot;C&quot; be changed to &quot;constructor&quot; in step 1.h
+
+If you&apos;d like to play it safe, just switching the argument order in the heading to 25.4.4.3.1 and the callsite in Promise.race step 11 would at least help some.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14482</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-06-08 16:29:15 -0700</bug_when>
+    <thetext>deferred to es7</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>965</bug_id>
+          
+          <creation_ts>2012-11-13 13:24:00 -0800</creation_ts>
+          <short_desc>15.4.{1,2}: &quot;NOTE&quot;</short_desc>
+          <delta_ts>2013-07-15 17:04:24 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2464</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-13 13:24:44 -0800</bug_when>
+    <thetext>In  15.4.1 &quot;The Array Constructor Called as a Function&quot;
+and 15.4.2 &quot;The Array Constructor&quot;,
+the paragraph begins:
+    NOTE When &apos;Array&apos; is called as ...
+
+But, for all other constructors, the corresponding paragraphs are not labelled as notes. For consistency, delete &quot;NOTE&quot;?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2497</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-21 16:47:43 -0800</bug_when>
+    <thetext>It probably the other way around.  the other constructors should get marked as notes.  In general, these paragraphs aren&apos;t stating normative requirements but are just an informative restatement of what happens in the actual algorithms.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2509</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-21 17:54:43 -0800</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; In general, these paragraphs aren&apos;t stating normative requirements but are
+&gt; just an informative restatement of what happens in the actual algorithms.
+
+Generally true, but in some &quot;Foo Constructor Called as a Function&quot; sections,
+if the behaviour is identical to calling the constructor as a constructor with the same arguments, that either is or could be the normative statement.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2513</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-22 09:45:07 -0800</bug_when>
+    <thetext>It&apos;s generally a good idea to eliminate redundant normative text as it can get out of sync or use  wording variations that are subject to differing  interpretations.
+
+Eliminating such redundant text (sometimes by making the duplicate informative) is a  background editorial task as I work on the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4374</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 17:26:47 -0700</bug_when>
+    <thetext>fixed in rev 16 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4508</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-15 17:04:24 -0700</bug_when>
+    <thetext>fixed in rev16 draft.  July 15, 2013</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

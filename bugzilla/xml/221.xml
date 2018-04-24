@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>221</bug_id>
+          
+          <creation_ts>2011-11-07 13:36:00 -0800</creation_ts>
+          <short_desc>Should hoisted functions be visible to parameter default value initializers?</short_desc>
+          <delta_ts>2012-01-05 12:08:08 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 4: November 7, 2011 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      <flag name="TC39Review"
+          id="7"
+          type_id="1"
+          status="-"
+          setter="allen"
+    />
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>506</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-11-07 13:36:32 -0800</bug_when>
+    <thetext>Consider
+
+function foo(p = func()) {
+   funtion func() {return 5}
+   return p
+}
+
+
+
+Is this legal or not?
+
+In the November 7, 2011 draft they are, beause inner functions are initiated and marked as initialized before the surrounding function&apos;s formal parameters are initialized.  To change this would take some restructuring of specification algorithms.
+
+Allen</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>537</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-05 12:08:08 -0800</bug_when>
+    <thetext>At the Nov 2011 meeting, the consensus was that local declarations (including functions) are not visible to PDV expressions.  Also, that there is a temporal dead zone for PDV expression reference to parameter names defined in the same parameter list.
+
+This is implemented in the REv 5 draft.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

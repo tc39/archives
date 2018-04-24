@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1654</bug_id>
+          
+          <creation_ts>2013-07-31 02:51:00 -0700</creation_ts>
+          <short_desc>15.4.2.4: Multiple issues in Array.from</short_desc>
+          <delta_ts>2013-08-23 08:22:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4628</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-31 02:51:24 -0700</bug_when>
+    <thetext>There are multiple issues in 15.4.2.4 Array.from():
+
+- &apos;mapping&apos; is always true (bug 1582)
+- &apos;kValue&apos; instead of &apos;nextValue&apos; resp. &apos;mappedValue&apos; in 8.h (bug 1599)
+
+- GetIterator() called on &apos;obj&apos;, but &apos;obj&apos; is not defined, should be &apos;items&apos; instead (step 8a)
+
+- loop condition in step 8h is always true, break from loop is done through explicit return in 8.h.vi, so the loop condition can actually be removed
+
+- extraneous &quot;Pk&quot; in step 8.h.xi
+
+- extraneous &quot;Pk&quot; in step 17.d.v</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4708</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-01 18:39:55 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft
+
+except I don&apos;t see why you say the Pk&apos;s are extraneous</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4717</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-08-02 00:39:00 -0700</bug_when>
+    <thetext>(In reply to comment #1)
+&gt; except I don&apos;t see why you say the Pk&apos;s are extraneous
+
+Err, not sure what I was writing there. It&apos;s just a comma that&apos;s missing between &quot;Pk&quot; and the PropertyDescriptor argument to DefinePropertyOrThrow().</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5034</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:22:06 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

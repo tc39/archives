@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>980</bug_id>
+          
+          <creation_ts>2012-11-21 12:46:00 -0800</creation_ts>
+          <short_desc>5.2: simplifying modulo</short_desc>
+          <delta_ts>2013-09-16 06:36:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WORKSFORME</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>claude.pache</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2484</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-21 12:46:38 -0800</bug_when>
+    <thetext>Section 5.2 says:
+    The notation “x modulo y” (y must be finite and nonzero)
+    computes a value k of the same sign as y (or zero) such that
+    abs(k) &lt; abs(y) and x-k = q * y for some integer q.
+
+You could make the definition a bit simpler by requiring that y be a positive integer, which is true of all uses of &apos;modulo&apos; in the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3265</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-02 10:58:54 -0800</bug_when>
+    <thetext>yes, but it doesn&apos;t hurt and maybe someday in the future it will be needed.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

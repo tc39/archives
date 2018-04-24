@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>967</bug_id>
+          
+          <creation_ts>2012-11-14 01:31:00 -0800</creation_ts>
+          <short_desc>15.5.4.25 codePointAt usability issue</short_desc>
+          <delta_ts>2014-04-18 12:54:29 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 11: October 26, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roger Andrews">roger.andrews</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>ecmascriptbugs</cc>
+    
+    <cc>roger.andrews</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2466</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-11-14 01:31:13 -0800</bug_when>
+    <thetext>The definition of codePointAt has results:
+   out-of-bounds                  -&gt; Undefined
+   normal BMP char                -&gt; the codepoint
+   lead surrogate of a good pair  -&gt; the codepoint
+   trail surrogate of a good pair -&gt; codeunit in [0xDC00:0xDFFF]  !!ambiguous
+   bad trail surrogate            -&gt; codeunit in [0xDC00:0xDFFF]
+   bad lead surrogate             -&gt; codeunit in [0xD800:0xDBFF]
+
+Note that a well-paired trail surrogate still results in a value even though the previous codeunit &quot;subsumed&quot; it.  So, if the caller is indexing down a string then it should take the well-paired trail surrogate value out of the sequence.
+
+UTF16 experts can write code to check these possibilities; but for general usability lets have:
+   Undefined for the trail surrogate of a good pair, and
+   NaN for bad surrogate.
+
+Then codePointAt would do the work for the casual user and experts can probe the string with charCodeAt (or codeUnitAt if it exists) if they really want to know the situation of bad surrogates.
+
+========================
+Unchanged, users are called upon to write code patterns like the messy....
+
+  // if the indexed position is part of a well-formed surrogate pair
+  // then result is either the entire code-point (for lead surrogates)
+  //                or undefined (for trail surrogates)
+  // result is NaN for bad surrogates
+  // (result is always undefined for out-of-bounds position)
+
+  cp = str.charPointAt( pos );
+  if (0xDC00 &lt;= cp  &amp;&amp;  cp &lt;= 0xDFFF) {
+      cu = str.charCodeAt( pos-1 );
+      if (0xD800 &lt;= cu  &amp;&amp;  cu &lt;= 0xDBFF) {
+          cp =  undefined;      // trail surrogate of good pair
+      }
+  }
+  if (0xD800 &lt;= cp  &amp;&amp;  cp &lt;= 0xDFFF) {
+      cp = NaN;                 // bad surrogate
+  }</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2467</commentid>
+    <comment_count>1</comment_count>
+    <who name="Roger Andrews">roger.andrews</who>
+    <bug_when>2012-11-14 01:43:13 -0800</bug_when>
+    <thetext>(Typo in my example code above: for &apos;charPointAt&apos; read &apos;codePointAt&apos;)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2909</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-11-29 13:46:56 -0800</bug_when>
+    <thetext>See discussion at
+https://mail.mozilla.org/pipermail/es-discuss/2012-November/thread.html#26340</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7822</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-18 12:54:29 -0700</bug_when>
+    <thetext>It&apos;s time to put ES6 to bed. Norbert made a good response to this proposal and nobody has further championed these changes within TC39, so at this point in time it doesn&apos;t look like we are going to make further ES6 changes in this area.
+
+Proposals are being made for post ES6 features (see https://github.com/tc39/ecma262 ), so you may want to consider re-proposing some of the additional String functions.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>112</bug_id>
+          
+          <creation_ts>2011-06-24 11:53:00 -0700</creation_ts>
+          <short_desc>15.9.1.15 time zone handling contradicts ISO 8601</short_desc>
+          <delta_ts>2015-10-02 14:33:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Linux</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>---</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>161</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="John Milner">jmilner+ecmascriptbz</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>vic99999</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>240</commentid>
+    <comment_count>0</comment_count>
+    <who name="John Milner">jmilner+ecmascriptbz</who>
+    <bug_when>2011-06-24 11:53:52 -0700</bug_when>
+    <thetext>I realize that ECMAScript&apos;s date time format is &quot;based upon a simplification of&quot; ISO 8601, but edition 5.1 actually contradicts it. Page 16, section 4.2.2.2 of ISO 8601:2004(E) defines &quot;Complete representations&quot; of &quot;local time&quot; as hhmmss and hh:mm:ss, i.e. without any time zone offset.
+
+A comparison of the two specifications follows. Please note the examples given by ISO 8601:2004(E).
+
+ECMA-262 edition 5.1 (p. 179):
+The value of an of absent time zone offset is &quot;Z&quot;.
+
+ISO 8601:2004(E) (p.19):
+4.3.3 Representations other than complete
+For reduced accuracy, decimal or expanded representations of date and time of day, any of the representations in 4.1.2 (calendar dates), 4.1.3 (ordinal dates) or 4.1.4 (week dates) followed immediately by the time designator [T] may be combined with any of the representations in 4.2.2.2 through 4.2.2.4 (local time), 4.2.4 (UTC of day) or 4.2.5.2 (local time and the difference from UTC)...
+
+The following are examples of reduced representations of combinations of date and time of day
+representations:
+
+a) Calendar date and local time
+Basic format: YYYYMMDDThhmm     Example: 19850412T1015
+Extended format: YYYY-MM-DDThh:mm     Example: 1985-04-12T10:15
+
+b) Ordinal date and UTC of day 
+Basic format: YYYYDDDThhmmZ     Example: 1985102T1015Z
+Extended format: YYYY-DDDThh:mmZ     Example: 1985-102T10:15Z</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>359</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-20 17:44:05 -0700</bug_when>
+    <thetext>Yes,  this was changed in ES5.1 but not correctly.  ES5 didn&apos;t explicitly say what to do if the time zone was missing but implementations seem to have correctly treated those as local times.  That what 5.1 should have also said.
+
+This need to go into the ES5.1 errata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>380</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2011-07-25 15:46:55 -0700</bug_when>
+    <thetext>see modified text in ES6 draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>588</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-01-12 12:31:27 -0800</bug_when>
+    <thetext>set IN_PROGRESS to indicated this should go into ES5.1 Errata.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>857</commentid>
+    <comment_count>4</comment_count>
+    <who name="">vic99999</who>
+    <bug_when>2012-04-04 21:39:33 -0700</bug_when>
+    <thetext>Seems, similar issue with 
+15.9.1.15 “date-time” forms
+ISO 8601 says:
+&quot;the date component shall not be represented with reduced accuracy&quot;
+(for date-time forms)
+
+but ES 5.1 says:
+
+YYYY
+YYYY-MM
+YYYY-MM-DD
+
+It also includes “date-time” forms that consist of one of the above date-only forms immediately followed by “T” and one of the following time forms with an optional time zone offset appended:
+
+THH:mm
+THH:mm:ss
+THH:mm:ss.sss
+
+Although, &quot;YYYYTHH:mm&quot; is not very usefull and not allowed by ISO 8601</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14727</commentid>
+    <comment_count>5</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:01 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>780</bug_id>
+          
+          <creation_ts>2012-10-09 17:13:00 -0700</creation_ts>
+          <short_desc>11.2.4: &quot;whose thisValue.&quot;</short_desc>
+          <delta_ts>2013-10-22 18:42:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1916</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-09 17:13:27 -0700</bug_when>
+    <thetext>In 11.2.4 &quot;The super Keyword&quot;,
+under &quot;Runtime Semantics: Evaluation&quot;,
+rule 2 step 8  and rule 3 step 8 say:
+    [...] a value of type Reference that is a Super Reference
+    whose base value is &lt;var&gt;baseValue&lt;/var&gt;,
+    whose referenced name is &lt;var&gt;propertyKey&lt;/var&gt;,
+    whose thisValue.
+
+The sentence has been cut off.
+My guess is, it should end the way rule 1 step 10 does.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1995</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-24 09:07:52 -0700</bug_when>
+    <thetext>corrected in rev 11 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2160</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:24 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2221</commentid>
+    <comment_count>3</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-26 22:06:22 -0700</bug_when>
+    <thetext>Sorry, I didn&apos;t notice that this problem also appears in rule *3* step 8.
+So rule 2 has been fixed, but rule 3 is still broken.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2750</commentid>
+    <comment_count>4</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-23 18:43:33 -0800</bug_when>
+    <thetext>(In reply to comment #3)
+&gt; Sorry, I didn&apos;t notice that this problem also appears in rule *3* step 8.
+
+(No wait, I *did* notice rule 3 -- I mentioned it in the original post.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5958</commentid>
+    <comment_count>5</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-10-22 18:42:14 -0700</bug_when>
+    <thetext>fixed in rev14</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

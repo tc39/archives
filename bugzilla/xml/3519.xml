@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3519</bug_id>
+          
+          <creation_ts>2015-01-08 05:21:00 -0800</creation_ts>
+          <short_desc>Maybe omission: Should - be a SyntaxCharacter in regexps?</short_desc>
+          <delta_ts>2015-02-02 18:39:05 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 30: December 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Marja Hölttä">marja</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11320</commentid>
+    <comment_count>0</comment_count>
+    <who name="Marja Hölttä">marja</who>
+    <bug_when>2015-01-08 05:21:13 -0800</bug_when>
+    <thetext>21.2.1 says:
+
+SyntaxCharacter :: one of
+^ $ \ . * + ? ( ) [ ] { } |
+
+And if the &apos;u&apos; flag is present, only syntax characters can be escaped:
+
+IdentityEscape [U] ::
+[+U] SyntaxCharacter
+[~U] SourceCharacter but not UnicodeIDContinue
+
+Is - deliberately not a syntax character? This means the user cannot write /[a-b\-f-g]/u but has to write /[a-bf-g-]/u instead.
+
+Other regexp implementations (Python, Perl) allow \- in this context. Otoh, they allow more liberal escaping anyway, such as \a to replace a, and so on.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11568</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-20 16:24:25 -0800</bug_when>
+    <thetext>fixed in rev32 editor&apos;s draft
+
+added 
+  ClassEscape[U] :: [+U] -
+regexp pattern production</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12045</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-02 18:39:05 -0800</bug_when>
+    <thetext>fixed in rev32 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

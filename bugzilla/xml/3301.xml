@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3301</bug_id>
+          
+          <creation_ts>2014-10-28 09:46:00 -0700</creation_ts>
+          <short_desc>Globals not treated as var bindings</short_desc>
+          <delta_ts>2014-12-07 14:35:09 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Andreas Rossberg">rossberg</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10541</commentid>
+    <comment_count>0</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-10-28 09:46:41 -0700</bug_when>
+    <thetext>The VarNames list of the global env is currently created empty. It should initially contain all global names defined in Sec. 18, so that code like the following is not allowed.
+
+   &lt;&gt;
+   function f(x) { return x === undefined }
+   &lt;/&gt;
+
+   &lt;&gt;
+   let undefined = 666
+   &lt;/&gt;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10711</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-03 15:50:37 -0800</bug_when>
+    <thetext>At the Nov. TC39 meeting we decide to forbind global lexical declarations that would shadow non-configurable own properties of the global object.  This takes care of bui;t-ins like undefined and infinity.
+
+Apply this to Ch 18 names would be future hostile as it essentially means that any future addition to the chapter 18 names would be a breaking change.
+
+fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10925</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:09 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3428</bug_id>
+          
+          <creation_ts>2014-12-08 15:55:00 -0800</creation_ts>
+          <short_desc>7.3.2 GetV (V, P): (1) copypasta error in step 5 – (2) GetV or GetP?</short_desc>
+          <delta_ts>2014-12-23 20:23:25 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 29: December 06, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10970</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2014-12-08 15:55:47 -0800</bug_when>
+    <thetext>7.3.2 GetV (V, P).
+
+(1) step 5. Currently:
+
+    Return the result of calling the [[Get]] internal method of box passing @@iterator and V as the arguments. 
+
+Should be:
+
+    Return Get(box, P).
+
+(2) Also: The abstract operation is called GetV in the section title, and GetP in the intro.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10973</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-08 17:41:08 -0800</bug_when>
+    <thetext>fixed in rev30 editor&apos;s draft
+
+but, step 5 can&apos;t use Put because it needs to V as the receiver value.  The bug fix is simply to replace @@iterator with P.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11152</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-23 20:23:25 -0800</bug_when>
+    <thetext>fixed in rev30</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1800</bug_id>
+          
+          <creation_ts>2013-08-22 10:38:00 -0700</creation_ts>
+          <short_desc>Web compatibility breaks with __proto__</short_desc>
+          <delta_ts>2013-08-23 08:23:08 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter>sureshja</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>5002</commentid>
+    <comment_count>0</comment_count>
+    <who name="">sureshja</who>
+    <bug_when>2013-08-22 10:38:46 -0700</bug_when>
+    <thetext>According to sections B.3.1#6.a and 16.1.1.1.2#3, implementations are expected to throw a TypeError exception if an object’s __proto__ is set with anything other than null or an object. Today the existing implementations (Chrome or Firefox) treat such assignments as a no-op. 
+
+Interestingly there are instances of web pages who assign undefined to an objects __proto__ are found. For example yelp.com assigns undefined to __proto__ via a function call as follows.
+
+function(f) { return { __proto__:f } }
+
+Implementing as per the specification would break the zoom in/out functionality of Yelp as this function would throw a TypeError. Similarly a radio player on myspace.com would not work either.  The fact that there are few instances we have seen in the wild would mean there could be more websites that could break. 
+
+Spec does not reflect current implementations of __proto__. Spec needs to clarify if assignments of primitives (or just undefined) to __proto__ should be ignored.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5003</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-22 10:46:32 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5140</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:08 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

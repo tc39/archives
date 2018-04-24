@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2672</bug_id>
+          
+          <creation_ts>2014-04-17 06:32:00 -0700</creation_ts>
+          <short_desc>7.4.1  GetIterator, 7.4.2  IsIterable: Missing IsCallable checks and typos</short_desc>
+          <delta_ts>2014-05-06 16:56:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 23: April 5, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7771</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-04-17 06:32:17 -0700</bug_when>
+    <thetext>7.4.1  GetIterator only checks for IsCallable in step 1.c if the method parameter was not passed, that means if method was passed no such check is performed.
+
+Either make step 1.c a new step between step 1 and step 2, or change 7.4.2  IsIterable to use GetMethod (and then handle only &apos;undefined&apos; in 7.4.1 step 1.c).
+
+Also &quot;IsIterable&quot; should probably be renamed to &quot;GetIteratorMethod&quot; are something similar, the &quot;Is*&quot;-prefix is normally only used for methods which return boolean results (e.g. IsCallable, IsConstructor, IsExtensible).
+
+
+Typos:
+- 7.4.1, step 2: Remove &quot;and.&quot; 
+- 7.4.2, step 2: &quot;@@Iterator&quot; -&gt; &quot;@@iterator&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7787</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-17 09:00:13 -0700</bug_when>
+    <thetext>fixed in rev24 editor&apos;s draft
+
+renamed IsIterable -&gt; CheckIterable</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8194</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-05-06 16:56:48 -0700</bug_when>
+    <thetext>fixed in rev24</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

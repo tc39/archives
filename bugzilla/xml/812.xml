@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>812</bug_id>
+          
+          <creation_ts>2012-10-23 13:43:00 -0700</creation_ts>
+          <short_desc>12.6.3: order of algorithms</short_desc>
+          <delta_ts>2012-10-26 15:34:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 10: September 27, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1976</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-23 13:43:25 -0700</bug_when>
+    <thetext>In 12.6.3 &quot;The for Statement&quot;,
+under &quot;Runtime Semantics: Labelled Evaluation&quot;,
+there&apos;s a production-headed algorithm, then an abstract operation, then 2 more production-headed algorithms.
+
+I suggest moving the abstract operation to the bottom of the sub-section (as in 11.1.9, 11.2.3, and 12.6.4). Then it&apos;s clearer that the latter 2 production-headed algorithms are sub-definitions of &quot;Labelled Evaluation With argument labelSet&quot;.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1977</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-23 15:49:56 -0700</bug_when>
+    <thetext>corrected in rev 11 editor&apos;s draft. Made a sweep at add adding a Runtime Semantics header to most abstraction operations through the spec.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2191</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:33 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

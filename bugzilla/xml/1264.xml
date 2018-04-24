@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1264</bug_id>
+          
+          <creation_ts>2013-03-08 10:33:00 -0800</creation_ts>
+          <short_desc>15.3.4.2 Function.prototype.toString: should callable proxies should have special toString behavior</short_desc>
+          <delta_ts>2015-10-15 17:14:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>New feature suggestons</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>brterlso</cc>
+    
+    <cc>mathias</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3306</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 10:33:47 -0800</bug_when>
+    <thetext>from tomvc.be@gmail.com:
+
+15.3.4.2 Function.prototype.toString
+
+Perhaps this is still on your TODO list, but I would advise to specify what this method should do on a Proxy. My suggested semantics:
+
+&quot;When called on a Proxy that is callable (i.e. whose [[ProxyTarget]] has a [[Call]] internal method), return the result of applying the built-in Function.prototype.toString on the Proxy’s [[ProxyTarget]]. Otherwise, throw a TypeError. When applied to a revoked proxy, throw a TypeError.&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3307</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-08 10:36:21 -0800</bug_when>
+    <thetext>I guess I don&apos;t see why.
+
+toString is just a method and it is going to be automatically forwarded unless the handler does something explicitly otherwise. 
+
+Similarly, for a revoked proxy it would be handled like any other property access.
+
+Why is special handling needed?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3417</commentid>
+    <comment_count>2</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-03-11 04:54:25 -0700</bug_when>
+    <thetext>Of course, `aProxy.toString()` will just be forwarded (or intercepted by the get trap).
+
+I&apos;m particularly thinking about:
+
+Function.prototype.toString.call(aProxy)
+
+For this, if we don&apos;t specify anything, it&apos;ll be up to the implementation. For proxies, I think forwarding to the target if the target is a function is the logical choice. But AFAICT, we need to specify this explicitly.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3419</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-03-11 08:55:28 -0700</bug_when>
+    <thetext>Isn&apos;t this a general issue for any (non-generic) method that is explicitly invoked via call/apply?
+
+For example:
+
+Array.prototype.slice.call(aProxyArray,5)
+
+(slice would actually work because it is generic, but anything that actually need something that was a real array would have the problem)
+
+In one sense this is similar to the problem with using discrete [[Get]] and [[Call]] steps to do method invocation. Without visibility of the [[Get]], the [[Call]] doesn&apos;t know whether a proxy to target translation need to take place.
+
+Do we need to elevate this to esdiscuss?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3421</commentid>
+    <comment_count>4</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2013-03-11 13:28:44 -0700</bug_when>
+    <thetext>I&apos;m happy to take this to the list.
+
+For most built-in methods, there is indeed no need to specify any special behavior for proxies, as those internal methods (especially those of Array.prototype) just use the MOP (i.e. calls to [[Get]] etc.), so can work with proxies as well.
+
+Function.prototype.toString is special in that its definition falls outside of the scope of the MOP. In particular, it is explicitly marked as a &quot;non-generic&quot; method. As its behavior is already mostly implementation-dependent, we could leave it at that, but I think prescribing the behavior for proxies is non-problematic and would avoid unnecessary incompatibilities.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14812</commentid>
+    <comment_count>5</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-15 17:14:44 -0700</bug_when>
+    <thetext>Proposals should use the proposal process documented here: https://github.com/tc39/ecma262/blob/master/CONTRIBUTING.md.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

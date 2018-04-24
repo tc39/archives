@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1732</bug_id>
+          
+          <creation_ts>2013-08-06 10:48:00 -0700</creation_ts>
+          <short_desc>Throw when Map, Set, WeakMap, WeakSet are called without new</short_desc>
+          <delta_ts>2013-08-16 13:46:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Rick Waldron">waldron.rick</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>waldron.rick</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4776</commentid>
+    <comment_count>0</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-08-06 10:48:36 -0700</bug_when>
+    <thetext>Per agenda item: https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-07/july-25.md#anti-pattern-to-call-a-constructor-without-new
+
+Resolution: https://github.com/rwldrn/tc39-notes/blob/master/es6/2013-07/july-25.md#consensusresolution-6
+
+- Throw when Map, Set, WeakMap, WeakSet are called without new</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4941</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-16 13:24:53 -0700</bug_when>
+    <thetext>this change was actually made in rev13</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4948</commentid>
+    <comment_count>2</comment_count>
+    <who name="Rick Waldron">waldron.rick</who>
+    <bug_when>2013-08-16 13:46:36 -0700</bug_when>
+    <thetext>Yes and I&apos;m sorry that I refiled. I was just going down a list and entering all of the actionable resolutions. Next time I&apos;ll be sure to double check (this was actually mentioned in the discussion I believe)</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

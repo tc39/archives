@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3257</bug_id>
+          
+          <creation_ts>2014-10-05 17:13:00 -0700</creation_ts>
+          <short_desc>Need decision on this binding of ES6 modules</short_desc>
+          <delta_ts>2015-07-10 08:35:01 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>Modules</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Allen Wirfs-Brock">allen</reporter>
+          <assigned_to name="Dave Herman">dherman</assigned_to>
+          <cc>d</cc>
+    
+    <cc>dherman</cc>
+    
+    <cc>erik.arvidsson</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10264</commentid>
+    <comment_count>0</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-10-05 17:13:25 -0700</bug_when>
+    <thetext>I need a final decision ASAP on the this binding visible at  the top level of ES6 modules.  It could be:
+
+1) the global object
+2) the value undefined  (good if you need to defer the decision
+3) throws when accessed (better if you need to defer)
+3) the namespace object of the current module 
+4) something else</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10265</commentid>
+    <comment_count>1</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-10-06 08:38:42 -0700</bug_when>
+    <thetext>1. The global object
+
+We talked about this in the breakout sessions at MS and the conclusion was that we want this to be the global object, even inside modules.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10660</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-11-17 15:50:55 -0800</bug_when>
+    <thetext>fixed in rev29 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10661</commentid>
+    <comment_count>3</comment_count>
+    <who name="Erik Arvidsson">arv</who>
+    <bug_when>2014-11-18 10:31:23 -0800</bug_when>
+    <thetext>Domenic told me that we wanted undefined. I don&apos;t know when that was agreed upon but I support using undefined too since minimizing the use of this to only be used in classes/methods seems like a good goal.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10853</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-12-07 14:35:01 -0800</bug_when>
+    <thetext>fixed in rev29</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

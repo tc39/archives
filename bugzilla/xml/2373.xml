@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2373</bug_id>
+          
+          <creation_ts>2013-12-10 19:45:00 -0800</creation_ts>
+          <short_desc>Specify String in terms of mapping from string tokens to string values</short_desc>
+          <delta_ts>2013-12-10 23:32:13 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="James Clark">jjc</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>jjc</cc>
+    
+    <cc>pfpschneider</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6913</commentid>
+    <comment_count>0</comment_count>
+    <who name="James Clark">jjc</who>
+    <bug_when>2013-12-10 19:45:09 -0800</bug_when>
+    <thetext>The prose in Section 9 could be improved by clearly framing it in terms of a mapping from string tokens to string values, where a string value is a sequence of code points.
+
+At the moment, the prose is rather unclear. Sometimes it uses the term &quot;code point&quot; or &quot;character&quot; to refer to code points occurring literally in the token (&quot;A string is a sequence of Unicode code points wrapped with quotation marks&quot;), and sometimes it uses those terms to refer to code points in the string value (&quot;Any code point may be represented as a hexadecimal number&quot;).
+
+I suggest it should say something like this:
+
+- a string token represents a string value, which is a sequence of code points
+
+- an unescaped code point within the string token represents itself
+
+- a pair of escapes \uXXXX\uYYYY, where U+XXXX is a high surrogate code point and U+YYYY is a low surrogate code point, represents the code point that the surrogate pair U+XXXX, U+YYYY would represent in UTF-16
+
+- in any other case, an escape \uXXXX represents the code point U+XXXX
+
+- other escapes \C represents a single code point as follows ....
+
+Switching from syntax diagrams to BNF would make it easier to express this rigorously.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4365</bug_id>
+          
+          <creation_ts>2015-05-14 16:23:00 -0700</creation_ts>
+          <short_desc>Exposing IsStructurallyValidLanguageTag and CanonicalizeLanguageTag in Intl api</short_desc>
+          <delta_ts>2015-05-15 12:32:59 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>DUPLICATE</resolution>
+          <dup_id>697</dup_id>
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Marcos">marcos</reporter>
+          <assigned_to name="Rick Waldron">waldron.rick</assigned_to>
+          <cc>marcos</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14407</commentid>
+    <comment_count>0</comment_count>
+    <who name="Marcos">marcos</who>
+    <bug_when>2015-05-14 16:23:37 -0700</bug_when>
+    <thetext>Would it make sense to expose the following two abstract operations through the Intl API:
+
+ * IsStructurallyValidLanguageTag
+ * CanonicalizeLanguageTag 
+
+For example:
+
+Intl.areStructurallyValid(tags); // returns boolean 
+Intl.canonicalize(tags); // returns an array of tags in canonical form
+
+I have a need to access these two abstract operations in a spec I&apos;m working on, but I have no means to access them directly in Gecko (and would prefer not to re-implement the the algorithms independently of what we already have in Gecko). 
+
+The spec I&apos;m implementing (steps 4 and 5):
+http://w3c.github.io/manifest/#lang-member</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14408</commentid>
+    <comment_count>1</comment_count>
+    <who name="Marcos">marcos</who>
+    <bug_when>2015-05-15 12:32:59 -0700</bug_when>
+    <thetext>
+
+*** This bug has been marked as a duplicate of bug 697 ***</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

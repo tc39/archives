@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2489</bug_id>
+          
+          <creation_ts>2014-01-30 10:23:00 -0800</creation_ts>
+          <short_desc>6.1.7.3, 9.1.2: Interleaved Proxy handler calls can violate [[SetPrototypeOf]] invariant</short_desc>
+          <delta_ts>2014-04-06 11:30:12 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7166</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-01-30 10:23:35 -0800</bug_when>
+    <thetext>6.1.7.3 Invariants of the Essential Internal Methods, [[SetPrototypeOf]] (V):
+
+&gt; If target is non-extensible, [[SetPrototypeOf]] must return false,
+&gt; unless V is the SameValue as the target’s observed [[GetPrototypeOf]] value.
+
+This invariant can be violated in 9.1.2 [[SetPrototypeOf]] when interleaved Proxy handlers calls take place.
+
+
+Test case:
+---
+let observedProto;
+let obj = {};
+let proxy = new Proxy({}, {
+  getPrototypeOf(t) {
+    // Interleaved Proxy handler call
+    print(`(2) IsExtensible(obj) = ${Reflect.isExtensible(obj)}`);
+    // Make object non-extensible and retrieve [[Prototype]]
+    Reflect.preventExtensions(obj);
+    observedProto = Reflect.getPrototypeOf(obj);
+    print(`(3) IsExtensible(obj) = ${Reflect.isExtensible(obj)}`);
+    return Reflect.getPrototypeOf(t);
+  }
+});
+
+// Change [[Prototype]] of `obj`
+print(`(1) IsExtensible(obj) = ${Reflect.isExtensible(obj)}`);
+let setProtoResult = Reflect.setPrototypeOf(obj, proxy);
+
+// Inspect current [[Prototype]] of `obj`
+print(`(4) IsExtensible(obj) = ${Reflect.isExtensible(obj)}`);
+let currentProto = Reflect.getPrototypeOf(obj);
+print(`observedProto === currentProto? ${observedProto === currentProto}`);
+print(`setProtoResult = ${setProtoResult}`);
+---
+
+Output:
+---
+(1) IsExtensible(obj) = true
+(2) IsExtensible(obj) = true
+(3) IsExtensible(obj) = false
+(4) IsExtensible(obj) = false
+observedProto === currentProto? false
+setProtoResult = true
+---
+
+Expected:
+`setProtoResult` should be false to indicate that the [[SetPrototypeOf]] operation was rejected. And `observedProto === currentProto` should yield `true`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7283</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-12 17:41:05 -0800</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+changed Ordinary Object [[SetPrototypeOf]] to recheck the preconditions after the final internal call to [[GetPrototypeOf]]
+
+The [[SetPrototypeOf]] internal method for prozy objects already worked that way.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7548</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:30:12 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

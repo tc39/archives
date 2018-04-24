@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2559</bug_id>
+          
+          <creation_ts>2014-02-20 09:13:00 -0800</creation_ts>
+          <short_desc>Need to define what &quot;is not present&quot; tests for arguments mean</short_desc>
+          <delta_ts>2014-04-06 11:31:18 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Boris Zbarky">bzbarsky</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7380</commentid>
+    <comment_count>0</comment_count>
+    <who name="Boris Zbarky">bzbarsky</who>
+    <bug_when>2014-02-20 09:13:04 -0800</bug_when>
+    <thetext>In particular, need to define that these are arguments.length checks and that they supersede the normal &quot;missing means undefined&quot; rule.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7448</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-18 15:50:38 -0700</bug_when>
+    <thetext>How about this in clause 17, 4th paragraph (last sentence is new):
+
+Unless otherwise specified in the description of a particular function, if a built-in function or constructor is given fewer arguments than the function is specified to require, the function or constructor shall behave exactly as if it had been given sufficient additional arguments, each such argument being the undefined value. Such missing arguments are considered to be “not present” and may be identified in that manner by specification algorithms.
+
+fixed in rev23 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7449</commentid>
+    <comment_count>2</comment_count>
+    <who name="Boris Zbarky">bzbarsky</who>
+    <bug_when>2014-03-18 18:53:37 -0700</bug_when>
+    <thetext>That helps a lot, yes.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7596</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:31:18 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

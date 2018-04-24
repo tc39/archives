@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>217</bug_id>
+          
+          <creation_ts>2011-10-20 17:35:00 -0700</creation_ts>
+          <short_desc>from 11.13.1-1-1 to 11.13.1-1-4 should raise SyntaxError (not ReferenceError)</short_desc>
+          <delta_ts>2012-01-13 09:22:52 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Yusuke Suzuki">utatane.tea</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>501</commentid>
+    <comment_count>0</comment_count>
+      <attachid>7</attachid>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2011-10-20 17:35:53 -0700</bug_when>
+    <thetext>Created attachment 7
+patch
+
+According to section 11.13.1
+http://es5.github.com/#x11.13.1
+
+AssignmentExpression : LeftHandSideExpression = AssignmentExpression
+
+and,
+  11.13.1-1-1, NumericLiteral
+    42
+  11.13.1-1-2, StringLiteral
+    &apos;x&apos;
+  11.13.1-1-3 BooleanLiteral
+    true
+  11.13.1-1-4 NullLiteral
+    null
+
+doesn&apos;t return Reference. And 11.13.1, step 4
+4. Throw a SyntaxError exception if the following conditions are all true:
+  Type(lref) is Reference is true
+  IsStrictReference(lref) is true
+  Type(GetBase(lref)) is Environment Record
+  GetReferencedName(lref) is either &quot;eval&quot; or &quot;arguments&quot;
+
+Then, Type(lref) is not Reference, so should raise SyntaxError as early error in parse phase.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>568</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-12 11:12:44 -0800</bug_when>
+    <thetext>The key to step 4 of 11.13.1 is:
+   &quot;IsStrictReference(lref) is true&quot;
+
+
+From 8.7:
+  &quot;IsStrictReference(V). Returns the strict reference component of the reference V.&quot;
+
+In turn, I believe strict reference has to do with strict mode, and am double-checking this assumption with the es-discuss alias.  If it is, the test case is valid as PutValue (section 8.7.2) is throwing the ReferenceError.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>569</commentid>
+    <comment_count>2</comment_count>
+    <who name="Yusuke Suzuki">utatane.tea</who>
+    <bug_when>2012-01-12 11:24:19 -0800</bug_when>
+    <thetext>Thanks.
+Oh sorry about my error. I misunderstood this step 4. Your indication is right!</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>597</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2012-01-13 09:22:52 -0800</bug_when>
+    <thetext>Never heard back from anyone on es-discuss, but I&apos;m fairly certain this interpretation is correct:)</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="0"
+              isprivate="0"
+          >
+            <attachid>7</attachid>
+            <date>2011-10-20 17:35:00 -0700</date>
+            <delta_ts>2011-10-20 17:35:53 -0700</delta_ts>
+            <desc>patch</desc>
+            <filename>res.patch</filename>
+            <type>application/octet-stream</type>
+            <size>5770</size>
+            <attacher name="Yusuke Suzuki">utatane.tea</attacher>
+            
+              <data encoding="base64">ZGlmZiAtLWdpdCBhL3Rlc3Qvc3VpdGUvY2hhcHRlcjExLzExLjEzLzExLjEzLjEvMTEuMTMuMS0x
+LTEuanMgYi90ZXN0L3N1aXRlL2NoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS0xLmpz
+Ci0tLSBhL3Rlc3Qvc3VpdGUvY2hhcHRlcjExLzExLjEzLzExLjEzLjEvMTEuMTMuMS0xLTEuanMK
+KysrIGIvdGVzdC9zdWl0ZS9jaGFwdGVyMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTEtMS5qcwpA
+QCAtMTQsMjYgKzE0LDI2IEBACiAvLy8gRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFSRSBESVND
+TEFJTUVELiBJTiBOTyBFVkVOVCBTSEFMTCBUSEUgQ09QWVJJR0hUIE9XTkVSIE9SIENPTlRSSUJV
+VE9SUyBCRSBMSUFCTEUKIC8vLyBGT1IgQU5ZIERJUkVDVCwgSU5ESVJFQ1QsIElOQ0lERU5UQUws
+IFNQRUNJQUwsIEVYRU1QTEFSWSwgT1IgQ09OU0VRVUVOVElBTCBEQU1BR0VTIChJTkNMVURJTkcs
+IEJVVCBOT1QKIC8vLyBMSU1JVEVEIFRPLCBQUk9DVVJFTUVOVCBPRiBTVUJTVElUVVRFIEdPT0RT
+IE9SIFNFUlZJQ0VTOyBMT1NTIE9GIFVTRSwgREFUQSwgT1IgUFJPRklUUzsgT1IgQlVTSU5FU1MK
+IC8vLyBJTlRFUlJVUFRJT04pIEhPV0VWRVIgQ0FVU0VEIEFORCBPTiBBTlkgVEhFT1JZIE9GIExJ
+QUJJTElUWSwgV0hFVEhFUiBJTiBDT05UUkFDVCwgU1RSSUNUIExJQUJJTElUWSwKIC8vLyBPUiBU
+T1JUIChJTkNMVURJTkcgTkVHTElHRU5DRSBPUiBPVEhFUldJU0UpIEFSSVNJTkcgSU4gQU5ZIFdB
+WSBPVVQgT0YgVEhFIFVTRSBPRiBUSElTIFNPRlRXQVJFLCBFVkVOIElGCiAvLy8gQURWSVNFRCBP
+RiBUSEUgUE9TU0lCSUxJVFkgT0YgU1VDSCBEQU1BR0UuCiAKIC8qKgotICogUHV0VmFsdWUgb3Bl
+cmF0ZXMgb25seSBvbiByZWZlcmVuY2VzIChzZWUgc3RlcCAxKQorICogVGhyb3cgU3ludGF4RXJy
+b3Igd2hlbiBUeXBlKGxyZWYpIGlzIFJlZmVyZW5jZSBpcyBub3QgdHJ1ZSAoc2VlIHN0ZXAgNCkK
+ICAqCiAgKiBAcGF0aCBjaGFwdGVyMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTEtMS5qcwotICog
+QGRlc2NyaXB0aW9uIHNpbXBsZSBhc3NpZ25tZW50IHRocm93cyBSZWZlcmVuY2VFcnJvciBpZiBM
+ZWZ0SGFuZFNpZGUgaXMgbm90IGEgcmVmZXJlbmNlIChudW1iZXIpCisgKiBAZGVzY3JpcHRpb24g
+c2ltcGxlIGFzc2lnbm1lbnQgdGhyb3dzIFN5bnRheEVycm9yIGlmIExlZnRIYW5kU2lkZSBpcyBu
+b3QgYSByZWZlcmVuY2UgKG51bWJlcikKICAqLwogCiAKIGZ1bmN0aW9uIHRlc3RjYXNlKCkgewog
+ICB0cnkgewogICAgIGV2YWwoIjQyID0gNDIiKTsKICAgfQogICBjYXRjaCAoZSkgewotICAgIGlm
+IChlIGluc3RhbmNlb2YgUmVmZXJlbmNlRXJyb3IpIHsKKyAgICBpZiAoZSBpbnN0YW5jZW9mIFN5
+bnRheEVycm9yKSB7CiAgICAgICByZXR1cm4gdHJ1ZTsKICAgICB9CiAgIH0KICB9CiBydW5UZXN0
+Q2FzZSh0ZXN0Y2FzZSk7CmRpZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoYXB0ZXIxMS8xMS4xMy8x
+MS4xMy4xLzExLjEzLjEtMS0yLmpzIGIvdGVzdC9zdWl0ZS9jaGFwdGVyMTEvMTEuMTMvMTEuMTMu
+MS8xMS4xMy4xLTEtMi5qcwotLS0gYS90ZXN0L3N1aXRlL2NoYXB0ZXIxMS8xMS4xMy8xMS4xMy4x
+LzExLjEzLjEtMS0yLmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2hhcHRlcjExLzExLjEzLzExLjEzLjEv
+MTEuMTMuMS0xLTIuanMKQEAgLTE0LDI2ICsxNCwyNiBAQAogLy8vIEZPUiBBIFBBUlRJQ1VMQVIg
+UFVSUE9TRSBBUkUgRElTQ0xBSU1FRC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIENPUFlSSUdIVCBP
+V05FUiBPUiBDT05UUklCVVRPUlMgQkUgTElBQkxFCiAvLy8gRk9SIEFOWSBESVJFQ1QsIElORElS
+RUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBFWEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwgREFN
+QUdFUyAoSU5DTFVESU5HLCBCVVQgTk9UCiAvLy8gTElNSVRFRCBUTywgUFJPQ1VSRU1FTlQgT0Yg
+U1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsIERBVEEsIE9SIFBST0ZJ
+VFM7IE9SIEJVU0lORVNTCiAvLy8gSU5URVJSVVBUSU9OKSBIT1dFVkVSIENBVVNFRCBBTkQgT04g
+QU5ZIFRIRU9SWSBPRiBMSUFCSUxJVFksIFdIRVRIRVIgSU4gQ09OVFJBQ1QsIFNUUklDVCBMSUFC
+SUxJVFksCiAvLy8gT1IgVE9SVCAoSU5DTFVESU5HIE5FR0xJR0VOQ0UgT1IgT1RIRVJXSVNFKSBB
+UklTSU5HIElOIEFOWSBXQVkgT1VUIE9GIFRIRSBVU0UgT0YgVEhJUyBTT0ZUV0FSRSwgRVZFTiBJ
+RgogLy8vIEFEVklTRUQgT0YgVEhFIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFNQUdFLgogCiAvKioK
+LSAqIFB1dFZhbHVlIG9wZXJhdGVzIG9ubHkgb24gcmVmZXJlbmNlcyAoc2VlIHN0ZXAgMSkuCisg
+KiBUaHJvdyBTeW50YXhFcnJvciB3aGVuIFR5cGUobHJlZikgaXMgUmVmZXJlbmNlIGlzIG5vdCB0
+cnVlIChzZWUgc3RlcCA0KQogICoKICAqIEBwYXRoIGNoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzEx
+LjEzLjEtMS0yLmpzCi0gKiBAZGVzY3JpcHRpb24gc2ltcGxlIGFzc2lnbm1lbnQgdGhyb3dzIFJl
+ZmVyZW5jZUVycm9yIGlmIExlZnRIYW5kU2lkZSBpcyBub3QgYSByZWZlcmVuY2UgKHN0cmluZykK
+KyAqIEBkZXNjcmlwdGlvbiBzaW1wbGUgYXNzaWdubWVudCB0aHJvd3MgU3ludGF4RXJyb3IgaWYg
+TGVmdEhhbmRTaWRlIGlzIG5vdCBhIHJlZmVyZW5jZSAoc3RyaW5nKQogICovCiAKIAogZnVuY3Rp
+b24gdGVzdGNhc2UoKSB7CiAgIHRyeSB7CiAgICAgZXZhbCgiJ3gnID0gNDIiKTsKICAgfQogICBj
+YXRjaCAoZSkgewotICAgIGlmIChlIGluc3RhbmNlb2YgUmVmZXJlbmNlRXJyb3IpIHsKKyAgICBp
+ZiAoZSBpbnN0YW5jZW9mIFN5bnRheEVycm9yKSB7CiAgICAgICByZXR1cm4gdHJ1ZTsKICAgICB9
+CiAgIH0KICB9CiBydW5UZXN0Q2FzZSh0ZXN0Y2FzZSk7CmRpZmYgLS1naXQgYS90ZXN0L3N1aXRl
+L2NoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS0zLmpzIGIvdGVzdC9zdWl0ZS9jaGFw
+dGVyMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTEtMy5qcwotLS0gYS90ZXN0L3N1aXRlL2NoYXB0
+ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS0zLmpzCisrKyBiL3Rlc3Qvc3VpdGUvY2hhcHRl
+cjExLzExLjEzLzExLjEzLjEvMTEuMTMuMS0xLTMuanMKQEAgLTE0LDI2ICsxNCwyNiBAQAogLy8v
+IEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRSBBUkUgRElTQ0xBSU1FRC4gSU4gTk8gRVZFTlQgU0hB
+TEwgVEhFIENPUFlSSUdIVCBPV05FUiBPUiBDT05UUklCVVRPUlMgQkUgTElBQkxFCiAvLy8gRk9S
+IEFOWSBESVJFQ1QsIElORElSRUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBFWEVNUExBUlksIE9S
+IENPTlNFUVVFTlRJQUwgREFNQUdFUyAoSU5DTFVESU5HLCBCVVQgTk9UCiAvLy8gTElNSVRFRCBU
+TywgUFJPQ1VSRU1FTlQgT0YgU1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRiBV
+U0UsIERBVEEsIE9SIFBST0ZJVFM7IE9SIEJVU0lORVNTCiAvLy8gSU5URVJSVVBUSU9OKSBIT1dF
+VkVSIENBVVNFRCBBTkQgT04gQU5ZIFRIRU9SWSBPRiBMSUFCSUxJVFksIFdIRVRIRVIgSU4gQ09O
+VFJBQ1QsIFNUUklDVCBMSUFCSUxJVFksCiAvLy8gT1IgVE9SVCAoSU5DTFVESU5HIE5FR0xJR0VO
+Q0UgT1IgT1RIRVJXSVNFKSBBUklTSU5HIElOIEFOWSBXQVkgT1VUIE9GIFRIRSBVU0UgT0YgVEhJ
+UyBTT0ZUV0FSRSwgRVZFTiBJRgogLy8vIEFEVklTRUQgT0YgVEhFIFBPU1NJQklMSVRZIE9GIFNV
+Q0ggREFNQUdFLgogCiAvKioKLSAqIFB1dFZhbHVlIG9wZXJhdGVzIG9ubHkgb24gcmVmZXJlbmNl
+cyAoc2VlIHN0ZXAgMSkuCisgKiBUaHJvdyBTeW50YXhFcnJvciB3aGVuIFR5cGUobHJlZikgaXMg
+UmVmZXJlbmNlIGlzIG5vdCB0cnVlIChzZWUgc3RlcCA0KQogICoKICAqIEBwYXRoIGNoYXB0ZXIx
+MS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS0zLmpzCi0gKiBAZGVzY3JpcHRpb24gc2ltcGxlIGFz
+c2lnbm1lbnQgdGhyb3dzIFJlZmVyZW5jZUVycm9yIGlmIExlZnRIYW5kU2lkZSBpcyBub3QgYSBy
+ZWZlcmVuY2UgKGJvb2xlYW4pCisgKiBAZGVzY3JpcHRpb24gc2ltcGxlIGFzc2lnbm1lbnQgdGhy
+b3dzIFN5bnRheEVycm9yIGlmIExlZnRIYW5kU2lkZSBpcyBub3QgYSByZWZlcmVuY2UgKGJvb2xl
+YW4pCiAgKi8KIAogCiBmdW5jdGlvbiB0ZXN0Y2FzZSgpIHsKICAgdHJ5IHsKICAgICBldmFsKCJ0
+cnVlID0gNDIiKTsKICAgfQogICBjYXRjaCAoZSkgewotICAgIGlmIChlIGluc3RhbmNlb2YgUmVm
+ZXJlbmNlRXJyb3IpIHsKKyAgICBpZiAoZSBpbnN0YW5jZW9mIFN5bnRheEVycm9yKSB7CiAgICAg
+ICByZXR1cm4gdHJ1ZTsKICAgICB9CiAgIH0KICB9CiBydW5UZXN0Q2FzZSh0ZXN0Y2FzZSk7CmRp
+ZmYgLS1naXQgYS90ZXN0L3N1aXRlL2NoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS00
+LmpzIGIvdGVzdC9zdWl0ZS9jaGFwdGVyMTEvMTEuMTMvMTEuMTMuMS8xMS4xMy4xLTEtNC5qcwot
+LS0gYS90ZXN0L3N1aXRlL2NoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS00LmpzCisr
+KyBiL3Rlc3Qvc3VpdGUvY2hhcHRlcjExLzExLjEzLzExLjEzLjEvMTEuMTMuMS0xLTQuanMKQEAg
+LTE0LDI2ICsxNCwyNiBAQAogLy8vIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRSBBUkUgRElTQ0xB
+SU1FRC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIENPUFlSSUdIVCBPV05FUiBPUiBDT05UUklCVVRP
+UlMgQkUgTElBQkxFCiAvLy8gRk9SIEFOWSBESVJFQ1QsIElORElSRUNULCBJTkNJREVOVEFMLCBT
+UEVDSUFMLCBFWEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwgREFNQUdFUyAoSU5DTFVESU5HLCBC
+VVQgTk9UCiAvLy8gTElNSVRFRCBUTywgUFJPQ1VSRU1FTlQgT0YgU1VCU1RJVFVURSBHT09EUyBP
+UiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsIERBVEEsIE9SIFBST0ZJVFM7IE9SIEJVU0lORVNTCiAv
+Ly8gSU5URVJSVVBUSU9OKSBIT1dFVkVSIENBVVNFRCBBTkQgT04gQU5ZIFRIRU9SWSBPRiBMSUFC
+SUxJVFksIFdIRVRIRVIgSU4gQ09OVFJBQ1QsIFNUUklDVCBMSUFCSUxJVFksCiAvLy8gT1IgVE9S
+VCAoSU5DTFVESU5HIE5FR0xJR0VOQ0UgT1IgT1RIRVJXSVNFKSBBUklTSU5HIElOIEFOWSBXQVkg
+T1VUIE9GIFRIRSBVU0UgT0YgVEhJUyBTT0ZUV0FSRSwgRVZFTiBJRgogLy8vIEFEVklTRUQgT0Yg
+VEhFIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFNQUdFLgogCiAvKioKLSAqIFB1dFZhbHVlIG9wZXJh
+dGVzIG9ubHkgb24gcmVmZXJlbmNlcyAoc2VlIHN0ZXAgMSkuCisgKiBUaHJvdyBTeW50YXhFcnJv
+ciB3aGVuIFR5cGUobHJlZikgaXMgUmVmZXJlbmNlIGlzIG5vdCB0cnVlIChzZWUgc3RlcCA0KQog
+ICoKICAqIEBwYXRoIGNoYXB0ZXIxMS8xMS4xMy8xMS4xMy4xLzExLjEzLjEtMS00LmpzCi0gKiBA
+ZGVzY3JpcHRpb24gc2ltcGxlIGFzc2lnbm1lbnQgdGhyb3dzIFJlZmVyZW5jZUVycm9yIGlmIExl
+ZnRIYW5kU2lkZSBpcyBub3QgYSByZWZlcmVuY2UgKG51bGwpCisgKiBAZGVzY3JpcHRpb24gc2lt
+cGxlIGFzc2lnbm1lbnQgdGhyb3dzIFN5bnRheEVycm9yIGlmIExlZnRIYW5kU2lkZSBpcyBub3Qg
+YSByZWZlcmVuY2UgKG51bGwpCiAgKi8KIAogCiBmdW5jdGlvbiB0ZXN0Y2FzZSgpIHsKICAgdHJ5
+IHsKICAgICBldmFsKCJudWxsID0gNDIiKTsKICAgfQogICBjYXRjaCAoZSkgewotICAgIGlmIChl
+IGluc3RhbmNlb2YgUmVmZXJlbmNlRXJyb3IpIHsKKyAgICBpZiAoZSBpbnN0YW5jZW9mIFN5bnRh
+eEVycm9yKSB7CiAgICAgICByZXR1cm4gdHJ1ZTsKICAgICB9CiAgIH0KICB9CiBydW5UZXN0Q2Fz
+ZSh0ZXN0Y2FzZSk7Cg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

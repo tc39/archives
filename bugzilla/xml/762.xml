@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>762</bug_id>
+          
+          <creation_ts>2012-10-09 13:56:00 -0700</creation_ts>
+          <short_desc>String segmentation</short_desc>
+          <delta_ts>2016-02-15 16:17:15 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Richard Gillam">gillam</assigned_to>
+          <cc>addison</cc>
+    
+    <cc>caridy</cc>
+    
+    <cc>princexcess69</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1897</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 13:56:32 -0700</bug_when>
+    <thetext>A break iterator for strings. Very useful in CJK languages - used in editors, word boundaries in regular expressions.
+
+Sample implementation/documentation in Chrome - http://code.google.com/p/v8-i18n/wiki/BreakIterator</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2415</commentid>
+    <comment_count>1</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-11-05 09:02:04 -0800</bug_when>
+    <thetext>One more use case we actually encountered - offline indexing, e.g. emails, docs.
+
+Should we up the importance to High?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2994</commentid>
+    <comment_count>2</comment_count>
+    <who name="Addison Phillips">addison</who>
+    <bug_when>2012-12-05 15:27:48 -0800</bug_when>
+    <thetext>I think this is of high importance. Word and grapheme boundary analysis are things that we do a fair amount of in our applications (for features such as dictionary lookup, text highlighting that is scripted, etc.). For some languages, such as JP, CN, Thai, etc., this can&apos;t be done trivially and requires a large data set to do a high quality job of. There exist some smaller, statistically based implementations, but these are not accurate enough for our needs.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3018</commentid>
+    <comment_count>3</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 16:15:37 -0800</bug_when>
+    <thetext>At the 2012-12-14 internationalization meeting Rich was asked to write a strawman.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3108</commentid>
+    <comment_count>4</comment_count>
+    <who name="Richard Gillam">gillam</who>
+    <bug_when>2013-01-04 18:07:28 -0800</bug_when>
+    <thetext>See http://wiki.ecmascript.org/doku.php?id=globalization:text_segmentation, such as it is.  This is a lot different from what Nebojsa has implemented, but I thought it might be useful to go in a different direction and spark a little discussion.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14925</commentid>
+    <comment_count>5</comment_count>
+    <who name="Caridy Patiño">caridy</who>
+    <bug_when>2016-02-15 16:17:15 -0800</bug_when>
+    <thetext>Update: @littledan will champion the breakIterator for 4rd edition.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

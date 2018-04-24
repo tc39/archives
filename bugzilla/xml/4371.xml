@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4371</bug_id>
+          
+          <creation_ts>2015-05-19 17:32:00 -0700</creation_ts>
+          <short_desc>9.4.4.2 doesn&apos;t reflect reality</short_desc>
+          <delta_ts>2015-10-26 13:05:32 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Bugs from ES6</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14424</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-05-19 17:32:19 -0700</bug_when>
+    <thetext>See also: https://github.com/tc39/test262/pull/274#issuecomment-103415105
+
+As @anba pointed out, there don&apos;t appear to be any implementations that follow the spec on this point. Generally, implementing the spec as is would require tracking the original arguments separate from the formal bindings just in case they might be needed in rare cases. Avoiding this work would be difficult. It&apos;s probably better to amend 9.4.4.2 similar to @anba proposes - by first consulting the current value of the mapped binding and setting that on the arguments object before removing the mapping. This seems to better reflect implementation reality.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14425</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-05-19 17:47:17 -0700</bug_when>
+    <thetext>This appears to be a spec.  bug that goes back to ES5. 
+
+@anba&apos;s fix seems about right</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14878</commentid>
+    <comment_count>2</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-26 13:05:32 -0700</bug_when>
+    <thetext>Fixed in ES2016 Draft (1afb8e6).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

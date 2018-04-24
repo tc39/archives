@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>765</bug_id>
+          
+          <creation_ts>2012-10-09 14:11:00 -0700</creation_ts>
+          <short_desc>Display names for languages and regions</short_desc>
+          <delta_ts>2012-12-17 16:48:28 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 2.0 proposals</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Nebojša Ćirić">cira</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>gphemsley</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1900</commentid>
+    <comment_count>0</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-09 14:11:13 -0700</bug_when>
+    <thetext>Useful for language/region pickers.
+
+Microsoft has data for languages and regions, but not for scripts.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1915</commentid>
+    <comment_count>1</comment_count>
+    <who name="Gordon P. Hemsley">gphemsley</who>
+    <bug_when>2012-10-09 17:03:25 -0700</bug_when>
+    <thetext>FTR, I have a script that parses the IANA Language Subtag Registry into .txt and .properties files:
+
+https://github.com/GPHemsley/BCP47
+
+It covers all subtag types afforded by BCP 47.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3024</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-17 16:48:28 -0800</bug_when>
+    <thetext>At the 2012-12-14 internationalization meeting, Jungshik was asked to write a
+strawman.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

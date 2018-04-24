@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1670</bug_id>
+          
+          <creation_ts>2013-07-31 05:15:00 -0700</creation_ts>
+          <short_desc>15.13.6, 15.13.7: TypedArray and DataView objects both use the same internal data property names</short_desc>
+          <delta_ts>2013-08-23 08:23:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 16: July 15, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>4644</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-07-31 05:15:36 -0700</bug_when>
+    <thetext>TypedArray and DataView objects both have internal data property names [[ViewedArrayBuffer]], [[ByteLength]], and [[ByteOffset]]. But [[ViewedArrayBuffer]] is also used to test for TypedArray resp. DataView object-ness, that means an algorithm which currently only tests for [[ViewedArrayBuffer]] can not differentiate between both kinds of objects. 
+
+For example the abstract operation for DataView objects &quot;GetViewValue()&quot; is currently also applicable for TypedArray objects. 
+
+Or 15.13.6.3.6 &quot;%TypedArray%.prototype.set(array, offset = 0 )&quot;, step 11 is currently undefined because only [[ViewedArrayBuffer]] is tested on the target variable, but if target is a DataView object [[TypedArrayName]] is not present.
+
+Or you can use the DataView constructor to perform (half-)initialisation of TypedArray objects ([[ViewedArrayBuffer]], [[ByteLength]], and [[ByteOffset]] get updated, but [[ArrayLength]] is still 0).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4987</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-21 13:01:28 -0700</bug_when>
+    <thetext>fixed in rev17 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>5148</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-08-23 08:23:13 -0700</bug_when>
+    <thetext>fixed in rev17, August 23, 2013 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

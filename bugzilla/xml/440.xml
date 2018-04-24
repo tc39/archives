@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>440</bug_id>
+          
+          <creation_ts>2012-07-04 07:48:00 -0700</creation_ts>
+          <short_desc>Creation of the arguments object shouldn’t take variable declarations into account</short_desc>
+          <delta_ts>2015-10-02 14:33:04 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-262, Editions 5 and 5.1</product>
+          <component>technical content</component>
+          <version>Edition 5.1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>brendan</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1091</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-04 07:48:35 -0700</bug_when>
+    <thetext>http://ecma-international.org/ecma-262/5.1/#sec-10.6 says:
+
+&gt; When control enters an execution context for function code, an arguments
+&gt; object is created unless (as specified in 10.5) the identifier arguments
+&gt; occurs as an Identifier in the function’s FormalParameterList or occurs as
+&gt; the Identifier of a VariableDeclaration or FunctionDeclaration contained in
+&gt; the function code.
+
+Following that logic, I would expect the following code to return `&quot;undefined&quot;`:
+
+    function fn() {
+      var arguments;
+      return typeof arguments;
+    };
+    fn();
+
+However, the order of steps in the normative part of the spec (http://ecma-international.org/ecma-262/5.1/#sec-10.5, especially step 6) makes clear that variable declarations are not taken into account (although parameters and function declarations are). So, the example above should in fact return `&quot;object&quot;`.
+
+As Brendan Eich noted, this looks like a regression in the spec from ES3 to ES5.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1092</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-07-04 08:44:56 -0700</bug_when>
+    <thetext>As noted, the actual normative algorithm  is correct.
+
+The error is in the non-normative introduction to 10.6.  For the next edition, we are generally either eliminating such text or explicitly marking it as non-normative.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1093</commentid>
+    <comment_count>2</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-04 09:04:22 -0700</bug_when>
+    <thetext>To further explain my confusion: `var arguments = undefined;` is equivalent to `var arguments; arguments = undefined;`. But then there’s http://ecma-international.org/ecma-262/5.1/#sec-12.2, which says:
+
+&gt; Variables are initialised to `undefined` when created.
+
+Consider the following example. I’ve added comments explaining what gets alerted in all the engines I tested in.
+
+function fn() {
+  alert(typeof arguments); // alerts &quot;object&quot;
+  var arguments; // not initialised to `undefined`?
+  alert(typeof arguments); // alerts &quot;object&quot;
+  arguments = undefined;
+  alert(typeof arguments); // alerts &quot;undefined&quot;
+};
+fn();
+
+Why doesn’t `var arguments;` initialize to `undefined`, as it says in the spec? Is that another error in non-normative text?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1094</commentid>
+    <comment_count>3</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2012-07-04 09:18:33 -0700</bug_when>
+    <thetext>(In reply to comment #2)
+&gt; Why doesn’t `var arguments;` initialize to `undefined`, as it says in the spec?
+&gt; Is that another error in non-normative text?
+
+I see now — step 8c in http://ecma-international.org/ecma-262/5.1/#sec-10.5. `varAlreadyDeclared` is `true` because the `arguments` object has already been created at that point. So, only when `[var] arguments = undefined;` is executed, it gets overwritten.
+
+So I guess it’s only comment #0 that’s an error.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14736</commentid>
+    <comment_count>4</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-10-02 14:33:04 -0700</bug_when>
+    <thetext>Bulk resolving ES5.1 errata issues as a sampling suggests these are all fixed. If this is in error, please open a new issue on GitHub.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4148</bug_id>
+          
+          <creation_ts>2015-03-09 07:44:00 -0700</creation_ts>
+          <short_desc>11.6.1.1 Static Semantics: Early Errors</short_desc>
+          <delta_ts>2015-03-17 16:57:06 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 35: March 4, 2015 Release Candidate 2</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Mathias Bynens">mathias</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>andrebargull</cc>
+    
+    <cc>ecmascriptbugs</cc>
+    
+    <cc>mathias</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13658</commentid>
+    <comment_count>0</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 07:44:34 -0700</bug_when>
+    <thetext>&gt; IdentifierStart :: \ UnicodeEscapeSequence
+&gt; 
+&gt; It is a Syntax Error if SV(UnicodeEscapeSequence) is neither the UTF16Encoding (10.1.1) of a single Unicode code point with the Unicode property “ID_Start” nor &quot;$&quot; or &quot;_&quot;.
+
+`Other_ID_Start` is missing.
+
+&gt; IdentifierPart :: \ UnicodeEscapeSequence
+&gt;
+&gt; It is a Syntax Error if SV(UnicodeEscapeSequence) is neither the UTF16Encoding (10.1.1) of a single Unicode code point with the Unicode property “ID_Continue” nor &quot;$&quot; or &quot;_&quot; nor the UTF16Encoding of either &lt;ZWNJ&gt; or &lt;ZWJ&gt;.
+
+`Other_ID_Continue` and `Other_ID_Start` is missing.
+
+Section 11.6 does mention those in the definitions of `UnicodeIDStart` and `UnicodeIDContinue` so either this section should too, or such mentions should be removed everywhere.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13659</commentid>
+    <comment_count>1</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 07:46:41 -0700</bug_when>
+    <thetext>For the record, it seems explicitly mentioning `Other_ID_Start` in the definition of `UnicodeIDContinue` is redundant.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13660</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-09 08:25:43 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #1)
+&gt; For the record, it seems explicitly mentioning `Other_ID_Start` in the
+&gt; definition of `UnicodeIDContinue` is redundant.
+
+No, see bug 3027.
+
+
+Unicode 7.0, PropList.txt:
+
+# ================================================
+
+2118          ; Other_ID_Start # Sm       SCRIPT CAPITAL P
+212E          ; Other_ID_Start # So       ESTIMATED SYMBOL
+309B..309C    ; Other_ID_Start # Sk   [2] KATAKANA-HIRAGANA VOICED SOUND MARK..KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+
+# Total code points: 4
+
+# ================================================
+
+00B7          ; Other_ID_Continue # Po       MIDDLE DOT
+0387          ; Other_ID_Continue # Po       GREEK ANO TELEIA
+1369..1371    ; Other_ID_Continue # No   [9] ETHIOPIC DIGIT ONE..ETHIOPIC DIGIT NINE
+19DA          ; Other_ID_Continue # No       NEW TAI LUE THAM DIGIT ONE
+
+# Total code points: 12
+
+# ================================================</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13661</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-09 08:59:48 -0700</bug_when>
+    <thetext>fixed in rev36 editor&apos;s draft
+
+the early error problem,</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13662</commentid>
+    <comment_count>4</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 09:28:41 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #2)
+&gt; Unicode 7.0, PropList.txt:
+&gt; 
+&gt; # ================================================
+&gt; 
+&gt; 2118          ; Other_ID_Start # Sm       SCRIPT CAPITAL P
+&gt; 212E          ; Other_ID_Start # So       ESTIMATED SYMBOL
+&gt; 309B..309C    ; Other_ID_Start # Sk   [2] KATAKANA-HIRAGANA VOICED SOUND
+&gt; MARK..KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+&gt; 
+&gt; # Total code points: 4
+&gt; 
+&gt; # ================================================
+&gt; 
+&gt; 00B7          ; Other_ID_Continue # Po       MIDDLE DOT
+&gt; 0387          ; Other_ID_Continue # Po       GREEK ANO TELEIA
+&gt; 1369..1371    ; Other_ID_Continue # No   [9] ETHIOPIC DIGIT ONE..ETHIOPIC
+&gt; DIGIT NINE
+&gt; 19DA          ; Other_ID_Continue # No       NEW TAI LUE THAM DIGIT ONE
+&gt; 
+&gt; # Total code points: 12
+&gt; 
+&gt; # ================================================
+
+Exactly — All those `Other_ID_Start` code points are already in `ID_Continue` anyway.
+
+To quickly confirm that explicitly including `Other_ID_Start` for `UnicodeIDContinue` doesn’t make a difference, use a script like https://gist.github.com/mathiasbynens/6334847. See the latest revision on https://gist.github.com/mathiasbynens/6334847 which didn’t cause any changes whatsoever in the generated output.
+
+Btw, rather than `PropList.txt` it seems `DerivedCoreProperties.txt` should be used as per http://unicode.org/reports/tr31/#Table_Lexical_Classes_for_Identifiers.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13663</commentid>
+    <comment_count>5</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-09 09:49:14 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #4)
+&gt; Exactly — All those `Other_ID_Start` code points are already in
+&gt; `ID_Continue` anyway.
+
+Err, in bug 2717 you&apos;ve requested to explicitly state that Other_ID_Start and Other_ID_Continue are included. 
+
+
+&gt; Btw, rather than `PropList.txt` it seems `DerivedCoreProperties.txt` should
+&gt; be used as per
+&gt; http://unicode.org/reports/tr31/#Table_Lexical_Classes_for_Identifiers.
+
+Other_ID_Start and Other_ID_Continue are defined in PropList.txt.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13664</commentid>
+    <comment_count>6</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-09 10:00:02 -0700</bug_when>
+    <thetext>So, if UnicodeIDContinue mentions Other_ID_Continue it should also mention Other_ID_Start, because Other_ID_Start ∩ Other_ID_Continue = ∅.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13665</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 10:03:02 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #5)
+&gt; (In reply to Mathias Bynens from comment #4)
+&gt; &gt; Exactly — All those `Other_ID_Start` code points are already in
+&gt; &gt; `ID_Continue` anyway.
+&gt; 
+&gt; Err, in bug 2717 you&apos;ve requested to explicitly state that Other_ID_Start
+&gt; and Other_ID_Continue are included. 
+
+I asked to explicitly include `Other_ID_Start` alongside `ID_Start` and `Other_ID_Continue` alongside `ID_Continue` (just to clarify/repeat what UAX #31 says). How is this relevant to this discussion, though? IIUC this is a different issue, about adding `Other_ID_Start` to `UnicodeIDContinue`.
+
+&gt; Other_ID_Start and Other_ID_Continue are defined in PropList.txt.
+
+Why should it be used over `DerivedCoreProperties.txt`? To me http://www.unicode.org/reports/tr44/#Simple_Derived sounds like `DerivedCoreProperties.txt` is the reference for derived core properties such as `ID_Start` and `ID_Continue`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13667</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 10:11:48 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #6)
+&gt; So, if UnicodeIDContinue mentions Other_ID_Continue it should also mention
+&gt; Other_ID_Start, because Other_ID_Start ∩ Other_ID_Continue = ∅.
+
+Right — I’m just saying (in comment #1) it doesn’t make a difference and it never will since `ID_Continue` already contains those code points anyway. See the definition of `ID_Continue` here: http://unicode.org/reports/tr31/#Table_Lexical_Classes_for_Identifiers `ID_Continue` is a superset of `ID_Start` (including `Other_ID_Start`), so this is a purely theoretical issue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13668</commentid>
+    <comment_count>9</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-09 10:17:16 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #8)
+&gt; (In reply to André Bargull from comment #6)
+&gt; &gt; So, if UnicodeIDContinue mentions Other_ID_Continue it should also mention
+&gt; &gt; Other_ID_Start, because Other_ID_Start ∩ Other_ID_Continue = ∅.
+&gt; 
+&gt; Right — I’m just saying (in comment #1) it doesn’t make a difference and it
+&gt; never will since `ID_Continue` already contains those code points anyway.
+&gt; See the definition of `ID_Continue` here:
+&gt; http://unicode.org/reports/tr31/#Table_Lexical_Classes_for_Identifiers
+&gt; `ID_Continue` is a superset of `ID_Start` (including `Other_ID_Start`), so
+&gt; this is a purely theoretical issue.
+
+It&apos;s just misleading to leave off Other_ID_Start in UnicodeIDContinue if Other_ID_Continue is explicitly included.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13669</commentid>
+    <comment_count>10</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-09 10:26:42 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #7)
+&gt; Why should it be used over `DerivedCoreProperties.txt`? To me
+&gt; http://www.unicode.org/reports/tr44/#Simple_Derived sounds like
+&gt; `DerivedCoreProperties.txt` is the reference for derived core properties
+&gt; such as `ID_Start` and `ID_Continue`.
+
+I don&apos;t understand that question. :-(
+
+In comment 2 I&apos;ve copy-pasted the definitions for Other_ID_Start and Other_ID_Continue from PropList.txt. 
+In comment 3 you&apos;ve responded to comment 2, and said that DerivedCoreProperties.txt instead of PropList.txt should be used (*).
+In comment 5 I&apos;ve responded to comment 3, and said that Other_ID_Start and Other_ID_Continue are defined in (and only in) PropList.txt.
+
+(*) Most likely this is the point where we started to talk about different subjects. I&apos;ve continued to say that Other_ID_Start and Other_ID_Continue are defined in PropList.txt. And you were talking about ID_Start and ID_Continue which are defined in DerivedCoreProperties.txt.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13673</commentid>
+    <comment_count>11</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-09 14:38:18 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #10)
+&gt; (In reply to Mathias Bynens from comment #7)
+&gt; &gt; Why should it be used over `DerivedCoreProperties.txt`? To me
+&gt; &gt; http://www.unicode.org/reports/tr44/#Simple_Derived sounds like
+&gt; &gt; `DerivedCoreProperties.txt` is the reference for derived core properties
+&gt; &gt; such as `ID_Start` and `ID_Continue`.
+&gt; 
+&gt; I don&apos;t understand that question. :-(
+&gt; 
+&gt; In comment 2 I&apos;ve copy-pasted the definitions for Other_ID_Start and
+&gt; Other_ID_Continue from PropList.txt. 
+&gt; In comment 3 you&apos;ve responded to comment 2, and said that
+&gt; DerivedCoreProperties.txt instead of PropList.txt should be used (*).
+&gt; In comment 5 I&apos;ve responded to comment 3, and said that Other_ID_Start and
+&gt; Other_ID_Continue are defined in (and only in) PropList.txt.
+&gt; 
+&gt; (*) Most likely this is the point where we started to talk about different
+&gt; subjects. I&apos;ve continued to say that Other_ID_Start and Other_ID_Continue
+&gt; are defined in PropList.txt. And you were talking about ID_Start and
+&gt; ID_Continue which are defined in DerivedCoreProperties.txt.
+
+My point was that neither `Other_ID_Start` or `Other_ID_Continue` are needed if we just use the `ID_Start` and `ID_Continue` listings in `DerivedCoreProperties.txt`, since those include `Other_ID_Start` and `Other_ID_Continue` respectively already.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13701</commentid>
+    <comment_count>12</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-03-11 17:14:46 -0700</bug_when>
+    <thetext>(In reply to Mathias Bynens from comment #11)
+&gt; My point was that neither `Other_ID_Start` or `Other_ID_Continue` are needed
+&gt; if we just use the `ID_Start` and `ID_Continue` listings in
+&gt; `DerivedCoreProperties.txt`, since those include `Other_ID_Start` and
+&gt; `Other_ID_Continue` respectively already.
+
+Yeah sure. Do you agree that removing `Other_ID_Start` and `Other_ID_Continue` from the definitions in UnicodeID{Start, Continue} and instead adding a note is a better (cleaner) way to define the set of allowed identifier characters? Because that should solve the whole redundancy issue.
+
+---
+UnicodeIDStart ::
+any Unicode code point with the Unicode property “ID_Start”
+
+UnicodeIDContinue ::
+any Unicode code point with the Unicode property “ID_Continue”
+
+NOTE: Grandfathered characters defined in “Other_ID_Start” and “Other_ID_Continue” must be recognized/supported by a compliant implementation. 
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13705</commentid>
+    <comment_count>13</comment_count>
+    <who name="Mathias Bynens">mathias</who>
+    <bug_when>2015-03-12 02:58:52 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #12)
+&gt; (In reply to Mathias Bynens from comment #11)
+&gt; &gt; My point was that neither `Other_ID_Start` or `Other_ID_Continue` are needed
+&gt; &gt; if we just use the `ID_Start` and `ID_Continue` listings in
+&gt; &gt; `DerivedCoreProperties.txt`, since those include `Other_ID_Start` and
+&gt; &gt; `Other_ID_Continue` respectively already.
+&gt; 
+&gt; Yeah sure. Do you agree that removing `Other_ID_Start` and
+&gt; `Other_ID_Continue` from the definitions in UnicodeID{Start, Continue} and
+&gt; instead adding a note is a better (cleaner) way to define the set of allowed
+&gt; identifier characters? Because that should solve the whole redundancy issue.
+&gt; 
+&gt; ---
+&gt; UnicodeIDStart ::
+&gt; any Unicode code point with the Unicode property “ID_Start”
+&gt; 
+&gt; UnicodeIDContinue ::
+&gt; any Unicode code point with the Unicode property “ID_Continue”
+&gt; 
+&gt; NOTE: Grandfathered characters defined in “Other_ID_Start” and
+&gt; “Other_ID_Continue” must be recognized/supported by a compliant
+&gt; implementation. 
+&gt; ---
+
+That was my intention when filing bug 2717 :) Sounds good.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13707</commentid>
+    <comment_count>14</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-12 09:55:21 -0700</bug_when>
+    <thetext>(In reply to André Bargull from comment #12)
+...
+&gt; 
+&gt; ---
+&gt; UnicodeIDStart ::
+&gt; any Unicode code point with the Unicode property “ID_Start”
+&gt; 
+&gt; UnicodeIDContinue ::
+&gt; any Unicode code point with the Unicode property “ID_Continue”
+&gt; 
+&gt; NOTE: Grandfathered characters defined in “Other_ID_Start” and
+&gt; “Other_ID_Continue” must be recognized/supported by a compliant
+&gt; implementation. 
+&gt; ---
+
+A NOTE can&apos;t express a normative requirement.  However, if we agree that  the definitions of of ID_Start and ID_continue are normatively sufficient, then we could have a NOTE that says something like:
+
+NOTE  The sets of code points with Unicode properties ID_Start and ID_Continue include, respectively, the code points with Unicode properties Other_ID_Start and Other_ID_Continue.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13785</commentid>
+    <comment_count>15</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2015-03-16 16:06:23 -0700</bug_when>
+    <thetext>I agree that all normative references to Other_ID_Start and Other_ID_Continue should be removed, and Allen&apos;s proposed note should be added.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13786</commentid>
+    <comment_count>16</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 16:29:25 -0700</bug_when>
+    <thetext>fixed in rev26 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13825</commentid>
+    <comment_count>17</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-17 16:57:06 -0700</bug_when>
+    <thetext>in rev36</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

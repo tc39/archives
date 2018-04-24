@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3930</bug_id>
+          
+          <creation_ts>2015-02-14 09:13:00 -0800</creation_ts>
+          <short_desc>9.2.3 [[Construct]]: Disallow tail calls in class constructors</short_desc>
+          <delta_ts>2015-02-15 14:51:57 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 33: February 12, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>INVALID</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>12666</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 09:13:41 -0800</bug_when>
+    <thetext>9.2.3 [[Construct]] ( argumentsList, newTarget)
+
+Tail calls in class constructors should not allowed for the reasons outlined in bug 3684 comment 2.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12674</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-14 11:33:33 -0800</bug_when>
+    <thetext>I&apos;m not sure what problem you see in 9.2.3. It creates a new execution for running the constructor but any state it needs after returning from evaluating the constructor body (thisArgument, envRec, kind) should have been captured as part of the original execution context.
+
+(admittedly, the spec. is a but sloppy in  dealing with  the boundary between spec. meta-level variables and actual runtime state, but I think the specification intent is clear enough here)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12675</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 11:56:08 -0800</bug_when>
+    <thetext>I was under the impression that retaining a reference to `envRec` is not valid under the tail-call semantics described in 14.6.3. But OTOH a reference to `envRec` is probably not too different from a closure within a constructor method (from the resource allocation point of view).</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

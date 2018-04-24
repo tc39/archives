@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2375</bug_id>
+          
+          <creation_ts>2013-12-10 20:03:00 -0800</creation_ts>
+          <short_desc>Mismatch between conformance and normative requirements</short_desc>
+          <delta_ts>2013-12-10 23:32:38 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>ECMA-404  JSON</product>
+          <component>1st Edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="James Clark">jjc</reporter>
+          <assigned_to name="Douglas Crockford">douglas</assigned_to>
+          <cc>allen</cc>
+    
+    <cc>jjc</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6915</commentid>
+    <comment_count>0</comment_count>
+    <who name="James Clark">jjc</who>
+    <bug_when>2013-12-10 20:03:55 -0800</bug_when>
+    <thetext>Section 9 contains requirements (which appear to be normative) about how JSON texts should be interpreted.  Yet Section 2 defines conformance purely in terms of whether a sequence of Unicode code points is a valid JSON text.  This is broken because any failure to meet a normative requirement should constitute non-conformance.
+
+Possible fixes are:
+
+a) Make the prose in section 9 informative, or
+b) Modify the definition of conformance to say, for example, that a conforming parser must treat equivalent JSON texts identically
+
+I think (b) would be more useful.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

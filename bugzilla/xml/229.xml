@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>229</bug_id>
+          
+          <creation_ts>2011-11-29 18:35:00 -0800</creation_ts>
+          <short_desc>Support non-numeric forms of year, day, hour, minute, second in DateTimeFormat</short_desc>
+          <delta_ts>2012-10-16 12:48:02 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Internationalization - ECMA-402</product>
+          <component>Specification</component>
+          <version>Edition 1.0 drafts</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Norbert">ecmascriptbugs</assigned_to>
+          <cc>cira</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>515</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2011-11-29 18:35:37 -0800</bug_when>
+    <thetext>Chinese, Japanese, and Korean commonly use representations of year, month, day, hour, minute, second that combine a number with a descriptive character, e.g., 2011年, 22일, 1時31分07秒. The current format specifications for DateTimeFormat have no way to describe such representations, except for the month component. While implementations may choose to use these representations in formats that include a short/medium/long month, there&apos;s no way to adequately report this back in resolvedOptions, and there&apos;s no way to request a time format such as 1時31分07秒.
+
+Support for these formats should be added.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>1861</commentid>
+    <comment_count>1</comment_count>
+    <who name="Nebojša Ćirić">cira</who>
+    <bug_when>2012-10-05 14:24:22 -0700</bug_when>
+    <thetext>Related ICU bug - http://bugs.icu-project.org/trac/ticket/9626.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

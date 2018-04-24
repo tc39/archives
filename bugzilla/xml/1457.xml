@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1457</bug_id>
+          
+          <creation_ts>2013-05-01 13:57:00 -0700</creation_ts>
+          <short_desc>command-line script on Windows incorrectly quotes all arguments before exec</short_desc>
+          <delta_ts>2013-05-17 07:41:14 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Windows</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>major</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dan Schaffer">dschaffe</reporter>
+          <assigned_to name="Dan Schaffer">dschaffe</assigned_to>
+          <cc>brbaker</cc>
+    
+    <cc>prsriniv</cc>
+    
+    <cc>trbaker</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3693</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dan Schaffer">dschaffe</who>
+    <bug_when>2013-05-01 13:57:46 -0700</bug_when>
+    <thetext>On Windows the test262.py script adds double quotes around the javascript shell and the javascript shell.  The script should just quote the javascript shell and possibly the temp file.  Removing the double quotes is a simple workaround to get the script running.
+
+Steps to reproduce:
+On Windows in the cmd.exe or in bash:
+python tools\packaging\test262.py --command=c:\builds\spidermonkey\js.exe bestPractice
+
+actual output:
+The System cannot find the path specified.
+
+line 232 of test.py is:
+    if IsWindows():
+      args = &apos;&quot;%s&quot;&apos; % command
+quoting the entire has the effect of execing:
+&quot;c:\builds\spidermonkey\js.exe c:\users\&lt;username&gt;\appdata\local\temp\test262-rnsfjw.js&quot;
+
+the command cannot have quotes around the entire string, it must either not have any quotes (would probably fail if the path to the javascript shell had spaces in the name) or have quotes just around the shell.
+c:\builds\spidermonkey\js.exe c:\users\&lt;username&gt;\appdata\local\temp\test262-rnsfjw.js
+OR
+&quot;c:\builds\spidermonkey\js.exe&quot; &quot;c:\users\&lt;username&gt;\appdata\local\temp\test262-rnsfjw.js&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3694</commentid>
+    <comment_count>1</comment_count>
+      <attachid>31</attachid>
+    <who name="Dan Schaffer">dschaffe</who>
+    <bug_when>2013-05-01 14:00:27 -0700</bug_when>
+    <thetext>Created attachment 31
+simple patch to remove quoting entire command on windows
+
+modifiying test262.py with this patch fixes my problem but a better solution would place quotes around the value of command.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4057</commentid>
+    <comment_count>2</comment_count>
+    <who name="Trevor Baker">trbaker</who>
+    <bug_when>2013-05-17 07:41:14 -0700</bug_when>
+    <thetext>pushed in http://hg.ecmascript.org/tests/test262/rev/b8b49c010686</thetext>
+  </long_desc>
+      
+          <attachment
+              isobsolete="0"
+              ispatch="1"
+              isprivate="0"
+          >
+            <attachid>31</attachid>
+            <date>2013-05-01 14:00:00 -0700</date>
+            <delta_ts>2013-05-01 14:00:27 -0700</delta_ts>
+            <desc>simple patch to remove quoting entire command on windows</desc>
+            <filename>1457.patch</filename>
+            <type>text/plain</type>
+            <size>400</size>
+            <attacher name="Dan Schaffer">dschaffe</attacher>
+            
+              <data encoding="base64">ZGlmZiAtciA4YmQ4NzQzNjNlZDcgdG9vbHMvcGFja2FnaW5nL3Rlc3QyNjIucHkKLS0tIGEvdG9v
+bHMvcGFja2FnaW5nL3Rlc3QyNjIucHkJTW9uIEFwciAxNSAyMDowNTo1MCAyMDEzIC0wNzAwCisr
+KyBiL3Rvb2xzL3BhY2thZ2luZy90ZXN0MjYyLnB5CVdlZCBNYXkgMDEgMTY6NTk6NDEgMjAxMyAt
+MDQwMApAQCAtMjI5LDcgKzIyOSw3IEBACiAKICAgZGVmIEV4ZWN1dGUoc2VsZiwgY29tbWFuZCk6
+CiAgICAgaWYgSXNXaW5kb3dzKCk6Ci0gICAgICBhcmdzID0gJyIlcyInICUgY29tbWFuZAorICAg
+ICAgYXJncyA9ICclcycgJSBjb21tYW5kCiAgICAgZWxzZToKICAgICAgIGFyZ3MgPSBjb21tYW5k
+LnNwbGl0KCIgIikKICAgICBzdGRvdXQgPSBUZW1wRmlsZShwcmVmaXg9InRlc3QyNjItb3V0LSIp
+Cg==
+</data>
+
+          </attachment>
+      
+
+    </bug>
+
+</bugzilla>

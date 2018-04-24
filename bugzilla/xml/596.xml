@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>596</bug_id>
+          
+          <creation_ts>2012-07-29 07:37:00 -0700</creation_ts>
+          <short_desc>Coverage: 15.4.4.11 - identical elements and array holes</short_desc>
+          <delta_ts>2016-03-03 13:58:00 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Bill Ticehurst">billti</assigned_to>
+          <cc>dehrenberg</cc>
+    
+    <cc>rossberg</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>1392</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2012-07-29 07:37:11 -0700</bug_when>
+    <thetext>Two additional test cases for Array.prototype.sort [15.4.4.11]:
+
+1) The SortCompare abstract operation calls ToString() for identical elements (step 14/15)
+2) Array.prototype.sort does not change non-existent elements to undefined elements, that means holes are preserved (cf. spec text about [[Delete]] and sparse arrays)
+
+
+test case for (1):
+---
+var counter = 0;
+var object = {toString: function(){ counter++; return &quot;&quot;; }};
+[object, object].sort();
+if (counter &lt; 2) {
+  // sort calls ToString() for each element at least once
+  $ERROR(&quot;...&quot;);
+}
+---
+
+
+test case for (2):
+---
+var array = [&apos;a&apos;,,void 0];
+
+if (array.length !== 3) { $ERROR(&quot;...&quot;) }
+if (array.hasOwnProperty(&apos;0&apos;) !== true) { $ERROR(&quot;...&quot;); }
+if (array.hasOwnProperty(&apos;1&apos;) !== false) { $ERROR(&quot;...&quot;); }
+if (array.hasOwnProperty(&apos;2&apos;) !== true) { $ERROR(&quot;...&quot;); }
+
+array.sort();
+
+if (array.length !== 3) { $ERROR(&quot;...&quot;) }
+if (array.hasOwnProperty(&apos;0&apos;) !== true) { $ERROR(&quot;...&quot;); }
+if (array.hasOwnProperty(&apos;1&apos;) !== true) { $ERROR(&quot;...&quot;); }
+if (array.hasOwnProperty(&apos;2&apos;) !== false) { $ERROR(&quot;...&quot;); }
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9865</commentid>
+    <comment_count>1</comment_count>
+    <who name="Andreas Rossberg">rossberg</who>
+    <bug_when>2014-08-25 06:59:15 -0700</bug_when>
+    <thetext>I think the first test (bug_596_1) is bogus. The spec allows an &quot;arbitrary sequence of calls&quot; to SortCompare. In particular, it is valid to not call it at all, as long as the two given conditions are met for the sorted result. In this particular case, that happens to be possible without ever calling SortCompare (and thus toString). So count===0 is a perfectly legal result. In fact, doing reference comparison before ToString is an important optimisation.
+
+(Arguably, you could check that toString is called an _even_ number of times, though.)
+
+However, there clearly is a spec issue here. I filed it separately:
+https://bugs.ecmascript.org/show_bug.cgi?id=3150</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9980</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-08-25 09:20:25 -0700</bug_when>
+    <thetext>(In reply to Andreas Rossberg from comment #1)
+&gt; I think the first test (bug_596_1) is bogus. The spec allows an &quot;arbitrary
+&gt; sequence of calls&quot; to SortCompare. In particular, it is valid to not call it
+&gt; at all, as long as the two given conditions are met for the sorted result.
+
+My interpretation of the algorithm is that SortCompare is called for every comparison operation during the sort. That includes comparing identical elements which means observable side-effects in ToString are possible. But the spec text is fuzzy enough to allow different interpretations, so I guess removing &quot;test/suite/es6/bug_596_1.js&quot; is acceptable.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14933</commentid>
+    <comment_count>3</comment_count>
+    <who name="Daniel Ehrenberg">dehrenberg</who>
+    <bug_when>2016-03-03 13:58:00 -0800</bug_when>
+    <thetext>This issue seems to be fixed. The new contents look valid to me per spec.
+
+----
+
+var counter = 0;
+var object = {
+    toString: function(){
+        counter++;
+        return &quot;&quot;;
+    }
+};
+
+[object, object].sort();
+if (counter &lt; 2) {
+  // sort calls ToString() for each element at least once
+  $ERROR(&apos;#1: [object, object].sort(); counter &lt; 22. Actual: &apos; + (counter));
+}</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

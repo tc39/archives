@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4421</bug_id>
+          
+          <creation_ts>2015-07-09 21:12:00 -0700</creation_ts>
+          <short_desc>There are several confusing notions of function kind</short_desc>
+          <delta_ts>2015-07-09 21:12:36 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Bugs from ES6</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14539</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2015-07-09 21:12:36 -0700</bug_when>
+    <thetext>[[FunctionKind]] can be &quot;normal&quot;, &quot;classConstructor&quot;, or &quot;generator&quot; (a string)
+
+FunctionAllocate accepts a third optional argument, named kind, which can be one of &quot;normal&quot;, &quot;non-constructor&quot; or &quot;generator&quot;. (Or absent, which is the same as &quot;normal&quot;.) This is also a string.
+
+FunctionInitialize accepts a second mandatory argument, named kind, which can be one of Normal, Method, Arrow. The type of this argument seems to be a spec-level constant instead of a string.
+
+---
+
+This is pretty confusing. It would be best if these concepts could either be collapsed (unlikely) or renamed so that at most one of them is using the word &quot;kind&quot;.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

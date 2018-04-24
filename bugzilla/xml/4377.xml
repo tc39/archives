@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4377</bug_id>
+          
+          <creation_ts>2015-05-26 08:46:00 -0700</creation_ts>
+          <short_desc>Remove environment parameters from GlobalDeclarationInstantiation/EvalDeclarationInstantiation</short_desc>
+          <delta_ts>2015-05-26 08:46:30 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14452</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-05-26 08:46:30 -0700</bug_when>
+    <thetext>{Global, Eval}DeclarationInstantiation access the current variable/lexical environments through explicit parameters.
+Both abstract operations should instead use the execution context to retrieve the environment state. Otherwise it&apos;s
+possible to pass or rather it gives the wrong impression it&apos;s valid to pass other environments to global/eval declaration
+instantiation than the current environments. 
+FunctionDeclarationInstantiation already retrieves the current lexical environment through the execution context.
+
+
+Proposed changes:
+
+15.1.7 Runtime Semantics: ScriptEvaluation
+  10. Let result be GlobalDeclarationInstantiation(ScriptBody).
+
+15.1.8 Runtime Semantics: GlobalDeclarationInstantiation(script)
+  1. Let env be the running execution context’s LexicalEnvironment.
+  2. Let envRec be env’s EnvironmentRecord.
+  3. Assert: envRec is a global Environment Record.
+
+
+18.2.1.1 Runtime Semantics: PerformEval(x, evalRealm, strictCaller, direct)
+  18. Let result be EvalDeclarationInstantiation(body, strictEval).
+
+18.2.1.2 Runtime Semantics: EvalDeclarationInstantiation(body, strict)
+  1. Let varEnv be the running execution context’s VariableEnvironment.
+  2. Let varEnvRec be varEnv’s EnvironmentRecord.
+  3. Let lexEnv be the running execution context’s LexicalEnvironment.
+  4. Let lexEnvRec be lexEnv’s EnvironmentRecord.
+  5. Assert: lexEnvRec is a declarative Environment Record.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

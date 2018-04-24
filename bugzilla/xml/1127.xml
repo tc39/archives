@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1127</bug_id>
+          
+          <creation_ts>2012-12-13 20:50:00 -0800</creation_ts>
+          <short_desc>Problems for Word-&gt;HTML conversion caused by table-related markup</short_desc>
+          <delta_ts>2014-07-27 22:20:33 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>VERIFIED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Norbert">ecmascriptbugs</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3008</commentid>
+    <comment_count>0</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2012-12-13 20:50:10 -0800</bug_when>
+    <thetext>There are a few issues with table-related markup in the spec that cause problems in Word-&gt;HTML conversion. Here are the necessary fixes in the Word document:
+
+Above table 8, in the text &quot;Table 8 summarises&quot;, and above table 9, in the text &quot;Table 9 summarises&quot;, set the cursor at the end of the white space after the table number and delete backwards until the table reference is highlighted. Reinsert one white space. This deletes some empty cross references left over from previous edits.
+
+Make the text reference to table 28 not bold.
+
+Make the caption for table 28 use the paragraph style &quot;Table title&quot;, but without character styles (it&apos;s currently styled bold).</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3067</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-12-21 11:53:18 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9635</commentid>
+    <comment_count>2</comment_count>
+    <who name="Norbert">ecmascriptbugs</who>
+    <bug_when>2014-07-27 22:20:33 -0700</bug_when>
+    <thetext>Verified in rev 26 draft. The references to and captions for the tables (now tables 5, 6, 41) look fine in the HTML version.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

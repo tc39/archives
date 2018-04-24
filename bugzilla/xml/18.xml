@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>18</bug_id>
+          
+          <creation_ts>2011-02-12 16:40:00 -0800</creation_ts>
+          <short_desc>several tests assume it&apos;s okay to have a FunctionDeclaration in a Statement context</short_desc>
+          <delta_ts>2011-09-24 23:39:37 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>ECMA-262 Tests</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc>http://hg.ecmascript.org/tests/test262/rev/a012a7e238f6</bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>High</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Mark S. Miller">erights</assigned_to>
+          <cc>dfugate</cc>
+    
+    <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>28</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-02-12 16:40:30 -0800</bug_when>
+    <thetext>Several tests (mostly from sputnik) have a FunctionDeclaration in a Statement context. This isn&apos;t permitted by the ES5 grammar, but the tests apparently don&apos;t expect it to cause a parse error. Section 12 of ES5 recommends against supporting it.
+
+Here&apos;s a list:
+    12.14-5.js
+    S12.10_A3.3_T4.js
+    S12.10_A3.3_T5.js
+    S12.7_A3.js
+    S12.7_A4_T1.js
+    S12.7_A4_T2.js
+    S12.7_A4_T3.js
+    S12.8_A3.js
+    S12.8_A4_T1.js
+    S12.8_A4_T2.js
+    S12.8_A4_T3.js
+    S13.2.2_A17_T1.js
+    S13.2.2_D20_T2.js
+    S13.2.2_D20_T3.js
+    S13.2.2_D20_T4.js
+    S13.2.2_D20_T5.js
+    S13.2.2_D20_T6.js
+    S13.2.2_D20_T7.js
+    S13.2.2_D20_T8.js
+    S13_D1_T1.js
+    S14_D1_T1.js
+    S14_D4_T1.js
+    S14_D4_T2.js
+    S14_D4_T3.js
+    S14_D6_T1.js
+    S14_D6_T2.js
+    S14_D7.js</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>35</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-14 14:26:45 -0800</bug_when>
+    <thetext>This one&apos;s a bit tricky.  The spec states verbatim:
+NOTE Several widely used implementations of ECMAScript are known to support the use of FunctionDeclaration as a Statement. However there are significant and irreconcilable variations among the implementations in the semantics applied to such FunctionDeclarations. Because of these irreconcilable difference, the use of a FunctionDeclaration as a Statement results in code that is not reliably portable among implementations. It is recommended that ECMAScript implementations either disallow this usage of FunctionDeclaration or issue a warning when such a usage is encountered. Future editions of ECMAScript may define alternative portable means for declaring functions in a Statement context.
+
+However, ES5 also states the following about (Syntax) errors:
+An implementation may extend program syntax and regular expression pattern or flag syntax. To permit this, all operations (such as calling eval, using a regular expression literal, or using the Function or RegExp constructor) that are allowed to throw SyntaxError are permitted to exhibit implementation-defined behaviour instead of throwing SyntaxError when they encounter an implementation-defined extension to the program syntax or regular expression pattern or flag syntax.
+
+
+Need to give this one some more thought...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>38</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-02-14 18:49:32 -0800</bug_when>
+    <thetext>Okay, so a conforming implementation isn&apos;t required to raise a SyntaxError on these cases. But the point of these tests isn&apos;t to determine whether the implementation supports FunctionDecls-as-Statements or not; the tests just *assume* that the implementation does. I think it&apos;s unwise for a test to rely on support for any feature that isn&apos;t required by the spec (let alone one that&apos;s actively discouraged by the spec).
+
+It would be nice if they could be rewritten to not rely on support for that feature. Or at least marked/grouped somehow so that the assumption was made explicit.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>62</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-02-25 10:51:20 -0800</bug_when>
+    <thetext>For the short term, I&apos;m disabling the set you&apos;ve identified below.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>169</commentid>
+    <comment_count>4</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-23 14:43:00 -0700</bug_when>
+    <thetext>We also have a number of tests which explicitly check to ensure it&apos;s *not* OK to have a FunctionDeclaration in a Statement.  This is also disallowed by ES5.1 via chapter 16:
+    An implementation may extend program syntax and regular expression pattern or flag syntax. To permit this, all operations (such as calling eval, using a regular expression literal, or using the Function or RegExp constructor) that are allowed to throw SyntaxError are permitted to exhibit implementation-defined behaviour instead of throwing SyntaxError when they encounter an implementation-defined extension to the program syntax or regular expression pattern or flag syntax.
+
+After consulting with the TC-39 committee, we&apos;ve decided &apos;negative parser tests&apos; such as this should be disabled unless ES5 explicitly calls out that they should throw.  E.g., literal octals in strings under Strict Mode would be a valid negative test case we would not disable.  In the long term, the test harness and website will be adapted to allow opting-in WRT running these tests.  Thus far I&apos;ve found the following which need to be disabled:
+
+S12.1_A1
+Trying to declare function at the Block statement
+
+S12.5_A9_T1
+Declaring function within an &quot;if&quot; statement
+
+S12.5_A9_T2
+Declaring function within and &quot;if&quot; that is declared within the function call
+
+S12.6.1_A13_T1
+Declaring function within a &quot;do-while&quot; loop
+
+S12.6.1_A13_T2
+Declaring a function within a &quot;do-while&quot; loop that is within a function call
+
+S12.6.2_A13_T1
+Checking if declaring a function within a &quot;while&quot; Statement leads to an exception
+
+S12.6.2_A13_T2
+Checking if declaring a function within a &quot;while&quot; Statement that is in a function call leads to an exception
+
+S12.6.4_A13_T1
+Declaring function within a &quot;for-in&quot; Statement
+
+S12.6.4_A13_T2
+Declaring function within a &quot;for-in&quot; Statement that is within a function call</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>277</commentid>
+    <comment_count>5</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-07-07 09:15:50 -0700</bug_when>
+    <thetext>Just removed 12.14-5.js outright after analyzing it.  Corrections for the Sputnik tests will need to be done by Mark before we can close this one down.
+
+Michael, just out of curiosity how did you generate this list of invalid tests?  Sounds like whatever tool/JS impl. you used would be useful for periodic &apos;validity&apos; checks on the tests:)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>280</commentid>
+    <comment_count>6</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-07-07 11:03:17 -0700</bug_when>
+    <thetext>&gt;  how did you generate this list of invalid tests?
+
+I built a parser from the grammar in the ES5.1 spec, fed it the tests in the test suite, and looked at the ones that unexpectedly raised a syntax error.
+
+&gt; Sounds like whatever tool/JS impl. you used would be useful for periodic
+&gt; &apos;validity&apos; checks on the tests:)
+
+Aren&apos;t there generally-available implementations that only accept (or have a mode where they only accept) exactly what the spec says?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>462</commentid>
+    <comment_count>7</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:04:52 -0700</bug_when>
+    <thetext>Hi Michael, Of the files you list, I can&apos;t find the ones with an &quot;_D&quot; in them:
+
+(In reply to comment #0)
+&gt;     S13.2.2_D20_T2.js
+&gt;     S13.2.2_D20_T3.js
+&gt;     S13.2.2_D20_T4.js
+&gt;     S13.2.2_D20_T5.js
+&gt;     S13.2.2_D20_T6.js
+&gt;     S13.2.2_D20_T7.js
+&gt;     S13.2.2_D20_T8.js
+&gt;     S13_D1_T1.js
+&gt;     S14_D1_T1.js
+&gt;     S14_D4_T1.js
+&gt;     S14_D4_T2.js
+&gt;     S14_D4_T3.js
+&gt;     S14_D6_T1.js
+&gt;     S14_D6_T2.js
+&gt;     S14_D7.js
+
+I also looked in external/contributions/Google/sputniktests/tests/Conformance and they&apos;re not there.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>463</commentid>
+    <comment_count>8</comment_count>
+    <who name="Mark S. Miller">erights</who>
+    <bug_when>2011-09-24 16:30:13 -0700</bug_when>
+    <thetext>Fixed at http://hg.ecmascript.org/tests/test262/rev/a012a7e238f6</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>472</commentid>
+    <comment_count>9</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2011-09-24 23:39:37 -0700</bug_when>
+    <thetext>(In reply to comment #7)
+&gt; Hi Michael, Of the files you list, I can&apos;t find the ones with an &quot;_D&quot; in them:
+
+In the copy I have, they&apos;re in
+    sputnik-v1/tests/Implementation_Diagnostics/
+and
+    test262-ca885b11b815/test/suite/sputnik/Implementation_Diagnostics/</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

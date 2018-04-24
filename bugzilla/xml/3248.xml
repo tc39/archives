@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3248</bug_id>
+          
+          <creation_ts>2014-09-24 10:01:00 -0700</creation_ts>
+          <short_desc>Static typed system.</short_desc>
+          <delta_ts>2015-02-13 14:50:02 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>new feature</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Roman">roman.vanesyan</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>impinball</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10245</commentid>
+    <comment_count>0</comment_count>
+    <who name="Roman">roman.vanesyan</who>
+    <bug_when>2014-09-24 10:01:46 -0700</bug_when>
+    <thetext>What about adding to ecmascript static typed system. Javascript is very good and flexible language, but it has some performance issues. If it&apos;ll have static typed system issues will reduce. Many people wanna this, so were created a lot of languages that compiling to js, but with static typed system: typescript, dart, etc. Also Mozilla introduced new project named `asm.js` (asmjs.org), but it&apos;s created on hack as I think. I think it could be something like this specification: http://wiki.ecmascript.org/doku.php?id=strawman:types&amp;s=static+types</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>10676</commentid>
+    <comment_count>1</comment_count>
+    <who name="">impinball</who>
+    <bug_when>2014-11-23 22:41:33 -0800</bug_when>
+    <thetext>@Roman It largely is, but mainly to provide backwards compatibility with engines that don&apos;t recognize the types (only Firefox properly optimizes specifically for it). Also, I think the mailing list (es-discuss@lists.mozilla.org) may be a better place to suggest this kind of thing.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12594</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-13 14:50:02 -0800</bug_when>
+    <thetext>Both the pros and and cons of static typing is is well known by TC39 members and various projects are underway by TC39 members that investigate possible future enhancements to ECMAScript related to &quot;types&quot;
+
+Thanks for the input.
+
+I;m going to close this general bug, for now, since it is too broad to really be actionable.  In the future there will likely be new tickets opens for specific feature work</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1005</bug_id>
+          
+          <creation_ts>2012-11-24 10:15:00 -0800</creation_ts>
+          <short_desc>&quot;named property&quot;</short_desc>
+          <delta_ts>2012-12-21 18:08:26 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 12: November 22, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>2757</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-11-24 10:15:55 -0800</bug_when>
+    <thetext>Since you appear to be eliminating the term &quot;named property&quot; (including
+&quot;named data property&quot; etc.), you may want to fix these occurrences:
+
+4.3.25 / Note
+    &quot;In addition to its named properties&quot;
+
+8.1.6.1 / Table 6 / caption
+    &quot;Attributes of a Named Accessor Property&quot;
+
+8.2.5 / para 1
+    &quot;the manipulation and reification of named property attributes.&quot;
+
+8.3 / para 3
+    &quot;additional named properties&quot;
+
+10.6 / Note 1
+    &quot;named data properties of an arguments object&quot;
+
+15.8 / para 1
+    &quot;a single ordinary object that has some named properties&quot;
+
+15.12.3 / JA Abstract Operation / para 1
+    &quot;Named properties are excluded from the stringification.&quot;
+
+15.13.6.5.2 / para 1
+    &quot;This special internal method provides access to named properties&quot;
+
+(Note that there are also occurrences of &quot;the named property&quot; that shouldn&apos;t be changed, because they mean something like &quot;the property of that name&quot;.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2919</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-11-30 15:37:23 -0800</bug_when>
+    <thetext>fixed in rev 13 editor&apos;s draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

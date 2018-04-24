@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3573</bug_id>
+          
+          <creation_ts>2015-01-17 16:55:00 -0800</creation_ts>
+          <short_desc>12.14.5.2 Runtime Semantics: DestructuringAssignmentEvaluation</short_desc>
+          <delta_ts>2015-01-20 10:46:29 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 31: January 15, 2015 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Axel Rauschmayer">axel</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>11538</commentid>
+    <comment_count>0</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-01-17 16:55:10 -0800</bug_when>
+    <thetext>It feels like the following case can be handled via KeyedDestructuringAssignmentEvaluation (like the case after it).
+
+AssignmentProperty : IdentifierReference Initializer_opt</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11544</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-18 13:10:31 -0800</bug_when>
+    <thetext>That doesn&apos;t quite work because of how the grammar productions are factored.  Basically, the Initializer is at different levels in the two parse tress.
+
+The body of the KeyedDestructuringAssignmentEvaluation rule could probably be factored out into an abstract operation that was used for both cases.  But it seems late in the process to be making that big of a refactoring unless it is also needed to fix an actual semantic bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11552</commentid>
+    <comment_count>2</comment_count>
+    <who name="Axel Rauschmayer">axel</who>
+    <bug_when>2015-01-19 12:57:43 -0800</bug_when>
+    <thetext>Yes. Not worth the risk.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1240</bug_id>
+          
+          <creation_ts>2013-02-01 07:38:00 -0800</creation_ts>
+          <short_desc>[10.6] MakeArgGetter/MakeArgGetter does not work well with duplicate arguments</short_desc>
+          <delta_ts>2014-04-06 11:29:52 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 13: December 21, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3172</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-01 07:38:25 -0800</bug_when>
+    <thetext>The following expression returns `undefined` per 10.6 MakeArgGetter algorithm, but should return `1`:
+---
+(function(a,a){return arguments[0]})(1)
+---
+
+Reason:
+MakeArgGetter creates the following getter function:
+---
+function() { return a }
+---
+
+The getter function resolves `a` to the second argument which is defaulted to `undefined`. 
+
+
+This bug also applies to the ECMAScript 5.1 specification.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3173</commentid>
+    <comment_count>1</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-01 08:16:11 -0800</bug_when>
+    <thetext>Hmm, I guess CompleteMappedArgumentsObject only needs be changed:
+---
+1-4: &lt;&lt;leave as is&gt;&gt;
+5: Let indx = numberOfNonRestFormals - 1.
+6: Repeat while indx ≥ 0,
+ a: Let param be getParameter of formals with argument indx.
+ b: If param is a BindingIdentifier, then
+  i : Let name be the sole element of BoundNames of param.
+  ii: If name is not an element of mappedNames, then
+    1: Add name as an element of the list mappedNames.
+    2: If indx is less than len, then
+      a: Let g be the result of calling the MakeArgGetter abstract operation with arguments name and env.
+      b: Let p be the result of calling the MakeArgSetter abstract operation with arguments name and env.
+      c: Call the [[DefineOwnProperty]] internal method of map passing ToString(indx) and the Property Descriptor {[[Set]]: p, [[Get]]: g, [[Configurable]]: true} as arguments.
+ c: Let indx = indx - 1.
+7-9: &lt;&lt;leave as is&gt;&gt;
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>3174</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-02-01 08:26:29 -0800</bug_when>
+    <thetext>Step 7 also needs to be changed and one additional boolean flag must be added. The complete algorithm:
+---
+1. Let len be the result of Get(obj, &quot;length&quot;).
+2. Let mappedNames be an empty List.
+3. Let hasMapped be false.
+4. Let numberOfNonRestFormals be NumberOfParameters of formals.
+5. Let map be the result of the abstract operation ObjectCreate.
+6. Let indx = numberOfNonRestFormals - 1.
+7. Repeat while indx ≥ 0,
+ a. Let param be getParameter of formals with argument indx.
+ b. If param is a BindingIdentifier, then
+  i.  Let name be the sole element of BoundNames of param.
+  ii. If name is not an element of mappedNames, then
+    1. Add name as an element of the list mappedNames.
+    2. If indx is less than len, then
+      a  Let hasMapped be true.
+      b  Let g be the result of calling the MakeArgGetter abstract operation with arguments name and env.
+      c  Let p be the result of calling the MakeArgSetter abstract operation with arguments name and env.
+      d  Call the [[DefineOwnProperty]] internal method of map passing ToString(indx) and the Property Descriptor {[[Set]]: p, [[Get]]: g, [[Configurable]]: true} as arguments.
+ c. Let indx = indx - 1.
+8. If hasMapped is true, then
+  a. Set the [[ParameterMap]] internal data property of obj to map.
+  b. Set the [[GetP]], [[GetOwnProperty]], [[DefineOwnProperty]], and [[Delete]] internal methods of obj to the definitions provided below.
+9. Call the [[DefineOwnProperty]] internal method on obj passing &quot;callee&quot; and the Property Descriptor 
+{[[Value]]: func , [[Writable]]:  true, [[Enumerable]]: false, [[Configurable]]: true} as arguments.
+10. Return obj
+---</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7479</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-03-27 09:11:34 -0700</bug_when>
+    <thetext>fixed in rev23 editor&apos;s draft
+
+complex rewrite, should be reviewed again.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7535</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-04-06 11:29:52 -0700</bug_when>
+    <thetext>fixed in rev23 draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

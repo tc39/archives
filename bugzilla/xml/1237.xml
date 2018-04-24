@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>1237</bug_id>
+          
+          <creation_ts>2013-01-31 13:23:00 -0800</creation_ts>
+          <short_desc>presentation of notes</short_desc>
+          <delta_ts>2015-03-17 16:49:13 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>3169</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-01-31 13:23:24 -0800</bug_when>
+    <thetext>It&apos;s easy to see where a Note begins, because it starts with &quot;NOTE&quot; and some whitespace.
+
+But it&apos;s often hard to see where it ends, because (as far as I can tell) the only visual difference between Note-text and normal body text is that Note-text is in a slightly smaller font (say, 10pt versus 11pt).
+
+(And it&apos;s important to see where a Note ends, because that&apos;s a division between normative and non-normative text.)
+
+So please do something to make the end of a Note more obvious. E.g.:
+-- change the Note&apos;s typeface, text color (gray level), background color,
+   and/or indentation,
+-- put a box around it,
+-- put it in brackets, or
+-- end it with something like &quot;End Note&quot;.
+
+(I looked at a couple other Ecma specs, and there doesn&apos;t appear to be a &quot;house style&quot; for Notes.)</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4365</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-07-11 16:29:44 -0700</bug_when>
+    <thetext>actually the ECMA  house style for TC39 is basically the ISO/IEC style http://isotc.iso.org/livelink/livelink?func=ll&amp;objId=4230456&amp;objAction=browse&amp;sort=subtype√ 
+
+because TC39 standards are usually fast-tracked as ISO standards.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>4384</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2013-07-12 01:04:24 -0700</bug_when>
+    <thetext>In that document (&quot;Rules for the structure and drafting of International Standards&quot;), the relevant section appears to be 6.5.1 &quot;Notes and examples integrated in the text&quot;. As far as I can tell, none of the requirements there prohibit any of my suggestions in comment 0.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

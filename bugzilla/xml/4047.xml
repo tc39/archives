@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4047</bug_id>
+          
+          <creation_ts>2015-02-21 08:32:00 -0800</creation_ts>
+          <short_desc>8.1.1.5.1 GetBindingValue: Wrong test in step 3.b</short_desc>
+          <delta_ts>2015-03-04 18:58:14 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13221</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-21 08:32:54 -0800</bug_when>
+    <thetext>8.1.1.5.1 GetBindingValue(N,S)
+
+Steps 3.b-c should read:
+&gt; Let targetEnv be M.[[Environment]].
+&gt; If targetEnv is undefined, throw a ReferenceError exception.
+&gt; Let targetER be targetEnv’s environment record.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13335</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 16:31:03 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft
+
+I&apos;m pretty sure (but not certain) that this condition never occurs.  I considered an assert, but the uncertainty makes the throw a better choice.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13404</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-26 14:46:49 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; I&apos;m pretty sure (but not certain) that this condition never occurs.  I
+&gt; considered an assert, but the uncertainty makes the throw a better choice.
+
+It shouldn&apos;t be possible with the built-in Source Text Module Record, but a Module Record implementation from a different specification may have other semantics. So I agree with saying that `throw` is the better choice.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13490</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:14 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

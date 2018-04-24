@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4393</bug_id>
+          
+          <creation_ts>2015-06-12 16:05:00 -0700</creation_ts>
+          <short_desc>19.1.1 The Object Constructor: incorrect and confusing description in the intro</short_desc>
+          <delta_ts>2015-06-12 16:05:22 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Bugs from ES6</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Claude Pache">claude.pache</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14495</commentid>
+    <comment_count>0</comment_count>
+    <who name="Claude Pache">claude.pache</who>
+    <bug_when>2015-06-12 16:05:22 -0700</bug_when>
+    <thetext>In the introductory text of Section 19.1.1:
+
+    When called as a constructor it creates a new ordinary object. When Object is called as a function rather than as a constructor, it performs a type conversion.
+
+That description is confusing as it makes a nonexistent distinction between invocation as constructor and as function. Moreover, when you invoke it as constructor passing, e.g., an exotic Array as argument, the resulting object is neither new, nor ordinary in contradicting the aforementioned description.
+
+
+Possible reformulation:
+
+    The Object constructor behaves the same way when called as a function or as a constructor. When called with no argument or when used as a super-constructor, it creates a new object. Otherwise, it converts its argument to an object.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

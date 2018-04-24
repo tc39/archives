@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3118</bug_id>
+          
+          <creation_ts>2014-08-11 14:48:00 -0700</creation_ts>
+          <short_desc>Reflect.Loader.prototype.set should reject non-module arguments</short_desc>
+          <delta_ts>2015-03-16 14:30:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>deferred features</component>
+          <version>Rev 26: July 18, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Jason Orendorff">jorendorff</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>dherman</cc>
+    
+    <cc>jorendorff</cc>
+    
+    <cc>samth</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>9755</commentid>
+    <comment_count>0</comment_count>
+    <who name="Jason Orendorff">jorendorff</who>
+    <bug_when>2014-08-11 14:48:40 -0700</bug_when>
+    <thetext>LinkDeclarativeModules assumes that modules in the Loader&apos;s [[Modules]] registry are actual Module objects:
+
+- Step 3 makes a List &apos;resolvedDeps&apos; of Records mapping module names to Module Objects. Items from the Loader&apos;s [[Modules]] registry can be stored in this List. The List is stored in pair.[[Module]].[[Dependencies]].
+
+- Step 5 calls ResolveImportEntries and LinkImports, which are meant to use the module&apos;s [[Dependencies]] to link it to the other modules it depends on.
+
+Anyway -- as far as I know, because linking requires actual module objects, Reflect.Loader.prototype.set must do a type check and refuse to add non-module objects to the registry.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13753</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-16 14:30:23 -0700</bug_when>
+    <thetext>concerns old module spec.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

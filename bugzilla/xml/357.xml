@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>357</bug_id>
+          
+          <creation_ts>2012-05-13 01:08:00 -0700</creation_ts>
+          <short_desc>B.3.1.3: various oddities</short_desc>
+          <delta_ts>2012-10-26 15:34:23 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 7: May 4, 2012 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>minor</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>941</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-05-13 01:08:19 -0700</bug_when>
+    <thetext>In B.3.1.3 &quot;__proto___ Object Initialisers&quot;:
+
+(A)
+&quot;Definitions of two algorithms in 11.1.5 are replaced with the following:&quot;
+
+    Change &quot;11.1.5&quot; to &quot;11.1.5.2&quot; ?
+
+(B)
+In the algorithms, step 3.b / 5.b is (in its entirety):
+    &quot;If desc be propId.descriptor&quot;
+which doesn&apos;t make any sense. I&apos;m guessing it should be:
+    &quot;Let desc be propId.descriptor&quot;
+except that there are no other references to &apos;desc&apos; in either algorithm.
+Maybe just delete it?
+
+(C)
+Step 3.c.i / 5.c.i says:
+    &quot;Set the value of the [[Prototype]] internal property of O to V.&quot;
+but neither &apos;O&apos; nor &apos;V&apos; have been defined. Should it be:
+    &quot;... of obj to v&quot; ?
+
+(D)
+Step 3.c.ii / 5.c.ii says simply:
+    &quot;Return&quot;
+but shouldn&apos;t the algorithm return an object? So maybe
+    &quot;Return obj&quot;
+?</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>979</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-06-14 14:29:28 -0700</bug_when>
+    <thetext>11.1.5 isn&apos;t supposed to have subsections.  I eliminated those subsection numbers instead of changing the reference 
+
+As __proto__ seemms to be one the road to being a non-optional features, this needs to be integrated into 11.1.5 and update to match the current formulation of in 11.1.5</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2032</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2012-10-24 20:12:50 -0700</bug_when>
+    <thetext>(C) and (D) have been fixed in rev 10, but (B) is still there.
+
+(E)
+Re &quot;Definitions of two algorithms ... are replaced&quot;:
+It&apos;s unclear which two algorithms are to be replaced.
+
+Both algorithms in B.3.1.3 deal with evaluation of PropertyDefinitionList,
+but if you look under &quot;Runtime Semantics: Evaluation&quot; in 11.1.5,
+there aren&apos;t any rules for PropertyDefinitionList.
+
+If you look under &quot;Runtime Semantics: Property Definition Evaluation&quot;,
+there&apos;s only one.
+
+(F)
+In the two algorithms, all references to evaluation should probably be changed to
+&quot;Property Definition Evaluation&quot;.
+
+(G)
+The algorithms should take &apos;object&apos; as a parameter?
+
+(H)
+The algorithms appear to assume that the result of evaluating a PropertyDefinition is a Property Identifier, but Property Definition Evaluation of a PropertyDefinition just returns the result of calling [[DefineOwnProperty]], which is a boolean.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>2156</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2012-10-26 15:34:23 -0700</bug_when>
+    <thetext>in October 26, 2012 release draft</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

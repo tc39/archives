@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>3272</bug_id>
+          
+          <creation_ts>2014-10-08 13:16:00 -0700</creation_ts>
+          <short_desc>7.1.16  CanonicalNumericIndexString: Consider to ignore canonical, but non-integer or negative property keys in integer indexed objects?</short_desc>
+          <delta_ts>2015-02-18 16:53:51 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 27: August 24, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>WONTFIX</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>10298</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-10-08 13:16:32 -0700</bug_when>
+    <thetext>7.1.16  CanonicalNumericIndexString ( argument )
+
+Follow-up from bug 2049.
+
+It should be considered to further restrict canonical numeric indices to positive (?), integer values up to `Number.MAX_SAFE_INTEGER`. I don&apos;t see any value in treating &quot;NaN&quot;, &quot;Infinity&quot;, &quot;-Infinity&quot;, &quot;1e+21&quot;, &quot;1e-10&quot;, &quot;0.1&quot;, &quot;9999999999999998&quot; etc. as canonical numeric indices, whereas &quot;+Infinity&quot;, &quot;1e21&quot;, &quot;1e+20&quot;, &quot;1e-6&quot;, &quot;0.10&quot;, &quot;9999999999999999&quot; are not accepted as numeric indices for integer indexed objects. Implementors will likely prefer a simple definition for integer indexed property keys which avoids performing the ToString+ToNumber combo.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12207</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-06 18:28:34 -0800</bug_when>
+    <thetext>The problem is that at most usage sites there are three alternative code paths:
+
+one for strings that are not CanonicalNumericIndesString
+one for strings that are CanonicalNumericIndexString and are valid indexes
+one for strings that are CanonicalNumericIndexString but aren&apos;t valid indexes
+
+With some refactoring that I probably I could probably avoid the ToString+ToNumber combo for for some of the third case. But I&apos;m probably not going to do it for this edition.
+
+Implementers are are certainly free for each usage to figure out if those when they can avoid those conversions.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>12681</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2015-02-14 14:16:42 -0800</bug_when>
+    <thetext>(In reply to Allen Wirfs-Brock from comment #1)
+&gt; With some refactoring that I probably I could probably avoid the
+&gt; ToString+ToNumber combo for for some of the third case. But I&apos;m probably not
+&gt; going to do it for this edition.
+&gt; 
+&gt; Implementers are are certainly free for each usage to figure out if those
+&gt; when they can avoid those conversions.
+
+
+In that case just resolve this report as Won&apos;t fix?</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

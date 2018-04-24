@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>39</bug_id>
+          
+          <creation_ts>2011-03-02 15:40:00 -0800</creation_ts>
+          <short_desc>Refactor SputnikConverter based on Google&apos;s feedback</short_desc>
+          <delta_ts>2011-09-25 21:12:56 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Test262</product>
+          <component>Test Harness</component>
+          <version>unspecified</version>
+          <rep_platform>PC</rep_platform>
+          <op_sys>Windows</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Highest</priority>
+          <bug_severity>blocker</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          <blocked>36</blocked>
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Dave Fugate">dfugate</reporter>
+          <assigned_to name="Dave Fugate">dfugate</assigned_to>
+          <cc>erights</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>88</commentid>
+    <comment_count>0</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:40:10 -0800</bug_when>
+    <thetext>Improvements need to be made to the SputnikConverter such as preserving test case metadata attributes, and not eval&apos;ing snippets with syntax errors.  Once these changes have been made, Sputnik&apos;s conformance tests will be converted one last time and the tool can be thrown away.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>89</commentid>
+    <comment_count>1</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:41:59 -0800</bug_when>
+    <thetext>Mark, please document all of your requested changes to the Sputnik=&gt;Test262 conversion tool here.  Thanks!
+
+Blindly guesstimating around a week will be needed to implement the changes and verify they don&apos;t break anything in the process.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>96</commentid>
+    <comment_count>2</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-03-02 15:55:34 -0800</bug_when>
+    <thetext>A few more of the suggestions I recall:
+- harness should emit the failure message instead of just stating it&apos;s failed
+- should we use a distinguished error (e.g., SputnikError) instead or in addition to the &quot;true/false&quot; function return value paradigm
+- for Sputnik negative scenarios we should introduce &apos;expectedError&apos;, &apos;testSrc&apos;, etc. test case metadata</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>482</commentid>
+    <comment_count>3</comment_count>
+    <who name="Dave Fugate">dfugate</who>
+    <bug_when>2011-09-25 21:12:56 -0700</bug_when>
+    <thetext></thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

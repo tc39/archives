@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4039</bug_id>
+          
+          <creation_ts>2015-02-20 12:55:00 -0800</creation_ts>
+          <short_desc>15.1.1: &quot;However, such function code does not include ArrowFunction function code.&quot;</short_desc>
+          <delta_ts>2015-03-04 18:58:12 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 34: February 20, 2015 Release Candidate 1</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Michael Dyck">jmdyck</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>13210</commentid>
+    <comment_count>0</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-20 12:55:04 -0800</bug_when>
+    <thetext>In 15.1.1 &quot;Static Semantics: Early Errors&quot;,
+bullets 3 and 4 say:
+    It is a Syntax Error if StatementList Contains &lt;foo&gt; unless the source code
+    containing &lt;foo&gt; is eval code that is being processed by a direct eval that
+    is contained in function code. However, such function code does not include
+    ArrowFunction function code.
+
+The significance of the last sentence is unclear.
+
+Is it merely reminding the reader of the definition of &apos;function code&apos;, where the function code of a particular function does not include the function code of any nested ArrowFunction (among other things)? If so, it could just be a Note.
+
+Or is it actually altering the semantics of the preceding sentence? If so, then this would be clearer:
+    ... contained in function code that is not ArrowFunction function code.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13291</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 11:43:33 -0800</bug_when>
+    <thetext>This is the case that the bullets are trying to describe:
+
+//top level of a script
+let f= x+&gt; {
+   eval(&quot;super.foo&quot;);  //but arrow function f doesn&apos;t have a visible super binding
+};
+
+
+10.2 is actually a little vague about whether or not the body of such an arrow function is &quot;function code&quot;</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13296</commentid>
+    <comment_count>2</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-02-24 12:08:10 -0800</bug_when>
+    <thetext>So it sounds like the the second interpretation is the intended one.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13324</commentid>
+    <comment_count>3</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-02-24 14:27:30 -0800</bug_when>
+    <thetext>fixed in rev35 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>13474</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-03-04 18:58:12 -0800</bug_when>
+    <thetext>fixed in rev35</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

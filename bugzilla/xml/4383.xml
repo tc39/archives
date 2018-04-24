@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>4383</bug_id>
+          
+          <creation_ts>2015-05-28 17:46:00 -0700</creation_ts>
+          <short_desc>Static Semantics Contains missing base cases</short_desc>
+          <delta_ts>2015-05-28 19:20:44 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 7th Edition</product>
+          <component>Deferred from 6th edition</component>
+          <version>unspecified</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>CONFIRMED</bug_status>
+          <resolution></resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Brian Terlson">brterlso</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>jmdyck</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>14467</commentid>
+    <comment_count>0</comment_count>
+    <who name="Brian Terlson">brterlso</who>
+    <bug_when>2015-05-28 17:46:28 -0700</bug_when>
+    <thetext>The base case for Contains is whether the parameter symbol matches the production being considered. Many static semantics (Arrow Functions, Generator Function Decls/Exprs, Func Decls/Exprs, etc) are missing this base case. It may not be a bug if no one ever calls Contains with a parameter of these productions but could probably be fixed for completeness&apos;s sake.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>14468</commentid>
+    <comment_count>1</comment_count>
+    <who name="Michael Dyck">jmdyck</who>
+    <bug_when>2015-05-28 19:20:44 -0700</bug_when>
+    <thetext>(In reply to Brian Terlson from comment #0)
+&gt; The base case for Contains is whether the parameter symbol matches the
+&gt; production being considered. Many static semantics (Arrow Functions,
+&gt; Generator Function Decls/Exprs, Func Decls/Exprs, etc) are missing this base
+&gt; case.
+
+On the contrary, sections 14.1.4, 14.2.3, and 14.4.4 *do* cover such cases. However, they do so by returning false, which, while perhaps unintuitive, is not incomplete.
+
+&gt; It may not be a bug if no one ever calls Contains with a parameter of
+&gt; these productions but could probably be fixed for completeness&apos;s sake.
+
+Indeed, I believe the right-hand argument to Contains is only ever:
+    SuperProperty
+    SuperCall
+    super
+    NewTarget or
+    ScriptBody
+so how Contains would behave if it were passed any other symbol is (currently) irrelevant from a normative standpoint.</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

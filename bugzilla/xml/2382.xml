@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2382</bug_id>
+          
+          <creation_ts>2013-12-11 03:36:00 -0800</creation_ts>
+          <short_desc>6.2.4: Current PropertyDescriptor.[[Origin]] design hazards</short_desc>
+          <delta_ts>2014-08-01 06:28:48 -0700</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 21: November 8, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>normal</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="André Bargull">andrebargull</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          <cc>erights</cc>
+    
+    <cc>tomvc.be</cc>
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6924</commentid>
+    <comment_count>0</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2013-12-11 03:36:25 -0800</bug_when>
+    <thetext>The [[Origin]] field for PropertyDescriptor records seems to cause more harm than it brings benefits, at least in its current design. IIRC [[Origin]] was added to reduce object allocation costs and to provide a way to use custom property descriptors. But with its current design it is also possible to return invalid property descriptors from `Object.getOwnPropertyDescriptor()`, which does not seem to be intended. 
+
+This test case from [1] currently prints &quot;false&quot;, which gives the impression that the property is non-configurable when in fact it is configurable.
+---
+let propertyName = &quot;propertyName&quot;;
+let target = {[propertyName]: 0};
+let p2 = new Proxy(target, {
+  getOwnPropertyDescriptor(t, pk) {
+    return {
+      value: 1, writable: true, enumerable: true,
+      get configurable() {
+        delete this.configurable;
+        this.configurable = false;
+        return true;
+      }
+    };
+  }
+});
+print(Object.getOwnPropertyDescriptor(p2, propertyName).configurable);
+---
+
+[1] https://github.com/anba/es6draft/blob/master/src/test/scripts/suite/objects/Proxy/origin_pitfalls.js</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7331</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-02-16 17:49:52 -0800</bug_when>
+    <thetext>What harm is there in this?
+
+What was intended is that a Proxy handler can generate and accept (at the object level) any sort of property descriptor is wants. Including ones that  add new attributes or has attribute combinations (set+writable) that aren&apos;t produced by ordinary objects.  These are exactly the sorts of things that extensions to the ES ordinary object  model might do. So this allow such extensions to be experimented with and polyfilled.
+
+We could restrict the property descriptors to returned from [[GetOwnProperty]] to only containing data properties.  But it isn&apos;t clear to me why why is necessary. It has always been the case that property descritpros using accessor properties could be passed to Object.defineProperty, etc.  And a property descriptor itself might be a Proxy so restricting accessor properties still don&apos;t result in side-effect free access to property descriptors.
+
+We already have a good separation between Property Descriptor Records which are used internally within the spec. and Property Descriptor Objects which are at the Es meta level.  I don&apos;t see why the object form needs to be restricted.  When internal invariants need to be maintained Descriptor records are generated from descriptor objects.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7336</commentid>
+    <comment_count>2</comment_count>
+    <who name="André Bargull">andrebargull</who>
+    <bug_when>2014-02-17 04:13:17 -0800</bug_when>
+    <thetext>I&apos;ve just noticed this topic was already discussed in [1]. Basically I share the same concerns as Tom Van Cutsem (cc-ed), so I don&apos;t think it&apos;s necessary for me to repeat them here once again. I&apos;ve also cc-ed Mark Miller because he was explicitly mentioned in that thread. 
+
+[1] http://esdiscuss.org/topic/property-descriptor-normalization-was-general-comments-response-was-re-es6-rev13-review-mop-refactoring-symbols-proxies-reflect-module</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>8227</commentid>
+    <comment_count>3</comment_count>
+    <who name="Tom Van Cutsem">tomvc.be</who>
+    <bug_when>2014-05-08 14:20:43 -0700</bug_when>
+    <thetext>These issues were brought up independently by Jason Orendorff [1]
+
+After discussion between MarkM, Allen and myself, the consensus is to remove [[Origin]] and instead spec [[GetOwnProperty]] for Proxies such that the descriptor returned by the trap is coerced into a fresh, normalized, complete descriptor object (as originally specified in [2], but without copying custom attributes).
+
+[1] http://esdiscuss.org/topic/object-getownpropertydescriptor-can-return-just-about-anything
+[2] http://wiki.ecmascript.org/doku.php?id=harmony:proxies_spec</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>9654</commentid>
+    <comment_count>4</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-08-01 06:28:48 -0700</bug_when>
+    <thetext>in rev26</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

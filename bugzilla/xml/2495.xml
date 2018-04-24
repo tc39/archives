@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2495</bug_id>
+          
+          <creation_ts>2014-02-03 14:48:00 -0800</creation_ts>
+          <short_desc>Consider reducing boilerplate around &quot;new X(...argumentsList)&quot;</short_desc>
+          <delta_ts>2015-01-15 16:19:04 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>editorial issue</component>
+          <version>Rev 22: January 20, 2014 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>enhancement</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Domenic Denicola">d</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>7176</commentid>
+    <comment_count>0</comment_count>
+    <who name="Domenic Denicola">d</who>
+    <bug_when>2014-02-03 14:48:55 -0800</bug_when>
+    <thetext>From what I can tell, all built-in functions except for Object use the template:
+
+---
+
+new X ( ... argumentsList)
+
+When X is called as part of a new expression, it initialises a newly created object.
+
+    Let F be the X function object on which the new operator was applied.
+    Let argumentsList be the argumentsList argument of the [[Construct]] internal method that was invoked by the new operator.
+    Return the result of Construct (F, argumentsList).
+
+If X is implemented as an ECMAScript function object, its [[Construct]] internal method will perform the above steps.
+
+---
+
+This is kind of annoying to repeat, and see repeated, over and over. It could perhaps be factored out into a prelude of the sort &quot;assume the following algorithm for `new` at all times, except when counter-specified.&quot; Kind of like property descriptors are assumed to be `{ enumerable: false, configurable: true, writable: true }`.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11331</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-13 10:58:20 -0800</bug_when>
+    <thetext>fixed in rev31 editor&apos;s draft
+
+all gone...</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>11440</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2015-01-15 16:19:04 -0800</bug_when>
+    <thetext>In Rev31</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>

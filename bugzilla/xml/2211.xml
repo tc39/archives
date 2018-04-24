@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE bugzilla SYSTEM "https://bugs.ecmascript.org/page.cgi?id=bugzilla.dtd">
+
+<bugzilla version="4.4.4+"
+          urlbase="https://bugs.ecmascript.org/"
+          
+          maintainer="dherman@mozilla.com"
+>
+
+    <bug>
+          <bug_id>2211</bug_id>
+          
+          <creation_ts>2013-11-10 05:41:00 -0800</creation_ts>
+          <short_desc>Proxy abstract operations: some check if [[ProxyHandler]] is null, some if undefined</short_desc>
+          <delta_ts>2014-01-27 10:05:24 -0800</delta_ts>
+          <reporter_accessible>1</reporter_accessible>
+          <cclist_accessible>1</cclist_accessible>
+          <classification_id>1</classification_id>
+          <classification>Unclassified</classification>
+          <product>Draft for 6th Edition</product>
+          <component>technical issue</component>
+          <version>Rev 20: October 28, 2013 Draft</version>
+          <rep_platform>All</rep_platform>
+          <op_sys>All</op_sys>
+          <bug_status>RESOLVED</bug_status>
+          <resolution>FIXED</resolution>
+          
+          
+          <bug_file_loc></bug_file_loc>
+          <status_whiteboard></status_whiteboard>
+          <keywords></keywords>
+          <priority>Normal</priority>
+          <bug_severity>trivial</bug_severity>
+          <target_milestone>---</target_milestone>
+          
+          
+          <everconfirmed>1</everconfirmed>
+          <reporter name="Bartek Swierczynski">b.swierczynski</reporter>
+          <assigned_to name="Allen Wirfs-Brock">allen</assigned_to>
+          
+          
+
+      
+
+      
+
+      
+
+          <comment_sort_order>oldest_to_newest</comment_sort_order>  
+          <long_desc isprivate="0" >
+    <commentid>6623</commentid>
+    <comment_count>0</comment_count>
+    <who name="Bartek Swierczynski">b.swierczynski</who>
+    <bug_when>2013-11-10 05:41:35 -0800</bug_when>
+    <thetext>Abstract operations defined under section &quot;9.5 Proxy Object Internal Methods and Internal Slots&quot; have initial steps that throw an exception when the [[ProxyHandler]] has an invalid value (it&apos;s done during the first 2 or 3 steps of each algorithm).
+
+The &apos;invalid value&apos; is inconsistent throughout the abstract operations. This looks like a mistake.
+
+The following compare [[ProxyHandler]] to null:
+[[GetPrototypeOf]]
+[[SetPrototypeOf]]
+[[IsExtensible]]
+[[GetOwnProperty]]
+[[DefineOwnProperty]]
+[[HasProperty]]
+[[Get]]
+[[Delete]]
+[[Enumerate]]
+[[Construct]]
+
+The following compare [[ProxyHandler] to undefined:
+[[PreventExtensions]]
+[[Set]] 
+[[OwnPropertyKeys]]
+[[Call]]
+
+Note that [[Get]] and [[Set]] perform different checks.
+
+It looks like all checks should be against null.
+
+This issue was found in the ES6 specs draft of November 8, 2013
+( http://wiki.ecmascript.org/lib/exe/fetch.php?id=harmony%3Aspecification_drafts&amp;cache=cache&amp;media=harmony:working_draft_ecma-262_edition_6_11-08-13.pdf )
+
+I could not pick this version from the version list while filling this bug.</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>6627</commentid>
+    <comment_count>1</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2013-11-10 09:16:57 -0800</bug_when>
+    <thetext>fixed in rev22 editor&apos;s draft</thetext>
+  </long_desc><long_desc isprivate="0" >
+    <commentid>7099</commentid>
+    <comment_count>2</comment_count>
+    <who name="Allen Wirfs-Brock">allen</who>
+    <bug_when>2014-01-27 10:05:24 -0800</bug_when>
+    <thetext>fixed in Rev22 (January 20, 2013) release</thetext>
+  </long_desc>
+      
+      
+
+    </bug>
+
+</bugzilla>
