@@ -23,6 +23,10 @@ const defaults = {
   ],
   booleanFields: [
     'everconfirmed'
+  ],
+  arrayFields: [
+    'long_desc',
+    'attachment'
   ]
 };
 
@@ -76,6 +80,13 @@ const convertBooleanFields = (options, val, key, p) => {
   return true;
 };
 
+const expandArrayFields = (options, val, key, p) => {
+  if(options.arrayFields.includes(key) && !Array.isArray(p[key])) {
+    p[key] = [p[key]];
+  }
+  return true;
+};
+
 const removeUnusedFields = (options, val, key, p) => {
   if(options.unusedFields.includes(key)) { delete p[key]; }
   return true;
@@ -92,6 +103,7 @@ const bzxml2js = function(xml, options = {}) {
     convertBooleanFields,
     removeUnusedFields,
     stripEmptyValues,
+    expandArrayFields,
   ]).overEvery()
     .partial(config)
     .value();
